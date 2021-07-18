@@ -4,7 +4,9 @@ import           Data.Monoid (mappend)
 import           Hakyll
 
 
+
 --------------------------------------------------------------------------------
+
 config :: Configuration
 config = defaultConfiguration
   { destinationDirectory = "docs"
