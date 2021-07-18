@@ -3,14 +3,10 @@ title: Updating Hakyll posts
 ---
 
 
-{Add your 2099-01-01-blogtitle.md to my-blog/posts/}
+Add your 2099-01-01-blogtitle.md to my-blog/posts/
 stack exec myblog clean
 stack exec myblog build
-~~~~ {#mycode .haskell .numberLines startFrom="100"}
-qsort []     = []
-qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
-               qsort (filter (>= x) xs)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 git init
 git add .
