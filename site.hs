@@ -2,7 +2,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid (mappend)
 import           Hakyll
-
+import qualified GHC.IO.Encoding as E
+--import qualified Data.Set as S
+--import           Text.Pandoc.Options
 
 
 --------------------------------------------------------------------------------
@@ -13,6 +15,7 @@ config = defaultConfiguration
   }
 main :: IO ()
 main = do
+    E.setLocaleEncoding E.utf8
     hakyllWith config $ do
         match "images/*" $ do
             route   idRoute

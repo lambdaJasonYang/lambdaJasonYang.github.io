@@ -1,14 +1,15 @@
 ---
 title: Who Am I?
 ---
-Jason Yang
-
-
-1. Amamus Unicode 碁
-2. Interdum nex magna.
-
-Vivamus eget mauris sit amet nulla laoreet lobortis. Nulla in diam elementum
-risus convallis commodo. Cras vehicula varius dui vitae facilisis. Proin
-elementum libero eget leo aliquet quis euismod orci vestibulum. Duis rhoncus
-lorem consequat tellus vestibulum aliquam. Quisque orci orci, malesuada porta
-blandit et, interdum nec magna.
+| Jason Yang
+| Software Engineer
+| Experienced in AWS Serverless Cloud technology 
+| 
+| The reason for this blog isn't to gain popularity or followers but to retain my knowledge.
+| I've switch between many frameworks, languages and concepts but after a while, I start to forget what I've done. 
+| It really feels like a waste to look back at my projects and not even recognize the pitfalls I had to overcome that may have taken days or weeks to solve.
+|
+| My blog will mostly include my interests in hardware projects, small scripts, development environment setup and even algorithmic and mathematical proofs.
+| The Hakyll powered blog will host mostly conceptual thoughts rather than projects.
+| 
+| My react-powered project page will be up soon when I have the time. 

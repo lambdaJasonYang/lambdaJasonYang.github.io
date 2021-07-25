@@ -1,8 +1,8 @@
 ---
-title: Updating Hakyll posts
+title: Template Page (Ignore)
 ---
 
-
+Use this page as a template to building other Hakyll pages.
 
 
 ```bash
@@ -10,7 +10,6 @@ chcp 65001
 stack exec myblog clean
 stack exec myblog build
 ```
-view the site by going to your ~/myblog/docs/index.html
 
 ```bash
 git add .
@@ -18,12 +17,7 @@ git commit -m "some message"
 git push origin main:main
 ```
 
-Hot reload
-``` haskell
-./site watch
-```
 
-Example code
 
 ``` haskell
 fac n = foldr (*) 1 [1..n]
