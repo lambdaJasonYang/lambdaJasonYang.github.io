@@ -1,16 +1,19 @@
 ---
-title: Convert Enterprise printer to a prosumer printer
-tags: printers
+title: Why Hakyll
 ---
 
-Use this page as a template to building other Hakyll pages.
+It's minimalistic.
+It's fast.
+Plus it's a good excuse to find a more applied use for Haskell.
 
+I had thought about using Gatsby but decided I would rather make a separate page that is more dynamic and project focused.
 
 ```bash
 chcp 65001
 stack exec myblog clean
 stack exec myblog build
 ```
+$$ x \in $$
 
 ```bash
 git add .

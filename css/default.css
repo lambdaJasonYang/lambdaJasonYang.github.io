@@ -4,7 +4,22 @@ body {
     font-size: 16px;
     margin: 0px auto 0px auto;
     width: 600px;
+    --text-primary: #b6b6b6;
+    --text-secondary: #ececec;
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
 }
+
+body::-webkit-scrollbar {
+    width: 0.25rem;
+}
+body::-webkit-scrollbar-track {
+    background: #1e1e24;
+}
+body::-webkit-scrollbar-thumb {
+    background: #6649b8;
+}
+
 
 div#header {
     border-bottom: 2px solid black;
@@ -55,31 +70,77 @@ div.info {
     font-size: 14px;
     font-style: italic;
 }
+main {
+    margin-left : 5rem;
+    padding: 1rem;
 
+}
+
+@media only screen and (min-width: 800px){
 /* The sidebar menu */
 .sidenav {
-    height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 160px; /* Set the width of the sidebar */
+    padding: 0;
+    height: 100vh; /* Full-height: remove this if you want "auto" height */
+    width: 6rem; /* 5 * font pixel */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
+    background-color: var(--bg-primary); /* Black */
     left: 0;
-    background-color: #111; /* Black */
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 20px;
   }
   
   /* The navigation menu links */
   .sidenav a {
-    padding: 6px 8px 6px 16px;
+    padding-left: 5%;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 2rem;
     color: #818181;
-    display: block;
   }
   
   /* When you mouse over the navigation links, change their color */
   .sidenav a:hover {
     color: #f1f1f1;
   }
+
+  .sidenav-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-item {
+      width: 100%;
+      display: flex;
+      align-items:center;
+      color: var(--text-primary);
+      filter: grayscale(100%) opacity(0.7);
+      transition: 1ms;
+
+  }
   
+  .nav-item:hover {
+      filter: grayscale(0%) opacity(1);
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+  }
+  .logo {
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: var(--text-secondary);
+      border-style: double;
+      border: 0.2rem solid black;
+      font-size: 1.5rem;
+      letter-spacing: 0.3ch;
+  }
+}
+/* end of large screen css */
+/* begin small screen css */
+  @media only screen and (max-width: 800px) {
+      .sidenav {
+          display: none;
+      }
+  }

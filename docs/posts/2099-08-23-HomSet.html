@@ -14,7 +14,7 @@
          <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
       </script> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>My Hakyll Blog - Formulating ZFC Set Theory with python</title>
+        <title>My Hakyll Blog - HomSet</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -63,29 +63,28 @@
         </div>
 
         <div id="content">
-            <h1>Formulating ZFC Set Theory with python</h1>
+            <h1>HomSet</h1>
             
 
             <div class="info">
-    Posted on August 23, 2018
+    Posted on August 23, 2099
     
 </div>
 <div class="info">
     
-    Tags: future, science fiction, humanoid
+    Tags: printers
     
 </div>
-<p><a href="https://nbviewer.jupyter.org/github/userJY/JupyterNotebooks/blob/master/SetTheory.ipynb">Jupyter Note book python implementation using default set data structure</a></p>
-<p>We can axiomatically build the Set-interpretation of natural numbers by recursively nesting sets within each other.</p>
-<p>\[ \{ \} = \emptyset := 0 \] \[ 0 \cup \{ 0 \} = \{ 0 \} = \{ \{ \} \} := 1 \] \[ 1 \cup \{1 \} = \{ 0, 1 \} = \{ 0, \{ 0 \} \} = \{ \{ \} ,\{ \{ \} \} \} := 2 \] \[ 2 \cup \{2 \} = \{ 0, 1, 2 \} = \{ 0, 1 \} \cup \{ \{ 0, 1 \} \} = \{ \{ \},\{ \{ \} \} , \{ \{ \} ,\{ \{ \} \} \} \} = 3 \]</p>
-<p>\[ k-1 \cup \{ k-1 \} = \{ 0,1,2… k-1 \} := k\]</p>
-<p>Given a goal to define the Set-interpretation of the k natural</p>
-<p>We take the Set-interpretation of the (k-1) natural, which we have previously defined, and union it with itself but nested inside a set.</p>
-<p>Another way to look at it.<br />
-To define the k natural, we form a set that contains all the Set-interpretation of numbers from 0 to k-1.</p>
-<p>Given the above knowledge we can define a successor function: \[ Succ(K) = K \cup \{ K \} \]</p>
-<p>Notice that since the k natural contains all the numbers,(0,1,2…k-1) before it,<br />
-we can define a Predecessor function by simply fetching the Maximum element inside the Set-interpretation of K. \[ Pred(K) = max(\{ x | x \in K \}) \]</p>
+<p>Hom(A,B) Hel <br /><span class="math display"><em>f</em> ∷ <em>A</em> → <em>B</em> := <em>f</em> ∈ <em>H</em><em>o</em><em>m</em>(<em>A</em>, <em>B</em>)</span><br /> <br /><span class="math display">$$ \ln x = \int_{-\infty}^x \frac 1 y  dy $$</span><br /> \[ f :: A \rightarrow (B \rightarrow C) := f \in Hom(A, Hom(B,C)) \] \[ f :: (A \rightarrow B) \rightarrow C := f \in Hom(Hom(A,B),C) \]</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> greet; <span class="st">&quot;Hello, world!&quot;</span>; <span class="kw">end</span></span></code></pre></div>
+<p>\[ \ln x = \int_{-\infty}^x \frac 1 y \, dy . \]</p>
 
         </div>
         <div id="footer">

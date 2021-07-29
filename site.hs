@@ -3,11 +3,54 @@
 import           Data.Monoid (mappend)
 import           Hakyll
 import qualified GHC.IO.Encoding as E
---import qualified Data.Set as S
---import           Text.Pandoc.Options
 
+import           Text.Pandoc.Options
+import Hakyll.Web.Pandoc
+import qualified  Text.Blaze.Html5                as H
 
 --------------------------------------------------------------------------------
+blogWriterOptions :: WriterOptions
+blogWriterOptions = 
+   defaultHakyllWriterOptions
+      {
+        writerHTMLMathMethod = MathJax ""
+      , writerTableOfContents = True
+      , writerNumberSections  = True
+      , writerTOCDepth        = 2
+      , writerTemplate        = 
+         let
+            toc = "$toc$" :: String
+            body = "$body$" :: String
+         in
+            Just . renderHtml $ do
+               H.div ! class_ "toc" $ do
+                  toHtml toc
+               toHtml body
+      }
+blogReaderOptions :: ReaderOptions
+blogReaderOptions = 
+   defaultHakyllReaderOptions
+      {
+         readerExtensions = 
+            (readerExtensions defaultHakyllReaderOptions) <> extensionsFromList
+               [ 
+                 Ext_tex_math_single_backslash  -- TeX math btw (..) [..]
+               , Ext_tex_math_double_backslash  -- TeX math btw \(..\) \[..\]
+               , Ext_tex_math_dollars           -- TeX math between $..$ or $$..$$
+               , Ext_latex_macros               -- Parse LaTeX macro definitions (for math only)
+               , Ext_inline_code_attributes     -- Ext_inline_code_attributes
+
+               ]
+      }
+
+blogCompiler :: Compiler (Item String)
+blogCompiler = do
+   ident <- getUnderlying
+   toc   <- getMetadataField ident "withtoc"
+   pandocCompilerWith blogReaderOptions (maybe defaultOptions blogOptions toc)
+   where
+      defaultOptions = defaultHakyllWriterOptions
+      blogOptions = const blogWriterOptions
 
 config :: Configuration
 config = defaultConfiguration
