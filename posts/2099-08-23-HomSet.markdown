@@ -5,10 +5,9 @@ tags: printers
 
 Hom(A,B)
 Hel
-$$ f \Colon A \rightarrow B := f \in Hom(A, B) $$
-$$ \ln x = \int_{-\infty}^x \frac 1 y  dy $$
-\\[ f :: A \\rightarrow (B \\rightarrow C) := f \\in Hom(A, Hom(B,C)) \\]
-\\[ f :: (A \\rightarrow B) \\rightarrow C := f \\in Hom(Hom(A,B),C) \\]
+$$ f :: A \rightarrow B := f \in Hom(A, B) $$
+$$ f :: A \rightarrow (B \rightarrow C) := f \in Hom(A, Hom(B,C)) $$
+$$ f :: (A \rightarrow B) \rightarrow C := f \in Hom(Hom(A,B),C) $$
 
 ```bash
 chcp 65001

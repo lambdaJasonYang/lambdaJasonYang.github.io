@@ -5,52 +5,38 @@ import           Hakyll
 import qualified GHC.IO.Encoding as E
 
 import           Text.Pandoc.Options
-import Hakyll.Web.Pandoc
-import qualified  Text.Blaze.Html5                as H
+
+
 
 --------------------------------------------------------------------------------
-blogWriterOptions :: WriterOptions
-blogWriterOptions = 
-   defaultHakyllWriterOptions
-      {
-        writerHTMLMathMethod = MathJax ""
-      , writerTableOfContents = True
-      , writerNumberSections  = True
-      , writerTOCDepth        = 2
-      , writerTemplate        = 
-         let
-            toc = "$toc$" :: String
-            body = "$body$" :: String
-         in
-            Just . renderHtml $ do
-               H.div ! class_ "toc" $ do
-                  toHtml toc
-               toHtml body
-      }
-blogReaderOptions :: ReaderOptions
-blogReaderOptions = 
-   defaultHakyllReaderOptions
-      {
-         readerExtensions = 
-            (readerExtensions defaultHakyllReaderOptions) <> extensionsFromList
-               [ 
-                 Ext_tex_math_single_backslash  -- TeX math btw (..) [..]
-               , Ext_tex_math_double_backslash  -- TeX math btw \(..\) \[..\]
-               , Ext_tex_math_dollars           -- TeX math between $..$ or $$..$$
-               , Ext_latex_macros               -- Parse LaTeX macro definitions (for math only)
-               , Ext_inline_code_attributes     -- Ext_inline_code_attributes
-
-               ]
-      }
-
-blogCompiler :: Compiler (Item String)
-blogCompiler = do
-   ident <- getUnderlying
-   toc   <- getMetadataField ident "withtoc"
-   pandocCompilerWith blogReaderOptions (maybe defaultOptions blogOptions toc)
-   where
-      defaultOptions = defaultHakyllWriterOptions
-      blogOptions = const blogWriterOptions
+--Step 0: Add "pandoc, containers" under build-depends in stack.yaml   
+--Step 0: "import Text.Pandoc.Options" in site.hs
+--Step 1: Get the mathjax Extensions that recognizes single $ in our pandocs
+mathjaxExtensions :: Extensions
+mathjaxExtensions = extensionsFromList 
+                    [Ext_tex_math_dollars --  $...$ or $$...$$
+                    ,Ext_tex_math_double_backslash --  \(...\) or \[...\]
+                    ,Ext_latex_macros
+                    ,Ext_inline_code_attributes 
+                    ]
+--Step 2: Setup ReaderOptions using the Extensions from Step 1
+readMathjaxOptions :: ReaderOptions 
+readMathjaxOptions = defaultHakyllReaderOptions
+                {
+                    readerExtensions = (readerExtensions defaultHakyllReaderOptions) <> mathjaxExtensions
+                }
+--Step 3: Setup WriterOptions
+writeMathjaxOptions :: WriterOptions
+writeMathjaxOptions = defaultHakyllWriterOptions 
+                {
+                    writerHTMLMathMethod = MathJax ""
+                }
+--Step 4: Build the compiler using the ReaderOption and Writer Option from Step 2, 3.
+mathJaxAddedCompiler :: Compiler (Item String)
+mathJaxAddedCompiler = pandocCompilerWith readMathjaxOptions writeMathjaxOptions
+--Step 5: Replace the line "compile $ pandocCompiler" under "match "posts/*" $ do" with 
+--"compiler $ mathJaxAddedCompiler"
+--------------------------------------------------------------------------------
 
 config :: Configuration
 config = defaultConfiguration
@@ -76,7 +62,7 @@ main = do
 
         match "posts/*" $ do
             route $ setExtension "html"
-            compile $ pandocCompiler
+            compile $ mathJaxAddedCompiler
                 >>= loadAndApplyTemplate "templates/post.html"    postCtx
                 >>= loadAndApplyTemplate "templates/default.html" postCtx
                 >>= relativizeUrls

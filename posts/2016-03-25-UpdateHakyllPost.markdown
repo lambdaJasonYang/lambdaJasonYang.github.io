@@ -34,6 +34,13 @@ Hot reload
 stack exec myblog watch
 ```
 
+if you messed around in site.hs , you need to do
+``` haskell
+stack build
+stack exec myblog rebuild
+```
+
+
 Example code
 
 ``` haskell

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+         <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+      </script> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>My Hakyll Blog - Adding Mathjax to Hakyll in 2021</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation -->
+        <nav class="sidenav">
+            <ul class="sidenav-nav">
+                <li class="logo">
+                    <a href="#" class="nav-link">JY</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../about.html" class="nav-link">
+                        Math
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../about.html" class="nav-link">      
+                        Math
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../about.html" class="nav-link">
+                        
+                        Math
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../about.html" class="nav-link">
+                        
+                        Math
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="header">
+            <div id="logo">
+                <a href="../">My Hakyll Blog</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Adding Mathjax to Hakyll in 2021</h1>
+            
+
+            <div class="info">
+    Posted on August 23, 2099
+    
+</div>
+<div class="info">
+    
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">--Step 0: Add &quot;pandoc, containers&quot; under build-depends in stack.yaml   </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="co">--Step 0: &quot;import Text.Pandoc.Options&quot; in site.hs</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="co">--Step 1: Get the mathjax Extensions that recognizes single $ in our pandocs</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="ot">mathjaxExtensions ::</span> <span class="dt">Extensions</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>mathjaxExtensions <span class="ot">=</span> extensionsFromList </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>                    [<span class="dt">Ext_tex_math_dollars</span> <span class="co">--  $...$ or $$...$$</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>                    ,<span class="dt">Ext_tex_math_double_backslash</span> <span class="co">--  \(...\) or \[...\]</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>                    ,<span class="dt">Ext_latex_macros</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>                    ,<span class="dt">Ext_inline_code_attributes</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>                    ]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="co">--Step 2: Setup ReaderOptions using the Extensions from Step 1</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="ot">readMathjaxOptions ::</span> <span class="dt">ReaderOptions</span> </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a>readMathjaxOptions <span class="ot">=</span> defaultHakyllReaderOptions</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>                {</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>                    readerExtensions <span class="ot">=</span> (readerExtensions defaultHakyllReaderOptions) <span class="op">&lt;&gt;</span> mathjaxExtensions</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>                }</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="co">--Step 3: Setup WriterOptions</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="ot">writeMathjaxOptions ::</span> <span class="dt">WriterOptions</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a>writeMathjaxOptions <span class="ot">=</span> defaultHakyllWriterOptions </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a>                {</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a>                    writerHTMLMathMethod <span class="ot">=</span> <span class="dt">MathJax</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>                }</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a><span class="co">--Step 4: Build the compiler using the ReaderOption and Writer Option from Step 2, 3.</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a><span class="ot">mathJaxAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a>mathJaxAddedCompiler <span class="ot">=</span> pandocCompilerWith readMathjaxOptions writeMathjaxOptions</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a><span class="co">--Step 5: Replace the line &quot;compile $ pandocCompiler&quot; under &quot;match &quot;posts/*&quot; $ do&quot; with </span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a><span class="co">--&quot;compiler $ mathJaxAddedCompiler&quot;</span></span></code></pre></div>
+<p>remember to call</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">stack</span> build</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="ex">stack</span> exec yourprojectname rebuild</span></code></pre></div>
+<p>to rebuild your site.hs</p>
+
+        </div>
+        <div id="footer">
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </div>
+    </body>
+</html>

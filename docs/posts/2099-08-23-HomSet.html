@@ -75,7 +75,7 @@
     Tags: printers
     
 </div>
-<p>Hom(A,B) Hel <br /><span class="math display"><em>f</em> ∷ <em>A</em> → <em>B</em> := <em>f</em> ∈ <em>H</em><em>o</em><em>m</em>(<em>A</em>, <em>B</em>)</span><br /> <br /><span class="math display">$$ \ln x = \int_{-\infty}^x \frac 1 y  dy $$</span><br /> \[ f :: A \rightarrow (B \rightarrow C) := f \in Hom(A, Hom(B,C)) \] \[ f :: (A \rightarrow B) \rightarrow C := f \in Hom(Hom(A,B),C) \]</p>
+<p>Hom(A,B) Hel <span class="math display">\[ f :: A \rightarrow B := f \in Hom(A, B) \]</span> <span class="math display">\[ f :: A \rightarrow (B \rightarrow C) := f \in Hom(A, Hom(B,C)) \]</span> <span class="math display">\[ f :: (A \rightarrow B) \rightarrow C := f \in Hom(Hom(A,B),C) \]</span></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
@@ -84,7 +84,7 @@
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> greet; <span class="st">&quot;Hello, world!&quot;</span>; <span class="kw">end</span></span></code></pre></div>
-<p>\[ \ln x = \int_{-\infty}^x \frac 1 y \, dy . \]</p>
+<p><span class="math display">\[ \\ln x = \\int_{-\\infty}^x \\frac 1 y \\, dy . \]</span></p>
 
         </div>
         <div id="footer">
