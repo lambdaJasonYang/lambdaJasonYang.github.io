@@ -1,5 +1,6 @@
 ---
 title: Fold and Induction
+tags: math, CS
 ---
 
 Use this page as a template to building other Hakyll pages.

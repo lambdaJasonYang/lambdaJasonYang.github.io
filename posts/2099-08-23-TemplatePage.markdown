@@ -1,5 +1,6 @@
 ---
 title: Template Page (Ignore)
+tag: scripts
 ---
 
 Use this page as a template to building other Hakyll pages.

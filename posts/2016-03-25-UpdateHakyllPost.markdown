@@ -1,5 +1,6 @@
 ---
 title: Updating Hakyll posts
+tags: scripts
 ---
 
 How does Hakyll site.hs work?

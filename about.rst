@@ -5,11 +5,13 @@ title: About Me
 | Software Engineer
 | Experienced in AWS Serverless Cloud technology 
 | 
-| The reason for creating blog isn't to gain popularity or followers but to help organize my thoughts. 
+| The reason for creating blog is to help organize my thoughts. 
 |
-| My blog will mostly include my interests in hardware projects, small scripts, development environment setup and even algorithmic/mathematical proofs.
+| My Hakyll blog will mostly include math, algorithms and small code snippets.
+| My React blog will host some of my projects. 
 | 
-| As developers, we believe in separation of concerns and this blog host the more abstract and conceptual components of my learning experiences.
-| I host many private gitbooks for learning codebases and new languages.
-| My react-powered project page will be up soon when I have the time. 
+| My interests include functional programming, software verification, combinatorics, and energy based ML models.
+| I like to tinker with hardware and use open source firmware to get the most out of my devices.
+| 
+|  
 |

@@ -1,6 +1,6 @@
 ---
 title: Convert Enterprise printer to a prosumer printer
-tags: printers
+tags: hardware
 ---
 
 Use this page as a template to building other Hakyll pages.

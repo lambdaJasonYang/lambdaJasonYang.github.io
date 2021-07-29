@@ -1,6 +1,6 @@
 ---
 title: Formulating ZFC Set Theory with python
-tags: future, science fiction, humanoid
+tags: math, cs
 ---
 
 

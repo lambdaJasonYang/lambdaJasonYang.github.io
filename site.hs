@@ -9,6 +9,7 @@ import           Text.Pandoc.Options
 
 
 --------------------------------------------------------------------------------
+--Setup Mathjax on Hakyll
 --Step 0: Add "pandoc, containers" under build-depends in stack.yaml   
 --Step 0: "import Text.Pandoc.Options" in site.hs
 --Step 1: Get the mathjax Extensions that recognizes single $ in our pandocs
@@ -59,12 +60,27 @@ main = do
             compile $ pandocCompiler
                 >>= loadAndApplyTemplate "templates/default.html" defaultContext
                 >>= relativizeUrls
+----------------------
+        tags <- buildTags "posts/*" (fromCapture "tags/*.html")
+        tagsRules tags $ \tag pattern -> do
+            let title = "Posts tagged \"" ++ tag ++ "\""
+            route idRoute
+            compile $ do
+                posts <- recentFirst =<< loadAll pattern
+                let ctx = constField "title" title
+                        `mappend` listField "posts" (postCtxWithTags tags) (return posts)
+                        `mappend` defaultContext
 
+                makeItem ""
+                    >>= loadAndApplyTemplate "templates/tag.html" ctx
+                    >>= loadAndApplyTemplate "templates/default.html" ctx
+                    >>= relativizeUrls
+----------------------
         match "posts/*" $ do
             route $ setExtension "html"
             compile $ mathJaxAddedCompiler
-                >>= loadAndApplyTemplate "templates/post.html"    postCtx
-                >>= loadAndApplyTemplate "templates/default.html" postCtx
+                >>= loadAndApplyTemplate "templates/post.html"    (postCtxWithTags tags)
+                >>= loadAndApplyTemplate "templates/default.html" (postCtxWithTags tags)
                 >>= relativizeUrls
 
         create ["archive.html"] $ do
@@ -105,3 +121,6 @@ postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
 
+
+postCtxWithTags :: Tags -> Context String
+postCtxWithTags tags = tagsField "tags" tags `mappend` postCtx

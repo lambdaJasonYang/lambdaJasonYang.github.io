@@ -1,5 +1,6 @@
 ---
 title: Adding Mathjax to Hakyll in 2021
+tags: scripts
 ---
 
 
