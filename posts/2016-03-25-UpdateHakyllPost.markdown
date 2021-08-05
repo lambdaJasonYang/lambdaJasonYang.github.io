@@ -41,12 +41,19 @@ stack build
 stack exec myblog rebuild
 ```
 
-
-Example code
+Example codeblock uses 3 backquotes then name of language
+``` haskell
+--```haskell
+--  fac n = foldr (*) 1 [1..n]
+--```
+```
 
 ``` haskell
 fac n = foldr (*) 1 [1..n]
 ```
+
+Inline code uses   
+`print(shit)`{.python}
 
 ```{.ruby .numberLines}
 def greet; "Hello, world!"; end

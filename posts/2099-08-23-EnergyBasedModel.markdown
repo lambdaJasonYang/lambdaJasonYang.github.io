@@ -1,0 +1,51 @@
+---
+title: Energy Based Models
+tag: scripts
+---
+
+### Energy Based Model vs Probablistic Model
+Probablistic Model are based on a distribution derived from the possible solution set.   
+What if the solution set is intractable or infinite?  
+
+
+Probablistic Model result extremely steep gradients, more like fractured crevices where the solution is at the bottom and everywhere else is wrong.  
+EBM have much smoother gradients.  
+
+### Energy Based Model vs regular Neural nets (Training and Inference)
+Regular Neural nets predict a single output.  
+Energy Based Model predicts a set of plausible outputs.   
+
+It is possible to convert EBM to probablistic model using Boltzmann probability distribution.  
+
+Unlike NN, training EBM is basically just building the energy map.
+How do we train EBM?
+Most methods say we give our dataset the lowest energy level. 
+There are different ways to design the high energy space. 
+Example include creating data we know is definitely incorrect and giving it a high energy.
+Example2 include giving high energy to all data other than our dataset (WARNING, this is basically the same as a probabilistic model with the issue of extremely steep gradients)
+
+
+Two types of inference architectures.  
+Latent energy variable.   
+
+```bash
+chcp 65001
+stack exec myblog clean
+stack exec myblog build
+```
+
+```bash
+git add .
+git commit -m "some message"
+git push origin main:main
+```
+
+
+
+``` haskell
+fac n = foldr (*) 1 [1..n]
+```
+
+```{.ruby .numberLines}
+def greet; "Hello, world!"; end
+```

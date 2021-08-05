@@ -1,3 +1,4 @@
+/* COMMON BEGIN ----------------------------------------*/
 body {
     color: black;
     font-family: Verdana, Helvetica, Palatino; 
@@ -9,15 +10,31 @@ body {
     --bg-primary: #23232e;
     --bg-secondary: #141418;
 }
-
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
 body::-webkit-scrollbar {
     width: 0.25rem;
+    height: 0.25rem;
 }
 body::-webkit-scrollbar-track {
     background: #1e1e24;
 }
 body::-webkit-scrollbar-thumb {
     background: #6649b8;
+}
+
+div::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 0.25rem;
+}
+div::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+div::-webkit-scrollbar-thumb {
+  background: #6649b8;
 }
 
 
@@ -27,13 +44,7 @@ div#header {
     padding: 12px 0px 12px 0px;
 }
 
-div#logo a {
-    color: black;
-    float: left;
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-}
+
 
 div#header #navigation {
     text-align: right;
@@ -75,95 +86,31 @@ main {
     padding: 1rem;
 
 }
+/* COMMON END ----------------------------------------*/
 
-@media only screen and (min-width: 800px){
-/* The sidebar menu */
-.sidenav {
-    padding: 0;
-    height: 100vh; /* Full-height: remove this if you want "auto" height */
-    width: 6rem; /* 5 * font pixel */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    background-color: var(--bg-primary); /* Black */
-    left: 0;
-  }
-  
-  /* The navigation menu links */
-  .sidenav a {
-    padding-left: 5%;
-    text-decoration: none;
-    font-size: 2rem;
-    color: #818181;
-  }
-  
-  /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
 
-  .sidenav-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .nav-item {
-      width: 100%;
-      display: flex;
-      align-items:center;
-      color: var(--text-primary);
-      filter: grayscale(100%) opacity(0.7);
-      transition: 1ms;
-
-  }
-  
-  .nav-item:hover {
-      filter: grayscale(0%) opacity(1);
-      background: var(--bg-secondary);
-      color: var(--text-secondary);
-  }
-  .logo {
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-top: 0.2rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      color: var(--text-secondary);
-      border-style: double;
-      border: 0.2rem solid black;
-      font-size: 1.5rem;
-      letter-spacing: 0.3ch;
-  }
-}
-/* end of large screen css */
-/* begin small screen css */
-  @media only screen and (max-width: 800px) {
-      .sidenav {
-          display: none;
-      }
-  }
-
-  /*END OF SMALL SCREEN CSS  */
-  code.sourceCode { white-space: pre; position: relative; }
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span:empty { height: 1.2em; }
+/*START CODE CSS           ----------------------------------------------------*/
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
-sourceCode { margin: 0; }
+pre.sourceCode { margin: 0; }
 @media screen {
-
+div.sourceCode { overflow: auto; }
+}
+.sourceCode{
+  background-color: #e9e9dc;
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-code.numberSource code
+pre.numberSource code
   { counter-reset: source-line 0; }
-code.numberSource code > span
+pre.numberSource code > span
   { position: relative; left: -4em; counter-increment: source-line; }
-code.numberSource code > span > a:first-child::before
+pre.numberSource code > span > a:first-child::before
   { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; display: inline-block;
@@ -173,11 +120,12 @@ code.numberSource code > span > a:first-child::before
     padding: 0 4px; width: 4em;
     color: #aaaaaa;
   }
-code.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  background-color: #f8f8f8; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+
+
+
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -207,4 +155,148 @@ code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+/*END CODE CSS           ----------------------------------------------------*/
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 800px){
+/* The sidebar menu */
+.sidenav {
+    padding: 0;
+    height: 100vh; /* Full-height: remove this if you want "auto" height */
+    width: 6rem; /* 5 * font pixel */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    background-color: var(--bg-primary); /* Black */
+    left: 0;
+    transition: width 600ms ease;
+  }
+  
+  /* The navigation menu links */
+.sidenav a {
+    padding-left: 5%;
+    text-decoration: none;
+    font-size: 2rem;
+    color: #818181;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+  .sidenav-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
+  /*  */
+  .sidenav:hover {
+    width: 16rem;
+  }
+  .sidenav:hover .link-text {
+    display: inline;
+  }
+
+  .sidenav:hover .logo svg
+  {
+    margin-left: 11rem;
+  }
+
+  .sidenav:hover .logo-text
+  {
+    left: 0px;
+    
+  }
+
+  .logo {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #ce5c00;
+    background: var(--bg-primary);
+    font-size: 1.5rem;
+    letter-spacing: 0.3ch;
+    width: 100%;
+    filter: invert(100%);
+  }
+  
+  .logo svg {
+    transform: rotate(0deg);
+    transition: 600ms;
+  }
+  
+  .logo-text
+  {
+    display: inline;
+    position: absolute;
+    left: -999px;
+    transition: 600ms;
+  }
+/*  */
+  
+  .nav-item {
+      width: 100%;
+
+
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    color: #a40000;
+    text-decoration: none;
+    filter: grayscale(100%) opacity(0.7);
+    transition: 600ms;
+  }
+  .nav-link:hover {
+    filter: grayscale(0%) opacity(1);
+    background: var(--bg-secondary);
+    color: #c4a000;
+  }
+  .link-text {  
+    display: none;
+    margin-left: 1rem;
+  }
+  
+  .nav-link svg {
+    width: 2rem;
+    min-width: 2rem;
+    margin: 0 1.5rem;
+  }
+  
+  .fa-primary {
+    color: #ff7eee;
+  }
+  
+  .fa-secondary {
+    color: #df49a6;
+  }
+  
+  .fa-primary,
+  .fa-secondary {
+    transition: 600ms;
+  }
+  
+ 
+}
+/* end of large screen css */
+/* begin small screen css */
+  @media only screen and (max-width: 800px) {
+      .sidenav {
+          display: none;
+      }
+  }
+
+  /*END OF SMALL SCREEN CSS  ----------------------------------------------------*/
+
   

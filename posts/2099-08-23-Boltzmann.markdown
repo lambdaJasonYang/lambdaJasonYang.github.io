@@ -3,7 +3,10 @@ title: Template Page (Ignore)
 tag: scripts
 ---
 
-Use this page as a template to building other Hakyll pages.
+Boltzmann probability
+
+Given : Energy levels of a system  
+Output: Probability of existence of different energy levels  
 
 
 ```bash
@@ -27,3 +30,4 @@ fac n = foldr (*) 1 [1..n]
 ```{.ruby .numberLines}
 def greet; "Hello, world!"; end
 ```
+\\[ \\ln x = \\int_{-\\infty}^x \\frac 1 y \\, dy . \\]

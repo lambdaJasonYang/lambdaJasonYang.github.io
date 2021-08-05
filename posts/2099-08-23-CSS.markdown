@@ -1,0 +1,47 @@
+---
+title: CSS
+tag: scripts
+---
+
+Remember to Ctrl + Shift + R , to hard refresh as chrome will cache your old CSS.
+
+### Nested HTML
+Using  "pre > code.sourceCode" is how to match nested HTML elements.
+
+```CSS
+pre > code.sourceCode {
+background-color: #f8f8f8;
+}
+```
+
+```HTML
+<pre>
+  <code class="sourceCode">
+    <span>
+
+
+```
+
+### Wildcard class names
+
+Below the CSS selector matches beginning occurances of "sourceCode..." within a div element when using class^.  
+When using asterisk, class* it matches the term anywhere.
+```CSS
+div[class^="sourceCode"]{
+    background-color: #f8f8f8;
+}
+
+div[class*="sourceCode"]{
+    background-color: #f8f8f8;
+}
+
+```
+```HTML
+<div class="sourceCode ...">...</div>
+
+<div class="... sourceCode ..."></div>
+```
+
+
+
+
