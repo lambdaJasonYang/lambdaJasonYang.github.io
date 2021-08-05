@@ -1,6 +1,6 @@
 ---
 title: Template Page (Ignore)
-tag: scripts
+tags: tech,mathcs,AI,musings
 ---
 
 Use this page as a template to building other Hakyll pages.

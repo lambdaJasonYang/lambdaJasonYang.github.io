@@ -1,6 +1,6 @@
 ---
 title: Building Natural numbers from Sets with python
-tags: math, CS
+tags: mathcs
 ---
 
 

@@ -1,9 +1,29 @@
 ---
-title: Template Page (Ignore)
-tag: scripts
+title: Greedy Algo
+tags: mathcs, cs, math, algorithms
 ---
+### Greedy Swap Proof
+#### Example problem: 
+$$ A = [a_1 , a_2, a_3 ...]$$
+$$ O = [o_1, o_2, o_3 ...]$$
+Each element of A represents a state.  
+$$ Assume\ A \neq O $$ (NOTE THIS IS NOT A PROOF BY CONTRADICTION AS THERE MAY BE MULTIPLE OPTIMAL SOLUTIONS THAT ARE NOT EQUAL)
+Therefore
+$$ Either\ $$
+$$\exists x \in O , x \notin A $$
+$$ \exists x \in A, x \notin O$$
+$$ a_p = o_q , a_q = o_p \ Swap$$
 
-Use this page as a template to building other Hakyll pages.
+
+
+### Greedy Inductive Lookahead Proof
+#### Example problem: A frog can take 1..k Steps each turn, get least number of turns to reach the n Step.
+
+State = turn  
+Greedy Solution, take the max k Step each State  
+
+Proof of Correctness:
+Show by induction that for all states, the current state is the most optimal  
 
 
 ```bash

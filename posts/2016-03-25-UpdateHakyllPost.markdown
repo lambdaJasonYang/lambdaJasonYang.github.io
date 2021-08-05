@@ -1,21 +1,22 @@
 ---
 title: Updating Hakyll posts
-tags: scripts
+tags: tech
 ---
 
-How does Hakyll site.hs work?
-3 main functions: match, route, compile  
-match "images/*"   
+### How does Hakyll site.hs work?  
+3 main functions: match route compile 
+
+match "images/*"
 images/dog.png will be matched
 
-route someRoute  
-route basically transforms the filename  
+route someRoute   
+route basically transforms the filename   
 2099-01-01-title.markdown will be converted to site/2099-01-01-title.html
 
-compile someCompiler
+compile someCompiler  
 Compile converts the content in the file like using the pandoc compiler then moves the folder into the output directory
 
-
+### Updating hakyll posts
 
 ```bash
 chcp 65001
@@ -35,33 +36,43 @@ Hot reload
 stack exec myblog watch
 ```
 
+### Updating Hakyll site.hs
+
 if you messed around in site.hs , you need to do
 ``` haskell
 stack build
 stack exec myblog rebuild
 ```
 
-Example codeblock uses 3 backquotes then name of language
-``` haskell
+### Pandoc formatting
+
+Example codeblock uses 3 backquotes then name of language  
+we can also do {.haskell .numberLines} to have a numbered codeblock
+``` {.haskell .numberLines}
 --```haskell
 --  fac n = foldr (*) 1 [1..n]
 --```
+
+--``` {.haskell .numberLines}
+--fac n = foldr (*) 1 [1..n]
+--```
+
 ```
 
 ``` haskell
 fac n = foldr (*) 1 [1..n]
 ```
 
-Inline code uses   
-`print(shit)`{.python}
 
-```{.ruby .numberLines}
-def greet; "Hello, world!"; end
+Inline code `print(stuff)`{.python} uses   
+``` python
+`print(stuff)`{.python}
 ```
+
    
   
 For Latex 
 ```{.ruby .numberLines}
-\\[ bleh \\in Set ...latex Code \\]
+$$ bleh \in Set  $$
 ```
-\\[ \\ln x = \\int_{-\\infty}^x \\frac 1 y \\, dy . \\]
+$$ bleh \in Set $$

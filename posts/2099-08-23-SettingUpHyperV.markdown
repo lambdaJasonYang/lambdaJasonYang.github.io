@@ -1,6 +1,6 @@
 ---
 title: HyperV on a home server
-tag: scripts
+tags: tech, server
 ---
 
 ### On Client Windows PC

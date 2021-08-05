@@ -147,10 +147,10 @@ code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Docum
 code span.dt { color: #204a87; } /* DataType */
 code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
+code span.ex { color: blue} /* Extension */
 code span.fl { color: #0000cf; } /* Float */
 code span.fu { color: #000000; } /* Function */
-code span.im { } /* Import */
+code span.im { color: blue} /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
@@ -174,6 +174,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 @media only screen and (min-width: 800px){
 /* The sidebar menu */
 .sidenav {
+    z-index: 20;
     padding: 0;
     height: 100vh; /* Full-height: remove this if you want "auto" height */
     width: 6rem; /* 5 * font pixel */

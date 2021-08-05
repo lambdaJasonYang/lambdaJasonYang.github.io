@@ -1,10 +1,56 @@
 ---
 title: YCombinators and Russell's paradox
-tags: math
+tags: mathcs
 ---
+ 
+Russell's paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself.
+$$ S = \{ x | x \notin x \} \tag{1}$$
+Next we ask can S be an element of S?  
+[Assume S is element of itself] 
+$$S \in S \tag{2}$$   
+[This would imply by definition (1)]
+$$S \notin S \tag{3}$$
+[By contradiction (2) and (3)]  
+$$S \notin S \tag{4}$$
 
-Use this page as a template to building other Hakyll pages.
+[but by the definition of (1) ]  
+$$S \in S \tag{5}$$  
+...thus the whole process repeats infinitely  
+It is a paradox because there is no end to this proof, meaning we cannot conclude whether it is true or false.
 
+The resolution is to bound the universe so that S must be within some universe.
+
+### Analogy
+In set theory, the propositional function is elementhood.
+Elementhood takes two sets (lets call the universe that contain all sets SET) and return a truth value.  
+$$ \in :: (SET,SET) \rightarrow bool $$ 
+
+First lets analyze the $$(SET,\in)$$ .
+elementhood(granny smith,red apples) is true only when the proposition granny smith is red is true.
+
+Let's design ano hter theory $$(BEAR, like)$$
+like(Smokey, honey bears) is true only when proposition Smokey eats honey is true.
+
+Lets design another paradox using groups of bears and "like".
+$$ like :: (BEAR,BEAR) \rightarrow bool $$
+
+S = a group of bears that Specifies groups of bears that do not like themselves
+
+Notice the analog
+	$$ Set of Elements \approx Group of Bears $$
+    $$ \in \approx like $$
+
+Here we have a group of bears that do not like other bears. 
+![](/images/ycomb0.png)
+
+We select wlog an arbitrary bear of such group, Smokey.
+We say Smoke likes Smokey.
+![](/images/ycomb1.png)
+
+
+![](/images/ycomb2.png)
+![](/images/ycomb3.png)
+![](/images/ycomb4.png)
 
 ```bash
 chcp 65001

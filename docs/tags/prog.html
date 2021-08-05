@@ -18,7 +18,7 @@
         </script>
         <!-- MATH JAx END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>My Hakyll Blog - Building Natural numbers from Sets with python</title>
+        <title>My Hakyll Blog - Posts tagged "prog"</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -226,29 +226,20 @@
         </div>
 
         <div id="content">
-            <h1>Building Natural numbers from Sets with python</h1>
+            <h1>Posts tagged "prog"</h1>
             
 
-            <div class="info">
-    Posted on August 23, 2018
+            <ul>
     
-</div>
-<div class="info">
+        <li>
+            <a href="../posts/2099-08-23-NQueen.html">NQueen in Haskell</a> - August 23, 2099
+        </li>
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+        <li>
+            <a href="../posts/2099-08-23-CSS.html">CSS</a> - August 23, 2099
+        </li>
     
-</div>
-<p><a href="https://nbviewer.jupyter.org/github/userJY/JupyterNotebooks/blob/master/SetTheory.ipynb">Jupyter Note book python implementation using default set data structure</a></p>
-<p>We can axiomatically build the Set-interpretation of natural numbers by recursively nesting sets within each other.</p>
-<p><span class="math display">\[ \{  \} = \emptyset := 0 \]</span> <span class="math display">\[ 0 \cup \{ 0 \}  = \{ 0 \} = \{ \{ \} \}  := 1  \]</span> <span class="math display">\[ 1 \cup \{1 \} = \{ 0, 1 \} = \{ 0, \{ 0 \} \} = \{ \{ \} ,\{ \{ \} \} \} := 2 \]</span> <span class="math display">\[ 2 \cup \{2 \} = \{ 0, 1, 2 \} = \{ 0, 1 \} \cup \{ \{ 0, 1 \} \} = \{ \{  \},\{ \{ \} \} , \{ \{ \} ,\{ \{ \} \} \}  \} = 3 \]</span></p>
-<p><span class="math display">\[ k-1 \cup \{ k-1 \} = \{ 0,1,2... k-1 \} := k\]</span></p>
-<p>Given a goal to define the Set-interpretation of the k natural</p>
-<p>We take the Set-interpretation of the (k-1) natural, which we have previously defined, and union it with itself but nested inside a set.</p>
-<p>Another way to look at it.<br />
-To define the k natural, we form a set that contains all the Set-interpretation of numbers from 0 to k-1.</p>
-<p>Given the above knowledge we can define a successor function: <span class="math display">\[ Succ(K) = K \cup \{ K \} \]</span></p>
-<p>Notice that since the k natural contains all the numbers,(0,1,2…k-1) before it,<br />
-we can define a Predecessor function by simply fetching the Maximum element inside the Set-interpretation of K. <span class="math display">\[ Pred(K) = max(\{ x | x \in K \}) \]</span></p>
+</ul>
 
         </div>
         <div id="footer">

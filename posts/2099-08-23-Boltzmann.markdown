@@ -1,6 +1,6 @@
 ---
-title: Template Page (Ignore)
-tag: scripts
+title: Boltzmann probability distribution
+tags: mathcs, AI
 ---
 
 Boltzmann probability
