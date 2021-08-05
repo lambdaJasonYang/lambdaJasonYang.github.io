@@ -10,6 +10,13 @@ body {
     --bg-primary: #23232e;
     --bg-secondary: #141418;
 }
+div#logo > a{
+color:black;
+font-size: 1.3rem;
+font-weight:bold;
+text-decoration: none;
+float: left;
+}
 li {
   list-style-type: none;
   margin: 0;
@@ -242,13 +249,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     left: -999px;
     transition: 600ms;
   }
-/*  */
+
   
   .nav-item {
       width: 100%;
-
-
   }
+
+  
   .nav-link {
     display: flex;
     align-items: center;
@@ -274,23 +281,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     margin: 0 1.5rem;
   }
   
-  .fa-primary {
-    color: #ff7eee;
-  }
-  
-  .fa-secondary {
-    color: #df49a6;
-  }
-  
-  .fa-primary,
-  .fa-secondary {
-    transition: 600ms;
-  }
+ 
   
  
 }
-/* end of large screen css */
-/* begin small screen css */
+/* END LARGE SCREEN CSS------------------------------------------------- */
+
+
+
+/* BEGIN SMALL SCREEN CSS--------------------------------------------------- */
   @media only screen and (max-width: 800px) {
       .sidenav {
           display: none;
