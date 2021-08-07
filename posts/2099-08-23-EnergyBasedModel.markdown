@@ -28,7 +28,7 @@ Example2 include giving high energy to all data other than our dataset (WARNING,
 Two types of inference architectures.  
 Latent energy variable.   
 
-
+$$P(y|x) = \frac{e^{-\beta E(x,y)}}{\int_{y'}e^{-\beta E(x,y')}} $$
 ```bash
 chcp 65001
 stack exec myblog clean

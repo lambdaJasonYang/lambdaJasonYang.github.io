@@ -5,6 +5,7 @@ import           Hakyll
 import qualified GHC.IO.Encoding as E
 
 import           Text.Pandoc.Options
+import Hakyll.Web.Tags (renderTagCloud)
 
 
 
@@ -87,9 +88,11 @@ main = do
             route idRoute
             compile $ do
                 posts <- recentFirst =<< loadAll "posts/*"
+                taglist <- renderTagCloud 90 130 tags
                 let archiveCtx =
                         listField "posts" postCtx (return posts) `mappend`
                         constField "title" "Archives"            `mappend`
+                        constField "taglist" taglist             `mappend`
                         defaultContext
 
                 makeItem ""

@@ -18,7 +18,7 @@
         </script>
         <!-- MATH JAx END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>My Hakyll Blog - Template Page (Ignore)</title>
+        <title>My Hakyll Blog - Language, Teaching and Set theory</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -226,7 +226,7 @@
         </div>
 
         <div id="content">
-            <h1>Template Page (Ignore)</h1>
+            <h1>Language, Teaching and Set theory</h1>
             
 
             <div class="info">
@@ -235,18 +235,67 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
+    Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
     
 </div>
-<p>Use this page as a template to building other Hakyll pages.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> greet; <span class="st">&quot;Hello, world!&quot;</span>; <span class="kw">end</span></span></code></pre></div>
+<h3 id="the-problem">The Problem</h3>
+<p>My first introduction to set theory, I remember being told:</p>
+<p>“sets are sorta like bags but only loosely speaking”<br />
+“sets can contain things”</p>
+<p>This cursed introduction gave me a misleading conceptualization of sets. Initially I had thought sets were similar to real objects such as bags or containers that contained elements.<br />
+This physical conceptualization, lead me to believe(incorrectly) that elements could be taken or placed into sets at whim.<br />
+This incorrect intuition caused a lot of trouble in understanding how sets contained everything that it specified WITHOUT EXCEPTION.<br />
+So what are sets?</p>
+<p>A set specifies a predicate.<br />
+An element <strong>MUST</strong> be in a set if it satisify such predicate.</p>
+<p>How do we mitigate this confusion in teaching?<br />
+From my own experience, most teachers would introduce/intialize a set by saying “Here we have a set that contains all even numbers”</p>
+<p>The problematic word <strong>“Contains”</strong> rears it’s head.<br />
+We must emphasize that sets are not objects like bags but <strong>specifications</strong>.</p>
+<h3 id="sets-are-specifications">Sets are Specifications</h3>
+<p>First we need to:<br />
+STOP INITIALIZING sets by saying “Let S be the set that contains …”</p>
+<p>example:<br />
+1. DO NOT: “Let S be the set that contains red apple pies”<br />
+2. DO:“Let S be the set that <strong>specifies</strong> red apple pies”</p>
+<h3 id="stop-using-contains">Stop using Contains</h3>
+<p>After introducing the set, we prod the set with elementhood <span class="math inline">\(\in\)</span> and some element <span class="math inline">\(x\)</span>.<br />
+We may ask “is <span class="math inline">\(x\)</span> in the set?” or assert “<span class="math inline">\(x\)</span> is in the set”.</p>
+<p>“apple pie <span class="math inline">\(x\)</span> is in set S”<br />
+<span class="math display">\[ x \in S \]</span></p>
+<p>Isnt “apple pie <span class="math inline">\(x\)</span> is in set S” and<br />
+“set S contains apple pie <span class="math inline">\(x\)</span>” the same thing?</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Syntax 1</th>
+<th style="text-align: center;">Syntax 2</th>
+<th style="text-align: center;">Syntax 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">apple pie <span class="math inline">\(x\)</span></td>
+<td style="text-align: center;">is in</td>
+<td style="text-align: center;">Set S</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(x\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\in\)</span></td>
+<td style="text-align: center;">S</td>
+</tr>
+</tbody>
+</table>
+<p>Yes, semantically overall, they are equivalent but the first statement is closer to the mathematical notation in terms of discrete syntax and semantic ordering (as shown in the chart above).</p>
+<p>Again, there is the issue that “contains” implies that sets have some physical manifestation.</p>
+<p>Therefore, it is preferable to say “apple pie <span class="math inline">\(x\)</span> is in set S” over<br />
+“set S contains apple pie <span class="math inline">\(x\)</span>”.</p>
+<p>example:<br />
+DO NOT: “<span class="math inline">\(\mathbb{N}\)</span> contains 1,2,3”<br />
+DO: “1,2,3 are in <span class="math inline">\(\mathbb{N}\)</span>”</p>
+<h5 id="aside">Aside</h5>
+<p>Perhaps after students have a better grasp on sets, we can ease up on the “contains” restriction in terms of elementhood<br />
+but I believe initializing sets with “specifies” should become the standard as it explicitly indicates first use of the set to the readers.</p>
 
         </div>
         <div id="footer">

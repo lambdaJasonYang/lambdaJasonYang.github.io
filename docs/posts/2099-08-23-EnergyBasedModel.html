@@ -251,6 +251,7 @@ Energy Based Model predicts a set of plausible outputs.</p>
 Example2 include giving high energy to all data other than our dataset (WARNING, this is basically the same as a probabilistic model with the issue of extremely steep gradients)</p>
 <p>Two types of inference architectures.<br />
 Latent energy variable.</p>
+<p><span class="math display">\[P(y|x) = \frac{e^{-\beta E(x,y)}}{\int_{y'}e^{-\beta E(x,y')}} \]</span></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>

@@ -243,28 +243,30 @@
 For me it returns “Wi-Fi” in the name field, use this in the next command.</p>
 <p><code class="sourceCode bash"><span class="ex">Set-NetConnectionProfile</span> -InterfaceAlias Wi-Fi -NetworkCategory Private</code> <code class="sourceCode bash"><span class="ex">winrm</span> quickconfig</code></p>
 <p><code class="sourceCode bash"><span class="ex">Set-Item</span> WSMan:\localhost\Client\TrustedHosts -Value <span class="st">&quot;192.168.1.66&quot;</span></code> <code class="sourceCode bash"><span class="ex">Enable-WSManCredSSP</span> -Role client -DelegateComputer <span class="st">&quot;192.168.1.66&quot;</span></code></p>
-<p>Go to group policy Computer Configuration &gt; Administrative Templates &gt; System &gt; Credential Delegation Enable “Allow delegating fresh credentials”, Press “Show…” next to “Add servers to the list: Add value”wsman/*"</p>
-<p>Enable “Allow delegating fresh credentials with NTLM-only server authentication”, Press “Show…” next to “Add servers to the list: Add value”wsman/*"</p>
-<p>Click on hyper-v manager “Connect to Server…” DESKTOP-T1OVJA9 Your password to login to Administrator</p>
-<p>##Aside, I noticed that my server never startups with the internet on and I have to reset the network adapter. Here is the method to rest the Network adapter. <code class="sourceCode bash"><span class="ex">Restart-NetAdapter</span> (Get-NetAdapter <span class="kw">|</span> <span class="kw">select</span> <span class="ex">-expand</span> Name)</code></p>
+<p>Go to group policy Computer Configuration &gt; Administrative Templates &gt; System &gt; Credential Delegation<br />
+Enable “Allow delegating fresh credentials”, Press “Show…” next to “Add servers to the list:<br />
+Add value”wsman/*"</p>
+<p>Enable “Allow delegating fresh credentials with NTLM-only server authentication”, Press “Show…” next to “Add servers to the list:<br />
+Add value”wsman/*"</p>
+<p>Click on hyper-v manager “Connect to Server…”<br />
+DESKTOP-ABCD2E Your password to login to Administrator</p>
+<p>“DESKTOP-ABCD2E” will be replaced by the name of your PC.</p>
+<h2 id="bad-server-wifi-startup-fix">Bad Server Wifi startup fix</h2>
+<p>I noticed that my server never startups with the internet on and I have to reset the network adapter everytime which means physically being at the server PC and running commands.</p>
+<p>Here is the command to rest the Network adapter on Powershell.<br />
+<code class="sourceCode bash"><span class="ex">Restart-NetAdapter</span> (Get-NetAdapter <span class="kw">|</span> <span class="kw">select</span> <span class="ex">-expand</span> Name)</code></p>
+<h5 id="automate-the-wifi-restart-fix">Automate the wifi restart fix</h5>
 <p>To call the command on startup, we create a config file in powershell</p>
-<p>New-Item -Path . -Name “Config.ps1” -ItemType “file” -Value “Restart-NetAdapter (Get-NetAdapter | select -expand Name)”</p>
-<p>From stackoverflow vkrams, a startup script that sets the task</p>
+<p><code class="sourceCode bash"><span class="ex">New-Item</span> -Path . -Name <span class="st">&quot;Config.ps1&quot;</span> -ItemType <span class="st">&quot;file&quot;</span> -Value <span class="st">&quot;Restart-NetAdapter (Get-NetAdapter | select -expand Name)&quot;</span></code></p>
+<p>Credit to stackoverflow “vkrams”, a startup script that sets any task to run at startup.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="va">$TaskAction1</span> = <span class="ex">New-ScheduledTaskAction</span> -Execute <span class="st">&quot;PowerShell.exe&quot;</span> -Argument <span class="st">&quot;-ExecutionPolicy Bypass -File Config.ps1&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="va">$TaskTrigger</span> = <span class="ex">New-ScheduledTaskTrigger</span> -AtStartup</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="va">$TaskPrincipal</span> = <span class="ex">New-ScheduledTaskPrincipal</span> -UserID <span class="st">&quot;NT AUTHORITY\SYSTEM&quot;</span> -LogonType ServiceAccount -RunLevel Highest</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="ex">Register-ScheduledTask</span> -Action <span class="va">$TaskAction1</span> -Trigger <span class="va">$TaskTrigger</span> -Principal <span class="va">$TaskPrincipal</span> -TaskName <span class="st">&quot;Config&quot;</span> -Description <span class="st">&quot;Config Script&quot;</span></span></code></pre></div>
+<h5 id="irrelevant-tidbits">Irrelevant tidbits</h5>
 <p>The wget of linux in powershell is:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">(</span><span class="ex">New-Object</span> System.Net.WebClient<span class="kw">)</span><span class="ex">.DownloadFile</span>(<span class="st">&quot;https://github.com/macchrome/winchrome/releases/download/v92.0.4515.107-r885287-Win64/92.0.4515.107_ungoogled_mini_installer.exe&quot;</span>, <span class="st">&quot;ChromeSetup.exe&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">def</span> greet; <span class="st">&quot;Hello, world!&quot;</span>; <span class="kw">end</span></span></code></pre></div>
-<p><span class="math display">\[ \\ln x = \\int_{-\\infty}^x \\frac 1 y \\, dy . \]</span></p>
+<p>We can download a fully functioning Chrome on a barebones Hyper-V core server.</p>
 
         </div>
         <div id="footer">

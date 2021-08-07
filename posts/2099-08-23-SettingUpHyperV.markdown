@@ -16,26 +16,31 @@ For me it returns "Wi-Fi" in the name field, use this in the next command.
 
 
 Go to group policy
-Computer Configuration > Administrative Templates > System > Credential Delegation
-Enable "Allow delegating fresh credentials", Press "Show..." next to "Add servers to the list:
+Computer Configuration > Administrative Templates > System > Credential Delegation  
+Enable "Allow delegating fresh credentials", Press "Show..." next to "Add servers to the list:  
 Add value "wsman/*"
 
-Enable "Allow delegating fresh credentials with NTLM-only server authentication", Press "Show..." next to "Add servers to the list:
-Add value "wsman/*"
+Enable "Allow delegating fresh credentials with NTLM-only server authentication", Press "Show..." next to "Add servers to the list:  
+Add value "wsman/*"  
 
-Click on hyper-v manager "Connect to Server..."
-DESKTOP-T1OVJA9\Administrator
-Your password to login to Administrator 
+Click on hyper-v manager "Connect to Server..."  
+DESKTOP-ABCD2E\Administrator  
+Your password to login to Administrator   
 
-##Aside, I noticed that my server never startups with the internet on and I have to reset the network adapter.
-Here is the method to rest the Network adapter.
-`Restart-NetAdapter (Get-NetAdapter | select -expand Name)`{.bash}
+"DESKTOP-ABCD2E" will be replaced by the name of your PC.
 
-To call the command on startup, we create a config file in powershell
+## Bad Server Wifi startup fix
+I noticed that my server never startups with the internet on and I have to reset the network adapter everytime which means physically being at the server PC and running commands.  
 
-New-Item -Path . -Name "Config.ps1" -ItemType "file" -Value "Restart-NetAdapter (Get-NetAdapter | select -expand Name)"
+Here is the command to rest the Network adapter on Powershell.  
+`Restart-NetAdapter (Get-NetAdapter | select -expand Name)`{.bash}  
+ 
+##### Automate the wifi restart fix
+To call the command on startup, we create a config file in powershell  
 
-From stackoverflow vkrams, a startup script that sets the task
+`New-Item -Path . -Name "Config.ps1" -ItemType "file" -Value "Restart-NetAdapter (Get-NetAdapter | select -expand Name)"`{.bash}  
+
+Credit to stackoverflow "vkrams", a startup script that sets any task to run at startup.
 
 ```bash
 $TaskAction1 = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-ExecutionPolicy Bypass -File Config.ps1"
@@ -44,31 +49,10 @@ $TaskPrincipal = New-ScheduledTaskPrincipal -UserID "NT AUTHORITY\SYSTEM" -Logon
 Register-ScheduledTask -Action $TaskAction1 -Trigger $TaskTrigger -Principal $TaskPrincipal -TaskName "Config" -Description "Config Script"
 ```
 
+##### Irrelevant tidbits
+
 The wget of linux in powershell is:
 ```bash
 (New-Object System.Net.WebClient).DownloadFile("https://github.com/macchrome/winchrome/releases/download/v92.0.4515.107-r885287-Win64/92.0.4515.107_ungoogled_mini_installer.exe", "ChromeSetup.exe")
 ```
-
-
-```bash
-chcp 65001
-stack exec myblog clean
-stack exec myblog build
-```
-
-```bash
-git add .
-git commit -m "some message"
-git push origin main:main
-```
-
-
-
-``` haskell
-fac n = foldr (*) 1 [1..n]
-```
-
-```{.ruby .numberLines}
-def greet; "Hello, world!"; end
-```
-\\[ \\ln x = \\int_{-\\infty}^x \\frac 1 y \\, dy . \\]
+We can download a fully functioning Chrome on a barebones Hyper-V core server.

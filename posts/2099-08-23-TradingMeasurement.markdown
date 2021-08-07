@@ -25,3 +25,4 @@ Avg. Up Month        4.92%
 Avg. Down Month      -4.59%  
 Win Year %           71.43%  
 Win 12m %            68.00%  
+
