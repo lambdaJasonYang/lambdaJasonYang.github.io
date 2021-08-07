@@ -22,6 +22,17 @@ li {
   margin: 0;
   padding: 0;
 }
+/* table css start */
+table {
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid #999;
+  padding: 0.5rem;
+  text-align: left;
+}
+/* table css  end */
 body::-webkit-scrollbar {
     width: 0.25rem;
     height: 0.25rem;

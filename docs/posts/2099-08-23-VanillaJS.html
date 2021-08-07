@@ -18,8 +18,8 @@
         </script>
         <!-- MATH JAx END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>My Hakyll Blog - Home</title>
-        <link rel="stylesheet" type="text/css" href="./css/default.css" />
+        <title>My Hakyll Blog - VanillaJS mini scripts</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
     <body>
@@ -84,7 +84,7 @@
         
             
                 <li class="nav-item">
-                    <a href="./tags/mathcs.html" class="nav-link">
+                    <a href="../tags/mathcs.html" class="nav-link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="4 0 20 30">
                             <path fill="#f8f8f8" d="M 9 5 L 9 7 L 11 7 C 11.793889 7 12.517434 7.4817455 12.8125 8.21875 L 14.40625 12.1875 L 8 27 L 10.1875 27 L 15.4375 14.8125 L 19.34375 24.53125 C 19.940328 26.022694 21.393227 27 23 27 L 25 27 L 25 25 L 23 25 C 22.204773 25 21.482922 24.519806 21.1875 23.78125 L 14.65625 7.46875 C 14.059316 5.9777545 12.606111 5 11 5 L 9 5 z" overflow="visible"></path>
                         </svg>
@@ -93,7 +93,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a href="./tags/prog.html" class="nav-link">
+                    <a href="../tags/prog.html" class="nav-link">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 488.4 488.4" style="enable-background:new 0 0 488.4 488.4;filter:invert(100)" xml:space="preserve">
                                 <g>
                                     <g>
@@ -116,7 +116,7 @@
 
 
                 <li class="nav-item">
-                    <a href="./tags/AI.html" class="nav-link">
+                    <a href="../tags/AI.html" class="nav-link">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;filter:invert(100)" xml:space="preserve">
                                     <g>
                                         <g>
@@ -158,7 +158,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="./tags/tech.html" class="nav-link">
+                    <a href="../tags/tech.html" class="nav-link">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 287.639 287.639" style="filter:invert(100);enable-background:new 0 0 287.639 287.639;" xml:space="preserve">
                             <g>
                                 <path d="M102.543,43.003C112.344,35.226,128.788,30,143.462,30c14.81,0,31.376,5.321,41.225,13.241
@@ -182,7 +182,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="./tags/musings.html" class="nav-link">
+                    <a href="../tags/musings.html" class="nav-link">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 487.194 487.194" style="enable-background:new 0 0 487.194 487.194;filter:invert(100)" xml:space="preserve">
                                 <g>
                                     <g>
@@ -215,170 +215,58 @@
 
         <div id="header">
             <div id="logo">
-                <a href="./">My Hakyll Blog</a>
+                <a href="../">My Hakyll Blog</a>
             </div>
             <div id="navigation">
-                <a href="./">Home</a>
-                <a href="./about.html">About</a>
-                <a href="./contact.html">Contact</a>
-                <a href="./archive.html">Archive</a>
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
             </div>
         </div>
 
         <div id="content">
-            <h1>Home</h1>
+            <h1>VanillaJS mini scripts</h1>
             
 
-            <h2>Welcome</h2>
+            <div class="info">
+    Posted on August 23, 2099
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
+    
+</div>
+<p>Some random JS scripts that I come back to frequently for webscraping or cross site scripting practice.</p>
+<h5 id="send-html-request-with-js">Send HTML request with js</h5>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">var</span> xmlHttp <span class="op">=</span> <span class="kw">new</span> <span class="bu">XMLHttpRequest</span>()<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>xmlHttp<span class="op">.</span><span class="at">onreadystatechange</span> <span class="op">=</span> <span class="kw">function</span>() {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    <span class="cf">if</span> (xmlHttp<span class="op">.</span><span class="at">readyState</span> <span class="op">==</span> <span class="dv">4</span> <span class="op">&amp;&amp;</span> xmlHttp<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="dv">200</span>) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>        <span class="kw">var</span> response <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(xmlHttp<span class="op">.</span><span class="at">responseText</span>)<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>        <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;#content&quot;</span>)<span class="op">.</span><span class="at">innerHTML</span> <span class="op">=</span> response<span class="op">.</span><span class="at">value</span><span class="op">.</span><span class="at">joke</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>    }</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>}</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>xmlHttp<span class="op">.</span><span class="fu">open</span>(<span class="st">&quot;GET&quot;</span><span class="op">,</span> <span class="st">&quot;https://api.icndb.com/jokes/random/&quot;</span><span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>xmlHttp<span class="op">.</span><span class="fu">send</span>(<span class="kw">null</span>)<span class="op">;</span></span></code></pre></div>
+<h5 id="select-element-by-class-or-id">Select element by class or id</h5>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;#content&quot;</span>)<span class="op">.</span><span class="at">value</span> <span class="op">=</span> <span class="st">&quot;new value&quot;</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="co">//this will select by id</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;.myclass&quot;</span>)<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co">//this will select by class</span></span></code></pre></div>
+<h5 id="more-complex-selector">More Complex selector</h5>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">var</span> el <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;div.user-panel.main input[name='login']&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;user-panel main&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;login&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<h5 id="building-html-element-through-vanilla-js">Building HTML element through vanilla JS</h5>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">var</span> paragraph <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">&quot;p&quot;</span>)<span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="kw">var</span> textContent <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createTextNode</span>(<span class="st">&quot;content&quot;</span>)<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>paragraph<span class="op">.</span><span class="fu">appendChild</span>(textContent)<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;#messages&quot;</span>)<span class="op">.</span><span class="fu">appendChild</span>(paragraph)<span class="op">;</span></span></code></pre></div>
 
-<p>Welcome to my blog!</p>
-
-<p>I've reproduced a list of recent posts here for your reading pleasure:</p>
-
-<h2>Posts</h2>
-<ul>
-    
-        <li>
-            <a href="./posts/2099-08-23-YParadox.html">YCombinators and Russell's paradox</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-WhyHakyll.html">Why Hakyll</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-VanillaJS.html">VanillaJS mini scripts</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-TradingMeasurement.html">Benchmarks for algotrading</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-TemplatePage.html">Template Page (Ignore)</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-TeachingSets.html">Language, Teaching and Set theory</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-SettingUpHyperV.html">HyperV on a home server</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-NQueen.html">NQueen in Haskell</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-MemoryPointers.html">Overcomplicating Memory Model and Pointers</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-Kolmogorov-Smirnov.html">Testing for normal dist with Kolmogorov-Smirnov</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-HomSet.html">HomSet</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-GreedyAlgo.html">Greedy Algo</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-EnergyBasedModel.html">Energy Based Models</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-Cointegration.html">Cointegration and Spreads</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-CSS.html">CSS</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2099-08-23-Boltzmann.html">Boltzmann probability distribution</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="./posts/2021-08-23-KyoceraPrinters.html">Convert Enterprise printer to a prosumer printer</a> - August 23, 2021
-        </li>
-    
-        <li>
-            <a href="./posts/2021-08-23-AddMathjaxToHakyll.html">Adding Mathjax to Hakyll in 2021</a> - August 23, 2021
-        </li>
-    
-        <li>
-            <a href="./posts/2021-05-25-Future.html">Type Theory and Predicting the Far Future</a> - May 25, 2021
-        </li>
-    
-        <li>
-            <a href="./posts/2021-03-23-example.html">The State of Full Stack Languages in 2021</a> - March 23, 2021
-        </li>
-    
-        <li>
-            <a href="./posts/2019-08-23-FoldAndInduction.html">Fold and Induction</a> - August 23, 2019
-        </li>
-    
-        <li>
-            <a href="./posts/2018-08-23-SetTheoryPython.html">Building Natural numbers from Sets with python</a> - August 23, 2018
-        </li>
-    
-        <li>
-            <a href="./posts/2016-03-25-UpdateHakyllPost.html">Updating Hakyll posts</a> - March 25, 2016
-        </li>
-    
-        <li>
-            <a href="./posts/2015-08-23-Linux.html">Linux troubleshooting commands</a> - August 23, 2015
-        </li>
-    
-</ul>
-
-
-<p>…or you can find more in the <a href="./archive.html">archives</a>.</p>
-
-<p>
-<div>All articles can be reached through the sidebar. All articles are labeled by either one or more of the 5 tags shown below.</div>
-<table>
-    <thead>
-      <tr>
-        <th>tag</th>
-        <th>meaning</th>
-        
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>mathcs</td>
-        <td>math and computer science</td>
-       
-      </tr>
-      <tr>
-        <td>prog</td>
-        <td>programming</td>
-        
-      </tr>
-      <tr>
-        <td>AI</td>
-        <td>Artifical intelligence and machine learning</td>
-        
-      </tr>
-      <tr>
-        <td>tech</td>
-        <td>hardware tinkering</td>
-        
-      </tr>
-      <tr>
-        <td>musings</td>
-        <td>ramblings</td>
-        
-      </tr>
-    </tbody>
-</table>
-
-</p>
         </div>
         <div id="footer">
             Site proudly generated by
