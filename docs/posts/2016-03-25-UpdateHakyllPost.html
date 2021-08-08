@@ -239,42 +239,44 @@
     
 </div>
 <h3 id="how-does-hakyll-site.hs-work">How does Hakyll site.hs work?</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>    match <span class="st">&quot;images/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>        route   idRoute</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>        compile copyFileCompiler</span></code></pre></div>
 <p>3 main functions: match route compile</p>
-<p>match "images/*" images/dog.png will be matched</p>
-<p>route someRoute<br />
+<p><code class="sourceCode haskell">match <span class="st">&quot;images/*&quot;</span></code> images/dog.png will be matched</p>
+<p><code class="sourceCode haskell">route idRoute</code><br />
 route basically transforms the filename<br />
-2099-01-01-title.markdown will be converted to site/2099-01-01-title.html</p>
-<p>compile someCompiler<br />
-Compile converts the content in the file like using the pandoc compiler then moves the folder into the output directory</p>
+In this case idRoute is the identity function meaning no change to the name “dog.png”</p>
+<p><code class="sourceCode haskell">compile copyFileCompiler</code> we copy “/images/dog.png” to the same path meaning no change.</p>
 <h3 id="updating-hakyll-posts">Updating hakyll posts</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
 <p>view the site by going to your ~/myblog/docs/index.html</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
 <p>Hot reload</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>stack exec myblog watch</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>stack exec myblog watch</span></code></pre></div>
 <h3 id="updating-hakyll-site.hs">Updating Hakyll site.hs</h3>
 <p>if you messed around in site.hs , you need to do</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>stack build</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>stack exec myblog rebuild</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>stack build</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>stack exec myblog rebuild</span></code></pre></div>
 <h3 id="pandoc-formatting">Pandoc formatting</h3>
 <p>Example codeblock uses 3 backquotes then name of language<br />
 we can also do {.haskell .numberLines} to have a numbered codeblock</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource haskell numberLines"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">--```haskell</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">--  fac n = foldr (*) 1 [1..n]</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">--```</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">--``` {.haskell .numberLines}</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">--fac n = foldr (*) 1 [1..n]</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">--```</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource haskell numberLines"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">--```haskell</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">--  fac n = foldr (*) 1 [1..n]</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">--```</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">--``` {.haskell .numberLines}</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">--fac n = foldr (*) 1 [1..n]</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">--```</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
 <p>Inline code <code class="sourceCode python"><span class="bu">print</span>(stuff)</code> uses</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>`print(stuff)`{.python}</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>`print(stuff)`{.python}</span></code></pre></div>
 <p>For Latex</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb8-1"><a href="#cb8-1"></a><span class="dt">$$</span> bleh \<span class="kw">in</span> <span class="dt">Set</span>  <span class="dt">$$</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb9-1"><a href="#cb9-1"></a><span class="dt">$$</span> bleh \<span class="kw">in</span> <span class="dt">Set</span>  <span class="dt">$$</span></span></code></pre></div>
 <p><span class="math display">\[ bleh \in Set \]</span></p>
 
         </div>

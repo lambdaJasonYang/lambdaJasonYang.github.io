@@ -4,17 +4,23 @@ tags: tech
 ---
 
 ### How does Hakyll site.hs work?  
+``` haskell
+    match "images/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+```
+
 3 main functions: match route compile 
 
-match "images/*"
+`match "images/*"`{.haskell}
 images/dog.png will be matched
 
-route someRoute   
+`route idRoute`{.haskell}   
 route basically transforms the filename   
-2099-01-01-title.markdown will be converted to site/2099-01-01-title.html
+In this case idRoute is the identity function meaning no change to the name "dog.png"
 
-compile someCompiler  
-Compile converts the content in the file like using the pandoc compiler then moves the folder into the output directory
+`compile copyFileCompiler`{.haskell}
+we copy "/images/dog.png" to the same path meaning no change.
 
 ### Updating hakyll posts
 

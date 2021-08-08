@@ -33,7 +33,7 @@ executable myblog
     containers   
 ```
 
-### Modify site.hs
+### Setup functions in site.hs
 ```haskell
    
 --Step 0: Add "import Text.Pandoc.Options" in site.hs
@@ -62,8 +62,22 @@ writeMathjaxOptions = defaultHakyllWriterOptions
 --Step 4: Build the compiler using the ReaderOption and Writer Option from Step 2, 3.
 mathJaxAddedCompiler :: Compiler (Item String)
 mathJaxAddedCompiler = pandocCompilerWith readMathjaxOptions writeMathjaxOptions
---Step 5: Replace the line "compile $ pandocCompiler" under "match "posts/*" $ do" with 
---"compiler $ mathJaxAddedCompiler"
+```
+### Modifying compiler in site.hs
+Replace the line `compile $ pandocCompiler`{.haskell} with   
+`compiler $ mathJaxAddedCompiler`{.haskell}  
+As shown in line 8
+``` {.haskell .numberLines}
+...
+main :: IO ()
+main = do    
+    hakyllWith config $ do
+        ...
+        match "posts/*" $ do
+            route $ setExtension "html"
+            compile $ mathJaxAddedCompiler
+               ...
+
 ```
 
 remember to call 

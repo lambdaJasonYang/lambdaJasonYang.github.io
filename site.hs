@@ -63,11 +63,11 @@ main = do
                 >>= relativizeUrls
 ----------------------
         tags <- buildTags "posts/*" (fromCapture "tags/*.html")
-        tagsRules tags $ \tag pattern -> do
+        tagsRules tags $ \tag tagpattern -> do
             let title = "Posts tagged \"" ++ tag ++ "\""
             route idRoute
             compile $ do
-                posts <- recentFirst =<< loadAll pattern
+                posts <- recentFirst =<< loadAll tagpattern
                 let ctx = constField "title" title
                         `mappend` listField "posts" (postCtxWithTags tags) (return posts)
                         `mappend` defaultContext
