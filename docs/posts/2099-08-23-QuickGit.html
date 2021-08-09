@@ -18,7 +18,7 @@
         </script>
         <!-- MATH JAx END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Linux troubleshooting commands</title>
+        <title>Jason's Blog - Git Crashcourse</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -215,7 +215,7 @@
 
         <div id="header">
             <div id="logo">
-                <a href="../">Jason's Blog</a>
+                <a href="../">My Hakyll Blog</a>
             </div>
             <div id="navigation">
                 <a href="../">Home</a>
@@ -226,20 +226,83 @@
         </div>
 
         <div id="content">
-            <h1>Linux troubleshooting commands</h1>
+            <h1>Git Crashcourse</h1>
             
 
             <div class="info">
-    Posted on August 23, 2015
+    Posted on August 23, 2099
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>
+    Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
 </div>
-<pre><code>nano /etc/network/interfaces</code></pre>
-<pre><code>/etc/resolv.</code></pre>
+<h3 id="preconfig">Preconfig</h3>
+<p>configure remote variable we name “origin”<br />
+or remove to reuse variable</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">git</span> remote add origin https://github.com/UserJY/bleh.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">git</span> remote remove origin</span></code></pre></div>
+<h3 id="the-process">The process</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span></code></pre></div>
+<p>updating to remote repo like github</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">git</span> push origin main</span></code></pre></div>
+<h3 id="pushing-updates-to-team-repo">Pushing updates to Team repo</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">git</span> checkout -b Fixedbugbranch</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;fixed bugs&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="fu">git</span> push origin Fixedbugbranch</span></code></pre></div>
+<p>On the team’s side, they see a pull request(PR) which is ran through github actions(CI system) that tests if your update doesn’t break existing systems in the main repo.<br />
+They can reject or accept your PR.<br />
+If accepted, they merge your PR branch with the main branch.</p>
+<h3 id="more-depth-concept">More depth, Concept</h3>
+<p>Three Levels to know: ref, alias, HEAD</p>
+<p>ref(commit_new) ← ref(commit_old) ← ref(commit_oldest)<br />
+↑<br />
+alias(“SomeBranchName”)<br />
+↑<br />
+HEAD</p>
+<ul>
+<li>ref - static nodes of the commit tree.
+<ul>
+<li>ref = commits</li>
+</ul></li>
+<li>alias - static names that point to the refs; default name is “main”
+<ul>
+<li>typically alias are given to heads of branches</li>
+</ul></li>
+<li>HEAD - dynamic pointer that can point to alias or refs</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">name</th>
+<th style="text-align: center;">command</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">ref</td>
+<td style="text-align: center;">git commit - adds a new ref node</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">alias</td>
+<td style="text-align: center;">git branch - assign an alias to ref node on new branch</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">HEAD</td>
+<td style="text-align: center;">git checkout - Moves head pointer to either alias or ref</td>
+</tr>
+</tbody>
+</table>
+<p>Every git node is a commit that has a ref that looks like 3bed42g14584b3c0c04fdcc4f503346f92be1003</p>
+<p>The alias for the most current node is “main” which points to some ref.</p>
+<p>We can point HEAD to aliases like “main” with git checkout main</p>
+<p>We can point HEAD to ref like “3bed42g1…” with git checkout “3bed42g1…”</p>
+<p>Pointing HEAD to ref directly results in detached HEAD mode. git switch 3bed42g14584b3c0c04fdcc4f503346f92be1003</p>
+<p>alias To make a new alias, we use git branch bleh</p>
+<p>transverse git commit tree using the HEAD pointer. HEAD pointer can point to alias like “main” or refs like “3bed42g…”</p>
 
         </div>
         <div id="footer">

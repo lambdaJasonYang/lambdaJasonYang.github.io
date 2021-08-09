@@ -4,21 +4,24 @@ tags: musings, mathcs
 ---
 
 ### The Problem
-My first introduction to set theory, I remember being told:
+I remember being told:
 
 "sets are sorta like bags but only loosely speaking"  
 "sets can contain things"  
 
-This cursed introduction gave me a misleading conceptualization of sets. 
-Initially I had thought sets were similar to real objects such as bags or containers that contained elements.  
-This physical conceptualization, lead me to believe(incorrectly) that elements could be taken or placed into sets at whim.  
-This incorrect intuition caused a lot of trouble in understanding how sets contained everything that it specified WITHOUT EXCEPTION.   
-So what are sets?
+This introduction to sets gave me the incorrect intuition of what sets were and how they behave. 
+It lead me to believe sets were behaved as bags or containers that contained elements.  
+This physical conceptualization, lead me to believe(incorrectly) that elements could be taken or placed into sets at whim. 
+This misunderstanding caused a lot of trouble in understanding proofs.
+So without futher ado.   
+what are sets?
 
 A set specifies a predicate.  
 An element **MUST** be in a set if it satisify such predicate.  
 
-How do we mitigate this confusion in teaching?  
+If we really wanted to use the bag and container analogy, then we would have to believe this bag had some magical vortex that sucked every element that the predicate satisfies inside the bag.
+
+Moving on, let's get to the bottom of why I had such a misunderstanding of how sets worked.  
 From my own experience, most teachers would introduce/intialize a set by saying "Here we have a set that contains all even numbers"   
 
 The problematic word **"Contains"** rears it's head.  
@@ -31,8 +34,10 @@ First we need to:
 STOP INITIALIZING sets by saying "Let S be the set that contains ..."  
 
 example:  
-1. DO NOT: "Let S be the set that contains red apple pies"  
-2. DO:"Let S be the set that **specifies** red apple pies" 
+1. DO NOT: "Let S be the set that contains apple pies that are tasty"  
+2. DO:"Let S be the set that **specifies** **ALL** red apple pies that are tasty" 
+
+Now instead of focusing on the set S as it's own object, I am now focusing on the elements that satisfies the specification which is really what sets were meant for.
 
 ### Stop using Contains
 After introducing the set, we prod the set with elementhood $\in$ and some element $x$.  

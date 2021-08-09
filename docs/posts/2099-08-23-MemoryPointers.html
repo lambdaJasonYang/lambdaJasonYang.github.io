@@ -18,7 +18,7 @@
         </script>
         <!-- MATH JAx END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>My Hakyll Blog - Overcomplicating Memory Model and Pointers</title>
+        <title>Jason's Blog - Overcomplicating Memory Model and Pointers</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -215,7 +215,7 @@
 
         <div id="header">
             <div id="logo">
-                <a href="../">My Hakyll Blog</a>
+                <a href="../">Jason's Blog</a>
             </div>
             <div id="navigation">
                 <a href="../">Home</a>
@@ -241,17 +241,41 @@
 <h3 id="the-problem">The Problem</h3>
 <p>Online forums and tutorials tend to introduce C pointers and memory model as some complex behemoth. Professors introduce the memory model with a bucketload of terms like stacks, heaps, address space, registers.</p>
 <h3 id="solution">Solution</h3>
-<p>To understand pointers we must understand memory. Here is a simple way to describe memory which makes me surprised why no one has taught it or introduced it this way. Let’s just do alway with all the complex OS terminology.</p>
+<p>To understand pointers we must understand memory. Here is a simple way to describe memory which makes me surprised why no one has taught it or introduced it this way. Let’s just do alway with all the OS terminology.</p>
+<p>We will design an very simplified model that I will name the EZ model . For a non-low level programmer.</p>
 <blockquote>
 <p>Computer memory is just an array.</p>
 </blockquote>
+<p>Let’s call this array MEM.</p>
+<p>In our EZ model, we start with one array, MEM.</p>
 <p>The memory addresses are indexes of the array.<br />
 The values that memory addresses point to are the elements of the array.</p>
 <p>Clearly we know how to read the value at memory address. Translated: Clearly we know how to read the element at each array index.</p>
 <p>A computer isn’t a storage device, it works by being dynamic which includes changing memory values. Translated: So how can we change values of this array?</p>
 <p>Pointers!</p>
-<p>See everything is just part of the array even pointers. BUT pointers are given a unique function we call “dereference”. a[3] = 6 a[6] = 1 Let’s say “3” is a pointer. then dereference(3) = a[6] =&gt; 1</p>
-<p>So how do <span class="math display">\[ \bbox[5px, border: 2px solid red]{x} \bbox[5px, border: 2px solid red]{x} \]</span></p>
+<p>See everything is just part of the array even pointers. BUT pointers are given a unique function we call “dereference”. <span class="math display">\[ \underset{\downarrow}{\bbox[5px, border: 2px dotted purple]{P} } \ \ \ \ \ \]</span> <span class="math display">\[ \underset{\downarrow}{\bbox[5px, border: 2px solid green]{0} } \underset{\downarrow}{\bbox[5px, border: 2px solid green]{1}}  \underset{\downarrow}{\bbox[5px, border: 2px solid green]{2}}  \underset{\downarrow}{\bbox[5px, border: 2px solid green]{3}}   \]</span> <span class="math display">\[ \bbox[5px, border: 2px solid red]{7} \bbox[5px, border: 2px solid red]{2} \bbox[5px, border: 2px solid red]{6} \bbox[5px, border: 2px solid red]{4}\]</span></p>
+<p>The image above is our array MEM.<br />
+The green boxes indicate the indexes, like any array it starts at 0.<br />
+The red boxes indicate the values of our array.</p>
+<p>In OS language, the green boxes indicate memory addresses. The red boxes are the value that the memory addresses refer to.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">//filling our MEM, aka loading a program into memory</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>MEM[<span class="dv">0</span>] = <span class="dv">9</span>   </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>MEM[<span class="dv">1</span>] = <span class="dv">2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>MEM[<span class="dv">2</span>] = <span class="dv">6</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>MEM[<span class="dv">3</span>] = <span class="dv">4</span>  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="co">//dereference function</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>Dereference(MEM[<span class="dv">1</span>])</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="co">//This will output 6 </span></span></code></pre></div>
+<p>Calling Dereference(MEM[1]) can be reduced to Dereference(2), which can be reduced to MEM[2] which is just 6.</p>
+<p>Dereference(MEM[1]) == MEM[MEM[1]]</p>
+<p>Let’s say “3” is a pointer. then dereference(3) will return 1 For the intents of this section of understanding pointers, let’s just assume we can magically determine which indexes of MEM are pointers.</p>
+<h3 id="ez2-model">EZ2 Model</h3>
+<p>In our EZ model, we magically decided which indexes are pointers which is not correct. Pointers are a implementation in assembly that uses registers. The functionality of pointers to a C programmer is analogous to the functionality of registers to a assembly programmer.</p>
+<p>The real pointers in computers aren’t those “int* x” that programmers code up but computer registers like eax, ebx… Just think of these registers as powerful as pointers. someaddr = 3</p>
+<p>Let’s clear things up, we call the assembly model and the EZ Model.</p>
+<p>the assembly notation [EAX] notationally equivalent to our EZ MEM[EAX]</p>
+<p>How pointers behave to C programmers is analogous to how registers work to assembly programmers.</p>
 
         </div>
         <div id="footer">
