@@ -61,7 +61,7 @@ jobs:
         run: |
              pwd
              ls
-      - run: export PATH="/home/runner/work/userjy.github.io/userjy.github.io:$PATH"
+      - run: export PATH="$PATH:/home/runner/work/userjy.github.io/userjy.github.io"
 
       - run: |
             stack --system-ghc exec myblog clean
