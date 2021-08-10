@@ -28,11 +28,13 @@ jobs:
           path: blog
 
       - name: step 1
-        run: pwd
+        run: |
+             pwd
+             ls
 
       - uses: actions/cache@v2
         with:
-          key: ${{ hashfiles('site.hs') }}
+          key: ${{ hashfiles('~/site.hs') }}
           path: |
             ~/.stack
             ~/.stack-work
