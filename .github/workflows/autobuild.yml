@@ -55,13 +55,14 @@ jobs:
              pwd
              ls
 
-      - run: stack --system-ghc build --only-dependencies
+      #- run: stack --system-ghc build --only-dependencies
       
       - name: step 3
         run: |
              pwd
              ls
-      
+      - run: export PATH="/home/runner/work/userjy.github.io/userjy.github.io:$PATH"
+
       - run: |
             stack --system-ghc exec myblog clean
             stack --system-ghc exec myblog build
