@@ -61,6 +61,7 @@ jobs:
         run: |
              pwd
              ls
+             
       - run: echo "/home/runner/work/userjy.github.io/userjy.github.io" >> $GITHUB_PATH
 
       - run: |
