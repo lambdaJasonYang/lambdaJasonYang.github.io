@@ -30,7 +30,7 @@ jobs:
 
       - uses: actions/cache@v2
         with:
-          key: stack-${{ hashfiles('**/site.hs') }}
+          key: stack-${{ hashFiles('**/site.hs') }}
           path: |
             ~/.stack
             ~/.stack-work
