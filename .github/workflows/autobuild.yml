@@ -61,12 +61,12 @@ jobs:
         run: |
              pwd
              ls
-             
+
       - run: echo "/home/runner/work/userjy.github.io/userjy.github.io" >> $GITHUB_PATH
 
       - run: |
-            stack --system-ghc exec site clean
-            stack --system-ghc exec site build
+            stack --system-ghc exec "userjy.github.io" clean
+            stack --system-ghc exec "userjy.github.io" build
 
       - name: step 4
         run: |
