@@ -56,6 +56,12 @@ jobs:
              ls
 
       - run: stack --system-ghc build --only-dependencies
+      
+      - name: step 3
+        run: |
+             pwd
+             ls
+      
       - run: |
             stack --system-ghc exec myblog clean
             stack --system-ghc exec myblog build
