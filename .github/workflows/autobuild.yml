@@ -65,8 +65,8 @@ jobs:
       - run: echo "/home/runner/work/userjy.github.io/userjy.github.io" >> $GITHUB_PATH
 
       - run: |
-            stack --system-ghc exec "userjy.github.io" clean
-            stack --system-ghc exec "userjy.github.io" build
+            stack exec -- myblog clean
+            stack exec -- myblog build
 
       - name: step 4
         run: |
