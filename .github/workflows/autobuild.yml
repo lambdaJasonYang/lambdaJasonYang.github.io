@@ -4,9 +4,7 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ main ]
+
   pull_request:
     branches: [ main ]
 
@@ -24,8 +22,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        with: 
-          path: blog
 
       - name: step 1
         run: |
@@ -34,10 +30,12 @@ jobs:
 
       - uses: actions/cache@v2
         with:
-          key: ${{ hashfiles('~/site.hs') }}
+          key: stack-${{ hashfiles('**/site.hs') }}
           path: |
             ~/.stack
             ~/.stack-work
+          restore-keys: |
+            stack-
 
       - name: step 2
         run: pwd
@@ -54,6 +52,7 @@ jobs:
       - run: stack --system-ghc init 
       - run: stack --system-ghc build --only-dependencies
       - run: |
+            stack --system-ghc exec myblog clean
             stack --system-ghc exec myblog build
 
       - name: step 4
