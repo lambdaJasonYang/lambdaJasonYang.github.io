@@ -272,15 +272,16 @@
 <h3 id="upgrading">UPGRADING</h3>
 <h3 id="setting-up-as-ap-mode">Setting up as AP Mode</h3>
 <p>My real router is pfsense so I always use the routers that I buy as dumb APs.</p>
-<p>Interface &gt; General Settings &gt; Protocol Default is : Static address turn to DHCP client</p>
+<p>Interface &gt; General Settings &gt; Protocol Enter a different static address from your router</p>
 <p>Interface &gt; DHCP Server &gt; General Settings Enable “Ignore Interface”</p>
 <p>IPv6 Settings Disable RA-Services Disable DHCPv6-Services</p>
 <p>System&gt; Startup disable firewall disable dnsmasq disable odhcpd</p>
-<p>Wait until it applies because sometimes it will fail(meaning you waited for 90s and it did not apply) and it will give you the option to Apply unchecked Hit apply unchecked if that happens</p>
+<p>IMPORTANT: Wait a few seconds, then disconnect the ethernet on your PC and connect it to the main router so that your OpenWRT AP is connected to your router. This has to be done within 90 seconds or the settings will rollback.</p>
 <p>If you misconfigured something that results in locking yourself out of access to the router, simply factory reset your router and it will reset to default OpenWrt settings.</p>
 <p>Note the default settings doesn’t have wifi turned on automatically so you have to access your router by ethernet to turn it on.</p>
-<p>Afterwards, find the IP of your Openwrt AP through your PFsense(or main router) or tool like nmap. Sometimes your Openwrt AP will take the same IP as your main router. If that happens you need to connect to the router by ethernet than use the same ip to connect to the web interface.</p>
-<p>The next step is to change back your LAN interface, from DHCP client to static. The static IP will be anything you choose subnet mask is typically 255.255.255.0 The gateway will be 192.168.1.1 or whatever IP your router is. Then apply and save. ### Some issues with OpenWRT Your wifi SSID may not appear while searching for networks if you use the incorrect channels and channel width. You have to keep playing around with the configuration. If your wifi disappears, then you have to play around with the channels and channel width and country origin settings on your wifi radio tab.</p>
+<p>The next step is to change back your LAN interface, Select gateway as 192.168.1.1 which is usually the IP of your main router subnet mask is typically 255.255.255.0 Then go to advanced settings, enter 8.8.8.8 or 1.1.1.1 as Custom DNS servers.(Google DNS and Cloudflare DNS respectively). If you don’t enter the custom DNS servers then you can’t install packages and opkg update will bring up an error.</p>
+<h3 id="some-issues-with-openwrt">Some issues with OpenWRT</h3>
+<p>Your wifi SSID may not appear while searching for networks if you use the incorrect channels and channel width. You have to keep playing around with the configuration. If your wifi disappears, then you have to play around with the channels and channel width and country origin settings on your wifi radio tab.</p>
 
         </div>
         <div id="footer">
