@@ -62,8 +62,13 @@ jobs:
              pwd
              ls
 
-      - run: echo "/home/runner/work/userjy.github.io/userjy.github.io" >> $GITHUB_PATH
+      - run: stack install --fast --flag hakyll:-previewserver --flag hakyll:-watchserver
 
+      - name: step 3
+        run: |
+             pwd
+             ls
+             
       - run: |
             stack exec -- myblog clean
             stack exec -- myblog build
