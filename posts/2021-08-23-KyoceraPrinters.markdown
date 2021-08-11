@@ -7,11 +7,11 @@ CUPS server
 Set up
 
 Configuration
-Select AppSocket/HP Jet Direct
-Enter "socket://169.233.52.233"
-use ip of your printer
-The ip address can be found by going through your kyocera network panel.
-use the kyocera ppd 6002i file
+Select AppSocket/HP Jet Direct  
+Enter "socket://169.233.52.233"  
+use ip of your printer  
+The ip address can be found by going through your kyocera network panel.  
+use the kyocera ppd 6002i file  
 
 ### A Better way if you are using OpenWrt 
 Requires 2 OpenWrt routers 

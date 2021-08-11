@@ -18,7 +18,7 @@
         </script>
         <!-- MATH JAx END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Posts tagged "hardware"</title>
+        <title>Jason's Blog - Guide to Choosing Routers</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -226,20 +226,70 @@
         </div>
 
         <div id="content">
-            <h1>Posts tagged "hardware"</h1>
+            <h1>Guide to Choosing Routers</h1>
             
 
-            <ul>
+            <div class="info">
+    Posted on August 23, 2021
     
-        <li>
-            <a href="../posts/2021-08-23-KyoceraPrinters.html">Convert Enterprise printer to a prosumer printer</a> - August 23, 2021
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2021-08-23-GuideToChoosingRouters.html">Guide to Choosing Routers</a> - August 23, 2021
-        </li>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'hardware'." href="../tags/hardware.html">hardware</a>
     
+</div>
+<p>Guide for newcomers looking to become prosumers of routers.</p>
+<p>What you want out of the router are :<br />
+* Latency - higher mbps(megabytes per second) the better. * Relability - no random disconnections * Range - no dead zones</p>
+<h3 id="latency">Latency</h3>
+<p>Each section will have terms to look for which are keywords you will find on google or amazon searches.</p>
+<h4 id="abgn-only-routers">802.11 a/b/g/n Only routers</h4>
+<ul>
+<li>outdated.</li>
+<li>a/b/g/n only routers = 2.4Ghz and too slow</li>
+<li>Terms to look for: 802.11 abg, 802.11 abgn, 2.4 Ghz router</li>
 </ul>
+<p>300mbps from an ISP will translate to around 80mbps to wifi devices in the same room and 40mbps on another floor. They are typically only sold at second hand markets like ebay and are really cheap. Best used as Dumb access points for IOT devices like cameras.</p>
+<h4 id="ac-wave-1">802.11 ac Wave 1</h4>
+<ul>
+<li>802.11ac routers = 5Ghz channel + 2.4Ghz channel</li>
+<li>include the a/b/g/n bands</li>
+<li>Terms to look for : 802.11 ac Wave 1, ac750</li>
+<li>outdated</li>
+</ul>
+<h4 id="ac-wave-2">802.11 ac Wave 2</h4>
+<ul>
+<li>typically at the best price point and performance for 2021.</li>
+<li>Wave 2 = MU-MIMO</li>
+<li>MU-MIMO means the router has better performance when multiple devices are connected to it.
+<ul>
+<li>MU-MIMO has it’s own version of number of bandwidth streams that look like 2x2x2,3x3x3 or 4x4x4</li>
+</ul></li>
+<li>Terms to look for : MU-MIMO , 2x2x2,3x3x3,4x4x4,ac1200,ac1750 ac 1900, ac2100</li>
+<li>Most popular in households as of 2020</li>
+</ul>
+<p>300 mbps from an ISP will translate to around 250 mbps to wifi devices in the same room to 100mbps on another floor.</p>
+<h4 id="ax">802.11 ax</h4>
+<ul>
+<li>It’s being rolled out to the market right now.</li>
+<li>Terms to look for : 802.11 ax, AX, Wifi 6, ax3000</li>
+</ul>
+<p>You may not need this if your device doesn’t have a wifi 6 network card such as older labtops or PCs.<br />
+However typically they have a better network chipset and thus better performance all-around.</p>
+<h4 id="future-wifi-6e">Future: Wifi 6E</h4>
+<h3 id="reliability">Reliability</h3>
+<p>Your router should never be dropping wifi. Ideally big brands should test their products so this doesn’t happen but they don’t always do so well. Netgear RAX200 is an example of a budget Wifi 6 router that disconnects at random. Routers designed for foreign markets like Huawei or Xiaomi may not work as well here resulting in disconnections at random. A possible solution is to flash the software with OpenWRT if a firmware exists or do some online googlefu with terms like “Netgear RAX200 disconnect”.</p>
+<h3 id="range">Range</h3>
+<p>Look at antennas and power.</p>
+<h3 id="other-links">Other links</h3>
+<p>This website is helpful in comparing routers<br />
+https://www.smallnetbuilder.com/</p>
+<h3 id="on-second-hand-market-routers">On Second hand market routers</h3>
+<p>Typically they are not worth it unless you are looking to flash OpenWRT(if so look at my other article whether OpenWRT routers are worth it).</p>
+<p>Routers like the archer C7 are already outdated and are around $20-30 for a second-hand one. Buying a new tp-link ax wifi 6 budget router on amazon is around $70 and will have better performance and range all around.</p>
+<h3 id="on-second-hand-market-enterprise-access-points">On Second hand market Enterprise Access points</h3>
+<p>Routers like Ruckus, Aruba, Cisco, Aerohive Like most enterprise products, much of the cost comes in factored into their service contract which you are not getting. Even paying $200 would only net you a used Access point that’s outdated with much slower performance compared to buying a new $200 Wifi 6 router.<br />
+Believe me, I did it, specifically with a Ruckus R700. The performance and range did not even come close with a modern tp link.</p>
 
         </div>
         <div id="footer">
