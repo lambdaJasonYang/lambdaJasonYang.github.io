@@ -83,8 +83,7 @@ opkg install luci
 My real router is pfsense so I always use the routers that I buy as dumb APs.
 
 Interface > General Settings > Protocol
-Default is : Static address 
-turn to DHCP client
+Enter a different static address from your router
 
 Interface > DHCP Server > General Settings
 Enable "Ignore Interface"
@@ -98,22 +97,20 @@ disable firewall
 disable dnsmasq
 disable odhcpd
 
-Wait until it applies because sometimes it will fail(meaning you waited for 90s and it did not apply) and it will give you the option to Apply unchecked 
-Hit apply unchecked if that happens
+IMPORTANT: Wait a few seconds, then disconnect the ethernet on your PC and connect it to the main router so that your OpenWRT AP is connected to your router.
+This has to be done within 90 seconds or the settings will rollback.
 
 If you misconfigured something that results in locking yourself out of access to the router,
 simply factory reset your router and it will reset to default OpenWrt settings.
 
 Note the default settings doesn't have wifi turned on automatically so you have to access your router by ethernet to turn it on.
 
-Afterwards, find the IP of your Openwrt AP through your PFsense(or main router) or tool like nmap.
-Sometimes your Openwrt AP will take the same IP as your main router. If that happens you need to connect to the router by ethernet than use the same ip to connect to the web interface.
 
-The next step is to change back your LAN interface, from DHCP client to static.
-The static IP will be anything you choose
+The next step is to change back your LAN interface, Select gateway as 192.168.1.1 which is usually the IP of your main router
 subnet mask is typically 255.255.255.0
-The gateway will be 192.168.1.1 or whatever IP your router is.
-Then apply and save.
+Then go to advanced settings, 
+enter 8.8.8.8 or 1.1.1.1 as Custom DNS servers.(Google DNS and Cloudflare DNS respectively). If you don't enter the custom DNS servers then you can't install packages and opkg update will bring up an error.
+
 ### Some issues with OpenWRT
 Your wifi SSID may not appear while searching for networks if you use the incorrect channels and channel width.
 You have to keep playing around with the configuration.
