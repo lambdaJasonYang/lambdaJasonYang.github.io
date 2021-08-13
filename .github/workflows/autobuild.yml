@@ -58,9 +58,9 @@ jobs:
       #- run: stack --system-ghc build --only-dependencies
       
       - name: Stack Installing hakyll environment
-      - run: stack install --fast --flag hakyll:-previewserver --flag hakyll:-watchserver
+        run: stack install --fast --flag hakyll:-previewserver --flag hakyll:-watchserver
 
-      - name: step 3
+      - name: step 4
         run: |
              pwd
              ls
@@ -71,11 +71,11 @@ jobs:
             echo "autotarget=$(basename $tpath .cabal)" >> $GITHUB_ENV
             
       - name: Cleaning then building hakyll static pages
-      - run: |
+        run: |
             stack exec -- $autotarget clean
             stack exec -- $autotarget build
 
-      - name: step 4
+      - name: step 5
         run: |
              pwd
              ls
