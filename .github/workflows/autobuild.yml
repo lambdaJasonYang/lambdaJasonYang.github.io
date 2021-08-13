@@ -65,9 +65,12 @@ jobs:
              pwd
              ls
              
-      - name: Autofinding hakyll blog name
+      - name: Autofinding hakyll blog full path
         run: |
             echo "tpath=$( find ${{ github.workspace }} -name '*.cabal' | head )" >> $GITHUB_ENV
+           
+      - name: Formatting full path to basename
+        run: |
             echo "autotarget=$(basename $tpath .cabal)" >> $GITHUB_ENV
             
       - name: Cleaning then building hakyll static pages
