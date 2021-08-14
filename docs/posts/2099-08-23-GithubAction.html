@@ -294,6 +294,16 @@
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a><span class="at">				</span><span class="fu">AWS_TOKEN</span><span class="kw">:</span><span class="at"> ${{ secrets.myAWS_TOKENNAME }}</span></span></code></pre></div>
 <h3 id="conclusion">Conclusion</h3>
 <p>if tests fail -&gt; fix bugs if tests succeed -&gt; continue to CD CD: runs deploy actions -&gt; new update live on internet</p>
+<h3 id="quirks">Quirks</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>	 bleh=4</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>	 echo $bleh</span></code></pre></div>
+<p>The echo will show no output because run will run the two commands concurrently.<br />
+To run sequentially, the commands need to be in two separate run.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource yml numberLines"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1"></a><span class="at">echo &quot;somevar=3&quot; &gt;&gt; $GITHUB_ENV</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="at">${{ env.somevar }}</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="at">$somevar</span></span></code></pre></div>
+<p>line 2 and 3 are the same, no need to wrap the somevar.</p>
 
         </div>
         <div id="footer">

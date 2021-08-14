@@ -18,7 +18,7 @@
         </script>
         <!-- MATH JAx END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Git Crashcourse</title>
+        <title>Jason's Blog - Git through my lens</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -226,7 +226,7 @@
         </div>
 
         <div id="content">
-            <h1>Git Crashcourse</h1>
+            <h1>Git through my lens</h1>
             
 
             <div class="info">
@@ -238,11 +238,13 @@
     Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
 </div>
+<p>WARNING: The terms I use are nonstandard from most other tutorials.</p>
 <h3 id="preconfig">Preconfig</h3>
 <p>configure remote variable we name “origin”<br />
 or remove to reuse variable</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">git</span> remote add origin https://github.com/UserJY/bleh.git</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">git</span> remote add -u origin https://github.com/UserJY/bleh.git</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">git</span> remote remove origin</span></code></pre></div>
+<p>the -u flag adds the remote commit to your local git tree.</p>
 <h3 id="the-process">The process</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span></code></pre></div>
@@ -257,14 +259,14 @@ or remove to reuse variable</p>
 PR is ran through github actions(CI system) that runs tests.<br />
 If accepted, they merge your PR branch with the main branch.</p>
 <h3 id="more-depth-concept">More depth, Concept</h3>
-<p>Three Levels to know: commit-references(ref), alias, HEAD</p>
+<p>Three layers to know: commit-references(ref), branch-alias(alias), HEAD</p>
 <ul>
-<li>ref : static nodes of the commit tree.</li>
-<li>alias : static names that point to the refs
+<li>layer 1 - ref : static nodes of the commit tree.</li>
+<li>layer 2 - alias : static names that point to the refs
 <ul>
 <li>alias = name of branch, default branch is “main”</li>
 </ul></li>
-<li>HEAD : dynamic pointer that can point to alias or refs</li>
+<li>layer 3 - HEAD : dynamic pointer that can point to alias or refs</li>
 </ul>
 <p>Example git tree:</p>
 <p>ref(commit_new) ← ref(commit_old) ← ref(commit_oldest)<br />
@@ -272,6 +274,12 @@ If accepted, they merge your PR branch with the main branch.</p>
 alias(“SomeBranchName”)<br />
 ↑<br />
 HEAD</p>
+<p>HEAD(layer 1) points to branch alias(layer 2) which points to commit ref(layer 3). Aliases(layer 2) always points to the local head(layer 1).</p>
+<h4 id="creating-new-aliases-creating-new-branches">Creating new Aliases = Creating new branches</h4>
+<p>Old commits(layer 1) aka non-local-head commits do not have aliases(layer 2) pointing to them but if you do make an alias, they will become a local-head(layer 1) by branching.</p>
+<p>Do not confuse the “HEAD” pointer with the “local head of a branch”.<br />
+The “local head of a branch” refers to the local head of commit-refs at layer 1.<br />
+The “HEAD” pointer refers to the layer 3 pointer.</p>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -285,43 +293,36 @@ HEAD</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td>ref</td>
+<td>ref (layer 1)</td>
 <td>git commit - adds a new ref node. Moves HEAD to alias of new node</td>
 </tr>
 <tr class="even">
-<td>alias</td>
+<td>alias (layer 2)</td>
 <td>git branch - assign an alias to ref node on new branch. Moves HEAD to new alias</td>
 </tr>
 <tr class="odd">
-<td>HEAD</td>
+<td>HEAD (layer 3)</td>
 <td>git checkout - Moves head pointer to either alias or ref</td>
 </tr>
 </tbody>
 </table>
-<p>Structure of git tree</p>
-<ul>
-<li>There is always a main branch</li>
-<li>Creating a new alias = Creating a new branch</li>
-<li>#leafs of the tree = # of current versions</li>
-</ul>
 <p>Every git node has a ref that looks like 3bed42g14584b3c0c04fdcc4f503346f92be1003</p>
-<p>We can point HEAD to aliases like “main” with git checkout main</p>
-<p>Switching branch = move HEAD pointer to alias of new branch git checkout someotherbranch</p>
+<p>We can point HEAD(layer 3) to aliases(layer 2) like “main” with git checkout main</p>
+<p>Switching branch = move HEAD(layer 3) to alias(layer 2) of new branch git checkout someotherbranch</p>
 <p>git checkout can<br />
 1) switch branch<br />
 2) go to older version</p>
-<p>We can point HEAD to ref like “3bed42g1…” with git checkout “3bed42g1…”</p>
-<p>naked refs = refs without aliases = old commits</p>
-<p><strong>Pointing HEAD to a commit ref directly results in detached HEAD mode.</strong><br />
-Think of it like sandbox mode.<br />
-Switch back to main, to discard changes.<br />
-git checkout main</p>
-<p>alias To make a new alias, we use git branch bleh</p>
+<p><strong>Pointing HEAD(layer 3) directly to ref(layer 1), Detached HEAD mode</strong> We can point HEAD(layer 3) to ref(layer 1) like “3bed42g1…” with git checkout “3bed42g1…”</p>
+<p>If you modify files, then commit. Any change will be discarded if you switch back to main (git checkout main)</p>
+<p>To make changes permanent, you have to build a branch by making an alias(layer 2) with your commit(layer 1). git branch SomeName</p>
 <p><strong>Why and When do we point HEAD to naked refs</strong> The newest version has compatibility issues and you want to build off an old version.</p>
 <p>transverse git commit tree using the HEAD pointer. HEAD pointer can point to alias like “main” or refs like “3bed42g…”</p>
 <p>“git branch” vs “git checkout -b”<br />
 git branch makes a new alias and branch, BUT HEAD stays on current branch<br />
 git checkout -b behaves the same as git branch BUT moves HEAD to new branch</p>
+<h3 id="extras">Extras</h3>
+<p>tags are just renaming refs, they are NOT at the same level as aliases. Meaning if you point HEAD to a tag, you are in a detached head state.</p>
+<p>In gitk yellow node HEAD pointer points to blue untagged node(meaning it is not the local head of a branch)git</p>
 
         </div>
         <div id="footer">
