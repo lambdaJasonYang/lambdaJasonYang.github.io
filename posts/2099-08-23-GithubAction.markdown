@@ -86,3 +86,20 @@ jobs:
 if tests fail -> fix bugs
 if tests succeed -> continue to CD
 CD: runs deploy actions -> new update live on internet
+
+### Quirks
+``` yml
+run: |
+	 bleh=4
+	 echo $bleh
+```
+The echo will show no output because run will run the two commands concurrently.  
+To run sequentially, the commands need to be in two separate run.
+
+
+``` {.yml .numberLines}
+echo "somevar=3" >> $GITHUB_ENV
+${{ env.somevar }}
+$somevar
+```
+line 2 and 3 are the same, no need to wrap the somevar.

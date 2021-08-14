@@ -76,10 +76,11 @@ jobs:
              ls
              
             
-      - name: Cleaning then building hakyll static pages
-        run: |
-            stack exec -- $autotarget clean
-            stack exec -- $autotarget build
+      - name: Cleaning hakyll
+        run: stack exec -- $autotarget clean
+            
+      - name: Building hakyll static pages
+        run: stack exec -- $autotarget build
 
       - name: step 5
         run: |
