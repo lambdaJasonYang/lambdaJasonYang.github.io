@@ -18,7 +18,7 @@
         </script>
         <!-- MATH JAx END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Posts tagged "mathcs"</title>
+        <title>Jason's Blog - Executive Summary of Differential Equations</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -226,75 +226,55 @@
         </div>
 
         <div id="content">
-            <h1>Posts tagged "mathcs"</h1>
+            <h1>Executive Summary of Differential Equations</h1>
             
 
-            <ul>
+            <div class="info">
+    Posted on August 23, 2099
     
-        <li>
-            <a href="../posts/2099-08-23-YParadox.html">Russell's paradox, AST and Bears</a> - August 23, 2099
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2099-08-23-TradingMeasurement.html">Benchmarks for algotrading</a> - August 23, 2099
-        </li>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>
     
-        <li>
-            <a href="../posts/2099-08-23-TemplatePage.html">Template Page (Ignore)</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="../posts/2099-08-23-TeachingSets.html">Language, Teaching and Set theory</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="../posts/2099-08-23-NQueen.html">NQueen in Haskell</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="../posts/2099-08-23-HomSet.html">HomSet</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="../posts/2099-08-23-GreedyAlgo.html">Greedy Algo</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="../posts/2099-08-23-GitActionHakyll.html">Autobuild Hakyll</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="../posts/2099-08-23-DownwardInduction.html">Proof technique Downward Induction</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="../posts/2099-08-23-DiffyQ1.html">Finding Steady States</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="../posts/2099-08-23-DiffyQ.html">Executive Summary of Differential Equations</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="../posts/2099-08-23-Cointegration.html">Cointegration and Spreads</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="../posts/2099-08-23-Boltzmann.html">Boltzmann probability distribution</a> - August 23, 2099
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Monad.html">Monads, Bind, Return</a> - August 23, 2019
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-FoldInduction.html">Fold and Induction</a> - August 23, 2019
-        </li>
-    
-        <li>
-            <a href="../posts/2018-08-23-BuildNatSets.html">Building Natural numbers from Sets with python</a> - August 23, 2018
-        </li>
-    
+</div>
+<p>A conceptual and non-calculational approach.</p>
+<h4 id="functions">Functions</h4>
+<p><span class="math display">\[ FoodEaten :: DayOfWeek \rightarrow AmountOfFoodEaten \]</span> <span class="math display">\[FoodEaten(Sunday) = Alot \]</span> <span class="math display">\[FoodEaten(Monday) = morsels \]</span></p>
+<p>Functions are equations in which we can meta-label the input(independent variable) and output(dependent variable) of our variables.</p>
+<p>This means a single equation can result in multiple different functions depending on our meta-labelling.</p>
+<p>Functions are equations with an extra contraint: Every valid input must have 1 and only 1 output.</p>
+<p>Not all equations are functions such as the equation for a circle,<br />
+but all functions are equations.</p>
+<p>Explicit functions can take the written form of f(x) = …<br />
+Implicit functions can only be written as an equation.<br />
+Both behave the same; implicit and explicit is a meta-level syntax detail.</p>
+<h4 id="differential-and-derivatives">Differential and derivatives</h4>
+<p>Derivatives of a function tells us how the change of an input from some input value affects the change of an output.</p>
+<p>In programming terms, derivatives are wrappers that is also dependent on the inputs of the function it wraps.<br />
+Derivative of a function will output a function with the same input type.</p>
+<p>Example: Derivative of a FoodEaten function will output a RateOfFoodEaten function.</p>
+<p>The RateOfFoodEaten function takes inputs of the same type as FoodEaten which are DayOfWeek. <span class="math display">\[ t :: DayOfWeek \]</span> <span class="math display">\[ D(FoodEaten(t)) = RateOfFoodEaten(t) \]</span></p>
+<p>Below is the derivative of the FoodEaten function. <span class="math display">\[ D(FoodEaten(Sunday)) = RateOfFoodEaten(Sunday) = faster pace \]</span></p>
+<p><span class="math display">\[ D(FoodEaten(Monday)) = RateOfFoodEaten(Monday) = slower pace \]</span></p>
+<h4 id="typical-non-differential-equations">Typical (Non-differential) Equations</h4>
+<p><span class="math display">\[ Food + Population = t + ConstantK * Weather\]</span> Equations are relations between two or more variables.</p>
+<p><strong>Main Question in solving Equations - What are the points that fit this specification?</strong><br />
+Specification in this context means the Equation.</p>
+<p>The solution of equations will output a set of points. (We will come back to this later when comparing with Differential Equations)</p>
+<p>Another way to put it: Given this equation that shows a relationship of variables between values and values,<br />
+What are the possible ways we can design points that satisfy these contraints?</p>
+<p>(Typically these points end up looking like some line or a function)</p>
+<h4 id="differential-equations">Differential Equations</h4>
+<p><span class="math display">\[ D(Population(t)) = ConstantA * (1 - \frac{Population(t)}{FoodEaten(t)}) * D(FoodEaten(t))\]</span></p>
+<p><strong>Main Question in solving Differential Equations - What are the functions that fit these specifications?</strong></p>
+<p>However, specification in the context of Differential equations means equations that also includes derivatives or rates.</p>
+<p>Another way to put it : Given this differential equation that shows a relationship of variables between values with values, values with rates, and rates with rates,<br />
+What are the possible ways we can design a function that satisfies these contraints?</p>
+<h4 id="notice-similarity">Notice Similarity:</h4>
+<ul>
+<li>Solution of Differential Equation Outputs a set of functions.</li>
+<li>Solution of Equations Outputs a set of points.</li>
 </ul>
 
         </div>

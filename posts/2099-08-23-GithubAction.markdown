@@ -1,21 +1,22 @@
 ---
 title: CI/CD in GithubAction
-tags: musings
+tags: prog
 ---
 
 
-CI is used to check when the developer is sending a pull-request. 
+### CI - runs after pushing local repo to github
 CI is used to integrate tests, typically your github action will run tests on the code.
 
 1) Give name
 ``` yaml
 name: SomeRandomName
 ```
-2) Run on pull-requests to the master branch
+2) Run on push to main branch
 ``` yaml
 on:
-	pull_request:
+	push: 
 		branches: [main]
+
 ``` 
 3) Define the job to start
 	Steps) are the instructions to test and run code
@@ -48,7 +49,7 @@ jobs:
 ```
 
 
-CD - Continuous deployment - runs after merging a pull-request
+### CD - runs after merging a pull-request
 CD is used to push your updates to some cloud server so the internet can see your new updated website.
 
 You have to connect to servers like AWS to deploy your website
@@ -57,7 +58,7 @@ on Github: Settings > Secrets > Add a new secret
 Now you can securely access with github action securely
 ``` yaml
 on:
-	push:
+	pull_request:
 		branches: [main]
 ```
 
@@ -82,24 +83,32 @@ jobs:
 ```
 
 ### Conclusion
-
-if tests fail -> fix bugs
-if tests succeed -> continue to CD
-CD: runs deploy actions -> new update live on internet
+1. push local dev branch to remote github
+2. CI Starts test on new code
+3. * if tests fail -> fix bugs
+   * if tests succeed -> Ask PR to merge dev with main branch
+4. Maintainer accepts PR
+5. main branch merges with dev 
+6. CD Starts uploading new main branch to servers
+7. new update live on internet or server
 
 ### Quirks
+##### Concurrent behavior in run
 ``` yml
 run: |
 	 bleh=4
 	 echo $bleh
 ```
-The echo will show no output because run will run the two commands concurrently.  
-To run sequentially, the commands need to be in two separate run.
+The echo will show no output because run will call the two commands concurrently.  
+To call sequentially, the commands need to be in two separate run.
 
-
+##### Github environment variable
 ``` {.yml .numberLines}
 echo "somevar=3" >> $GITHUB_ENV
 ${{ env.somevar }}
 $somevar
 ```
-line 2 and 3 are the same, no need to wrap the somevar.
+line 2 and 3 are the same   
+use $somevar over ${{ env.somevar }}
+
+The local environment is decarded on separate runs, so its best to store variables in $GITHUB_ENV.

@@ -235,19 +235,20 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<p>CI is used to check when the developer is sending a pull-request. CI is used to integrate tests, typically your github action will run tests on the code.</p>
+<h3 id="ci---runs-after-pushing-local-repo-to-github">CI - runs after pushing local repo to github</h3>
+<p>CI is used to integrate tests, typically your github action will run tests on the code.</p>
 <ol type="1">
 <li>Give name</li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> SomeRandomName</span></span></code></pre></div>
 <ol start="2" type="1">
-<li>Run on pull-requests to the master branch</li>
+<li>Run on push to main branch</li>
 </ol>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="at">	</span><span class="fu">pull_request</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="at">	</span><span class="fu">push</span><span class="kw">:</span><span class="at"> </span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="at">		</span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span></code></pre></div>
 <ol start="3" type="1">
 <li>Define the job to start Steps) are the instructions to test and run code actions/checkout@v2 is what clones the repo to your VM</li>
@@ -270,10 +271,11 @@
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm ci  &lt;--- npm install</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm test</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm run build</span></span></code></pre></div>
-<p>CD - Continuous deployment - runs after merging a pull-request CD is used to push your updates to some cloud server so the internet can see your new updated website.</p>
+<h3 id="cd---runs-after-merging-a-pull-request">CD - runs after merging a pull-request</h3>
+<p>CD is used to push your updates to some cloud server so the internet can see your new updated website.</p>
 <p>You have to connect to servers like AWS to deploy your website First you need a secret token from AWS on Github: Settings &gt; Secrets &gt; Add a new secret Now you can securely access with github action securely</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="at">	</span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="at">	</span><span class="fu">pull_request</span><span class="kw">:</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="at">		</span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">jobs</span><span class="kw">:</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="at">	</span><span class="fu">yourJobName</span><span class="kw">:</span></span>
@@ -293,17 +295,32 @@
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a><span class="at">			  </span><span class="fu">env</span><span class="kw">:</span></span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a><span class="at">				</span><span class="fu">AWS_TOKEN</span><span class="kw">:</span><span class="at"> ${{ secrets.myAWS_TOKENNAME }}</span></span></code></pre></div>
 <h3 id="conclusion">Conclusion</h3>
-<p>if tests fail -&gt; fix bugs if tests succeed -&gt; continue to CD CD: runs deploy actions -&gt; new update live on internet</p>
+<ol type="1">
+<li>push local dev branch to remote github</li>
+<li>CI Starts test on new code</li>
+<li><ul>
+<li>if tests fail -&gt; fix bugs</li>
+<li>if tests succeed -&gt; Ask PR to merge dev with main branch</li>
+</ul></li>
+<li>Maintainer accepts PR</li>
+<li>main branch merges with dev</li>
+<li>CD Starts uploading new main branch to servers</li>
+<li>new update live on internet or server</li>
+</ol>
 <h3 id="quirks">Quirks</h3>
+<h5 id="concurrent-behavior-in-run">Concurrent behavior in run</h5>
 <div class="sourceCode" id="cb7"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">run</span><span class="kw">: </span><span class="ch">|</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>	 bleh=4</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>	 echo $bleh</span></code></pre></div>
-<p>The echo will show no output because run will run the two commands concurrently.<br />
-To run sequentially, the commands need to be in two separate run.</p>
+<p>The echo will show no output because run will call the two commands concurrently.<br />
+To call sequentially, the commands need to be in two separate run.</p>
+<h5 id="github-environment-variable">Github environment variable</h5>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource yml numberLines"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1"></a><span class="at">echo &quot;somevar=3&quot; &gt;&gt; $GITHUB_ENV</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="at">${{ env.somevar }}</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="at">$somevar</span></span></code></pre></div>
-<p>line 2 and 3 are the same, no need to wrap the somevar.</p>
+<p>line 2 and 3 are the same<br />
+use $somevar over ${{ env.somevar }}</p>
+<p>The local environment is decarded on separate runs, so its best to store variables in $GITHUB_ENV.</p>
 
         </div>
         <div id="footer">

@@ -4,25 +4,25 @@ tags: musings, mathcs
 ---
 
 ### The Problem
-I remember being told:
 
 "sets are sorta like bags but only loosely speaking"  
 "sets can contain things"  
 
-This introduction to sets gave me the incorrect intuition of what sets were and how they behave. 
-It lead me to believe sets were behaved as bags or containers that contained elements.  
-This physical conceptualization, lead me to believe(incorrectly) that elements could be taken or placed into sets at whim. 
-This misunderstanding caused a lot of trouble in understanding proofs.
+This is the typical introduction to sets given in math classes.  
+I believe this introduction misleads students to believe sets behave as bags or containers that can physically hold elements.  
+This physical conceptualization results in the belief that elements could be taken or placed into sets at whim.  
+This can cause a lot of trouble in understanding proofs.  
 So without futher ado.   
 what are sets?
 
 A set specifies a predicate.  
 An element **MUST** be in a set if it satisify such predicate.  
 
-If we really wanted to use the bag and container analogy, then we would have to believe this bag had some magical vortex that sucked every element that the predicate satisfies inside the bag.
+If we really wanted to use the bag and container analogy, then we would have to believe this bag had some magical vortex that sucked every element that the predicate satisfies inside the bag.(Hard to imagine as a first intro so lets drop this possibility)
 
-Moving on, let's get to the bottom of why I had such a misunderstanding of how sets worked.  
-From my own experience, most teachers would introduce/intialize a set by saying "Here we have a set that contains all even numbers"   
+Moving on, let's get to the main issue.  
+Most teachers would introduce/intialize a set by saying "Here we have a set that **contains** all even numbers"  
+
 
 The problematic word **"Contains"** rears it's head.  
 We must emphasize that sets are not objects like bags but **specifications**.
