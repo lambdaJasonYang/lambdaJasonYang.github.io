@@ -1,9 +1,10 @@
 ---
-title: YCombinators and Russell's paradox
+title: Russell's paradox, AST and Bears
 tags: mathcs
 ---
- 
-Russell's paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself.
+### Russell's paradox with Sets 
+
+Russell's paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself. (Note everything in our current model is a set; even the elements of sets are sets)
 $$ S = \{ x | x \notin x \} \tag{1}$$
 Next we ask can S be an element of S?  
 [Assume S is element of itself] 
@@ -16,61 +17,66 @@ $$S \notin S \tag{4}$$
 [but by the definition of (1) ]  
 $$S \in S \tag{5}$$  
 ...thus the whole process repeats infinitely  
-It is a paradox because there is no end to this proof, meaning we cannot conclude whether it is true or false.
+It is a paradox because there is no end to this proof ( we cannot conclude whether it is true or false )
 
-The resolution is to bound the universe so that S must be within some universe.
+The resolution is to bound the universe so that S must be within a universe.  
 
-### Analogy
+#### Russell's paradoxal set S as an AST
+
+![](/images/ycomb/ycombinator.svg)  
+
+
+
+### Analogy and Abstracting Russell's paradox with bears
 In set theory, the propositional function is elementhood.
-Elementhood takes two sets (lets call the universe that contain all sets SET) and return a truth value.  
+Elementhood takes two sets (lets call the universe that contain our sets of interest, $SET$) and return a truth value. Also remember everything is a set.  
+We can think of our standard set theory as a pair that contains the universe and it's associated function.
+$$(SET,\in)$$
+
 $$ \in :: (SET,SET) \rightarrow bool $$ 
 
-First lets analyze the $$(SET,\in)$$ .
-elementhood(granny smith,red apples) is true only when the proposition granny smith is red is true.
 
-Let's design ano hter theory $$(BEAR, like)$$
-like(Smokey, honey bears) is true only when proposition Smokey eats honey is true.
 
-Lets design another paradox using groups of bears and "like".
+Let's design another theory $$(BEAR, like)$$ with $BEAR$ being defined as the universe of bears.  
 $$ like :: (BEAR,BEAR) \rightarrow bool $$
 
-S = a group of bears that Specifies groups of bears that do not like themselves
+Just like our initial set model, lets pretend everything in our universe is a bear and instead of set containing sets, we have bears liking bears.  
 
-Notice the analog
-	$$ Set of Elements \approx Group of Bears $$
-    $$ \in \approx like $$
+And with theory let's design a paradox using groups of bears and "like".
 
-Here we have a group of bears that do not like other bears. 
+
+
+* Arbitrary bear y that likes bear B iff P(y,likes) is true 
+* Arbitrary set x are elements of set S iff P(x,$\in$) is true 
+    * where P(x,action) stands for negation of action(x,x) 
+
+Note the similarities between our Set theory and Bear theory.
+
+In other words,  
+any bear y must like bear B if and only if bear y does not like itself
+
+### AST with Bears
+
+[Let us define bear B as this AST]  
+
 ![](/images/ycomb0.png)
 
-We select wlog an arbitrary bear of such group, Smokey.
-We say Smoke likes Smokey.
+[bear B likes itself]  
+
 ![](/images/ycomb1.png)
 
+[therefore bear B does not like itself]  
 
 ![](/images/ycomb2.png)
+
+[But this means bear B does not not like itself, which is a double negative, meaning bear B likes itself]
+
 ![](/images/ycomb3.png)
+
+[and so on and so forth...]  
+
 ![](/images/ycomb4.png)
 
-```bash
-chcp 65001
-stack exec myblog clean
-stack exec myblog build
-```
-
-```bash
-git add .
-git commit -m "some message"
-git push origin main:main
-```
-
-
-
-``` haskell
-fac n = foldr (*) 1 [1..n]
-```
-
-```{.ruby .numberLines}
-def greet; "Hello, world!"; end
-```
-\\[ \\ln x = \\int_{-\\infty}^x \\frac 1 y \\, dy . \\]
+### End
+I hope this helped elucidate your understanding of this fundamental paradox.  
+Next post will be short one showcasing the powerful Y-combinator which is closely related to this paradox.  

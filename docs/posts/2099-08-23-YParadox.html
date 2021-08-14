@@ -18,7 +18,7 @@
         </script>
         <!-- MATH JAx END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - YCombinators and Russell's paradox</title>
+        <title>Jason's Blog - Russell's paradox, AST and Bears</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -226,7 +226,7 @@
         </div>
 
         <div id="content">
-            <h1>YCombinators and Russell's paradox</h1>
+            <h1>Russell's paradox, AST and Bears</h1>
             
 
             <div class="info">
@@ -238,35 +238,50 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
     
 </div>
-<p>Russell’s paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself. <span class="math display">\[ S = \{ x | x \notin x \} \tag{1}\]</span> Next we ask can S be an element of S?<br />
+<h3 id="russells-paradox-with-sets">Russell’s paradox with Sets</h3>
+<p>Russell’s paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself. (Note everything in our current model is a set; even the elements of sets are sets) <span class="math display">\[ S = \{ x | x \notin x \} \tag{1}\]</span> Next we ask can S be an element of S?<br />
 [Assume S is element of itself] <span class="math display">\[S \in S \tag{2}\]</span><br />
 [This would imply by definition (1)] <span class="math display">\[S \notin S \tag{3}\]</span> [By contradiction (2) and (3)]<br />
 <span class="math display">\[S \notin S \tag{4}\]</span></p>
 <p>[but by the definition of (1) ]<br />
 <span class="math display">\[S \in S \tag{5}\]</span><br />
 …thus the whole process repeats infinitely<br />
-It is a paradox because there is no end to this proof, meaning we cannot conclude whether it is true or false.</p>
-<p>The resolution is to bound the universe so that S must be within some universe.</p>
-<h3 id="analogy">Analogy</h3>
-<p>In set theory, the propositional function is elementhood. Elementhood takes two sets (lets call the universe that contain all sets SET) and return a truth value.<br />
-<span class="math display">\[ \in :: (SET,SET) \rightarrow bool \]</span></p>
-<p>First lets analyze the <span class="math display">\[(SET,\in)\]</span> . elementhood(granny smith,red apples) is true only when the proposition granny smith is red is true.</p>
-<p>Let’s design ano hter theory <span class="math display">\[(BEAR, like)\]</span> like(Smokey, honey bears) is true only when proposition Smokey eats honey is true.</p>
-<p>Lets design another paradox using groups of bears and “like”. <span class="math display">\[ like :: (BEAR,BEAR) \rightarrow bool \]</span></p>
-<p>S = a group of bears that Specifies groups of bears that do not like themselves</p>
-<p>Notice the analog <span class="math display">\[ Set of Elements \approx Group of Bears \]</span> <span class="math display">\[ \in \approx like \]</span></p>
-<p>Here we have a group of bears that do not like other bears. <img src="../images/ycomb0.png" /></p>
-<p>We select wlog an arbitrary bear of such group, Smokey. We say Smoke likes Smokey. <img src="../images/ycomb1.png" /></p>
-<p><img src="../images/ycomb2.png" /> <img src="../images/ycomb3.png" /> <img src="../images/ycomb4.png" /></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> greet; <span class="st">&quot;Hello, world!&quot;</span>; <span class="kw">end</span></span></code></pre></div>
-<p><span class="math display">\[ \\ln x = \\int_{-\\infty}^x \\frac 1 y \\, dy . \]</span></p>
+It is a paradox because there is no end to this proof ( we cannot conclude whether it is true or false )</p>
+<p>The resolution is to bound the universe so that S must be within a universe.</p>
+<h4 id="russells-paradoxal-set-s-as-an-ast">Russell’s paradoxal set S as an AST</h4>
+<p><img src="../images/ycomb/ycombinator.svg" /></p>
+<h3 id="analogy-and-abstracting-russells-paradox-with-bears">Analogy and Abstracting Russell’s paradox with bears</h3>
+<p>In set theory, the propositional function is elementhood. Elementhood takes two sets (lets call the universe that contain our sets of interest, <span class="math inline">\(SET\)</span>) and return a truth value. Also remember everything is a set.<br />
+We can think of our standard set theory as a pair that contains the universe and it’s associated function. <span class="math display">\[(SET,\in)\]</span></p>
+<p><span class="math display">\[ \in :: (SET,SET) \rightarrow bool \]</span></p>
+<p>Let’s design another theory <span class="math display">\[(BEAR, like)\]</span> with <span class="math inline">\(BEAR\)</span> being defined as the universe of bears.<br />
+<span class="math display">\[ like :: (BEAR,BEAR) \rightarrow bool \]</span></p>
+<p>Just like our initial set model, lets pretend everything in our universe is a bear and instead of set containing sets, we have bears liking bears.</p>
+<p>And with theory let’s design a paradox using groups of bears and “like”.</p>
+<ul>
+<li>Arbitrary bear y that likes bear B iff P(y,likes) is true</li>
+<li>Arbitrary set x are elements of set S iff P(x,<span class="math inline">\(\in\)</span>) is true
+<ul>
+<li>where P(x,action) stands for negation of action(x,x)</li>
+</ul></li>
+</ul>
+<p>Note the similarities between our Set theory and Bear theory.</p>
+<p>In other words,<br />
+any bear y must like bear B if and only if bear y does not like itself</p>
+<h3 id="ast-with-bears">AST with Bears</h3>
+<p>[Let us define bear B as this AST]</p>
+<p><img src="../images/ycomb0.png" /></p>
+<p>[bear B likes itself]</p>
+<p><img src="../images/ycomb1.png" /></p>
+<p>[therefore bear B does not like itself]</p>
+<p><img src="../images/ycomb2.png" /></p>
+<p>[But this means bear B does not not like itself, which is a double negative, meaning bear B likes itself]</p>
+<p><img src="../images/ycomb3.png" /></p>
+<p>[and so on and so forth…]</p>
+<p><img src="../images/ycomb4.png" /></p>
+<h3 id="end">End</h3>
+<p>I hope this helped elucidate your understanding of this fundamental paradox.<br />
+Next post will be short one showcasing the powerful Y-combinator which is closely related to this paradox.</p>
 
         </div>
         <div id="footer">

@@ -48,7 +48,7 @@ main :: IO ()
 main = do
     E.setLocaleEncoding E.utf8
     hakyllWith config $ do
-        match "images/*" $ do
+        match "images/**" $ do
             route   idRoute
             compile copyFileCompiler
 

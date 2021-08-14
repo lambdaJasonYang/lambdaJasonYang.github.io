@@ -1,0 +1,14 @@
+---
+title: Logging out of github with git bash
+tags: tech
+---
+
+
+``` bash
+git config --global  credential.usehttppath true
+```
+
+It will ask you to login with browser or use a personal access token.
+Personal access token can be created at
+Settings >> Developer Settings >> Personal Access tokens
+
