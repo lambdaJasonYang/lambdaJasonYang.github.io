@@ -82,7 +82,8 @@ jobs:
         run: |
             echo "autotarget=$(basename $tpath .cabal)" >> $GITHUB_ENV
 
-
+      - name: Checking
+        run: echo $autotarget
       #- run: stack --system-ghc build --only-dependencies
       
       - name: Stack Installing hakyll environment
