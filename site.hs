@@ -116,11 +116,27 @@ main = do
                     >>= relativizeUrls
 
         match "templates/*" $ compile templateCompiler
-
+--------Building sitemap
+        create ["sitemap.xml"] $ do
+            route idRoute
+            compile $ do
+                posts <- recentFirst =<< loadAll "posts/*"
+                singlePages <- loadAll (fromList ["about.rst", "contact.markdown"])
+                let pages = posts <> singlePages
+                    sitemapCtx =
+                        constField "root" root <> -- here
+                        listField "pages" postCtx (return pages)
+                makeItem ""
+                    >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
 
 --------------------------------------------------------------------------------
+--root is for sitemap
+root :: String
+root = "https://userjy.github.io"
+
 postCtx :: Context String
 postCtx =
+    constField "root" root `mappend`
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
 
