@@ -9,9 +9,8 @@ tags: musings, mathcs
 "sets can contain things"  
 
 This is the typical introduction to sets given in math classes.  
-I believe this introduction misleads students to believe sets behave as bags or containers that can physically hold elements.  
-This physical conceptualization results in the belief that elements could be taken or placed into sets at whim.  
-This can cause a lot of trouble in understanding proofs.  
+I believe this introduction misleads students into seeing sets as bags or containers that can physically hold elements.  
+This conceptualization results in the belief that elements could be taken or placed into sets at whim which can inhibit learning proofs.  
 So without futher ado.   
 what are sets?
 
