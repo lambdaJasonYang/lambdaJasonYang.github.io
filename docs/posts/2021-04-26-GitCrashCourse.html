@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Git through my lens</title>
+        <title>Jason's Blog - Git Crashcourse</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,7 +232,7 @@
         </div>
 
         <div id="content">
-            <h1>Git through my lens</h1>
+            <h1>Git Crashcourse</h1>
             
 
             <div class="info">
@@ -275,12 +275,19 @@ If accepted, they merge your PR branch with the main branch.</p>
 <li>layer 3 - HEAD : dynamic pointer that can point to alias or refs</li>
 </ul>
 <p>Example git tree:</p>
-<p>ref(commit_new) ← ref(commit_old) ← ref(commit_oldest)<br />
-↑<br />
-alias(“SomeBranchName”)<br />
-↑<br />
+<p>                              alias(“somebranch”)<br />
+                              🠫<br />
+                             ref(branch_new)<br />
+                              🡑<br />
+ref(commit_new) ← ref(commit_old) ← ref(commit_oldest)<br />
+🠩<br />
+alias(“main”)<br />
+⭫<br />
 HEAD</p>
-<p>HEAD(layer 1) points to branch alias(layer 2) which points to commit ref(layer 3). Aliases(layer 2) always points to the local head(layer 1).</p>
+<p>Description:<br />
+HEAD(layer 1) points to branch alias(layer 2) which points to<br />
+commit ref(layer 3).<br />
+Aliases(layer 2) always points to the local head(layer 1).</p>
 <h4 id="creating-new-aliases-creating-new-branches">Creating new Aliases = Creating new branches</h4>
 <p>Old commits(layer 1) aka non-local-head commits do not have aliases(layer 2) pointing to them but if you do make an alias, they will become a local-head(layer 1) by branching.</p>
 <p>Do not confuse the “HEAD” pointer with the “local head of a branch”.<br />

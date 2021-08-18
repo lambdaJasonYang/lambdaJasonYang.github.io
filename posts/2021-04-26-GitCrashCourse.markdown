@@ -1,5 +1,5 @@
 ---
-title: Git through my lens
+title: Git Crashcourse
 tags: musings
 ---
 
@@ -45,14 +45,20 @@ Three layers to know: commit-references(ref), branch-alias(alias), HEAD
 
 Example git tree:
 
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ alias("somebranch")  
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 🠫  
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ref(branch_new)  
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   🡑  
 ref(commit_new) ← ref(commit_old) ← ref(commit_oldest)  
-↑  
-alias("SomeBranchName")  
-↑  
+🠩  
+alias("main")  
+⭫  
 HEAD  
 
-HEAD(layer 1) points to branch alias(layer 2) which points to commit ref(layer 3).
-Aliases(layer 2) always points to the local head(layer 1).
+Description:  
+HEAD(layer 1) points to branch alias(layer 2) which points to   
+commit ref(layer 3).  
+Aliases(layer 2) always points to the local head(layer 1).  
 
 #### Creating new Aliases = Creating new branches
 
