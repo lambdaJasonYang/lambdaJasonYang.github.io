@@ -245,8 +245,36 @@
     
 </div>
 <p>Problem: Cutting an area into N regions</p>
-<p>AM-GM Theorem <span class="math display">\[ (x_1 x_2 .. x_n)^{1/n} \leq \frac{x_1 + x_2 + .. x_n}{n} \]</span></p>
-<p>Graph Vertex edges Adjacency matrix</p>
+<p>AM-GM Theorem<br />
+<span class="math display">\[ (x_1 x_2 .. x_n)^{1/n} \leq \frac{x_1 + x_2 + .. x_n}{n} \]</span></p>
+<h3 id="upward-induction-step-1">Upward induction step 1</h3>
+<p>Base step: n = 1, obvious<br />
+Base step: n = 2, obvious</p>
+<p><span class="math inline">\((P(k) \rightarrow P(2k) )\)</span>:</p>
+<p>for <span class="math inline">\(k \geq 2\)</span> IH:<br />
+<span class="math display">\[(x_1 x_2 .. x_k)^{1/k} \leq \frac{x_1 + x_2 + .. x_k}{k}\]</span></p>
+<p>Prove P(2k) is true: <span class="math display">\[ (x_1 x_2 .. x_{2k})^{1/2k} \leq \frac{x_1 + x_2 + .. x_{2k} }{2k} \]</span></p>
+<p>Thoughts:</p>
+<ul>
+<li>Attempt to shift complexity towards one side for IH
+<ul>
+<li>IH: <span class="math inline">\((x_1 x_2 .. x_k) \leq (\frac{x_1 + x_2 + .. x_k}{k})^{k}\)</span></li>
+</ul></li>
+<li>Separate problem to subproblems we call subpartA, subpartB
+<ul>
+<li><span class="math inline">\((x_1 x_2 .. x_{2k})\)</span> to subpartA: <span class="math inline">\((x_1 x_2 .. x_k) , subpartB: (x_{k+1} x_{k+2} .. x_{2k})\)</span></li>
+</ul></li>
+<li>Technique - apply induction to the subproblems
+<ul>
+<li>IH(subpart) IH(subpartB)</li>
+</ul></li>
+<li>Technique - Algebraic and Inequality manipulation
+<ul>
+<li><h3 id="downward-induction-step-2">Downward induction step 2</h3></li>
+</ul></li>
+</ul>
+<p>Thoughts:</p>
+<p><span class="math inline">\(A= \frac{a_1 + a_2 + .. + a_{m-1}}{m-1}\)</span></p>
 
         </div>
         <div id="footer">

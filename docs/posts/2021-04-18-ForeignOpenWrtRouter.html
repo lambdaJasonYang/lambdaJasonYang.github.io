@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Russell's Paradox, AST and Bears</title>
+        <title>Jason's Blog - 2021 Installing Openwrt</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,63 +232,63 @@
         </div>
 
         <div id="content">
-            <h1>Russell's Paradox, AST and Bears</h1>
+            <h1>2021 Installing Openwrt</h1>
             
 
             <div class="info">
-    Posted on May  5, 2018
+    Posted on April 18, 2021
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'openwrt'." href="../tags/openwrt.html">openwrt</a>, <a title="All pages tagged 'homeserver'." href="../tags/homeserver.html">homeserver</a>
     
 </div>
-<h3 id="russells-paradox-with-sets">Russell’s paradox with Sets</h3>
-<p>Russell’s paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself. (Note everything in our current model is a set; even the elements of sets are sets) <span class="math display">\[ S = \{ x | x \notin x \} \tag{1}\]</span> Next we ask can S be an element of S?<br />
-[Assume S is element of itself] <span class="math display">\[S \in S \tag{2}\]</span><br />
-[This would imply by definition (1)] <span class="math display">\[S \notin S \tag{3}\]</span> [By contradiction (2) and (3)]<br />
-<span class="math display">\[S \notin S \tag{4}\]</span></p>
-<p>[but by the definition of (1) ]<br />
-<span class="math display">\[S \in S \tag{5}\]</span><br />
-…thus the whole process repeats infinitely<br />
-It is a paradox because there is no end to this proof ( we cannot conclude whether it is true or false )</p>
-<p>The resolution is to bound the universe so that S must be within a universe.</p>
-<h4 id="russells-paradoxal-set-s-as-an-ast">Russell’s paradoxal set S as an AST</h4>
-<p><img src="../images/ycomb/ycombinator.svg" /></p>
-<h3 id="analogy-and-abstracting-russells-paradox-with-bears">Analogy and Abstracting Russell’s paradox with bears</h3>
-<p>In set theory, the propositional function is elementhood. Elementhood takes two sets (lets call the universe that contain our sets of interest, <span class="math inline">\(SET\)</span>) and return a truth value. Also remember everything is a set.<br />
-We can think of our standard set theory as a pair that contains the universe and it’s associated function. <span class="math display">\[(SET,\in)\]</span></p>
-<p><span class="math display">\[ \in :: (SET,SET) \rightarrow bool \]</span></p>
-<p>Let’s design another theory <span class="math display">\[(BEAR, like)\]</span> with <span class="math inline">\(BEAR\)</span> being defined as the universe of bears.<br />
-<span class="math display">\[ like :: (BEAR,BEAR) \rightarrow bool \]</span></p>
-<p>Just like our initial set model, lets pretend everything in our universe is a bear and instead of set containing sets, we have bears liking bears.</p>
-<p>And with theory let’s design a paradox using groups of bears and “like”.</p>
-<ul>
-<li>Arbitrary bear y that likes bear B iff P(y,likes) is true</li>
-<li>Arbitrary set x are elements of set S iff P(x,<span class="math inline">\(\in\)</span>) is true
-<ul>
-<li>where P(x,action) stands for negation of action(x,x)</li>
-</ul></li>
-</ul>
-<p>Note the similarities between our Set theory and Bear theory.</p>
-<p>In other words,<br />
-any bear y must like bear B if and only if bear y does not like itself</p>
-<h3 id="ast-with-bears">AST with Bears</h3>
-<p>[Let us define bear B as this AST]</p>
-<p><img src="../images/ycomb/ycomb0.png" /></p>
-<p>[bear B likes itself]</p>
-<p><img src="../images/ycomb/ycomb1.png" /></p>
-<p>[therefore bear B does not like itself]</p>
-<p><img src="../images/ycomb/ycomb2.png" /></p>
-<p>[But this means bear B does not not like itself, which is a double negative, meaning bear B likes itself]</p>
-<p><img src="../images/ycomb/ycomb3.png" /></p>
-<p>[and so on and so forth…]</p>
-<p><img src="../images/ycomb/ycomb4.png" /></p>
-<h3 id="end">End</h3>
-<p>I hope this helped elucidate your understanding of this fundamental paradox.<br />
-Next post will be short one showcasing the powerful Y-combinator which is closely related to this paradox.<br />
-<a href="../posts/2018-05-23-YParadox2.html">Part2 - YCombinator and Recursive functions</a></p>
+<p>I will be install Openwrt on black cylindrical Xiaomi mi router ac2100.</p>
+<p>As of 2021, I’ve found the openwrt to be incorrect or outdated. This guide will tell you how to flash your xiaomi mi router ac2100 to a snapshot build then upgrade to a stable build.</p>
+<p>Why not just flash directly to a stable build? Simply because I followed the Openwrt wiki then realized it was outdated and needed to update the firmware so I have no idea if upgrading directly could introduce some unforeseen issues as I have not tried it.</p>
+<p>For xiaomi mi ac2100 downgrading the firmware First if you have brand new mi router, you need to connect it to the internet and create a password and set up SSID. Do not just connect to the default passwordless SSID that comes right out of the box because it will not work, I tried it.</p>
+<p>Once you set up your ssid login to the router panel by going to http://192.168.31.1 The Url should show http://192.168.31.1/cgi-bin/luci/;stok=&lt;STOK&gt;/web/home#router example</p>
+<p>For each of the below, replace &lt;STOK&gt; with your STOK After each command you should see a page that display “Code: 0”</p>
+<ol type="1">
+<li>http://192.168.31.1/cgi-bin/luci/;stok=&lt;STOK&gt;/api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3Bnvram%20set%20ssh%5Fen%3D1%3B%20nvram%20commit%3B</li>
+<li>http://192.168.31.1/cgi-bin/luci/;stok=&lt;STOK&gt;/api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3Bsed%20-i%20’s/channel=.*/channel=%5C%22debug%5C%22/g’%20/etc/init.d/dropbear%3B</li>
+<li>http://192.168.31.1/cgi-bin/luci/;stok=<STOK>/api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3B/etc/init.d/dropbear%20start%3B</li>
+<li>http://192.168.31.1/cgi-bin/luci/;stok=<STOK>/api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3B%20echo%20-e%20’admin%5Cnadmin’ %20%7C%20passwd%20root%3B</li>
+</ol>
+<p>ssh root@192.168.31.1</p>
+<p>On windows, Download WinSCP in WinSCP, connect to your router and select protocol “SCP” Download snapshot files on your windows http://downloads.openwrt.org/snapshots/targets/ramips/mt7621/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-kernel1.bin</p>
+<p>http://downloads.openwrt.org/snapshots/targets/ramips/mt7621/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-rootfs0.bin</p>
+<p>On WinSCP, on the remote router folder, go up one level to the root folder then go to “/tmp/” folder Then drag the two files you downloaded onto your windows machine into that the remote “/tmp/” folder</p>
+<p>Then on your ssh session</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">mtd</span> write /tmp/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-kernel1.bin kernel1</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">mtd</span> write /tmp/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-rootfs0.bin rootfs0</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="ex">nvram</span> set uart_en=1</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="ex">nvram</span> set bootdelay=5</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="ex">nvram</span> set flag_try_sys1_failed=1</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="ex">nvram</span> commit</span></code></pre></div>
+<p>Then disconnect your router by unplugging the power. You may notice this portion of the guide differs from the OpenWRT wiki.</p>
+<p>Well that is because when I followed the wiki, everytime I ran the commands in their order, the router just factory reset back to the original mi firmware.</p>
+<p>If you want to use this snapshot. If you want to upgrade to the stable release then skip this segment. take note that there is no Luci web GUI installed so you have to configure the router using command line. You can install luci by …</p>
+<p>flashing snapshot OpenWrt does not come preinstalled with gui SO you must connect with ethernet Then ssh in to openwrt</p>
+<p>ssh root@192.168.1.1 uci show uci set wireless.radio1.disabled=‘0’ uci commit wireless wifi up</p>
+<p>WARNING: THE DEFAULT SSID is OpenWrt So if you had an old OpenWrt router setup already, be aware.</p>
+<p>opkg update opkg install luci</p>
+<h3 id="upgrading">UPGRADING</h3>
+<h3 id="setting-up-as-ap-mode">Setting up as AP Mode</h3>
+<p>My real router is pfsense so I always use the routers that I buy as dumb APs.</p>
+<p>Interface &gt; General Settings &gt; Protocol Enter a different static address from your router</p>
+<p>Interface &gt; DHCP Server &gt; General Settings Enable “Ignore Interface”</p>
+<p>IPv6 Settings Disable RA-Services Disable DHCPv6-Services</p>
+<p>System&gt; Startup disable firewall disable dnsmasq disable odhcpd</p>
+<p>IMPORTANT: Wait a few seconds, then disconnect the ethernet on your PC and connect it to the main router so that your OpenWRT AP is connected to your router. This has to be done within 90 seconds or the settings will rollback.</p>
+<p>If you misconfigured something that results in locking yourself out of access to the router, simply factory reset your router and it will reset to default OpenWrt settings.</p>
+<p>Note the default settings doesn’t have wifi turned on automatically so you have to access your router by ethernet to turn it on.</p>
+<p>The next step is to change back your LAN interface, Select gateway as 192.168.1.1 which is usually the IP of your main router subnet mask is typically 255.255.255.0 Then go to advanced settings, enter 8.8.8.8 or 1.1.1.1 as Custom DNS servers.(Google DNS and Cloudflare DNS respectively). If you don’t enter the custom DNS servers then you can’t install packages and opkg update will bring up an error.</p>
+<h3 id="some-issues-with-openwrt">Some issues with OpenWRT</h3>
+<p>Your wifi SSID may not appear while searching for networks if you use the incorrect channels and channel width. You have to keep playing around with the configuration. If your wifi disappears, then you have to play around with the channels and channel width and country origin settings on your wifi radio tab.</p>
 
         </div>
         <div id="footer">

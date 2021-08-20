@@ -13,9 +13,12 @@ body {
 h2, h3, h4, h5, h6 { 
   color: darkcyan 
 }
+/* size of bold start */
 strong{
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
+/* size of bold end */
+
 div#logo > a{
 color:black;
 font-size: 1.3rem;
@@ -29,8 +32,16 @@ nav.sidenav > li{
   padding-left: 0;
   
 }
-
-
+/*  */
+blockquote {
+  
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+  padding-left: 15px;
+  border-left: 3px solid #ccc;
+}
+/*  */
 /* table css start */
 table {
   border-collapse: collapse;

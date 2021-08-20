@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Russell's Paradox, AST and Bears</title>
+        <title>Jason's Blog - Lookahead Bias</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,63 +232,28 @@
         </div>
 
         <div id="content">
-            <h1>Russell's Paradox, AST and Bears</h1>
+            <h1>Lookahead Bias</h1>
             
 
             <div class="info">
-    Posted on May  5, 2018
+    Posted on August 23, 2099
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
 </div>
-<h3 id="russells-paradox-with-sets">Russell’s paradox with Sets</h3>
-<p>Russell’s paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself. (Note everything in our current model is a set; even the elements of sets are sets) <span class="math display">\[ S = \{ x | x \notin x \} \tag{1}\]</span> Next we ask can S be an element of S?<br />
-[Assume S is element of itself] <span class="math display">\[S \in S \tag{2}\]</span><br />
-[This would imply by definition (1)] <span class="math display">\[S \notin S \tag{3}\]</span> [By contradiction (2) and (3)]<br />
-<span class="math display">\[S \notin S \tag{4}\]</span></p>
-<p>[but by the definition of (1) ]<br />
-<span class="math display">\[S \in S \tag{5}\]</span><br />
-…thus the whole process repeats infinitely<br />
-It is a paradox because there is no end to this proof ( we cannot conclude whether it is true or false )</p>
-<p>The resolution is to bound the universe so that S must be within a universe.</p>
-<h4 id="russells-paradoxal-set-s-as-an-ast">Russell’s paradoxal set S as an AST</h4>
-<p><img src="../images/ycomb/ycombinator.svg" /></p>
-<h3 id="analogy-and-abstracting-russells-paradox-with-bears">Analogy and Abstracting Russell’s paradox with bears</h3>
-<p>In set theory, the propositional function is elementhood. Elementhood takes two sets (lets call the universe that contain our sets of interest, <span class="math inline">\(SET\)</span>) and return a truth value. Also remember everything is a set.<br />
-We can think of our standard set theory as a pair that contains the universe and it’s associated function. <span class="math display">\[(SET,\in)\]</span></p>
-<p><span class="math display">\[ \in :: (SET,SET) \rightarrow bool \]</span></p>
-<p>Let’s design another theory <span class="math display">\[(BEAR, like)\]</span> with <span class="math inline">\(BEAR\)</span> being defined as the universe of bears.<br />
-<span class="math display">\[ like :: (BEAR,BEAR) \rightarrow bool \]</span></p>
-<p>Just like our initial set model, lets pretend everything in our universe is a bear and instead of set containing sets, we have bears liking bears.</p>
-<p>And with theory let’s design a paradox using groups of bears and “like”.</p>
+<p>A frequentist statistican can easily make a mistake with lookahead bias. The mindset of simply aggregating and summarizing data that is prevalent in many frequentists can lead to this mistake. Example:</p>
 <ul>
-<li>Arbitrary bear y that likes bear B iff P(y,likes) is true</li>
-<li>Arbitrary set x are elements of set S iff P(x,<span class="math inline">\(\in\)</span>) is true
+<li>Graphing a timeseries stock chart from 2008-2010, then drawing straight horizontal boundaries(the mean and the standard deviations) on the graph using the stock data.</li>
+<li>Then the frequentist says “whenever the price crosses these boundaries, we should act”
 <ul>
-<li>where P(x,action) stands for negation of action(x,x)</li>
+<li>problem: the mean and std dev. is calculated using the total data. The correct chart can not be used to make any inferences from 2008-2010.</li>
+<li>Perhaps we can use this to predict 2011 if we used this entire chart as a 2 year moving average.</li>
 </ul></li>
 </ul>
-<p>Note the similarities between our Set theory and Bear theory.</p>
-<p>In other words,<br />
-any bear y must like bear B if and only if bear y does not like itself</p>
-<h3 id="ast-with-bears">AST with Bears</h3>
-<p>[Let us define bear B as this AST]</p>
-<p><img src="../images/ycomb/ycomb0.png" /></p>
-<p>[bear B likes itself]</p>
-<p><img src="../images/ycomb/ycomb1.png" /></p>
-<p>[therefore bear B does not like itself]</p>
-<p><img src="../images/ycomb/ycomb2.png" /></p>
-<p>[But this means bear B does not not like itself, which is a double negative, meaning bear B likes itself]</p>
-<p><img src="../images/ycomb/ycomb3.png" /></p>
-<p>[and so on and so forth…]</p>
-<p><img src="../images/ycomb/ycomb4.png" /></p>
-<h3 id="end">End</h3>
-<p>I hope this helped elucidate your understanding of this fundamental paradox.<br />
-Next post will be short one showcasing the powerful Y-combinator which is closely related to this paradox.<br />
-<a href="../posts/2018-05-23-YParadox2.html">Part2 - YCombinator and Recursive functions</a></p>
+<p>Solution: Use Moving averages or Timeseries statistics</p>
 
         </div>
         <div id="footer">

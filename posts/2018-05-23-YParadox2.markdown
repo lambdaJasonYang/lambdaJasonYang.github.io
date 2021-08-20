@@ -1,0 +1,127 @@
+---
+title: Y Combinator, Partial Recursive functions
+tags: tech,mathcs,AI,musings
+---
+
+> A total recursive function is an illusion.  
+
+A total recursive function simply a partial function that approximates the recursive function by nesting within itself an infinite number of times.  
+
+
+### Partial recursive factorial
+``` python 
+def fact0(n):
+  if n == 0:
+    return 1
+  else:
+    return "error"
+
+def fact1(n):
+  if n == 0:
+    return 1
+  else:
+    return n* fact0(n-1)
+def fact2(n):
+  if n == 0:
+    return 1
+  else:
+    return n* fact1(n-1)
+def fact3(n):
+  if n == 0:
+    return 1
+  else:
+    return n * fact2(n-1)
+
+```
+### A more general example
+
+The partial recursive function takes itself as the parameter which it will use for the IH or recursive case.  
+
+``` python
+partialrecursivefunction = lambda f: (lambda x: 1 if x == 0 else x * (f(x-1)))
+sentinel = lambda x: "error"
+p = partialrecursivefunction
+s = sentinel
+# error will display if the partial func isn't nested deeply enough
+
+p(s)(1)
+#> 'error'
+
+p(s)(0)
+#> 0
+
+p(p(s))(1)
+#> 1
+
+p(p(s))(0)
+#> 0
+
+p(p(s))(2)
+#> 'errorerror'
+```
+
+Observe that the input domain is limited by how nested the partial recursive function is.
+
+
+### Y-combinator 
+
+``` python
+Y = lambda f: (lambda x: x(x))(lambda x: f(lambda *args: x(x)(*args)))
+Y(p)(5)
+#> 120
+```
+
+other examples of the y combinator
+``` python
+Y2 = lambda f: (lambda g: (g)(g))(lambda h: f (lambda x: (h)(h)(x)))
+Y3 = lambda f: (lambda h: (lambda x: (f((h)(h)))(x) ) )(lambda h: (lambda x: (f((h)(h)))(x) ) )
+
+Y2(p)(5)
+#>120
+Y3(p)(5)
+#>120
+```
+non lambda version
+``` python
+
+def Y4(f):
+  def app(g):
+    return g(g)
+  def hh(h):
+    def xx(x):
+      return (h(h))(x)
+    return f(xx)
+
+  return app(hh)
+Y4(p)(5)
+#> 120
+```
+
+### A total recursive factorial
+
+``` python
+def fac(s,n):
+  if n == 0:
+    return 1
+  else:
+    return n* s(s,n-1)
+
+fac(fac,5)
+#> 120
+```
+### Analogy
+##### Taylor Series
+Similar to the taylor series, as we add more terms to the series, the series becomes a closer approximate to the function.
+
+##### Transitive relation
+
+mini background: 
+
+* Let $R$ be a relation from a set to itself,   
+* Let's compose the relation to itself 3 times   
+* $R \circ R \circ R$ would be the relations that are 3 levels deep, no more, NO LESS.  
+    * We can denote it $R^3$  
+
+$R \cup R^2 \cup R^3$ would be analogous to our partial function `p(p(p(s)))`{.python}
+
+$\bigcup R^{n\in \mathbb{N}}$ would be the total recursive function.

@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Russell's Paradox, AST and Bears</title>
+        <title>Jason's Blog - Partial Recursive</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,63 +232,116 @@
         </div>
 
         <div id="content">
-            <h1>Russell's Paradox, AST and Bears</h1>
+            <h1>Partial Recursive</h1>
             
 
             <div class="info">
-    Posted on May  5, 2018
+    Posted on August 23, 2099
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
 </div>
-<h3 id="russells-paradox-with-sets">Russell’s paradox with Sets</h3>
-<p>Russell’s paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself. (Note everything in our current model is a set; even the elements of sets are sets) <span class="math display">\[ S = \{ x | x \notin x \} \tag{1}\]</span> Next we ask can S be an element of S?<br />
-[Assume S is element of itself] <span class="math display">\[S \in S \tag{2}\]</span><br />
-[This would imply by definition (1)] <span class="math display">\[S \notin S \tag{3}\]</span> [By contradiction (2) and (3)]<br />
-<span class="math display">\[S \notin S \tag{4}\]</span></p>
-<p>[but by the definition of (1) ]<br />
-<span class="math display">\[S \in S \tag{5}\]</span><br />
-…thus the whole process repeats infinitely<br />
-It is a paradox because there is no end to this proof ( we cannot conclude whether it is true or false )</p>
-<p>The resolution is to bound the universe so that S must be within a universe.</p>
-<h4 id="russells-paradoxal-set-s-as-an-ast">Russell’s paradoxal set S as an AST</h4>
-<p><img src="../images/ycomb/ycombinator.svg" /></p>
-<h3 id="analogy-and-abstracting-russells-paradox-with-bears">Analogy and Abstracting Russell’s paradox with bears</h3>
-<p>In set theory, the propositional function is elementhood. Elementhood takes two sets (lets call the universe that contain our sets of interest, <span class="math inline">\(SET\)</span>) and return a truth value. Also remember everything is a set.<br />
-We can think of our standard set theory as a pair that contains the universe and it’s associated function. <span class="math display">\[(SET,\in)\]</span></p>
-<p><span class="math display">\[ \in :: (SET,SET) \rightarrow bool \]</span></p>
-<p>Let’s design another theory <span class="math display">\[(BEAR, like)\]</span> with <span class="math inline">\(BEAR\)</span> being defined as the universe of bears.<br />
-<span class="math display">\[ like :: (BEAR,BEAR) \rightarrow bool \]</span></p>
-<p>Just like our initial set model, lets pretend everything in our universe is a bear and instead of set containing sets, we have bears liking bears.</p>
-<p>And with theory let’s design a paradox using groups of bears and “like”.</p>
+<p>A total recursive function is an illusion.<br />
+A total recursive function simply a partial function that approximates the recursive function by nesting within itself an infinite number of times.</p>
+<h3 id="partial-recursive-factorial">Partial recursive factorial</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">def</span> fact0(n):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  <span class="cf">else</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>    <span class="cf">return</span> <span class="st">&quot;error&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="kw">def</span> fact1(n):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>  <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>    <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  <span class="cf">else</span>:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>    <span class="cf">return</span> n<span class="op">*</span> fact0(n<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="kw">def</span> fact2(n):</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a>  <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>    <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>  <span class="cf">else</span>:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>    <span class="cf">return</span> n<span class="op">*</span> fact1(n<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="kw">def</span> fact3(n):</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>  <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a>    <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a>  <span class="cf">else</span>:</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a>    <span class="cf">return</span> n <span class="op">*</span> fact2(n<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+<h3 id="a-more-general-example">A more general example</h3>
+<p>The partial recursive function takes itself as the parameter which it will use for the IH or recursive case.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>partialrecursivefunction <span class="op">=</span> <span class="kw">lambda</span> f: (<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="cf">if</span> x <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> x <span class="op">*</span> (f(x<span class="op">-</span><span class="dv">1</span>)))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>sentinel <span class="op">=</span> <span class="kw">lambda</span> x: <span class="st">&quot;error&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>p <span class="op">=</span> partialrecursivefunction</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>s <span class="op">=</span> sentinel</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co"># error will display if the partial func isn't nested deeply enough</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>p(s)(<span class="dv">1</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">#&gt; 'error'</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>p(s)(<span class="dv">0</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">#&gt; 0</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>p(p(s))(<span class="dv">1</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co">#&gt; 1</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>p(p(s))(<span class="dv">0</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a><span class="co">#&gt; 0</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>p(p(s))(<span class="dv">2</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a><span class="co">#&gt; 'errorerror'</span></span></code></pre></div>
+<p>Observe that the input domain is limited by how nested the partial recursive function is.</p>
+<h3 id="y-combinator">Y-combinator</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>Y <span class="op">=</span> <span class="kw">lambda</span> f: (<span class="kw">lambda</span> x: x(x))(<span class="kw">lambda</span> x: f(<span class="kw">lambda</span> <span class="op">*</span>args: x(x)(<span class="op">*</span>args)))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>Y(p)(<span class="dv">5</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="co">#&gt; 120</span></span></code></pre></div>
+<p>other examples of the y combinator</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>Y2 <span class="op">=</span> <span class="kw">lambda</span> f: (<span class="kw">lambda</span> g: (g)(g))(<span class="kw">lambda</span> h: f (<span class="kw">lambda</span> x: (h)(h)(x)))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>Y3 <span class="op">=</span> <span class="kw">lambda</span> f: (<span class="kw">lambda</span> h: (<span class="kw">lambda</span> x: (f((h)(h)))(x) ) )(<span class="kw">lambda</span> h: (<span class="kw">lambda</span> x: (f((h)(h)))(x) ) )</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>Y2(p)(<span class="dv">5</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="co">#&gt;120</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>Y3(p)(<span class="dv">5</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="co">#&gt;120</span></span></code></pre></div>
+<p>non lambda version</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="kw">def</span> Y4(f):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>  <span class="kw">def</span> app(g):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>    <span class="cf">return</span> g(g)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>  <span class="kw">def</span> hh(h):</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>    <span class="kw">def</span> xx(x):</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>      <span class="cf">return</span> (h(h))(x)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a>    <span class="cf">return</span> f(xx)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>  <span class="cf">return</span> app(hh)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>Y4(p)(<span class="dv">5</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a><span class="co">#&gt; 120</span></span></code></pre></div>
+<h3 id="a-total-recursive-factorial">A total recursive factorial</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">def</span> fac(s,n):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>  <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>    <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>  <span class="cf">else</span>:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>    <span class="cf">return</span> n<span class="op">*</span> s(s,n<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>fac(fac,<span class="dv">5</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a><span class="co">#&gt; 120</span></span></code></pre></div>
+<h3 id="analogy">Analogy</h3>
+<h5 id="taylor-series">Taylor Series</h5>
+<p>Similar to the taylor series, as we add more terms to the series, the series becomes a closer approximate to the function.</p>
+<h5 id="transitive-relation">Transitive relation</h5>
+<p>mini background:</p>
 <ul>
-<li>Arbitrary bear y that likes bear B iff P(y,likes) is true</li>
-<li>Arbitrary set x are elements of set S iff P(x,<span class="math inline">\(\in\)</span>) is true
+<li>Let <span class="math inline">\(R\)</span> be a relation from a set to itself,<br />
+</li>
+<li>Let’s compose the relation to itself 3 times<br />
+</li>
+<li><span class="math inline">\(R \circ R \circ R\)</span> would be the relations that are 3 levels deep, no more, NO LESS.
 <ul>
-<li>where P(x,action) stands for negation of action(x,x)</li>
+<li>We can denote it <span class="math inline">\(R^3\)</span></li>
 </ul></li>
 </ul>
-<p>Note the similarities between our Set theory and Bear theory.</p>
-<p>In other words,<br />
-any bear y must like bear B if and only if bear y does not like itself</p>
-<h3 id="ast-with-bears">AST with Bears</h3>
-<p>[Let us define bear B as this AST]</p>
-<p><img src="../images/ycomb/ycomb0.png" /></p>
-<p>[bear B likes itself]</p>
-<p><img src="../images/ycomb/ycomb1.png" /></p>
-<p>[therefore bear B does not like itself]</p>
-<p><img src="../images/ycomb/ycomb2.png" /></p>
-<p>[But this means bear B does not not like itself, which is a double negative, meaning bear B likes itself]</p>
-<p><img src="../images/ycomb/ycomb3.png" /></p>
-<p>[and so on and so forth…]</p>
-<p><img src="../images/ycomb/ycomb4.png" /></p>
-<h3 id="end">End</h3>
-<p>I hope this helped elucidate your understanding of this fundamental paradox.<br />
-Next post will be short one showcasing the powerful Y-combinator which is closely related to this paradox.<br />
-<a href="../posts/2018-05-23-YParadox2.html">Part2 - YCombinator and Recursive functions</a></p>
+<p><span class="math inline">\(R \cup R^2 \cup R^3\)</span> would be analogous to our partial function <code class="sourceCode python">p(p(p(s)))</code></p>
+<p><span class="math inline">\(\bigcup R^{n\in \mathbb{N}}\)</span> would be the total recursive function.</p>
 
         </div>
         <div id="footer">

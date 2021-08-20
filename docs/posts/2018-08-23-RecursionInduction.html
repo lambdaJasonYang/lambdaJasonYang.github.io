@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Russell's Paradox, AST and Bears</title>
+        <title>Jason's Blog - Recursion Induction Duality</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,63 +232,72 @@
         </div>
 
         <div id="content">
-            <h1>Russell's Paradox, AST and Bears</h1>
+            <h1>Recursion Induction Duality</h1>
             
 
             <div class="info">
-    Posted on May  5, 2018
+    Posted on August 23, 2018
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>
     
 </div>
-<h3 id="russells-paradox-with-sets">Russell’s paradox with Sets</h3>
-<p>Russell’s paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself. (Note everything in our current model is a set; even the elements of sets are sets) <span class="math display">\[ S = \{ x | x \notin x \} \tag{1}\]</span> Next we ask can S be an element of S?<br />
-[Assume S is element of itself] <span class="math display">\[S \in S \tag{2}\]</span><br />
-[This would imply by definition (1)] <span class="math display">\[S \notin S \tag{3}\]</span> [By contradiction (2) and (3)]<br />
-<span class="math display">\[S \notin S \tag{4}\]</span></p>
-<p>[but by the definition of (1) ]<br />
-<span class="math display">\[S \in S \tag{5}\]</span><br />
-…thus the whole process repeats infinitely<br />
-It is a paradox because there is no end to this proof ( we cannot conclude whether it is true or false )</p>
-<p>The resolution is to bound the universe so that S must be within a universe.</p>
-<h4 id="russells-paradoxal-set-s-as-an-ast">Russell’s paradoxal set S as an AST</h4>
-<p><img src="../images/ycomb/ycombinator.svg" /></p>
-<h3 id="analogy-and-abstracting-russells-paradox-with-bears">Analogy and Abstracting Russell’s paradox with bears</h3>
-<p>In set theory, the propositional function is elementhood. Elementhood takes two sets (lets call the universe that contain our sets of interest, <span class="math inline">\(SET\)</span>) and return a truth value. Also remember everything is a set.<br />
-We can think of our standard set theory as a pair that contains the universe and it’s associated function. <span class="math display">\[(SET,\in)\]</span></p>
-<p><span class="math display">\[ \in :: (SET,SET) \rightarrow bool \]</span></p>
-<p>Let’s design another theory <span class="math display">\[(BEAR, like)\]</span> with <span class="math inline">\(BEAR\)</span> being defined as the universe of bears.<br />
-<span class="math display">\[ like :: (BEAR,BEAR) \rightarrow bool \]</span></p>
-<p>Just like our initial set model, lets pretend everything in our universe is a bear and instead of set containing sets, we have bears liking bears.</p>
-<p>And with theory let’s design a paradox using groups of bears and “like”.</p>
+<blockquote>
+<p>Recursion is informally the Computational Dual of Induction.<br />
+Induction tells us some chain of increasing P(n) is true.<br />
+Recursion uses that knowledge of induction to safely climb down that chain of truths to the base case.<br />
+-me</p>
+</blockquote>
+<p>Induction comes from your thoughts and algorithm design.<br />
+Recursion comes from the code being executed.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">def</span> identity(k):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    <span class="cf">if</span> k <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    <span class="cf">if</span> k <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">+</span>identity(k<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
 <ul>
-<li>Arbitrary bear y that likes bear B iff P(y,likes) is true</li>
-<li>Arbitrary set x are elements of set S iff P(x,<span class="math inline">\(\in\)</span>) is true
+<li>In inductive proofs, <span class="math inline">\(P(k-1) \overset{proves}\rightarrow P(k)\)</span>
 <ul>
-<li>where P(x,action) stands for negation of action(x,x)</li>
+<li>we assume <code class="sourceCode python"><span class="bu">id</span>(k<span class="op">-</span><span class="dv">1</span>)</code> is correct to design an algorithm for <code class="sourceCode python"><span class="bu">id</span>(k)</code>.<br />
+</li>
+</ul></li>
+<li>But computationally or recursively, <code class="sourceCode python"><span class="bu">id</span>(k<span class="op">-</span><span class="dv">1</span>)</code> <span class="math inline">\(\overset{reduce}\leftarrow\)</span> <code class="sourceCode python"><span class="bu">id</span>(k)</code></li>
+</ul>
+<h3 id="analogy">Analogy</h3>
+<p>Lets pretend we have Wizard, Worker and stairs.<br />
+Whatever Wizard says must be true in this reality, nothing more, nothing less. (Don’t assume that a ground exists or that we can freely go up or down the stairs)</p>
+<p>Wizard is on the ground at the bottom of the stairs.<br />
+Worker is at some position on the stairs but needs to get his tools on the ground.</p>
+<ul>
+<li>Induction - Wizard at the bottom of a stairs saying:
+<ul>
+<li>“I know that the ground exists and we can take a step upwards from the ground to the stairs or from the current step to the next higher step”</li>
+<li>“Therefore I am certain there is a chain of steps to your(Worker) position”</li>
+</ul></li>
+<li>Recursion - Worker at some position on the stairs who gets the memo and thinks:
+<ul>
+<li>“This means the wizard is certain there is a path from the ground to my position; Then I must be able to step down to the ground, get my tools, then come back up here”</li>
 </ul></li>
 </ul>
-<p>Note the similarities between our Set theory and Bear theory.</p>
-<p>In other words,<br />
-any bear y must like bear B if and only if bear y does not like itself</p>
-<h3 id="ast-with-bears">AST with Bears</h3>
-<p>[Let us define bear B as this AST]</p>
-<p><img src="../images/ycomb/ycomb0.png" /></p>
-<p>[bear B likes itself]</p>
-<p><img src="../images/ycomb/ycomb1.png" /></p>
-<p>[therefore bear B does not like itself]</p>
-<p><img src="../images/ycomb/ycomb2.png" /></p>
-<p>[But this means bear B does not not like itself, which is a double negative, meaning bear B likes itself]</p>
-<p><img src="../images/ycomb/ycomb3.png" /></p>
-<p>[and so on and so forth…]</p>
-<p><img src="../images/ycomb/ycomb4.png" /></p>
-<h3 id="end">End</h3>
-<p>I hope this helped elucidate your understanding of this fundamental paradox.<br />
-Next post will be short one showcasing the powerful Y-combinator which is closely related to this paradox.<br />
-<a href="../posts/2018-05-23-YParadox2.html">Part2 - YCombinator and Recursive functions</a></p>
+<p>When induction is done incorrectly meaning the Wizard misspoke and conjured up a different reality by accident.</p>
+<ul>
+<li>The Wizard is floating and tells us the ground doesn’t exist.
+<ul>
+<li>Worker will climb down infinitely</li>
+</ul></li>
+<li>The Wizard tells us we can only take the current step to a step downwards.
+<ul>
+<li>Worker looks down and sees NOTHING, BUT he looks upwards and sees steps upwards.
+<ul>
+<li>Reasoning: The only way to get to Worker’s position is by stepping downwards from a higher position. This means the only way for the Worker to move is upwards.</li>
+<li>Worker will climb up infinitely</li>
+</ul></li>
+</ul></li>
+</ul>
 
         </div>
         <div id="footer">

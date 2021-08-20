@@ -1,7 +1,9 @@
 ---
-title: 2021 Openwrt for Xiaomi mi ac2100
+title: 2021 Installing Openwrt
 tags: tech, openwrt, homeserver
 ---
+
+I will be install Openwrt on black cylindrical Xiaomi mi router ac2100.
 
 As of 2021, I've found the openwrt to be incorrect or outdated.
 This guide will tell you how to flash your xiaomi mi router ac2100 to a snapshot build then upgrade to a stable build.   

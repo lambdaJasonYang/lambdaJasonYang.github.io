@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Russell's Paradox, AST and Bears</title>
+        <title>Jason's Blog - Type Theory and should you care</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,63 +232,28 @@
         </div>
 
         <div id="content">
-            <h1>Russell's Paradox, AST and Bears</h1>
+            <h1>Type Theory and should you care</h1>
             
 
             <div class="info">
-    Posted on May  5, 2018
+    Posted on May 25, 2021
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
 </div>
-<h3 id="russells-paradox-with-sets">Russell’s paradox with Sets</h3>
-<p>Russell’s paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself. (Note everything in our current model is a set; even the elements of sets are sets) <span class="math display">\[ S = \{ x | x \notin x \} \tag{1}\]</span> Next we ask can S be an element of S?<br />
-[Assume S is element of itself] <span class="math display">\[S \in S \tag{2}\]</span><br />
-[This would imply by definition (1)] <span class="math display">\[S \notin S \tag{3}\]</span> [By contradiction (2) and (3)]<br />
-<span class="math display">\[S \notin S \tag{4}\]</span></p>
-<p>[but by the definition of (1) ]<br />
-<span class="math display">\[S \in S \tag{5}\]</span><br />
-…thus the whole process repeats infinitely<br />
-It is a paradox because there is no end to this proof ( we cannot conclude whether it is true or false )</p>
-<p>The resolution is to bound the universe so that S must be within a universe.</p>
-<h4 id="russells-paradoxal-set-s-as-an-ast">Russell’s paradoxal set S as an AST</h4>
-<p><img src="../images/ycomb/ycombinator.svg" /></p>
-<h3 id="analogy-and-abstracting-russells-paradox-with-bears">Analogy and Abstracting Russell’s paradox with bears</h3>
-<p>In set theory, the propositional function is elementhood. Elementhood takes two sets (lets call the universe that contain our sets of interest, <span class="math inline">\(SET\)</span>) and return a truth value. Also remember everything is a set.<br />
-We can think of our standard set theory as a pair that contains the universe and it’s associated function. <span class="math display">\[(SET,\in)\]</span></p>
-<p><span class="math display">\[ \in :: (SET,SET) \rightarrow bool \]</span></p>
-<p>Let’s design another theory <span class="math display">\[(BEAR, like)\]</span> with <span class="math inline">\(BEAR\)</span> being defined as the universe of bears.<br />
-<span class="math display">\[ like :: (BEAR,BEAR) \rightarrow bool \]</span></p>
-<p>Just like our initial set model, lets pretend everything in our universe is a bear and instead of set containing sets, we have bears liking bears.</p>
-<p>And with theory let’s design a paradox using groups of bears and “like”.</p>
-<ul>
-<li>Arbitrary bear y that likes bear B iff P(y,likes) is true</li>
-<li>Arbitrary set x are elements of set S iff P(x,<span class="math inline">\(\in\)</span>) is true
-<ul>
-<li>where P(x,action) stands for negation of action(x,x)</li>
-</ul></li>
-</ul>
-<p>Note the similarities between our Set theory and Bear theory.</p>
-<p>In other words,<br />
-any bear y must like bear B if and only if bear y does not like itself</p>
-<h3 id="ast-with-bears">AST with Bears</h3>
-<p>[Let us define bear B as this AST]</p>
-<p><img src="../images/ycomb/ycomb0.png" /></p>
-<p>[bear B likes itself]</p>
-<p><img src="../images/ycomb/ycomb1.png" /></p>
-<p>[therefore bear B does not like itself]</p>
-<p><img src="../images/ycomb/ycomb2.png" /></p>
-<p>[But this means bear B does not not like itself, which is a double negative, meaning bear B likes itself]</p>
-<p><img src="../images/ycomb/ycomb3.png" /></p>
-<p>[and so on and so forth…]</p>
-<p><img src="../images/ycomb/ycomb4.png" /></p>
-<h3 id="end">End</h3>
-<p>I hope this helped elucidate your understanding of this fundamental paradox.<br />
-Next post will be short one showcasing the powerful Y-combinator which is closely related to this paradox.<br />
-<a href="../posts/2018-05-23-YParadox2.html">Part2 - YCombinator and Recursive functions</a></p>
+<p>Behind all the hype with Machine learning (GPT-3, OpenAI) there is another contender that may rock your world, <strong>Dependent Type Theory</strong>!!</p>
+<h4 id="prediction">Prediction</h4>
+<p>New tech may allow us to “simply” design code that carries a proof of correctness using types and the compiler will automagically swap out our inefficient code with the most optimized version.<br />
+I say “simply” tongue in cheek because these proofs are actually really bulky in comparison to traditional mathematical proofs but it may change in the future with better designed tactics(proof writing functions).</p>
+<h4 id="present">Present</h4>
+<p>Many functional programming languages already implements some form of dependent type theory like Haskell, Coq or Lean or even templates in C++.<br />
+However they are more often than not unpractical in the real world (except Hakyll which this site is powered with).</p>
+<p>People can design proof of correctness in Haskell or C++ but I find that it does not actually help in solving problems but rather it shifts the problem towards the manipulation of types.</p>
+<h4 id="how-does-it-affect-you">How does it affect you?</h4>
+<p>Most likely it won’t if you aren’t a compiler designer or working in high fidelity/high security software that requires software verfication. Perhaps people will implement features of dependent type theory in newer languages like Rust but learning the theoretic underpinnings of type theory isn’t necessary to start programming with powerful dependent types.</p>
 
         </div>
         <div id="footer">
