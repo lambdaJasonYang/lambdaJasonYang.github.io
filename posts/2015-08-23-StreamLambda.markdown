@@ -5,11 +5,9 @@ tags: tech
 
 Stream<int> = (int, lambda: Stream<int>)  
 
-notice similarity to LinkedList  
+notice similarity to LinkedList:  
 LinkedList<int> = (int, LinkedList)
 
-The trick to implementing the data-type or class recursively is  
-converting the data-type into a function data-type using lambda.
 
 Analogy:  
 
