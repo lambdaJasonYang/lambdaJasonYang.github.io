@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Logging out of github with git bash</title>
+        <title>Jason's Blog - Gentzen</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,7 +232,7 @@
         </div>
 
         <div id="content">
-            <h1>Logging out of github with git bash</h1>
+            <h1>Gentzen</h1>
             
 
             <div class="info">
@@ -244,8 +244,25 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>
     
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">git</span> config --global  credential.usehttppath true</span></code></pre></div>
-<p>It will ask you to login with browser or use a personal access token. Personal access token can be created at Settings &gt;&gt; Developer Settings &gt;&gt; Personal Access tokens</p>
+<p><span class="math display">\[x \vDash y\]</span><br />
+x satisfies y<br />
+<span class="math inline">\(x :: Prop\)</span><br />
+<span class="math inline">\(\Gamma :: \{Prop\}\)</span><br />
+<span class="math inline">\(\Delta :: \{Prop\}\)</span><br />
+<span class="math inline">\(\Gamma \Delta\)</span> are the set of propositions in this universe.</p>
+<h2 id="gentzen-cut">Gentzen Cut</h2>
+<p>Gentzen Cut is simply a syntatic trick</p>
+<p><span class="math display">\[
+\frac{a \vDash b \ \ \ \ b \vDash c}{a \vDash c}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\Gamma , a \vDash b , \Delta \ \ \ \ \Gamma , b \vDash c , \Delta}{\Gamma , a \vDash  c , \Delta}
+\]</span></p>
+<p>Absorbing a into Gamma<br />
+Absorbing b into Delta<br />
+<span class="math display">\[
+\frac{\Gamma \vDash b , \Delta \ \ \ \ \Gamma , b \vDash \Delta}{\Gamma \vDash  \Delta}
+\]</span></p>
 
         </div>
         <div id="footer">

@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Simple Inductive proofs</title>
+        <title>Jason's Blog - Linear Logic</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,118 +232,19 @@
         </div>
 
         <div id="content">
-            <h1>Simple Inductive proofs</h1>
+            <h1>Linear Logic</h1>
             
 
             <div class="info">
-    Posted on March 20, 2019
+    Posted on August 23, 2015
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>
     
 </div>
-<p>AM-GM Theorem<br />
-<span class="math display">\[ (x_1 x_2 .. x_n)^{1/n} \leq \frac{x_1 + x_2 + .. x_n}{n} \]</span></p>
-<h3 id="upward-induction-step-1">Upward induction step 1</h3>
-<p>Base step: n = 1, obvious<br />
-Base step: n = 2, obvious</p>
-<p><span class="math inline">\((P(k) \rightarrow P(2k) )\)</span>:</p>
-<p>for <span class="math inline">\(k \geq 2\)</span> IH:<br />
-<span class="math display">\[(x_1 x_2 .. x_k)^{1/k} \leq \frac{x_1 + x_2 + .. x_k}{k}\]</span></p>
-<p>Prove P(2k) is true: <span class="math display">\[ (x_1 x_2 .. x_{2k})^{1/2k} \leq \frac{x_1 + x_2 + .. x_{2k} }{2k} \]</span></p>
-<p>Thoughts:</p>
-<ul>
-<li><strong>Shift complexity</strong> from LHS to RHS for IH
-<ul>
-<li>IH: <span class="math inline">\((x_1 x_2 .. x_k) \leq (\frac{x_1 + x_2 + .. x_k}{k})^{k}\)</span></li>
-<li>Goal: <span class="math inline">\((x_1 x_2 .. x_{2k}) \leq (\frac{x_1 + x_2 + .. x_{2k}}{2k})^{2k}\)</span></li>
-</ul></li>
-<li>Separate problem to <strong>Subproblem</strong> and <strong>Renaming</strong>
-<ul>
-<li>(1..2k) to (1..k) and (k+1 ..2k)</li>
-<li>Renaming
-<ul>
-<li><span class="math inline">\({}^{\times}A : (x_1 x_2 .. x_k)\)</span></li>
-<li><span class="math inline">\({}^{\times}B : (x_{k+1} x_{k+2} .. x_{2k})\)</span></li>
-<li>Goal: <span class="math inline">\({}^{\times}A \times {}^{\times}B \leq (\frac{{}^{+}A + {}^{+}B}{2k})^{2k}\)</span></li>
-</ul></li>
-</ul></li>
-<li><strong>Apply IH</strong> to the subproblems
-<ul>
-<li><span class="math inline">\({}^{\times}A \leq (\frac{{}^{+}A}{k})^{k}\)</span></li>
-<li><span class="math inline">\({}^{\times}B \leq (\frac{{}^{+}B}{k})^{k}\)</span></li>
-</ul></li>
-<li>Try to <strong>Build towards Goal</strong>(LHS of Goal) using IHs
-<ul>
-<li>Notice multiplying both IHs works
-<ul>
-<li><span class="math inline">\({}^{\times}A \times {}^{\times}B \leq (\frac{{}^{+}A}{k})^{k} (\frac{{}^{+}B}{k})^{k} = (\frac{{}^{+}A \times {}^{+}B}{k^2})^{k}\)</span></li>
-</ul></li>
-</ul></li>
-<li>New Goal: Show <span class="math inline">\((\frac{{}^{+}A \times {}^{+}B}{k^2})^{k} \leq (\frac{{}^{+}A + {}^{+}B}{2k})^{2k}\)</span></li>
-</ul>
-<p>Get stuck !! How do we show this inequality.</p>
-<p><strong>IMPORTANT TECHNIQUE - IH(2)</strong> meaning induction hypothesis with n=2.</p>
-<p>Observe <span class="math inline">\((\frac{\color{red}{{}^{+}A \times {}^{+}B}}{k^2})^{k}\)</span></p>
-<ul>
-<li>IH(2): <span class="math inline">\(\color{red}{{}^{+}A \times {}^{+}B \leq (\frac{{}^{+}A \times {}^{+}B}{2})^{2}}\)</span></li>
-</ul>
-<p><span class="math inline">\((\frac{\color{red}{{}^{+}A \times {}^{+}B}}{k^2})^{k} \leq (\frac{1}{k^2})({\color{red}{(\frac{{}^{+}A \times {}^{+}B}{2})^{2}}})^{k} = (\frac{{}^{+}A + {}^{+}B}{2k})^{2k}\)</span></p>
-<p>QED: <span class="math inline">\((\frac{{}^{+}A \times {}^{+}B}{k^2})^{k} \leq (\frac{{}^{+}A + {}^{+}B}{2k})^{2k}\)</span></p>
-<p>Thoughts: Don’t fall in to the trap of believing IH should only be used with obvious cases like n-1, n/2<br />
-IH(2) is the crux of this proof.</p>
-<h3 id="downward-induction-step-2">Downward induction step 2</h3>
-<p><span class="math inline">\((P(k) \rightarrow P(k-1) )\)</span>:<br />
-After shifting complexity LHS to RHS:</p>
-<p><strong>IMPORTANT</strong> WRITE OUT <span class="math inline">\(x_{n-1}\)</span> instead of just abstracting it into the ellipse.If not you will hit a roadblock when using IH.<br />
-<span class="math inline">\(x_1 + x_2 + .. x_{n}\)</span> is BAD.<br />
-<span class="math inline">\(x_1 + x_2 + ..+x_{n-1}+x_{n}\)</span> is GOOD.</p>
-<p>IH: <span class="math display">\[ (x_1 x_2 ..x_{n-1} x_n) \leq (\frac{x_1 + x_2 + .. x_{n-1} + x_n}{n})^{n} \]</span></p>
-<p>Goal: <span class="math display">\[ (x_1 x_2 .. x_{n-1}) \leq (\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1} \]</span></p>
-<ul>
-<li>Find starting point:
-<ul>
-<li><span class="math inline">\((x_1 x_2 .. x_{n-1})\)</span></li>
-</ul></li>
-<li>Notice similarity of IH LHS <span class="math inline">\((x_1 x_2 ..x_{n-1} x_n)\)</span> with starting point
-<ul>
-<li>We can FREELY add one more variable/expression <span class="math inline">\(\framebox{}\)</span> to starting point so we can use IH. How do we Choose?</li>
-</ul></li>
-</ul>
-<p>Choosing an expression will gives us this IH: <span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \tag{1}\]</span></p>
-<p>Relating IH back to the Goal.<br />
-<span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{2}\]</span></p>
-<p>Combined (1) and (2): <span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n}\leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{3}\]</span></p>
-<p>New Goal by r:<br />
-<span class="math display">\[ (x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\framebox{}})(\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \leq (\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{4}\]</span></p>
-<p>Thoughts:</p>
-<ul>
-<li><strong>Find syntatic similarity</strong> of the three expression in goal.
-<ul>
-<li><span class="math inline">\(x_1 + x_2 + .. x_{n-1}\)</span></li>
-</ul></li>
-<li>Renaming
-<ul>
-<li><span class="math inline">\(A = x_1 + x_2 + .. x_{n-1}\)</span></li>
-</ul></li>
-</ul>
-<p>Renamed Goal: <span class="math display">\[ (x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\framebox{}})(\frac{A + \framebox{}}{n})^{n} \leq (\frac{A}{n-1})^{n-1}\]</span></p>
-<p>Try: <span class="math inline">\(\framebox{} = \frac{A}{n-1}\)</span></p>
-<ul>
-<li>Backenvelop calculations to see where this could go:
-<ul>
-<li><span class="math inline">\(\frac{A + \framebox{}}{n} =\frac{A+\frac{A}{n-1}}{n} = \frac{\frac{An-A+A}{n-1}}{n}=\frac{A}{n-1}\)</span></li>
-<li>Looks good</li>
-</ul></li>
-</ul>
-<p>Solving Goal:</p>
-<p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\frac{A}{n-1}})(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
-<p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{-1}(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
-<p>QED: <span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{n-1}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
-<h3 id="step-3-combining-results-from-upwards-and-downward-induction">Step 3 Combining results from Upwards and Downward induction</h3>
-<p>We have a full inductive proof.</p>
+
 
         </div>
         <div id="footer">
