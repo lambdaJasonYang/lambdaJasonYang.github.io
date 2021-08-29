@@ -4,3 +4,112 @@ tags: tech
 ---
 
 
+
+
+```plantuml
+@startuml
+Alice->Bob : I am us ing hex
+@enduml
+```
+<!-- ![](http://www.plantuml.com/plantuml/svg/SoWkIImgAStDuKfCBialKaZEoKpDA-7Aoqz9LKWiA80maXEB88oIuepCeX8kBg20WguTM04G0vamVH0AA01LEgHC7JLrrDHHKnrIyrA0vG40) -->
+
+```plantuml
+@startuml
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt
+actor client
+node app
+node car
+node tshirt
+
+car -> app
+app -> client
+client -> tshirt    
+@enduml
+```

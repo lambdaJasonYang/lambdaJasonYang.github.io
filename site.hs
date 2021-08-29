@@ -3,12 +3,32 @@
 import           Data.Monoid (mappend)
 import           Hakyll
 import qualified GHC.IO.Encoding as E
+import Text.Pandoc.Definition
+    ( Block(RawBlock, CodeBlock), Format(Format), Pandoc )
+import Text.Pandoc.Options
+    ( extensionsFromList,
+      Extension(Ext_inline_code_attributes, Ext_tex_math_dollars,
+                Ext_tex_math_double_backslash, Ext_latex_macros),
+      Extensions,
+      HTMLMathMethod(MathJax),
+      ReaderOptions(readerExtensions),
+      WriterOptions(writerHTMLMathMethod) )
 
-import           Text.Pandoc.Options
 import Hakyll.Web.Tags (renderTagCloud)
+import qualified Data.ByteString.Char8 as C
+--import qualified Data.ByteString as B
+import Data.ByteString.Base16 (encode, decode)
+
+import           Text.Pandoc.Walk
+import qualified Data.Text as T
+import GHC.IO.Handle.Types (BufferMode(BlockBuffering))
+
+import Numeric (showHex)
+import Data.Char (ord)
 
 
-
+--------------
+--------------
 --------------------------------------------------------------------------------
 --Setup Mathjax on Hakyll
 --Step 0: Add "pandoc, containers" under build-depends in stack.yaml   
@@ -35,11 +55,49 @@ writeMathjaxOptions = defaultHakyllWriterOptions
                 }
 --Step 4: Build the compiler using the ReaderOption and Writer Option from Step 2, 3.
 mathJaxAddedCompiler :: Compiler (Item String)
-mathJaxAddedCompiler = pandocCompilerWith readMathjaxOptions writeMathjaxOptions
+mathJaxAddedCompiler = pandocCompilerWithTransform readMathjaxOptions writeMathjaxOptions addToCodeBlock
 --Step 5: Replace the line "compile $ pandocCompiler" under "match "posts/*" $ do" with 
 --"compiler $ mathJaxAddedCompiler"
 --------------------------------------------------------------------------------
 
+--------------------------------------------- PLANT UML pandoc filter
+
+strToASCII :: [Char] -> [Int]
+--strToASCII xs = fmap ord ( filter (\x -> not $ isSpace x) xs )
+strToASCII xs = fmap ord xs
+asciiToHex :: [Int] -> [String]
+asciiToHex xs = fmap (\x -> showHex x "") xs
+
+
+plantUMLhex :: [Char] -> String 
+plantUMLhex xs = (concat.  asciiToHex  . strToASCII) xs
+
+
+-- replaceLF replaces markdown doublespace newlines hex with plantUML compatible newline hex
+replaceLF :: T.Text -> T.Text 
+replaceLF xs =  (T.replace "20200" "0a") xs
+
+
+hexCode :: T.Text -> T.Text 
+hexCode y = (replaceLF (T.pack ( plantUMLhex (T.unpack y))))
+
+mhexCode :: T.Text -> String
+mhexCode y = tail $ init ( show ( encode $ C.pack $ T.unpack y ))
+
+planthtml :: T.Text -> T.Text 
+--planthtml y = T.pack ("<figure><img src='http://www.plantuml.com/plantuml/svg/~h" <> (T.unpack $ hexCode y) <>"'></figure>") 
+planthtml y = T.pack ("<figure><img src='http://www.plantuml.com/plantuml/svg/~h" <> (mhexCode $ y) <>"'></figure>") 
+
+--Pandoc filtering, 
+addToCodeBlock :: Pandoc -> Pandoc 
+addToCodeBlock  = walk ftranslate 
+  where ftranslate :: Block -> Block
+        ftranslate (CodeBlock ("",["plantuml"],[]) txt ) = RawBlock (Format "html") (planthtml txt)
+        ftranslate x = x 
+
+                
+
+----------------------------------------------
 config :: Configuration
 config = defaultConfiguration
   { destinationDirectory = "docs"
