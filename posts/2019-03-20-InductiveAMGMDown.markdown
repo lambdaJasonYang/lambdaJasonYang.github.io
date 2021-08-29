@@ -1,5 +1,5 @@
 ---
-title: Simple Inductive proofs
+title: Proof Downward Induction AM-GM
 tags: mathcs
 ---
 

@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Adding Mathjax to Hakyll in 2021</title>
+        <title>Jason's Blog - Integrate PlantUML diagrams into Hakyll (Updated)</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,11 +232,11 @@
         </div>
 
         <div id="content">
-            <h1>Adding Mathjax to Hakyll in 2021</h1>
+            <h1>Integrate PlantUML diagrams into Hakyll (Updated)</h1>
             
 
             <div class="info">
-    Posted on August 23, 2021
+    Posted on August 24, 2021
     
 </div>
 <div class="info">
@@ -244,80 +244,92 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>
     
 </div>
-<h3 id="add-mathjax-js-to-head-in-templatesdefault.html">Add mathjax js to &lt;head&gt; in /templates/default.html</h3>
-<p>Insert line 3,4,5</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource html numberLines"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">&lt;head&gt;</span>...</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">&lt;script</span><span class="ot"> id=</span><span class="st">&quot;MathJax-script&quot;</span><span class="ot"> async</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="ot">    src=</span><span class="st">&quot;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">&lt;/script&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>...<span class="kw">&lt;/head&gt;</span></span></code></pre></div>
-<h3 id="modify-myblog.cabal">Modify myblog.cabal</h3>
-<p>Note For you it is named _site.cabal or what you named your hakyll project.</p>
-<p>Add “pandoc, containers” under build-depends in myblog.cabal</p>
-<p>Insert line 7,8</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sh numberLines"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">executable</span> myblog</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="ex">...</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="ex">...</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="ex">build-depends</span>:       </span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="ex">base</span> <span class="op">&gt;</span>= 4.7 <span class="kw">&amp;&amp;</span> <span class="op">&lt;</span> <span class="ex">5</span>,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="ex">hakyll</span>,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="ex">pandoc</span>,</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="ex">containers</span>   </span></code></pre></div>
-<h3 id="setup-functions-in-site.hs">Setup functions in site.hs</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>   </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="co">--Step 0: Add &quot;import Text.Pandoc.Options&quot; in site.hs</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Text.Pandoc.Options</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="op">--..</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="co">--Step 1: Get the mathjax Extensions that recognizes single $ in our pandocs</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="ot">mathjaxExtensions ::</span> <span class="dt">Extensions</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>mathjaxExtensions <span class="ot">=</span> extensionsFromList </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>                    [<span class="dt">Ext_tex_math_dollars</span> <span class="co">--  $...$ or $$...$$</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>                    ,<span class="dt">Ext_tex_math_double_backslash</span> <span class="co">--  \(...\) or \[...\]</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>                    ,<span class="dt">Ext_latex_macros</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>                    ,<span class="dt">Ext_inline_code_attributes</span> </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>                    ]</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a><span class="co">--Step 2: Setup ReaderOptions using the Extensions from Step 1</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a><span class="ot">readMathjaxOptions ::</span> <span class="dt">ReaderOptions</span> </span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a>readMathjaxOptions <span class="ot">=</span> defaultHakyllReaderOptions</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true"></a>                {</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true"></a>                    readerExtensions <span class="ot">=</span> (readerExtensions defaultHakyllReaderOptions) <span class="op">&lt;&gt;</span> mathjaxExtensions</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true"></a>                }</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true"></a><span class="co">--Step 3: Setup WriterOptions</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true"></a><span class="ot">writeMathjaxOptions ::</span> <span class="dt">WriterOptions</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true"></a>writeMathjaxOptions <span class="ot">=</span> defaultHakyllWriterOptions </span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true"></a>                {</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true"></a>                    writerHTMLMathMethod <span class="ot">=</span> <span class="dt">MathJax</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true"></a>                }</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true"></a><span class="co">--Step 4: Build the compiler using the ReaderOption and Writer Option from Step 2, 3.</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true"></a><span class="ot">mathJaxAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true"></a>mathJaxAddedCompiler <span class="ot">=</span> pandocCompilerWith readMathjaxOptions writeMathjaxOptions</span></code></pre></div>
-<h3 id="modifying-compiler-in-site.hs">Modifying compiler in site.hs</h3>
-<p>Replace the line <code class="sourceCode haskell">compile <span class="op">$</span> pandocCompiler</code> with<br />
-<code class="sourceCode haskell">compiler <span class="op">$</span> mathJaxAddedCompiler</code><br />
-As shown in line 8</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource haskell numberLines"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">...</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
-<span id="cb4-3"><a href="#cb4-3"></a>main <span class="ot">=</span> <span class="kw">do</span>    </span>
-<span id="cb4-4"><a href="#cb4-4"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>        <span class="op">...</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>        match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>            route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>            compile <span class="op">$</span> mathJaxAddedCompiler</span>
-<span id="cb4-9"><a href="#cb4-9"></a>               <span class="op">...</span></span></code></pre></div>
-<p>remember to call</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="ex">stack</span> build</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog rebuild</span></code></pre></div>
-<p>to rebuild your site.hs<br />
-replace “myblog” with the name of your hakyll project</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>After doing all this you should be able to simply write your latex using</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>$$ x \in Set $$</span></code></pre></div>
-<p><span class="math display">\[ x \in Set \]</span></p>
-<h4 id="aside">Aside</h4>
-<p>You can just do the first part(add mathjax js to &lt;head&gt;) for a working mathjax BUT then you would have to escape characters frequently and this would make it unportable to other editors.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">\\</span>[ x <span class="fu">\\</span>in Set <span class="fu">\\</span>]</span></code></pre></div>
+<h3 id="plant-uml-hex-image-link">Plant UML hex image link</h3>
+<p>Plant UML allows us to draw UML diagram using simple code.</p>
+<p>Our goal is to allow us to write code in our pandocs markdown files in hakyll that will automatically generate the UML.<br />
+How it works is PlantUML has a server that can convert links to image urls.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">http</span>://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f62203a204920616d207573696e67206865780a40656e64756d6c</span></code></pre></div>
+<ol type="1">
+<li>Converts code into ASCII decimal</li>
+<li>Converts ASCII decimal into hex</li>
+<li>Hex is part of URL of planttext which will generate our image</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.ByteString.Char8</span> <span class="kw">as</span> <span class="dt">C</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Data.ByteString.Base16</span> (encode, decode)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ot">mhexCode ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">String</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>mhexCode y <span class="ot">=</span> <span class="fu">tail</span> <span class="op">$</span> <span class="fu">init</span> ( <span class="fu">show</span> ( encode <span class="op">$</span> C.pack <span class="op">$</span> T.unpack y ))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="ot">planthtml ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>planthtml y <span class="ot">=</span> T.pack (<span class="st">&quot;&lt;figure&gt;&lt;img src='http://www.plantuml.com/plantuml/svg/~h&quot;</span> <span class="op">&lt;&gt;</span> (mhexCode <span class="op">$</span> y) <span class="op">&lt;&gt;</span><span class="st">&quot;'&gt;&lt;/figure&gt;&quot;</span>) </span></code></pre></div>
+<p>Above is our helper functions that will be used to generate the hex of our code.</p>
+<p>example:<br />
+INPUT Markdown codeblock content : <code class="sourceCode bash"><span class="ex">@startuml</span></code></p>
+<ol type="1">
+<li><code class="sourceCode haskell">encode</code> - Convert <code class="sourceCode bash"><span class="ex">@startuml</span></code> to “407374617274756D6C”</li>
+<li>intermediate hex result: “407374617274756D6C”</li>
+<li><code class="sourceCode haskell">planthtml</code> - Use hex result to create a ‘http://www.plantuml.com…’ img src DOM string.</li>
+</ol>
+<p>Notice in the plantuml image link above http://www.plantuml.com/plantuml/svg/~h407374617274756d6c…<br />
+the string after “~h” begins with “407374617274756D6C” which is our result.</p>
+<h3 id="pandocs-filtering">Pandocs filtering</h3>
+<p>Now we need to modify site.hs so that Hakyll will transform a PlantUML code block into a html img that links to the Planttext generated image.<br />
+We can do this with Hakyll’s Pandocs Filtering.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="co">--Pandoc filtering, </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>addToCodeBlock  <span class="ot">=</span> walk ftranslate </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>  <span class="kw">where</span><span class="ot"> ftranslate ::</span> <span class="dt">Block</span> <span class="ot">-&gt;</span> <span class="dt">Block</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>        ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[]) txt ) <span class="ot">=</span> <span class="dt">RawBlock</span> (<span class="dt">Format</span> <span class="st">&quot;html&quot;</span>) (planthtml txt)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>        ftranslate x <span class="ot">=</span> x </span></code></pre></div>
+<p><code class="sourceCode haskell">ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[]) txt )</code> pattern matches CodeBlock objects in pandoc and finds “plantuml” annotations denoted by the Attr object <code class="sourceCode haskell">(<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[])</code><br />
+The Content of our CodeBlock is pattern matched as <code class="sourceCode haskell">txt</code>.</p>
+<p>After pattern matching it converts it into a raw html block, and applies our “Code to Img DOM” transformation function <code class="sourceCode haskell">planthtml</code> on the content.</p>
+<p>INPUT Markdown codeblock :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="st">'''plantuml</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="st">@startuml  </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="st">Alice-&gt;Bob : I am using hex  </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="st">@enduml</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="st">'''</span></span></code></pre></div>
+<p>Output DOM element :</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f62203a204920616d207573696e67206865780a40656e64756d6c"></figure>
+<h3 id="full-code">Full Code</h3>
+<p>add under “build-depends” in your .cabal file</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="ex">pandoc</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="ex">pandoc-types</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="ex">text</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="ex">base16-bytestring</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="ex">bytestring</span>,  </span></code></pre></div>
+<p>Add to your site.hs</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc.Definition</span>  </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc.Walk</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="kw">import</span>           <span class="dt">Data.Text</span>  </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.ByteString.Char8</span> <span class="kw">as</span> <span class="dt">C</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Data.ByteString.Base16</span> (encode, decode)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="ot">mhexCode ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">String</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>mhexCode y <span class="ot">=</span> <span class="fu">tail</span> <span class="op">$</span> <span class="fu">init</span> ( <span class="fu">show</span> ( encode <span class="op">$</span> C.pack <span class="op">$</span> T.unpack y ))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a><span class="ot">planthtml ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>planthtml y <span class="ot">=</span> T.pack (<span class="st">&quot;&lt;figure&gt;&lt;img src='http://www.plantuml.com/plantuml/svg/~h&quot;</span> <span class="op">&lt;&gt;</span> (mhexCode <span class="op">$</span> y) <span class="op">&lt;&gt;</span><span class="st">&quot;'&gt;&lt;/figure&gt;&quot;</span>) </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a><span class="co">--Pandoc filtering, </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a>addToCodeBlock  <span class="ot">=</span> walk ftranslate </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a>  <span class="kw">where</span><span class="ot"> ftranslate ::</span> <span class="dt">Block</span> <span class="ot">-&gt;</span> <span class="dt">Block</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a>        ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[]) txt ) <span class="ot">=</span> <span class="dt">RawBlock</span> (<span class="dt">Format</span> <span class="st">&quot;html&quot;</span>) (planthtml txt)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a>        ftranslate x <span class="ot">=</span> x </span></code></pre></div>
+<ul>
+<li>If you’ve followed my mathjax hakyll tutorial, simply add the code below:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="ot">mathJaxAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>mathJaxAddedCompiler <span class="ot">=</span> pandocCompilerWithTransform readMathjaxOptions writeMathjaxOptions addToCodeBlock</span></code></pre></div>
+<ul>
+<li>If you didn’t follow my mathjax hakyll tutorial, then add the code below:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="ot">simpleCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>simpleCompiler <span class="ot">=</span> pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock</span></code></pre></div>
 
         </div>
         <div id="footer">

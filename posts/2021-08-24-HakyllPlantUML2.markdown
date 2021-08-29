@@ -1,5 +1,5 @@
 ---
-title: Integrate PlantUML diagrams into Hakyll
+title: Integrate PlantUML diagrams into Hakyll (Updated)
 tags: tech
 ---
 ### Plant UML hex image link
@@ -18,45 +18,31 @@ http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f622
 2. Converts ASCII decimal into hex
 3. Hex is part of URL of planttext which will generate our image 
 
+```haskell
+import qualified Data.ByteString.Char8 as C
+import Data.ByteString.Base16 (encode, decode)
+import qualified Data.Text as T
+```
 
 ``` haskell
-strToASCII :: [Char] -> [Int]
-strToASCII xs = fmap ord xs
-
-asciiToHex :: [Int] -> [String]
-asciiToHex xs = fmap (\x -> showHex x "") xs
-
-plantUMLhex :: [Char] -> String 
-plantUMLhex xs = (concat.  asciiToHex  . strToASCII) xs
-
--- replaceLF replaces markdown doublespace newlines hex with plantUML compatible newline hex
-replaceLF :: T.Text -> T.Text 
-replaceLF xs =  (T.replace "20200" "0a") xs
-
-hexCode :: T.Text -> T.Text 
-hexCode y = (replaceLF (T.pack ( plantUMLhex (T.unpack y))))
+mhexCode :: T.Text -> String
+mhexCode y = tail $ init ( show ( encode $ C.pack $ T.unpack y ))
 
 planthtml :: T.Text -> T.Text 
-planthtml y = T.pack ("<figure><img src='http://www.plantuml.com/plantuml/svg/~h" <> (T.unpack $ hexCode y) <>"'></figure>") 
+planthtml y = T.pack ("<figure><img src='http://www.plantuml.com/plantuml/svg/~h" <> (mhexCode $ y) <>"'></figure>") 
+
 ```
 Above is our helper functions that will be used to generate the hex of our code.
 
 example:  
 INPUT Markdown codeblock content :  `@startuml`{.bash}  
 
-1. `strToASCII`{.haskell} - Convert `@startuml`{.bash} to \[64,115,116,97,114,116,117,109,108\]
-2. `asciiToHex`{.haskell} - Convert ASCII decimal encoding with \[40,73,74,61,72,74,75,6D,6C\]
-3. `concat`{.haskell} - \[40,73,74,61,72,74,75,6D,6C\] to  "407374617274756D6C"
-4. `replaceLF`{.haskell} - replace "20200" substrings with "0a", in this case there are none.
-5. intermediate hex result: "407374617274756D6C"
-6. `planthtml`{.haskell} - Use hex result to create a 'http://www.plantuml.com...' img src DOM string.
+1. `encode`{.haskell} - Convert `@startuml`{.bash} to "407374617274756D6C"
+2. intermediate hex result: "407374617274756D6C"
+3. `planthtml`{.haskell} - Use hex result to create a 'http://www.plantuml.com...' img src DOM string.
 
 Notice in the plantuml image link above http://www.plantuml.com/plantuml/svg/~h407374617274756d6c...    
 the string after "~h" begins with "407374617274756D6C" which is our result.
-
-
-replaceLF is neccessary because the LineFeed of our Pandocs doesn't match PlantUML server's LineFeed. Therefore we design a function that replaces our LineFeed hex with a suitable hex.
-This means in your markdown file you must add double space at the end of a line for a new line.
 
 
 ### Pandocs filtering
@@ -97,13 +83,15 @@ Alice->Bob : I am using hex
 @enduml
 ```
 
-### full code
+### Full Code
 
-add to your cabal file
+add under "build-depends" in your .cabal file
 ```bash
 pandoc,
 pandoc-types,
-text  
+text,
+base16-bytestring,
+bytestring,  
 ```
 
 Add to your site.hs
@@ -113,29 +101,17 @@ import           Text.Pandoc.Definition
 import           Text.Pandoc.Walk
 import           Data.Text  
 
-import Numeric (showHex)
-import Data.Char (ord)
+import qualified Data.ByteString.Char8 as C
+import Data.ByteString.Base16 (encode, decode)
+import qualified Data.Text as T
 ```
 
 ``` haskell
-strToASCII :: [Char] -> [Int]
-strToASCII xs = fmap ord xs
-
-asciiToHex :: [Int] -> [String]
-asciiToHex xs = fmap (\x -> showHex x "") xs
-
-plantUMLhex :: [Char] -> String 
-plantUMLhex xs = (concat.  asciiToHex . strToASCII) xs
-
--- replaceLF replaces markdown doublespace newlines hex with plantUML compatible newline hex
-replaceLF :: T.Text -> T.Text 
-replaceLF xs =  (T.replace "20200" "0a") xs
-
-hexCode :: T.Text -> T.Text 
-hexCode y = (replaceLF (T.pack ( plantUMLhex (T.unpack y))))
+mhexCode :: T.Text -> String
+mhexCode y = tail $ init ( show ( encode $ C.pack $ T.unpack y ))
 
 planthtml :: T.Text -> T.Text 
-planthtml y = T.pack ("<figure><img src='http://www.plantuml.com/plantuml/svg/~h" <> (T.unpack $ hexCode y) <>"'></figure>") 
+planthtml y = T.pack ("<figure><img src='http://www.plantuml.com/plantuml/svg/~h" <> (mhexCode $ y) <>"'></figure>") 
 
 --Pandoc filtering, 
 addToCodeBlock :: Pandoc -> Pandoc 

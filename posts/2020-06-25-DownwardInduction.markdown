@@ -25,9 +25,8 @@ Implement the identity function $id$:
 
 #### Overview
 
-input: n  
 Find the least power of 2 greater than input n.  
-Then 
+
 
 #### Downward induction using dynamic programming
 

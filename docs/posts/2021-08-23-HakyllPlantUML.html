@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Integrate PlantUML diagrams into Hakyll</title>
+        <title>Jason's Blog - Integrate PlantUML diagrams into Hakyll (Old)</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,7 +232,7 @@
         </div>
 
         <div id="content">
-            <h1>Integrate PlantUML diagrams into Hakyll</h1>
+            <h1>Integrate PlantUML diagrams into Hakyll (Old)</h1>
             
 
             <div class="info">
@@ -285,7 +285,7 @@ INPUT Markdown codeblock content : <code class="sourceCode bash"><span class="ex
 </ol>
 <p>Notice in the plantuml image link above http://www.plantuml.com/plantuml/svg/~h407374617274756d6c…<br />
 the string after “~h” begins with “407374617274756D6C” which is our result.</p>
-<p>replaceLF is neccessary because the LineFeed of our Pandocs doesn’t match PlantUML server’s LineFeed. Therefore we design a function that replaces our LineFeed hex with a suitable hex. This means in your markdown file you must add double space at the end of a line for a new line.</p>
+<p>replaceLF is neccessary because the LineFeed of our Pandocs doesn’t match PlantUML server’s LineFeed. Therefore we design a function that replaces our LineFeed hex with a suitable hex. This means in your markdown file you must add double space at the end of a line for a new line. NOTE: Updated post fixes this problem <a href="2021-08-24-HakyllPlantUML2.markdown">Integrate PlantUML diagrams into Hakyll (Updated)</a></p>
 <h3 id="pandocs-filtering">Pandocs filtering</h3>
 <p>Now we need to modify site.hs so that Hakyll will transform a PlantUML code block into a html img that links to the Planttext generated image.<br />
 We can do this with Hakyll’s Pandocs Filtering.</p>
@@ -307,8 +307,8 @@ The Content of our CodeBlock is pattern matched as <code class="sourceCode haske
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="st">'''</span></span></code></pre></div>
 <p>Output DOM element :</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f62203a204920616d207573696e67206865780a40656e64756d6c"></figure>
-<h3 id="full-code">full code</h3>
-<p>add to your cabal file</p>
+<h3 id="full-code">Full Code</h3>
+<p>add under “build-depends” in your .cabal file</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="ex">pandoc</span>,</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="ex">pandoc-types</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="ex">text</span>  </span></code></pre></div>

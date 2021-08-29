@@ -16,7 +16,6 @@ import Text.Pandoc.Options
 
 import Hakyll.Web.Tags (renderTagCloud)
 import qualified Data.ByteString.Char8 as C
---import qualified Data.ByteString as B
 import Data.ByteString.Base16 (encode, decode)
 
 import           Text.Pandoc.Walk
@@ -62,24 +61,24 @@ mathJaxAddedCompiler = pandocCompilerWithTransform readMathjaxOptions writeMathj
 
 --------------------------------------------- PLANT UML pandoc filter
 
-strToASCII :: [Char] -> [Int]
---strToASCII xs = fmap ord ( filter (\x -> not $ isSpace x) xs )
-strToASCII xs = fmap ord xs
-asciiToHex :: [Int] -> [String]
-asciiToHex xs = fmap (\x -> showHex x "") xs
+-- strToASCII :: [Char] -> [Int]
+-- --strToASCII xs = fmap ord ( filter (\x -> not $ isSpace x) xs )
+-- strToASCII xs = fmap ord xs
+-- asciiToHex :: [Int] -> [String]
+-- asciiToHex xs = fmap (\x -> showHex x "") xs
 
 
-plantUMLhex :: [Char] -> String 
-plantUMLhex xs = (concat.  asciiToHex  . strToASCII) xs
+-- plantUMLhex :: [Char] -> String 
+-- plantUMLhex xs = (concat.  asciiToHex  . strToASCII) xs
 
 
--- replaceLF replaces markdown doublespace newlines hex with plantUML compatible newline hex
-replaceLF :: T.Text -> T.Text 
-replaceLF xs =  (T.replace "20200" "0a") xs
+-- -- replaceLF replaces markdown doublespace newlines hex with plantUML compatible newline hex
+-- replaceLF :: T.Text -> T.Text 
+-- replaceLF xs =  (T.replace "20200" "0a") xs
 
 
-hexCode :: T.Text -> T.Text 
-hexCode y = (replaceLF (T.pack ( plantUMLhex (T.unpack y))))
+-- hexCode :: T.Text -> T.Text 
+-- hexCode y = (replaceLF (T.pack ( plantUMLhex (T.unpack y))))
 
 mhexCode :: T.Text -> String
 mhexCode y = tail $ init ( show ( encode $ C.pack $ T.unpack y ))
