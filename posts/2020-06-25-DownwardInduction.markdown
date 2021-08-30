@@ -1,6 +1,6 @@
 ---
 title: Proof technique Downward Induction
-tags: mathcs, math, cs
+tags: mathcs
 ---
 
 ### Analogy

@@ -1,6 +1,6 @@
 ---
 title: Updating Hakyll posts
-tags: tech
+tags: tech, HakyllSetupSeries
 ---
 
 ### How does Hakyll site.hs work?  

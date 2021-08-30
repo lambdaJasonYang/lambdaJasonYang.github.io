@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Integrate PlantUML diagrams into Hakyll (Old)</title>
+        <title>Jason's Blog - 2021 Installing Openwrt</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,129 +232,63 @@
         </div>
 
         <div id="content">
-            <h1>Integrate PlantUML diagrams into Hakyll (Old)</h1>
+            <h1>2021 Installing Openwrt</h1>
             
 
             <div class="info">
-    Posted on August 23, 2021
+    Posted on May 22, 2021
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'HakyllSetupSeries'." href="../tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'openwrt'." href="../tags/openwrt.html">openwrt</a>, <a title="All pages tagged 'homeserver'." href="../tags/homeserver.html">homeserver</a>
     
 </div>
-<p>** Go here <a href="2021-08-24-HakyllPlantUML2.html">Integrate PlantUML diagrams into Hakyll (Updated)</a> that uses Hakyll libraries rather than my reinvent-the-wheel-bad implementations**</p>
-<h3 id="plant-uml-hex-image-link">Plant UML hex image link</h3>
-<p>Plant UML allows us to draw UML diagram using simple code.</p>
-<p>Our goal is to allow us to write code in our pandocs markdown files in hakyll that will automatically generate the UML.<br />
-How it works is PlantUML has a server that can convert links to image urls.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">http</span>://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f62203a204920616d207573696e67206865780a40656e64756d6c</span></code></pre></div>
+<p>I will be install Openwrt on black cylindrical Xiaomi mi router ac2100.</p>
+<p>As of 2021, I’ve found the openwrt to be incorrect or outdated. This guide will tell you how to flash your xiaomi mi router ac2100 to a snapshot build then upgrade to a stable build.</p>
+<p>Why not just flash directly to a stable build? Simply because I followed the Openwrt wiki then realized it was outdated and needed to update the firmware so I have no idea if upgrading directly could introduce some unforeseen issues as I have not tried it.</p>
+<p>For xiaomi mi ac2100 downgrading the firmware First if you have brand new mi router, you need to connect it to the internet and create a password and set up SSID. Do not just connect to the default passwordless SSID that comes right out of the box because it will not work, I tried it.</p>
+<p>Once you set up your ssid login to the router panel by going to http://192.168.31.1 The Url should show http://192.168.31.1/cgi-bin/luci/;stok=&lt;STOK&gt;/web/home#router example</p>
+<p>For each of the below, replace &lt;STOK&gt; with your STOK After each command you should see a page that display “Code: 0”</p>
 <ol type="1">
-<li>Converts code into ASCII decimal</li>
-<li>Converts ASCII decimal into hex</li>
-<li>Hex is part of URL of planttext which will generate our image</li>
+<li>http://192.168.31.1/cgi-bin/luci/;stok=&lt;STOK&gt;/api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3Bnvram%20set%20ssh%5Fen%3D1%3B%20nvram%20commit%3B</li>
+<li>http://192.168.31.1/cgi-bin/luci/;stok=&lt;STOK&gt;/api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3Bsed%20-i%20’s/channel=.*/channel=%5C%22debug%5C%22/g’%20/etc/init.d/dropbear%3B</li>
+<li>http://192.168.31.1/cgi-bin/luci/;stok=<STOK>/api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3B/etc/init.d/dropbear%20start%3B</li>
+<li>http://192.168.31.1/cgi-bin/luci/;stok=<STOK>/api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3B%20echo%20-e%20’admin%5Cnadmin’ %20%7C%20passwd%20root%3B</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ot">strToASCII ::</span> [<span class="dt">Char</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>strToASCII xs <span class="ot">=</span> <span class="fu">fmap</span> <span class="fu">ord</span> xs</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="ot">asciiToHex ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">String</span>]</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>asciiToHex xs <span class="ot">=</span> <span class="fu">fmap</span> (\x <span class="ot">-&gt;</span> showHex x <span class="st">&quot;&quot;</span>) xs</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="ot">plantUMLhex ::</span> [<span class="dt">Char</span>] <span class="ot">-&gt;</span> <span class="dt">String</span> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>plantUMLhex xs <span class="ot">=</span> (<span class="fu">concat</span><span class="op">.</span>  asciiToHex  <span class="op">.</span> strToASCII) xs</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">-- replaceLF replaces markdown doublespace newlines hex with plantUML compatible newline hex</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="ot">replaceLF ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span> </span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>replaceLF xs <span class="ot">=</span>  (T.replace <span class="st">&quot;20200&quot;</span> <span class="st">&quot;0a&quot;</span>) xs</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="ot">hexCode ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span> </span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>hexCode y <span class="ot">=</span> (replaceLF (T.pack ( plantUMLhex (T.unpack y))))</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a><span class="ot">planthtml ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span> </span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>planthtml y <span class="ot">=</span> T.pack (<span class="st">&quot;&lt;figure&gt;&lt;img src='http://www.plantuml.com/plantuml/svg/~h&quot;</span> <span class="op">&lt;&gt;</span> (T.unpack <span class="op">$</span> hexCode y) <span class="op">&lt;&gt;</span><span class="st">&quot;'&gt;&lt;/figure&gt;&quot;</span>) </span></code></pre></div>
-<p>Above is our helper functions that will be used to generate the hex of our code.</p>
-<p>example:<br />
-INPUT Markdown codeblock content : <code class="sourceCode bash"><span class="ex">@startuml</span></code></p>
-<ol type="1">
-<li><code class="sourceCode haskell">strToASCII</code> - Convert <code class="sourceCode bash"><span class="ex">@startuml</span></code> to [64,115,116,97,114,116,117,109,108]</li>
-<li><code class="sourceCode haskell">asciiToHex</code> - Convert ASCII decimal encoding with [40,73,74,61,72,74,75,6D,6C]</li>
-<li><code class="sourceCode haskell"><span class="fu">concat</span></code> - [40,73,74,61,72,74,75,6D,6C] to “407374617274756D6C”</li>
-<li><code class="sourceCode haskell">replaceLF</code> - replace “20200” substrings with “0a”, in this case there are none.</li>
-<li>intermediate hex result: “407374617274756D6C”</li>
-<li><code class="sourceCode haskell">planthtml</code> - Use hex result to create a ‘http://www.plantuml.com…’ img src DOM string.</li>
-</ol>
-<p>Notice in the plantuml image link above http://www.plantuml.com/plantuml/svg/~h407374617274756d6c…<br />
-the string after “~h” begins with “407374617274756D6C” which is our result.</p>
-<p>replaceLF is neccessary because the LineFeed of our Pandocs doesn’t match PlantUML server’s LineFeed. Therefore we design a function that replaces our LineFeed hex with a suitable hex. This means in your markdown file you must add double space at the end of a line for a new line. NOTE: Updated post fixes this problem <a href="2021-08-24-HakyllPlantUML2.html">Integrate PlantUML diagrams into Hakyll (Updated)</a></p>
-<h3 id="pandocs-filtering">Pandocs filtering</h3>
-<p>Now we need to modify site.hs so that Hakyll will transform a PlantUML code block into a html img that links to the Planttext generated image.<br />
-We can do this with Hakyll’s Pandocs Filtering.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="co">--Pandoc filtering, </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>addToCodeBlock  <span class="ot">=</span> walk ftranslate </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>  <span class="kw">where</span><span class="ot"> ftranslate ::</span> <span class="dt">Block</span> <span class="ot">-&gt;</span> <span class="dt">Block</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>        ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[]) txt ) <span class="ot">=</span> <span class="dt">RawBlock</span> (<span class="dt">Format</span> <span class="st">&quot;html&quot;</span>) (planthtml txt)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>        ftranslate x <span class="ot">=</span> x </span></code></pre></div>
-<p><code class="sourceCode haskell">ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[]) txt )</code> pattern matches CodeBlock objects in pandoc and finds “plantuml” annotations denoted by the Attr object <code class="sourceCode haskell">(<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[])</code><br />
-The Content of our CodeBlock is pattern matched as <code class="sourceCode haskell">txt</code>.</p>
-<p>After pattern matching it converts it into a raw html block, and applies our “Code to Img DOM” transformation function <code class="sourceCode haskell">planthtml</code> on the content.</p>
-<p>INPUT Markdown codeblock :</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="st">'''plantuml</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="st">@startuml  </span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="st">Alice-&gt;Bob : I am using hex  </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="st">@enduml</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="st">'''</span></span></code></pre></div>
-<p>Output DOM element :</p>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f62203a204920616d207573696e67206865780a40656e64756d6c"></figure>
-<h3 id="full-code">Full Code</h3>
-<p>add under “build-depends” in your .cabal file</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="ex">pandoc</span>,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="ex">pandoc-types</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="ex">text</span>  </span></code></pre></div>
-<p>Add to your site.hs</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc.Definition</span>  </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc.Walk</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="kw">import</span>           <span class="dt">Data.Text</span>  </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Numeric</span> (showHex)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Data.Char</span> (ord)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="ot">strToASCII ::</span> [<span class="dt">Char</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>strToASCII xs <span class="ot">=</span> <span class="fu">fmap</span> <span class="fu">ord</span> xs</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="ot">asciiToHex ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">String</span>]</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>asciiToHex xs <span class="ot">=</span> <span class="fu">fmap</span> (\x <span class="ot">-&gt;</span> showHex x <span class="st">&quot;&quot;</span>) xs</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a><span class="ot">plantUMLhex ::</span> [<span class="dt">Char</span>] <span class="ot">-&gt;</span> <span class="dt">String</span> </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>plantUMLhex xs <span class="ot">=</span> (<span class="fu">concat</span><span class="op">.</span>  asciiToHex <span class="op">.</span> strToASCII) xs</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a><span class="co">-- replaceLF replaces markdown doublespace newlines hex with plantUML compatible newline hex</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a><span class="ot">replaceLF ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span> </span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a>replaceLF xs <span class="ot">=</span>  (T.replace <span class="st">&quot;20200&quot;</span> <span class="st">&quot;0a&quot;</span>) xs</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a><span class="ot">hexCode ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span> </span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a>hexCode y <span class="ot">=</span> (replaceLF (T.pack ( plantUMLhex (T.unpack y))))</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a><span class="ot">planthtml ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span> </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true"></a>planthtml y <span class="ot">=</span> T.pack (<span class="st">&quot;&lt;figure&gt;&lt;img src='http://www.plantuml.com/plantuml/svg/~h&quot;</span> <span class="op">&lt;&gt;</span> (T.unpack <span class="op">$</span> hexCode y) <span class="op">&lt;&gt;</span><span class="st">&quot;'&gt;&lt;/figure&gt;&quot;</span>) </span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true"></a><span class="co">--Pandoc filtering, </span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true"></a>addToCodeBlock  <span class="ot">=</span> walk ftranslate </span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true"></a>  <span class="kw">where</span><span class="ot"> ftranslate ::</span> <span class="dt">Block</span> <span class="ot">-&gt;</span> <span class="dt">Block</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true"></a>        ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[]) txt ) <span class="ot">=</span> <span class="dt">RawBlock</span> (<span class="dt">Format</span> <span class="st">&quot;html&quot;</span>) (planthtml txt)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true"></a>        ftranslate x <span class="ot">=</span> x </span></code></pre></div>
-<ul>
-<li>If you’ve followed my mathjax hakyll tutorial, simply add the code below:</li>
-</ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="ot">mathJaxAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>mathJaxAddedCompiler <span class="ot">=</span> pandocCompilerWithTransform readMathjaxOptions writeMathjaxOptions addToCodeBlock</span></code></pre></div>
-<ul>
-<li>If you didn’t follow my mathjax hakyll tutorial, then add the code below:</li>
-</ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="ot">simpleCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>simpleCompiler <span class="ot">=</span> pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock</span></code></pre></div>
+<p>ssh root@192.168.31.1</p>
+<p>On windows, Download WinSCP in WinSCP, connect to your router and select protocol “SCP” Download snapshot files on your windows http://downloads.openwrt.org/snapshots/targets/ramips/mt7621/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-kernel1.bin</p>
+<p>http://downloads.openwrt.org/snapshots/targets/ramips/mt7621/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-rootfs0.bin</p>
+<p>On WinSCP, on the remote router folder, go up one level to the root folder then go to “/tmp/” folder Then drag the two files you downloaded onto your windows machine into that the remote “/tmp/” folder</p>
+<p>Then on your ssh session</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">mtd</span> write /tmp/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-kernel1.bin kernel1</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">mtd</span> write /tmp/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-rootfs0.bin rootfs0</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="ex">nvram</span> set uart_en=1</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="ex">nvram</span> set bootdelay=5</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="ex">nvram</span> set flag_try_sys1_failed=1</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="ex">nvram</span> commit</span></code></pre></div>
+<p>Then disconnect your router by unplugging the power. You may notice this portion of the guide differs from the OpenWRT wiki.</p>
+<p>Well that is because when I followed the wiki, everytime I ran the commands in their order, the router just factory reset back to the original mi firmware.</p>
+<p>If you want to use this snapshot. If you want to upgrade to the stable release then skip this segment. take note that there is no Luci web GUI installed so you have to configure the router using command line. You can install luci by …</p>
+<p>flashing snapshot OpenWrt does not come preinstalled with gui SO you must connect with ethernet Then ssh in to openwrt</p>
+<p>ssh root@192.168.1.1 uci show uci set wireless.radio1.disabled=‘0’ uci commit wireless wifi up</p>
+<p>WARNING: THE DEFAULT SSID is OpenWrt So if you had an old OpenWrt router setup already, be aware.</p>
+<p>opkg update opkg install luci</p>
+<h3 id="upgrading">UPGRADING</h3>
+<h3 id="setting-up-as-ap-mode">Setting up as AP Mode</h3>
+<p>My real router is pfsense so I always use the routers that I buy as dumb APs.</p>
+<p>Interface &gt; General Settings &gt; Protocol Enter a different static address from your router</p>
+<p>Interface &gt; DHCP Server &gt; General Settings Enable “Ignore Interface”</p>
+<p>IPv6 Settings Disable RA-Services Disable DHCPv6-Services</p>
+<p>System&gt; Startup disable firewall disable dnsmasq disable odhcpd</p>
+<p>IMPORTANT: Wait a few seconds, then disconnect the ethernet on your PC and connect it to the main router so that your OpenWRT AP is connected to your router. This has to be done within 90 seconds or the settings will rollback.</p>
+<p>If you misconfigured something that results in locking yourself out of access to the router, simply factory reset your router and it will reset to default OpenWrt settings.</p>
+<p>Note the default settings doesn’t have wifi turned on automatically so you have to access your router by ethernet to turn it on.</p>
+<p>The next step is to change back your LAN interface, Select gateway as 192.168.1.1 which is usually the IP of your main router subnet mask is typically 255.255.255.0 Then go to advanced settings, enter 8.8.8.8 or 1.1.1.1 as Custom DNS servers.(Google DNS and Cloudflare DNS respectively). If you don’t enter the custom DNS servers then you can’t install packages and opkg update will bring up an error.</p>
+<h3 id="some-issues-with-openwrt">Some issues with OpenWRT</h3>
+<p>Your wifi SSID may not appear while searching for networks if you use the incorrect channels and channel width. You have to keep playing around with the configuration. If your wifi disappears, then you have to play around with the channels and channel width and country origin settings on your wifi radio tab.</p>
 
         </div>
         <div id="footer">

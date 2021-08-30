@@ -1,6 +1,6 @@
 ---
 title: Python Concurrency
-tags: tech
+tags: python, prog
 ---
 
 * IO-bound , Slow IO, Many Connections  

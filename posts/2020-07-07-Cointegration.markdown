@@ -1,6 +1,6 @@
 ---
 title: Cointegration and Spreads
-tags: tech,mathcs,AI,musings
+tags: mathcs, finance
 ---
 
 Remember in Juypter notebook, use questionmark to get quick info

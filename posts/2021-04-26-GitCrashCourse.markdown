@@ -1,6 +1,6 @@
 ---
 title: Git Crashcourse
-tags: musings
+tags: prog
 ---
 
 WARNING: The terms I use are nonstandard from most other tutorials.

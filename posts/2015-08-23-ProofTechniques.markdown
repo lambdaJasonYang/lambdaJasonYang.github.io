@@ -1,6 +1,6 @@
 ---
 title: Proof techniques
-tags: musings
+tags: mathcs
 ---
 
 

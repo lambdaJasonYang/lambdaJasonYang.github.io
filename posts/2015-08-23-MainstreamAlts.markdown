@@ -1,6 +1,6 @@
 ---
 title: Mainstream big tech site alternatives
-tags: tech
+tags: tech, musings
 ---
 
 

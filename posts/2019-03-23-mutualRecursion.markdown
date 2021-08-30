@@ -15,7 +15,15 @@ def odd(n):
     return False
   else:
     return even(n-1)
+```
+Proving this is simply strengthing the IH so instead of:
+ $even(n) \overset{proves}\Rightarrow even(n+1)$  
+we have   
+ $even(n) \land odd(n) \overset{proves}\Rightarrow even(n+1) \land odd(n+1)$  
 
+Any mutual recursive function can be inlined to the other
+
+```python
 #any mutual recursive function can be inlined to the other
 def Even_oddinline(n):
   if n == 0:

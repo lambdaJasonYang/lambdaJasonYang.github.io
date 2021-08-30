@@ -1,6 +1,6 @@
 ---
 title: Implementing Stream with lambdas
-tags: tech
+tags: prog, mathcs
 ---
 
 Stream<int> = (int, lambda: Stream<int>)  

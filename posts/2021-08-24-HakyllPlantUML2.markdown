@@ -1,7 +1,12 @@
 ---
 title: Integrate PlantUML diagrams into Hakyll (Updated)
-tags: tech
+tags: tech, prog, HakyllSetupSeries
 ---
+#### Hakyll Setup Series
+1. [Setup Mathjax](2021-08-23-HakyllSetupMathjax.html)
+2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
+3. [Setup autobuild Hakyll site Git action CI](2021-06-28-Hakyll.html)
+
 ### Plant UML hex image link
 
 Plant UML allows us to draw UML diagram using simple code.
@@ -122,7 +127,7 @@ addToCodeBlock  = walk ftranslate
 
 ```
 
-* If you've followed my mathjax hakyll tutorial, simply add the code below:
+* If you've followed my [mathjax hakyll tutorial](2021-08-23-HakyllSetupMathjax.html), simply add the code below:
 
 ```haskell
 mathJaxAddedCompiler :: Compiler (Item String)

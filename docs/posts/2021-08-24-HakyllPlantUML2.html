@@ -241,9 +241,15 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'HakyllSetupSeries'." href="../tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
     
 </div>
+<h4 id="hakyll-setup-series">Hakyll Setup Series</h4>
+<ol type="1">
+<li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
+<li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
+<li><a href="2021-06-28-Hakyll.html">Setup autobuild Hakyll site Git action CI</a></li>
+</ol>
 <h3 id="plant-uml-hex-image-link">Plant UML hex image link</h3>
 <p>Plant UML allows us to draw UML diagram using simple code.</p>
 <p>Our goal is to allow us to write code in our pandocs markdown files in hakyll that will automatically generate the UML.<br />
@@ -321,7 +327,7 @@ The Content of our CodeBlock is pattern matched as <code class="sourceCode haske
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a>        ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[]) txt ) <span class="ot">=</span> <span class="dt">RawBlock</span> (<span class="dt">Format</span> <span class="st">&quot;html&quot;</span>) (planthtml txt)</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a>        ftranslate x <span class="ot">=</span> x </span></code></pre></div>
 <ul>
-<li>If you’ve followed my mathjax hakyll tutorial, simply add the code below:</li>
+<li>If you’ve followed my <a href="2021-08-23-HakyllSetupMathjax.html">mathjax hakyll tutorial</a>, simply add the code below:</li>
 </ul>
 <div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="ot">mathJaxAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>mathJaxAddedCompiler <span class="ot">=</span> pandocCompilerWithTransform readMathjaxOptions writeMathjaxOptions addToCodeBlock</span></code></pre></div>

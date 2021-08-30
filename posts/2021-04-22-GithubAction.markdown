@@ -1,6 +1,6 @@
 ---
 title: CI/CD in GithubAction
-tags: prog
+tags: prog, CICD
 ---
 
 

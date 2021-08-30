@@ -1,7 +1,14 @@
 ---
 title: Autobuild Hakyll
-tags: tech,mathcs,AI,musings
+tags: tech, prog, HakyllSetupSeries, CICD
 ---
+
+#### Hakyll Setup Series
+1. [Setup Mathjax](2021-08-23-HakyllSetupMathjax.html)
+2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
+3. [Setup autobuild Hakyll site Git action CI](2021-06-28-Hakyll.html)
+   
+### Plant UML hex image link
 
 Building a Hakyll site from source takes an hour the first time you do it.  
 Once it is cached, it only takes a few seconds.  

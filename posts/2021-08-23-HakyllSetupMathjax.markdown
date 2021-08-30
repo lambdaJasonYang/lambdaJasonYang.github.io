@@ -1,8 +1,15 @@
 ---
 title: Adding Mathjax to Hakyll in 2021
-tags: tech
+tags: tech, prog, HakyllSetupSeries
 ---
-### Add mathjax js to \<head\> in /templates/default.html   
+#### Hakyll Setup Series
+1. [Setup Mathjax](2021-08-23-HakyllSetupMathjax.html)
+2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
+3. [Setup autobuild Hakyll site Git action CI](2021-06-28-Hakyll.html)
+
+### JS setup
+
+Add mathjax js to \<head\> in /templates/default.html   
 
 Insert line 3,4,5
 ```{.html .numberLines}
@@ -16,8 +23,9 @@ Insert line 3,4,5
 
 ```
 
-### Modify myblog.cabal
-Note For you it is named _site.cabal or what you named your hakyll project.
+### Add dependencies
+Modify myblog.cabal  
+Note For you it is named myblog.cabal or what you named your hakyll project.
 
 Add "pandoc, containers" under build-depends in myblog.cabal  
 

@@ -1,6 +1,6 @@
 ---
 title: For Loops, Tail recursion, and Left fold
-tags: tech
+tags: mathcs, python, prog
 ---
 
 

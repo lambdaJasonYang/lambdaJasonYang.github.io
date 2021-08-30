@@ -1,7 +1,9 @@
 ---
 title: Integrate PlantUML diagrams into Hakyll (Old)
-tags: tech
+tags: tech, prog, HakyllSetupSeries
 ---
+** Go here [Integrate PlantUML diagrams into Hakyll (Updated)](2021-08-24-HakyllPlantUML2.html) that uses Hakyll libraries rather than my reinvent-the-wheel-bad implementations**
+
 ### Plant UML hex image link
 
 Plant UML allows us to draw UML diagram using simple code.
@@ -57,7 +59,7 @@ the string after "~h" begins with "407374617274756D6C" which is our result.
 
 replaceLF is neccessary because the LineFeed of our Pandocs doesn't match PlantUML server's LineFeed. Therefore we design a function that replaces our LineFeed hex with a suitable hex.
 This means in your markdown file you must add double space at the end of a line for a new line.
-NOTE: Updated post fixes this problem [Integrate PlantUML diagrams into Hakyll (Updated)](2021-08-24-HakyllPlantUML2.markdown)
+NOTE: Updated post fixes this problem [Integrate PlantUML diagrams into Hakyll (Updated)](2021-08-24-HakyllPlantUML2.html)
 
 ### Pandocs filtering
 

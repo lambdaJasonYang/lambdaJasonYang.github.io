@@ -1,6 +1,6 @@
 ---
 title: Energy Based Models
-tags: AI
+tags: mathcs, AI
 ---
 
 ### Energy Based Model vs Probablistic Model
