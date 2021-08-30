@@ -1,6 +1,6 @@
 ---
 title: Recursion Induction Duality
-tags: tech
+tags: mathcs, prog, python
 ---
 
 > Recursion is informally the Computational Dual of Induction.  
@@ -22,10 +22,10 @@ def identity(k):
 
 ```
 
-* In inductive proofs, $P(k-1) \overset{proves}\rightarrow P(k)$
+* In inductive proofs, $P(k-1) \overset{proves}\Rightarrow P(k)$
   * we assume `id(k-1)`{.python} is correct to design an algorithm for `id(k)`{.python}.  
 * But computationally or recursively, 
-`id(k-1)`{.python} $\overset{reduce}\leftarrow$ `id(k)`{.python} 
+`id(k-1)`{.python} $\overset{reduce}\Leftarrow$ `id(k)`{.python} 
 
 
 

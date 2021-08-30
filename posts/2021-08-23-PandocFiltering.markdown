@@ -1,7 +1,14 @@
 ---
 title: Hakyll Pandoc filtering
-tags: tech
+tags: tech, prog,HakyllSetupSeries
 ---
+#### Hakyll Setup Series
+1. [Setup Mathjax](2021-08-23-HakyllSetupMathjax.html)
+2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
+3. [Setup autobuild Hakyll site Git action CI](2021-06-28-HakyllGitAction.html)
+4. [Very Simple Hakyll Pandoc Filtering Example](2021-08-23-PandocFiltering.html)
+
+
 
 Pandoc filtering means when I type up a blog post,  
 I can control whether I want some text to be transformed in some manner after Hakyll builds it.

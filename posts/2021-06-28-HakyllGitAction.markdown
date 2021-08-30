@@ -6,7 +6,9 @@ tags: tech, prog, HakyllSetupSeries, CICD
 #### Hakyll Setup Series
 1. [Setup Mathjax](2021-08-23-HakyllSetupMathjax.html)
 2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
-3. [Setup autobuild Hakyll site Git action CI](2021-06-28-Hakyll.html)
+3. [Setup autobuild Hakyll site Git action CI](2021-06-28-HakyllGitAction.html)
+4. [Very Simple Hakyll Pandoc Filtering Example](2021-08-23-PandocFiltering.html)
+
    
 ### Plant UML hex image link
 

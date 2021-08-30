@@ -241,7 +241,7 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'python'." href="../tags/python.html">python</a>
     
 </div>
 <blockquote>
@@ -260,12 +260,12 @@ Recursion comes from the code being executed.</p>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>    <span class="cf">else</span>:</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">+</span>identity(k<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
 <ul>
-<li>In inductive proofs, <span class="math inline">\(P(k-1) \overset{proves}\rightarrow P(k)\)</span>
+<li>In inductive proofs, <span class="math inline">\(P(k-1) \overset{proves}\Rightarrow P(k)\)</span>
 <ul>
 <li>we assume <code class="sourceCode python"><span class="bu">id</span>(k<span class="op">-</span><span class="dv">1</span>)</code> is correct to design an algorithm for <code class="sourceCode python"><span class="bu">id</span>(k)</code>.<br />
 </li>
 </ul></li>
-<li>But computationally or recursively, <code class="sourceCode python"><span class="bu">id</span>(k<span class="op">-</span><span class="dv">1</span>)</code> <span class="math inline">\(\overset{reduce}\leftarrow\)</span> <code class="sourceCode python"><span class="bu">id</span>(k)</code></li>
+<li>But computationally or recursively, <code class="sourceCode python"><span class="bu">id</span>(k<span class="op">-</span><span class="dv">1</span>)</code> <span class="math inline">\(\overset{reduce}\Leftarrow\)</span> <code class="sourceCode python"><span class="bu">id</span>(k)</code></li>
 </ul>
 <h3 id="analogy">Analogy</h3>
 <p>Lets pretend we have Wizard, Worker and stairs.<br />
