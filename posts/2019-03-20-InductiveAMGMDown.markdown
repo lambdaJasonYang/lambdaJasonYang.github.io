@@ -79,6 +79,7 @@ Goal: $$ (x_1 x_2 .. x_{n-1}) \leq (\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1} $$
 * Notice similarity of IH LHS $(x_1 x_2 ..x_{n-1} x_n)$ with starting point
   * We can FREELY add one more variable/expression $\framebox{}$ to starting point so we can use IH. How do we Choose?
 
+#### Pause: Reverse meta-guessing possible pathway to solution
 
 Choosing an expression will gives us this IH:
 $$(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \tag{1}$$
@@ -109,6 +110,8 @@ Try: $\framebox{} = \frac{A}{n-1}$
   * $\frac{A + \framebox{}}{n} =\frac{A+\frac{A}{n-1}}{n} = \frac{\frac{An-A+A}{n-1}}{n}=\frac{A}{n-1}$ 
   * Looks good
 
+#### Resume: continue proof
+
 Solving Goal:
 
 $$(x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\frac{A}{n-1}})(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}$$
@@ -119,4 +122,4 @@ QED: $$(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{n-1}\leq (\frac{A}{n-1})^{n-1}
 
 ### Step 3 Combining results from Upwards and Downward induction
 
-We have a full inductive proof.
+QED Combining Upward and Downward induction constitutes a full proof the inequality is true for all naturals.

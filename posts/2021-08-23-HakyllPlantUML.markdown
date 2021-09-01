@@ -9,7 +9,7 @@ tags: tech, prog, HakyllSetupSeries
 Plant UML allows us to draw UML diagram using simple code.
 
 Our goal is to allow us to write code in our pandocs markdown files in hakyll that will automatically generate the UML.  
-How it works is PlantUML has a server that can convert links to image urls. 
+PlantUML has a server that can convert links to image urls. 
 
 ``` bash
 http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f62203a204920616d207573696e67206865780a40656e64756d6c

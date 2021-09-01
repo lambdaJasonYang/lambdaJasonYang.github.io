@@ -1,7 +1,22 @@
 ---
-title: Convert recursion to Iteration
+title: Convert Recursion to Iteration
 tags: tech,mathcs,AI,musings
 ---
+
+```plantuml
+@startuml
+autoactivate on
+B -> B:
+
+
+B -> B:
+B -> B:
+
+return
+return
+
+@enduml
+```
 
 ``` python
 def recfac(n):

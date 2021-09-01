@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason's Blog - Proof Downward Induction AM-GM</title>
+        <title>Jason Yang - Proof Downward Induction AM-GM</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -221,7 +221,7 @@
 
         <div id="header">
             <div id="logo">
-                <a href="../">Jason's Blog</a>
+                <a href="../">Jason Yang</a>
             </div>
             <div id="navigation">
                 <a href="../">Home</a>
@@ -312,6 +312,7 @@ After shifting complexity LHS to RHS:</p>
 <li>We can FREELY add one more variable/expression <span class="math inline">\(\framebox{}\)</span> to starting point so we can use IH. How do we Choose?</li>
 </ul></li>
 </ul>
+<h4 id="pause-reverse-meta-guessing-possible-pathway-to-solution">Pause: Reverse meta-guessing possible pathway to solution</h4>
 <p>Choosing an expression will gives us this IH: <span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \tag{1}\]</span></p>
 <p>Relating IH back to the Goal.<br />
 <span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{2}\]</span></p>
@@ -338,12 +339,13 @@ After shifting complexity LHS to RHS:</p>
 <li>Looks good</li>
 </ul></li>
 </ul>
+<h4 id="resume-continue-proof">Resume: continue proof</h4>
 <p>Solving Goal:</p>
 <p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\frac{A}{n-1}})(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
 <p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{-1}(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
 <p>QED: <span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{n-1}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
 <h3 id="step-3-combining-results-from-upwards-and-downward-induction">Step 3 Combining results from Upwards and Downward induction</h3>
-<p>We have a full inductive proof.</p>
+<p>QED Combining Upward and Downward induction constitutes a full proof the inequality is true for all naturals.</p>
 
         </div>
         <div id="footer">

@@ -1,0 +1,391 @@
+---
+title: Quick C
+tags: prog, C
+---
+Remember  pointers always hold an address so if you're reading some spec, replace pointer with address if it gets confusing.
+parameter that takes a pointer == parameter that takes an address
+
+```C
+default c compile gcc
+gcc -o bleh main.c
+./bleh
+int b = 5;
+int *a = &b;
+printf("address of pointee b aka value of a is %p  \n", a);
+printf("value of pointee is b  \n", *(int*)(a));
+//address of pointee b aka value of a is 0xbefe3588
+//value of pointee b is 5 
+
+printf("An int is %d, A long is %ld, a float is %f, a double is %lf, a char is %c, a string is %s, a pointer is %p",12,25555555,23.1,23.01,'c',"asd",a)
+```
+printf keywords
+
+|%c | char |
+|%s | string |
+|%d,%ld | int,long|
+|%f | float |
+|%lf | double |
+|%p | pointer value aka address of pointee|
+%x will convert unsigned number to hex
+%o will convert unsigned number to octal
+
+preprocessor, similar to prototypes.
+```C
+#ifndef two
+#define two 2
+#endif
+int a = two;
+```
+ifndef tells us if not defined then define it else skip it.
+
+`#define MAX(a,b) a > b ? a : b`{.c}
+
+
+```bash
+gcc -c partA.c
+gcc -c main.c 
+gcc -o output partA.c main.c
+```
+
+gcc -c <FILE.c> tells us to run preprocessor(.h) files and compile to object file.
+
+standard library is behind <> like <iostream>
+
+
+makefile
+input: <FILE.o>
+
+
+main.c calls functions from dependA.c which is why dependA.o depends on dependB.h
+dependA.c calls functions from dependB.c 
+
+```bash
+all: main.o dependA.o dependB.o
+	gcc -o output main.o dependA.o dependB.o 
+	
+main.o: main.c dependA.h
+	gcc -c main.c
+
+dependA.o: dependA.c dependA.h dependB.h
+	gcc -c dependA.c
+
+dependB.o: dependB.c dependB.h
+	gcc -c dependB.c 
+```	
+
+<Target.o>: <Target.o> <dependencyA.h> ...
+{TAB} gcc -c <Target.c>
+
+the  all keyword will always run.
+all: main.o ...
+therefore the make will go to main.o 
+
+```bash
+gcc -c main.c
+gcc -c dependA.c 
+gcc -c dependB.c 
+gcc -o output main.o dependA.o dependB.o 
+```
+
+
+Strings are really just arrays of chars
+array of chars are pointers
+
+last entry of string is either 0 or '\0'
+
+### String literals are immutable
+Typing a string like "hello" in your code editor means your progam will allocate a permanent address and memory for "hello" that all other
+"hello" in your code will refer to.
+printf("%s","hello"); //init string literal "hello" at some address 
+printf("%s","hello"); //reuse same string literal at same address
+
+char s[256];
+mutable array of 256 initialized.
+
+char s[256] = "hello";
+immutable string literal "hello" is initialized
+mutable array of 256 initialized.
+Copies string(Auto append a terminating \0) "hello\0" into mutable array.
+
+char s[] = "hello";
+immutable string literal "hello" is initialized
+automatically initialized 8 bytes mutable array.
+Copies string(Auto append a terminating \0) "hello\0" into mutable array.
+
+char *s = "hello";
+immutable string literal "hello" is initialized
+s points to immutable string
+
+
+
+
+Dynamic mem allocation
+malloc(size_t x)
+allocates x bytes of heap memory
+return address for x
+return a void pointer, void *
+int *a;
+a = malloc(5 * sizeof(int));
+
+
+free(void * p)
+release dynamically allocated memory
+input: pointer[aka address] to the beginning of a dynamically allocated block of memory
+
+calloc(size_t n, size_t x)
+basically just malloc with n*x bytes of memory
+
+realloc(void *p, size_t x)
+p must point to beginning of block
+reallocate memory to x size.
+
+
+GDB
+must compile with -g 
+gcc -g ...
+gdb someprogram
+
+run
+
+
+
+file functions
+<fcntl.h>
+open
+add a . file to file table 	returns file descriptor
+if open fails => -1
+
+open(path,flags, mode)
+* mode - basically file permission like 777
+  * used in file creation 
+* flags - what to do with file
+  * O_RDONLY
+  * O_WRONLY
+  * O_RDWR
+  * O_CREAT
+ 
+<sys/stat.h>
+umask 
+set file creation for all files;
+umask(777); //gives all new file that will be created full permission
+
+<unistd.h>
+read data from file
+read(filename, buffer , size)
+read size bytes from filename into buffer
+
+<unistd.h>
+write(filename,buffer,size)
+
+<unistd.h>
+lseek
+set current position in open file
+lseek(file_descriptor, offset,whence)
+* offset - number of bytes to move position by, (-inf,inf)
+* whence - where to measure offset from
+  * SEEK_SET - beginning of file
+  * SEEK_CUR - current position in file
+  * SEEK)END - end of file
+
+<sys/stat.h>
+stat(path , stat_buffer )
+get information about a file
+
+
+DIRECTORIES
+
+<dirent.h>
+opendir 
+*Open a directory file
+opendir( path);
+ returns a pointer to a directory stream typed "DIR *"
+ 
+closedir(dir_stream)
+  closes directory stream and frees the pointer 
+  
+readdir(dir_stream)
+	returns pointer to next entry in a directory stream or NULL if all entries have already been returned.
+	
+rewinddir(DIR * d)
+	
+	resets directory stream of d to the beginngin
+ 
+
+INPUT OUTPUT
+int main( int argc, char *argv[] )
+argc - number of command line args
+argv - array of command line args as strings
+
+stdin input 
+<stdio.h>
+fgets(char * s, int size, FILE * f)
+reads size-1 characters fomr file stream f and stores it in s and appends NULL.
+stops at newline, EOF.
+File stream has type "FILE *"
+	* more complex than file descriptor
+	*stdin is a universal FILE * variable
+fgets(s,100 stdin);
+
+
+Signals
+
+kill(pid,signal)
+
+sighandler is basically a callback function you define.
+static void sighandler (int signo )
+intercept signals in a c program, cannot catch SIGKILL,SIGSTOP
+
+signal(SIGNUMBER, sighandler) 
+attach a signal to a signal handling function 
+
+static void sighandler(int signo){
+if (signo ==  SIGUSR1 )
+printf("YO");
+}
+signal(SIGUSR1,sighandler);
+
+
+
+Exec - c functions that run other proc or replace current proc with anothe proc
+<unistd.h>
+
+execl(path, command ,arg0, arg1 .. )
+
+
+execlp(path, command, arg0,arg1 ..)
+same as execlp but uses $PATH environment variables
+
+
+
+Managing Sub-processes
+
+<unistd.h>
+fork()
+
+<sys/wait.h>
+wait(status)
+stops parent process until child exited
+return pid of child  exited 
+* status
+  * WIFEEXITED - true if exit normally
+  * WEXITSTATUS - return value of child
+  * WIFSIGNALED - true if exit with signal
+  * WTERMSIG - signal number intercepted  dby child
+
+waidpid(pid,status,options)
+wait for specific child
+
+
+
+Redirection
+<unistd.h>
+dup2(fd1,fd2)
+ * redirects fd2 to fd1
+
+
+
+Pipes
+A conduit between 2 separate processes on the same computer.
+Pipes have 2 ends, a read end and a write end.
+Pipes act just like files (i.e. you can read() and write() to send any kind of data).
+Pipes exist in memory.
+Unnamed Pipes
+Unnamed pipes have no external identifier.
+pipe - <unistd.h>
+Create an unnamed pipe.
+Returns 0 if the pipe was created, -1 if not.
+pipe( descriptors )
+descriptors
+Array that will contain the descriptors for each end of the pipe. Must be an int array of size 2.
+descriptors[0] is the read end.
+descriptors[1] is the write end.
+example
+int fds[2];
+pipe( fds );
+char line[100];
+f = fork();
+if (f == 0) {
+  close( fds[0] );
+  write( fds[1], "hello!", 7);
+}
+else {
+  close( fds[1] );
+  read( fds[0], line, sizeof(line) );
+}
+Named Pipes
+Also known as FIFOs.
+Same as unnamed pipes except FIFOs have a name that can be used to identify them via different programs.
+Like unnamed pipes, FIFOS are unidirectional.
+mkfifo
+Shell command to make a FIFO
+$ mkfifo name
+mkfifo - <sys/types.h> <sys/stat.h>
+c function to create a FIFO
+Returns 0 on success and -1 on failure
+Once created, the FIFO acts like a regular file, and we can use open, read, write, and close on it.
+FIFOs will block on open until both ends of the pipe have a connection.
+mkfifo( name, permissions )
+
+
+
+
+
+Shared Memory
+<sys/shm.h> <sys/ipc.h> <sys/types.h>
+A segment of heap memory that can be accessed by multiple processes.
+Shared memory is accessed via a key that is known by any process that needs to access it.
+Shared memory does not get released when a program exits.`
+
+* 5 Shared memory operations
+ * Create the segment (happens once) - shmget
+ * Access the segment (happens once per process) - shmget
+ * Attach the segment to a variable (once per process) - shmat
+ * Detach the segment from a variable (once per process) - shmdt
+ * Remove the segment (happens once) - shmctl
+
+```C
+int *data;
+int shmd;
+shmd = shmget(KEY, sizeof(int), IPC_CREAT | 0640);
+printf("shmd: %d\n", shmd);
+data = shmat(shmd, 0, 0);
+printf("data: %p\n", data);
+printf("*data: %d\n", *data);
+*data = * data + 10;
+printf("*data: %d\n", *data);
+shmdt(data); 
+```
+
+
+Server Design
+* Handshake - ensure a connection between 2 programs
+
+* 3-way-handshake - verify both client and server can BOTH SEND AND RECIEVE DATA
+ * Client send msg to Server. (lets server know client can recieve data)
+  * NOTE: At this point Server DOES NOT KNOW if client can send data  
+ * Server send resp to Client. (Let client know Server can recieve and send data)
+ * Client send resp to Server. (lets server know client can recieve and send data) 
+
+Setup
+
+* Server creates a FIFO (Well Known Pipe) and waits for a connection.
+ * Client creates a “private” FIFO.
+sprintf(buffer, "%d", getpid() );
+
+Handshake
+
+* Client connects to server and sends the private FIFO name. 
+* Client waits for a response from the server.
+* Server receives client’s message and removes the WKP.
+* Server connects to client FIFO, sending an initial acknowledgement message.
+* Client receives server’s message, removes its private FIFO.
+* Client sends response to server.
+
+Operation
+
+* Server and client send information back and forth.
+
+Reset
+
+* Client exits, server closes any connections to the client.
+* Server recreates the WKP waits for another client.

@@ -1,0 +1,78 @@
+---
+title: TLA
+tags: tech, musings
+---
+
+
+
+TLA+
+
+Programs are state machines.
+Execution of digital system is a sequence of states.
+We want to describe all possible sequence of states of a system.
+
+Every computer has a program counter register(PC) that points to the current line of instruction.
+PC points to the current state.
+
+```C
+int i;
+void main()
+{i=someNumber(); //pc="start"
+ i=i+1;          //pc="middle"
+}                //pc="done"
+```
+pc means current state pc pointer
+pc' means next state pc pointer 
+
+* IF pc=="start" 
+ * THEN pc' == "middle" and i' \in (0,1000)
+* ELSEIF pc=="middle" 
+ * THEN (i' = i + 1) and (pc' =="done")
+ * ELSE FALSE
+ 
+ Basically saying if we are at this section of code, then our next section of code must satisfy some constraint.
+ 
+```C
+switch 
+   case pc == "start:
+     Satisfy Constraint(pc,pc')
+   case pc == "middle":
+     Satisfy Constraint(pc,pc')
+    ...
+``` 
+
+TLA+ notation for arrays:
+
+meta-thought: arrays are really just partial functions and TLA+ makes this explicit.
+
+TLA+ Notation: sqr = [i \in 42 \rightarrow i^2 ]
+ 
+code: sqrt[i] = i^2
+
+
+```plantuml
+@startuml
+
+title Activity Diagram \n
+
+start
+
+:i = someNumber();;
+
+note left
+    pc = "start"
+end note
+
+:i = i+1;;
+
+note left
+    pc = "middle"
+end note
+
+stop
+
+note left
+    pc = "done"
+end note
+@enduml
+```
