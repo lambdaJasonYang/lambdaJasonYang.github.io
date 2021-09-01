@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Posts tagged "python"</title>
+        <title>Jason Yang - Euler, Complex and Imaginary</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,40 +232,33 @@
         </div>
 
         <div id="content">
-            <h1>Posts tagged "python"</h1>
+            <h1>Euler, Complex and Imaginary</h1>
             
 
-            <ul>
+            <div class="info">
+    Posted on August 23, 2015
     
-        <li>
-            <a href="../posts/2021-08-25-RequestHeader.html">HTTP requests - Design proper headers in python</a> - August 25, 2021
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2018-08-23-RecursionInduction.html">Recursion Induction Duality</a> - August 23, 2018
-        </li>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'asm'." href="../tags/asm.html">asm</a>, <a title="All pages tagged 'C'." href="../tags/C.html">C</a>
     
-        <li>
-            <a href="../posts/2018-03-24-pyplot.html">Pyplot matplotlib</a> - March 24, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-03-24-pandas.html">Pandas</a> - March 24, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-03-24-Stochastic.html">Stochastic calculus and brownian motion</a> - March 24, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2017-07-15-PythonConcurrency.html">Python Concurrency</a> - July 15, 2017
-        </li>
-    
-        <li>
-            <a href="../posts/2015-12-05-LeftFoldTailLoop.html">For Loops, Tail recursion, and Left fold</a> - December  5, 2015
-        </li>
-    
-</ul>
+</div>
+<p>A bootloader is 512 bytes,</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">sudo</span> apt install nasm</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">sudo</span> apt-get install qemu-system</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="fu">nasm</span> -f bin boot.bin -o boot.asm</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="ex">qemu-system-x86_64</span> -nographic boot.bin </span></code></pre></div>
+<p>$ dollar sign means current address<br />
+double dollar is section start<br />
+($-$$) = (current addr - section start) = length of previous code<br />
+db means define byte<br />
+Zero out 512 bytes, then add the 2byte bootloader identitifer 0x55 0xaa</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="bu">jmp</span> <span class="dv">$</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="pp">times</span> <span class="dv">510</span>-(<span class="dv">$</span>-<span class="dv">$$</span>) <span class="dt">db</span> <span class="dv">0</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="dt">db</span><span class="bn"> 0x55, 0xaa</span></span></code></pre></div>
+<p>510 - length of previous code = allows us to fill the memory to 510 bytes</p>
 
         </div>
         <div id="footer">

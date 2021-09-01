@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Implementing Stream with lambdas</title>
+        <title>Jason Yang - Mainstream big tech site alternatives</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,51 +232,23 @@
         </div>
 
         <div id="content">
-            <h1>Implementing Stream with lambdas</h1>
+            <h1>Mainstream big tech site alternatives</h1>
             
 
             <div class="info">
-    Posted on August 23, 2015
+    Posted on May 23, 2021
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
 </div>
-<p>Stream<int> = (int, lambda: Stream<int>)</p>
-<p>notice similarity to LinkedList:<br />
-LinkedList<int> = (int, LinkedList)</p>
-<p>Analogy:</p>
-<ul>
-<li>Press a button and the next item will appear.</li>
-<li>The button is implemented as an empty lambda.</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">class</span> StreamLinkedList:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,data):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>        <span class="va">self</span>.<span class="bu">next</span> <span class="op">=</span> <span class="kw">lambda</span> : StreamLinkedList(data<span class="op">*</span><span class="dv">2</span>) <span class="co"># empty lambda implementation acts like a button to get next value</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>        <span class="co">#if we exclude the lambda, we get StackOverflow by recursion</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>        <span class="cf">return</span> <span class="bu">str</span>(<span class="va">self</span>.data)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="kw">def</span> reclist(n,initList):</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>        <span class="cf">return</span> [initList]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a>    <span class="cf">else</span>:</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a>        <span class="cf">return</span> reclist(n<span class="op">-</span><span class="dv">1</span>,initList.<span class="bu">next</span>()) <span class="op">+</span> [initList]</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>    </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>a <span class="op">=</span> StreamLinkedList(<span class="dv">3</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a><span class="bu">print</span>(a)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="co">#&gt;3</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>b <span class="op">=</span> a.<span class="bu">next</span>()</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a><span class="bu">print</span>(b)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="co">#&gt;6</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a>c <span class="op">=</span> a.<span class="bu">next</span>().<span class="bu">next</span>()</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a><span class="bu">print</span>(c)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a><span class="co">#&gt;12</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a><span class="bu">print</span>(reclist(<span class="dv">4</span>,a))</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a><span class="co">#&gt;[24, 12, 6, 3]</span></span></code></pre></div>
+<p>https://yewtu.be/feed/popular</p>
+<p>https://joinpeertube.org/instances#instances-list</p>
+<p>https://makelinux.github.io/kernel/diagram/</p>
+<p>https://bootlin.com/training/kernel/</p>
+<p>https://makelinux.github.io/kernel/diagram/</p>
 
         </div>
         <div id="footer">

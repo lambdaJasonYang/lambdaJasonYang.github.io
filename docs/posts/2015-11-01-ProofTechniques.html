@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Python Concurrency</title>
+        <title>Jason Yang - Proof techniques</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,156 +232,21 @@
         </div>
 
         <div id="content">
-            <h1>Python Concurrency</h1>
+            <h1>Proof techniques</h1>
             
 
             <div class="info">
-    Posted on August 23, 2015
+    Posted on November  1, 2015
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'python'." href="../tags/python.html">python</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
     
 </div>
-<ul>
-<li>IO-bound , Slow IO, Many Connections
-<ul>
-<li>Use Async</li>
-<li>example: web client requests/downloads(IO)</li>
-</ul></li>
-<li>Content from Server IO-bound , Fast IO , Limited Connections
-<ul>
-<li>Use Multi-thread</li>
-</ul></li>
-<li>Non IO-bound, CPU calculations
-<ul>
-<li>Use Multi-processing</li>
-</ul></li>
-</ul>
-<h4 id="threading">Threading</h4>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="im">import</span> threading</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">def</span> fstThread(): <span class="co">#parent thread</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    sndThread <span class="op">=</span> threading.Thread(target<span class="op">=</span>someFunction,args<span class="op">=</span>(<span class="dv">2</span>,))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    sndThread.start()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>    someFunction(<span class="dv">1</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>    </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="kw">def</span> someFunction(k): <span class="co">#child thread</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{k}</span><span class="ss"> from </span><span class="sc">{</span>threading<span class="sc">.</span>current_thread()<span class="sc">.</span>name<span class="sc">}</span><span class="ch">\n</span><span class="ss">&quot;</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>    </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>fstThread()</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="co">#&gt;2 from Thread-6</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="co">#&gt;1 from MainThread</span></span></code></pre></div>
-<h4 id="multiprocessing">Multiprocessing</h4>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="im">import</span> multiprocessing</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">def</span> fstProcess():</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    sndProcess <span class="op">=</span> multiprocessing.Process(target<span class="op">=</span>someFunctionA,args<span class="op">=</span>(<span class="dv">2</span>,))</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    sndProcess.start()</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    someFunctionA(<span class="dv">1</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="kw">def</span> someFunctionA(k):</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{k}</span><span class="ss"> from </span><span class="sc">{</span>multiprocessing<span class="sc">.</span>current_process()<span class="sc">.</span>name<span class="sc">}</span><span class="ch">\n</span><span class="ss">&quot;</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>    </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>fstProcess()</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">##Note using IDLE or Jupyter, the Child process shows no output </span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">##Using python script the output would look similar to the threading output, 2 prints</span></span></code></pre></div>
-<h4 id="race-condition">Race condition</h4>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="im">import</span> threading</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="im">from</span> time <span class="im">import</span> sleep</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>count <span class="op">=</span> [<span class="dv">0</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="kw">def</span> inc():</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>    temp <span class="op">=</span> count[<span class="dv">0</span>]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>    sleep(<span class="dv">0</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>    count[<span class="dv">0</span>] <span class="op">=</span> temp <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>other <span class="op">=</span> threading.Thread(target <span class="op">=</span> inc, args <span class="op">=</span> ())</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>other.start()</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>inc()</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a><span class="bu">print</span>(<span class="ss">f&quot;count is </span><span class="sc">{</span>count[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">&quot;</span>) <span class="co">#output is sometimes 2, sometimes 1</span></span></code></pre></div>
-<h4 id="producer-consumer-non-synchronized">Producer Consumer non-synchronized</h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="im">import</span> threading</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="im">from</span> time <span class="im">import</span> sleep</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>Items <span class="op">=</span> []</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>Commands <span class="op">=</span> []</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="kw">def</span> consume():</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>    <span class="cf">while</span> <span class="bu">len</span>(Commands) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>        <span class="cf">pass</span> <span class="co">#stuck in this loop waiting for Items.append loop to end</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="ss">f&quot;item is </span><span class="sc">{</span>Items<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a><span class="kw">def</span> produce():</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a>    consumer <span class="op">=</span> threading.Thread(target<span class="op">=</span>consume,args<span class="op">=</span>())</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a>    consumer.start()</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true"></a>        Items.append(i)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true"></a>    Commands.append(<span class="st">&quot;go&quot;</span>)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true"></a>produce()</span></code></pre></div>
-<h4 id="producer-consumer-synchronized">Producer Consumer synchronized</h4>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="im">from</span> queue <span class="im">import</span> Queue</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>queue <span class="op">=</span> Queue()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="kw">def</span> synchronized_consume():</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>        <span class="bu">print</span>(<span class="st">'got an item:'</span>, queue.get())</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a>        queue.task_done() <span class="co">#</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a><span class="kw">def</span> synchronized_produce():</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>    consumer <span class="op">=</span> threading.Thread(target<span class="op">=</span>synchronized_consume, args<span class="op">=</span>())</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a>    consumer.daemon <span class="op">=</span> <span class="va">True</span> <span class="co">#Parent or &quot;synchronized_produce()&quot; process will not wait for the consumer before exiting</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a>    consumer.start()</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a>        queue.put(i)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a>    queue.join()</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a>synchronized_produce()</span></code></pre></div>
-<h4 id="lock">Lock</h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>seen <span class="op">=</span> <span class="bu">set</span>()  <span class="co">##The set that we will sychronize with a lock</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>seen_lock <span class="op">=</span> threading.Lock()</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="kw">def</span> already_seen(item):</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>    <span class="cf">with</span> seen_lock:</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>        <span class="cf">if</span> item <span class="kw">not</span> <span class="kw">in</span> seen:  <span class="co"># Only one thread is checking if item is in sychronizd set</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>            seen.add(item)   <span class="co">#modifying a sychronized set, means only one thread can add to the set seen</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a>            <span class="cf">return</span> <span class="va">False</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a>        <span class="cf">return</span> <span class="va">True</span></span></code></pre></div>
-<h4 id="barrier">Barrier</h4>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>counters <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>barrier <span class="op">=</span> threading.Barrier(<span class="dv">2</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="kw">def</span> count(thread_num, steps):</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(steps):</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>        other <span class="op">=</span> counters[<span class="dv">1</span> <span class="op">-</span> thread_num]</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>        barrier.wait() <span class="co"># wait for reads to complete</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>        counters[thread_num] <span class="op">=</span> other <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>        barrier.wait() <span class="co"># wait for writes to complete</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a><span class="kw">def</span> threaded_count(steps):</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a>    other <span class="op">=</span> threading.Thread(target<span class="op">=</span>count, args<span class="op">=</span>(<span class="dv">1</span>, steps))</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a>    other.start()</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a>    count(<span class="dv">0</span>, steps)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">'counters:'</span>, counters)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a>threaded_count(<span class="dv">10</span>)</span></code></pre></div>
-<h4 id="message-passing">Message passing</h4>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">def</span> process_consume(in_pipe):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>        item <span class="op">=</span> in_pipe.recv()</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>        <span class="cf">if</span> item <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>            <span class="cf">return</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>        <span class="bu">print</span>(<span class="st">'got an item:'</span>, item)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a><span class="kw">def</span> process_produce():</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a>    pipe <span class="op">=</span> multiprocessing.Pipe(<span class="va">False</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a>    consumer <span class="op">=</span> multiprocessing.Process(target<span class="op">=</span>process_consume, args<span class="op">=</span>(pipe[<span class="dv">0</span>],))</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a>    consumer.start()</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a>        pipe[<span class="dv">1</span>].send(i)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a>    pipe[<span class="dv">1</span>].send(<span class="va">None</span>) <span class="co"># done signal</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true"></a>process_produce()</span></code></pre></div>
+<p>The problem with inequalities is that there is simply limitless amount of solutions.</p>
+<p>typically a problem would go like this Given: <span class="math inline">\(A &lt; B\)</span> PROVE: <span class="math inline">\(A &lt; C\)</span></p>
+<p>We can conjure up constants and operations on <span class="math inline">\(B\)</span> to manipulate it so. Syntax(C) =&gt;</p>
 
         </div>
         <div id="footer">
