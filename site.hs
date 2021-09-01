@@ -97,6 +97,18 @@ addToCodeBlock  = walk ftranslate
                 
 
 ----------------------------------------------
+
+--ATOM RSS FEED----------------------------------------------------
+myFeedConfiguration :: FeedConfiguration
+myFeedConfiguration = FeedConfiguration
+    { feedTitle       = "Jason Yang: Math and Computer Science Blog"
+    , feedDescription = "Programming language theory, haskell, induction, combinatorics, Energy based models, time series analysis, differential equations, stochastic calculus, trading"
+    , feedAuthorName  = "Jason Yang"
+    , feedAuthorEmail = "jasonyang299@gmail.com"
+    , feedRoot        = "https://userjy.github.io"
+    }
+
+-------------------------------------------------------------------
 config :: Configuration
 config = defaultConfiguration
   { destinationDirectory = "docs"
@@ -118,6 +130,24 @@ main = do
             compile $ pandocCompiler
                 >>= loadAndApplyTemplate "templates/default.html" defaultContext
                 >>= relativizeUrls
+---------------------
+--ADD ATOM RSS FEED BEGIN
+        create ["atom.xml"] $ do
+            route idRoute
+            compile $ do
+                let feedCtx = postCtx `mappend` bodyField "description"
+                posts <- fmap (take 10) . recentFirst =<<
+                    loadAllSnapshots "posts/*" "content"
+                renderAtom myFeedConfiguration feedCtx posts
+        create ["rss.xml"] $ do
+            route idRoute
+            compile $ do
+                let feedCtx = postCtx `mappend` bodyField "description"
+                posts <- fmap (take 10) . recentFirst =<<
+                    loadAllSnapshots "posts/*" "content"
+                renderRss myFeedConfiguration feedCtx posts
+--ADD ATOM RSS FEED END
+
 ----------------------
         tags <- buildTags "posts/*" (fromCapture "tags/*.html")
         tagsRules tags $ \tag tagpattern -> do
@@ -138,6 +168,7 @@ main = do
             route $ setExtension "html"
             compile $ mathJaxAddedCompiler
                 >>= loadAndApplyTemplate "templates/post.html"    (postCtxWithTags tags)
+                >>= saveSnapshot "content"
                 >>= loadAndApplyTemplate "templates/default.html" (postCtxWithTags tags)
                 >>= relativizeUrls
 
@@ -197,6 +228,8 @@ postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
 
+feedCtx :: Context String
+feedCtx = postCtx <> bodyField "description"
 
 postCtxWithTags :: Tags -> Context String
 postCtxWithTags tags = tagsField "tags" tags `mappend` postCtx
