@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Posts tagged "python"</title>
+        <title>Jason Yang - Gentzen</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,40 +232,37 @@
         </div>
 
         <div id="content">
-            <h1>Posts tagged "python"</h1>
+            <h1>Gentzen</h1>
             
 
-            <ul>
+            <div class="info">
+    Posted on August 23, 2015
     
-        <li>
-            <a href="../posts/2021-08-25-RequestHeader.html">HTTP requests - Design proper headers in python</a> - August 25, 2021
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2018-08-23-RecursionInduction.html">Recursion Induction Duality</a> - August 23, 2018
-        </li>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
     
-        <li>
-            <a href="../posts/2018-03-24-pyplot.html">Pyplot matplotlib</a> - March 24, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-03-24-pandas.html">Pandas</a> - March 24, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-03-24-Stochastic.html">Stochastic calculus and brownian motion</a> - March 24, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2017-07-15-PythonConcurrency.html">Python Concurrency</a> - July 15, 2017
-        </li>
-    
-        <li>
-            <a href="../posts/2015-12-05-LeftFoldTailLoop.html">For Loops, Tail recursion, and Left fold</a> - December  5, 2015
-        </li>
-    
-</ul>
+</div>
+<p><span class="math display">\[x \vDash y\]</span><br />
+x satisfies y<br />
+<span class="math inline">\(x :: Prop\)</span><br />
+<span class="math inline">\(\Gamma :: \{Prop\}\)</span><br />
+<span class="math inline">\(\Delta :: \{Prop\}\)</span><br />
+<span class="math inline">\(\Gamma \Delta\)</span> are the set of propositions in this universe.</p>
+<h2 id="gentzen-cut">Gentzen Cut</h2>
+<p>Gentzen Cut is simply a syntatic trick</p>
+<p><span class="math display">\[
+\frac{a \vDash b \ \ \ \ b \vDash c}{a \vDash c}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\Gamma , a \vDash b , \Delta \ \ \ \ \Gamma , b \vDash c , \Delta}{\Gamma , a \vDash  c , \Delta}
+\]</span></p>
+<p>Absorbing a into Gamma<br />
+Absorbing b into Delta<br />
+<span class="math display">\[
+\frac{\Gamma \vDash b , \Delta \ \ \ \ \Gamma , b \vDash \Delta}{\Gamma \vDash  \Delta}
+\]</span></p>
 
         </div>
         <div id="footer">

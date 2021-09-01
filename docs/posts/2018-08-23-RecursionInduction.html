@@ -267,37 +267,7 @@ Recursion comes from the code being executed.</p>
 </ul></li>
 <li>But computationally or recursively, <code class="sourceCode python"><span class="bu">id</span>(k<span class="op">-</span><span class="dv">1</span>)</code> <span class="math inline">\(\overset{reduce}\Leftarrow\)</span> <code class="sourceCode python"><span class="bu">id</span>(k)</code></li>
 </ul>
-<h3 id="analogy">Analogy</h3>
-<p>Lets pretend we have Wizard, Worker and stairs.<br />
-Whatever Wizard says must be true in this reality, nothing more, nothing less. (Don’t assume that a ground exists or that we can freely go up or down the stairs)</p>
-<p>Wizard is on the ground at the bottom of the stairs.<br />
-Worker is at some position on the stairs but needs to get his tools on the ground.</p>
-<ul>
-<li>Induction - Wizard at the bottom of a stairs saying:
-<ul>
-<li>“I know that the ground exists and we can take a step upwards from the ground to the stairs or from the current step to the next higher step”</li>
-<li>“Therefore I am certain there is a chain of steps to your(Worker) position”</li>
-</ul></li>
-<li>Recursion - Worker at some position on the stairs who gets the memo and thinks:
-<ul>
-<li>“This means the wizard is certain there is a path from the ground to my position; Then I must be able to step down to the ground, get my tools, then come back up here”</li>
-</ul></li>
-</ul>
-<p>When induction is done incorrectly meaning the Wizard misspoke and conjured up a different reality by accident.</p>
-<ul>
-<li>The Wizard is floating and tells us the ground doesn’t exist.
-<ul>
-<li>Worker will climb down infinitely</li>
-</ul></li>
-<li>The Wizard tells us we can only take the current step to a step downwards.
-<ul>
-<li>Worker looks down and sees NOTHING, BUT he looks upwards and sees steps upwards.
-<ul>
-<li>Reasoning: The only way to get to Worker’s position is by stepping downwards from a higher position. This means the only way for the Worker to move is upwards.</li>
-<li>Worker will climb up infinitely</li>
-</ul></li>
-</ul></li>
-</ul>
+<p>Induction can be thought as a meta-level confirmation that computable recursion will work.</p>
 
         </div>
         <div id="footer">

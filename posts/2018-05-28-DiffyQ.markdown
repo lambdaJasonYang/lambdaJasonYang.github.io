@@ -1,5 +1,5 @@
 ---
-title: Executive Summary of Differential Equations
+title: Quick Summary Differential Equations
 tags: mathcs, AI, appliedmath
 ---
 A conceptual and non-calculational approach.
@@ -75,7 +75,31 @@ Another way to put it :
 Given this differential equation that shows a relationship of variables between values with values, values with rates, and rates with rates,  
 What are the possible ways we can design a function that satisfies these contraints?
 
-#### Notice Similarity:  
+---
+## Executive Summary
+
+#### Notice Similarity
 
 * Solution of Differential Equation Outputs a set of functions.
 * Solution of Equations Outputs a set of points.
+
+
+#### Implications
+
+If we have complete understanding of how each component of a system behaves in relation to every other component in said system,  
+we can predict, given initial conditions, what the state of the system will be in the future.  
+
+Simply put, Differential equations lets us see the future (assuming differential wrt time).
+
+#### ODE vs PDE
+
+* ODE - single variable(time)
+  * time is typically our single variable differential 
+  * Want to predict system state wrt to time (predict future)
+
+* PDE - multiple variables(time,space,etc)
+  * time and space
+  * Want to predict system state wrt to time and space 
+    * Heat Equation is a PDE that lets us predict state(temperature) on a surface at some point in time.  
+
+ODE's are really 1 variable PDE's

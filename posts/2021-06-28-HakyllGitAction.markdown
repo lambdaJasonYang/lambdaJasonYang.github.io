@@ -9,8 +9,7 @@ tags: tech, prog, HakyllSetupSeries, CICD
 3. [Setup autobuild Hakyll site Git action CI](2021-06-28-HakyllGitAction.html)
 4. [Very Simple Hakyll Pandoc Filtering Example](2021-08-23-PandocFiltering.html)
 
-   
-### Plant UML hex image link
+### Autogenerate static site on git push to github
 
 Building a Hakyll site from source takes an hour the first time you do it.  
 Once it is cached, it only takes a few seconds.  

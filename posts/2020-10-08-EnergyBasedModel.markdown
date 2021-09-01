@@ -29,24 +29,4 @@ Two types of inference architectures.
 Latent energy variable.   
 
 $$P(y|x) = \frac{e^{-\beta E(x,y)}}{\int_{y'}e^{-\beta E(x,y')}} $$
-```bash
-chcp 65001
-stack exec myblog clean
-stack exec myblog build
-```
 
-```bash
-git add .
-git commit -m "some message"
-git push origin main:main
-```
-
-
-
-``` haskell
-fac n = foldr (*) 1 [1..n]
-```
-
-```{.ruby .numberLines}
-def greet; "Hello, world!"; end
-```

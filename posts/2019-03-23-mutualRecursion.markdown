@@ -24,7 +24,7 @@ we have
 Any mutual recursive function can be inlined to the other
 
 ```python
-#any mutual recursive function can be inlined to the other
+#insert Inline odd(n) into even(n)
 def Even_oddinline(n):
   if n == 0:
     return True
@@ -33,7 +33,10 @@ def Even_oddinline(n):
       return False
     else:
       return Even_oddinline((n-1)-1)
+```
 
+```python
+#insert Inline even(n) into odd(n)
 def Odd_eveninline(n):
   if n == 0:
     return False
