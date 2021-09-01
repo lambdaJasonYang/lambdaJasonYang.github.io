@@ -250,11 +250,11 @@
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="fu">nasm</span> -f bin boot.bin -o boot.asm</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="ex">qemu-system-x86_64</span> -nographic boot.bin </span></code></pre></div>
-<p>single dollar = current address<br />
-double dollar = section start</p>
-<p>($-$$) = (current addr - section start) = length of previous code<br />
-db := define byte</p>
-<p>Zero out 510 bytes, then add the 2byte bootloader identifier 0x55 0xaa</p>
+<p>$ dollar sign means current address<br />
+double dollar is section start<br />
+($-$$) = (current addr - section start) = length of previous code<br />
+db means define byte<br />
+Zero out 512 bytes, then add the 2byte bootloader identitifer 0x55 0xaa</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="bu">jmp</span> <span class="dv">$</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="pp">times</span> <span class="dv">510</span>-(<span class="dv">$</span>-<span class="dv">$$</span>) <span class="dt">db</span> <span class="dv">0</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="dt">db</span><span class="bn"> 0x55, 0xaa</span></span></code></pre></div>

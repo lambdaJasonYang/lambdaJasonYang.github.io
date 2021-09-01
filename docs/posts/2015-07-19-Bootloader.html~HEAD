@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Proof techniques</title>
+        <title>Jason Yang - BootLoader</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,21 +232,33 @@
         </div>
 
         <div id="content">
-            <h1>Proof techniques</h1>
+            <h1>BootLoader</h1>
             
 
             <div class="info">
-    Posted on August 23, 2015
+    Posted on July 19, 2015
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'asm'." href="../tags/asm.html">asm</a>, <a title="All pages tagged 'C'." href="../tags/C.html">C</a>
     
 </div>
-<p>The problem with inequalities is that there is simply limitless amount of solutions.</p>
-<p>typically a problem would go like this Given: <span class="math inline">\(A &lt; B\)</span> PROVE: <span class="math inline">\(A &lt; C\)</span></p>
-<p>We can conjure up constants and operations on <span class="math inline">\(B\)</span> to manipulate it so. Syntax(C) =&gt;</p>
+<p>A bootloader is 512 bytes,</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">sudo</span> apt install nasm</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">sudo</span> apt-get install qemu-system</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="fu">nasm</span> -f bin boot.bin -o boot.asm</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="ex">qemu-system-x86_64</span> -nographic boot.bin </span></code></pre></div>
+<p>single dollar = current address<br />
+double dollar = section start</p>
+<p>($-$$) = (current addr - section start) = length of previous code<br />
+db := define byte</p>
+<p>Zero out 510 bytes, then add the 2byte bootloader identifier 0x55 0xaa</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="bu">jmp</span> <span class="dv">$</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="pp">times</span> <span class="dv">510</span>-(<span class="dv">$</span>-<span class="dv">$$</span>) <span class="dt">db</span> <span class="dv">0</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="dt">db</span><span class="bn"> 0x55, 0xaa</span></span></code></pre></div>
+<p>510 - length of previous code = allows us to fill the memory to 510 bytes</p>
 
         </div>
         <div id="footer">
