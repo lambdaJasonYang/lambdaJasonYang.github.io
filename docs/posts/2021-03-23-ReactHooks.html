@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Posts tagged "musings"</title>
+        <title>Jason Yang - React Hooks</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,84 +232,34 @@
         </div>
 
         <div id="content">
-            <h1>Posts tagged "musings"</h1>
+            <h1>React Hooks</h1>
             
 
-            <ul>
+            <div class="info">
+    Posted on March 23, 2021
     
-        <li>
-            <a href="../posts/2021-08-25-PlantUMLkey.html">PlantUML diagram list</a> - August 25, 2021
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2021-08-25-Alexa%20copy.html">Alexa</a> - August 25, 2021
-        </li>
+    Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
-        <li>
-            <a href="../posts/2021-08-10-WhyHakyll.html">Why Hakyll</a> - August 10, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-08-10-TemplatePage.html">Template Page (Ignore)</a> - August 10, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-05-25-TypeTheoryFuture.html">Type Theory and should you care</a> - May 25, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-05-23-Somelinks.html">Mainstream big tech site alternatives</a> - May 23, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-03-23-example.html">The State of Full Stack Languages in 2021</a> - March 23, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-03-23-ReactHooks.html">React Hooks</a> - March 23, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2020-04-20-LookaheadBias.html">Lookahead Bias</a> - April 20, 2020
-        </li>
-    
-        <li>
-            <a href="../posts/2020-04-05-TLA.html">TLA</a> - April  5, 2020
-        </li>
-    
-        <li>
-            <a href="../posts/2019-03-25-RecursionToIterative.html">Convert Recursion to Iteration</a> - March 25, 2019
-        </li>
-    
-        <li>
-            <a href="../posts/2019-03-23-mutualRecursion.html">Mutual recursion</a> - March 23, 2019
-        </li>
-    
-        <li>
-            <a href="../posts/2018-10-02-MemoryPointers.html">Overcomplicating Memory Model and Pointers</a> - October  2, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-07-15-TeachingSets.html">Language, Teaching and Set theory</a> - July 15, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-05-23-YParadox2.html">Y Combinator, Partial Recursive functions</a> - May 23, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-01-05-RandTips.html">Random Shortcuts</a> - January  5, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-01-05-MarkovChain.html">Markov Chain and State machines</a> - January  5, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2016-01-01-TradingMeasurement.html">Benchmarks for algotrading</a> - January  1, 2016
-        </li>
-    
-</ul>
+</div>
+<p>UseRef</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6f626a656374206173640a6e6f7465206c6566740a203c26776966693e0a656e64206e6f74650a6469616d6f6e6420730a0a40656e64756d6c"></figure>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="kw">const</span> refContainer <span class="op">=</span> <span class="fu">useRef</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="kw">const</span> onButtonClick <span class="op">=</span> () <span class="kw">=&gt;</span> {<span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(refContainer<span class="op">.</span><span class="at">current</span>)}</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="co">//refContainer.current will return the DOM object</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="cf">return</span>(</span>
+<span id="cb1-6"><a href="#cb1-6"></a>        <span class="op">&lt;&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>            <span class="op">&lt;</span>div ref<span class="op">=</span>{refContainer}<span class="op">&gt;</span>SomeText <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>            <span class="op">&lt;</span>button onClick<span class="op">=</span>{onButtonClick}<span class="op">&gt;</span>button<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>        <span class="op">&lt;/&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    )</span>
+<span id="cb1-11"><a href="#cb1-11"></a>}</span></code></pre></div>
+<p>line 7, the JSX <code class="sourceCode javascript"><span class="op">&lt;</span>div ref<span class="op">=</span>{refContainer}<span class="op">&gt;</span></code> is what binds the ref Hook to the Dom Element.</p>
+<p>In most cases of hooks like useEffect or useState, it’s the JSX element that depends on the hook.<br />
+But in this case the hook depends on the JSX element.</p>
 
         </div>
         <div id="footer">

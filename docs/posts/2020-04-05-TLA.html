@@ -254,10 +254,14 @@
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>}                <span class="co">//pc=&quot;done&quot;</span></span></code></pre></div>
 <p>pc means current state pc pointer pc’ means next state pc pointer</p>
 <ul>
-<li>IF pc==“start”</li>
+<li>IF pc==“start”
+<ul>
 <li>THEN pc’ == “middle” and i’ (0,1000)</li>
-<li>ELSEIF pc==“middle”</li>
+</ul></li>
+<li>ELSEIF pc==“middle”
+<ul>
 <li>THEN (i’ = i + 1) and (pc’ ==“done”)</li>
+</ul></li>
 <li>ELSE FALSE</li>
 </ul>
 <p>Basically saying if we are at this section of code, then our next section of code must satisfy some constraint.</p>
@@ -271,7 +275,7 @@
 <p>meta-thought: arrays are really just partial functions and TLA+ makes this explicit.</p>
 <p>TLA+ Notation: sqr = [i  i^2 ]</p>
 <p>code: sqrt[i] = i^2</p>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a0a7469746c65204163746976697479204469616772616d205c6e0a0a73746172740a0a3a69203d20736f6d654e756d62657228293b3b0a0a6e6f7465206c6566740a202020207063203d20227374617274220a656e64206e6f74650a0a3a69203d20692b313b3b0a0a6e6f7465206c6566740a202020207063203d20226d6964646c65220a656e64206e6f74650a0a73746f700a0a6e6f7465206c6566740a202020207063203d2022646f6e65220a656e64206e6f74650a40656e64756d6c"></figure>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a7469746c65204163746976697479204469616772616d205c6e0a73746172740a3a69203d20736f6d654e756d62657228293b3b0a6e6f7465206c6566740a202020207063203d20227374617274220a656e64206e6f74650a3a69203d20692b313b3b0a6e6f7465206c6566740a202020207063203d20226d6964646c65220a656e64206e6f74650a73746f700a6e6f7465206c6566740a202020207063203d2022646f6e65220a656e64206e6f74650a40656e64756d6c"></figure>
 
         </div>
         <div id="footer">

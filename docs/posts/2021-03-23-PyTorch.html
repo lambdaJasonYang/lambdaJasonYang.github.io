@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Posts tagged "musings"</title>
+        <title>Jason Yang - Pytorch</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,84 +232,115 @@
         </div>
 
         <div id="content">
-            <h1>Posts tagged "musings"</h1>
+            <h1>Pytorch</h1>
             
 
-            <ul>
+            <div class="info">
+    Posted on March 23, 2021
     
-        <li>
-            <a href="../posts/2021-08-25-PlantUMLkey.html">PlantUML diagram list</a> - August 25, 2021
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2021-08-25-Alexa%20copy.html">Alexa</a> - August 25, 2021
-        </li>
+    Tags: <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'python'." href="../tags/python.html">python</a>
     
-        <li>
-            <a href="../posts/2021-08-10-WhyHakyll.html">Why Hakyll</a> - August 10, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-08-10-TemplatePage.html">Template Page (Ignore)</a> - August 10, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-05-25-TypeTheoryFuture.html">Type Theory and should you care</a> - May 25, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-05-23-Somelinks.html">Mainstream big tech site alternatives</a> - May 23, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-03-23-example.html">The State of Full Stack Languages in 2021</a> - March 23, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-03-23-ReactHooks.html">React Hooks</a> - March 23, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2020-04-20-LookaheadBias.html">Lookahead Bias</a> - April 20, 2020
-        </li>
-    
-        <li>
-            <a href="../posts/2020-04-05-TLA.html">TLA</a> - April  5, 2020
-        </li>
-    
-        <li>
-            <a href="../posts/2019-03-25-RecursionToIterative.html">Convert Recursion to Iteration</a> - March 25, 2019
-        </li>
-    
-        <li>
-            <a href="../posts/2019-03-23-mutualRecursion.html">Mutual recursion</a> - March 23, 2019
-        </li>
-    
-        <li>
-            <a href="../posts/2018-10-02-MemoryPointers.html">Overcomplicating Memory Model and Pointers</a> - October  2, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-07-15-TeachingSets.html">Language, Teaching and Set theory</a> - July 15, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-05-23-YParadox2.html">Y Combinator, Partial Recursive functions</a> - May 23, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-01-05-RandTips.html">Random Shortcuts</a> - January  5, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-01-05-MarkovChain.html">Markov Chain and State machines</a> - January  5, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2016-01-01-TradingMeasurement.html">Benchmarks for algotrading</a> - January  1, 2016
-        </li>
-    
+</div>
+<p><img src="../images/pyimage/pyplot.svg" /></p>
+<p>ML Simplified: <span class="math display">\[Data Input \overset{linear}{\Rightarrow} s \overset{non-linear}{\Rightarrow} z\]</span></p>
+<h3 id="prelude">Prelude</h3>
+<p>Drawing basis</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>mbases <span class="op">=</span> torch.cat((torch.zeros(<span class="dv">2</span>, <span class="dv">2</span>), torch.eye(<span class="dv">2</span>))).to(<span class="st">&quot;cpu&quot;</span>)  </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="co">#&gt;mbases := tensor([[0., 0.], [0., 0.], [1., 0.], [0., 1.]])</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="co">#mbases is a plt.arrow vector that points from origin [0., 0.] to [1., 0.]</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="co">#and [0., 0.] to [0., 1.]</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="kw">def</span> plot_bases(bases, width<span class="op">=</span><span class="fl">0.04</span>):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>    bases <span class="op">=</span> bases.cpu()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>    bases[<span class="dv">2</span>:] <span class="op">-=</span> bases[:<span class="dv">2</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>    plt.arrow(<span class="op">*</span>bases[<span class="dv">0</span>], <span class="op">*</span>bases[<span class="dv">2</span>], width<span class="op">=</span>width, color<span class="op">=</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), zorder<span class="op">=</span><span class="dv">10</span>, alpha<span class="op">=</span><span class="fl">1.</span>, length_includes_head<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>    plt.arrow(<span class="op">*</span>bases[<span class="dv">1</span>], <span class="op">*</span>bases[<span class="dv">3</span>], width<span class="op">=</span>width, color<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>), zorder<span class="op">=</span><span class="dv">10</span>, alpha<span class="op">=</span><span class="fl">1.</span>, length_includes_head<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>    plt.savefig(<span class="st">&quot;output&quot;</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="co">#plot_bases(mbases)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="co">#&gt;shows basis vectors</span></span></code></pre></div>
+<h3 id="basics">Basics</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co"># Load libraries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="im">import</span> torch</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="im">from</span> res.plot_lib <span class="im">import</span> set_default, show_scatterplot, plot_bases</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> plot, title, axis</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>device <span class="op">=</span> torch.device(<span class="st">&quot;cuda:0&quot;</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">&quot;cpu&quot;</span>)</span></code></pre></div>
+<p>Plot 3d vector representing (x,y,color)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>dataset <span class="op">=</span> torch.tensor([[<span class="dv">0</span>,<span class="dv">4</span>,<span class="fl">0.1</span>],[<span class="fl">0.5</span>,<span class="dv">5</span>,<span class="fl">0.2</span>]]).to(<span class="st">&quot;cpu&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="co">## We load the points (0,4) (0.5,5) to cpu memory</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="co">## alternative is torch.tensor(..).to(&quot;cuda:0&quot;)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="co">#dataset = torch.randn(30,3)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="co">## creates 30 datapoints of 3-d vectors</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>colors <span class="op">=</span> dataset[:,<span class="dv">2</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>points <span class="op">=</span> dataset[:,(<span class="dv">0</span>,<span class="dv">1</span>)]</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>plt.scatter(points[:,<span class="dv">0</span>],points[:,<span class="dv">1</span>],c<span class="op">=</span>colors)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>plt.axis(<span class="st">'square'</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>plt.show()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a></span></code></pre></div>
+<p><span class="math inline">\(\begin{bmatrix} \color{red}{ 0} \\ \color{red}{4} \\ \color{blue}{0.1} \end{bmatrix} \begin{bmatrix} \color{red}{0.5} \\ \color{red}{5} \\ \color{blue}{0.2} \end{bmatrix}\)</span></p>
+<p>RED: Extract (x,y)-points (0,4) and (0.5,5)<br />
+BLUE: Extract 2 respective colors 0.1 and 0.2 for the two points.</p>
+<p><img src="../images/pytorchimg/Figure_1.svg" /></p>
+<hr />
+<h3 id="transformations">Transformations</h3>
+<p>Above we had a 3d vector representing (x,y,color)<br />
+Now we will plot a 2d vector and have the color represent a static label of x-axis. (x,y,color=x)</p>
+<p>Why? We will transform these set of points and use the color to get a feel for how each point is transformed.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>dataset <span class="op">=</span> torch.randn(<span class="dv">1000</span>,<span class="dv">2</span>).to(<span class="st">&quot;cpu&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="co">## creates a set of 1000, 2-d vectors</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>colors <span class="op">=</span> dataset[:,<span class="dv">0</span>]    <span class="co">#color will be a 2nd representation of x-axis</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>points <span class="op">=</span> dataset[:,(<span class="dv">0</span>,<span class="dv">1</span>)]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>plt.scatter(points[:,<span class="dv">0</span>],points[:,<span class="dv">1</span>],c<span class="op">=</span>colors)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>plt.axis(<span class="st">'square'</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>plt.title(<span class="st">&quot;ScatterPoint&quot;</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="../images/pytorchimg/Figure_2.svg" /></p>
+<h4 id="svd">SVD</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>Weight <span class="op">=</span> torch.randn(<span class="dv">2</span>,<span class="dv">2</span>).to(<span class="st">&quot;cpu&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="co">#Weight := tensor([[ 0.3439,  0.9503], [-0.2960,  0.1503]])</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>Output <span class="op">=</span> points <span class="op">@</span> Weight.t()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="bu">print</span>(Output.shape)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="co">#SVD</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>U, S, V <span class="op">=</span> torch.svd(Weight)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="co">#&gt;U := tensor([[ 0.9990,  0.0449], [ 0.0449, -0.9990]])</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="co">#&gt;S := tensor([1.0115, 0.3292])</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="co">#&gt;V := tensor([[ 0.3265,  0.9452], [ 0.9452, -0.3265]])</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>plt.scatter(Output[:,<span class="dv">0</span>],Output[:,<span class="dv">1</span>],c<span class="op">=</span>colors)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>mbases <span class="op">=</span> mbases <span class="op">@</span> Weight.t()</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a><span class="co">#&gt; mbases := tensor([[ 0.0000,  0.0000],[ 0.0000,  0.0000],[ 0.3439, -0.2960],[ 0.9503,  0.1503]])</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a><span class="cf">assert</span> Weight.allclose(U<span class="op">@</span>torch.diag(S)<span class="op">@</span>V.t())</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a><span class="co">## Weight.allclose() is effectively testing equality because pure equality w/ floating points is f***ing dangerous</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a>plot_bases(mbases)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<p><img src="../images/pytorchimg/Figure_3.svg" /> Notice how the yellow dots rotated to the bottom</p>
+<p><span class="math display">\[Weight = \begin{bmatrix} 0.3439 \\ 0.9503 \end{bmatrix} \begin{bmatrix} -0.2960 \\ 0.1503 \end{bmatrix}\]</span> <span class="math display">\[U = Rotation = \begin{bmatrix} 0.9990 &amp; 0.0449 \\ 0.0449 &amp; -0.9990 \end{bmatrix}\]</span> <span class="math display">\[S = Symmetry = \begin{bmatrix} 1.0115 &amp; 0 \\ 0 &amp; 0.3292 \end{bmatrix}\]</span> <span class="math display">\[V = Reflection = \begin{bmatrix} 0.3265 &amp; 0.9452 \\ 0.9452 &amp; -0.3265 \end{bmatrix}\]</span></p>
+<p><span class="math display">\[SVD(Weight) = Rotation \times Symmetric\ Matrix \times Reflection^{T}\]</span> <span class="math display">\[W = U \begin{bmatrix} s_1 &amp; 0 \\ 0 &amp; s_2 \end{bmatrix} V^T\]</span></p>
+<p>We can decompose the Weight matrix into 3 easily understood operations</p>
+<ul>
+<li>U = Rotation</li>
+<li>S = Symmetry</li>
+<li>V = Reflection</li>
 </ul>
+<p><strong>Pytorch makes the above linear transformation easy</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>model <span class="op">=</span> nn.Sequential(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>        nn.Linear(<span class="dv">2</span>, <span class="dv">2</span>, bias<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>model.to(<span class="st">&quot;cpu&quot;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="cf">with</span> torch.no_grad():</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>    Output <span class="op">=</span> model(dataset)</span></code></pre></div>
+<h3 id="non-linear-transformations">Non-linear Transformations</h3>
+<hr />
+<h3 id="autodifferentiation">Autodifferentiation</h3>
 
         </div>
         <div id="footer">

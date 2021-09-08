@@ -31,3 +31,27 @@ def identity(k):
 
 Induction can be thought as a meta-level confirmation that computable recursion will work.
 
+```plantuml
+@startuml
+
+B -> B:
+activate B
+
+
+B -> B:
+activate B
+
+B -> B:
+activate B
+
+B --> B:
+deactivate B
+
+B --> B:
+deactivate B
+
+B --> B:
+deactivate B
+
+@enduml
+```
