@@ -3,28 +3,16 @@ title: Fold and Induction
 tags: mathcs
 ---
 
-Use this page as a template to building other Hakyll pages.
+A literature review of Folds with Hutton et al.
 
+### Foldr
 
-```bash
-chcp 65001
-stack exec myblog clean
-stack exec myblog build
+```haskell
+foldr :: (a -> b -> b) -> b -> ([a] -> b)
+type recurse = (a -> b -> b)
+type base = b
+type listarg = [a]
+type output = b
+foldr :: recurse -> base -> listarg -> output
 ```
-
-```bash
-git add .
-git commit -m "some message"
-git push origin main:main
-```
-
-
-
-``` haskell
-fac n = foldr (*) 1 [1..n]
-```
-
-```{.ruby .numberLines}
-def greet; "Hello, world!"; end
-```
-\\[ \\ln x = \\int_{-\\infty}^x \\frac 1 y \\, dy . \\]
+recurse is a left semigroup action.

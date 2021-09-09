@@ -59,24 +59,153 @@ any bear y must like bear B if and only if bear y does not like itself
 
 [Let us define bear B as this AST]  
 
-![](/images/ycomb/ycomb0.png)
+```plantuml
+@startuml
+digraph world {
+size="3,3";
+lbear[label = "lambda-bear"]
+bear2[label = "bear"]
+
+lbear -> not 
+not -> likes
+likes -> bear
+likes -> bear2
+}
+@enduml
+```
 
 
 [bear B likes itself]  
+```plantuml
+@startuml
+digraph world {
+size="3,3";
+lbear1[label = "lambda-bear"]
+lbear2[label = "lambda-bear"]
+bear1[label = "bear"]
+bear2[label = "bear"]
+bear3[label = "bear"]
+bear4[label = "bear"]
+not1[label = "not"]
+not2[label = "not"]
+like1[label =  "likes"]
+like2[label = "likes"]
+like3[label = "likes"]
+like1 -> lbear1
+like1 -> lbear2
+lbear1 -> not1
+lbear2 -> not2
+not1 -> like2
+not2 -> like3
+like2 -> bear1
+like2 -> bear2
+like3 -> bear3
+like3 -> bear4
+}
+@enduml
+```
 
-![](/images/ycomb/ycomb1.png)
 
 [therefore bear B does not like itself]  
+```plantuml
+@startuml
+digraph world {
+size="3,3";
+notA[label = "not"]
+lbear1[label = "lambda-bear"]
+lbear2[label = "lambda-bear"]
+bear1[label = "bear"]
+bear2[label = "bear"]
+bear3[label = "bear"]
+bear4[label = "bear"]
+not1[label = "not"]
+not2[label = "not"]
+like1[label =  "likes"]
+like2[label = "likes"]
+like3[label = "likes"]
+notA -> like1
+like1 -> lbear1
+like1 -> lbear2
+lbear1 -> not1
+lbear2 -> not2
+not1 -> like2
+not2 -> like3
+like2 -> bear1
+like2 -> bear2
+like3 -> bear3
+like3 -> bear4
+}
+@enduml
+```
 
-![](/images/ycomb/ycomb2.png)
 
 [But this means bear B does not not like itself, which is a double negative, meaning bear B likes itself]
+```plantuml
+@startuml
+digraph world {
+size="3,3";
+notA[label = "not"]
+notB[label = "not"]
+lbear1[label = "lambda-bear"]
+lbear2[label = "lambda-bear"]
+bear1[label = "bear"]
+bear2[label = "bear"]
+bear3[label = "bear"]
+bear4[label = "bear"]
+not1[label = "not"]
+not2[label = "not"]
+like1[label =  "likes"]
+like2[label = "likes"]
+like3[label = "likes"]
+notA -> notB
+notB -> like1
+like1 -> lbear1
+like1 -> lbear2
+lbear1 -> not1
+lbear2 -> not2
+not1 -> like2
+not2 -> like3
+like2 -> bear1
+like2 -> bear2
+like3 -> bear3
+like3 -> bear4
+}
+@enduml
+```
 
-![](/images/ycomb/ycomb3.png)
 
 [and so on and so forth...]  
+```plantuml
+@startuml
+digraph world {
+size="3,3";
+dots[label = "..."]
+lbear1[label = "lambda-bear"]
+lbear2[label = "lambda-bear"]
+bear1[label = "bear"]
+bear2[label = "bear"]
+bear3[label = "bear"]
+bear4[label = "bear"]
+not1[label = "not"]
+not2[label = "not"]
+like1[label =  "likes"]
+like2[label = "likes"]
+like3[label = "likes"]
+dots -> like1
+like1 -> lbear1
+like1 -> lbear2
+lbear1 -> not1
+lbear2 -> not2
+not1 -> like2
+not2 -> like3
+like2 -> bear1
+like2 -> bear2
+like3 -> bear3
+like3 -> bear4
+}
+@enduml
+```
 
-![](/images/ycomb/ycomb4.png)
 
 ### End
 I hope this helped elucidate your understanding of this fundamental paradox.  

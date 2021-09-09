@@ -268,7 +268,12 @@ Recursion comes from the code being executed.</p>
 <li>But computationally or recursively, <code class="sourceCode python"><span class="bu">id</span>(k<span class="op">-</span><span class="dv">1</span>)</code> <span class="math inline">\(\overset{reduce}\Leftarrow\)</span> <code class="sourceCode python"><span class="bu">id</span>(k)</code></li>
 </ul>
 <p>Induction can be thought as a meta-level confirmation that computable recursion will work.</p>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a0a42202d3e20423a0a616374697661746520420a0a0a42202d3e20423a0a616374697661746520420a0a42202d3e20423a0a616374697661746520420a0a42202d2d3e20423a0a6465616374697661746520420a0a42202d2d3e20423a0a6465616374697661746520420a0a42202d2d3e20423a0a6465616374697661746520420a0a40656e64756d6c"></figure>
+<hr />
+<h3 id="diagrams">Diagrams</h3>
+<p>The lifelines of the Sequence diagram(the rectangular boxes) <strong>stacked</strong> on each other indicates a recursive function.<br />
+We can take advantage of this stacking behavior to implement recursion using stacks.</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a0a42202d3e20423a0a616374697661746520420a42202d3e20423a0a616374697661746520420a42202d3e20423a0a616374697661746520420a42202d2d3e20423a0a6465616374697661746520420a42202d2d3e20423a0a6465616374697661746520420a42202d2d3e20423a0a6465616374697661746520420a40656e64756d6c"></figure>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a73746172740a69662028692029207468656e202865712030290a20203a313b0a202073746f700a0a656c73652028203e203129200a20203a34202a3b0a706172746974696f6e2073756270726f626c656d207b0a202073746172740a0a20206966202820692029207468656e202865712030290a20203a20313b0a202073746f700a2020656c736520283e2031290a202020203a34202a3b200a20202020706172746974696f6e2073756273756270726f626c656d207b0a202020203a2e2e2e3b0a202020207d0a0a2020656e6469660a7d0a73746f70200a656e6469660a40656e64756d6c"></figure>
 
         </div>
         <div id="footer">
