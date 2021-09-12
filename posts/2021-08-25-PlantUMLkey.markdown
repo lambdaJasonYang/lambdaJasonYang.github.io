@@ -3,6 +3,10 @@ title: PlantUML diagram list
 tags: musings, prog
 ---
 
+State Diagram  only have 1 type of arrow.
+Activity Diagram has less control than state diagram.
+
+
 ```plantuml
 @startuml
 abstract        abstract
@@ -183,6 +187,7 @@ size="7,7";
 1 -> { 2 3 } [color=blue]
 2 -> { 4 } [color=red dir=both]
 4 -> { 5 6} [color=green dir=none comment=hello]
+5 -> { 6} [color=green label="hello" style=dotted]
 }
 @enduml
 ```
