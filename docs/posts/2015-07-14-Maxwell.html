@@ -244,12 +244,50 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
     
 </div>
-<p>Fundamental Theorem of Algebra</p>
+<p><span class="math inline">\(Div(F) =\nabla \cdot F\)</span><br />
+<span class="math inline">\(Curl(F) =\nabla \times F\)</span></p>
+<h2 id="div">Div</h2>
+<p>Assume given a vector field <span class="math inline">\(F\)</span></p>
+<p>Positive = source<br />
+Negative = sink</p>
 <ul>
-<li>Complex polynomials(complex coefficients) can be factored in to n factors with n roots that may not be distinct.</li>
-<li>Since reals are subset of complex, implies typical real polynomials can always be factored resulting in real or complex roots.</li>
-<li>Complex numbers have a closure property in factoring</li>
+<li><span class="math inline">\(Div(F,(x,y))\)</span> means Divergence of field F at point (x,y).</li>
+<li>Draw a circle at (x,y) in vector field
+<ul>
+<li>Fluid moving out Circle &gt; Fluid moving in Circle
+<ul>
+<li>Positive</li>
+</ul></li>
+<li>Fluid moving in Circle &gt; Fluit moving out Circle
+<ul>
+<li>Negative</li>
+</ul></li>
+</ul></li>
 </ul>
+<p>Incompressible fluid like water has Divergence = 0 everywhere. Divergence = 0 implies no source or sinks.</p>
+<h2 id="curl">Curl</h2>
+<p>How much fluid rotates around a point.</p>
+<p>postive = Clockwise negative = Counterclockwise</p>
+<p>Uni-directional vector field, imagine a vertical piece of wood, if vector field is stronger on top than bottom it will make it spin clockwise.</p>
+<h2 id="maxwell-eq">Maxwell Eq</h2>
+<p><span class="math inline">\(Div(E) = \frac{\rho}{\epsilon_0}\)</span></p>
+<ul>
+<li>Divergence of electric field is correlated to charge density.
+<ul>
+<li>Electric field has a source like effect when charge is positive.</li>
+<li>Electric field has a sink like effect when charge is negative.</li>
+</ul></li>
+</ul>
+<p><span class="math inline">\(Div(B) = 0\)</span></p>
+<ul>
+<li>magnetic field is incompressible like water</li>
+<li>magnetic field have no source nor sinks
+<ul>
+<li>The north-south pole magnet effect is created a pair of clockwise and counter clockwise flow.</li>
+</ul></li>
+</ul>
+<p><span class="math inline">\(Curl(E) = -\frac{dB}{dt}\)</span> A closed circuit denoted by the Curl of E will be induced a current when magnetic field changes. A magnetic field will be induced when current is running through a closed circuit.</p>
+<p><span class="math inline">\(Curl(B) = \mu_{0}(J + \epsilon_{0}\frac{dE}{dt})\)</span></p>
 
         </div>
         <div id="footer">

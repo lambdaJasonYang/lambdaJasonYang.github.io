@@ -3,12 +3,56 @@ title: Maxwell Equations
 tags: mathcs, appliedmath
 ---
 
-
-Fundamental Theorem of Algebra 
-
-* Complex polynomials(complex coefficients) can be factored in to n factors with n roots that may not be distinct.
-* Since reals are subset of complex, implies typical real polynomials can always be factored resulting in real or complex roots.
-* Complex numbers have a closure property in factoring
-  
+$Div(F) =\nabla \cdot F$  
+$Curl(F) =\nabla \times F$
 
 
+## Div
+Assume given a vector field $F$
+
+Positive = source  
+Negative = sink  
+
+
+* $Div(F,(x,y))$ means Divergence of field F at point (x,y). 
+* Draw a circle at (x,y) in vector field
+  * Fluid moving out Circle > Fluid moving in Circle
+    * Positive
+  * Fluid moving in Circle > Fluit moving out Circle
+    * Negative
+
+Incompressible fluid like water has Divergence = 0 everywhere.
+Divergence = 0 implies no source or sinks.
+
+
+## Curl
+
+How much fluid rotates around a point.
+
+postive = Clockwise 
+negative = Counterclockwise 
+
+Uni-directional vector field, imagine a vertical piece of wood, if vector field is stronger on top than bottom it will make it spin clockwise.
+
+
+## Maxwell Eq
+
+$Div(E) = \frac{\rho}{\epsilon_0}$  
+
+* Divergence of electric field is correlated to charge density.
+  * Electric field has a source like effect when charge is positive.
+  * Electric field has a sink like effect when charge is negative.
+
+
+$Div(B) = 0$
+
+* magnetic field is incompressible like water
+* magnetic field have no source nor sinks
+  * The north-south pole magnet effect is created a pair of clockwise and counter clockwise flow.
+
+
+$Curl(E) = -\frac{dB}{dt}$
+A closed circuit denoted by the Curl of E will be induced a current when magnetic field changes.
+A magnetic field will be induced when current is running through a closed circuit.
+
+$Curl(B) = \mu_{0}(J + \epsilon_{0}\frac{dE}{dt})$

@@ -66,6 +66,41 @@ pricing known pay offs - what is the value today? answer is deterministic * pric
     <dc:creator>Jason Yang</dc:creator>
 </item>
 <item>
+    <title>Trading Indicators</title>
+    <link>https://userjy.github.io/posts/2021-08-25-StockIndicators.html</link>
+    <description><![CDATA[<div class="info">
+    Posted on August 25, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;mathcs&#39;." href="/tags/mathcs.html">mathcs</a>, <a title="All pages tagged &#39;finance&#39;." href="/tags/finance.html">finance</a>
+    
+</div>
+<h3 id="studies">Studies</h3>
+<ul>
+<li><p>AccDist</p></li>
+<li><p>Acceleration band</p></li>
+</ul>
+<hr />
+<h3 id="strategies">Strategies</h3>
+<hr />
+<h3 id="candlestick-patterns">Candlestick Patterns</h3>
+<p>Doji Candle = minimum change, candle stick is very thin Bullish Candle = + green change Bearish Candle = - red change</p>
+<p>Reversal</p>
+<ul>
+<li>Abandoned Baby
+<ul>
+<li>Bullish -&gt; Doji -&gt; Bearish</li>
+<li>Formed at end of up trend and signal reversal</li>
+</ul></li>
+</ul>
+]]></description>
+    <pubDate>Wed, 25 Aug 2021 00:00:00 UT</pubDate>
+    <guid>https://userjy.github.io/posts/2021-08-25-StockIndicators.html</guid>
+    <dc:creator>Jason Yang</dc:creator>
+</item>
+<item>
     <title>HTTP requests - Design proper headers in python</title>
     <link>https://userjy.github.io/posts/2021-08-25-RequestHeader.html</link>
     <description><![CDATA[<div class="info">
@@ -716,32 +751,6 @@ Plus it’s a good excuse to find a more applied use for Haskell.</p>
 ]]></description>
     <pubDate>Tue, 10 Aug 2021 00:00:00 UT</pubDate>
     <guid>https://userjy.github.io/posts/2021-08-10-WhyHakyll.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
-    <title>Template Page (Ignore)</title>
-    <link>https://userjy.github.io/posts/2021-08-10-TemplatePage.html</link>
-    <description><![CDATA[<div class="info">
-    Posted on August 10, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;tech&#39;." href="/tags/tech.html">tech</a>, <a title="All pages tagged &#39;mathcs&#39;." href="/tags/mathcs.html">mathcs</a>, <a title="All pages tagged &#39;AI&#39;." href="/tags/AI.html">AI</a>, <a title="All pages tagged &#39;musings&#39;." href="/tags/musings.html">musings</a>
-    
-</div>
-<p>Use this page as a template to building other Hakyll pages.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> greet; <span class="st">&quot;Hello, world!&quot;</span>; <span class="kw">end</span></span></code></pre></div>
-]]></description>
-    <pubDate>Tue, 10 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-10-TemplatePage.html</guid>
     <dc:creator>Jason Yang</dc:creator>
 </item>
 
