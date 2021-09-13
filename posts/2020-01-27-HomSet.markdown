@@ -3,6 +3,10 @@ title: HomSet
 tags: mathcs, categorytheory
 ---
 
+HomSet in programming terms are simply the types of the functions.
+
+Nested HomSets are simply the types of curried functions.
+
 ### Translate Homset to function type notation
 
 $$ f :: A \rightarrow B := f \in Hom(A, B) $$

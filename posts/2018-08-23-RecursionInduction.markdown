@@ -31,3 +31,57 @@ def identity(k):
 
 Induction can be thought as a meta-level confirmation that computable recursion will work.
 
+---
+
+### Diagrams
+
+The lifelines of the Sequence diagram(the rectangular boxes) **stacked** on each other indicates a recursive function.  
+We can take advantage of this stacking behavior to implement recursion using stacks.
+
+
+```plantuml
+@startuml
+
+B -> B:
+activate B
+B -> B:
+activate B
+B -> B:
+activate B
+B --> B:
+deactivate B
+B --> B:
+deactivate B
+B --> B:
+deactivate B
+@enduml
+```
+
+
+```plantuml
+@startuml
+start
+if (i ) then (eq 0)
+  :1;
+  stop
+
+else ( > 1) 
+  :4 *;
+partition subproblem {
+  start
+
+  if ( i ) then (eq 0)
+  : 1;
+  stop
+  else (> 1)
+    :4 *; 
+    partition subsubproblem {
+    :...;
+    }
+
+  endif
+}
+stop 
+endif
+@enduml
+```

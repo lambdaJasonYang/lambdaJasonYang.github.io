@@ -5,15 +5,25 @@ tags: tech,mathcs,AI,musings
 
 ```plantuml
 @startuml
-autoactivate on
+
 B -> B:
+activate B
 
 
 B -> B:
-B -> B:
+activate B
 
-return
-return
+B -> B:
+activate B
+
+B --> B:
+deactivate B
+
+B --> B:
+deactivate B
+
+B --> B:
+deactivate B
 
 @enduml
 ```

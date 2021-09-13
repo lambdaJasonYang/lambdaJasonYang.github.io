@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Fold and Induction</title>
+        <title>Jason Yang - Literature review</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,111 +232,20 @@
         </div>
 
         <div id="content">
-            <h1>Fold and Induction</h1>
+            <h1>Literature review</h1>
             
 
             <div class="info">
-    Posted on August 23, 2019
+    Posted on September  1, 2020
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
 </div>
-<p>A literature review of Folds with Hutton et al.</p>
-<h3 id="foldr">Foldr</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">foldr</span><span class="ot"> ::</span> (a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> ([a] <span class="ot">-&gt;</span> b)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">type</span> recurse <span class="ot">=</span> (a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> b)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">type</span> base <span class="ot">=</span> b</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="kw">type</span> listarg <span class="ot">=</span> [a]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="kw">type</span> output <span class="ot">=</span> b</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="fu">foldr</span><span class="ot"> ::</span> recurse <span class="ot">-&gt;</span> base <span class="ot">-&gt;</span> listarg <span class="ot">-&gt;</span> output</span></code></pre></div>
-<p>recurse is a left semigroup action which is easily inferred by it’s type.</p>
-<p><span class="math display">\[foldr\ recurse\ base\ listarg = \begin{cases} base&amp; \text{if listarg match empty list} \\ recurse\ listarg[0]\ (foldr\ recurse\ base\ listarg[1:]) &amp; else \end{cases}\]</span></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">def</span> sum1(a,b):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold sum monoid act: </span><span class="ch">\t\t</span><span class="st">&quot;</span>,fold(sum1,<span class="dv">0</span>,tlist))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="kw">def</span> product1(a,b):</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>    <span class="cf">return</span> a <span class="op">*</span> b</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold product monoid act: </span><span class="ch">\t</span><span class="st">&quot;</span>,fold(product1,<span class="dv">1</span>,tlist))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="kw">def</span> and1(a,b):</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>    <span class="cf">return</span> a <span class="kw">and</span> b</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold AND monoid act: </span><span class="ch">\t\t</span><span class="st">&quot;</span>, fold(and1,<span class="va">True</span>,tlist))</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="kw">def</span> or1(a,b):</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>    <span class="cf">return</span> a <span class="kw">or</span> b</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold OR monoid act: </span><span class="ch">\t\t</span><span class="st">&quot;</span>,fold(or1,<span class="va">False</span>,tlist))</span></code></pre></div>
-<pre class="code"><code>fold sum monoid act: 		 15
-fold product monoid act: 	 120
-fold AND monoid act: 		 True
-fold OR monoid act: 		 1
-</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>appendlambda <span class="op">=</span> <span class="kw">lambda</span> x,n: [x] <span class="op">+</span> n</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold append monoid act: </span><span class="ch">\t</span><span class="st">&quot;</span>, fold(appendlambda,[],tlist))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="co">#fold(lambda x. lambda y. [x] ++ y,[],</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>lenlambda <span class="op">=</span> <span class="kw">lambda</span> x,n: <span class="dv">1</span> <span class="op">+</span> n</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold length monoid act: </span><span class="ch">\t</span><span class="st">&quot;</span>,fold(lenlambda, <span class="dv">0</span>, tlist))</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>revlambda <span class="op">=</span> <span class="kw">lambda</span> x,xs: xs <span class="op">+</span> [x]</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold reverse monoid act: </span><span class="ch">\t</span><span class="st">&quot;</span>,fold(revlambda,[],tlist))</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>maplambda <span class="op">=</span> <span class="kw">lambda</span> f:(<span class="kw">lambda</span> x,xs: [f(x)] <span class="op">+</span> xs )</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>times2 <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold map monoid act: </span><span class="ch">\t\t</span><span class="st">&quot;</span>,fold(maplambda(times2),[],tlist))</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a>filterlambda <span class="op">=</span> <span class="kw">lambda</span> p: (<span class="kw">lambda</span> x,xs: [x] <span class="op">+</span> xs <span class="cf">if</span> p(x) <span class="cf">else</span> xs)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a>evenQ <span class="op">=</span> <span class="kw">lambda</span> x: x<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold even monoid act: </span><span class="ch">\t\t</span><span class="st">&quot;</span>,fold(filterlambda(evenQ),[],tlist))</span></code></pre></div>
-<pre class="code"><code>fold append monoid act: 	 [1, 2, 3, 4, 5]
-fold length monoid act: 	 5
-fold reverse monoid act: 	 [5, 4, 3, 2, 1]
-fold map monoid act: 		 [2, 4, 6, 8, 10]
-fold even monoid act: 		 [2, 4]</code></pre>
-<h3 id="universal-property">Universal property</h3>
-<p>In Hutton’s paper he tells us when fold can be used. Essentially it’s just an inductive proof of correctness packaged into the function g.</p>
-<p><span class="math display">\[   \begin{aligned}
-    g  \ []  &amp;=  v\\
-    g \ (x:xs) &amp;=  f\ x\ (g\ xs) 
-  \end{aligned}
-  \quad\Longleftrightarrow\quad
-  \begin{aligned}
-    g &amp;= fold\ f\ v 
-  \end{aligned} \]</span></p>
-<p>We can design a fold iff we can design a function g.<br />
-The left hand side of the iff is just an inductive proof over length of list.</p>
-<ul>
-<li>g [] = v
-<ul>
-<li>show g applied to base case returns expected base case v</li>
-</ul></li>
-<li>(g xs) is our IH
-<ul>
-<li>f x (g xs) = f x IH, meaning when we apply our function f to our inductive hypothesis IH and the dangling element x, we will return our expected results.</li>
-</ul></li>
-</ul>
-<h3 id="fusion">Fusion</h3>
-<p>When can we some arbitrary function h with a fold to return another fold? <span class="math display">\[ h \circ fold\ a\ b \overset{?}{=} fold\ c\ d\]</span></p>
-<p>We denote the 2 folds in the eqn above:</p>
-<ul>
-<li>LHS-fold
-<ul>
-<li>basecase is b</li>
-<li>recursive operation is a</li>
-</ul></li>
-<li>RHS-fold
-<ul>
-<li>basecase is d</li>
-<li>recursive operation is c</li>
-</ul></li>
-<li>h b = d</li>
-<li>h (c x LHS-IH) = c x (a LHS-IH) example</li>
-</ul>
-<p><span class="math display">\[ (+1) \circ sumfold = fold\ (+)\ 1 \]</span></p>
-<p>h = (+1)<br />
-a = (+)<br />
-b = 0<br />
-c = (+)<br />
-d = 1</p>
+<p>https://arxiv.org/pdf/1112.1051.pdf</p>
+<p>Benchmark used: Mean Absolute Percentage Error (MAPE)</p>
 
         </div>
         <div id="footer">

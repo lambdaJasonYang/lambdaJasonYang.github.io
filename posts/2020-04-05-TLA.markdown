@@ -25,10 +25,10 @@ pc means current state pc pointer
 pc' means next state pc pointer 
 
 * IF pc=="start" 
- * THEN pc' == "middle" and i' \in (0,1000)
+  * THEN pc' == "middle" and i' \in (0,1000)
 * ELSEIF pc=="middle" 
- * THEN (i' = i + 1) and (pc' =="done")
- * ELSE FALSE
+  * THEN (i' = i + 1) and (pc' =="done")
+* ELSE FALSE
  
  Basically saying if we are at this section of code, then our next section of code must satisfy some constraint.
  
@@ -52,25 +52,17 @@ code: sqrt[i] = i^2
 
 ```plantuml
 @startuml
-
 title Activity Diagram \n
-
 start
-
 :i = someNumber();;
-
 note left
     pc = "start"
 end note
-
 :i = i+1;;
-
 note left
     pc = "middle"
 end note
-
 stop
-
 note left
     pc = "done"
 end note

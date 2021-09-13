@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Fold and Induction</title>
+        <title>Jason Yang - Quick React</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,111 +232,137 @@
         </div>
 
         <div id="content">
-            <h1>Fold and Induction</h1>
+            <h1>Quick React</h1>
             
 
             <div class="info">
-    Posted on August 23, 2019
+    Posted on March 23, 2021
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<p>A literature review of Folds with Hutton et al.</p>
-<h3 id="foldr">Foldr</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">foldr</span><span class="ot"> ::</span> (a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> ([a] <span class="ot">-&gt;</span> b)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">type</span> recurse <span class="ot">=</span> (a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> b)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">type</span> base <span class="ot">=</span> b</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="kw">type</span> listarg <span class="ot">=</span> [a]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="kw">type</span> output <span class="ot">=</span> b</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="fu">foldr</span><span class="ot"> ::</span> recurse <span class="ot">-&gt;</span> base <span class="ot">-&gt;</span> listarg <span class="ot">-&gt;</span> output</span></code></pre></div>
-<p>recurse is a left semigroup action which is easily inferred by it’s type.</p>
-<p><span class="math display">\[foldr\ recurse\ base\ listarg = \begin{cases} base&amp; \text{if listarg match empty list} \\ recurse\ listarg[0]\ (foldr\ recurse\ base\ listarg[1:]) &amp; else \end{cases}\]</span></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">def</span> sum1(a,b):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold sum monoid act: </span><span class="ch">\t\t</span><span class="st">&quot;</span>,fold(sum1,<span class="dv">0</span>,tlist))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="kw">def</span> product1(a,b):</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>    <span class="cf">return</span> a <span class="op">*</span> b</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold product monoid act: </span><span class="ch">\t</span><span class="st">&quot;</span>,fold(product1,<span class="dv">1</span>,tlist))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="kw">def</span> and1(a,b):</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>    <span class="cf">return</span> a <span class="kw">and</span> b</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold AND monoid act: </span><span class="ch">\t\t</span><span class="st">&quot;</span>, fold(and1,<span class="va">True</span>,tlist))</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="kw">def</span> or1(a,b):</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>    <span class="cf">return</span> a <span class="kw">or</span> b</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold OR monoid act: </span><span class="ch">\t\t</span><span class="st">&quot;</span>,fold(or1,<span class="va">False</span>,tlist))</span></code></pre></div>
-<pre class="code"><code>fold sum monoid act: 		 15
-fold product monoid act: 	 120
-fold AND monoid act: 		 True
-fold OR monoid act: 		 1
-</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>appendlambda <span class="op">=</span> <span class="kw">lambda</span> x,n: [x] <span class="op">+</span> n</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold append monoid act: </span><span class="ch">\t</span><span class="st">&quot;</span>, fold(appendlambda,[],tlist))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="co">#fold(lambda x. lambda y. [x] ++ y,[],</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>lenlambda <span class="op">=</span> <span class="kw">lambda</span> x,n: <span class="dv">1</span> <span class="op">+</span> n</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold length monoid act: </span><span class="ch">\t</span><span class="st">&quot;</span>,fold(lenlambda, <span class="dv">0</span>, tlist))</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>revlambda <span class="op">=</span> <span class="kw">lambda</span> x,xs: xs <span class="op">+</span> [x]</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold reverse monoid act: </span><span class="ch">\t</span><span class="st">&quot;</span>,fold(revlambda,[],tlist))</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>maplambda <span class="op">=</span> <span class="kw">lambda</span> f:(<span class="kw">lambda</span> x,xs: [f(x)] <span class="op">+</span> xs )</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>times2 <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold map monoid act: </span><span class="ch">\t\t</span><span class="st">&quot;</span>,fold(maplambda(times2),[],tlist))</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a>filterlambda <span class="op">=</span> <span class="kw">lambda</span> p: (<span class="kw">lambda</span> x,xs: [x] <span class="op">+</span> xs <span class="cf">if</span> p(x) <span class="cf">else</span> xs)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a>evenQ <span class="op">=</span> <span class="kw">lambda</span> x: x<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;fold even monoid act: </span><span class="ch">\t\t</span><span class="st">&quot;</span>,fold(filterlambda(evenQ),[],tlist))</span></code></pre></div>
-<pre class="code"><code>fold append monoid act: 	 [1, 2, 3, 4, 5]
-fold length monoid act: 	 5
-fold reverse monoid act: 	 [5, 4, 3, 2, 1]
-fold map monoid act: 		 [2, 4, 6, 8, 10]
-fold even monoid act: 		 [2, 4]</code></pre>
-<h3 id="universal-property">Universal property</h3>
-<p>In Hutton’s paper he tells us when fold can be used. Essentially it’s just an inductive proof of correctness packaged into the function g.</p>
-<p><span class="math display">\[   \begin{aligned}
-    g  \ []  &amp;=  v\\
-    g \ (x:xs) &amp;=  f\ x\ (g\ xs) 
-  \end{aligned}
-  \quad\Longleftrightarrow\quad
-  \begin{aligned}
-    g &amp;= fold\ f\ v 
-  \end{aligned} \]</span></p>
-<p>We can design a fold iff we can design a function g.<br />
-The left hand side of the iff is just an inductive proof over length of list.</p>
 <ul>
-<li>g [] = v
+<li>React components have 2 parts
 <ul>
-<li>show g applied to base case returns expected base case v</li>
-</ul></li>
-<li>(g xs) is our IH
-<ul>
-<li>f x (g xs) = f x IH, meaning when we apply our function f to our inductive hypothesis IH and the dangling element x, we will return our expected results.</li>
+<li>localenv: local environment’s variable,hooks,functions</li>
+<li>JSX: the JSX or virtual DOM it returns.</li>
 </ul></li>
 </ul>
-<h3 id="fusion">Fusion</h3>
-<p>When can we some arbitrary function h with a fold to return another fold? <span class="math display">\[ h \circ fold\ a\ b \overset{?}{=} fold\ c\ d\]</span></p>
-<p>We denote the 2 folds in the eqn above:</p>
+<p>The moment we enter a new state, 0.1 and 0.2 is what happens first.</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a7374617465203020617320227374617465203022207b0a2020737461746520226c6f63616c656e7622206173206c656e7631203c3c73646c726563656976653e3e0a2020737461746520226a737822206173206a737831203c3c73646c726563656976653e3e0a20206c656e7631202d5b23626c75655d2d3e206c656e7631203a20302e312e2052656e646572200a20206a737831202d5b23626c75655d2d3e206a737831203a20302e322e2052656e6465720a20205b2a5d202d2d3e206a737831203a20312e20636c69636b20627574746f6e0a20206a737831202d2d3e206c656e7631203a20322e2063616c6c6261636b2063616c6c732075706772616465687028297b2e2e2e207365746870282e297d0a20206c656e7631202d2d3e206c656e7631203a20332e2075706772616465687028292072756e7320746f205c6e636f6d706c6574696f6e2077697468206e6f207374617465206368616e6765206d69647761790a20200a20200a7d0a0a7374617465203120617320227374617465203122207b0a2020737461746520226c6f63616c656e7622206173206c656e7632203c3c73646c726563656976653e3e0a2020737461746520226a737822206173206a737832203c3c73646c726563656976653e3e0a20206c656e7632202d5b23626c75655d2d3e206c656e7632203a20302e312052656e6465720a20206a737832202d5b23626c75655d2d3e206a737832203a20302e322052656e6465720a20205b2a5d202d5b646f747465645d2d3e206a737832203a20352e20536565207570646174656420706167650a7d0a6c656e7631202d5b23677265656e5d2d3e2031203a20342e207374617465206368616e67650a40656e64756d6c"></figure>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">//LOCALENV START ------------</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;0.1 render&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">const</span> hp<span class="op">,</span> sethp <span class="op">=</span> <span class="fu">useState</span>(() <span class="kw">=&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">const</span> <span class="fu">upgradehp</span>() <span class="op">=</span> {</span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(hp) <span class="co">//2. outputs 0</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="fu">sethp</span>(prevhp <span class="kw">=&gt;</span> prevhp<span class="op">*</span><span class="dv">2</span>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(hp) <span class="co">//2. outputs 0</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>}<span class="co">//3. after running to completion our state update takes effect</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">//LOCALENV End --------------</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">//JSX START ------------------</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="cf">return</span> (</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="co">//1. click some button that calls upgradehp()</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    {<span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;0.2 render&quot;</span>)}</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    {hp}</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>)</span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co">//JSX End --------------------</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>}</span></code></pre></div>
+<p>Line 6 and Line 8 will always output the same value. The local env maintains some level of functional purity.</p>
+<p>The pure upgradehp() function will run through completion (ignoring the state change of hp)<br />
+but after finishing it will signal to the JSX that hp state has changed and rerender the component to a new state.</p>
+<p>In many ways the upgradehp() is similar to being an IO monad.</p>
+<p>To understand react, trust that every function behaves in a functional deterministic manner wrt to it’s current state. (shown in line 6 and line 8)</p>
+<h3 id="when-does-react-component-rerender">When does React component rerender</h3>
 <ul>
-<li>LHS-fold
-<ul>
-<li>basecase is b</li>
-<li>recursive operation is a</li>
-</ul></li>
-<li>RHS-fold
-<ul>
-<li>basecase is d</li>
-<li>recursive operation is c</li>
-</ul></li>
-<li>h b = d</li>
-<li>h (c x LHS-IH) = c x (a LHS-IH) example</li>
+<li>setState hook() is called</li>
+<li>All children of the component will also be rerendered</li>
 </ul>
-<p><span class="math display">\[ (+1) \circ sumfold = fold\ (+)\ 1 \]</span></p>
-<p>h = (+1)<br />
-a = (+)<br />
-b = 0<br />
-c = (+)<br />
-d = 1</p>
+<h3 id="usestate">UseState</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">const</span> hp<span class="op">,</span> sethp <span class="op">=</span> <span class="fu">useState</span>(() <span class="kw">=&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">const</span> <span class="fu">upgradehp</span>() <span class="op">=</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="fu">sethp</span>(prevhp <span class="kw">=&gt;</span> prevhp<span class="op">*</span><span class="dv">2</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    <span class="fu">sethp</span>(prevhp <span class="kw">=&gt;</span> prevhp<span class="op">*</span><span class="dv">2</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="op">...</span></span></code></pre></div>
+<ul>
+<li>DO pass a lambda function <code class="sourceCode javascript">prevhp <span class="kw">=&gt;</span> prevhp<span class="op">*</span><span class="dv">2</span></code> to setState</li>
+<li>DO NOT do <code class="sourceCode javascript"><span class="fu">sethealth</span>(hp<span class="op">*</span><span class="dv">2</span>)</code>
+<ul>
+<li>The behavior may be indeterminant if we called it twice like in the above code.</li>
+</ul></li>
+<li>we pass in a lazy function <code class="sourceCode javascript">() <span class="kw">=&gt;</span> <span class="dv">0</span></code> on useState so that it isn’t called on every render.
+<ul>
+<li>Similar reason we pass a lazy callback function in jsx element like <code class="sourceCode javascript">onClick<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">doSomething</span>()}</code></li>
+</ul></li>
+</ul>
+<h3 id="useeffect">UseEffect</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    <span class="co">//Mount begin--------------</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>    <span class="co">//setup event listener, subscribe api</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>    <span class="co">//mount</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">'target changed'</span>) </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>    <span class="co">//Mount end----------------</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>    <span class="co">//UnMount begin------------</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>    <span class="cf">return</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">'return from unmount changed'</span>) </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>        <span class="co">//clean up event listener, unsubscribe api</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>        <span class="co">//unmount</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>    }</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a>    <span class="co">//UnMount end ------------</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a>}<span class="op">,</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true"></a>[] <span class="co">//target is empty</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true"></a>)</span></code></pre></div>
+<ul>
+<li>Mount - can only happen once</li>
+<li>Update - can happen as much as possible</li>
+<li>unMount - can only happen once</li>
+</ul>
+<p><strong>When UseEffect tracks a target or variable</strong></p>
+<ul>
+<li>It will also call on mount/unmount but this time it will also call when the target is changed.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    <span class="co">// begin--------------</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    <span class="co">//on mount 1 call</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>    <span class="co">//setup event listener, subscribe api</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>    </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">'target changed'</span>) </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>    <span class="co">// end----------------</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>    <span class="co">// begin------------</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>    <span class="cf">return</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">'return from unmount changed'</span>) </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a>        <span class="co">//clean up event listener, unsubscribe api</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a>        <span class="co">//unmount</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a>    }</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a>    <span class="co">// end ------------</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true"></a>}<span class="op">,</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true"></a>[target] </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true"></a>)</span></code></pre></div>
+<h3 id="useref">UseRef</h3>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6f626a656374206173640a6e6f7465206c6566740a203c26776966693e0a656e64206e6f74650a6469616d6f6e6420730a0a40656e64756d6c"></figure>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="kw">const</span> refContainer <span class="op">=</span> <span class="fu">useRef</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="kw">const</span> onButtonClick <span class="op">=</span> () <span class="kw">=&gt;</span> {<span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(refContainer<span class="op">.</span><span class="at">current</span>)}</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="co">//refContainer.current will return the DOM object</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="cf">return</span>(</span>
+<span id="cb5-6"><a href="#cb5-6"></a>        <span class="op">&lt;&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>            <span class="op">&lt;</span>div ref<span class="op">=</span>{refContainer}<span class="op">&gt;</span>SomeText <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>            <span class="op">&lt;</span>button onClick<span class="op">=</span>{onButtonClick}<span class="op">&gt;</span>button<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>        <span class="op">&lt;/&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>    )</span>
+<span id="cb5-11"><a href="#cb5-11"></a>}</span></code></pre></div>
+<p>line 7, the JSX <code class="sourceCode javascript"><span class="op">&lt;</span>div ref<span class="op">=</span>{refContainer}<span class="op">&gt;</span></code> is what binds the ref Hook to the Dom Element.</p>
+<p>In most cases of hooks like useEffect or useState, it’s the JSX element that depends on the hook.<br />
+But in this case the hook depends on the JSX element.</p>
 
         </div>
         <div id="footer">
