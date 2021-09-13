@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Greedy Algo</title>
+        <title>Jason Yang - Proof - Greedy Algo</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,7 +232,7 @@
         </div>
 
         <div id="content">
-            <h1>Greedy Algo</h1>
+            <h1>Proof - Greedy Algo</h1>
             
 
             <div class="info">
@@ -241,26 +241,63 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'cs'." href="../tags/cs.html">cs</a>, <a title="All pages tagged 'math'." href="../tags/math.html">math</a>, <a title="All pages tagged 'algorithms'." href="../tags/algorithms.html">algorithms</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'cs'." href="../tags/cs.html">cs</a>, <a title="All pages tagged 'math'." href="../tags/math.html">math</a>, <a title="All pages tagged 'algorithms'." href="../tags/algorithms.html">algorithms</a>, <a title="All pages tagged 'proofSeries'." href="../tags/proofSeries.html">proofSeries</a>
     
 </div>
 <h3 id="greedy-swap-proof">Greedy Swap Proof</h3>
 <h4 id="example-problem">Example problem:</h4>
 <p><span class="math display">\[ A = [a_1 , a_2, a_3 ...]\]</span> <span class="math display">\[ O = [o_1, o_2, o_3 ...]\]</span> Each element of A represents a state.<br />
 <span class="math display">\[ Assume\ A \neq O \]</span> (NOTE THIS IS NOT A PROOF BY CONTRADICTION AS THERE MAY BE MULTIPLE OPTIMAL SOLUTIONS THAT ARE NOT EQUAL) Therefore <span class="math display">\[ Either\ \]</span> <span class="math display">\[\exists x \in O , x \notin A \]</span> <span class="math display">\[ \exists x \in A, x \notin O\]</span> <span class="math display">\[ a_p = o_q , a_q = o_p \ Swap\]</span></p>
+<p>Prove by contradiction</p>
 <h3 id="greedy-inductive-lookahead-proof">Greedy Inductive Lookahead Proof</h3>
 <h4 id="example-problem-a-frog-can-take-1..k-steps-each-turn-get-least-number-of-turns-to-reach-the-n-step.">Example problem: A frog can take 1..k Steps each turn, get least number of turns to reach the n Step.</h4>
 <p>State = turn<br />
 Greedy Solution, take the max k Step each State</p>
 <p>Proof of Correctness: Show by induction that for all states, the current state is the most optimal</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> greet; <span class="st">&quot;Hello, world!&quot;</span>; <span class="kw">end</span></span></code></pre></div>
+<p>Instinctively we believe that jumping farther in position is correlated to optimal least number of jumps.</p>
+<p>Denote <span class="math inline">\(P(i,..)\)</span> as the position function after <span class="math inline">\(i\)</span> steps. <span class="math display">\[P(i,..)\ \propto\ Optimality\]</span></p>
+<p>Proving our naive Greedy algo <span class="math inline">\(J\)</span> will jump at least as far as some theoretical optimal algo <span class="math inline">\(J^*\)</span></p>
+<p>Prove: <span class="math inline">\(P(i+1,J^*) \leq P(i+1,J)\)</span></p>
+<p>IH: <span class="math inline">\(P(i,J^*) \leq P(i,J)\)</span></p>
+<p>LEM: <span class="math inline">\(P(i,J) \lt P(i+1,J^*) \lor P(i,J) \geq P(i+1,J^*)\)</span></p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a73697a653d22372c37223b0a097b72616e6b3d73616d653b20225028692c4a292220225028692c4a2a29223b7d0a202020207b72616e6b3d73616d653b20225028692b312c4a292220225028692b312c4a2a29223b7d0a0a225028692c4a2a2922202d3e20225028692c4a292220205b6c6162656c203d20224948225d0a225028692b312c4a2a2922202d3e20225028692b312c4a2922205b6c6162656c203d20223f22207374796c653d646f747465645d0a225028692c4a2a2922202d3e20225028692b312c4a2a2922205b6c6162656c203d202254225d0a225028692c4a2922202d3e20225028692b312c4a2922205b6c6162656c203d202254225d0a225028692c4a2922202d3e20225028692b312c4a2a2922205b7374796c65203d20646173686564206c6162656c3d226c74204c454d22206172726f77686561643d656d7074795d0a225028692b312c4a2a2922202d3e20225028692c4a2922205b7374796c65203d20646173686564206c6162656c3d22677465225d0a0a7d0a40656e64756d6c"></figure>
+<p>Arrow labeled “T” means obvious truth <span class="math inline">\(P(i,J) \leq P(i+1,J)\)</span>.<br />
+i to i+1 means you made a jump so you must be farther or at least the same position.</p>
+<p>Dashed arrow labeled “lt” and “gte” comes from LEM which will help us through case analysis.<br />
+Filled arrow head means unstrict inequality <span class="math inline">\(\geq\)</span><br />
+Empty arrow head means strict inequality <span class="math inline">\(\gt\)</span></p>
+<p>We want to prove dotted arrow labeled “?”.</p>
+<p>PROOF:</p>
+<p>Using LEM will help us prove our goal.</p>
+<ul>
+<li>LEM Case “gte” <span class="math inline">\(P(i,J) \geq P(i+1,J^*)\)</span></li>
+</ul>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a73697a653d22372c37223b0a097b72616e6b3d73616d653b20225028692c4a292220225028692c4a2a29223b7d0a202020207b72616e6b3d73616d653b20225028692b312c4a292220225028692b312c4a2a29223b7d0a0a225028692c4a2a2922202d3e20225028692c4a292220205b6c6162656c203d20224948225d0a225028692b312c4a2a2922202d3e20225028692b312c4a2922205b6c6162656c203d20223f22207374796c653d646f7474656420636f6c6f723d22726564225d0a225028692c4a2a2922202d3e20225028692b312c4a2a2922205b6c6162656c203d202254225d0a225028692c4a2922202d3e20225028692b312c4a2922205b6c6162656c203d2022542220636f6c6f723d22626c7565225d0a225028692b312c4a2a2922202d3e20225028692c4a2922205b7374796c65203d20646173686564206c6162656c3d226774652220636f6c6f723d22626c7565225d0a0a7d0a40656e64756d6c"></figure>
+<p>Obvious from composition of inequalities:</p>
+<p>Given: <span class="math inline">\(P(i+1,J^*) \leq P(i,J)\)</span> by “gte” case of LEM<br />
+Given: <span class="math inline">\(P(i,J) \leq P(i+1,J)\)</span> by obvious truth<br />
+Conclusion: <span class="math inline">\(P(i+1,J^*) \leq P(i+1,J)\)</span><br />
+Goal solved for one case of LEM</p>
+<ul>
+<li>LEM Case “lt” <span class="math inline">\(P(i,J) \lt P(i+1,J^*)\)</span> :</li>
+</ul>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a73697a653d22372c37223b0a097b72616e6b3d73616d653b20225028692c4a292220225028692c4a2a29223b7d0a202020207b72616e6b3d73616d653b20225028692b312c4a292220225028692b312c4a2a29223b7d0a0a225028692c4a2a2922202d3e20225028692c4a292220205b6c6162656c203d20224948225d0a225028692b312c4a2a2922202d3e20225028692b312c4a2922205b6c6162656c203d20223f22207374796c653d646f747465645d0a225028692c4a2a2922202d3e20225028692b312c4a2a2922205b6c6162656c203d202254225d0a225028692c4a2922202d3e20225028692b312c4a2922205b6c6162656c203d202254225d0a225028692c4a2922202d3e20225028692b312c4a2a2922205b7374796c65203d20646173686564206c6162656c3d226c7422206172726f77686561643d656d7074795d0a0a0a7d0a40656e64756d6c"></figure>
+<p>Observation: Look at the maximum number of positions one can move in 1 transition.</p>
+<p>Our greedy algo <span class="math inline">\(J\)</span> by definition will take r steps (by definition since it’s greedy).<br />
+No evidence <span class="math inline">\(J^*\)</span> the Theoretical optimal algo will take r steps.</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a72616e6b646972203d2054423b0a202020207b72616e6b3d73616d653b20225028692c4a29223b20225028692c4a2a29223b7d0a202020207b72616e6b3d73616d653b20225028692b312c4a29223b20225028692b312c4a2a29223b7d0a202020207b72616e6b3d73696e6b3b20225028692c4a292b72223b20225028692c4a2a292b72223b7d0a0a225028692c4a2a2922202d3e20225028692c4a292220205b6c6162656c203d20224948225d0a225028692b312c4a2a2922202d3e20225028692b312c4a2922205b6c6162656c203d20223f22207374796c653d646f747465645d0a225028692c4a2a2922202d3e20225028692b312c4a2a2922205b6c6162656c203d202254225d0a225028692c4a2922202d3e20225028692b312c4a2922205b6c6162656c203d202254225d0a225028692c4a2922202d3e20225028692b312c4a2a2922205b7374796c65203d20646173686564206c6162656c3d226c7422206172726f77686561643d656d7074795d0a0a0a225028692c4a2922202d3e20225028692c4a292b7222205b6c6162656c3d2254225d0a225028692c4a2a2922202d3e20225028692c4a2a292b7222205b6c6162656c3d2254225d0a225028692c4a2a292b7222202d3e20225028692c4a292b7222205b6c6162656c3d2249482b72225d0a0a7d0a40656e64756d6c"></figure>
+<p>PURPLE DOUBLE ARROW MEANS EQUALITY.<br />
+Basically it says our greedy algo WILL take r steps.</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a0a202020207b72616e6b3d73616d653b20225028692c4a29223b20225028692c4a2a29223b7d0a202020207b72616e6b3d73616d653b20225028692b312c4a29223b20225028692b312c4a2a29223b7d0a202020207b72616e6b3d73696e6b3b20225028692c4a292b72223b20225028692c4a2a292b72223b7d0a0a225028692c4a2a2922202d3e20225028692c4a292220205b6c6162656c203d20224948225d0a225028692b312c4a2a2922202d3e20225028692b312c4a2922205b6c6162656c203d20223f22207374796c653d646f7474656420636f6c6f723d7265645d0a225028692c4a2a2922202d3e20225028692b312c4a2a2922205b6c6162656c203d202254225d0a225028692c4a2922202d3e20225028692b312c4a2922205b6c6162656c203d202254225d0a225028692c4a2922202d3e20225028692b312c4a2a2922205b7374796c65203d20646173686564206c6162656c3d226c7422206172726f77686561643d656d7074795d0a0a0a225028692c4a2922202d3e20225028692c4a292b7222205b6c6162656c3d225422205d0a225028692c4a2a2922202d3e20225028692c4a2a292b7222205b6c6162656c3d2254225d0a225028692c4a2a292b7222202d3e20225028692c4a292b7222205b6c6162656c3d2249482b722220636f6c6f723d626c75655d0a0a225028692b312c4a2922202d3e20225028692c4a292b7222205b6c6162656c3d22477265656422206469723d626f746820636f6c6f723d707572706c65207374796c653d626f6c6420636f6e73747261696e743d66616c736520666f6e74636f6c6f723d707572706c65206172726f77486561643d22746565225d0a225028692b312c4a2922202d3e20225028692c4a292b7222205b6c6162656c3d2254225d0a225028692b312c4a2a2922202d3e20225028692c4a2a292b7222205b6c6162656c3d22542220636f6c6f723d626c75655d0a0a7d0a40656e64756d6c"></figure>
+<p><span class="math inline">\(\color{purple}{Greed: P(i+1,J)=P(i,J)+r}\)</span></p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a0a202020207b72616e6b3d73616d653b20225028692c4a29223b20225028692c4a2a29223b7d0a202020207b72616e6b3d73616d653b20225028692b312c4a29223b20225028692b312c4a2a29223b7d0a202020207b72616e6b3d73696e6b3b20225028692c4a292b72223b20225028692c4a2a292b72223b7d0a0a225028692c4a2a2922202d3e20225028692c4a292220205b6c6162656c203d20224948225d0a0a0a225028692c4a2a2922202d3e20225028692b312c4a2a2922205b6c6162656c203d202254225d0a225028692c4a2922202d3e20225028692b312c4a2922205b6c6162656c203d202254225d0a225028692c4a2922202d3e20225028692b312c4a2a2922205b7374796c65203d20646173686564206c6162656c3d226c7422206172726f77686561643d656d7074795d0a0a0a225028692c4a2922202d3e20225028692c4a292b7222205b6c6162656c3d225422205d0a225028692c4a2a2922202d3e20225028692c4a2a292b7222205b6c6162656c3d2254225d0a225028692c4a2a292b7222202d3e20225028692c4a292b7222205b6c6162656c3d2249482b722220636f6c6f723d626c75655d0a0a225028692b312c4a2922202d3e20225028692c4a292b7222205b6c6162656c3d22477265656422206469723d626f746820636f6c6f723d707572706c65207374796c653d626f6c6420666f6e74636f6c6f723d707572706c65206172726f77486561643d22746565225d0a225028692b312c4a2922202d3e20225028692c4a292b7222205b6c6162656c3d2254225d0a225028692b312c4a2a2922202d3e20225028692c4a2a292b7222205b6c6162656c3d22542220636f6c6f723d626c75655d0a225028692b312c4a2a2922202d3e20225028692c4a292b7222205b6c6162656c203d20223f22207374796c653d646f7474656420636f6c6f723d7265645d0a0a7d0a40656e64756d6c"></figure>
+<p>Notice how <span class="math inline">\(P(i,J)+r\)</span> behaves like a sink or a Terminal object.<br />
+In general, finding terminal objects is a hint at optimality.</p>
+<ul>
+<li>Both cases of LEM proved</li>
+</ul>
+<p>By induction we shown our greedy algo will always be ahead in terms of position which is correlated to optimality.</p>
+<p>remarks: Now that I look at it, LEM may not have been necessary but technically the proof is still correct.</p>
 
         </div>
         <div id="footer">
