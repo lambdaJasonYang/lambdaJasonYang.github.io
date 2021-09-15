@@ -1,6 +1,6 @@
 ---
 title: Quick React
-tags: prog
+tags: prog, QuickCode
 ---
 
 * React components have 2 parts 

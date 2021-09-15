@@ -118,3 +118,29 @@ Meaning if you point HEAD to a tag, you are in a detached head state.
 In gitk
 yellow node HEAD pointer points to
 blue untagged node(meaning it is not the local head of a branch)git
+
+
+--- 
+
+#Merging
+
+
+git config merge.tool vimdiff
+
+
+```
+error: Merging is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+```
+use git merge --abort
+
+
+To merge a remote repo with local, first checkout remote repo onto local branch
+main is the name of the remote branch to fetch from
+remoteb is the name of the new branch to create locally
+
+git fetch origin main:remoteb
+
+git mergetool

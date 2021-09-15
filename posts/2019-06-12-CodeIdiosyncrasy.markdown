@@ -1,6 +1,6 @@
 ---
 title: Programming Lang Idiosyncrasies and Similarities
-tags: prog
+tags: prog, QuickLang
 ---
 
 

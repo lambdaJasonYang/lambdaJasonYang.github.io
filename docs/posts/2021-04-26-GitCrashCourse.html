@@ -336,6 +336,17 @@ git checkout -b behaves the same as git branch BUT moves HEAD to new branch</p>
 <h3 id="extras">Extras</h3>
 <p>tags are just renaming refs, they are NOT at the same level as aliases. Meaning if you point HEAD to a tag, you are in a detached head state.</p>
 <p>In gitk yellow node HEAD pointer points to blue untagged node(meaning it is not the local head of a branch)git</p>
+<hr />
+<p>#Merging</p>
+<p>git config merge.tool vimdiff</p>
+<pre><code>error: Merging is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm &lt;file&gt;'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.</code></pre>
+<p>use git merge –abort</p>
+<p>To merge a remote repo with local, first checkout remote repo onto local branch main is the name of the remote branch to fetch from remoteb is the name of the new branch to create locally</p>
+<p>git fetch origin main:remoteb</p>
+<p>git mergetool</p>
 
         </div>
         <div id="footer">
