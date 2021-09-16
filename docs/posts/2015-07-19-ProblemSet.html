@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Posts tagged "C"</title>
+        <title>Jason Yang - ProblemSets</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,24 +232,81 @@
         </div>
 
         <div id="content">
-            <h1>Posts tagged "C"</h1>
+            <h1>ProblemSets</h1>
             
 
-            <ul>
+            <div class="info">
+    Posted on July 19, 2015
     
-        <li>
-            <a href="../posts/2018-03-24-QuickC.html">Quick C</a> - March 24, 2018
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2015-07-19-ProblemSet.html">ProblemSets</a> - July 19, 2015
-        </li>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'asm'." href="../tags/asm.html">asm</a>, <a title="All pages tagged 'C'." href="../tags/C.html">C</a>
     
-        <li>
-            <a href="../posts/2015-07-19-Bootloader.html">BootLoader</a> - July 19, 2015
-        </li>
-    
-</ul>
+</div>
+<h3 id="twosum">TwoSum</h3>
+<pre class="code"><code>Goal: Return INDEX of nums that sum to target
+
+nums = [2,7,11,15]
+hmap = {Value#1stpartialSum |-&gt; Index#2ndpartialSum} 
+also   {Value#2ndpartialSum |-&gt; Index#1stpartialSum}
+     where Invariant:: Value#1stpartialSum + Value#2ndPartialSum = target
+let nums = Value#1stpartialSum
+enumerate(nums) = {index |-&gt; nums} where i::index, k::Value#1stpartialSum
+check k::Value#1stpartialSum in hmap
+    true: return [hmap(k)::Index#2ndpartialSum, (index of k::Value#1stpartialSum)::Index#1ndpartialSum
+    false: SET hmap[target - Value#1stpartialSum |-&gt; Index#2ndpartialSum]
+</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">class</span> Solution(<span class="bu">object</span>):</span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="kw">def</span> twoSum(<span class="va">self</span>, nums, target):</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>        <span class="co">'''</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">Goal: Return INDEX of nums that sum to target</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">nums = [2,7,11,15]</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">hmap = {Value#1stpartialSum |-&gt; Index#2ndpartialSum} </span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">also   {Value#2ndpartialSum |-&gt; Index#1stpartialSum}</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">     where Invariant:: Value#1stpartialSum + Value#2ndPartialSum = target</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">let nums = Value#1stpartialSum</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">enumerate(nums) = {index |-&gt; nums} where i::index, k::Value#1stpartialSum</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">check k::Value#1stpartialSum in hmap</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">    true: return [hmap(k)::Index#2ndpartialSum, (index of k::Value#1stpartialSum)::Index#1ndpartialSum</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">    false: SET hmap[target - Value#1stpartialSum |-&gt; Index#2ndpartialSum]</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">'''</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a></span>
+<span id="cb2-18"><a href="#cb2-18"></a>        hmap <span class="op">=</span> {}</span>
+<span id="cb2-19"><a href="#cb2-19"></a>        <span class="cf">for</span> Index1stPartial,Value1stPartial <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
+<span id="cb2-20"><a href="#cb2-20"></a>            <span class="cf">if</span> Value1stPartial <span class="kw">in</span> hmap:</span>
+<span id="cb2-21"><a href="#cb2-21"></a>                Index2ndPartial<span class="op">=</span>hmap[Value1stPartial]</span>
+<span id="cb2-22"><a href="#cb2-22"></a>                <span class="cf">return</span> [Index2ndPartial,Index1stPartial]</span>
+<span id="cb2-23"><a href="#cb2-23"></a>            Value2ndPartial <span class="op">=</span> target<span class="op">-</span>Value1stPartial</span>
+<span id="cb2-24"><a href="#cb2-24"></a>            hmap[Value2ndPartial] <span class="op">=</span> Index1stPartial</span>
+<span id="cb2-25"><a href="#cb2-25"></a>        <span class="cf">return</span> []</span>
+<span id="cb2-26"><a href="#cb2-26"></a></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="co">#Test = Solution().twoSum([2,7,11,15],9)</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#print(Test)</span></span></code></pre></div>
+<p>the target is composed of values from two partial sums (Value#1stpartialSum + Value#2ndpartialSum)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">func</span> twoSum(nums []<span class="dt">int</span>, target <span class="dt">int</span>) []<span class="dt">int</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>	hmap := <span class="bu">make</span>(<span class="kw">map</span>[<span class="dt">int</span>]<span class="dt">int</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>	<span class="kw">for</span> Index1stPartial, Value1stPartial := <span class="kw">range</span> nums {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>		<span class="kw">if</span> _, exists := hmap[Value1stPartial]; exists {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>			Index2ndPartial := hmap[Value1stPartial]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>			<span class="kw">return</span> []<span class="dt">int</span>{Index2ndPartial, Index1stPartial}</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>		} <span class="kw">else</span> {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>			Value2ndPartial := target - Value1stPartial</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>			hmap[Value2ndPartial] = Index1stPartial</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>		}</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>	}</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>	<span class="kw">return</span> []<span class="dt">int</span>{}</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a>}</span></code></pre></div>
+<p>2 cases:</p>
+<p>Hashmap Miss</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a0a6672616d65206e756d73207b0a20202020757365636173652022496e6465782c56616c7565233173745061727469616c53756d22206173205543310a20202020757365636173652022496e6465782c56616c756523326e645061727469616c53756d2220617320580a7d0a0a6672616d65204861736856616c7565207b0a0a202075736563617365202243616e27742066696e6420496e64657823326e645061727469616c53756d22206173204143310a2020757365636173652022496e646578233173745061727469616c53756d22206173204143320a7d0a6672616d652048617368496e646578207b0a75736563617365202243616e27742066696e642056616c7565233173745061727469616c53756d22206173205543330a202075736563617365202256616c756523326e645061727469616c53756d22206173205543320a0a7d0a0a40656e64756d6c0a0a554331202d5b646f747465645d2d3e20554333203a2022312920686173686d6170206d6973735c6e204c696e652032302046616c7365220a554333202d5b646f747465645d2d3e20414331203a2022312920686173686d6170206d6973735c6e204c696e652032302046616c7365220a554332202d2d3e20414332203a20202233292066696c6c20686173686d61705c6e204c696e65203234220a554331202d2d3e20554332203a2022322920746172676574202d2056616c756523317374204c696e65203233220a"></figure>
+<p>next step<br />
+Hashmap hit</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a0a6672616d65206e756d73207b0a20202020757365636173652022496e6465782c56616c7565233173745061727469616c53756d2220617320580a20202020757365636173652022496e6465782c56616c756523326e645061727469616c53756d22206173205543310a7d0a0a6672616d65204861736856616c7565207b0a20200a2020757365636173652022496e646578233173745061727469616c53756d22206173204143320a7d0a6672616d652048617368496e646578207b0a202075736563617365202256616c756523326e645061727469616c53756d22206173205543320a0a7d0a0a75736563617365202272657475726e20536f6c7574696f6e496e6465786573222061732053530a554331202d2d3e2053530a414332202d2d3e2053530a40656e64756d6c0a0a554332202d2d3e20414332203a202022332920536f6c7574696f6e205c6e204c696e65203232220a554331202d2d3e20554332203a2022312920686173686d6170206869745c6e204c696e652032302054727565220a"></figure>
+<hr />
 
         </div>
         <div id="footer">

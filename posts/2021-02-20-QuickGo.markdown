@@ -5,6 +5,15 @@ tags: prog, QuickCode
 
 Notes on tdd with Go
 
+### Some surprises
+
+for loops and if statements conditions do not have parenthesis.
+
+* `if(x == 2){..}`{.C} $\Rightarrow$ `if x == 2 {..}`{.go}
+* `for(int i=0;i<5;i++){..}`{.C} $\Rightarrow$ `for i:=0;i<5;i++ {..}`{.go}
+
+
+
 ### Functions
 
 ```go
@@ -34,9 +43,22 @@ delegate int Monoid(int lhs, int rhs);
 
 ### Learn by doing
 
-```gofunc Hello(name string) string {
-	var bleh string
-	var sentinel string
+`var bleh int = 3`{.go} is same as `bleh := 3`{.go} 
+
+```go
+gofunc Hello(name string) string {
+  var bleh string
+  var sentinel string
+  arr := [3]int{1,2,3}
+  const heh int = 3;
+  var (
+    target = 9
+    curr = 3
+  )
+  const (
+    pi = 3.14
+    e = 2.718
+  )
 	if name == "bob" {
 		sentinel = "pie"
 	} else if name == "annie" {
@@ -47,6 +69,109 @@ delegate int Monoid(int lhs, int rhs);
 		bleh = "bob likes pie"
 		fmt.Println(bleh)
 	}
+  fmt.Println(arr[0])
+  fmt.Println(heh)
 	return "Hello World"
 }
 ```
+
+### loops
+
+
+
+```go
+
+func main() {
+  arr := [3]int{1,2,3}
+  arr2 := arr[0:2]
+  sum := 0
+  for i:=0; i < 5; i++ {
+	  sum += i
+  }
+  for keyX, ValX := range arr {
+    fmt.Println(keyX)
+    fmt.Println(ValX)
+  }
+	fmt.Println(arr[0])
+	fmt.Println(sum)
+}
+
+```
+
+### Switch statement
+
+```go
+if i == 0 {
+  fmt.Println("Zero")
+}else if i == 1 {
+  fmt.Println("One")
+}else if i == 2{
+  fmt.Println("Two")
+}else {
+  fmt.Println("default")
+}
+```
+
+```go
+switch i {
+  case 0: fmt.Println("Zero")
+  case 1: fmt.Println("One")
+  case 2: fmt.Println("Two")
+  default: fmt.Println("default")
+}
+```
+### struct
+
+```go
+
+type Rectangle struct {
+    Width float64
+    Height float64
+}
+
+funct (r *Rectangle) AreaX int {
+ return 5
+}
+
+func (r Rectangle) Area() int {
+	return 5
+}
+
+func main(){
+  rect := Rectangle{12, 6}
+  outp := rect.Area()
+  outpX := AreaX(&Rect)
+  fmt.Println(outp)
+  //5
+}
+```
+Just by passing in the Rectangle argument for a method 'Area()', the method automatically is attached to struct 'Rectangle'
+
+
+```go
+type Shape interface {
+    Area() float64
+}
+
+```
+
+
+### Pointer
+Just as in our "Quick C" , 
+
+* think of passing pointers in args as passing addresses. 
+* The temporary `ptr *int`{.go} will bind to the passed address `&x`{.go}.
+
+```{.go }
+func trans(ptr *int){
+  *ptr = 0
+}
+func main(){
+  x := 5
+  trans(&x)
+
+}
+```
+
+
+---

@@ -245,6 +245,12 @@
     
 </div>
 <p>Notes on tdd with Go</p>
+<h3 id="some-surprises">Some surprises</h3>
+<p>for loops and if statements conditions do not have parenthesis.</p>
+<ul>
+<li><code class="sourceCode c"><span class="cf">if</span>(x == <span class="dv">2</span>){..}</code> <span class="math inline">\(\Rightarrow\)</span> <code class="sourceCode go"><span class="kw">if</span> x == <span class="dv">2</span> {..}</code></li>
+<li><code class="sourceCode c"><span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;<span class="dv">5</span>;i++){..}</code> <span class="math inline">\(\Rightarrow\)</span> <code class="sourceCode go"><span class="kw">for</span> i:=<span class="dv">0</span>;i&lt;<span class="dv">5</span>;i++ {..}</code></li>
+</ul>
 <h3 id="functions">Functions</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">func</span> typicalfunction() <span class="dt">string</span>{</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a> <span class="kw">return</span> <span class="st">&quot;simple function&quot;</span></span>
@@ -265,7 +271,107 @@
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="kw">delegate</span> <span class="dt">int</span> <span class="fu">Monoid</span>(<span class="dt">int</span> lhs, <span class="dt">int</span> rhs);</span></code></pre></div>
 <hr />
 <h3 id="learn-by-doing">Learn by doing</h3>
-<p><code>gofunc Hello(name string) string { 	var bleh string 	var sentinel string 	if name == "bob" { 		sentinel = "pie" 	} else if name == "annie" { 		sentinel = "cola" 	} 	switch sentinel { 	case "bob": 		bleh = "bob likes pie" 		fmt.Println(bleh) 	} 	return "Hello World" }</code></p>
+<p><code class="sourceCode go"><span class="kw">var</span> bleh <span class="dt">int</span> = <span class="dv">3</span></code> is same as <code class="sourceCode go">bleh := <span class="dv">3</span></code></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>gofunc Hello(name <span class="dt">string</span>) <span class="dt">string</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>  <span class="kw">var</span> bleh <span class="dt">string</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>  <span class="kw">var</span> sentinel <span class="dt">string</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>  arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>  <span class="kw">const</span> heh <span class="dt">int</span> = <span class="dv">3</span>;</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>  <span class="kw">var</span> (</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>    target = <span class="dv">9</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>    curr = <span class="dv">3</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>  )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>  <span class="kw">const</span> (</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>    pi = <span class="dv">3</span><span class="fl">.14</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>    e = <span class="dv">2</span><span class="fl">.718</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>  )</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a>	<span class="kw">if</span> name == <span class="st">&quot;bob&quot;</span> {</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a>		sentinel = <span class="st">&quot;pie&quot;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true"></a>	} <span class="kw">else</span> <span class="kw">if</span> name == <span class="st">&quot;annie&quot;</span> {</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true"></a>		sentinel = <span class="st">&quot;cola&quot;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true"></a>	}</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true"></a>	<span class="kw">switch</span> sentinel {</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true"></a>	<span class="kw">case</span> <span class="st">&quot;bob&quot;</span>:</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true"></a>		bleh = <span class="st">&quot;bob likes pie&quot;</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true"></a>		fmt.Println(bleh)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true"></a>	}</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true"></a>  fmt.Println(arr[<span class="dv">0</span>])</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true"></a>  fmt.Println(heh)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true"></a>	<span class="kw">return</span> <span class="st">&quot;Hello World&quot;</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true"></a>}</span></code></pre></div>
+<h3 id="loops">loops</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="kw">func</span> main() {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>  arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>  arr2 := arr[<span class="dv">0</span>:<span class="dv">2</span>]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>  sum := <span class="dv">0</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>  <span class="kw">for</span> i:=<span class="dv">0</span>; i &lt; <span class="dv">5</span>; i++ {</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>	  sum += i</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>  }</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>  <span class="kw">for</span> keyX, ValX := <span class="kw">range</span> arr {</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>    fmt.Println(keyX)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a>    fmt.Println(ValX)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a>  }</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a>	fmt.Println(arr[<span class="dv">0</span>])</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a>	fmt.Println(sum)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a>}</span></code></pre></div>
+<h3 id="switch-statement">Switch statement</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">if</span> i == <span class="dv">0</span> {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;Zero&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>}<span class="kw">else</span> <span class="kw">if</span> i == <span class="dv">1</span> {</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;One&quot;</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>}<span class="kw">else</span> <span class="kw">if</span> i == <span class="dv">2</span>{</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;Two&quot;</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>}<span class="kw">else</span> {</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;default&quot;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">switch</span> i {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>  <span class="kw">case</span> <span class="dv">0</span>: fmt.Println(<span class="st">&quot;Zero&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>  <span class="kw">case</span> <span class="dv">1</span>: fmt.Println(<span class="st">&quot;One&quot;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>  <span class="kw">case</span> <span class="dv">2</span>: fmt.Println(<span class="st">&quot;Two&quot;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>  <span class="kw">default</span>: fmt.Println(<span class="st">&quot;default&quot;</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>}</span></code></pre></div>
+<h3 id="struct">struct</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="kw">type</span> Rectangle <span class="kw">struct</span> {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>    Width <span class="dt">float64</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>    Height <span class="dt">float64</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>}</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>funct (r *Rectangle) AreaX <span class="dt">int</span> {</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a> <span class="kw">return</span> <span class="dv">5</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>}</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a><span class="kw">func</span> (r Rectangle) Area() <span class="dt">int</span> {</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a>	<span class="kw">return</span> <span class="dv">5</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a>}</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a><span class="kw">func</span> main(){</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a>  rect := Rectangle{<span class="dv">12</span>, <span class="dv">6</span>}</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a>  outp := rect.Area()</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true"></a>  outpX := AreaX(&amp;Rect)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true"></a>  fmt.Println(outp)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true"></a>  <span class="co">//5</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true"></a>}</span></code></pre></div>
+<p>Just by passing in the Rectangle argument for a method ‘Area()’, the method automatically is attached to struct ‘Rectangle’</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">type</span> Shape <span class="kw">interface</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>    Area() <span class="dt">float64</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>}</span></code></pre></div>
+<h3 id="pointer">Pointer</h3>
+<p>Just as in our “Quick C” ,</p>
+<ul>
+<li>think of passing pointers in args as passing addresses.</li>
+<li>The temporary <code class="sourceCode go">ptr *<span class="dt">int</span></code> will bind to the passed address <code class="sourceCode go">&amp;x</code>.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">func</span> trans(ptr *<span class="dt">int</span>){</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>  *ptr = <span class="dv">0</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>}</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="kw">func</span> main(){</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>  x := <span class="dv">5</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>  trans(&amp;x)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a>}</span></code></pre></div>
+<hr />
 
         </div>
         <div id="footer">
