@@ -3,6 +3,14 @@ title: Logging out of github with git bash
 tags: tech
 ---
 
+Setting email and username for local repo or global env
+```bash
+git config user.email "example@example.com"
+git config user.name "example"
+
+git config --global user.email "example@example.com"
+git config --global user.name "example"
+```
 
 ``` bash
 git config --global  credential.usehttppath true
