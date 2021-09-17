@@ -1,0 +1,45 @@
+---
+title: Quick AWS
+tags: mathcs, appliedmath
+---
+
+```plantuml
+@startuml
+scale 750 width
+skinparam shadowing false
+
+frame VPC {
+frame "US East (Ohio)" as f1 <<Availability Zone>> {
+  object "NetworkACL" as NA1
+  object "NetworkACL" as NA2
+  frame "privateSubnet" as PP1 {
+    object "EC2" as A1
+  }
+  frame "publicSubnet" as PP2 {
+    object "EC2" as A2
+  } 
+  NA1 --> PP1
+  NA2 --> PP2
+}
+
+frame "US West (Cali)" as f2 <<Availability Zone>> {
+  object "NetworkACL" as NA3
+  object "NetworkACL" as NA4
+  frame "privateSubnet" as PP3 {
+    object "EC2" as B1
+  }
+  frame "publicSubnet" as PP4 {
+    object "EC2" as B2
+  } 
+  NA3 --> PP3
+  NA4 --> PP4
+}
+
+
+object router
+router --o f1
+router --o f2
+
+}
+@enduml
+```

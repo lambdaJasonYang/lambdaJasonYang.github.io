@@ -79,7 +79,7 @@ $\underset{n\rightarrow\infty}{lim}(1+\frac{1}{n})^n = e$
 ##### Substitution method
 
 Logarithm satisfies
-$f(x \cdot y) = f(x) + f(y)$
+$\forall f:f(x \cdot y) = f(x) + f(y)$
 
 * $\text{[let f be an arbitrary function]}$
   * $let\ y = 1$ [Substitution]

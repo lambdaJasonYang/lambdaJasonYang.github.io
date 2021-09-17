@@ -11,6 +11,7 @@ The moment we enter a new state, 0.1 and 0.2 is what happens first.
 
 ```plantuml
 @startuml
+skinparam shadowing false
 state 0 as "state 0" {
   state "localenv" as lenv1 <<sdlreceive>>
   state "jsx" as jsx1 <<sdlreceive>>
