@@ -245,22 +245,48 @@
     
 </div>
 <p>WARNING: The terms I use are nonstandard from most other tutorials.</p>
-<h3 id="preconfig">Preconfig</h3>
+<h3 id="setup-credentials">Setup Credentials</h3>
+<p>Setting email and username for local repo or global env</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">git</span> config user.email <span class="st">&quot;example@example.com&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">git</span> config user.name <span class="st">&quot;example&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="fu">git</span> config --global user.email <span class="st">&quot;example@example.com&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="fu">git</span> config --global user.name <span class="st">&quot;example&quot;</span></span></code></pre></div>
+<h3 id="removing-credentials">Removing Credentials</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> config --global  credential.usehttppath true</span></code></pre></div>
+<hr />
+<h3 id="preconfig-remote-github-repo-variable">Preconfig Remote Github repo variable</h3>
 <p>configure remote variable we name “origin”<br />
 or remove to reuse variable</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">git</span> remote add -u origin https://github.com/UserJY/bleh.git</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">git</span> remote remove origin</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">git</span> remote remove origin</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">git</span> remote add origin https://github.com/UserJY/bleh.git</span></code></pre></div>
 <p>the -u flag adds the remote commit to your local git tree.</p>
-<h3 id="the-process">The process</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span></code></pre></div>
+<h3 id="create-a-new-repo-locally-and-push-create-github-repo">Create a new repo locally and push create github repo</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">git</span> init</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">git</span> remote add origin https://github.com/userJY/testrepo.git</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">'update'</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="fu">git</span> push -u origin main:main</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="ex">---</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="co">### On git push and pull</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="kw">`</span><span class="fu">git</span> push -u origin <span class="op">&lt;</span>SrcLocalBranch<span class="op">&gt;</span>:<span class="op">&lt;</span>TargetRemoteBranch<span class="op">&gt;</span><span class="kw">`</span><span class="dt">{.bash}</span>  </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a><span class="kw">`</span><span class="fu">git</span> pull origin <span class="op">&lt;</span>SrcRemoteBranch<span class="op">&gt;</span>:<span class="op">&lt;</span>TargetLocalBranch<span class="op">&gt;</span><span class="kw">`</span><span class="dt">{.bash}</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a><span class="co">### The process</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true"></a><span class="kw">```</span> <span class="fu">bash</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span></code></pre></div>
 <p>updating to remote repo like github</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">git</span> push origin main</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">git</span> push origin main</span></code></pre></div>
 <h3 id="pushing-updates-to-team-repo">Pushing updates to Team repo</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">git</span> checkout -b Fixedbugbranch</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">git</span> add .</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;fixed bugs&quot;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="fu">git</span> push origin Fixedbugbranch</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">git</span> checkout -b Fixedbugbranch</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;fixed bugs&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="fu">git</span> push origin Fixedbugbranch</span></code></pre></div>
 <p>You see a push but on the team’s side, they see a pull request(PR).<br />
 PR is ran through github actions(CI system) that runs tests.<br />
 If accepted, they merge your PR branch with the main branch.</p>

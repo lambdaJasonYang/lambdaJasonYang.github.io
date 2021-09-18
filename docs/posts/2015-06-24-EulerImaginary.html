@@ -250,46 +250,53 @@
 <li>Since reals are subset of complex, implies typical real polynomials can always be factored resulting in real or complex roots.</li>
 <li>Complex numbers have a closure property in factoring</li>
 </ul>
-<h3 id="cart-polar-polarform-coordinate-systems">Cart, Polar, PolarForm Coordinate Systems</h3>
+<h3 id="coordinate-systems">Coordinate systems</h3>
+<p>Everything in the table is equal</p>
 <table>
 <thead>
 <tr class="header">
-<th>Syntax</th>
-<th>Description</th>
+<th>cart</th>
+<th>complex</th>
+<th>geometric cart</th>
+<th>geocomplex</th>
+<th>polar</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Header</td>
-<td>Title</td>
-</tr>
-<tr class="even">
-<td>Paragraph</td>
-<td>Text</td>
+<td>(x,y)</td>
+<td>x+yi</td>
+<td>(rcos<span class="math inline">\(\theta\)</span>,rsin<span class="math inline">\(\theta\)</span>)</td>
+<td><span class="math inline">\(r(cos\theta + i sin\theta)\)</span></td>
+<td>((r, <span class="math inline">\(\theta\)</span>))</td>
 </tr>
 </tbody>
 </table>
-<p><span class="math inline">\((x,y) \in Cart\)</span><br />
-<span class="math inline">\((r,\theta) \in Polar\)</span><br />
-<span class="math inline">\(a+bi \in PolarForm\)</span> <span class="math inline">\(r(cos\theta + i sin\theta) = rcis\theta \in PolarForm\)</span></p>
-<p><span class="math inline">\(ATranslate :: Cart \leftrightarrow Polar\)</span><br />
-<span class="math inline">\(ATranslate\ \ (x,y) = (r cos\theta,rsin\theta)\ where\ r=\sqrt{x^2 + y^2}\)</span></p>
+<p>Either find <span class="math inline">\(x,y\)</span> or find <span class="math inline">\(r,\theta\)</span></p>
 <ul>
-<li>With cartesian (x,y) we can derive r which is length of hypotenuse and theta with inverse trig functions.</li>
-<li>With r and theta we can derive x and y.</li>
+<li>Find <span class="math inline">\(r,\theta\)</span>
+<ul>
+<li><span class="math inline">\(r=\sqrt{x^2 + y^2}\)</span></li>
+<li><span class="math inline">\(\theta=tan^{-1}\frac{y}{x}\)</span></li>
+</ul></li>
+<li>Find <span class="math inline">\(x,y\)</span>
+<ul>
+<li><span class="math inline">\(x=rcos\theta\)</span></li>
+<li><span class="math inline">\(y=rsin\theta\)</span></li>
+</ul></li>
 </ul>
-<p><span class="math inline">\(BTranslate :: PolarForm \leftrightarrow Polar\)</span> <span class="math inline">\(BTranslate\ \ r(cos\theta + i sin\theta) = (r cos\theta,rsin\theta)\)</span></p>
-<p><span class="math inline">\((x,y) \leftrightarrow (r,\theta) \leftrightarrow r(cos\theta + i sin\theta) \leftrightarrow rcis\theta\)</span></p>
 <p>One can think of all of these as vectors.</p>
+<p>Shorthand notation <span class="math inline">\(rcis\theta = ((r,\theta))\)</span></p>
 <h3 id="de-moivre-theorem">De Moivre Theorem</h3>
 <p><span class="math inline">\((r\ cis\ \alpha)(s\ cis\ \beta) = (r\cdot s)cis\ (\alpha + \beta)\)</span></p>
-<p><strong>multiplying vectors in PolarForm results in</strong></p>
+<p>We can derive this by converting polar to geocomplex then multiplying.</p>
+<p><strong>multiplying vectors in polar results in</strong></p>
 <ul>
 <li><span class="math inline">\(\cdot\)</span> length of 2 vectors <span class="math inline">\((r\cdot s)\)</span></li>
 <li><span class="math inline">\(+\)</span> angle of 2 vectors <span class="math inline">\((\alpha + \beta)\)</span></li>
 </ul>
 <p>if we assume r and s are 1 meaning we have unit vectors<br />
-Multiplying unit length vectors simply results in rotations.</p>
+<strong>Multiplying unit length vectors simply results in rotations.</strong></p>
 <p><span class="math inline">\((cos\theta + isin\theta)^{n}=cos\ n\theta + isin\ n\theta\)</span></p>
 <p>short hand: <span class="math inline">\((cis \theta)^{n} = cis\ n\theta\)</span></p>
 <p><strong>Warning:</strong></p>
@@ -304,35 +311,31 @@ Multiplying unit length vectors simply results in rotations.</p>
 <p><span class="math inline">\(\underset{n\rightarrow\infty}{lim}(1+\frac{1}{n})^n = e\)</span></p>
 <hr />
 <h3 id="functional-identities">Functional identities</h3>
+<p>Imagine if we had a functional identity <span class="math display">\[ \forall a: \forall f : f(a) = 1 \]</span></p>
+<p>The only function that satisfies this is <span class="math inline">\(f(x) = 1\)</span></p>
+<p>Note <span class="math inline">\(\{\forall a: \forall f : f(a) = 1\} \neq \{f(x) = 1\}\)</span></p>
+<p>One is a functional identity and the other is a single function.</p>
 <h5 id="substitution-method">Substitution method</h5>
-<p>Logarithm satisfies <span class="math inline">\(\forall f:f(x \cdot y) = f(x) + f(y)\)</span></p>
+<p>Logarithm satisfies <span class="math inline">\(\forall x,y : \forall f:f(x \cdot y) = f(x) + f(y)\)</span></p>
 <ul>
-<li><span class="math inline">\(\text{[let f be an arbitrary function]}\)</span>
+<li><span class="math inline">\([assume\ \hat{x}]\)</span>
 <ul>
-<li><span class="math inline">\(let\ y = 1\)</span> [Substitution]
+<li><span class="math inline">\(\text{[let y = 1]}\)</span>
 <ul>
-<li><span class="math inline">\(f(x \cdot 1) = f(x) + f(1)\)</span></li>
-<li><span class="math inline">\(f(x) = f(x) + k\)</span></li>
-</ul></li>
+<li><span class="math inline">\([assume\ \hat{f}]\)</span>
+<ul>
+<li><span class="math inline">\(\hat{f}(\hat{x} \cdot 1) = \hat{f}(\hat{x}) + \hat{f}(1)\)</span></li>
+<li><span class="math inline">\(\hat{f}(\hat{x}) = \hat{f}(\hat{x}) + \hat{f}(1)\)</span></li>
+<li>conclude <span class="math inline">\(\hat{f}(1) = 0\)</span></li>
 </ul></li>
 <li><span class="math inline">\(\forall f:f(1) = 0\)</span></li>
-</ul>
-<p>Log(1) = 0</p>
-<p><span class="math inline">\(f(1) = 0\)</span> is true for any function f that satisfies the identity <span class="math inline">\(f(x \cdot y) = f(x) + f(y)\)</span></p>
-<p>DO NOT mistake f as a proposition, <span class="math inline">\(\xcancel{[y = 1] \Rightarrow f(1)=0}\)</span><br />
-<strong>Functions exist in a higher context, almost like a global namespace</strong></p>
-<p>This means substitution is a valid method(just as we substituted y for 1) to understanding the generalized function that satisfies the functional identity.</p>
-<p>Analogy:</p>
-<ul>
-<li>substituting variables to fill in the puzzle of how the function behaves.<br />
-</li>
-<li><strong>SUBSTITUTION is NOT ASSUMPTION</strong> because Functions are <strong>defined</strong> .
-<ul>
-<li>There is no need to “discharge” a substitution unlike a proposition<br />
-</li>
 </ul></li>
-<li>We are teasing out the behavior of the function with each substitution</li>
+<li><span class="math inline">\(y\)</span> is no longer in context, we can continue with existential elimination</li>
+</ul></li>
+<li><span class="math inline">\(\forall x : \forall f: f(1) = 0\)</span></li>
 </ul>
+<p>Notice <span class="math inline">\(Log(1) = 0\)</span></p>
+<p><span class="math inline">\(f(1) = 0\)</span> is true for any function f that satisfies the identity <span class="math inline">\(f(x \cdot y) = f(x) + f(y)\)</span></p>
 <hr />
 <h3 id="derivatives">Derivatives</h3>
 <p>Derivatives operate on functions</p>

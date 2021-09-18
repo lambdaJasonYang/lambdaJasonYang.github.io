@@ -5,16 +5,52 @@ tags: prog
 
 WARNING: The terms I use are nonstandard from most other tutorials.
 
-### Preconfig
+### Setup Credentials
+
+Setting email and username for local repo or global env
+```bash
+git config user.email "example@example.com"
+git config user.name "example"
+
+git config --global user.email "example@example.com"
+git config --global user.name "example"
+```
+
+### Removing Credentials
+
+``` bash
+git config --global  credential.usehttppath true
+```
+
+---
+
+### Preconfig Remote Github repo variable
 configure remote variable we name "origin"  
 or remove to reuse variable
 ``` bash
-git remote add -u origin https://github.com/UserJY/bleh.git
 git remote remove origin
+git remote add origin https://github.com/UserJY/bleh.git
 ```
 the -u flag adds the remote commit to your local git tree.
 
+### Create a new repo locally and push create github repo
+
+```bash
+git init
+git remote add origin https://github.com/userJY/testrepo.git
+git add .
+git commit -m 'update'
+git push -u origin main:main
+
+---
+
+### On git push and pull
+
+`git push -u origin <SrcLocalBranch>:<TargetRemoteBranch>`{.bash}  
+`git pull origin <SrcRemoteBranch>:<TargetLocalBranch>`{.bash}
+
 ### The process
+
 ``` bash
 git add .
 git commit -m "some message"
@@ -144,3 +180,4 @@ remoteb is the name of the new branch to create locally
 git fetch origin main:remoteb
 
 git mergetool
+
