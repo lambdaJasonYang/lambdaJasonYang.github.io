@@ -37,8 +37,8 @@ $\widetilde{A}$ is the maximal set that is linearly independent.
 Note minimal and maximal are not unique.  
 The basis is not unique.  
 There can be multiple basis but they will all have the same number of elements.  
-$$ \{ \begin{bmatrix}1 \\0 \end{bmatrix}, \begin{bmatrix}0 \\1 \end{bmatrix} \} Canonical\ Basis$$
-$$\{ \begin{bmatrix}1 \\0 \end{bmatrix}, \begin{bmatrix}1 \\1 \end{bmatrix} \}\ \ \ Another\ Basis$$
+$$ \{ \begin{bmatrix}1 \\0 \end{bmatrix}, \begin{bmatrix}0 \\1 \end{bmatrix} \}\qquad Canonical\ Basis$$
+$$\{ \begin{bmatrix}1 \\0 \end{bmatrix}, \begin{bmatrix}1 \\1 \end{bmatrix} \}\qquad Another\ Basis$$
 
 
 #### Common misunderstanding with linear (in)dependence:  

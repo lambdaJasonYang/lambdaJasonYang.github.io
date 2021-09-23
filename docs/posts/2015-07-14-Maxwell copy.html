@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Autobuild Nextjs github pages</title>
+        <title>Jason Yang - Maxwell Equations</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,50 +232,62 @@
         </div>
 
         <div id="content">
-            <h1>Autobuild Nextjs github pages</h1>
+            <h1>Maxwell Equations</h1>
             
 
             <div class="info">
-    Posted on June 28, 2021
+    Posted on July 14, 2015
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'CICD'." href="../tags/CICD.html">CICD</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
     
 </div>
-<p>add to package.json</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  <span class="er">&quot;scripts&quot;:</span> <span class="fu">{</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;next dev&quot;</span><span class="fu">,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;next build&quot;</span><span class="fu">,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;next start&quot;</span><span class="fu">,</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>    <span class="dt">&quot;lint&quot;</span><span class="fu">:</span> <span class="st">&quot;next lint&quot;</span><span class="fu">,</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>    <span class="dt">&quot;export&quot;</span> <span class="fu">:</span> <span class="st">&quot;next export&quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>  <span class="fu">}</span></span></code></pre></div>
-<p>npm export builds static pages into the out folder</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="at">  </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="at">  ....</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="at">  ....</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm run export</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> touch ./out/.nojekyll</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="at">    </span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="at">    </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy 🚀</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> JamesIves/github-pages-deploy-action@4.1.5</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="at">      </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="at">        </span><span class="fu">branch</span><span class="kw">:</span><span class="at"> gh-pages</span><span class="co"> # The branch the action should deploy to.</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="at">        </span><span class="fu">folder</span><span class="kw">:</span><span class="at"> out</span><span class="co"> # The folder the action should deploy.</span></span></code></pre></div>
-<p>on your github.com/<username>/<repo>/settings/pages</p>
-<p>Select Source Choose “Branch: gh-pages” “/ (root)” Save</p>
-<h3 id="follow-through">Follow through</h3>
-<p>in your next.config.js</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>  <span class="dt">basePath</span><span class="op">:</span> <span class="st">'/reponame'</span><span class="op">,</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>  <span class="dt">assetPrefix</span><span class="op">:</span> <span class="st">'/reponame'</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>}</span></code></pre></div>
-<p>You may notice GET ERR_ABORTED 404 on your www.github.io/repoName/_next/…</p>
-<p>Github runs jekyll on every underscore folder including "_next" folders which we don’t want create a “.nojekyll” file, we already did that for you in the github actions command</p>
+<p><span class="math inline">\(Div(F) =\nabla \cdot F\)</span><br />
+<span class="math inline">\(Curl(F) =\nabla \times F\)</span></p>
+<h2 id="div">Div</h2>
+<p>Assume given a vector field <span class="math inline">\(F\)</span></p>
+<p>Positive = source<br />
+Negative = sink</p>
+<ul>
+<li><span class="math inline">\(Div(F,(x,y))\)</span> means Divergence of field F at point (x,y).</li>
+<li>Draw a circle at (x,y) in vector field
+<ul>
+<li>Fluid moving out Circle &gt; Fluid moving in Circle
+<ul>
+<li>Positive</li>
+</ul></li>
+<li>Fluid moving in Circle &gt; Fluit moving out Circle
+<ul>
+<li>Negative</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Incompressible fluid like water has Divergence = 0 everywhere. Divergence = 0 implies no source or sinks.</p>
+<h2 id="curl">Curl</h2>
+<p>How much fluid rotates around a point.</p>
+<p>postive = Clockwise negative = Counterclockwise</p>
+<p>Uni-directional vector field, imagine a vertical piece of wood, if vector field is stronger on top than bottom it will make it spin clockwise.</p>
+<h2 id="maxwell-eq">Maxwell Eq</h2>
+<p><span class="math inline">\(Div(E) = \frac{\rho}{\epsilon_0}\)</span></p>
+<ul>
+<li>Divergence of electric field is correlated to charge density.
+<ul>
+<li>Electric field has a source like effect when charge is positive.</li>
+<li>Electric field has a sink like effect when charge is negative.</li>
+</ul></li>
+</ul>
+<p><span class="math inline">\(Div(B) = 0\)</span></p>
+<ul>
+<li>magnetic field is incompressible like water</li>
+<li>magnetic field have no source nor sinks
+<ul>
+<li>The north-south pole magnet effect is created a pair of clockwise and counter clockwise flow.</li>
+</ul></li>
+</ul>
+<p><span class="math inline">\(Curl(E) = -\frac{dB}{dt}\)</span> A closed circuit denoted by the Curl of E will be induced a current when magnetic field changes. A magnetic field will be induced when current is running through a closed circuit.</p>
+<p><span class="math inline">\(Curl(B) = \mu_{0}(J + \epsilon_{0}\frac{dE}{dt})\)</span></p>
 
         </div>
         <div id="footer">

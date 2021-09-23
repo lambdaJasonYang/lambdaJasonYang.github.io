@@ -301,11 +301,18 @@
 <p>short hand: <span class="math inline">\((cis \theta)^{n} = cis\ n\theta\)</span></p>
 <p><strong>Warning:</strong></p>
 <ul>
-<li>Multiplying Cartesian <span class="math inline">\(\neq\)</span> Multiplying PolarForm<br />
+<li>DO NOT multiply elements with a Coordinate system type
+<ul>
+<li>There isn’t even an operation defined for Multiplying by cartesian or polar coordinate systems !!</li>
+</ul></li>
+<li>BAD <span class="math inline">\((a,b)\cdot(c,d)\)</span></li>
+<li>BAD <span class="math inline">\(((r,\theta)) \cdot ((s,\delta))\)</span><br />
 </li>
-<li><span class="math inline">\((a,b)\times(c,d) \neq cis\alpha \times cis\beta\)</span><br />
-</li>
-<li>One must first transform Cartesian to PolarForm to multiply them then convert back to Cartesian</li>
+<li>Look at the above table, translate Coordinate to Complex form
+<ul>
+<li>{cart,polar,geometric cart} <span class="math inline">\(\rightarrow\)</span> {complex,geocomplex}</li>
+</ul></li>
+<li>GOOD <span class="math inline">\((r\ cis\ \alpha)(s\ cis\ \beta) = r(cos \alpha + i sin \alpha) \cdot s(cos\beta + i sin \beta) = ...\)</span></li>
 </ul>
 <hr />
 <p><span class="math inline">\(\underset{n\rightarrow\infty}{lim}(1+\frac{1}{n})^n = e\)</span></p>
@@ -318,22 +325,25 @@
 <h5 id="substitution-method">Substitution method</h5>
 <p>Logarithm satisfies <span class="math inline">\(\forall x,y : \forall f:f(x \cdot y) = f(x) + f(y)\)</span></p>
 <ul>
-<li><span class="math inline">\([assume\ \hat{x}]\)</span>
+<li><span class="math inline">\([assume\ \hat{a}]\)</span>
 <ul>
-<li><span class="math inline">\(\text{[let y = 1]}\)</span>
+<li><span class="math inline">\([let\ \exists \bar{b}, \bar{b}= 1]\)</span>
 <ul>
 <li><span class="math inline">\([assume\ \hat{f}]\)</span>
 <ul>
-<li><span class="math inline">\(\hat{f}(\hat{x} \cdot 1) = \hat{f}(\hat{x}) + \hat{f}(1)\)</span></li>
-<li><span class="math inline">\(\hat{f}(\hat{x}) = \hat{f}(\hat{x}) + \hat{f}(1)\)</span></li>
+<li>plug in <span class="math inline">\(\hat{a} , \bar{b}, \hat{f}\)</span> into functional identity</li>
+<li><span class="math inline">\(\hat{f}(\hat{a} \cdot \bar{b}) = \hat{f}(\hat{a}) + \hat{f}(\bar{b})\)</span> , apply substitution <span class="math inline">\(\bar{b} = 1\)</span></li>
+<li><span class="math inline">\(\hat{f}(\hat{a} \cdot 1) = \hat{f}(\hat{a}) + \hat{f}(1)\)</span></li>
+<li><span class="math inline">\(\hat{f}(\hat{a}) = \hat{f}(\hat{a}) + \hat{f}(1)\)</span></li>
 <li>conclude <span class="math inline">\(\hat{f}(1) = 0\)</span></li>
 </ul></li>
-<li><span class="math inline">\(\forall f:f(1) = 0\)</span></li>
+<li><span class="math inline">\(\forall f:f(1) = 0\)</span> discharge arbitrary <span class="math inline">\(\hat{f}\)</span></li>
 </ul></li>
-<li><span class="math inline">\(y\)</span> is no longer in context, we can continue with existential elimination</li>
+<li><span class="math inline">\(b\)</span> is no longer in context; Simply drop existential quantifier instead of discharging</li>
 </ul></li>
-<li><span class="math inline">\(\forall x : \forall f: f(1) = 0\)</span></li>
+<li><span class="math inline">\(\forall a : \forall f: f(1) = 0\)</span> discharge arbitrary <span class="math inline">\(\hat{a}\)</span></li>
 </ul>
+<p>Plug back our conclusion back into original functional identity for verification (not shown here).</p>
 <p>Notice <span class="math inline">\(Log(1) = 0\)</span></p>
 <p><span class="math inline">\(f(1) = 0\)</span> is true for any function f that satisfies the identity <span class="math inline">\(f(x \cdot y) = f(x) + f(y)\)</span></p>
 <hr />

@@ -61,9 +61,13 @@ short hand: $(cis \theta)^{n} = cis\ n\theta$
 
 **Warning:**   
 
-* Multiplying Cartesian $\neq$ Multiplying PolarForm  
-* $(a,b)\times(c,d) \neq cis\alpha \times cis\beta$  
-* One must first transform Cartesian to PolarForm to multiply them then convert back to Cartesian
+* DO NOT multiply elements with a Coordinate system type
+  * There isn't even an operation defined for Multiplying by cartesian or polar coordinate systems !!
+* BAD $(a,b)\cdot(c,d)$
+* BAD $((r,\theta)) \cdot ((s,\delta))$  
+* Look at the above table, translate Coordinate to Complex form
+  * {cart,polar,geometric cart} $\rightarrow$ {complex,geocomplex}
+* GOOD  $(r\ cis\ \alpha)(s\ cis\ \beta) = r(cos \alpha + i sin \alpha) \cdot s(cos\beta + i sin \beta) = ...$
 
 ---
 
@@ -89,15 +93,19 @@ One is a functional identity and the other is a single function.
 Logarithm satisfies
 $\forall x,y : \forall f:f(x \cdot y) = f(x) + f(y)$
 
-* $[assume\ \hat{x}]$
-  * $\text{[let y = 1]}$
+* $[assume\ \hat{a}]$
+  * $[let\ \exists \bar{b}, \bar{b}= 1]$
     * $[assume\ \hat{f}]$
-      * $\hat{f}(\hat{x} \cdot 1) = \hat{f}(\hat{x}) + \hat{f}(1)$
-      * $\hat{f}(\hat{x}) = \hat{f}(\hat{x}) + \hat{f}(1)$
+      * plug in $\hat{a} , \bar{b}, \hat{f}$ into functional identity
+      * $\hat{f}(\hat{a} \cdot \bar{b}) = \hat{f}(\hat{a}) + \hat{f}(\bar{b})$ , apply substitution $\bar{b} = 1$
+      * $\hat{f}(\hat{a} \cdot 1) = \hat{f}(\hat{a}) + \hat{f}(1)$
+      * $\hat{f}(\hat{a}) = \hat{f}(\hat{a}) + \hat{f}(1)$
       * conclude $\hat{f}(1) = 0$
-    * $\forall f:f(1) = 0$
-  * $y$ is no longer in context, we can continue with existential elimination
-* $\forall x : \forall f: f(1) = 0$
+    * $\forall f:f(1) = 0$ discharge arbitrary $\hat{f}$
+  * $b$ is no longer in context; Simply drop existential quantifier instead of discharging
+* $\forall a : \forall f: f(1) = 0$ discharge arbitrary $\hat{a}$
+
+Plug back our conclusion back into original functional identity for verification (not shown here).
 
 Notice $Log(1) = 0$
 

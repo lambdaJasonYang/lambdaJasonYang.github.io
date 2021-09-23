@@ -241,12 +241,43 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'logic'." href="../tags/logic.html">logic</a>
     
 </div>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f62203a204920616d20757320696e67206865780a40656e64756d6c"></figure>
-<!-- ![](http://www.plantuml.com/plantuml/svg/SoWkIImgAStDuKfCBialKaZEoKpDA-7Aoqz9LKWiA80maXEB88oIuepCeX8kBg20WguTM04G0vamVH0AA01LEgHC7JLrrDHHKnrIyrA0vG40) -->
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e207473686972740a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e207473686972740a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e207473686972740a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e207473686972740a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e207473686972740a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e207473686972740a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e207473686972740a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e207473686972740a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e207473686972740a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e207473686972740a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e207473686972740a6163746f7220636c69656e740a6e6f6465206170700a6e6f6465206361720a6e6f6465207473686972740a0a636172202d3e206170700a617070202d3e20636c69656e740a636c69656e74202d3e20747368697274202020200a40656e64756d6c"></figure>
+<h4 id="prelude">Prelude</h4>
+<p><span class="math display">\[\Delta \vdash A\]</span> <span class="math inline">\(\Delta\)</span> is a resource that can be consumed to produce goal A.</p>
+<p>Coin Exchange example:</p>
+<ul>
+<li>d,d,n (dime,dime,nickel) is our resources <span class="math inline">\(\Delta\)</span></li>
+<li>q (quarter) is what is produced by using up those resources</li>
+</ul>
+<p>Sequent form <span class="math display">\[ d,d,n \vdash q \]</span></p>
+<p>Tree form <span class="math display">\[ \cfrac{(d\qquad d\qquad n)^{\Delta}}{q} \]</span></p>
+<p>Invalid example:</p>
+<p><span class="math display">\[ \xcancel{\cfrac{\cfrac{(d\qquad d\qquad n)^{\Delta}}{q} \qquad \cfrac{(d\qquad d\qquad n)^{\Delta}}{q} }{h}} \]</span> Above would be perfectly valid in typical ND but not in linear logic. We used resource <span class="math inline">\(\Delta\)</span> twice which is not allowed.</p>
+<p>Graph Walk Example:</p>
+<p>If we are given Resource Node(A) and all edges of the graph Edge(A,B), Edge(B,A), Edge(A,C) … we can walk though the entire graph using up alledges.<br />
+<span class="math inline">\({\color{red}\Delta = Node(A),Edge(A,B),Edge(B,A),Edge(A,C)}\)</span></p>
+<p>with a linear rule</p>
+<p><span class="math display">\[ \cfrac{Node(x) \qquad Edge(x,y)}{Node(y)}\]</span></p>
+<p>Walk the entire graph = Using up all the edge resources</p>
+<p><span class="math display">\[\cfrac{\cfrac{\cfrac{\cfrac{{\color{red}Node(A)}\qquad {\color{red}Edge(A,B)}}{Node(B)} \qquad {\color{red}Edge(B,A)}}{Node(A)} \qquad {\color{red}Edge(A,C)}}{Node(C)} \qquad {\color{red}...}}{Node(..)}\]</span></p>
+<p>In linear logic the assumption is the resources in red is by default ephemeral (can only be used once).<br />
+We will underline the resources if it is a reusable resource which is basically typical ND if we underlined all resources.</p>
+<hr />
+<p><span class="math display">\[u: A \vdash A\]</span></p>
+<h4 id="simultaneous-conjunction">Simultaneous Conjunction</h4>
+<p>A and B are both true in the same state.</p>
+<p>Intro</p>
+<p><span class="math display">\[\cfrac{\Delta \vdash A \qquad \Delta' \vdash B}{\Delta, \Delta' \vdash A \otimes B}\]</span></p>
+<ul>
+<li>Given: Resource <span class="math inline">\(\Delta\)</span> can produce A</li>
+<li></li>
+</ul>
+<p>Elim</p>
+<p><span class="math display">\[\cfrac{\cfrac{\Delta ...}{A \otimes B} \qquad \cfrac{[u:A, w:B]}{\cfrac{\Delta'...}{C}}}{C}\]</span></p>
+<h4 id="alternative-conjunction">Alternative Conjunction</h4>
+<p>Intro</p>
 
         </div>
         <div id="footer">

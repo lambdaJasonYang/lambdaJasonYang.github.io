@@ -9,6 +9,36 @@ tags: prog, QuickCode
 
 The moment we enter a new state, 0.1 and 0.2 is what happens first.
 
+***localenv behaves asynchronously*** Don't trust your own ordering of ESPECIALLY WHEN INITAIZLING JSON variables because your INIT may depend on side effects it may mix side effects.
+```javascript
+App = ({data}) => {
+//data outputs some modified garbage data 
+//because of asynchronous side effect below
+console.log(data) 
+/////////////////////////////////////////
+const optionVar = {
+  price: SideEffectFunc(data) 
+  //BIG NONO
+}
+/////////////////////////////////////////
+return(..JSX..)
+}
+//1st fetches data from db
+export async func getStaticProps(context){
+  const data = fetch(...)
+  return data
+}
+```
+
+Initializing a json "optionVar" but initialization depends on a sideeffect function.
+We expect data to output clean data but the "SideEffectFunc" already touched and corrupted our data.
+**Server side on our console it looks like clean data BUT WHEN RENDERED USING chrome inspect we see data is actually modified**
+
+* DO NOT USE STATEFUL VARIABLES OR SIDE EFFECTS IN localenv
+* DO NOT MODIFY THE "props" IN localenv
+
+```
+
 ```plantuml
 @startuml
 skinparam shadowing false

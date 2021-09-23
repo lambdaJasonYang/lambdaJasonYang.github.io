@@ -23,6 +23,7 @@ npm export builds static pages into the out folder
   ....
   ....
     - run: npm run export
+    - run: touch ./out/.nojekyll
     
     
     - name: Deploy 🚀
@@ -37,3 +38,25 @@ on your github.com/<username>/<repo>/settings/pages
 Select Source
 Choose "Branch: gh-pages"  "/ (root)"
 Save
+
+
+### Follow through
+
+
+in your next.config.js 
+
+```js
+module.exports = {
+  basePath: '/reponame',
+  assetPrefix: '/reponame'
+}
+```
+
+
+You may notice GET ERR_ABORTED 404 on your www.github.io/repoName/_next/...
+
+
+
+
+Github runs jekyll on every underscore folder including "_next" folders which we don't want
+create a ".nojekyll" file, we already did that for you in the github actions command

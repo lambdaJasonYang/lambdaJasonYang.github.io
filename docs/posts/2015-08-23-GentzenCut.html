@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Gentzen</title>
+        <title>Jason Yang - Sequents and Gentzen Cut</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,7 +232,7 @@
         </div>
 
         <div id="content">
-            <h1>Gentzen</h1>
+            <h1>Sequents and Gentzen Cut</h1>
             
 
             <div class="info">
@@ -244,10 +244,10 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
     
 </div>
-<p><span class="math display">\[x \vDash y\]</span><br />
-x satisfies y<br />
-<span class="math inline">\(x :: Prop\)</span><br />
-<span class="math inline">\(\Gamma :: \{Prop\}\)</span><br />
+<p>a and b are Predicates. <span class="math display">\[a \vDash b\]</span><br />
+a satisfies b<br />
+<span class="math inline">\(x :: U\)</span> <span class="math inline">\(a, b :: U \rightarrow Bool\)</span> <span class="math inline">\(\{x | a(x)\} \subset \{x | b(x)\}\)</span>$</p>
+<p><span class="math inline">\(\Gamma :: \{Prop\}\)</span><br />
 <span class="math inline">\(\Delta :: \{Prop\}\)</span><br />
 <span class="math inline">\(\Gamma \Delta\)</span> are the set of propositions in this universe.</p>
 <h2 id="gentzen-cut">Gentzen Cut</h2>
@@ -256,13 +256,17 @@ x satisfies y<br />
 \frac{a \vDash b \ \ \ \ b \vDash c}{a \vDash c}
 \]</span></p>
 <p><span class="math display">\[
-\frac{\Gamma , a \vDash b , \Delta \ \ \ \ \Gamma , b \vDash c , \Delta}{\Gamma , a \vDash  c , \Delta}
+\frac{ {\color{blue}\Gamma , a} \vDash b , {\color{red}\Delta} \ \ \ \ {\color{blue}\Gamma} , b \vDash{\color{red} c , \Delta}}{{\color{blue}\Gamma , a} \vDash  {\color{red}c , \Delta}}
 \]</span></p>
-<p>Absorbing a into Gamma<br />
-Absorbing b into Delta<br />
+<p>We expand</p>
+<p><span class="math display">\[
+\frac{ {\color{blue}\Gamma , a} \vDash b , {\color{red}c , \Delta} \ \ \ \ {\color{blue}\Gamma, a} , b \vDash{\color{red} c , \Delta}}{{\color{blue}\Gamma , a} \vDash  {\color{red}c , \Delta}}
+\]</span> Absorbing a into Gamma<br />
+Absorbing c into Delta<br />
 <span class="math display">\[
-\frac{\Gamma \vDash b , \Delta \ \ \ \ \Gamma , b \vDash \Delta}{\Gamma \vDash  \Delta}
+\frac{\Gamma' \vDash b , \Delta' \ \ \ \ \Gamma' , b \vDash \Delta'}{\Gamma' \vDash  \Delta'}
 \]</span></p>
+<p>Why? Remember <span class="math inline">\(AND \vdash OR\)</span></p>
 
         </div>
         <div id="footer">
