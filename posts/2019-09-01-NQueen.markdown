@@ -3,28 +3,20 @@ title: NQueen in Haskell
 tags: mathcs, prog
 ---
 
-Use this page as a template to building other Hakyll pages.
+8 queens
 
+```haskell
+type Row = Int
+type Col = Int
+type Coord = (Row, Col)
+type Board = [Row]
 
-```bash
-chcp 65001
-stack exec myblog clean
-stack exec myblog build
+queens :: Col -> [Board]
+queens 0 = [[]]
+queens n | n > 0 = [q :qs | q <- [1..8],
+                    qs <- queens (n-1),
+                    and [not (check (1,q) (x,y)) | (x,y) <- zip [2..n] qs]]
+check :: Coord -> Coord -> Bool
+check (x,y) (x',y') = x == x' || y == y' || x + y == x' + y' || x-y == x'-y'
+
 ```
-
-```bash
-git add .
-git commit -m "some message"
-git push origin main:main
-```
-
-
-
-``` haskell
-fac n = foldr (*) 1 [1..n]
-```
-
-```{.ruby .numberLines}
-def greet; "Hello, world!"; end
-```
-\\[ \\ln x = \\int_{-\\infty}^x \\frac 1 y \\, dy . \\]

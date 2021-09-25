@@ -24,7 +24,7 @@ Keypoints:
 thus proving $T_1 \neq T_2$ 
 
 
-$$\frac{\frac{[T_1 = T_2]^{null}}{\frac{..p < 0.05..}{\bot}}}{T_1 \neq T_2}$$
+$$\cfrac{\cfrac{[T_1 = T_2]^{null}}{\cfrac{..p < 0.05..}{\bot}}}{T_1 \neq T_2}$$
 
 alpha or 0.05 is Type 2 error.   
 

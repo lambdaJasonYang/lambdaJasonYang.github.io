@@ -3,6 +3,4 @@ title: Type Theory
 tags: musings
 ---
 
-```plantuml
-
-```
+Lexer -> Parser 

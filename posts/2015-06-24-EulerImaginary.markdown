@@ -70,6 +70,10 @@ short hand: $(cis \theta)^{n} = cis\ n\theta$
 * GOOD  $(r\ cis\ \alpha)(s\ cis\ \beta) = r(cos \alpha + i sin \alpha) \cdot s(cos\beta + i sin \beta) = ...$
 
 ---
+Group of n-th roots of unity
+
+$$U_n =\{z \in \mathbb{C} | z^n = 1 \}= \{cos\frac{2k\pi}{n}+isin\frac{2k\pi}{n} | k = 1..n-1\}$$
+
 
 $\underset{n\rightarrow\infty}{lim}(1+\frac{1}{n})^n = e$ 
 
