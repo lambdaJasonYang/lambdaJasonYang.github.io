@@ -13,14 +13,11 @@ Keypoints:
 
 ###  Tests are like proof by contradiction.  
 
-1. Goal: Prove two groups are not equal. $T_1 \neq T_2$  
-
-2. Null hypothesis is our assumption.
-[$T_1 = T_2$]
+2. Null hypothesis is our assumption. $[T_1 = T_2]^{null}$
 
 3. If p-value is less than alpha, we have a proof by contradiction.  
 
-4. Discharge assumption $[T_1 = T_2]$ (Reject the Null)   
+4. Discharge assumption $[T_1 = T_2]^{null}$ (Reject the Null)   
 thus proving $T_1 \neq T_2$ 
 
 

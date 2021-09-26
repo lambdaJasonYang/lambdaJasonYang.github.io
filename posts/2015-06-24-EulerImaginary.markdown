@@ -16,7 +16,7 @@ Everything in the table is equal
 
 | cart | complex | geometric cart |geocomplex| polar |
 | ---- | ---- | ---- | ---- | ---- | 
-| (x,y) | x+yi | (rcos$\theta$,rsin$\theta$) | $r(cos\theta + i sin\theta)$ | ((r, $\theta$)) |
+| $(x,y)$ | $x+yi$ | $(rcos\theta,rsin\theta)$ | $r(cos\theta + i sin\theta)$ | $\langle r, \theta \rangle$ |
 
 Either find $x,y$ or find $r,\theta$  
 
@@ -35,7 +35,7 @@ Either find $x,y$ or find $r,\theta$
 
 One can think of all of these as vectors.
 
-Shorthand notation $rcis\theta = ((r,\theta))$
+Shorthand notation $rcis\theta = \langle r,\theta \rangle$
 
 ### De Moivre Theorem  
 
@@ -64,7 +64,7 @@ short hand: $(cis \theta)^{n} = cis\ n\theta$
 * DO NOT multiply elements with a Coordinate system type
   * There isn't even an operation defined for Multiplying by cartesian or polar coordinate systems !!
 * BAD $(a,b)\cdot(c,d)$
-* BAD $((r,\theta)) \cdot ((s,\delta))$  
+* BAD $\langle r,\theta \rangle \cdot \langle s,\delta \rangle$  
 * Look at the above table, translate Coordinate to Complex form
   * {cart,polar,geometric cart} $\rightarrow$ {complex,geocomplex}
 * GOOD  $(r\ cis\ \alpha)(s\ cis\ \beta) = r(cos \alpha + i sin \alpha) \cdot s(cos\beta + i sin \beta) = ...$
@@ -131,3 +131,43 @@ Derivative operator is a linear operator
 
 Functional identity for trig functions
 $f(x+y) = f(x)g(y) + f(y)g(x)$
+
+### Partial Fractions
+
+```mathematica
+Apart[(6 x^2 + 12 x + 14)/(x^3 + 5 x^2 + 3 x + 15)]
+```
+$$\frac{4 (4 x+1)}{7 \left(x^2+3\right)}+\frac{26}{7 (x+5)}$$
+
+
+---
+
+### Helices
+
+```mathematica
+r := 1
+c := 1/4
+ParametricPlot3D[
+  {r*Cos[t],r*Sin[t], c*t},
+  {t, 0, 8*Pi},
+  ImageSize -> Small,
+  PlotRange -> {{-2, 2}, {-2, 2}, {0, 8}}
+  ]
+```
+![](\images\BasicMath\helix.svg)
+
+$$s(t) = \langle rcos(t),rsin(t),c*t \rangle $$
+$$\frac{1}{c} \propto \# cycles,frequency$$
+$$r \propto radius $$
+
+### Open Delta neighborhoods
+
+Neighborhood is a set N.
+
+$$N(x_0,\delta) = \{x\in\mathbb{R}^n\ |\ \lvert x-x_0 \rvert < \delta \}$$
+
+* 1-D neigborhood : Interval
+* 2-D neighborhood: points in circle
+* 3-D neighborhood: points in ball
+
+##### Interior Point - Ball inside Ball 

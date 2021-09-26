@@ -1,5 +1,5 @@
 ---
-title: ProblemSets
+title: CSES ProblemSets
 
 tags: tech, prog, asm, C
 ---
