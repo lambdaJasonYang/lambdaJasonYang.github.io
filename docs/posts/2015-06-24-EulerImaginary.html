@@ -360,18 +360,69 @@ Derivative operator is a linear operator</p>
 <h3 id="partial-fractions">Partial Fractions</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">Apart</span>[(<span class="dv">6</span> <span class="fu">x</span>^<span class="dv">2</span> + <span class="dv">12</span> <span class="fu">x</span> + <span class="dv">14</span>)/(<span class="fu">x</span>^<span class="dv">3</span> + <span class="dv">5</span> <span class="fu">x</span>^<span class="dv">2</span> + <span class="dv">3</span> <span class="fu">x</span> + <span class="dv">15</span>)]</span></code></pre></div>
 <p><span class="math display">\[\frac{4 (4 x+1)}{7 \left(x^2+3\right)}+\frac{26}{7 (x+5)}\]</span></p>
+<h3 id="taylor-series">Taylor Series</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">Series</span>[<span class="fu">E</span>^(<span class="fu">I</span>*<span class="fu">x</span>), {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">Series</span>[<span class="fu">Cos</span>[<span class="fu">x</span>], {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}] + (<span class="fu">I</span>*<span class="fu">Series</span>[<span class="fu">Sin</span>[<span class="fu">x</span>], {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}])</span></code></pre></div>
+<p><span class="math display">\[
+e^{ix} = 1+i x-\frac{x^2}{2}-\frac{i x^3}{6}+\frac{x^4}{24}+\frac{i
+   x^5}{120}-\frac{x^6}{720}-\frac{i x^7}{5040}+O\left(x^8\right)
+\]</span></p>
+<p><span class="math display">\[
+cos(x) = 1-\frac{x^2}{2}+\frac{x^4}{24}-\frac{x^6}{720}+O\left(x^8\right)
+\]</span></p>
+<p><span class="math display">\[
+i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
+   x^7}{5040}+O\left(x^8\right)
+\]</span></p>
+<p><span class="math display">\[e^{ix} = cos(x) + i\cdot sin(x)\]</span> <span class="math display">\[e^{i\pi} + 1 = 0\ when\ x = \pi \]</span></p>
 <hr />
+<h3 id="practical">Practical</h3>
+<ul>
+<li>A speed limit is 15mph, a driver moves 40mi in 2 hour. Did the driver ever break the speed limit?
+<ul>
+<li>Draw a graph, <span class="math inline">\(\frac{dx}{dt}\ vs\ t\)</span>, the area or integral must always be 40mi.</li>
+<li>Suppose the driver went slowly then speed up
+<ul>
+<li>eventually the driver must’ve hit the speed limit</li>
+<li>Think of it like debt, every time the driver slows down, they have debt in speed which must be paid.</li>
+<li>The graph is like a bubble, push down on one area(slow down in speed) results in push up on other area(speed up)</li>
+</ul></li>
+<li>To minimize the maximum speed, the driver should move at the same constant speed the whole duration.</li>
+</ul></li>
+</ul>
+<h3 id="integral">Integral</h3>
+<ul>
+<li>Find something x that can be enumerated or indexed.
+<ul>
+<li>velocity can be indexed by time</li>
+<li>stockprice can be indexed by volume</li>
+</ul></li>
+<li>Find something that has meaning when x is multiplied by f(x).
+<ul>
+<li>time multipled by velocity is distance</li>
+<li>volume multipled by stockprice is marketcap</li>
+</ul></li>
+<li>Find something that has meaning when you sum by index x
+<ul>
+<li>distanced summed over each index of time is total distance</li>
+<li>stock price summed over each index of volume is total portfolio value <span class="math inline">\(velocity=\frac{distance}{time}\ stockprice=\frac{marketcap}{volume}\)</span></li>
+</ul></li>
+</ul>
+<p>Examples: pairs (x,f(x),x*fx) = {(time,velocity,distance),(volume,stock price,marketcap),(time, current, charge)}</p>
+<p><img src="\images\BasicMath\Integram.svg" /></p>
+<p>The arrows denote velocity being indexed by time.<br />
+The binary operation multiply is applied to each pair then summed.</p>
 <h3 id="helices">Helices</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">r</span> := <span class="dv">1</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">c</span> := <span class="dv">1</span>/<span class="dv">4</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">ParametricPlot3D</span>[</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>  {<span class="fu">r</span>*<span class="fu">Cos</span>[<span class="fu">t</span>],<span class="fu">r</span>*<span class="fu">Sin</span>[<span class="fu">t</span>], <span class="fu">c</span>*<span class="fu">t</span>},</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>  {<span class="fu">t</span>, <span class="dv">0</span>, <span class="dv">8</span>*<span class="fu">Pi</span>},</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>  <span class="fu">ImageSize</span> -&gt; <span class="fu">Small</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>  <span class="fu">PlotRange</span> -&gt; {{-<span class="dv">2</span>, <span class="dv">2</span>}, {-<span class="dv">2</span>, <span class="dv">2</span>}, {<span class="dv">0</span>, <span class="dv">8</span>}}</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>  ]</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">r</span> := <span class="dv">1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">c</span> := <span class="dv">1</span>/<span class="dv">4</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="fu">ParametricPlot3D</span>[</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>  {<span class="fu">r</span>*<span class="fu">Cos</span>[<span class="fu">t</span>],<span class="fu">r</span>*<span class="fu">Sin</span>[<span class="fu">t</span>], <span class="fu">c</span>*<span class="fu">t</span>},</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>  {<span class="fu">t</span>, <span class="dv">0</span>, <span class="dv">8</span>*<span class="fu">Pi</span>},</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>  <span class="fu">ImageSize</span> -&gt; <span class="fu">Small</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>  <span class="fu">PlotRange</span> -&gt; {{-<span class="dv">2</span>, <span class="dv">2</span>}, {-<span class="dv">2</span>, <span class="dv">2</span>}, {<span class="dv">0</span>, <span class="dv">8</span>}}</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>  ]</span></code></pre></div>
 <p><img src="\images\BasicMath\helix.svg" /></p>
-<p><span class="math display">\[s(t) = \langle rcos(t),rsin(t),c*t \rangle \]</span> <span class="math display">\[\frac{1}{c} \propto \# cycles,frequency\]</span> <span class="math display">\[r \propto radius \]</span></p>
+<p><span class="math display">\[s(t) = \langle rcos(t),rsin(t),c*t \rangle \]</span> <span class="math display">\[\frac{1}{c} = \# cycles,frequency\]</span> <span class="math display">\[r = radius \]</span></p>
 <h3 id="open-delta-neighborhoods">Open Delta neighborhoods</h3>
 <p>Neighborhood is a set N.</p>
 <p><span class="math display">\[N(x_0,\delta) = \{x\in\mathbb{R}^n\ |\ \lvert x-x_0 \rvert &lt; \delta \}\]</span></p>

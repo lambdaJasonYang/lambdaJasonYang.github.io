@@ -246,7 +246,7 @@
 </div>
 <h4 id="prelude">Prelude</h4>
 <p><span class="math display">\[\Delta \vdash A\]</span> <span class="math inline">\(\Delta\)</span> is a resource that can be consumed to produce goal A.</p>
-<p>Coin Exchange example:</p>
+<h5 id="coin-exchange-example">Coin Exchange example:</h5>
 <ul>
 <li>d,d,n (dime,dime,nickel) is our resources <span class="math inline">\(\Delta\)</span></li>
 <li>q (quarter) is what is produced by using up those resources</li>
@@ -255,7 +255,7 @@
 <p>Tree form <span class="math display">\[ \cfrac{(d\qquad d\qquad n)^{\Delta}}{q} \]</span></p>
 <p>Invalid example:</p>
 <p><span class="math display">\[ \xcancel{\cfrac{\cfrac{(d\qquad d\qquad n)^{\Delta}}{q} \qquad \cfrac{(d\qquad d\qquad n)^{\Delta}}{q} }{h}} \]</span> Above would be perfectly valid in typical ND but not in linear logic. We used resource <span class="math inline">\(\Delta\)</span> twice which is not allowed.</p>
-<p>Graph Walk Example:</p>
+<h5 id="graph-walk-example">Graph Walk Example:</h5>
 <p>If we are given Resource Node(A) and all edges of the graph Edge(A,B), Edge(B,A), Edge(A,C) … we can walk though the entire graph using up alledges.<br />
 <span class="math inline">\({\color{red}\Delta = Node(A),Edge(A,B),Edge(B,A),Edge(A,C)}\)</span></p>
 <p>with a linear rule</p>

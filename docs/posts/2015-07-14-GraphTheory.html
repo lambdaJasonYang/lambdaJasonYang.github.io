@@ -284,8 +284,44 @@
 <li>Choosing an edge to a cut-set = Union of 2 partitions</li>
 </ul>
 <p>The minimum element in a Cut-Set is the edge contained in all MST.</p>
-<h2 id="trees">Trees</h2>
 <h3 id="bfs">BFS</h3>
+<h5 id="adjacency-list">Adjacency list</h5>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a2020200a2020323b0a0a202030202d3e2031202d3e20343b0a202031202d3e20333b0a202030202d3e20333b0a202033202d3e20353b0a202035202d3e20330a0a7d0a40656e64756d6c"></figure>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>a <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">3</span>],[<span class="dv">3</span>,<span class="dv">4</span>],[<span class="dv">2</span>],[<span class="dv">5</span>],[],[<span class="dv">3</span>]]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>b <span class="op">=</span>  [[<span class="dv">0</span> <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(a))] <span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(a))]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="kw">class</span> Node:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,data):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>        <span class="va">self</span>.children <span class="op">=</span> []</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>    <span class="kw">def</span> printout(<span class="va">self</span>):</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>        <span class="bu">print</span>(<span class="va">self</span>.data)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="kw">def</span> adjToMat(adj,mat):</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>    <span class="cf">for</span> row,adjlist <span class="kw">in</span> <span class="bu">enumerate</span>(adj):</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>        <span class="cf">for</span> col <span class="kw">in</span> adjlist:</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>           mat[row][col] <span class="op">=</span> <span class="dv">1</span> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>    <span class="cf">return</span> mat</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a>c <span class="op">=</span> adjToMat(a,b)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a><span class="kw">def</span> prettyMat(x):</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a>    colLabel <span class="op">=</span> <span class="st">&quot;  &quot;</span>.join([<span class="bu">str</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(x))])</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="ss">f&quot;   </span><span class="sc">{</span>colLabel<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a>    <span class="cf">for</span> row,i <span class="kw">in</span> <span class="bu">enumerate</span>(x):</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a>        <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>row<span class="sc">}</span><span class="ss"> </span><span class="sc">{i}</span><span class="ss">&quot;</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a>prettyMat(c)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a><span class="co">#    0  1  2  3  4  5</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a><span class="co"># 0 [0, 1, 0, 1, 0, 0]</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a><span class="co"># 1 [0, 0, 0, 1, 1, 0]</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a><span class="co"># 2 [0, 0, 1, 0, 0, 0]</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a><span class="co"># 3 [0, 0, 0, 0, 0, 1]</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true"></a><span class="co"># 4 [0, 0, 0, 0, 0, 0]</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true"></a><span class="co"># 5 [0, 0, 0, 1, 0, 0]</span></span></code></pre></div>
 
         </div>
         <div id="footer">

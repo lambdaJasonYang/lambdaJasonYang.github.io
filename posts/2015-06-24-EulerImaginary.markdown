@@ -139,8 +139,61 @@ Apart[(6 x^2 + 12 x + 14)/(x^3 + 5 x^2 + 3 x + 15)]
 ```
 $$\frac{4 (4 x+1)}{7 \left(x^2+3\right)}+\frac{26}{7 (x+5)}$$
 
+### Taylor Series 
+
+```mathematica
+Series[E^(I*x), {x, 0, 7}]
+Series[Cos[x], {x, 0, 7}] + (I*Series[Sin[x], {x, 0, 7}])
+```
+$$
+e^{ix} = 1+i x-\frac{x^2}{2}-\frac{i x^3}{6}+\frac{x^4}{24}+\frac{i
+   x^5}{120}-\frac{x^6}{720}-\frac{i x^7}{5040}+O\left(x^8\right)
+$$
+
+$$
+cos(x) = 1-\frac{x^2}{2}+\frac{x^4}{24}-\frac{x^6}{720}+O\left(x^8\right)
+$$
+
+$$
+i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
+   x^7}{5040}+O\left(x^8\right)
+$$
+
+$$e^{ix} = cos(x) + i\cdot sin(x)$$
+$$e^{i\pi} + 1 = 0\ when\ x = \pi $$
+
 
 ---
+
+### Practical
+
+* A speed limit is 15mph, a driver moves 40mi in 2 hour. Did the driver ever break the speed limit?
+  * Draw a graph, $\frac{dx}{dt}\ vs\ t$, the area or integral must always be 40mi.
+  * Suppose the driver went slowly then speed up
+    * eventually the driver must've hit the speed limit
+    * Think of it like debt, every time the driver slows down, they have debt in speed which must be paid.
+    * The graph is like a bubble, push down on one area(slow down in speed) results in push up on other area(speed up)
+  * To minimize the maximum speed, the driver should move at the same constant speed the whole duration.
+
+### Integral
+* Find something x that can be enumerated or indexed.
+  * velocity can be indexed by time
+  * stockprice can be indexed by volume
+* Find something that has meaning when x is multiplied by f(x).
+  * time multipled by velocity is distance
+  * volume multipled by stockprice is marketcap
+* Find something that has meaning when you sum by index x
+  * distanced summed over each index of time is total distance
+  * stock price summed over each index of volume is total portfolio value 
+$velocity=\frac{distance}{time}\ stockprice=\frac{marketcap}{volume}$
+
+
+Examples: pairs (x,f(x),x*fx) =  {(time,velocity,distance),(volume,stock price,marketcap),(time, current, charge)}
+
+![](\images\BasicMath\Integram.svg)
+
+The arrows denote velocity being indexed by time.  
+The binary operation multiply is applied to each pair then summed.
 
 ### Helices
 
@@ -157,8 +210,8 @@ ParametricPlot3D[
 ![](\images\BasicMath\helix.svg)
 
 $$s(t) = \langle rcos(t),rsin(t),c*t \rangle $$
-$$\frac{1}{c} \propto \# cycles,frequency$$
-$$r \propto radius $$
+$$\frac{1}{c} = \# cycles,frequency$$
+$$r = radius $$
 
 ### Open Delta neighborhoods
 
@@ -171,3 +224,5 @@ $$N(x_0,\delta) = \{x\in\mathbb{R}^n\ |\ \lvert x-x_0 \rvert < \delta \}$$
 * 3-D neighborhood: points in ball
 
 ##### Interior Point - Ball inside Ball 
+
+

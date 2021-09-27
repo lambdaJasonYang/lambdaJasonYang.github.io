@@ -9,7 +9,7 @@ Matlab
 use Simulink image labeler
 export will output: gTruth
 
-```mat
+```Matlab
 trainingDataTable = objectDetectorTrainingData(gTruth)
 acfDetector = trainACFObjectDetector(trainingDataTable,'NegativeSamplesFactor',2);
 I = imread("C:\Users\User\Downloads\archive\shapes\squares\drawing(28).png");

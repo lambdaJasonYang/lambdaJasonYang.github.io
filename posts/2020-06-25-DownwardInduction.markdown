@@ -1,5 +1,5 @@
 ---
-title: Proof technique Downward Induction
+title: Recursive Code for Downward Induction
 tags: mathcs
 ---
 
