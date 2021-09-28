@@ -10,98 +10,6 @@
     </author>
     <updated>2021-08-25T00:00:00Z</updated>
     <entry>
-    <title>Options Derivatives Notes</title>
-    <link href="https://userjy.github.io/posts/2021-08-25-StockOptionsNotes.html" />
-    <id>https://userjy.github.io/posts/2021-08-25-StockOptionsNotes.html</id>
-    <published>2021-08-25T00:00:00Z</published>
-    <updated>2021-08-25T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on August 25, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;mathcs&#39;." href="/tags/mathcs.html">mathcs</a>, <a title="All pages tagged &#39;finance&#39;." href="/tags/finance.html">finance</a>
-    
-</div>
-<p>Assumption rate of stock price growth is exponential</p>
-<h1 id="section">2</h1>
-<p>First part Pricing</p>
-<p>Basic securities stock bonds<br />
-pricing known pay offs - what is the value today? answer is deterministic * pricing fixed cash flows * spot interest rates * forward rates</p>
-<p>Similar principle can be used in stochastic payoffs? * options</p>
-<p>assumptions * Pricing by No-arbitrage * Binomial trees model - there is a unique price for each random/nonrandom payoffs. (Reality there is a bid ask spread ) * Stochastic calulus, Ito rule, Brownian motion - Math tools to learn black scholes * Black-Scholes formula</p>
-<p>Second part Hedging</p>
-<p>Fixed income derivatives - bond market</p>
-<h1 id="section-1">3</h1>
-<p>Futures and forwards are linear function of basic securities/stocks</p>
-<p>Swaps are linear function of basic securities. Swaps are just sequence of future contracts.</p>
-<p>Options are nonlinear functions of stocks.</p>
-<h1 id="section-2">4</h1>
-<h3 id="forward-contract">Forward Contract</h3>
-<p>F := forward price T := maturity date S(T) := spot (market) price at maturity</p>
-<p>Forward price(F) is chosen so contract has 0 value today. Payoff at maturity * long := S(T) - F = spot - forward * short := F - S(T) = forward - spot</p>
-<ul>
-<li>meta-simplify fancy terms</li>
-<li>spot = current value<br />
-</li>
-<li>forward = store bought price</li>
-</ul>
-<h3 id="options">Options</h3>
-<p>S(T) = current value K = strike</p>
-<p>current value &lt; strike implies 0 payoff</p>
-<p>before maturity options are smooth nonlinear functions and they grow closer to looking like piecewise functions.</p>
-<p>calls flipped vertically on it’s kink results in a put</p>
-<p>long flipped horzontally on x-axis results in a short.</p>
-<p>All Longs have negative premiums. (horizontal line below 0) All Shorts have positive premiums. (horizontal line above 0)</p>
-<p>#5</p>
-<p>swaps</p>
-<p>#6</p>
-<p>Exotic options * Asian options - value is average over period * Lookback option - value is max or min over period * Barrier option - value is binary, only pays if goes above a barrier (cheaper to buy but riskier) * Basket option - value depends on value of several assets</p>
-<p>Writing an option - selling option Premium - price of option</p>
-<p>#7</p>
-<p>#10 Theoretically we can design any curve assuming we call options are traded for ALL(infinitely many) strike prices(unrealistic).</p>
-<p>#21</p>
-<h1 id="section-3">45</h1>
-<p>Fundamental Theorem of asset pricing</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Trading Indicators</title>
-    <link href="https://userjy.github.io/posts/2021-08-25-StockIndicators.html" />
-    <id>https://userjy.github.io/posts/2021-08-25-StockIndicators.html</id>
-    <published>2021-08-25T00:00:00Z</published>
-    <updated>2021-08-25T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on August 25, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;mathcs&#39;." href="/tags/mathcs.html">mathcs</a>, <a title="All pages tagged &#39;finance&#39;." href="/tags/finance.html">finance</a>
-    
-</div>
-<h3 id="studies">Studies</h3>
-<ul>
-<li><p>AccDist</p></li>
-<li><p>Acceleration band</p></li>
-</ul>
-<hr />
-<h3 id="strategies">Strategies</h3>
-<hr />
-<h3 id="candlestick-patterns">Candlestick Patterns</h3>
-<p>Doji Candle = minimum change, candle stick is very thin Bullish Candle = + green change Bearish Candle = - red change</p>
-<p>Reversal</p>
-<ul>
-<li>Abandoned Baby
-<ul>
-<li>Bullish -&gt; Doji -&gt; Bearish</li>
-<li>Formed at end of up trend and signal reversal</li>
-</ul></li>
-</ul>
-]]></summary>
-</entry>
-<entry>
     <title>HTTP requests - Design proper headers in python</title>
     <link href="https://userjy.github.io/posts/2021-08-25-RequestHeader.html" />
     <id>https://userjy.github.io/posts/2021-08-25-RequestHeader.html</id>
@@ -849,6 +757,81 @@ The Content of our CodeBlock is pattern matched as <code class="sourceCode haske
 <p>It’s minimalistic.<br />
 It’s fast.<br />
 Plus it’s a good excuse to find a more applied use for Haskell.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Template Page (Ignore)</title>
+    <link href="https://userjy.github.io/posts/2021-08-10-TemplatePage.html" />
+    <id>https://userjy.github.io/posts/2021-08-10-TemplatePage.html</id>
+    <published>2021-08-10T00:00:00Z</published>
+    <updated>2021-08-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on August 10, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;tech&#39;." href="/tags/tech.html">tech</a>, <a title="All pages tagged &#39;mathcs&#39;." href="/tags/mathcs.html">mathcs</a>, <a title="All pages tagged &#39;AI&#39;." href="/tags/AI.html">AI</a>, <a title="All pages tagged &#39;musings&#39;." href="/tags/musings.html">musings</a>
+    
+</div>
+<p>Use this page as a template to building other Hakyll pages.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> greet; <span class="st">&quot;Hello, world!&quot;</span>; <span class="kw">end</span></span></code></pre></div>
+]]></summary>
+</entry>
+<entry>
+    <title>CSS</title>
+    <link href="https://userjy.github.io/posts/2021-08-10-CSS.html" />
+    <id>https://userjy.github.io/posts/2021-08-10-CSS.html</id>
+    <published>2021-08-10T00:00:00Z</published>
+    <updated>2021-08-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on August 10, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<p>Remember to Ctrl + Shift + R , to hard refresh as chrome will cache your old CSS.</p>
+<h3 id="nested-html">Nested HTML</h3>
+<p>Using “pre &gt; code.sourceCode” is how to match nested HTML elements.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>pre <span class="op">&gt;</span> code<span class="fu">.sourceCode</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">background-color</span>: <span class="cn">#f8f8f8</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">&lt;pre&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>  <span class="kw">&lt;code</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="kw">&lt;span&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>        ...<span class="kw">&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a></span></code></pre></div>
+<h3 id="wildcard-class-names">Wildcard class names</h3>
+<p>Below the CSS selector matches beginning occurances of “sourceCode…” within a div element when using class^.<br />
+When using asterisk, class* it matches the term anywhere.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>div<span class="ex">[class</span><span class="op">^=</span><span class="st">&quot;sourceCode&quot;</span><span class="ex">]</span>{</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    <span class="kw">background-color</span>: <span class="cn">#f8f8f8</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>div<span class="ex">[class</span><span class="op">*=</span><span class="st">&quot;sourceCode&quot;</span><span class="ex">]</span>{</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>    <span class="kw">background-color</span>: <span class="cn">#f8f8f8</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sourceCode ...&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;... sourceCode ...&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<h3 id="selecting-by-id-property">Selecting by id property</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>div<span class="pp">#logo</span> <span class="op">&gt;</span> a</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> id</span> <span class="ot">=</span> <span class="st">&quot;logo&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>    <span class="kw">&lt;a&gt;</span> ...<span class="kw">&lt;/a&gt;&lt;/div&gt;</span></span></code></pre></div>
+<h3 id="inverting-color-and-resizing-svg">Inverting color and resizing SVG</h3>
+<p>note 1rem is size of font</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">&lt;svg</span><span class="ot"> width=</span><span class="st">&quot;3rem&quot;</span><span class="ot"> height=</span><span class="st">&quot;3rem&quot;</span><span class="ot"> style</span> <span class="ot">=</span> <span class="st">&quot;filter:invert(100)&quot;</span><span class="kw">&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>    ...<span class="kw">&lt;/svg&gt;</span></span></code></pre></div>
 ]]></summary>
 </entry>
 

@@ -244,7 +244,9 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'asm'." href="../tags/asm.html">asm</a>, <a title="All pages tagged 'C'." href="../tags/C.html">C</a>
     
 </div>
-<p>A bootloader is 512 bytes,</p>
+<p>Using nasm x86 asm</p>
+<p>The first thing PC does is look for the Boot Sector (first sector of a bootable drive).</p>
+<p>A bootsector is 512 bytes,</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">sudo</span> apt install nasm</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">sudo</span> apt-get install qemu-system</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
@@ -254,11 +256,13 @@
 double dollar = section start</p>
 <p>($-$$) = (current addr - section start) = length of previous code<br />
 db := define byte</p>
-<p>Zero out 510 bytes, then add the 2byte bootloader identifier 0x55 0xaa</p>
+<p>Zero out 510 bytes, then add the 2-byte bootloader identifier 0x55 0xaa</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="bu">jmp</span> <span class="dv">$</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="pp">times</span> <span class="dv">510</span>-(<span class="dv">$</span>-<span class="dv">$$</span>) <span class="dt">db</span> <span class="dv">0</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="dt">db</span><span class="bn"> 0x55, 0xaa</span></span></code></pre></div>
 <p>510 - length of previous code = allows us to fill the memory to 510 bytes</p>
+<hr />
+<p>BIOS (vs UEFI)</p>
 
         </div>
         <div id="footer">

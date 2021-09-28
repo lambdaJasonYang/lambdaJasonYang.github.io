@@ -158,8 +158,171 @@ blue untagged node(meaning it is not the local head of a branch)git
 
 --- 
 
-#Merging
+### Merging
 
+Example:
+clone git project first commit 
+
+```bash
+commit 0382315a65a3fa24595718b3bf141f09a49b6469 (HEAD -> main, origin/main, origin/HEAD)
+Author: JY <example@example.com>
+Date:   Mon Sep 27 16:04:23 2021 -0700
+
+    Initial commit
+```
+
+0382315a65a3fa24595718b3bf141f09a49b6469 is the commit on both server and local repo.
+
+* Modify README.md locally (write "hello" to README.md)
+
+```bash
+$ git log
+commit 070f18087be629ba7387a9242af03f85ac656910 (HEAD -> main)
+Author: jy <example@example.com>
+Date:   Mon Sep 27 16:15:11 2021 -0700
+
+    update
+
+commit 0382315a65a3fa24595718b3bf141f09a49b6469 (origin/main, origin/HEAD)
+Author: jy <example@example.com>
+Date:   Mon Sep 27 16:04:23 2021 -0700
+
+    Initial commit
+```
+
+* Modify README.md on github website. (write "goodbye" to README.md)
+
+remote new head: 3295ca935359bc5fc4e8592c9057d3c3c5cd7a6d
+
+
+* Notice Remote and Local repo are out of sync now
+  * Local repo head: 070f18087be629ba7387a9242af03f85ac656910
+  * Remote repo head: 3295ca935359bc5fc4e8592c9057d3c3c5cd7a6d
+  * Point of divergence: 0382315a65a3fa24595718b3bf141f09a49b6469
+
+Let's trying pushing local 070f1 changes to remote anyway
+
+```bash
+$ git push -u origin main:main
+To https://github.com/userJY/gittmp.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/userJY/gittmp.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+```
+It failed as expected  
+Let's follow instructions and use git pull
+
+```bash
+$ git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), 641 bytes | 91.00 KiB/s, done.
+From https://github.com/userJY/gittmp
+   0382315..3295ca9  main       -> origin/main
+Auto-merging README.md
+CONFLICT (content): Merge conflict in README.md
+Automatic merge failed; fix conflicts and then commit the result.
+```
+`   0382315..3295ca9  main       -> origin/main`{.bash}
+The above line shows the commits on the remote.
+
+on our console we see we have been automatically put into MERGE mode.
+```bash
+User@WindowsPC MINGW64 ~/Desktop/gittmp (main|MERGING)
+```
+If you enter your README.md you will find the below content while in MERGE mode. 
+
+Pre-Merge state:
+
+```bash
+<<<<<< HEAD
+hello
+
+
+Hello 
+=======
+goodbye
+
+Goodbye 
+>>>>>>> 3295ca935359bc5fc4e8592c9057d3c3c5cd7a6d
+```
+
+Aside: You can even commit this pre-merge state.  
+This will update local README.md to the above content.  
+You can even push this new pre-merge state commit to remote github.   But clearly you shouldn't do this as it defeats the entire point of merging!!  
+
+
+Use abort to leave MERGE mode to return to local repo
+```bash
+git merge --abort
+```
+
+
+##### To fix up the MERGE conflicts
+
+Go back to MERGE mode
+```bash
+git pull #back to merge mode
+git mergetool #will ask to start default vimdiff
+```
+
+##### Non-conflict automerge
+image if local was
+```bash
+hello
+```
+and remote was
+```bash
+
+yello
+```
+Git pull, would merge by 
+
+```bash
+$ git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), 639 bytes | 91.00 KiB/s, done.
+From https://github.com/userJY/gittmp
+   8401a16..d93f27c  main       -> origin/main
+Auto-merging README.md
+Merge made by the 'recursive' strategy.
+ README.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+```
+
+#### Vim micro tut
+ctrl-w-w to switch screen on 3 way commit
+
+esc-u to undo
+esc-:diffupdate   after undo to rescan difference
+
+esc-i to insert mode
+esc-dd to delete line
+
+
+### Undo last commit
+
+Undo last commit but keep content changes
+```bash
+git reset --soft HEAD~1
+```
+
+Undo last commit, do not keep content change
+```bash
+git reset --hard HEAD~1
+```
+
+
+---
 
 git config merge.tool vimdiff
 
