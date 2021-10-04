@@ -69,6 +69,11 @@ short hand: $(cis \theta)^{n} = cis\ n\theta$
   * {cart,polar,geometric cart} $\rightarrow$ {complex,geocomplex}
 * GOOD  $(r\ cis\ \alpha)(s\ cis\ \beta) = r(cos \alpha + i sin \alpha) \cdot s(cos\beta + i sin \beta) = ...$
 
+```mathematica
+z = Sqrt[2] + I * Sqrt[2]
+
+```
+
 ---
 Group of n-th roots of unity
 
@@ -224,5 +229,6 @@ $$N(x_0,\delta) = \{x\in\mathbb{R}^n\ |\ \lvert x-x_0 \rvert < \delta \}$$
 * 3-D neighborhood: points in ball
 
 ##### Interior Point - Ball inside Ball 
+
 
 

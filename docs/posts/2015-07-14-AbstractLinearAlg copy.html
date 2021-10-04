@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Translate Sequent Calculus to ND</title>
+        <title>Jason Yang - Linear and Abstract Algebra</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,52 +232,30 @@
         </div>
 
         <div id="content">
-            <h1>Translate Sequent Calculus to ND</h1>
+            <h1>Linear and Abstract Algebra</h1>
             
 
             <div class="info">
-    Posted on September 21, 2020
+    Posted on July 14, 2015
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
     
 </div>
-<p>3 types of systems: LK or Sequent Calc, ND and my custom.</p>
-<p>Visual proof trees with the root being the conclusion.<br />
-The leafs on top (P,Q,R,S) are the assumptions or <span class="math inline">\(\Gamma\)</span></p>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a73697a653d22332c33223b0a097b72616e6b3d73616d653b20502051205220533b7d0a202020207b205020512052207d2d3e20540a2020202053202d3e20550a202020207b542055207d202d3e20436f6e636c7573696f6e0a090a7d0a40656e64756d6c"></figure>
-<p>Each Sequent is it’s own proof tree. The rules tell us how to transform one tree to another.</p>
-<p>ND:</p>
-<p>elim-and</p>
-<p><span class="math display">\[\frac{\Gamma \vdash A \land B  }{\Gamma \vdash A}\]</span></p>
-<p>intro-and</p>
-<p><span class="math display">\[\frac{\Gamma \vdash A \qquad \Pi \vdash B  }{\Gamma, \Pi \vdash A \land B}\]</span></p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6672616d6520224162656c69616e2047726f7570227b0a202020206672616d652047726f75707b0a20202020202020206672616d65204d6f6e6f6964207b0a2020202020202020202020206672616d652053656d6967726f7570207b0a2020202020202020202020206f626a6563742022536574204d22206173205365740a2020202020202020202020206f626a656374202242696e617279204f7065726174696f6e222061732042696e0a2020202020202020202020207d0a2020202020202020202020206f626a65637420226964656e7469747920656c656d656e7422206173204f6e650a2020202020202020202020204f6e65202d2d3e205365740a20202020202020207d0a20202020202020206f626a6563742022696e766572736520656c656d656e74732220617320496e760a2020202020202020496e76202d2d3e205365740a202020207d0a202020206f626a6563742022436f6d6d756e617469746976652220617320436f6d6d0a20202020436f6d6d202d2d3e2042696e0a7d0a0a40656e64756d6c6d6c"></figure>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">#print vector_space</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">vector_space</span> (R: Type u) <span class="kw">(</span><span class="ex">M</span>: Type v<span class="kw">)</span> [<span class="ex">field</span> R] [add_comm_group M] := semimodule R M</span></code></pre></div>
+<p>vector space is a</p>
 <ul>
-<li>Given: Some set of assumptions <span class="math inline">\(\Gamma\)</span> can produce a proof for <span class="math inline">\(A\)</span></li>
-<li>Given: another set of assumptions <span class="math inline">\(\Pi\)</span> can produce a proof for <span class="math inline">\(B\)</span>.<br />
-</li>
-<li>Therefore: we can produce a proof for <span class="math inline">\(A \land B\)</span> by combining the two set of assumptions <span class="math inline">\(\Gamma, \Pi\)</span>.</li>
+<li>semi-module over a
+<ul>
+<li>field R</li>
+<li>additive communitative group M ```plantuml</li>
+</ul></li>
 </ul>
-<p>LK:</p>
-<p>left-and</p>
-<p><span class="math display">\[\frac{\Gamma , A,B  \vdash \Delta  }{\Gamma, A \land B \vdash \Delta}\]</span></p>
-<p>right-and</p>
-<p><span class="math display">\[\frac{\Gamma \vdash A, \Delta \qquad \Sigma \vdash B, \Pi  }{\Gamma, \Sigma \vdash \Delta, \Pi, A \land B}\]</span></p>
-<h4 id="lem">LEM</h4>
-<p>ND:</p>
-<p><span class="math display">\[\frac{\Gamma , A \vdash B \qquad \Pi , \neg A \vdash B  }{\Gamma, \Pi \vdash B}\]</span></p>
-<p>custom:</p>
-<p><span class="math display">\[\cfrac{\cfrac{[A \lor \neg A]^{lem}}{...}}{B} \]</span></p>
-<h4 id="interlude">Interlude</h4>
-<p>Notice that the right rules of LK, is very similar to the rules of ND.</p>
-<h4 id="transformation">Transformation</h4>
-<p>LK builds proof trees from bottom up using pattern matching.<br />
-We want to prove</p>
-<p><span class="math display">\[ \vdash \neg \neg A \rightarrow A \]</span></p>
-<p>[look through LK table find a rule that looks like <span class="math inline">\(\cfrac{...}{... \vdash\ \fbox{}\rightarrow\fbox{}}\)</span>]<br />
-[the right-implication rule matches <span class="math inline">\(\cfrac{A,\Gamma \vdash \Delta, B}{\Gamma \vdash \Delta, A \rightarrow B}\)</span> ]</p>
+<p>```</p>
 
         </div>
         <div id="footer">

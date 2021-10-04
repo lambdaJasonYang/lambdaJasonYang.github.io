@@ -10,8 +10,8 @@ tags: tech, prog,HakyllSetupSeries
 
 
 
-Pandoc filtering means when I type up a blog post,  
-I can control whether I want some text to be transformed in some manner after Hakyll builds it.
+Pandoc filtering - when I type up a blog post,  
+I can control whether I want some pattern or group of text to be transformed in some manner when the site is rebuilt.
 
 Here I will show the simplest example:
 

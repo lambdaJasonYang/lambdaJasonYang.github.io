@@ -250,6 +250,93 @@
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    y <span class="op">=</span> <span class="bu">eval</span>(x) <span class="co">#EVAL</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    <span class="bu">print</span>(y)    <span class="co">#PRINT</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>    REPL()      <span class="co">#LOOP</span></span></code></pre></div>
+<hr />
+<h3 id="tokenizer">Tokenizer</h3>
+<p>Tokenizing is simply the act of converting a string to a list of elements.</p>
+<hr />
+<h3 id="a-very-simple-lisp-math-eval-for-ast">A Very Simple LISP math eval for AST</h3>
+<ul>
+<li>Racket treats list like (+ 2 3) as AST.
+<ul>
+<li>Head of list is the operator.<br />
+</li>
+<li>Tail of list are the arguments</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">def</span> helperStr_Int(k):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>    <span class="cf">try</span>:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>        <span class="cf">return</span> <span class="bu">int</span>(k)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    <span class="cf">except</span>:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>        <span class="cf">return</span> k</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>str_to_OP<span class="op">=</span>{<span class="st">&quot;+&quot;</span>: <span class="kw">lambda</span> x,y: x<span class="op">+</span>y}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="kw">def</span> eval_naive(AST):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>    operator <span class="op">=</span> str_to_OP[AST[<span class="dv">0</span>]]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>    args <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> x: helperStr_Int(x),AST[<span class="dv">1</span>:]))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>    <span class="cf">return</span> operator(<span class="op">*</span>args)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>test <span class="op">=</span> [<span class="st">&quot;+&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>eval_naive([<span class="st">&quot;+&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>])</span></code></pre></div>
+<h3 id="eval-with-nested-ast">Eval with nested AST</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>str_to_OP<span class="op">=</span>{<span class="st">&quot;+&quot;</span>: <span class="kw">lambda</span> x,y: x<span class="op">+</span>y,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>           <span class="st">&quot;define&quot;</span>: <span class="kw">lambda</span> x:<span class="dv">3</span>}</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="kw">def</span> helperStr_Int(k):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>    <span class="cf">try</span>:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>        <span class="cf">return</span> <span class="bu">int</span>(k)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>    <span class="cf">except</span>:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>        <span class="cf">return</span> k</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a><span class="kw">def</span> eval_naive(AST):</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>    operator <span class="op">=</span> str_to_OP[AST[<span class="dv">0</span>]]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>    args <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> x: helperStr_Int(x) ,AST[<span class="dv">1</span>:]))</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>    RECURSEargs <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> x: eval_naive(x) <span class="cf">if</span> <span class="bu">isinstance</span>(x,<span class="bu">list</span>) <span class="cf">else</span> x, args))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a>    <span class="co">#Recursively calls eval if another AST is found in the args.</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a>    <span class="cf">return</span> operator(<span class="op">*</span>RECURSEargs)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true"></a>eval_naive([<span class="st">&quot;+&quot;</span>,[<span class="st">&quot;+&quot;</span>,<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>],<span class="st">&quot;3&quot;</span>])</span></code></pre></div>
+<hr />
+<h3 id="using-lambdas-to-define-a-local-environment">Using Lambdas to define a local environment</h3>
+<p>In lambda calculus we can think of everything as a lambdas, everything including the local environment.</p>
+<p><span class="math inline">\((\lambda x. sourceCode)(2) \Rightarrow sourceCode[2/variable]\)</span></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>x<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="co">###sourceCode</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="cf">if</span>(..):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>  doSomething(x)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>  y<span class="op">=</span>x<span class="op">*</span>..</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>.....</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="co">###sourceCode</span></span></code></pre></div>
+<p>We can’t do this naively in python because python does eager evaluation.</p>
+<p>A way to get around that is converting everything to string then using <code class="sourceCode python"><span class="bu">eval</span></code> which simulates a lazy evaluation.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="co">#wrapCode builds our lazy lambda expression string</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="kw">def</span> wrapCode(sourceCode,var,val):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>    <span class="cf">return</span> <span class="ss">f&quot;(lambda </span><span class="sc">{</span>var<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>sourceCode<span class="sc">}</span><span class="ss">)(</span><span class="sc">{</span>val<span class="sc">}</span><span class="ss">)&quot;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>wrapCode(wrapCode(<span class="st">&quot;print(x+y)&quot;</span>,<span class="st">&quot;x&quot;</span>,<span class="dv">2</span>),<span class="st">&quot;y&quot;</span>,<span class="dv">3</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a><span class="co">#&gt; '(lambda y: (lambda x: print(x+y))(2))(3)'</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="bu">eval</span>(wrapCode(wrapCode(<span class="st">&quot;print(x+y)&quot;</span>,<span class="st">&quot;x&quot;</span>,<span class="dv">2</span>),<span class="st">&quot;y&quot;</span>,<span class="dv">3</span>))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="co">#&gt; 5</span></span></code></pre></div>
+<hr />
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">Expr</span> <span class="ot">=</span> <span class="dt">Var</span> <span class="dt">String</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>          <span class="op">|</span> <span class="dt">Const</span> <span class="dt">Int</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>          <span class="op">|</span> <span class="dt">Plus</span> <span class="dt">Expr</span> <span class="dt">Expr</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>          <span class="op">|</span> <span class="dt">Times</span> <span class="dt">Expr</span> <span class="dt">Expr</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>          <span class="op">|</span> <span class="dt">Sin</span> <span class="dt">Expr</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>          <span class="op">|</span> <span class="dt">Cos</span> <span class="dt">Expr</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>          <span class="kw">deriving</span> <span class="dt">Show</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a><span class="ot">diff ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a>diff (<span class="dt">Var</span> y) x <span class="op">|</span> y <span class="op">==</span> x <span class="ot">=</span> <span class="dt">Const</span> <span class="dv">1</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a>               <span class="op">|</span> <span class="fu">otherwise</span> <span class="ot">=</span> <span class="dt">Const</span> <span class="dv">0</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a>diff (<span class="dt">Const</span> _) _ <span class="ot">=</span> <span class="dt">Const</span> <span class="dv">0</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a>diff (<span class="dt">Plus</span> e1 e2) x <span class="ot">=</span> <span class="dt">Plus</span> (diff e1 x) (diff e2 x)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a>diff (<span class="dt">Times</span> e1 e2) x <span class="ot">=</span> <span class="dt">Plus</span> (<span class="dt">Times</span> (diff e1 x) e2)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a>                            (<span class="dt">Times</span> (diff e2 x) e1)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a>diff (<span class="dt">Sin</span> e1) x <span class="ot">=</span> <span class="dt">Times</span> (<span class="dt">Cos</span> e1) (diff e1 x)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a>diff (<span class="dt">Cos</span> e1) x <span class="ot">=</span> <span class="dt">Times</span> (<span class="dt">Times</span> (<span class="dt">Const</span> (<span class="op">-</span><span class="dv">1</span>)) (<span class="dt">Sin</span> e1)) (diff e1 x)</span></code></pre></div>
 
         </div>
         <div id="footer">

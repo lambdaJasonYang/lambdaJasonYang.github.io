@@ -241,7 +241,7 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'asm'." href="../tags/asm.html">asm</a>, <a title="All pages tagged 'C'." href="../tags/C.html">C</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>
     
 </div>
 <p>One of the most common recursive methods is to slice the list tail</p>
@@ -255,7 +255,12 @@
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>        <span class="cf">return</span> IH</span></code></pre></div>
 <p>It works most of the time…until it doesn’t.</p>
 <p>Problem Statement: Find the index of element “x” in a list “arr” (using recursion)</p>
-<p>The naive solution is : IH: Finds the element x in the tail arr and return it’s index Solution: Check if x in head arr return index 0, else IH.</p>
+<p>The naive solution is :</p>
+<ul>
+<li>IH: Finds the element x in the tail arr and return it’s index<br />
+</li>
+<li>Solve: Check if x in head arr return index 0, else IH.</li>
+</ul>
 <p>Why doesn’t this work?</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">def</span> func(arr,x):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>    HeadValue <span class="op">=</span> arr[<span class="dv">0</span>]</span>
@@ -271,8 +276,9 @@
 <p><code class="sourceCode python">tail <span class="op">=</span> arr[<span class="dv">1</span>:]</code> is impure.<br />
 It shifts the index of <code class="sourceCode python">arr[<span class="dv">1</span>:]</code> by <code class="sourceCode python"><span class="op">-</span><span class="dv">1</span></code>.<br />
 <strong>Remediate the Side-Effect</strong>: <code>IH = 1 + func(tail,x)</code></p>
-<p>Our naive thoughts came from the assumption that lists are pure data structs and the INDEX-VALUE relation is immutable. What we really wanted was a dictionary.<br />
-The below code does work when we convert list to dict.</p>
+<p>Error is due to assumption that lists are pure data structs and the INDEX-VALUE relation is immutable. What we really wanted was a dictionary.<br />
+The below code does work when we convert list to dict.<br />
+The partition between head and tail of the dict maintains the INDEX-VALUE pairing.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>arr <span class="op">=</span> [<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">24</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>ConvertListToDict <span class="op">=</span> <span class="kw">lambda</span> xs: <span class="bu">dict</span>(<span class="bu">enumerate</span>(xs))</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="co">#ConvertListToDict([5,8,3]) will return {0:5, 1:8, 2:3}</span></span>

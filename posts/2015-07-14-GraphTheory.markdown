@@ -140,7 +140,7 @@ digraph G {
 
 a = [[1,3],[3,4],[2],[5],[],[3]]
 
-b =  [[0 for j in range(0,len(a))] for row in range(0,len(a))]
+b =  [[0 for col in range(0,len(a))] for row in range(0,len(a))]
 
 class Node:
     def __init__(self,data):

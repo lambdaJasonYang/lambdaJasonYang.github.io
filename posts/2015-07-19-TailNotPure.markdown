@@ -1,6 +1,6 @@
 ---
 title: Recursion - Slicing the tail of list is impure
-tags: tech, prog, asm, C
+tags: prog, recursion
 ---
 
 One of the most common recursive methods is to slice the list tail
@@ -19,9 +19,10 @@ It works most of the time...until it doesn't.
 
 Problem Statement: Find the index of element "x" in a list "arr" (using recursion)
 
-The naive solution is :
-IH: Finds the element x in the tail arr and return it's index
-Solution: Check if x in head arr return index 0, else IH.
+The naive solution is :  
+ 
+*  IH: Finds the element x in the tail arr and return it's index  
+*  Solve: Check if x in head arr return index 0, else IH.  
 
 Why doesn't this work?
 
@@ -46,9 +47,10 @@ It shifts the index of `arr[1:]`{.python} by `-1`{.python}.
 
 
 
-Our naive thoughts came from the assumption that lists are pure data structs and the INDEX-VALUE relation is immutable.
+Error is due to assumption that lists are pure data structs and the INDEX-VALUE relation is immutable.
 What we really wanted was a dictionary.  
-The below code does work when we convert list to dict.
+The below code does work when we convert list to dict.   
+The partition between head and tail of the dict maintains the INDEX-VALUE pairing.
 
 
 ```python

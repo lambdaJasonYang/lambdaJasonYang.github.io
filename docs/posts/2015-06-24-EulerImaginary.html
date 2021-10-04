@@ -321,6 +321,7 @@
 </ul></li>
 <li>GOOD <span class="math inline">\((r\ cis\ \alpha)(s\ cis\ \beta) = r(cos \alpha + i sin \alpha) \cdot s(cos\beta + i sin \beta) = ...\)</span></li>
 </ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">z</span> = <span class="fu">Sqrt</span>[<span class="dv">2</span>] + <span class="fu">I</span> * <span class="fu">Sqrt</span>[<span class="dv">2</span>]</span></code></pre></div>
 <h3 id="functional-identities">Functional identities</h3>
 <p>Imagine if we had a functional identity <span class="math display">\[ \forall a: \forall f : f(a) = 1 \]</span></p>
 <p>The only function that satisfies this is <span class="math inline">\(f(x) = 1\)</span></p>
@@ -358,11 +359,11 @@
 Derivative operator is a linear operator</p>
 <p>Functional identity for trig functions <span class="math inline">\(f(x+y) = f(x)g(y) + f(y)g(x)\)</span></p>
 <h3 id="partial-fractions">Partial Fractions</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">Apart</span>[(<span class="dv">6</span> <span class="fu">x</span>^<span class="dv">2</span> + <span class="dv">12</span> <span class="fu">x</span> + <span class="dv">14</span>)/(<span class="fu">x</span>^<span class="dv">3</span> + <span class="dv">5</span> <span class="fu">x</span>^<span class="dv">2</span> + <span class="dv">3</span> <span class="fu">x</span> + <span class="dv">15</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">Apart</span>[(<span class="dv">6</span> <span class="fu">x</span>^<span class="dv">2</span> + <span class="dv">12</span> <span class="fu">x</span> + <span class="dv">14</span>)/(<span class="fu">x</span>^<span class="dv">3</span> + <span class="dv">5</span> <span class="fu">x</span>^<span class="dv">2</span> + <span class="dv">3</span> <span class="fu">x</span> + <span class="dv">15</span>)]</span></code></pre></div>
 <p><span class="math display">\[\frac{4 (4 x+1)}{7 \left(x^2+3\right)}+\frac{26}{7 (x+5)}\]</span></p>
 <h3 id="taylor-series">Taylor Series</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">Series</span>[<span class="fu">E</span>^(<span class="fu">I</span>*<span class="fu">x</span>), {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}]</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">Series</span>[<span class="fu">Cos</span>[<span class="fu">x</span>], {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}] + (<span class="fu">I</span>*<span class="fu">Series</span>[<span class="fu">Sin</span>[<span class="fu">x</span>], {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}])</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">Series</span>[<span class="fu">E</span>^(<span class="fu">I</span>*<span class="fu">x</span>), {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">Series</span>[<span class="fu">Cos</span>[<span class="fu">x</span>], {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}] + (<span class="fu">I</span>*<span class="fu">Series</span>[<span class="fu">Sin</span>[<span class="fu">x</span>], {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}])</span></code></pre></div>
 <p><span class="math display">\[
 e^{ix} = 1+i x-\frac{x^2}{2}-\frac{i x^3}{6}+\frac{x^4}{24}+\frac{i
    x^5}{120}-\frac{x^6}{720}-\frac{i x^7}{5040}+O\left(x^8\right)
@@ -413,14 +414,14 @@ i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
 <p>The arrows denote velocity being indexed by time.<br />
 The binary operation multiply is applied to each pair then summed.</p>
 <h3 id="helices">Helices</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">r</span> := <span class="dv">1</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">c</span> := <span class="dv">1</span>/<span class="dv">4</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="fu">ParametricPlot3D</span>[</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>  {<span class="fu">r</span>*<span class="fu">Cos</span>[<span class="fu">t</span>],<span class="fu">r</span>*<span class="fu">Sin</span>[<span class="fu">t</span>], <span class="fu">c</span>*<span class="fu">t</span>},</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>  {<span class="fu">t</span>, <span class="dv">0</span>, <span class="dv">8</span>*<span class="fu">Pi</span>},</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>  <span class="fu">ImageSize</span> -&gt; <span class="fu">Small</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>  <span class="fu">PlotRange</span> -&gt; {{-<span class="dv">2</span>, <span class="dv">2</span>}, {-<span class="dv">2</span>, <span class="dv">2</span>}, {<span class="dv">0</span>, <span class="dv">8</span>}}</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>  ]</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">r</span> := <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">c</span> := <span class="dv">1</span>/<span class="dv">4</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">ParametricPlot3D</span>[</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>  {<span class="fu">r</span>*<span class="fu">Cos</span>[<span class="fu">t</span>],<span class="fu">r</span>*<span class="fu">Sin</span>[<span class="fu">t</span>], <span class="fu">c</span>*<span class="fu">t</span>},</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>  {<span class="fu">t</span>, <span class="dv">0</span>, <span class="dv">8</span>*<span class="fu">Pi</span>},</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>  <span class="fu">ImageSize</span> -&gt; <span class="fu">Small</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>  <span class="fu">PlotRange</span> -&gt; {{-<span class="dv">2</span>, <span class="dv">2</span>}, {-<span class="dv">2</span>, <span class="dv">2</span>}, {<span class="dv">0</span>, <span class="dv">8</span>}}</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>  ]</span></code></pre></div>
 <p><img src="\images\BasicMath\helix.svg" /></p>
 <p><span class="math display">\[s(t) = \langle rcos(t),rsin(t),c*t \rangle \]</span> <span class="math display">\[\frac{1}{c} = \# cycles,frequency\]</span> <span class="math display">\[r = radius \]</span></p>
 <h3 id="open-delta-neighborhoods">Open Delta neighborhoods</h3>

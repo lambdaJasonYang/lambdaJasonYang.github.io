@@ -244,29 +244,46 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>
     
 </div>
-<h5 id="print-out-probability-distributions">print out probability Distributions</h5>
-<div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">StringCases</span>[#, <span class="dt">___</span> ~~ &quot;Distribution&quot; ~~ <span class="dt">___</span> :&gt; #] &amp; /@ </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  <span class="fu">Names</span>[&quot;System`*&quot;];</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="fu">DeleteCases</span>[%, {}]</span></code></pre></div>
+<h5 id="post-apply-and-latex-output">Post apply and LateX output</h5>
+<p>double backslash for post application</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">A</span> ={{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>},{-<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">0</span>}} // <span class="fu">MatrixForm</span> // <span class="fu">TeXForm</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">A</span> = <span class="fu">TeXForm</span>[<span class="fu">MatrixForm</span>[{{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>},{-<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">0</span>}}]]</span></code></pre></div>
 <h5 id="simplify-with-condition">Simplify with condition</h5>
+<p>Simplify[expr,assum] : simjply with assumptions Expand[expr,patt] : expand all but pattern patt ExpandAll[expr] : expand product and exponents ExpandAll[expr,patt] : expand when matching pattern patt</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">Assuming</span>[<span class="fu">Element</span>[<span class="fu">n</span>, <span class="fu">Integers</span>] &amp;&amp; <span class="fu">n</span> &gt; <span class="dv">0</span>,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>   <span class="fu">Integrate</span>[<span class="fu">Sin</span>[<span class="fu">n</span> <span class="fu">x</span>]^<span class="dv">2</span>, {<span class="fu">x</span>, <span class="dv">0</span>, <span class="fu">Pi</span>}]]</span></code></pre></div>
+<h5 id="print-out-ast">print out AST</h5>
+<div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">x</span>*<span class="fu">Tan</span>[<span class="fu">y</span> + <span class="fu">z</span>] // <span class="fu">TreeForm</span></span></code></pre></div>
+<h5 id="functions">Functions</h5>
+<pre><code>F[x_] = x*2+1
+F[x_] = Module[
+  {a,b},
+  a=2;
+  b=1;
+  x*a+b
+]</code></pre>
+<p>x_ the underscore means function arg<br />
+Module allows a local env</p>
+<h5 id="print-out-probability-distributions">print out probability Distributions</h5>
+<div class="sourceCode" id="cb5"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">StringCases</span>[#, <span class="dt">___</span> ~~ &quot;Distribution&quot; ~~ <span class="dt">___</span> :&gt; #] &amp; /@ </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>  <span class="fu">Names</span>[&quot;System`*&quot;];</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="fu">DeleteCases</span>[%, {}]</span></code></pre></div>
 <h5 id="solve-implicit-differentiation">Solve implicit differentiation</h5>
-<div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">x</span>[<span class="dt">t_</span>] := <span class="fu">Cosh</span>[<span class="fu">t</span>]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">y</span>[<span class="dt">s_</span>] := <span class="fu">Cos</span>[<span class="fu">s</span>]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="fu">z</span>[<span class="dt">x_</span>, <span class="dt">y_</span>] := <span class="fu">x</span>[<span class="fu">t</span>] <span class="fu">Exp</span>[-y[<span class="fu">s</span>]]</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="fu">D</span>[<span class="fu">z</span>[<span class="fu">x</span>, <span class="fu">y</span>], <span class="fu">s</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">x</span>[<span class="dt">t_</span>] := <span class="fu">Cosh</span>[<span class="fu">t</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="fu">y</span>[<span class="dt">s_</span>] := <span class="fu">Cos</span>[<span class="fu">s</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="fu">z</span>[<span class="dt">x_</span>, <span class="dt">y_</span>] := <span class="fu">x</span>[<span class="fu">t</span>] <span class="fu">Exp</span>[-y[<span class="fu">s</span>]]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="fu">D</span>[<span class="fu">z</span>[<span class="fu">x</span>, <span class="fu">y</span>], <span class="fu">s</span>]</span></code></pre></div>
 <h5 id="taylor-series">Taylor Series</h5>
-<div class="sourceCode" id="cb4"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">Series</span>[<span class="fu">E</span>^<span class="fu">x</span>, {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}]</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">Series</span>[<span class="fu">E</span>^<span class="fu">x</span>, {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}]</span></code></pre></div>
 <hr />
 <h5 id="importing-fred-data">Importing Fred Data</h5>
-<div class="sourceCode" id="cb5"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">y</span> = <span class="fu">Import</span>[&quot;C:\\Users\\User\\Downloads\\DCOILWTICO.csv&quot;, &quot;Dataset&quot;, </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>  &quot;HeaderLines&quot; -&gt; <span class="dv">1</span>]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="fu">DateListPlot</span>[<span class="fu">y</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="fu">y</span> = <span class="fu">Import</span>[&quot;C:\\Users\\User\\Downloads\\DCOILWTICO.csv&quot;, &quot;Dataset&quot;, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>  &quot;HeaderLines&quot; -&gt; <span class="dv">1</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="fu">DateListPlot</span>[<span class="fu">y</span>]</span></code></pre></div>
 <h5 id="equity-timeseries-forecast">Equity Timeseries Forecast</h5>
-<div class="sourceCode" id="cb6"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">x</span> = <span class="fu">FinancialData</span>[&quot;SPX&quot;, {{<span class="dv">2020</span>, <span class="dv">1</span>, <span class="dv">1</span>}, {<span class="dv">2021</span>, <span class="dv">1</span>, <span class="dv">1</span>}}]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>tsm = TimeSeriesModelFit[<span class="fu">x</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="fu">ListLinePlot</span>[{tsm[&quot;TemporalData&quot;], TimeSeriesForecast[<span class="fu">x</span>, {<span class="dv">10</span>}]}]</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="fu">x</span> = <span class="fu">FinancialData</span>[&quot;SPX&quot;, {{<span class="dv">2020</span>, <span class="dv">1</span>, <span class="dv">1</span>}, {<span class="dv">2021</span>, <span class="dv">1</span>, <span class="dv">1</span>}}]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>tsm = TimeSeriesModelFit[<span class="fu">x</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="fu">ListLinePlot</span>[{tsm[&quot;TemporalData&quot;], TimeSeriesForecast[<span class="fu">x</span>, {<span class="dv">10</span>}]}]</span></code></pre></div>
 
         </div>
         <div id="footer">

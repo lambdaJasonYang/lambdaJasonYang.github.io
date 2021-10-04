@@ -3,8 +3,7 @@ title: Monads, Bind, Return
 tags: mathcs
 ---
 
-$$ f :: a \rightarrow T b$$
-$$ g :: a \rightarrow T c$$
+
 
 
 ```haskell
@@ -19,3 +18,137 @@ class Monad m where
 ```
 
 
+
+```plantuml
+@startuml
+digraph G {
+  compound=true
+rankdir="LR"
+subgraph clusterb{
+label = "Functor M";
+subgraph clustera{
+label = "Functor M";
+ B [label="Int"]
+};
+}
+
+
+subgraph cluster{
+  label = "Functor M";
+A [label="Int"]
+}
+B->A [label="join" ltail=clusterb lhead=cluster]
+
+
+}
+@enduml
+```
+
+```plantuml
+@startuml
+digraph G {
+compound=true
+rankdir="LR"
+
+ B [label="Int"]
+
+
+
+subgraph cluster{
+label="Functor M";
+A [label="Int"]
+}
+B->A [label="unit" lhead=cluster]
+
+
+}
+@enduml
+```
+
+```haskell
+(>>=) :: Monad m => m a -> (a -> m b) -> m b
+```
+
+### Kleisli Category
+
+* f,g are morphisms
+* (>=>) is composition
+
+$$ f :: a \rightarrow m\ b$$
+$$ g :: b \rightarrow m\ c$$
+$$ >=> :: $$
+
+$$\text{Meta-Pattern Match} :: m\ b \rightarrow b$$
+
+```{.haskell .numberLines}
+(>=>) ::  (a -> m b) -> (b -> m c) -> (a -> m c)
+
+f :: a -> m b
+g :: b -> m c
+
+f >=> g :: \x ->
+  let (p, sideEffect1) = f x
+      (q, sideEffect2) = g p
+   in (q, sideEffect1 ++ sideEffect2) 
+
+```
+
+```plantuml
+@startuml
+digraph G {
+rankdir="LR"
+compound=true;
+
+subgraph cluster_0{
+label="Functor M";
+
+ B [label="B"]
+}
+
+
+A [label="A" fontcolor=red]
+
+BX [label="B"]
+
+subgraph cluster_1{
+label="Functor M";
+CX [label="C"]
+
+}
+
+A->B [label="f" color=red lhead=cluster_0]
+B -> BX [label="Meta-Pattern\nmatch" color=green ltail=cluster_0]
+BX -> CX [label="g" color=red lhead=cluster_1]
+
+A -> CX [label=">=>" style=dashed color=red lhead=cluster_1 constraint=false]
+
+}
+@enduml
+```
+
+The red are the arguments of (>=>)
+
+* x :: A  (line 6)
+* extract p :: B from f x :: M B
+  * green pattern match is extraction (line 7)
+* extract q :: C then repackage into (q,..) :: M C
+  * line 9 not shown in diagram
+  
+### Proving a Type of Function cannot exist
+
+```haskell
+
+ transform :: forall m a b. Monad m => (a -> m b) -> m (a -> b)
+
+--assume by contradiction
+--Specialize m to the continuation monad ((_ -> r) -> r)
+ transform :: forall a b r. (a -> (b -> r) -> r) -> ((a -> b) -> r) -> r
+
+ --Specialize r=a
+ transform :: forall a b. (a -> (b -> a) -> a) -> ((a -> b) -> a) -> a
+
+ --currying 
+ transform const :: forall a b. ((a -> b) -> a) -> a
+
+ --this is Peirce's Law, which is not provable in intuitionistic logic. Contradiction.
+ ```

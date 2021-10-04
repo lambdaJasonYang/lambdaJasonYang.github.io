@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Translate Sequent Calculus to ND</title>
+        <title>Jason Yang - Solving Differential Equations</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,52 +232,102 @@
         </div>
 
         <div id="content">
-            <h1>Translate Sequent Calculus to ND</h1>
+            <h1>Solving Differential Equations</h1>
             
 
             <div class="info">
-    Posted on September 21, 2020
+    Posted on July 14, 2015
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
     
 </div>
-<p>3 types of systems: LK or Sequent Calc, ND and my custom.</p>
-<p>Visual proof trees with the root being the conclusion.<br />
-The leafs on top (P,Q,R,S) are the assumptions or <span class="math inline">\(\Gamma\)</span></p>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a73697a653d22332c33223b0a097b72616e6b3d73616d653b20502051205220533b7d0a202020207b205020512052207d2d3e20540a2020202053202d3e20550a202020207b542055207d202d3e20436f6e636c7573696f6e0a090a7d0a40656e64756d6c"></figure>
-<p>Each Sequent is it’s own proof tree. The rules tell us how to transform one tree to another.</p>
-<p>ND:</p>
-<p>elim-and</p>
-<p><span class="math display">\[\frac{\Gamma \vdash A \land B  }{\Gamma \vdash A}\]</span></p>
-<p>intro-and</p>
-<p><span class="math display">\[\frac{\Gamma \vdash A \qquad \Pi \vdash B  }{\Gamma, \Pi \vdash A \land B}\]</span></p>
+<h3 id="differential-equations">Differential Equations</h3>
+<p>Properties</p>
 <ul>
-<li>Given: Some set of assumptions <span class="math inline">\(\Gamma\)</span> can produce a proof for <span class="math inline">\(A\)</span></li>
-<li>Given: another set of assumptions <span class="math inline">\(\Pi\)</span> can produce a proof for <span class="math inline">\(B\)</span>.<br />
-</li>
-<li>Therefore: we can produce a proof for <span class="math inline">\(A \land B\)</span> by combining the two set of assumptions <span class="math inline">\(\Gamma, \Pi\)</span>.</li>
+<li>Order: order of highest derivative</li>
+<li>(Non)Linear:</li>
+<li>(ODE)PDE</li>
+<li>Homogeneity</li>
 </ul>
-<p>LK:</p>
-<p>left-and</p>
-<p><span class="math display">\[\frac{\Gamma , A,B  \vdash \Delta  }{\Gamma, A \land B \vdash \Delta}\]</span></p>
-<p>right-and</p>
-<p><span class="math display">\[\frac{\Gamma \vdash A, \Delta \qquad \Sigma \vdash B, \Pi  }{\Gamma, \Sigma \vdash \Delta, \Pi, A \land B}\]</span></p>
-<h4 id="lem">LEM</h4>
-<p>ND:</p>
-<p><span class="math display">\[\frac{\Gamma , A \vdash B \qquad \Pi , \neg A \vdash B  }{\Gamma, \Pi \vdash B}\]</span></p>
-<p>custom:</p>
-<p><span class="math display">\[\cfrac{\cfrac{[A \lor \neg A]^{lem}}{...}}{B} \]</span></p>
-<h4 id="interlude">Interlude</h4>
-<p>Notice that the right rules of LK, is very similar to the rules of ND.</p>
-<h4 id="transformation">Transformation</h4>
-<p>LK builds proof trees from bottom up using pattern matching.<br />
-We want to prove</p>
-<p><span class="math display">\[ \vdash \neg \neg A \rightarrow A \]</span></p>
-<p>[look through LK table find a rule that looks like <span class="math inline">\(\cfrac{...}{... \vdash\ \fbox{}\rightarrow\fbox{}}\)</span>]<br />
-[the right-implication rule matches <span class="math inline">\(\cfrac{A,\Gamma \vdash \Delta, B}{\Gamma \vdash \Delta, A \rightarrow B}\)</span> ]</p>
+<hr />
+<h5 id="initial-value-problems">Initial Value Problems</h5>
+<p>notation: <span class="math inline">\(y' := \frac{dy}{dx}\)</span> <span class="math inline">\(y := y(x)\)</span></p>
+<p>Given Differential Equation <span class="math display">\[y'' - 5y' + 6y = 0\]</span><br />
+Solve for set of equations that satisfy Differential equation:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">DSolve</span>[y''[<span class="fu">x</span>] - <span class="dv">5</span>*y'[<span class="fu">x</span>] + <span class="dv">6</span> <span class="fu">y</span>[<span class="fu">x</span>] == <span class="dv">0</span>, <span class="fu">y</span>[<span class="fu">x</span>], <span class="fu">x</span>]</span></code></pre></div>
+<p><span class="math display">\[\left\{\left\{y(x)\to c_1 e^{2 x}+c_2 e^{3 x}\right\}\right\}\]</span></p>
+<p>Given Initial conditions: <span class="math display">\[y(0)=3\]</span> <span class="math display">\[y'(0)=1\]</span> Solve by finding the specific functions that satisfy the initial condition and the given differential equation</p>
+<ul>
+<li><span class="math inline">\(y(0)=3\)</span>
+<ul>
+<li>Plug into previous solution <span class="math inline">\(y(x)=c_1 e^{2 x}+c_2 e^{3 x}\)</span></li>
+<li><span class="math inline">\(y(0)=c_1 +c_2 = 3\)</span></li>
+</ul></li>
+<li><span class="math inline">\(y'(0)=2\)</span>
+<ul>
+<li>Find derivative of previous solution <span class="math inline">\(y(x)=c_1 e^{2 x}+c_2 e^{3 x}\)</span>
+<ul>
+<li><span class="math inline">\(y'(x) = 2c_1 + 3c_2\)</span></li>
+</ul></li>
+<li><span class="math inline">\(y'(0)=2c_1 + 3c_2 = 1\)</span></li>
+</ul></li>
+</ul>
+<p>Solve system of linear equations for constants <span class="math inline">\(c_1\)</span>,<span class="math inline">\(c_2\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+    c_1 + c_2  &amp;=  3\\
+    2c_1 + 3c_2 &amp;= 1 
+  \end{aligned}
+  \quad\Longleftrightarrow\quad
+  \begin{bmatrix}
+ 1 &amp; 1 \\
+ 2 &amp; 3 \\
+\end{bmatrix}
+\begin{bmatrix}
+ c_1 \\
+ c_2 \\
+\end{bmatrix}=
+\begin{bmatrix}
+ \text{3} \\
+ \text{1} \\
+\end{bmatrix} \]</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>mat = {{<span class="dv">1</span>, <span class="dv">1</span>}, {<span class="dv">2</span>, <span class="dv">3</span>}}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>vars = {{c1}, {c2}}</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">b</span> = {{<span class="dv">3</span>}, {<span class="dv">1</span>}}</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="fu">Solve</span>[{mat . vars == <span class="fu">b</span>}, {c1, c2}]</span></code></pre></div>
+<p><span class="math display">\[\{\{c_1\to 8,c_2\to -5\}\}\]</span></p>
+<p>Solution: <span class="math display">\[y = 8e^{2x}-5e^{3x}\]</span></p>
+<hr />
+<h3 id="examples">Examples</h3>
+<h5 id="radioactive-decay-substance-amount-yt">Radioactive Decay , substance amount y[t]</h5>
+<p><span class="math display">\[\frac{dy}{dt} = -ky(t)\]</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">DSolve</span>[y'[<span class="fu">t</span>] == -k*<span class="fu">y</span>[<span class="fu">t</span>], <span class="fu">y</span>[<span class="fu">t</span>], <span class="fu">t</span>] // <span class="fu">TeXForm</span></span></code></pre></div>
+<p><span class="math display">\[\left\{\left\{y(t)\to c_1 e^{-k t}\right\}\right\}\]</span></p>
+<p><span class="math display">\[y(0)=k\]</span></p>
+<hr />
+<h5 id="newtons-second-law">Newton’s Second Law</h5>
+<p>Solving the differential equation F=ma<br />
+Solving for 1) distance function and 2) velocity function, each wrt time</p>
+<ol type="1">
+<li></li>
+</ol>
+<p><span class="math display">\[m \frac{ds^2}{d^2t} = f\]</span></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">DSolve</span>[<span class="fu">m</span>*s''[<span class="fu">t</span>] == <span class="fu">f</span>, <span class="fu">s</span>[<span class="fu">t</span>], <span class="fu">t</span>] // <span class="fu">TeXForm</span></span></code></pre></div>
+<p><span class="math display">\[\left\{\left\{s(t)\to \frac{f}{m}\frac{1}{2}t^2+c_2 t+c_1\right\}\right\}\]</span> looks familiar <span class="math inline">\(s = \frac{1}{2} at^2 + v_0t\)</span></p>
+<ol start="2" type="1">
+<li></li>
+</ol>
+<p><span class="math display">\[m \frac{dv}{dt} = f\]</span></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">DSolve</span>[<span class="fu">m</span>*v'[<span class="fu">t</span>] == <span class="fu">f</span>, <span class="fu">v</span>[<span class="fu">t</span>], <span class="fu">t</span>] // <span class="fu">TeXForm</span></span></code></pre></div>
+<p><span class="math display">\[\left\{\left\{v(t)\to \frac{f t}{m}+c_1\right\}\right\}\]</span> looks familiar <span class="math inline">\(v_n=at+v_0\)</span></p>
+<hr />
+<h5 id="uniqueness-and-existence-problems">Uniqueness and Existence Problems</h5>
+<p>Theorem:<br />
+Given f(x,y) continous</p>
 
         </div>
         <div id="footer">

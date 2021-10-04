@@ -3,6 +3,49 @@ title: Quick Mathematica
 tags: prog, QuickCode
 ---
 
+##### Post apply and LateX output
+
+double backslash for post application
+
+```mathematica
+A ={{1,2,3},{-1,3,0}} // MatrixForm // TeXForm
+A = TeXForm[MatrixForm[{{1,2,3},{-1,3,0}}]]
+```
+
+##### Simplify with condition
+
+Simplify[expr,assum] : simjply with assumptions
+Expand[expr,patt] : expand all but pattern patt
+ExpandAll[expr] : expand product and exponents
+ExpandAll[expr,patt] : expand when matching pattern patt
+
+```mathematica
+Assuming[Element[n, Integers] && n > 0,
+   Integrate[Sin[n x]^2, {x, 0, Pi}]]
+```
+
+
+##### print out AST
+```mathematica
+x*Tan[y + z] // TreeForm
+```
+
+##### Functions
+```
+F[x_] = x*2+1
+F[x_] = Module[
+  {a,b},
+  a=2;
+  b=1;
+  x*a+b
+]
+```
+
+x_ the underscore means function arg  
+Module allows a local env  
+
+
+
 ##### print out probability Distributions
 
 ```mathematica
@@ -12,12 +55,6 @@ DeleteCases[%, {}]
 ```
 
 
-##### Simplify with condition
-
-```mathematica
-Assuming[Element[n, Integers] && n > 0,
-   Integrate[Sin[n x]^2, {x, 0, Pi}]]
-```
 
 ##### Solve implicit differentiation
 
@@ -49,3 +86,4 @@ x = FinancialData["SPX", {{2020, 1, 1}, {2021, 1, 1}}]
 tsm = TimeSeriesModelFit[x]
 ListLinePlot[{tsm["TemporalData"], TimeSeriesForecast[x, {10}]}]
 ```
+

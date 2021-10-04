@@ -228,8 +228,9 @@ Auto-merging README.md
 CONFLICT (content): Merge conflict in README.md
 Automatic merge failed; fix conflicts and then commit the result.
 ```
+
+The above line shows local..remote conflict.  
 `   0382315..3295ca9  main       -> origin/main`{.bash}
-The above line shows the commits on the remote.
 
 on our console we see we have been automatically put into MERGE mode.
 ```bash
@@ -305,9 +306,15 @@ ctrl-w-w to switch screen on 3 way commit
 esc-u to undo
 esc-:diffupdate   after undo to rescan difference
 
+esc-:diffget LO to apply Local, left most window
+esc-:diffget remote to apply Remote, right most window
+esc-:diffget BA to apply base, top center window
+
 esc-i to insert mode
 esc-dd to delete line
 
+esc-]-c to move to next conflict
+esc-[-c to move to prev conflict
 
 ### Undo last commit
 
@@ -321,26 +328,10 @@ Undo last commit, do not keep content change
 git reset --hard HEAD~1
 ```
 
+If you have unstaged changes you want to remove
+```bash
+git reset --hard
+```
 
 ---
-
-git config merge.tool vimdiff
-
-
-```
-error: Merging is not possible because you have unmerged files.
-hint: Fix them up in the work tree, and then use 'git add/rm <file>'
-hint: as appropriate to mark resolution and make a commit.
-fatal: Exiting because of an unresolved conflict.
-```
-use git merge --abort
-
-
-To merge a remote repo with local, first checkout remote repo onto local branch
-main is the name of the remote branch to fetch from
-remoteb is the name of the new branch to create locally
-
-git fetch origin main:remoteb
-
-git mergetool
 

@@ -244,47 +244,118 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'asm'." href="../tags/asm.html">asm</a>, <a title="All pages tagged 'C'." href="../tags/C.html">C</a>
     
 </div>
+<h3 id="documenting-some-random-algorithmic-problems">Documenting some random algorithmic problems:</h3>
+<hr />
+<blockquote>
+<p>Describe an algorithm that given a linked list,<br />
+if odd returns the middle element,<br />
+if even length then return the first of the two middle elements.</p>
+</blockquote>
+<ul>
+<li>Solve with 2 pointers, state of subproblem isomorphic with size of partition of 1st pointer allowing induction.</li>
+<li>1st pointer moves 2-spaces
+<ul>
+<li>1st pointer partitions the list to a subproblem</li>
+</ul></li>
+<li>2nd pointer moves 1-space
+<ul>
+<li>2nd pointer is IH invariant to each subproblem.<br />
+2nd pointer represents the solution or midpoint of the list.</li>
+</ul></li>
+</ul>
+<hr />
+<blockquote>
+<p>Design recursive procedure that takes n::int and returns ALL n-length lists where all consecutive letters are distinct. Only letters {A,B,C} can be used.<br />
+Eg. ‘AB’ ‘AC’ ‘BA’ ‘BC’ ‘CA’ ‘CB’</p>
+</blockquote>
+<ul>
+<li>IH: For (n-1) assume we have solution::[[str]] containing<br />
+list of (n-1)-lists = {‘A..’,‘B..’,‘C..’,…}</li>
+<li>For each (n-1)-list in IH check head of the (n-1)-list then build new lists from the 2 letters that do not match the head.<br />
+Eg: if ‘A…’ we add B or C to get new combinations {‘BA..’,‘CA..’}</li>
+</ul>
+<p>Misconception:</p>
+<ul>
+<li>Why not also check for tail of (n-1)-list?
+<ul>
+<li>combinations would repeat giving us double the solutions.
+<ul>
+<li>Assume {‘A..C’,‘B..A’} <span class="math inline">\(\in\)</span> IH</li>
+<li>Append to B,C to head ‘A..C’ =&gt; {<strong>‘BA..C’</strong>,‘CA..C’}</li>
+<li>Append to B,C to tail ‘B..A’ =&gt; {<strong>‘B..AC’</strong>,‘B..AB’}</li>
+<li>Notice ‘BA..C’ and ‘B..AC’ are the same</li>
+</ul></li>
+</ul></li>
+</ul>
+<hr />
+<blockquote>
+<p>4-pole Hanoi. Given 4 poles A,B,C,D clockwise in a square, you can only move clock wise. Design a method to move n::int disk from A to B.</p>
+</blockquote>
+<p>A–B<br />
+|   |<br />
+D–C</p>
+<ul>
+<li>IH: Assume we can move (n-1) disk to neighboring pairs like (A,B), (B,C) …</li>
+<li>Keypoints
+<ul>
+<li>We can still use IH on the (n-1) disks after moving the largest bottom disk,<br />
+since the largest disk does not cause any side effect or reduce degree of freedom.</li>
+</ul></li>
+<li>move top (n-1) disks from A to B. [IH]
+<ul>
+<li>[ A={n}, B={n-1,n-2..}]</li>
+</ul></li>
+<li>move all (n-1) disks from B to C. [IH]
+<ul>
+<li>[ A={n}, B={} , C={n-1,n-2,…}]</li>
+</ul></li>
+<li>move all (n-1) disks from C to D. [IH]
+<ul>
+<li>[ A={n}, B={} , C={}, D={n-1,n-2,…}]</li>
+</ul></li>
+<li>move single largest disk from A to B.
+<ul>
+<li>[ A={}, B={n}, D={n-1,n-2,…}]</li>
+</ul></li>
+<li>move all (n-1) disks from D to A. [IH]
+<ul>
+<li>[ A={n-1,n-2,…} , B={n} ]</li>
+</ul></li>
+<li>move all (n-1) disks from A to B. [IH]
+<ul>
+<li>[ B={n,n-1,n-2…} ]</li>
+</ul></li>
+</ul>
+<hr />
+<blockquote>
+<p>Take Tree T as an input. For every node C, output the shortest path from C to the closest leaf.</p>
+</blockquote>
 <h3 id="twosum">TwoSum</h3>
-<pre class="code"><code>Goal: Return INDEX of nums that sum to target
-
-nums = [2,7,11,15]
-hmap = {Value#1stpartialSum |-&gt; Index#2ndpartialSum} 
-also   {Value#2ndpartialSum |-&gt; Index#1stpartialSum}
-     where Invariant:: Value#1stpartialSum + Value#2ndPartialSum = target
-let nums = Value#1stpartialSum
-enumerate(nums) = {index |-&gt; nums} where i::index, k::Value#1stpartialSum
-check k::Value#1stpartialSum in hmap
-    true: return [hmap(k)::Index#2ndpartialSum, (index of k::Value#1stpartialSum)::Index#1ndpartialSum
-    false: SET hmap[target - Value#1stpartialSum |-&gt; Index#2ndpartialSum]
-</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">#Psuedocode</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">Goal</span>: Return INDEX of nums that sum to target</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="ex">nums</span> = [2,7,11,15]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="ex">hmap</span> = {Value#1stpartialSum <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> Index#2ndpartialSum} </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="ex">also</span>   {Value#2ndpartialSum <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> Index#1stpartialSum}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>     <span class="ex">where</span> Invariant is Value#1stpartialSum + Value#2ndPartialSum = target</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="bu">let</span> nums = Value#1stpartialSum</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="ex">enumerate</span>(nums) = {<span class="ex">index</span> <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> nums} <span class="ex">where</span> i::index, k::Value#1stpartialSum</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="ex">check</span> k::Value#1stpartialSum in hmap</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>    <span class="fu">true</span> =<span class="op">&gt;</span> return [hmap(k)::<span class="ex">Index</span>#2ndpartialSum, (index of k::Value#1stpartialSum)::<span class="ex">Index</span>#1ndpartialSum</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a>    <span class="fu">false</span> =<span class="op">&gt;</span> SET hmap[target - Value#1stpartialSum <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> Index#2ndpartialSum]</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">class</span> Solution(<span class="bu">object</span>):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    <span class="kw">def</span> twoSum(<span class="va">self</span>, nums, target):</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a>        <span class="co">'''</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">Goal: Return INDEX of nums that sum to target</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">nums = [2,7,11,15]</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">hmap = {Value#1stpartialSum |-&gt; Index#2ndpartialSum} </span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">also   {Value#2ndpartialSum |-&gt; Index#1stpartialSum}</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">     where Invariant:: Value#1stpartialSum + Value#2ndPartialSum = target</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">let nums = Value#1stpartialSum</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">enumerate(nums) = {index |-&gt; nums} where i::index, k::Value#1stpartialSum</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">check k::Value#1stpartialSum in hmap</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">    true: return [hmap(k)::Index#2ndpartialSum, (index of k::Value#1stpartialSum)::Index#1ndpartialSum</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co">    false: SET hmap[target - Value#1stpartialSum |-&gt; Index#2ndpartialSum]</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">'''</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a></span>
-<span id="cb2-18"><a href="#cb2-18"></a>        hmap <span class="op">=</span> {}</span>
-<span id="cb2-19"><a href="#cb2-19"></a>        <span class="cf">for</span> Index1stPartial,Value1stPartial <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
-<span id="cb2-20"><a href="#cb2-20"></a>            <span class="cf">if</span> Value1stPartial <span class="kw">in</span> hmap:</span>
-<span id="cb2-21"><a href="#cb2-21"></a>                Index2ndPartial<span class="op">=</span>hmap[Value1stPartial]</span>
-<span id="cb2-22"><a href="#cb2-22"></a>                <span class="cf">return</span> [Index2ndPartial,Index1stPartial]</span>
-<span id="cb2-23"><a href="#cb2-23"></a>            Value2ndPartial <span class="op">=</span> target<span class="op">-</span>Value1stPartial</span>
-<span id="cb2-24"><a href="#cb2-24"></a>            hmap[Value2ndPartial] <span class="op">=</span> Index1stPartial</span>
-<span id="cb2-25"><a href="#cb2-25"></a>        <span class="cf">return</span> []</span>
-<span id="cb2-26"><a href="#cb2-26"></a></span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="co">#Test = Solution().twoSum([2,7,11,15],9)</span></span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#print(Test)</span></span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3"></a>        hmap <span class="op">=</span> {}</span>
+<span id="cb2-4"><a href="#cb2-4"></a>        <span class="cf">for</span> Index1stPartial,Value1stPartial <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
+<span id="cb2-5"><a href="#cb2-5"></a>            <span class="cf">if</span> Value1stPartial <span class="kw">in</span> hmap:</span>
+<span id="cb2-6"><a href="#cb2-6"></a>                Index2ndPartial<span class="op">=</span>hmap[Value1stPartial]</span>
+<span id="cb2-7"><a href="#cb2-7"></a>                <span class="cf">return</span> [Index2ndPartial,Index1stPartial]</span>
+<span id="cb2-8"><a href="#cb2-8"></a>            Value2ndPartial <span class="op">=</span> target<span class="op">-</span>Value1stPartial</span>
+<span id="cb2-9"><a href="#cb2-9"></a>            hmap[Value2ndPartial] <span class="op">=</span> Index1stPartial</span>
+<span id="cb2-10"><a href="#cb2-10"></a>        <span class="cf">return</span> []</span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#Test = Solution().twoSum([2,7,11,15],9)</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#print(Test)</span></span></code></pre></div>
 <p>the target is composed of values from two partial sums (Value#1stpartialSum + Value#2ndpartialSum)</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">func</span> twoSum(nums []<span class="dt">int</span>, target <span class="dt">int</span>) []<span class="dt">int</span> {</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>	hmap := <span class="bu">make</span>(<span class="kw">map</span>[<span class="dt">int</span>]<span class="dt">int</span>)</span>
@@ -302,10 +373,9 @@ check k::Value#1stpartialSum in hmap
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a>}</span></code></pre></div>
 <p>2 cases:</p>
 <p>Hashmap Miss</p>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a0a6672616d65206e756d73207b0a20202020757365636173652022496e6465782c56616c7565233173745061727469616c53756d22206173205543310a20202020757365636173652022496e6465782c56616c756523326e645061727469616c53756d2220617320580a7d0a0a6672616d65204861736856616c7565207b0a0a202075736563617365202243616e27742066696e6420496e64657823326e645061727469616c53756d22206173204143310a2020757365636173652022496e646578233173745061727469616c53756d22206173204143320a7d0a6672616d652048617368496e646578207b0a75736563617365202243616e27742066696e642056616c7565233173745061727469616c53756d22206173205543330a202075736563617365202256616c756523326e645061727469616c53756d22206173205543320a0a7d0a0a40656e64756d6c0a0a554331202d5b646f747465645d2d3e20554333203a2022312920686173686d6170206d6973735c6e204c696e652032302046616c7365220a554333202d5b646f747465645d2d3e20414331203a2022312920686173686d6170206d6973735c6e204c696e652032302046616c7365220a554332202d2d3e20414332203a20202233292066696c6c20686173686d61705c6e204c696e65203234220a554331202d2d3e20554332203a2022322920746172676574202d2056616c756523317374204c696e65203233220a"></figure>
-<p>next step<br />
-Hashmap hit</p>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a0a6672616d65206e756d73207b0a20202020757365636173652022496e6465782c56616c7565233173745061727469616c53756d2220617320580a20202020757365636173652022496e6465782c56616c756523326e645061727469616c53756d22206173205543310a7d0a0a6672616d65204861736856616c7565207b0a20200a2020757365636173652022496e646578233173745061727469616c53756d22206173204143320a7d0a6672616d652048617368496e646578207b0a202075736563617365202256616c756523326e645061727469616c53756d22206173205543320a0a7d0a0a75736563617365202272657475726e20536f6c7574696f6e496e6465786573222061732053530a554331202d2d3e2053530a414332202d2d3e2053530a40656e64756d6c0a0a554332202d2d3e20414332203a202022332920536f6c7574696f6e205c6e204c696e65203232220a554331202d2d3e20554332203a2022312920686173686d6170206869745c6e204c696e652032302054727565220a"></figure>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a7363616c6520302e360a6672616d65206e756d73207b0a20202020757365636173652022496e6465782c56616c7565233173745061727469616c53756d22206173205543310a20202020757365636173652022496e6465782c56616c756523326e645061727469616c53756d2220617320580a7d0a0a6672616d65204861736856616c7565207b0a0a202075736563617365202243616e27742066696e6420496e64657823326e645061727469616c53756d22206173204143310a2020757365636173652022496e646578233173745061727469616c53756d22206173204143320a7d0a6672616d652048617368496e646578207b0a75736563617365202243616e27742066696e642056616c7565233173745061727469616c53756d22206173205543330a202075736563617365202256616c756523326e645061727469616c53756d22206173205543320a0a7d0a0a40656e64756d6c0a0a554331202d5b646f747465645d2d3e20554333203a2022312920686173686d6170206d6973735c6e204c696e652032302046616c7365220a554333202d5b646f747465645d2d3e20414331203a2022312920686173686d6170206d6973735c6e204c696e652032302046616c7365220a554332202d2d3e20414332203a20202233292066696c6c20686173686d61705c6e204c696e65203234220a554331202d2d3e20554332203a2022322920746172676574202d2056616c756523317374204c696e65203233220a"></figure>
+<p>Hashmap hit</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a7363616c6520302e360a6672616d65206e756d73207b0a20202020757365636173652022496e6465782c56616c7565233173745061727469616c53756d2220617320580a20202020757365636173652022496e6465782c56616c756523326e645061727469616c53756d22206173205543310a7d0a0a6672616d65204861736856616c7565207b0a20200a2020757365636173652022496e646578233173745061727469616c53756d22206173204143320a7d0a6672616d652048617368496e646578207b0a202075736563617365202256616c756523326e645061727469616c53756d22206173205543320a0a7d0a0a75736563617365202272657475726e20536f6c7574696f6e496e6465786573222061732053530a554331202d2d3e2053530a414332202d2d3e2053530a40656e64756d6c0a0a554332202d2d3e20414332203a202022332920536f6c7574696f6e205c6e204c696e65203232220a554331202d2d3e20554332203a2022312920686173686d6170206869745c6e204c696e652032302054727565220a"></figure>
 <hr />
 <h3 id="container-with-most-water">Container with most water</h3>
 

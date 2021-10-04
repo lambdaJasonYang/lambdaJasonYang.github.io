@@ -33,3 +33,57 @@ db 0x55, 0xaa
 ---
 
 BIOS (vs UEFI)
+
+Boot into the bootsector we enter into "REAL MODE".  
+"REAL MODE" is a 16 bit mode assisted by BIOS.  
+
+
+1. Switch to teletype mode
+by modifying a register then calling a BIOS interrupt
+
+```asm
+mov ah, 0x0e
+mov al, 'A'
+int 0x10
+```
+
+Printing 'A's.
+'A' = 65 in dec = 0x41 in hex = 0b1000001 in binary(0b means binary)
+
+```asm
+mov ah, 0x0e
+mov al, 'A'
+int 0x10
+
+mov ah, 0x0e
+mov al, 65
+int 0x10
+
+mov ah, 0x0e
+mov al, 0x41
+int 0x10
+
+mov ah, 0x0e
+mov al, 0b1000001
+int 0x10
+
+```
+
+### Disks
+
+Memory is divided into 512 chunks.
+
+Cylinder = [0..)
+Head = [0..)
+Sector = [1..)
+
+The location of each 512 chunk of memory on a disk is determined by  
+(Cylinder,Head,Sector)
+
+The first chunk of memory = "Boot Sector" at (C=0,H=0,S=1)
+
+
+### OS
+
+We need to write a bootloader.  
+To compiler

@@ -420,7 +420,8 @@ Let’s follow instructions and use git pull</p>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a><span class="ex">Auto-merging</span> README.md</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a><span class="ex">CONFLICT</span> (content)<span class="bu">:</span> Merge conflict in README.md</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a><span class="ex">Automatic</span> merge failed<span class="kw">;</span> <span class="ex">fix</span> conflicts and then commit the result.</span></code></pre></div>
-<p><code class="sourceCode bash"><span class="ex">0382315..3295ca9</span>  main       -<span class="op">&gt;</span> origin/main</code> The above line shows the commits on the remote.</p>
+<p>The above line shows local..remote conflict.<br />
+<code class="sourceCode bash"><span class="ex">0382315..3295ca9</span>  main       -<span class="op">&gt;</span> origin/main</code></p>
 <p>on our console we see we have been automatically put into MERGE mode.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="ex">User@WindowsPC</span> MINGW64 ~/Desktop/gittmp (main<span class="kw">|</span><span class="ex">MERGING</span>)</span></code></pre></div>
 <p>If you enter your README.md you will find the below content while in MERGE mode.</p>
@@ -466,22 +467,17 @@ You can even push this new pre-merge state commit to remote github. But clearly 
 <h4 id="vim-micro-tut">Vim micro tut</h4>
 <p>ctrl-w-w to switch screen on 3 way commit</p>
 <p>esc-u to undo esc-:diffupdate after undo to rescan difference</p>
+<p>esc-:diffget LO to apply Local, left most window esc-:diffget remote to apply Remote, right most window esc-:diffget BA to apply base, top center window</p>
 <p>esc-i to insert mode esc-dd to delete line</p>
+<p>esc-]-c to move to next conflict esc-[-c to move to prev conflict</p>
 <h3 id="undo-last-commit">Undo last commit</h3>
 <p>Undo last commit but keep content changes</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="fu">git</span> reset --soft HEAD~1</span></code></pre></div>
 <p>Undo last commit, do not keep content change</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a><span class="fu">git</span> reset --hard HEAD~1</span></code></pre></div>
+<p>If you have unstaged changes you want to remove</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="fu">git</span> reset --hard</span></code></pre></div>
 <hr />
-<p>git config merge.tool vimdiff</p>
-<pre><code>error: Merging is not possible because you have unmerged files.
-hint: Fix them up in the work tree, and then use 'git add/rm &lt;file&gt;'
-hint: as appropriate to mark resolution and make a commit.
-fatal: Exiting because of an unresolved conflict.</code></pre>
-<p>use git merge –abort</p>
-<p>To merge a remote repo with local, first checkout remote repo onto local branch main is the name of the remote branch to fetch from remoteb is the name of the new branch to create locally</p>
-<p>git fetch origin main:remoteb</p>
-<p>git mergetool</p>
 
         </div>
         <div id="footer">

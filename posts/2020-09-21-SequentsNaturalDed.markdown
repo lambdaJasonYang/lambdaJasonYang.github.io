@@ -63,7 +63,7 @@ $$\frac{\Gamma , A \vdash B \qquad \Pi , \neg A \vdash B  }{\Gamma, \Pi \vdash B
 
 custom:
 
-$$\frac{\frac{[A \lor \neg A]^{lem}}{...}}{B} $$
+$$\cfrac{\cfrac{[A \lor \neg A]^{lem}}{...}}{B} $$
 
 
 #### Interlude
@@ -77,5 +77,5 @@ We want to prove
 
 $$ \vdash \neg \neg A \rightarrow A $$
 
-[look through LK table find  a rule that looks like$\frac{...}{... \vdash\ \fbox{}\rightarrow\fbox{}}$]   
-[the right-implication rule matches $\frac{A,\Gamma \vdash \Delta, B}{\Gamma \vdash \Delta, A \rightarrow B}$ ]
+[look through LK table find  a rule that looks like $\cfrac{...}{... \vdash\ \fbox{}\rightarrow\fbox{}}$]   
+[the right-implication rule matches $\cfrac{A,\Gamma \vdash \Delta, B}{\Gamma \vdash \Delta, A \rightarrow B}$ ]

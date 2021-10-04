@@ -263,6 +263,39 @@ db := define byte</p>
 <p>510 - length of previous code = allows us to fill the memory to 510 bytes</p>
 <hr />
 <p>BIOS (vs UEFI)</p>
+<p>Boot into the bootsector we enter into “REAL MODE”.<br />
+“REAL MODE” is a 16 bit mode assisted by BIOS.</p>
+<ol type="1">
+<li>Switch to teletype mode by modifying a register then calling a BIOS interrupt</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="bu">mov</span><span class="bn"> ah, 0x0e</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="bu">mov</span> <span class="kw">al</span>, <span class="st">'A'</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="bu">int</span><span class="bn"> 0x10</span></span></code></pre></div>
+<p>Printing ‘A’s. ’A’ = 65 in dec = 0x41 in hex = 0b1000001 in binary(0b means binary)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="bu">mov</span><span class="bn"> ah, 0x0e</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="bu">mov</span> <span class="kw">al</span>, <span class="st">'A'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="bu">int</span><span class="bn"> 0x10</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="bu">mov</span><span class="bn"> ah, 0x0e</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="bu">mov</span> <span class="kw">al</span>, <span class="dv">65</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="bu">int</span><span class="bn"> 0x10</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="bu">mov</span><span class="bn"> ah, 0x0e</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a><span class="bu">mov</span> <span class="kw">al</span><span class="bn">, 0x41</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="bu">int</span><span class="bn"> 0x10</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a><span class="bu">mov</span><span class="bn"> ah, 0x0e</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a><span class="bu">mov</span> <span class="kw">al</span>, 0b1000001</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a><span class="bu">int</span><span class="bn"> 0x10</span></span></code></pre></div>
+<h3 id="disks">Disks</h3>
+<p>Memory is divided into 512 chunks.</p>
+<p>Cylinder = [0..) Head = [0..) Sector = [1..)</p>
+<p>The location of each 512 chunk of memory on a disk is determined by<br />
+(Cylinder,Head,Sector)</p>
+<p>The first chunk of memory = “Boot Sector” at (C=0,H=0,S=1)</p>
+<h3 id="os">OS</h3>
+<p>We need to write a bootloader.<br />
+To compiler</p>
 
         </div>
         <div id="footer">

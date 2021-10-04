@@ -3,37 +3,48 @@ title: 2021 Installing Openwrt
 tags: tech, openwrt, homeserver
 ---
 
-I will be install Openwrt on black cylindrical Xiaomi mi router ac2100.
+I will be installing Openwrt on black cylindrical Xiaomi mi router ac2100.
 
 As of 2021, I've found the openwrt to be incorrect or outdated.
 This guide will tell you how to flash your xiaomi mi router ac2100 to a snapshot build then upgrade to a stable build.   
 
-Why not just flash directly to a stable build? Simply because I followed the Openwrt wiki then realized it was outdated and needed to update the firmware so I have no idea if upgrading directly could introduce some unforeseen issues as I have not tried it.
+Why not just flash directly to a stable build? Simply because I followed the Openwrt wiki then realized only later a stable newer build existed. yea... OpenWrt Wiki is not maintained well at all...
 
 
 For xiaomi mi ac2100 downgrading the firmware
 First if you have brand new mi router, you need to connect it to the internet and create a password and set up SSID.
 Do not just connect to the default passwordless SSID that comes right out of the box because it will not work, I tried it.
 
-Once you set up your ssid login to the router panel by going to http://192.168.31.1
-The Url should show http://192.168.31.1/cgi-bin/luci/;stok=\<STOK\>/web/home#router
-example 
+Once you set up your ssid login to the router panel by going to http://192.168.31.1  
+
+The Url should show  
+ http://192.168.31.1/cgi-bin/luci/;stok=\<STOK\>/web/home#router
+ 
 
 For each of the below, replace \<STOK\> with your STOK
 After each command you should see a page that display "Code: 0"
 
-1) http://192.168.31.1/cgi-bin/luci/;stok=\<STOK\>/api/misystem/set_config_iotdev?bssid=Xiaomi&user_id=longdike&ssid=-h%3Bnvram%20set%20ssh%5Fen%3D1%3B%20nvram%20commit%3B
-2) http://192.168.31.1/cgi-bin/luci/;stok=\<STOK\>/api/misystem/set_config_iotdev?bssid=Xiaomi&user_id=longdike&ssid=-h%3Bsed%20-i%20's/channel=.*/channel=%5C%22debug%5C%22/g'%20/etc/init.d/dropbear%3B
-3) http://192.168.31.1/cgi-bin/luci/;stok=<STOK>/api/misystem/set_config_iotdev?bssid=Xiaomi&user_id=longdike&ssid=-h%3B/etc/init.d/dropbear%20start%3B
-4) http://192.168.31.1/cgi-bin/luci/;stok=<STOK>/api/misystem/set_config_iotdev?bssid=Xiaomi&user_id=longdike&ssid=-h%3B%20echo%20-e%20'admin%5Cnadmin' %20%7C%20passwd%20root%3B
+1) ``` html
+http://192.168.31.1/cgi-bin/luci/;stok=\<STOK\>/api/misystem/set_config_iotdev?bssid=Xiaomi&user_id=longdike&ssid=-h%3Bnvram%20set%20ssh%5Fen%3D1%3B%20nvram%20commit%3B
+```
+2) ``` html
+http://192.168.31.1/cgi-bin/luci/;stok=\<STOK\>/api/misystem/set_config_iotdev?bssid=Xiaomi&user_id=longdike&ssid=-h%3Bsed%20-i%20's/channel=.*/channel=%5C%22debug%5C%22/g'%20/etc/init.d/dropbear%3B
+```
+3) ``` html
+http://192.168.31.1/cgi-bin/luci/;stok=<STOK>/api/misystem/set_config_iotdev?bssid=Xiaomi&user_id=longdike&ssid=-h%3B/etc/init.d/dropbear%20start%3B
+```
+4) ``` html
+http://192.168.31.1/cgi-bin/luci/;stok=<STOK>/api/misystem/set_config_iotdev?bssid=Xiaomi&user_id=longdike&ssid=-h%3B%20echo%20-e%20'admin%5Cnadmin' %20%7C%20passwd%20root%3B
+```
 
 ssh root@192.168.31.1
 
 On windows, Download WinSCP
 in WinSCP, connect to your router and select protocol "SCP"
-Download snapshot files on your windows http://downloads.openwrt.org/snapshots/targets/ramips/mt7621/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-kernel1.bin
-
-http://downloads.openwrt.org/snapshots/targets/ramips/mt7621/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-rootfs0.bin
+Download snapshot files on your windows   
+  
+[kernel1.bin](http://downloads.openwrt.org/snapshots/targets/ramips/mt7621/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-kernel1.bin)  
+[rootfs0.bin](http://downloads.openwrt.org/snapshots/targets/ramips/mt7621/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-rootfs0.bin)
 
 On WinSCP, on the remote router folder, go up one level to the root folder then go to "/tmp/" folder 
 Then drag the two files you downloaded onto your windows machine into that the remote "/tmp/" folder
@@ -66,18 +77,20 @@ OpenWrt does not come preinstalled with gui
 SO you must connect with ethernet
 Then ssh in to openwrt
 
+```bash
 ssh root@192.168.1.1
 uci show
 uci set wireless.radio1.disabled='0'
 uci commit wireless
 wifi up
-
+```
 WARNING: THE DEFAULT SSID is OpenWrt
 So if you had an old OpenWrt router setup already, be aware.
 
+```bash
 opkg update
 opkg install luci
-
+```
 ### UPGRADING
 
 
