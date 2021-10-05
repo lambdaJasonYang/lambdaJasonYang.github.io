@@ -160,6 +160,22 @@ blue untagged node(meaning it is not the local head of a branch)git
 
 ### Merging
 
+##### Git Pull
+
+git pull is how we merge
+
+default setting for gitpull is rebase=false
+
+```bash
+git pull --rebase #default merge
+git pull --no-rebase
+git pull --ff-only #fast-forward-only
+```
+
+
+
+##### Example
+
 Example:
 clone git project first commit 
 
