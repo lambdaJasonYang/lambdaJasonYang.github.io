@@ -3,4 +3,36 @@ title: Docker
 tags: prog
 ---
 
-* For a docker to 
+* Images : templates like OSes 
+  * Containers: Instances of images
+
+
+
+| Command| Defined |
+| --- | --- |
+| docker image ls | ls images | 
+| docker image rm <image> | removes image |
+| docker image pull <image> | pull image from docker registry |
+| docker container ls -a | list all containers |
+| docker container run <image> | runs a container from an image |
+| docker container rm <container> | removes a container |
+| docker container stop <container> | stop container |
+| docker container exec <container> | start terminal INSIDE container |
+
+##### Run detached container and removing containers
+
+```bash
+docker container run -d nginx
+#>d89war8wf0489fwa08498w0atr48q0g8949a439w0
+
+docker container ls
+ #>CONTAINER ID   IMAGE   COMMAND                  CREATED             STATUS         PORTS     NAMES
+ #>d89war8wf048   nginx  "nginx -g 'daemon of…"   35 seconds ago      Up 34 seconds   80/tcp    some_bleh_name
+
+
+docker container stop some_bleh_name
+docker container rm some_bleh_name
+```
+
+
+

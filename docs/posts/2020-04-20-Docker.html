@@ -245,8 +245,64 @@
     
 </div>
 <ul>
-<li>For a docker to</li>
+<li>Images : templates like OSes
+<ul>
+<li>Containers: Instances of images</li>
+</ul></li>
 </ul>
+<table>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Defined</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>docker image ls</td>
+<td>ls images</td>
+</tr>
+<tr class="even">
+<td>docker image rm <image></td>
+<td>removes image</td>
+</tr>
+<tr class="odd">
+<td>docker image pull <image></td>
+<td>pull image from docker registry</td>
+</tr>
+<tr class="even">
+<td>docker container ls -a</td>
+<td>list all containers</td>
+</tr>
+<tr class="odd">
+<td>docker container run <image></td>
+<td>runs a container from an image</td>
+</tr>
+<tr class="even">
+<td>docker container rm <container></td>
+<td>removes a container</td>
+</tr>
+<tr class="odd">
+<td>docker container stop <container></td>
+<td>stop container</td>
+</tr>
+<tr class="even">
+<td>docker container exec <container></td>
+<td>start terminal INSIDE container</td>
+</tr>
+</tbody>
+</table>
+<h5 id="run-detached-container-and-removing-containers">Run detached container and removing containers</h5>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">docker</span> container run -d nginx</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="co">#&gt;d89war8wf0489fwa08498w0atr48q0g8949a439w0</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="ex">docker</span> container ls</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a> <span class="co">#&gt;CONTAINER ID   IMAGE   COMMAND                  CREATED             STATUS         PORTS     NAMES</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a> <span class="co">#&gt;d89war8wf048   nginx  &quot;nginx -g 'daemon of…&quot;   35 seconds ago      Up 34 seconds   80/tcp    some_bleh_name</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="ex">docker</span> container stop some_bleh_name</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="ex">docker</span> container rm some_bleh_name</span></code></pre></div>
 
         </div>
         <div id="footer">

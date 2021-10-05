@@ -24,7 +24,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Jason Yang - Quick AWS</title>
+        <title>Jason Yang - Remote Desktop Audio to phone</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -232,30 +232,36 @@
         </div>
 
         <div id="content">
-            <h1>Quick AWS</h1>
+            <h1>Remote Desktop Audio to phone</h1>
             
 
             <div class="info">
-    Posted on July 15, 2018
+    Posted on August 10, 2021
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a7363616c65203735302077696474680a736b696e706172616d20736861646f77696e672066616c73650a0a6672616d6520565043207b0a6672616d6520225553204561737420284f68696f2922206173206631203c3c417661696c6162696c697479205a6f6e653e3e207b0a20206f626a65637420224e6574776f726b41434c22206173204e41310a20206f626a65637420224e6574776f726b41434c22206173204e41320a20206672616d652022707269766174655375626e65742220617320505031207b0a202020206f626a6563742022454332222061732041310a20207d0a20206672616d6520227075626c69635375626e65742220617320505032207b0a202020206f626a6563742022454332222061732041320a20207d200a20204e4131202d2d3e205050310a20204e4132202d2d3e205050320a7d0a0a6672616d65202255532057657374202843616c692922206173206632203c3c417661696c6162696c697479205a6f6e653e3e207b0a20206f626a65637420224e6574776f726b41434c22206173204e41330a20206f626a65637420224e6574776f726b41434c22206173204e41340a20206672616d652022707269766174655375626e65742220617320505033207b0a202020206f626a6563742022454332222061732042310a20207d0a20206672616d6520227075626c69635375626e65742220617320505034207b0a202020206f626a6563742022454332222061732042320a20207d200a20204e4133202d2d3e205050330a20204e4134202d2d3e205050340a7d0a0a0a6f626a65637420726f757465720a726f75746572202d2d6f2066310a726f75746572202d2d6f2066320a0a7d0a40656e64756d6c"></figure>
-<ul>
-<li>region eg. North Virginia (us-east-1)
-<ul>
-<li>Availability Zones eg. { us-east-1a, us-east-1b…}
-<ul>
-<li>Each Zone is a different data center</li>
-<li>Each Zone hosts at least 1 subnet</li>
-</ul></li>
-<li>Typically all Zones use the same Route-Table, Network ACL</li>
-</ul></li>
-</ul>
+<ol type="1">
+<li><p>check if pulseaudio is installed</p></li>
+<li><p>run bash commands</p></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">pactl</span> load-module module-null-sink sink_name=rtp</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">pacmd</span> <span class="st">'update-source-proplist rtp.monitor device.description=&quot;Monitor of RTP&quot;'</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">pacmd</span> <span class="st">'update-sink-proplist rtp device.description=&quot;RTP&quot;'</span></span></code></pre></div>
+<ol start="3" type="1">
+<li>The below command may need to be ran every time you stream audio so best if you made a bash file for it.<br />
+192.168.1.179 is the IP of my phone</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">pactl</span> load-module module-rtp-send source=rtp.monitor destination_ip=192.168.1.179 port=1234</span></code></pre></div>
+<ol start="4" type="1">
+<li><p>go to pavucontrol or Pulse Audio Control Panel, go to output Devices &gt;&gt; RTP and enable</p></li>
+<li><p>On mobile go to vlc app<br />
+</p></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ex">rtp</span>://@:1234</span></code></pre></div>
 
         </div>
         <div id="footer">

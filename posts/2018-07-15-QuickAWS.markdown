@@ -43,3 +43,11 @@ router --o f2
 }
 @enduml
 ```
+
+* region eg. North Virginia (us-east-1)
+  * Availability Zones eg. { us-east-1a, us-east-1b...}
+    * Each Zone is a different data center
+    * Each Zone hosts at least 1 subnet
+  * Typically all Zones use the same Route-Table, Network ACL
+
+ 
