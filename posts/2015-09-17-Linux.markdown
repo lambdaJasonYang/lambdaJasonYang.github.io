@@ -64,3 +64,13 @@ Output redirection - Append
 echo "hello" > bleh.txt
 echo "hey" > bleh.txt
 bleh.txt will contain "hello\n hey"
+
+---
+
+##### Checking open ports
+
+```bash
+netstat -lntu
+ss -lntu
+```
+

@@ -3,6 +3,40 @@ title: Quick Next
 tags: prog, QuickCode
 ---
 
+```bash
+npx create-next-app --ts
+npm install @emotion/react
+npm install @emotion/eslint-plugin --save-dev
+```
+
+.eslintc.json
+```json
+{
+  "env":{
+    "browser": true,
+    "es2021": true,
+    "node":true
+  },
+  "parser":"@typescript-eslint/parser",
+  "parserOptions":{
+    "emcaVersion":2020,
+    "sourceType":"module",
+    "emcaFeatures":{
+      "jsx":true
+    },
+    "project":"./tsconfig.json"
+  },
+  "extends": ["next/core-web-vitals","plugin:@typescript-eslint/recommended","prettier"],
+  "settings":{
+    "react":{
+      "version":"detect"
+    }
+  }
+}
+
+```
+
+
 nextjs routing 
 
 Routing Depends on File/Folder organization

@@ -244,6 +244,32 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>
     
 </div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">npx</span> create-next-app --ts</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">npm</span> install @emotion/react</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">npm</span> install @emotion/eslint-plugin --save-dev</span></code></pre></div>
+<p>.eslintc.json</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>  <span class="dt">&quot;env&quot;</span><span class="fu">:{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="dt">&quot;browser&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    <span class="dt">&quot;es2021&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    <span class="dt">&quot;node&quot;</span><span class="fu">:</span><span class="kw">true</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>  <span class="fu">},</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>  <span class="dt">&quot;parser&quot;</span><span class="fu">:</span><span class="st">&quot;@typescript-eslint/parser&quot;</span><span class="fu">,</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>  <span class="dt">&quot;parserOptions&quot;</span><span class="fu">:{</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>    <span class="dt">&quot;emcaVersion&quot;</span><span class="fu">:</span><span class="dv">2020</span><span class="fu">,</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>    <span class="dt">&quot;sourceType&quot;</span><span class="fu">:</span><span class="st">&quot;module&quot;</span><span class="fu">,</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>    <span class="dt">&quot;emcaFeatures&quot;</span><span class="fu">:{</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>      <span class="dt">&quot;jsx&quot;</span><span class="fu">:</span><span class="kw">true</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>    <span class="fu">},</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>    <span class="dt">&quot;project&quot;</span><span class="fu">:</span><span class="st">&quot;./tsconfig.json&quot;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>  <span class="fu">},</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>  <span class="dt">&quot;extends&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;next/core-web-vitals&quot;</span><span class="ot">,</span><span class="st">&quot;plugin:@typescript-eslint/recommended&quot;</span><span class="ot">,</span><span class="st">&quot;prettier&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>  <span class="dt">&quot;settings&quot;</span><span class="fu">:{</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>    <span class="dt">&quot;react&quot;</span><span class="fu">:{</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>      <span class="dt">&quot;version&quot;</span><span class="fu">:</span><span class="st">&quot;detect&quot;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>    <span class="fu">}</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>  <span class="fu">}</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a><span class="fu">}</span></span></code></pre></div>
 <p>nextjs routing</p>
 <p>Routing Depends on File/Folder organization</p>
 <ul>

@@ -252,6 +252,10 @@
 <p><code class="sourceCode bash"><span class="kw">&amp;</span></code> <code class="sourceCode bash"><span class="fu">find</span> -name something.txt <span class="kw">&amp;</span></code> runs find in the background</p>
 <p>Output redirection - Overwrite &gt; echo “hello” &gt; bleh.txt echo “hey” &gt; bleh.txt bleh.txt will only contain “hey”</p>
 <p>Output redirection - Append &gt;&gt; echo “hello” &gt; bleh.txt echo “hey” &gt; bleh.txt bleh.txt will contain “hellohey”</p>
+<hr />
+<h5 id="checking-open-ports">Checking open ports</h5>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">netstat</span> -lntu</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="ex">ss</span> -lntu</span></code></pre></div>
 
         </div>
         <div id="footer">
