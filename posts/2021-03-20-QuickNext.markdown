@@ -5,8 +5,20 @@ tags: prog, QuickCode
 
 ```bash
 npx create-next-app --ts
-npm install @emotion/react
+
+npm install prettier --save-dev
+npm install eslint-config-prettier --save-dev
+npm install @emotion/babel-plugin --save-dev
 npm install @emotion/eslint-plugin --save-dev
+npm install @typescript-eslint/eslint-plugin --save-dev
+npm install @typescript-eslint/parser --save-dev
+
+npm install @mui/material
+npm install @mui/icons-material
+npm install @emotion/react
+npm install @emotion/server
+npm install @emotion/styled
+
 ```
 
 .eslintc.json

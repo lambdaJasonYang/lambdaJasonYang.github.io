@@ -313,10 +313,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     margin: 0 1.5rem;
   }
   
- 
-  
- 
 }
+
 /* END LARGE SCREEN CSS------------------------------------------------- */
 
 
@@ -331,3 +329,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   /*END OF SMALL SCREEN CSS  ----------------------------------------------------*/
 
   
+  /* START PRINT */
+
+  @media print
+  {    
+      .sidenav
+      {
+          display: none !important;
+      }
+      .nav-item
+      {
+        display: none !important;
+      }
+  }
+  /* END PRINT */
