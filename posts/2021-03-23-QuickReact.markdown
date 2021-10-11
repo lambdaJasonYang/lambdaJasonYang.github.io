@@ -37,7 +37,7 @@ We expect data to output clean data but the "SideEffectFunc" already touched and
 * DO NOT USE STATEFUL VARIABLES OR SIDE EFFECTS IN localenv
 * DO NOT MODIFY THE "props" IN localenv
 
-```
+
 
 ```plantuml
 @startuml

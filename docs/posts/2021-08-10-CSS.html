@@ -245,7 +245,7 @@
     
 </div>
 <p>Remember to Ctrl + Shift + R , to hard refresh as chrome will cache your old CSS.</p>
-<h3 id="nested-html">Nested HTML</h3>
+<h3 id="matching-nested-elements">Matching Nested Elements &gt;</h3>
 <p>Using “pre &gt; code.sourceCode” is how to match nested HTML elements.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>pre <span class="op">&gt;</span> code<span class="fu">.sourceCode</span> {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">background-color</span>: <span class="cn">#f8f8f8</span><span class="op">;</span></span>
@@ -255,8 +255,8 @@
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="kw">&lt;span&gt;</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>        ...<span class="kw">&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a></span></code></pre></div>
-<h3 id="wildcard-class-names">Wildcard class names</h3>
-<p>Below the CSS selector matches beginning occurances of “sourceCode…” within a div element when using class^.<br />
+<h3 id="wildcard-class-names">Wildcard class names ^= *=</h3>
+<p>Below the CSS selector matches beginning occurrences of “sourceCode…” within a div element when using class^.<br />
 When using asterisk, class* it matches the term anywhere.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>div<span class="ex">[class</span><span class="op">^=</span><span class="st">&quot;sourceCode&quot;</span><span class="ex">]</span>{</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    <span class="kw">background-color</span>: <span class="cn">#f8f8f8</span><span class="op">;</span></span>
@@ -268,7 +268,8 @@ When using asterisk, class* it matches the term anywhere.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sourceCode ...&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;... sourceCode ...&quot;</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span></span></code></pre></div>
-<h3 id="selecting-by-id-property">Selecting by id property</h3>
+<h3 id="selecting-by-id-using">Selecting by id using #</h3>
+<p>#logo</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>div<span class="pp">#logo</span> <span class="op">&gt;</span> a</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> id</span> <span class="ot">=</span> <span class="st">&quot;logo&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>    <span class="kw">&lt;a&gt;</span> ...<span class="kw">&lt;/a&gt;&lt;/div&gt;</span></span></code></pre></div>
@@ -276,6 +277,21 @@ When using asterisk, class* it matches the term anywhere.</p>
 <p>note 1rem is size of font</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">&lt;svg</span><span class="ot"> width=</span><span class="st">&quot;3rem&quot;</span><span class="ot"> height=</span><span class="st">&quot;3rem&quot;</span><span class="ot"> style</span> <span class="ot">=</span> <span class="st">&quot;filter:invert(100)&quot;</span><span class="kw">&gt;</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>    ...<span class="kw">&lt;/svg&gt;</span></span></code></pre></div>
+<hr />
+<h2 id="psuedo-classes-match-on-behaviors-something">Psuedo Classes match on Behaviors :something</h2>
+<p>match on behaviors</p>
+<p>example</p>
+<ul>
+<li>:link - matches on unclicked links</li>
+<li>:focus - matches on focus</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="pp">#content</span> a<span class="in">:focus</span>{</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>    <span class="kw">border-bottom</span>: <span class="dv">0</span> px<span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>}</span></code></pre></div>
+<p>matches link elements “&lt;a href..&gt;” inside “&lt;..id = content..&gt;” when focused</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> id</span> <span class="ot">=</span> <span class="st">content</span><span class="kw">&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">...</span><span class="kw">&gt;</span>somelink<span class="kw">&lt;/a&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>    <span class="kw">&lt;/div&gt;</span></span></code></pre></div>
 
         </div>
         <div id="footer">

@@ -10,6 +10,49 @@ body {
     --bg-primary: #23232e;
     --bg-secondary: #141418;
 }
+
+/* Link decoration  START*/
+
+  /* a.nav-link:hover{
+    color: #141418
+  } */
+  #content a.nav-link:focus{
+    border-bottom: 0 px;
+  }
+  #content a.nav-link:hover{
+    border-bottom: 0 px;
+  }
+
+  #content a{
+    text-decoration: none;
+  }
+
+  #content a:link {
+    color: #265301;
+  }
+
+  #content a:visited {
+    color: #437A16;
+  }
+
+  #content a:focus {
+    border-bottom: 1px solid;
+    background: #BAE498;
+  }
+
+  #content a:hover {
+    border-bottom: 1px solid;
+    background: #CDFEAA;
+  }
+
+  #content a:active {
+    background: #265301;
+    color: #CDFEAA;
+  }
+
+
+/* Link decoration END */
+
 h2, h3, h4, h5, h6 { 
   color: darkcyan 
 }

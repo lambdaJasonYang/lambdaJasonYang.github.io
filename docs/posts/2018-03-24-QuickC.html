@@ -245,50 +245,92 @@
     
 </div>
 <p>Remember pointers always hold an address so if you’re reading some spec, replace pointer with address if it gets confusing. parameter that takes a pointer == parameter that takes an address</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="cf">default</span> c compile gcc</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>gcc -o bleh main.c</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>./bleh</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="dt">int</span> b = <span class="dv">5</span>;</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="dt">int</span> *a = &amp;b;</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>printf(<span class="st">&quot;address of pointee b aka value of a is %p  </span><span class="sc">\n</span><span class="st">&quot;</span>, a);</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>printf(<span class="st">&quot;value of pointee is b  </span><span class="sc">\n</span><span class="st">&quot;</span>, *(<span class="dt">int</span>*)(a));</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="co">//address of pointee b aka value of a is 0xbefe3588</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="co">//value of pointee b is 5 </span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>printf(<span class="st">&quot;An int is %d, A long is %ld, a float is %f, a double is %lf, a char is %c, a string is %s, a pointer is %p&quot;</span>,<span class="dv">12</span>,<span class="dv">25555555</span>,<span class="fl">23.1</span>,<span class="fl">23.01</span>,<span class="ch">'c'</span>,<span class="st">&quot;asd&quot;</span>,a)</span></code></pre></div>
-<p>printf keywords</p>
-<p>|%c | char | |%s | string | |%d,%ld | int,long| |%f | float | |%lf | double | |%p | pointer value aka address of pointee| %x will convert unsigned number to hex %o will convert unsigned number to octal</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">gcc</span> -o bleh main.c</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">./bleh</span></span></code></pre></div>
+<p>standard library is nested in angled brackets like &lt;iostream&gt; &lt;stdio.h&gt;</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="dt">int</span> b = <span class="dv">5</span>;</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="dt">int</span> *a = &amp;b;</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>printf(<span class="st">&quot;address of pointee b aka value of a is %p  </span><span class="sc">\n</span><span class="st">&quot;</span>, a);</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>printf(<span class="st">&quot;value of pointee is b  </span><span class="sc">\n</span><span class="st">&quot;</span>, *(<span class="dt">int</span>*)(a));</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">//address of pointee b aka value of a is 0xbefe3588</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">//value of pointee b is 5 </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>printf(<span class="st">&quot;An int is %d, A long is %ld, a float is %f, a double is %lf, a char is %c, a string is %s, a pointer is %p&quot;</span>,<span class="dv">12</span>,<span class="dv">25555555</span>,<span class="fl">23.1</span>,<span class="fl">23.01</span>,<span class="ch">'c'</span>,<span class="st">&quot;asd&quot;</span>,a)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>printf</th>
+<th>keywords</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>%c</td>
+<td>char</td>
+</tr>
+<tr class="even">
+<td>%s</td>
+<td>string</td>
+</tr>
+<tr class="odd">
+<td>%d,%ld</td>
+<td>int,long</td>
+</tr>
+<tr class="even">
+<td>%f</td>
+<td>float</td>
+</tr>
+<tr class="odd">
+<td>%lf</td>
+<td>double</td>
+</tr>
+<tr class="even">
+<td>%p</td>
+<td>pointer value aka address of pointee</td>
+</tr>
+<tr class="odd">
+<td>%x</td>
+<td>convert unsigned number to hex</td>
+</tr>
+<tr class="even">
+<td>%o</td>
+<td>convert unsigned number to octal</td>
+</tr>
+</tbody>
+</table>
 <p>preprocessor, similar to prototypes.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">#ifndef two</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="pp">#define two 2</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="pp">#endif</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="dt">int</span> a = two;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="pp">#ifndef two</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="pp">#define two 2</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="pp">#endif</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="dt">int</span> a = two;</span></code></pre></div>
 <p>ifndef tells us if not defined then define it else skip it.</p>
 <p><code class="sourceCode c"><span class="pp">#define MAX(a,b) a &gt; b ? a : b</span></code></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">gcc</span> -c partA.c</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">gcc</span> -c main.c </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="fu">gcc</span> -o output partA.c main.c</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">gcc</span> -c partA.c</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">gcc</span> -c main.c </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">gcc</span> -o output partA.c main.c</span></code></pre></div>
 <p>gcc -c &lt;FILE.c&gt; tells us to run preprocessor(.h) files and compile to object file.</p>
-<p>standard library is behind &lt;&gt; like <iostream></p>
 <p>makefile input: &lt;FILE.o&gt;</p>
 <p>main.c calls functions from dependA.c which is why dependA.o depends on dependB.h dependA.c calls functions from dependB.c</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="ex">all</span>: main.o dependA.o dependB.o</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>	<span class="fu">gcc</span> -o output main.o dependA.o dependB.o </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>	</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="ex">main.o</span>: main.c dependA.h</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>	<span class="fu">gcc</span> -c main.c</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="ex">dependA.o</span>: dependA.c dependA.h dependB.h</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>	<span class="fu">gcc</span> -c dependA.c</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a><span class="ex">dependB.o</span>: dependB.c dependB.h</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a>	<span class="fu">gcc</span> -c dependB.c </span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="ex">all</span>: main.o dependA.o dependB.o</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>	<span class="fu">gcc</span> -o output main.o dependA.o dependB.o </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>	</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="ex">main.o</span>: main.c dependA.h</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>	<span class="fu">gcc</span> -c main.c</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="ex">dependA.o</span>: dependA.c dependA.h dependB.h</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a>	<span class="fu">gcc</span> -c dependA.c</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a><span class="ex">dependB.o</span>: dependB.c dependB.h</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>	<span class="fu">gcc</span> -c dependB.c </span></code></pre></div>
 <p>&lt;Target.o&gt;: &lt;Target.o&gt; &lt;dependencyA.h&gt; … {TAB} gcc -c &lt;Target.c&gt;</p>
 <p>the all keyword will always run. all: main.o … therefore the make will go to main.o</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">gcc</span> -c main.c</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="fu">gcc</span> -c dependA.c </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="fu">gcc</span> -c dependB.c </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="fu">gcc</span> -o output main.o dependA.o dependB.o </span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">gcc</span> -c main.c</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="fu">gcc</span> -c dependA.c </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="fu">gcc</span> -c dependB.c </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="fu">gcc</span> -o output main.o dependA.o dependB.o </span></code></pre></div>
 <p>Strings are really just arrays of chars array of chars are pointers</p>
 <p>last entry of string is either 0 or ‘\0’</p>
 <h3 id="string-literals-are-immutable">String literals are immutable</h3>
@@ -341,16 +383,16 @@
 <li>Detach the segment from a variable (once per process) - shmdt</li>
 <li>Remove the segment (happens once) - shmctl</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="dt">int</span> *data;</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="dt">int</span> shmd;</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>shmd = shmget(KEY, <span class="kw">sizeof</span>(<span class="dt">int</span>), IPC_CREAT | <span class="bn">0640</span>);</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>printf(<span class="st">&quot;shmd: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, shmd);</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>data = shmat(shmd, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>printf(<span class="st">&quot;data: %p</span><span class="sc">\n</span><span class="st">&quot;</span>, data);</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>printf(<span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, *data);</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>*data = * data + <span class="dv">10</span>;</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>printf(<span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, *data);</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>shmdt(data); </span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="dt">int</span> *data;</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="dt">int</span> shmd;</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>shmd = shmget(KEY, <span class="kw">sizeof</span>(<span class="dt">int</span>), IPC_CREAT | <span class="bn">0640</span>);</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>printf(<span class="st">&quot;shmd: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, shmd);</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>data = shmat(shmd, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>printf(<span class="st">&quot;data: %p</span><span class="sc">\n</span><span class="st">&quot;</span>, data);</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a>printf(<span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, *data);</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a>*data = * data + <span class="dv">10</span>;</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a>printf(<span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, *data);</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a>shmdt(data); </span></code></pre></div>
 <p>Server Design * Handshake - ensure a connection between 2 programs</p>
 <ul>
 <li>3-way-handshake - verify both client and server can BOTH SEND AND RECIEVE DATA</li>

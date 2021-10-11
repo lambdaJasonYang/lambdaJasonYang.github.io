@@ -5,10 +5,17 @@ tags: prog, C, QuickCode
 Remember  pointers always hold an address so if you're reading some spec, replace pointer with address if it gets confusing.
 parameter that takes a pointer == parameter that takes an address
 
-```C
-default c compile gcc
+```bash
+
 gcc -o bleh main.c
 ./bleh
+```
+
+standard library is nested in angled brackets like \<iostream\> \<stdio.h\>
+
+```C
+#include <stdio.h>
+
 int b = 5;
 int *a = &b;
 printf("address of pointee b aka value of a is %p  \n", a);
@@ -18,16 +25,16 @@ printf("value of pointee is b  \n", *(int*)(a));
 
 printf("An int is %d, A long is %ld, a float is %f, a double is %lf, a char is %c, a string is %s, a pointer is %p",12,25555555,23.1,23.01,'c',"asd",a)
 ```
-printf keywords
-
+|printf |keywords|
+|--- | --- |
 |%c | char |
 |%s | string |
 |%d,%ld | int,long|
 |%f | float |
 |%lf | double |
 |%p | pointer value aka address of pointee|
-%x will convert unsigned number to hex
-%o will convert unsigned number to octal
+| %x | convert unsigned number to hex   |
+| %o |  convert unsigned number to octal | 
 
 preprocessor, similar to prototypes.
 ```C
@@ -49,7 +56,7 @@ gcc -o output partA.c main.c
 
 gcc -c <FILE.c> tells us to run preprocessor(.h) files and compile to object file.
 
-standard library is behind <> like <iostream>
+
 
 
 makefile

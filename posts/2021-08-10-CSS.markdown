@@ -5,7 +5,7 @@ tags: prog
 
 Remember to Ctrl + Shift + R , to hard refresh as chrome will cache your old CSS.
 
-### Nested HTML
+### Matching Nested Elements >
 Using  "pre > code.sourceCode" is how to match nested HTML elements.
 
 ```CSS
@@ -23,9 +23,9 @@ background-color: #f8f8f8;
 
 ```
 
-### Wildcard class names
+### Wildcard class names ^=  *=
 
-Below the CSS selector matches beginning occurances of "sourceCode..." within a div element when using class^.  
+Below the CSS selector matches beginning occurrences of "sourceCode..." within a div element when using class^.  
 When using asterisk, class* it matches the term anywhere.
 ```CSS
 div[class^="sourceCode"]{
@@ -43,7 +43,9 @@ div[class*="sourceCode"]{
 <div class="... sourceCode ...">...</div>
 ```
 
-### Selecting by id property
+### Selecting by id using \#
+
+#logo 
 ```CSS
 div#logo > a
 ```
@@ -59,4 +61,28 @@ note 1rem is size of font
 <svg width="3rem" height="3rem" style = "filter:invert(100)"> 
     ...</svg>
 
+```
+
+---
+
+## Psuedo Classes match on Behaviors :something
+
+match on behaviors
+
+example 
+
+* :link - matches on unclicked links 
+* :focus - matches on focus 
+
+```css
+#content a:focus{
+    border-bottom: 0 px;
+}
+```
+
+matches link elements "<a href..>" inside "<..id = content..>" when focused
+```html
+<div id = content>
+<a href=...>somelink</a>
+    </div>
 ```
