@@ -4,6 +4,10 @@ tags: mathcs, finance
 ---
 
 Assumption rate of stock price growth is exponential
+example AAPL 
+
+$$\frac{CoVariance(AAPL, SPY )}{Variance(SPY)}$$
+
 
 # 2
 
