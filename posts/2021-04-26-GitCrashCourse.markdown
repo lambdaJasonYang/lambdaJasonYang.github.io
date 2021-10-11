@@ -22,6 +22,15 @@ git config --global user.name "example"
 git config --global  credential.usehttppath true
 ```
 
+### Saving remote github Credential on local repo
+```bash
+git config credential.helper store
+git push -u origin main:main
+```
+By pushing to remote repo you will be asked to enter username and password( password is really the auth token you have to generate in github settings).   
+The above command makes it so the setting is saved.  
+
+
 ---
 
 ### Preconfig Remote Github repo variable
@@ -350,4 +359,18 @@ git reset --hard
 ```
 
 ---
+
+### Merging two unrelated histories
+
+Example.  
+You made a github repo with a license.  
+Then you made a local repo with some web server and used git init.   
+Now you want to push your local repo on that "empty" remote repo.  
+
+Not so simple, we first have to merge it but it will give us an error on a naive merge since your local and remote repo have no common ancestor
+
+
+```bash
+git pull origin main --allow-unrelated-histories 
+```
 
