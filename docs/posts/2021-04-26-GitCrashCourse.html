@@ -254,39 +254,44 @@
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="fu">git</span> config --global user.name <span class="st">&quot;example&quot;</span></span></code></pre></div>
 <h3 id="removing-credentials">Removing Credentials</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> config --global  credential.usehttppath true</span></code></pre></div>
+<h3 id="saving-remote-github-credential-on-local-repo">Saving remote github Credential on local repo</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">git</span> config credential.helper store</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">git</span> push -u origin main:main</span></code></pre></div>
+<p>By pushing to remote repo you will be asked to enter username and password( password is really the auth token you have to generate in github settings).<br />
+The above command makes it so the setting is saved.</p>
 <hr />
 <h3 id="preconfig-remote-github-repo-variable">Preconfig Remote Github repo variable</h3>
 <p>configure remote variable we name “origin”<br />
 or remove to reuse variable</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">git</span> remote remove origin</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">git</span> remote add origin https://github.com/UserJY/bleh.git</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">git</span> remote remove origin</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">git</span> remote add origin https://github.com/UserJY/bleh.git</span></code></pre></div>
 <p>the -u flag adds the remote commit to your local git tree.</p>
 <h3 id="create-a-new-repo-locally-and-push-create-github-repo">Create a new repo locally and push create github repo</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">git</span> init</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">git</span> remote add origin https://github.com/userJY/testrepo.git</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">git</span> add .</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">'update'</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="fu">git</span> push -u origin main:main</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="ex">---</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="co">### On git push and pull</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="kw">`</span><span class="fu">git</span> push -u origin <span class="op">&lt;</span>SrcLocalBranch<span class="op">&gt;</span>:<span class="op">&lt;</span>TargetRemoteBranch<span class="op">&gt;</span><span class="kw">`</span><span class="dt">{.bash}</span>  </span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a><span class="kw">`</span><span class="fu">git</span> pull origin <span class="op">&lt;</span>SrcRemoteBranch<span class="op">&gt;</span>:<span class="op">&lt;</span>TargetLocalBranch<span class="op">&gt;</span><span class="kw">`</span><span class="dt">{.bash}</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a><span class="co">### The process</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true"></a><span class="kw">```</span> <span class="fu">bash</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true"></a><span class="fu">git</span> add .</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">git</span> init</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="fu">git</span> remote add origin https://github.com/userJY/testrepo.git</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">'update'</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="fu">git</span> push -u origin main:main</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="ex">---</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="co">### On git push and pull</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a><span class="kw">`</span><span class="fu">git</span> push -u origin <span class="op">&lt;</span>SrcLocalBranch<span class="op">&gt;</span>:<span class="op">&lt;</span>TargetRemoteBranch<span class="op">&gt;</span><span class="kw">`</span><span class="dt">{.bash}</span>  </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a><span class="kw">`</span><span class="fu">git</span> pull origin <span class="op">&lt;</span>SrcRemoteBranch<span class="op">&gt;</span>:<span class="op">&lt;</span>TargetLocalBranch<span class="op">&gt;</span><span class="kw">`</span><span class="dt">{.bash}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a><span class="co">### The process</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a><span class="kw">```</span> <span class="fu">bash</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span></code></pre></div>
 <p>updating to remote repo like github</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">git</span> push origin main</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">git</span> push origin main</span></code></pre></div>
 <h3 id="pushing-updates-to-team-repo">Pushing updates to Team repo</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">git</span> checkout -b Fixedbugbranch</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="fu">git</span> add .</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;fixed bugs&quot;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="fu">git</span> push origin Fixedbugbranch</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">git</span> checkout -b Fixedbugbranch</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;fixed bugs&quot;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="fu">git</span> push origin Fixedbugbranch</span></code></pre></div>
 <p>You see a push but on the team’s side, they see a pull request(PR).<br />
 PR is ran through github actions(CI system) that runs tests.<br />
 If accepted, they merge your PR branch with the main branch.</p>
@@ -367,32 +372,32 @@ git checkout -b behaves the same as git branch BUT moves HEAD to new branch</p>
 <h5 id="git-pull">Git Pull</h5>
 <p>git pull is how we merge</p>
 <p>default setting for gitpull is rebase=false</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">git</span> pull --rebase <span class="co">#default merge</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="fu">git</span> pull --no-rebase</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="fu">git</span> pull --ff-only <span class="co">#fast-forward-only</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="fu">git</span> pull --rebase <span class="co">#default merge</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="fu">git</span> pull --no-rebase</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="fu">git</span> pull --ff-only <span class="co">#fast-forward-only</span></span></code></pre></div>
 <h5 id="example">Example</h5>
 <p>Example: clone git project first commit</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="ex">commit</span> 0382315a65a3fa24595718b3bf141f09a49b6469 (HEAD -<span class="op">&gt;</span> main, origin/main, origin/HEAD)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="ex">Author</span>: JY <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="ex">Date</span>:   Mon Sep 27 16:04:23 2021 -0700</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>    <span class="ex">Initial</span> commit</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="ex">commit</span> 0382315a65a3fa24595718b3bf141f09a49b6469 (HEAD -<span class="op">&gt;</span> main, origin/main, origin/HEAD)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="ex">Author</span>: JY <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="ex">Date</span>:   Mon Sep 27 16:04:23 2021 -0700</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>    <span class="ex">Initial</span> commit</span></code></pre></div>
 <p>0382315a65a3fa24595718b3bf141f09a49b6469 is the commit on both server and local repo.</p>
 <ul>
 <li>Modify README.md locally (write “hello” to README.md)</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a>$ <span class="fu">git</span> log</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="ex">commit</span> 070f18087be629ba7387a9242af03f85ac656910 (HEAD -<span class="op">&gt;</span> main)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="ex">Author</span>: jy <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="ex">Date</span>:   Mon Sep 27 16:15:11 2021 -0700</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>    <span class="ex">update</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a><span class="ex">commit</span> 0382315a65a3fa24595718b3bf141f09a49b6469 (origin/main, origin/HEAD)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a><span class="ex">Author</span>: jy <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a><span class="ex">Date</span>:   Mon Sep 27 16:04:23 2021 -0700</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true"></a>    <span class="ex">Initial</span> commit</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>$ <span class="fu">git</span> log</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="ex">commit</span> 070f18087be629ba7387a9242af03f85ac656910 (HEAD -<span class="op">&gt;</span> main)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="ex">Author</span>: jy <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="ex">Date</span>:   Mon Sep 27 16:15:11 2021 -0700</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a>    <span class="ex">update</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a><span class="ex">commit</span> 0382315a65a3fa24595718b3bf141f09a49b6469 (origin/main, origin/HEAD)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a><span class="ex">Author</span>: jy <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a><span class="ex">Date</span>:   Mon Sep 27 16:04:23 2021 -0700</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true"></a>    <span class="ex">Initial</span> commit</span></code></pre></div>
 <ul>
 <li>Modify README.md on github website. (write “goodbye” to README.md)</li>
 </ul>
@@ -406,71 +411,71 @@ git checkout -b behaves the same as git branch BUT moves HEAD to new branch</p>
 </ul></li>
 </ul>
 <p>Let’s trying pushing local 070f1 changes to remote anyway</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>$ <span class="fu">git</span> push -u origin main:main</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="ex">To</span> https://github.com/userJY/gittmp.git</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a> ! [<span class="ex">rejected</span>]        main -<span class="op">&gt;</span> main (fetch first)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="ex">error</span>: failed to push some refs to <span class="st">'https://github.com/userJY/gittmp.git'</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a><span class="ex">hint</span>: Updates were rejected because the remote contains work that you do</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a><span class="ex">hint</span>: not have locally. This is usually caused by another repository pushing</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a><span class="ex">hint</span>: to the same ref. You may want to first integrate the remote changes</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a><span class="ex">hint</span>: (e.g., <span class="st">'git pull ...'</span>) <span class="ex">before</span> pushing again.</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a><span class="ex">hint</span>: See the <span class="st">'Note about fast-forwards'</span> in <span class="st">'git push --help'</span> for details.</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a>$ <span class="fu">git</span> push -u origin main:main</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="ex">To</span> https://github.com/userJY/gittmp.git</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a> ! [<span class="ex">rejected</span>]        main -<span class="op">&gt;</span> main (fetch first)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a><span class="ex">error</span>: failed to push some refs to <span class="st">'https://github.com/userJY/gittmp.git'</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a><span class="ex">hint</span>: Updates were rejected because the remote contains work that you do</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a><span class="ex">hint</span>: not have locally. This is usually caused by another repository pushing</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a><span class="ex">hint</span>: to the same ref. You may want to first integrate the remote changes</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a><span class="ex">hint</span>: (e.g., <span class="st">'git pull ...'</span>) <span class="ex">before</span> pushing again.</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a><span class="ex">hint</span>: See the <span class="st">'Note about fast-forwards'</span> in <span class="st">'git push --help'</span> for details.</span></code></pre></div>
 <p>It failed as expected<br />
 Let’s follow instructions and use git pull</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a>$ <span class="fu">git</span> pull</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="ex">remote</span>: Enumerating objects: 5, done.</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a><span class="ex">remote</span>: Counting objects: 100% (5/5), <span class="kw">done</span><span class="ex">.</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a><span class="ex">remote</span>: Total 3 (delta 0), <span class="ex">reused</span> 0 (delta 0), <span class="ex">pack-reused</span> 0</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a><span class="ex">Unpacking</span> objects: 100% (3/3), <span class="ex">641</span> bytes <span class="kw">|</span> <span class="ex">91.00</span> KiB/s, done.</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a><span class="ex">From</span> https://github.com/userJY/gittmp</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a>   <span class="ex">0382315..3295ca9</span>  main       -<span class="op">&gt;</span> origin/main</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a><span class="ex">Auto-merging</span> README.md</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a><span class="ex">CONFLICT</span> (content)<span class="bu">:</span> Merge conflict in README.md</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true"></a><span class="ex">Automatic</span> merge failed<span class="kw">;</span> <span class="ex">fix</span> conflicts and then commit the result.</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a>$ <span class="fu">git</span> pull</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="ex">remote</span>: Enumerating objects: 5, done.</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="ex">remote</span>: Counting objects: 100% (5/5), <span class="kw">done</span><span class="ex">.</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a><span class="ex">remote</span>: Total 3 (delta 0), <span class="ex">reused</span> 0 (delta 0), <span class="ex">pack-reused</span> 0</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a><span class="ex">Unpacking</span> objects: 100% (3/3), <span class="ex">641</span> bytes <span class="kw">|</span> <span class="ex">91.00</span> KiB/s, done.</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a><span class="ex">From</span> https://github.com/userJY/gittmp</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a>   <span class="ex">0382315..3295ca9</span>  main       -<span class="op">&gt;</span> origin/main</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a><span class="ex">Auto-merging</span> README.md</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a><span class="ex">CONFLICT</span> (content)<span class="bu">:</span> Merge conflict in README.md</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a><span class="ex">Automatic</span> merge failed<span class="kw">;</span> <span class="ex">fix</span> conflicts and then commit the result.</span></code></pre></div>
 <p>The above line shows local..remote conflict.<br />
 <code class="sourceCode bash"><span class="ex">0382315..3295ca9</span>  main       -<span class="op">&gt;</span> origin/main</code></p>
 <p>on our console we see we have been automatically put into MERGE mode.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="ex">User@WindowsPC</span> MINGW64 ~/Desktop/gittmp (main<span class="kw">|</span><span class="ex">MERGING</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="ex">User@WindowsPC</span> MINGW64 ~/Desktop/gittmp (main<span class="kw">|</span><span class="ex">MERGING</span>)</span></code></pre></div>
 <p>If you enter your README.md you will find the below content while in MERGE mode.</p>
 <p>Pre-Merge state:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="op">&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="ex">HEAD</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="ex">hello</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a><span class="ex">Hello</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>=======</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a><span class="ex">goodbye</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a><span class="ex">Goodbye</span> </span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="ex">3295ca935359bc5fc4e8592c9057d3c3c5cd7a6d</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="op">&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="ex">HEAD</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a><span class="ex">hello</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a><span class="ex">Hello</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a>=======</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true"></a><span class="ex">goodbye</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true"></a><span class="ex">Goodbye</span> </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="ex">3295ca935359bc5fc4e8592c9057d3c3c5cd7a6d</span></span></code></pre></div>
 <p>Aside: You can even commit this pre-merge state.<br />
 This will update local README.md to the above content.<br />
 You can even push this new pre-merge state commit to remote github. But clearly you shouldn’t do this as it defeats the entire point of merging!!</p>
 <p>Use abort to leave MERGE mode to return to local repo</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="fu">git</span> merge --abort</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="fu">git</span> merge --abort</span></code></pre></div>
 <h5 id="to-fix-up-the-merge-conflicts">To fix up the MERGE conflicts</h5>
 <p>Go back to MERGE mode</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="fu">git</span> pull <span class="co">#back to merge mode</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="fu">git</span> mergetool <span class="co">#will ask to start default vimdiff</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="fu">git</span> pull <span class="co">#back to merge mode</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a><span class="fu">git</span> mergetool <span class="co">#will ask to start default vimdiff</span></span></code></pre></div>
 <h5 id="non-conflict-automerge">Non-conflict automerge</h5>
 <p>image if local was</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="ex">hello</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a><span class="ex">hello</span></span></code></pre></div>
 <p>and remote was</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a><span class="ex">yello</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a><span class="ex">yello</span></span></code></pre></div>
 <p>Git pull, would merge by</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a>$ <span class="fu">git</span> pull</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a><span class="ex">remote</span>: Enumerating objects: 5, done.</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a><span class="ex">remote</span>: Counting objects: 100% (5/5), <span class="kw">done</span><span class="ex">.</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true"></a><span class="ex">remote</span>: Compressing objects: 100% (2/2), <span class="kw">done</span><span class="ex">.</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a><span class="ex">remote</span>: Total 3 (delta 1), <span class="ex">reused</span> 0 (delta 0), <span class="ex">pack-reused</span> 0</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true"></a><span class="ex">Unpacking</span> objects: 100% (3/3), <span class="ex">639</span> bytes <span class="kw">|</span> <span class="ex">91.00</span> KiB/s, done.</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true"></a><span class="ex">From</span> https://github.com/userJY/gittmp</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true"></a>   <span class="ex">8401a16..d93f27c</span>  main       -<span class="op">&gt;</span> origin/main</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true"></a><span class="ex">Auto-merging</span> README.md</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true"></a><span class="ex">Merge</span> made by the <span class="st">'recursive'</span> strategy.</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true"></a> <span class="ex">README.md</span> <span class="kw">|</span> <span class="ex">2</span> +-</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true"></a> <span class="ex">1</span> file changed, 1 insertion(+), <span class="ex">1</span> deletion(-)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a>$ <span class="fu">git</span> pull</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true"></a><span class="ex">remote</span>: Enumerating objects: 5, done.</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true"></a><span class="ex">remote</span>: Counting objects: 100% (5/5), <span class="kw">done</span><span class="ex">.</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true"></a><span class="ex">remote</span>: Compressing objects: 100% (2/2), <span class="kw">done</span><span class="ex">.</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true"></a><span class="ex">remote</span>: Total 3 (delta 1), <span class="ex">reused</span> 0 (delta 0), <span class="ex">pack-reused</span> 0</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true"></a><span class="ex">Unpacking</span> objects: 100% (3/3), <span class="ex">639</span> bytes <span class="kw">|</span> <span class="ex">91.00</span> KiB/s, done.</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true"></a><span class="ex">From</span> https://github.com/userJY/gittmp</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true"></a>   <span class="ex">8401a16..d93f27c</span>  main       -<span class="op">&gt;</span> origin/main</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true"></a><span class="ex">Auto-merging</span> README.md</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true"></a><span class="ex">Merge</span> made by the <span class="st">'recursive'</span> strategy.</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true"></a> <span class="ex">README.md</span> <span class="kw">|</span> <span class="ex">2</span> +-</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true"></a> <span class="ex">1</span> file changed, 1 insertion(+), <span class="ex">1</span> deletion(-)</span></code></pre></div>
 <h4 id="vim-micro-tut">Vim micro tut</h4>
 <p>ctrl-w-w to switch screen on 3 way commit</p>
 <p>esc-u to undo esc-:diffupdate after undo to rescan difference</p>
@@ -479,12 +484,19 @@ You can even push this new pre-merge state commit to remote github. But clearly 
 <p>esc-]-c to move to next conflict esc-[-c to move to prev conflict</p>
 <h3 id="undo-last-commit">Undo last commit</h3>
 <p>Undo last commit but keep content changes</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a><span class="fu">git</span> reset --soft HEAD~1</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="fu">git</span> reset --soft HEAD~1</span></code></pre></div>
 <p>Undo last commit, do not keep content change</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="fu">git</span> reset --hard HEAD~1</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a><span class="fu">git</span> reset --hard HEAD~1</span></code></pre></div>
 <p>If you have unstaged changes you want to remove</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a><span class="fu">git</span> reset --hard</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a><span class="fu">git</span> reset --hard</span></code></pre></div>
 <hr />
+<h3 id="merging-two-unrelated-histories">Merging two unrelated histories</h3>
+<p>Example.<br />
+You made a github repo with a license.<br />
+Then you made a local repo with some web server and used git init.<br />
+Now you want to push your local repo on that “empty” remote repo.</p>
+<p>Not so simple, we first have to merge it but it will give us an error on a naive merge since your local and remote repo have no common ancestor</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a><span class="fu">git</span> pull origin main --allow-unrelated-histories </span></code></pre></div>
 
         </div>
         <div id="footer">
