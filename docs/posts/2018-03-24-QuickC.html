@@ -341,26 +341,35 @@
 <p>Alternatively we can just do</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="fu">gcc</span> main.c helper.c -o myexecutable -Wall</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="ex">./myexecutable</span>    </span></code></pre></div>
-<h3 id="make">make</h3>
-<p>makefile input: &lt;FILE.o&gt;</p>
-<p>main.c calls functions from dependA.c which is why dependA.o depends on dependB.h dependA.c calls functions from dependB.c</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="ex">all</span>: main.o dependA.o dependB.o</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>	<span class="fu">gcc</span> -o output main.o dependA.o dependB.o </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>	</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="ex">main.o</span>: main.c dependA.h</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>	<span class="fu">gcc</span> -c main.c</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a><span class="ex">dependA.o</span>: dependA.c dependA.h dependB.h</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a>	<span class="fu">gcc</span> -c dependA.c</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a><span class="ex">dependB.o</span>: dependB.c dependB.h</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a>	<span class="fu">gcc</span> -c dependB.c </span></code></pre></div>
-<p>&lt;Target.o&gt;: &lt;Target.o&gt; &lt;dependencyA.h&gt; … {TAB} gcc -c &lt;Target.c&gt;</p>
-<p>the all keyword will always run. all: main.o … therefore the make will go to main.o</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="fu">gcc</span> -c main.c</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="fu">gcc</span> -c dependA.c </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="fu">gcc</span> -c dependB.c </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="fu">gcc</span> -o output main.o dependA.o dependB.o </span></code></pre></div>
+<h3 id="makefile">makefile</h3>
+<ul>
+<li>“make” is analogous to “npm build”<br />
+</li>
+<li>“makefile” is analogous to “package.json”</li>
+</ul>
+<p>On Vscode bottom right click on Spaces and turn to tab.<br />
+make requires tab before gcc command.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="fu">cat</span> -e -t -v makefile <span class="co">#Use to check for tabs ^I</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="fu">make</span> <span class="co">#this will build the makefile</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="ex">all</span>: main.o helper.o</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a>	<span class="fu">gcc</span> main.o helper.o -o myexecutable</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a><span class="ex">main.o</span>: main.c helper.h</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a>	<span class="fu">gcc</span> -c main.c</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a><span class="ex">helper.o</span>: helper.c helper.h</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a>	<span class="fu">gcc</span> -c helper.c</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true"></a><span class="ex">clean</span>:</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true"></a>	<span class="fu">rm</span> helper.o main.o myexecutable</span></code></pre></div>
+<ul>
+<li>the all keyword will always run.
+<ul>
+<li>all: main.o …</li>
+<li>therefore the make will go to<br />
+main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
+</ul></li>
+</ul>
 <hr />
 <p>Strings are really just arrays of chars array of chars are pointers</p>
 <p>last entry of string is either 0 or ‘\0’</p>
@@ -414,16 +423,16 @@
 <li>Detach the segment from a variable (once per process) - shmdt</li>
 <li>Remove the segment (happens once) - shmctl</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="dt">int</span> *data;</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="dt">int</span> shmd;</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>shmd = shmget(KEY, <span class="kw">sizeof</span>(<span class="dt">int</span>), IPC_CREAT | <span class="bn">0640</span>);</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a>printf(<span class="st">&quot;shmd: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, shmd);</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a>data = shmat(shmd, <span class="dv">0</span>, <span class="dv">0</span>);</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a>printf(<span class="st">&quot;data: %p</span><span class="sc">\n</span><span class="st">&quot;</span>, data);</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a>printf(<span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, *data);</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a>*data = * data + <span class="dv">10</span>;</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a>printf(<span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, *data);</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a>shmdt(data); </span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="dt">int</span> *data;</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="dt">int</span> shmd;</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>shmd = shmget(KEY, <span class="kw">sizeof</span>(<span class="dt">int</span>), IPC_CREAT | <span class="bn">0640</span>);</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>printf(<span class="st">&quot;shmd: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, shmd);</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a>data = shmat(shmd, <span class="dv">0</span>, <span class="dv">0</span>);</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>printf(<span class="st">&quot;data: %p</span><span class="sc">\n</span><span class="st">&quot;</span>, data);</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>printf(<span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, *data);</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a>*data = * data + <span class="dv">10</span>;</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a>printf(<span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span>, *data);</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true"></a>shmdt(data); </span></code></pre></div>
 <p>Server Design * Handshake - ensure a connection between 2 programs</p>
 <ul>
 <li>3-way-handshake - verify both client and server can BOTH SEND AND RECIEVE DATA</li>

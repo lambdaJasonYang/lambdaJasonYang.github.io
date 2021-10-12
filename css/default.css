@@ -10,15 +10,19 @@ body {
     --bg-primary: #23232e;
     --bg-secondary: #141418;
 }
+
+/* Adding filename to codeblock START */
 div.sourceCode::before {
   content: attr(data-filename);
   display: block;
   background-color: #badbd9cb;
   color: #919191;
   padding-left: 2%;
-  font-size: small;
+  font-size: smaller;
   font-family: monospace;
 }
+/* Adding filename to codeblock END */
+
 /* Link decoration  START*/
 
   /* a.nav-link:hover{

@@ -99,42 +99,42 @@ gcc main.c helper.c -o myexecutable -Wall
 ./myexecutable    
 ```
 
-### make
+### makefile
 
-makefile
-input: <FILE.o>
+* "make" is analogous to "npm build"  
+* "makefile" is analogous to "package.json"  
 
-
-main.c calls functions from dependA.c which is why dependA.o depends on dependB.h
-dependA.c calls functions from dependB.c 
+On Vscode bottom right click on Spaces and turn to tab.  
+make requires tab before gcc command.
+```bash
+cat -e -t -v makefile #Use to check for tabs ^I
+```
 
 ```bash
-all: main.o dependA.o dependB.o
-	gcc -o output main.o dependA.o dependB.o 
-	
-main.o: main.c dependA.h
+make #this will build the makefile
+```
+
+
+```bash
+all: main.o helper.o
+	gcc main.o helper.o -o myexecutable
+
+main.o: main.c helper.h
 	gcc -c main.c
 
-dependA.o: dependA.c dependA.h dependB.h
-	gcc -c dependA.c
+helper.o: helper.c helper.h
+	gcc -c helper.c
 
-dependB.o: dependB.c dependB.h
-	gcc -c dependB.c 
+clean:
+	rm helper.o main.o myexecutable
 ```	
 
-<Target.o>: <Target.o> <dependencyA.h> ...
-{TAB} gcc -c <Target.c>
 
-the  all keyword will always run.
-all: main.o ...
-therefore the make will go to main.o 
+* the all keyword will always run.
+  * all: main.o ...
+  * therefore the make will go to  
+  main.o main.o: \<Dependency1\> \<Dependency2\>...
 
-```bash
-gcc -c main.c
-gcc -c dependA.c 
-gcc -c dependB.c 
-gcc -o output main.o dependA.o dependB.o 
-```
 
 ---
 
