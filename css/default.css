@@ -10,7 +10,14 @@ body {
     --bg-primary: #23232e;
     --bg-secondary: #141418;
 }
-
+div.sourceCode::before {
+  content: attr(data-filename);
+  display: block;
+  background-color: #badbd9cb;
+  color: #919191;
+  padding-left: 2%;
+  font-family: monospace;
+}
 /* Link decoration  START*/
 
   /* a.nav-link:hover{
@@ -251,6 +258,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     z-index: 20;
     padding: 0;
     height: 100vh;
+    min-height: 100vh;
     width: 6rem; /* 5 * font pixel */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     background-color: var(--bg-primary); /* Black */

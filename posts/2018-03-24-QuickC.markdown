@@ -5,6 +5,8 @@ tags: prog, C, QuickCode
 Remember  pointers always hold an address so if you're reading some spec, replace pointer with address if it gets confusing.
 parameter that takes a pointer == parameter that takes an address
 
+
+
 ```bash
 
 gcc -o bleh main.c
@@ -47,17 +49,57 @@ ifndef tells us if not defined then define it else skip it.
 
 `#define MAX(a,b) a > b ? a : b`{.c}
 
+---
 
-```bash
-gcc -c partA.c
-gcc -c main.c 
-gcc -o output partA.c main.c
+### Example linking multiple object files
+
+```{.c filename=main.c}
+#include <stdio.h>
+#include "helper.h"
+#ifndef two
+#define two 2
+#endif
+
+int main(){
+    int a = two;
+    printf("hey %d ", plus(a,3));
+    return 0;
+
+}
 ```
 
-gcc -c <FILE.c> tells us to run preprocessor(.h) files and compile to object file.
+```{.c filename=helper.h}
+#ifndef avoidRepeatImport
+#define avoidRepeatImport
+
+int plus(int a, int b);
+
+#endif
+```
+```{.c filename=helper.c}
+#include "helper.h"
+
+int plus(int a, int b){
+    return a + b;
+}
+```
 
 
+Below, the "-c" flag tells us to convert helper.c to helper.o
+```bash
+gcc -c helper.c #outputs helper.o
+gcc -c main.c #outputs main.o
+gcc main.o helper.o -o myexecutable
+./myexecutable
+```
 
+Alternatively we can just do
+```bash
+gcc main.c helper.c -o myexecutable -Wall
+./myexecutable    
+```
+
+### make
 
 makefile
 input: <FILE.o>
@@ -93,6 +135,8 @@ gcc -c dependA.c
 gcc -c dependB.c 
 gcc -o output main.o dependA.o dependB.o 
 ```
+
+---
 
 
 Strings are really just arrays of chars
