@@ -49,4 +49,19 @@ paragraph.appendChild(textContent);
 document.querySelector("#messages").appendChild(paragraph);
 ```
 
+---
+
+### JS for React
+
+* event object
+  * React uses event as arguments to callbacks a lot
+
+```javascript
+const callback = (e) => {
+    const domTarget = e.target
+    console.log(e.type)
+}
+```
+
+[List of event types](https://developer.mozilla.org/en-US/docs/Web/API/Event#interfaces_based_on_event) 
 

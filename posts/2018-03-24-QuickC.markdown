@@ -138,39 +138,58 @@ clean:
 
 ---
 
+### Strings
 
-Strings are really just arrays of chars
-array of chars are pointers
+* Strings are really just arrays of chars
+  * array of chars are pointers
+  * Strings are pointers
+* last entry of string is either 0 or '\0'
 
-last entry of string is either 0 or '\0'
+#### String literals are immutable in memory
 
-### String literals are immutable
-Typing a string like "hello" in your code editor means your progam will allocate a permanent address and memory for "hello" that all other
+* Typing a string like "hello" in your code editor means your progam will allocate a permanent address and memory for "hello" that all other
 "hello" in your code will refer to.
-printf("%s","hello"); //init string literal "hello" at some address 
-printf("%s","hello"); //reuse same string literal at same address
+```c
+printf("%s","hello"); 
+//init string literal "hello" at SOME address 
+//0xfffeee -> "hello"
 
+printf("%s","hello"); 
+//REUSE same string literal at SAME address
+//0xfffeee -> "hello"
+```
+
+#### Different ways to init String
+
+```c
 char s[256];
-mutable array of 256 initialized.
+//MUTABLE array of 256 initialized.
 
 char s[256] = "hello";
-immutable string literal "hello" is initialized
-mutable array of 256 initialized.
-Copies string(Auto append a terminating \0) "hello\0" into mutable array.
+s[1]='Y';
+//RHS: immutable string literal "hello" is initialized
+//LHS: MUTABLE array s of 256 initialized.
+//Copies string( and Auto appends a terminating \0) 
+//RESULT: "hello\0" MUTABLE
 
 char s[] = "hello";
-immutable string literal "hello" is initialized
-automatically initialized 8 bytes mutable array.
-Copies string(Auto append a terminating \0) "hello\0" into mutable array.
+s[1]='Y';
+//RHS: immutable string literal "hello" is initialized
+//LHS: automatically initialized 8 bytes MUTABLE array s.
+//Copies string(and Auto append a terminating \0) 
+//RESULT: "hello\0" MUTABLE
 
 char *s = "hello";
-immutable string literal "hello" is initialized
-s points to immutable string
+*(s+1)='Y'; //Crash trying to change 'e' => 'Y'
+//RHS: immutable string literal "hello" is initialized
+//LHS: s POINTS to IMMUTABLE string
+//We Crash for trying to modify an immutable string literal
+```
 
+---
 
+### Dynamic mem allocation
 
-
-Dynamic mem allocation
 malloc(size_t x)
 allocates x bytes of heap memory
 return address for x

@@ -272,6 +272,19 @@
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>paragraph<span class="op">.</span><span class="fu">appendChild</span>(textContent)<span class="op">;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;#messages&quot;</span>)<span class="op">.</span><span class="fu">appendChild</span>(paragraph)<span class="op">;</span></span></code></pre></div>
+<hr />
+<h3 id="js-for-react">JS for React</h3>
+<ul>
+<li>event object
+<ul>
+<li>React uses event as arguments to callbacks a lot</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">const</span> callback <span class="op">=</span> (e) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>    <span class="kw">const</span> domTarget <span class="op">=</span> e<span class="op">.</span><span class="at">target</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(e<span class="op">.</span><span class="at">type</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>}</span></code></pre></div>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event#interfaces_based_on_event">List of event types</a></p>
 
         </div>
         <div id="footer">
