@@ -250,14 +250,14 @@
 <ul>
 <li>-3,-2,-1,0,1…</li>
 </ul></li>
-<li><span class="math inline">\(\mathbb{Q}\)</span> : p/q where p,q are Integers</li>
+<li><span class="math inline">\(\mathbb{Q}\)</span> : <span class="math inline">\(\frac{p}{q}\)</span> where p,q are Integers</li>
 </ul>
 <h5 id="dedekind-cuts">Dedekind cuts</h5>
 <ul>
-<li>Dedekind cuts in <span class="math inline">\(\mathbb{Q}\)</span> := (A,B) :: pair of partitioned subsets of <span class="math inline">\(\mathbb{Q}\)</span>
+<li><code class="sourceCode haskell"><span class="dt">Dedekind_cuts</span> <span class="op">:=</span> (<span class="dt">A</span>,<span class="dt">B</span>)<span class="ot"> ::</span> (<span class="dt">Partition</span>(<span class="dt">Q</span>),<span class="dt">Partition</span>(<span class="dt">Q</span>))</code>
 <ul>
 <li><span class="math inline">\(A,B \subseteq \mathbb{Q},\ A,B \neq \emptyset\)</span></li>
-<li><span class="math inline">\((A,B) = Partition(\mathbb{Q})\)</span>
+<li><span class="math inline">\((A,B) = 2\ partitions\ of\ Q\)</span>
 <ul>
 <li><span class="math inline">\(A \cup B = \mathbb{Q}\)</span></li>
 <li><span class="math inline">\(A \cap B \neq \emptyset\)</span></li>
@@ -278,9 +278,31 @@ A real number is represented by a partition of <span class="math inline">\(\math
 <p>Inner product on a vector space V = Operation on a pair of vectors in V</p>
 <p>discriminant proof of Cauchy-Schwarz Inequality valid for all inner products on a real vector space.</p>
 <p>All inner products define a norm but not all norms are inner products.</p>
+<hr />
 <h3 id="topology">Topology</h3>
 <h5 id="metric-space">Metric Space</h5>
-<p>Metric Space := (M,d) :: (Set,distance function)</p>
+<p><code class="sourceCode haskell"><span class="dt">Metric_Space</span> <span class="op">:=</span> (<span class="dt">M</span>,dist)<span class="ot"> ::</span> (<span class="dt">Set</span>,binary_operation)</code></p>
+<p>Fields of knowledge as Metric Spaces (M,d)</p>
+<ul>
+<li>Metric Space of Proofs in Math<br />
+<span class="math inline">\((M,d) := (math,dist_{math})\)</span></li>
+<li>Metric Space of Reactions in Chemistry<br />
+<span class="math inline">\((M,d) := (chem,dist_{chem})\)</span></li>
+</ul>
+<p>Mapping metric spaces of knowledge AKA analogies</p>
+<ul>
+<li>Analogies as a mapping between Metric Spaces of Knowledge
+<ul>
+<li>“Reagents is-to Reaction” as “Antecedents is-to Theorem”</li>
+<li><span class="math inline">\(dist_{chem}(reagents,reaction) \approx dist_{math}(antecedents,theorem)\)</span></li>
+</ul></li>
+</ul>
+<h5 id="limit-aka-limit-point">Limit aka Limit point</h5>
+<ul>
+<li>Given Metric Space <span class="math inline">\((M,d)\)</span></li>
+<li><span class="math inline">\(S \subseteq M\)</span></li>
+<li>p is a limit of S iff <span class="math inline">\(\exists p_n :: sequence\)</span> s.t. <span class="math inline">\(p_n converges to p\)</span></li>
+</ul>
 
         </div>
         <div id="footer">

@@ -74,3 +74,12 @@ netstat -lntu
 ss -lntu
 ```
 
+
+
+### Files
+
+All your header files or ".h" files will be inside /usr/include
+
+```bash
+find /usr -name libc-header-start.h  
+```
