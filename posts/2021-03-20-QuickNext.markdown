@@ -21,8 +21,8 @@ npm install @emotion/styled
 
 ```
 
-.eslintc.json
-```json
+
+```{.json filename=".eslintrc.json"}
 {
   "env":{
     "browser": true,
@@ -39,44 +39,93 @@ npm install @emotion/styled
     "project":"./tsconfig.json"
   },
   "extends": ["next/core-web-vitals","plugin:@typescript-eslint/recommended","prettier"],
+  "plugins" : ["@emotion"],
+  "rules" : {
+    "@emotion/jsx-import" : "error",
+    "@emotion/no-vanilla" : "error",
+    "@emotion/import-from-emotion" : "error",
+    "@emotion/styled-import": "error"
+  },
   "settings":{
     "react":{
       "version":"detect"
     }
   }
 }
+```
 
+```{.json filename=".babelrc"}
+{
+  "presets" : ["next/babel"],
+  "plugins" : ["@emotion"]
+}
+```
+```{.typescript filename="/lib/emotionCache.tsx"}
+import createCache from '@emotion/cache';
+
+const createEmotionCache = () => {
+  return createCache({ key: 'css' });
+};
+
+export default createEmotionCache;
+```
+
+```{.typescript filename="/src/components/StyledButton.tsx"}
+import styled from '@emotion/styled';
+
+interface IStyleProps{
+  backColor: string;
+} 
+
+const MyButton = styled.button<IStyleProps>
+`
+  padding: 100px;
+  color: hotpink;
+  background-color: ${(props) => props.backColor};
+  &:hover {
+    color: purple;
+   }
+`;
+const StyledButton = () => {
+  return <MyButton backColor="green">hello</MyButton>
+};
+export default StyledButton;
 ```
 
 
-nextjs routing 
 
-Routing Depends on File/Folder organization
+#### File structure determines routing
+
+Page filename in nextjs like "landingpage.js" must be lowercase letters  
+React Component filename in nextjs must be Uppercase like "MyCustomButton".
 
 * .next
 * package.json
 * package-lock.json
 * node_modules
-* .git
-* pages
-  * [carID]
-    * index.js
-	* [modelID].js
-  * [shipID]
-    * index.js
-	* [modelID].js
-  * index.js
-  
- nested route
-  
+* src
+  * components
+    * MyCustomButton
+  * pages
+    * [shipID] :: folder => represents a route
+      * index.tsx => https://mywebsite.com/[shipID]
+      * [modelID].tsx => https://mywebsite.com/[shipID]/[modelID]
+    * landingpage.tsx => https://mywebsite.com/landingpage.html
+    * index.tsx 
+    * _app.tsx :: layout_template
+    * _document.tsx :: custom layout_template
+    * api :: folder \<IGNORE, it's for backend\>
+* styles
+ * theme.tsx
+
  
-https://mywebsite.com/[carID]/[modelID]
-  
- 
-Capturing the [carID] and [modelID]
+##### Capturing the [carID] and [modelID] as variables
+
+```javascript
 const router = useRouter()
 const {carID, modelID} = router.query()
 console.log(`the car is {carID} and model {modelID}`)
+```
 
 getStaticProps only runs serverside even though you may have written it on a clientside file like index.js
 You can write serverside code in the getStaticProps function.

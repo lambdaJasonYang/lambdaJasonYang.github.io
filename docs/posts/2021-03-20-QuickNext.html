@@ -258,8 +258,7 @@
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="ex">npm</span> install @emotion/react</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="ex">npm</span> install @emotion/server</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="ex">npm</span> install @emotion/styled</span></code></pre></div>
-<p>.eslintc.json</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">{</span></span>
+<div class="sourceCode" id="cb2" data-filename=".eslintrc.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>  <span class="dt">&quot;env&quot;</span><span class="fu">:{</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="dt">&quot;browser&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    <span class="dt">&quot;es2021&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
@@ -275,38 +274,84 @@
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>    <span class="dt">&quot;project&quot;</span><span class="fu">:</span><span class="st">&quot;./tsconfig.json&quot;</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>  <span class="fu">},</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>  <span class="dt">&quot;extends&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;next/core-web-vitals&quot;</span><span class="ot">,</span><span class="st">&quot;plugin:@typescript-eslint/recommended&quot;</span><span class="ot">,</span><span class="st">&quot;prettier&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>  <span class="dt">&quot;settings&quot;</span><span class="fu">:{</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>    <span class="dt">&quot;react&quot;</span><span class="fu">:{</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>      <span class="dt">&quot;version&quot;</span><span class="fu">:</span><span class="st">&quot;detect&quot;</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>    <span class="fu">}</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>  <span class="fu">}</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a><span class="fu">}</span></span></code></pre></div>
-<p>nextjs routing</p>
-<p>Routing Depends on File/Folder organization</p>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>  <span class="dt">&quot;plugins&quot;</span> <span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;@emotion&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>  <span class="dt">&quot;rules&quot;</span> <span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>    <span class="dt">&quot;@emotion/jsx-import&quot;</span> <span class="fu">:</span> <span class="st">&quot;error&quot;</span><span class="fu">,</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>    <span class="dt">&quot;@emotion/no-vanilla&quot;</span> <span class="fu">:</span> <span class="st">&quot;error&quot;</span><span class="fu">,</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>    <span class="dt">&quot;@emotion/import-from-emotion&quot;</span> <span class="fu">:</span> <span class="st">&quot;error&quot;</span><span class="fu">,</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>    <span class="dt">&quot;@emotion/styled-import&quot;</span><span class="fu">:</span> <span class="st">&quot;error&quot;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a>  <span class="fu">},</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a>  <span class="dt">&quot;settings&quot;</span><span class="fu">:{</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a>    <span class="dt">&quot;react&quot;</span><span class="fu">:{</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true"></a>      <span class="dt">&quot;version&quot;</span><span class="fu">:</span><span class="st">&quot;detect&quot;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true"></a>    <span class="fu">}</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true"></a>  <span class="fu">}</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3" data-filename=".babelrc"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>  <span class="dt">&quot;presets&quot;</span> <span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;next/babel&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>  <span class="dt">&quot;plugins&quot;</span> <span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;@emotion&quot;</span><span class="ot">]</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4" data-filename="/lib/emotionCache.tsx"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="im">import</span> createCache from <span class="st">'@emotion/cache'</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>const createEmotionCache <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>  return <span class="fu">createCache</span>({ key<span class="op">:</span> <span class="st">'css'</span> })<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>}<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>export default createEmotionCache<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5" data-filename="/src/components/StyledButton.tsx"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="im">import</span> styled from <span class="st">'@emotion/styled'</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>interface IStyleProps{</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>  backColor<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>} </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>const MyButton <span class="op">=</span> styled<span class="op">.</span><span class="at">button</span><span class="op">&lt;</span>IStyleProps<span class="op">&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="vs">`</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="vs">  padding: 100px;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a><span class="vs">  color: hotpink;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a><span class="vs">  background-color: </span><span class="sc">${</span>(props) <span class="kw">=&gt;</span> props<span class="op">.</span><span class="at">backColor</span><span class="sc">}</span><span class="vs">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a><span class="vs">  &amp;:hover {</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a><span class="vs">    color: purple;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a><span class="vs">   }</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a>const StyledButton <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a>  return <span class="op">&lt;</span>MyButton backColor<span class="op">=</span><span class="st">&quot;green&quot;</span><span class="op">&gt;</span>hello<span class="op">&lt;/</span>MyButton<span class="op">&gt;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a>}<span class="op">;</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true"></a>export default StyledButton<span class="op">;</span></span></code></pre></div>
+<h4 id="file-structure-determines-routing">File structure determines routing</h4>
+<p>Page filename in nextjs like “landingpage.js” must be lowercase letters<br />
+React Component filename in nextjs must be Uppercase like “MyCustomButton”.</p>
 <ul>
 <li>.next</li>
 <li>package.json</li>
 <li>package-lock.json</li>
 <li>node_modules</li>
-<li>.git</li>
+<li>src
+<ul>
+<li>components
+<ul>
+<li>MyCustomButton</li>
+</ul></li>
 <li>pages
 <ul>
-<li>[carID]
+<li>[shipID] :: folder =&gt; represents a route
 <ul>
-<li>index.js</li>
-<li>[modelID].js</li>
+<li>index.tsx =&gt; https://mywebsite.com/[shipID]</li>
+<li>[modelID].tsx =&gt; https://mywebsite.com/[shipID]/[modelID]</li>
 </ul></li>
-<li>[shipID]
-<ul>
-<li>index.js</li>
-<li>[modelID].js</li>
+<li>landingpage.tsx =&gt; https://mywebsite.com/landingpage.html</li>
+<li>index.tsx</li>
+<li>_app.tsx :: layout_template</li>
+<li>_document.tsx :: custom layout_template</li>
+<li>api :: folder &lt;IGNORE, it’s for backend&gt;</li>
 </ul></li>
-<li>index.js</li>
 </ul></li>
+<li>styles</li>
+<li>theme.tsx</li>
 </ul>
-<p>nested route</p>
-<p>https://mywebsite.com/[carID]/[modelID]</p>
-<p>Capturing the [carID] and [modelID] const router = useRouter() const {carID, modelID} = router.query() console.log(<code>the car is {carID} and model {modelID}</code>)</p>
+<h5 id="capturing-the-carid-and-modelid-as-variables">Capturing the [carID] and [modelID] as variables</h5>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="kw">const</span> {carID<span class="op">,</span> modelID} <span class="op">=</span> router<span class="op">.</span><span class="fu">query</span>()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`the car is {carID} and model {modelID}`</span>)</span></code></pre></div>
 <p>getStaticProps only runs serverside even though you may have written it on a clientside file like index.js You can write serverside code in the getStaticProps function.</p>
 <p>getStaticProps is only allowed in a page file, NOT in a component file.</p>
 <p>getStaticProps only runs on build time, in dev mode we see it being rebuilt every request which may cause confusion.</p>
