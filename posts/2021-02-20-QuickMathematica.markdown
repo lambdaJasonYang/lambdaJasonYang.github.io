@@ -30,6 +30,17 @@ Assuming[Element[n, Integers] && n > 0,
 x*Tan[y + z] // TreeForm
 ```
 
+##### /@ map apply, (#...) & lambda function
+
+`(# + 3) &`{.mathematica} = `lambda x: x + 3`{.python}  
+`(#1 + #2 ...) &[5,8]`{.mathematica} is a lambda function that takes 2 args
+
+```mathematica
+In[1]:= (# + 3) & /@ {1, 2}
+
+Out[1]= {4, 5}
+```
+
 ##### Functions
 ```
 F[x_] = x*2+1

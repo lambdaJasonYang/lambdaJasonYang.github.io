@@ -3,6 +3,11 @@ title: Trading Indicators
 tags: mathcs, finance
 ---
 
+* Related: Related fundamentals
+* Target:  
+* IMPL: Why it implies
+
+
 ### Studies
 
 * AccDist
@@ -26,3 +31,15 @@ Reversal
 * Abandoned Baby
   * Bullish -> Doji -> Bearish
   * Formed at end of up trend and signal reversal
+
+---
+
+##### Detrended Price Oscillator
+
+* mathematica InteractiveTradingChart[...]
+* RELATED: 
+* PERIOD: ~1 month
+* EXPLAIN: Peak 
+* USE: 
+  * Predict peak => Sell before peak
+  * Predict trough => Buy before trough
