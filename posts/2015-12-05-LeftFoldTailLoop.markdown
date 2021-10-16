@@ -20,8 +20,6 @@ print(finalState)
 
 forL = lambda *x : x
 ```
+Iterative functions are best captured by tail-recursive functions since tail-recursive functions pass their state using arguments.
 
-It will ask you to login with browser or use a personal access token.
-Personal access token can be created at
-Settings >> Developer Settings >> Personal Access tokens
-
+Left fold can also capture this iterative process, with the base case acting as the initial state.
