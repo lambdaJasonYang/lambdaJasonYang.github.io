@@ -1,6 +1,6 @@
 ---
 title: VanillaJS mini scripts
-tags: prog
+tags: prog, web
 ---
 Some random JS scripts that I come back to frequently for webscraping or cross site scripting practice.
 

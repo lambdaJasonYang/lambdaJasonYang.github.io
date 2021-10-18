@@ -8,7 +8,7 @@ title: Stochastic calculus
 tags: tech
 ---
 
-![](/images/options/Stockoptions.svg)
+![](/images/Stkoptions/Stockoptions.svg)
 Black Scholes
 Stock follows Geometric Brownian motion
 
