@@ -1,0 +1,73 @@
+---
+title: Trace and Decorators
+tags: prog
+---
+
+### Decorators Mutate the target function
+
+Decorators are impure by default.
+
+```python
+def logged(func):
+    def with_logging(*args, **kwargs):
+        print(func.__name__ + " was called")
+        return func(*args, **kwargs)
+    return with_logging
+#################
+@logged
+def f(x):
+    return x
+
+# # # the decorator above is the same as doing the below
+def f(x):
+    return x
+f = logged(f) 
+#logged(f) returns a function with_logging
+#with_logging gets stored in f
+print(f.__name__)
+#> with_logging
+##################
+```
+
+##### functool wraps to prevent sideeffect
+
+
+
+```python
+def trace(func):
+    separate = "| "
+    trace.recursionDepth = 0
+
+    @wraps(func)
+    def trace_helper(*args, **kwargs):
+        print(f'{separate * trace.recursionDepth}|--> {func.__name__}({", ".join(map(str, args))})')
+
+        trace.recursionDepth += 1
+        output = func(*args,**kwargs)
+        trace.recursionDepth -= 1
+        print(f'{separate * (trace.recursionDepth + 1)}|--> return {output}')
+
+        return output
+    return trace_helper
+```
+
+---
+
+### Tracing
+
+```lisp
+#lang racket
+(require racket/trace)
+(define (fac x))
+    (if (< x 1)
+        1
+        (* x (fac (-x 1)))
+(trace fac)
+
+;> (fac 3)
+;> > (fac 2)
+;> > > (fac 1)
+;< < < 1
+;< < 2
+;< 6
+```

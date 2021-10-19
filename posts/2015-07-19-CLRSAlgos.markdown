@@ -169,3 +169,56 @@ A=[5,2,4,6,1,3]
 InsertionSort(A)
 print(A)
 ```
+
+```python
+def trace(func):
+    separate = "| "
+    trace.recursionDepth = 0
+
+    @wraps(func)
+    def trace_helper(*args, **kwargs):
+        print(f'{separate * trace.recursionDepth}|--> {func.__name__}({", ".join(map(str, args))})')
+
+        trace.recursionDepth += 1
+        output = func(*args,**kwargs)
+        trace.recursionDepth -= 1
+        print(f'{separate * (trace.recursionDepth + 1)}|--> return {output}')
+
+        return output
+    return trace_helper
+```
+
+```{.python filename="Myimplementation.py"}
+def insert(X,k):
+    partition = len(X)
+    for i in range(0,len(X)):
+        if k < X[i]:
+            partition = i
+            break
+    fstpart = X[:partition]
+    sndpart = X[partition:]
+    return fstpart + [k] + sndpart
+
+@trace
+def Insertsort(A,i,j):
+    if j == len(A)-1:
+        return A
+    else:
+        sublist = A[i:j]
+        IH = insert(sublist,A[j])
+        newA = IH + A[j+1:]
+        Insertsort(newA,i,j+1) #<-- fix this, we need to return
+Insertsort([1,8,3,5],0,0)
+
+# |--> Insertsort([1, 8, 3, 5], 0, 0)
+# | |--> Insertsort([1, 8, 3, 5], 0, 1)
+# | | |--> Insertsort([1, 8, 3, 5], 0, 2)
+# | | | |--> Insertsort([1, 3, 8, 5], 0, 3)
+# | | | | |--> return [1, 3, 8, 5]
+# | | | |--> return None
+# | | |--> return None
+# | |--> return None
+
+#where is the problem?
+```
+
