@@ -1,6 +1,6 @@
 ---
 title: VanillaJS mini scripts
-tags: prog, web
+tags: prog, cloud, frontend
 ---
 Some random JS scripts that I come back to frequently for webscraping or cross site scripting practice.
 

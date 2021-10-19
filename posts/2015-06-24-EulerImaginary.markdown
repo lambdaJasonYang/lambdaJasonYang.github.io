@@ -1,6 +1,6 @@
 ---
 title: Euler, Complex and Imaginary
-tags: mathcs
+tags: mathcs, mathbasics, appliedmath
 ---
 
 

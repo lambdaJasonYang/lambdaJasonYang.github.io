@@ -1,6 +1,6 @@
 ---
 title: Recursion Induction Duality
-tags: mathcs, prog, python
+tags: mathcs, prog, python, recursion
 ---
 
 > Recursion is informally the Computational Dual of Induction.  

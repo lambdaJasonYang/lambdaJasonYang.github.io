@@ -1,6 +1,6 @@
 ---
 title: Convert Recursion to Iteration
-tags: tech,mathcs,AI,musings
+tags: mathcs, recursion, prog
 ---
 
 ```plantuml

@@ -1,6 +1,6 @@
 ---
 title: Proof - Greedy Algo
-tags: mathcs, cs, math, algorithms, proofSeries
+tags: mathcs, algorithms, proofs
 ---
 ### Greedy Swap Proof
 #### Example problem: 

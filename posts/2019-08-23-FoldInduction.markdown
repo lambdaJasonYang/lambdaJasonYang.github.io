@@ -1,6 +1,6 @@
 ---
 title: Fold and Induction
-tags: mathcs
+tags: mathcs, recursion, prog, functional
 ---
 
 A literature review of Folds with Hutton et al.

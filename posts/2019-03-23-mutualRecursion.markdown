@@ -1,6 +1,6 @@
 ---
 title: Mutual recursion
-tags: tech,mathcs,AI,musings
+tags: mathcs, prog, python, recursion
 ---
 
 ``` python

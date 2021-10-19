@@ -1,6 +1,6 @@
 ---
 title: Building Natural numbers from Sets with python
-tags: mathcs
+tags: mathcs, proofs, prog, python, logic, puremath
 ---
 
 

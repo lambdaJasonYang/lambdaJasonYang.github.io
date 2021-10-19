@@ -1,0 +1,24 @@
+---
+title: IO
+tags: prog
+---
+
+### Golang
+
+```{.go filename="io.go"}
+package main
+import (
+	"fmt"
+)
+func main() {
+	var p int
+	fmt.Scanf("%d", &p)
+	fmt.Println(p)
+}
+
+```
+
+### Python
+```{.go filename="io.py"}
+a = int(input())
+```

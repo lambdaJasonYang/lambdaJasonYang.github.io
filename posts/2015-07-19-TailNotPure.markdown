@@ -1,6 +1,6 @@
 ---
 title: Recursion - Slicing the tail of list is impure
-tags: prog, recursion
+tags: mathcs, prog, recursion
 ---
 
 One of the most common recursive methods is to slice the list tail

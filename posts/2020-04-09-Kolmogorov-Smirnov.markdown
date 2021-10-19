@@ -1,6 +1,6 @@
 ---
 title: Testing for normal dist with Kolmogorov-Smirnov
-tags: mathcs, finance
+tags: mathcs, appliedmath, musings
 ---
 
 

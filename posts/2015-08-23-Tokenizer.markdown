@@ -1,6 +1,6 @@
 ---
 title: Tokenizer
-tags: mathcs, logic
+tags: mathcs, compiler
 ---
 
 

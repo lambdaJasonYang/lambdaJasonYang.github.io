@@ -14,6 +14,16 @@ go build main.go
 go run main.go
 ```
 
+### Header
+
+```go
+package main
+import (
+	"fmt"
+)
+func main(){...}
+```
+
 ### Some surprises
 
 for loops and if statements conditions do not have parenthesis.
@@ -34,7 +44,7 @@ var mylambda = func() string { return "this is lambda string func" }
 fmt.Println(mylambda())
 ```
 
-```{.C# filename=lambdas.cs}
+```{.cs filename=lambdas.cs}
 Func<int,int,int> Addlambda = (int x,int y) => {return x + y;};
 Monoid Addx = new Monoid(Addlambda);
 
@@ -184,3 +194,15 @@ func main(){
 
 
 ---
+
+
+| type | range |
+|---|---|
+| int8 | [-128,127] |
+| int16 | [-32768,32767] |
+| int32 | [-2147483648,2147483647] |
+| int64 | [–9223372036854775808,9223372036854775807] |
+| uint8 | [0,255] |
+| uint16 | [0,65536] |
+| uint32 | [0,4294967295] |
+| uint64 | [0,18446744073709551615] |

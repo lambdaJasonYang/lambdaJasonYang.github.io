@@ -1,6 +1,6 @@
 ---
 title: Autobuild Hakyll
-tags: tech, prog, HakyllSetupSeries, CICD
+tags: tech, prog, HakyllSetupSeries, DevOps
 ---
 
 #### Hakyll Setup Series

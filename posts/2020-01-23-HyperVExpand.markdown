@@ -1,6 +1,6 @@
 ---
 title: HyperV Expand win 10 VM virtual hard drive space
-tags: tech, homeserver
+tags: tech
 ---
 
 On Hyper V  

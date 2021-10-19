@@ -1,6 +1,6 @@
 ---
 title: Math for ML Notes
-tags: tech
+tags: AI, statistics, mathcs
 ---
 
 Notes on Math for ML

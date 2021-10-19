@@ -1,6 +1,6 @@
 ---
 title: Quick Next
-tags: prog, QuickCode
+tags: prog, QuickCode, cloud, frontend
 ---
 
 ```bash

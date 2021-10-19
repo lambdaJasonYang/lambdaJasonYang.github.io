@@ -1,6 +1,6 @@
 ---
 title: Git Crashcourse
-tags: prog
+tags: prog, DevOps
 ---
 
 WARNING: The terms I use are nonstandard from most other tutorials.

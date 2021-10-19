@@ -1,6 +1,6 @@
 ---
 title: Econ terms
-tags: tech
+tags: musings
 ---
 
 Oct. 1 to Sept. 30

@@ -1,6 +1,6 @@
 ---
 title: Sequents and Gentzen Cut
-tags: mathcs
+tags: mathcs, logic
 ---
 
 

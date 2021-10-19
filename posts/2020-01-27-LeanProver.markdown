@@ -1,6 +1,6 @@
 ---
 title: Lean
-tags: mathcs, categorytheory
+tags: mathcs, puremath ,categorytheory
 ---
 
 | Logic | Intro | Elim |

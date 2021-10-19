@@ -1,7 +1,7 @@
 ---
 title: CLRS Algos
 
-tags: tech, prog, asm, C
+tags: mathcs, algorithms
 ---
 
 ### Problem Solving Heuristic

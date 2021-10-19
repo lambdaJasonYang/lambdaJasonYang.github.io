@@ -1,6 +1,6 @@
 ---
 title: Overcomplicating Memory Model and Pointers
-tags: musings, prog
+tags: prog, OS
 ---
 
 ### The Problem

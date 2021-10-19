@@ -1,6 +1,6 @@
 ---
 title: BootLoader
-tags: tech, prog, asm, C
+tags: prog, OS
 ---
 
 Using nasm x86 asm

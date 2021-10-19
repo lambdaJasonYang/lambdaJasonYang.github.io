@@ -1,6 +1,6 @@
 ---
 title: Benchmarks for algotrading
-tags: tech,mathcs,AI,musings
+tags: musings
 ---
 
 Total Return         82.61%  

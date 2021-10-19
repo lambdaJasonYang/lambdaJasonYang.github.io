@@ -1,6 +1,6 @@
 ---
 title: Data Struct - Balanced Trees
-tags: mathcs, logic
+tags: mathcs, prog, datastruct
 ---
 ### Regular BST
 

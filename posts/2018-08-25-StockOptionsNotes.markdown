@@ -1,6 +1,6 @@
 ---
 title: Options Derivatives Notes
-tags: mathcs, finance
+tags: musings
 ---
 
 Assumption rate of stock price growth is exponential

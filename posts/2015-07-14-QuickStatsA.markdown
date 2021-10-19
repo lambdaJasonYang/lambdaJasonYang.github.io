@@ -1,6 +1,6 @@
 ---
 title: Quick Stats Part 1
-tags: mathcs, appliedmath
+tags: mathcs, appliedmath, AI, stats
 ---
 
 Keypoints:

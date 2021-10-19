@@ -1,6 +1,6 @@
 ---
 title: Solving Differential Equations
-tags: mathcs, appliedmath
+tags: mathcs, appliedmath, physics
 ---
 
 ### Differential Equations

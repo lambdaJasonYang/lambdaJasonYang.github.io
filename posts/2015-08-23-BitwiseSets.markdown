@@ -1,6 +1,6 @@
 ---
 title: Bitwise Operations and Sets
-tags: mathcs, logic
+tags: mathcs, algorithms, puremath
 ---
 
 

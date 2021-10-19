@@ -1,6 +1,6 @@
 ---
 title: Graph theory
-tags: mathcs, appliedmath
+tags: mathcs, algorithms
 ---
 
 ### Cuts

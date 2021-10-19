@@ -1,6 +1,6 @@
 ---
 title: Proof Downward Induction AM-GM
-tags: mathcs
+tags: mathcs, puremath, proofs, recursion
 ---
 
 

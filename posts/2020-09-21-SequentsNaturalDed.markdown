@@ -1,6 +1,6 @@
 ---
 title: Translate Sequent Calculus to ND
-tags: musings
+tags: mathcs, puremath, logic
 ---
 
 

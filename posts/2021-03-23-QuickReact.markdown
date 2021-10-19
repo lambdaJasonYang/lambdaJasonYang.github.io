@@ -1,6 +1,6 @@
 ---
 title: Quick React
-tags: prog, QuickCode
+tags: prog, QuickCode, cloud, frontend
 ---
 
 * React components have 2 parts 

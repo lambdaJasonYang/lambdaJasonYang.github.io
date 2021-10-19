@@ -1,6 +1,6 @@
 ---
 title: HTTP requests - Design proper headers in python
-tags: mathcs, finance, python
+tags: mathcs, musings, python
 ---
 
 In python, headers are key-value pairs in dicts.

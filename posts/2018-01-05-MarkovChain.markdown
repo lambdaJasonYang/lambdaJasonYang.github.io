@@ -1,6 +1,6 @@
 ---
 title: Markov Chain and State machines
-tags: tech,mathcs,AI,musings
+tags: mathcs, AI, statistics
 ---
 
 Markov Chains

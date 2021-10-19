@@ -1,6 +1,6 @@
 ---
 title: Real Analysis
-tags: mathcs, appliedmath
+tags: mathcs, puremath
 ---
 
 * $\mathbb{N}$ : Naturals

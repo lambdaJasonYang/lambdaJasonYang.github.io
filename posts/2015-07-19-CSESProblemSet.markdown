@@ -1,7 +1,7 @@
 ---
 title: Algorithm Problem Sets
 
-tags: tech, prog, asm, C
+tags: mathcs, algorithms
 ---
 
 ### Documenting some random algorithmic problems:

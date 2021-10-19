@@ -1,6 +1,6 @@
 ---
 title: Trading Indicators
-tags: mathcs, finance
+tags: musings
 ---
 
 * Related: Related fundamentals

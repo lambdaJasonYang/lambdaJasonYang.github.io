@@ -1,7 +1,7 @@
 ---
 title: Generating Functions
 
-tags: mathcs, math
+tags: mathcs, puremath
 ---
 
 ### Ordinary Generating Function and Exponential Generating Function

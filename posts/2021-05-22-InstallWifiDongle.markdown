@@ -1,6 +1,6 @@
 ---
 title: Installing Generic Wifi dongle on Kali/Debian/Linux
-tags: tech, openwrt, homeserver
+tags: tech, openwrt
 ---
 ```bash
 lsusb

@@ -1,6 +1,6 @@
 ---
 title: Autobuild Nextjs github pages
-tags: tech, prog, CICD
+tags: tech, prog, DevOps
 ---
 
 add to package.json

@@ -1,6 +1,6 @@
 ---
 title: Recursive Code for Downward Induction
-tags: mathcs
+tags: mathcs, recursion, prog
 ---
 
 ### Analogy

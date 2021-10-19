@@ -1,6 +1,6 @@
 ---
 title: Distributed Systems
-tags: tech
+tags: tech, cloud
 ---
 
 Issues:
