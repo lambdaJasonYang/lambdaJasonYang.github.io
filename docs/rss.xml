@@ -1051,6 +1051,7 @@ The Content of our CodeBlock is pattern matched as <code class="sourceCode haske
 </div>
 <div class="info">
     
+<<<<<<< HEAD
     Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
     
 </div>
@@ -1115,12 +1116,7 @@ The Content of our CodeBlock is pattern matched as <code class="sourceCode haske
 <item>
     <title>Why Hakyll</title>
     <link>https://userjy.github.io/posts/2021-08-10-WhyHakyll.html</link>
-    <description><![CDATA[<div class="info">
-    Posted on August 10, 2021
-    
-</div>
-<div class="info">
-    
+=======
     Tags: <a title="All pages tagged &#39;musings&#39;." href="/tags/musings.html">musings</a>
     
 </div>
@@ -1130,6 +1126,48 @@ Plus it’s a good excuse to find a more applied use for Haskell.</p>
 ]]></description>
     <pubDate>Tue, 10 Aug 2021 00:00:00 UT</pubDate>
     <guid>https://userjy.github.io/posts/2021-08-10-WhyHakyll.html</guid>
+    <dc:creator>Jason Yang</dc:creator>
+</item>
+<item>
+    <title>Template Page (Ignore)</title>
+    <link>https://userjy.github.io/posts/2021-08-10-TemplatePage.html</link>
+>>>>>>> e5494bbe520d9c20c4f97b5b1c782dd35211df88
+    <description><![CDATA[<div class="info">
+    Posted on August 10, 2021
+    
+</div>
+<div class="info">
+    
+<<<<<<< HEAD
+    Tags: <a title="All pages tagged &#39;musings&#39;." href="/tags/musings.html">musings</a>
+    
+</div>
+<p>It’s minimalistic.<br />
+It’s fast.<br />
+Plus it’s a good excuse to find a more applied use for Haskell.</p>
+]]></description>
+    <pubDate>Tue, 10 Aug 2021 00:00:00 UT</pubDate>
+    <guid>https://userjy.github.io/posts/2021-08-10-WhyHakyll.html</guid>
+=======
+    Tags: <a title="All pages tagged &#39;none&#39;." href="/tags/none.html">none</a>
+    
+</div>
+<p>Use this page as a template to building other Hakyll pages.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> greet; <span class="st">&quot;Hello, world!&quot;</span>; <span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">&lt;object</span><span class="ot"> type=</span><span class="st">&quot;image/svg+xml&quot;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="ot">data</span> <span class="ot">=</span><span class="st">&quot;https://www.plantuml.com/plantuml/svg/ZP6_RiCW6CHtdeAfGmUpTxBbgL9RjMet2rK4lW29-IFu6FBsmSRUsUwGVdS7Z1b5GcUzSYAIrt_w5H0oeLKjYq6C-OsnaY7T7eEsQCfbi86Xq9avWKRcmQ1RwMVLB_ClvuJse2B6rOBQ4Xe_jOCzXtFQrr-ozVeSq0pdNIY2F8h_ggeGMU6ANMXCGJVqkweadAkzlVV-ALRUvw2W9UoMRhvpz_H-FhSqrWFz095ywoSZU7NyunC0&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="kw">&lt;/object&gt;</span></span></code></pre></div>
+]]></description>
+    <pubDate>Tue, 10 Aug 2021 00:00:00 UT</pubDate>
+    <guid>https://userjy.github.io/posts/2021-08-10-TemplatePage.html</guid>
+>>>>>>> e5494bbe520d9c20c4f97b5b1c782dd35211df88
     <dc:creator>Jason Yang</dc:creator>
 </item>
 
