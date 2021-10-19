@@ -3,7 +3,16 @@ title: Quick Go
 tags: prog, QuickCode
 ---
 
-Notes on tdd with Go
+### Running or Building
+
+```bash
+go build main.go
+./main
+```
+
+```bash
+go run main.go
+```
 
 ### Some surprises
 
@@ -25,7 +34,7 @@ var mylambda = func() string { return "this is lambda string func" }
 fmt.Println(mylambda())
 ```
 
-```C#
+```{.C# filename=lambdas.cs}
 Func<int,int,int> Addlambda = (int x,int y) => {return x + y;};
 Monoid Addx = new Monoid(Addlambda);
 

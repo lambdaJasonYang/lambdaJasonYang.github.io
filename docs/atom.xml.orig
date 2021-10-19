@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"
-    xmlns:dc="http://purl.org/dc/elements/1.1/">
-    <channel>
-        <title>Jason Yang: Math and Computer Science Blog</title>
-        <link>https://userjy.github.io</link>
-        <description><![CDATA[Programming language theory, haskell, induction, combinatorics, Energy based models, time series analysis, differential equations, stochastic calculus, trading]]></description>
-        <atom:link href="https://userjy.github.io/rss.xml" rel="self"
-                   type="application/rss+xml" />
-        <lastBuildDate>Tue, 21 Sep 2021 00:00:00 UT</lastBuildDate>
-        <item>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Jason Yang: Math and Computer Science Blog</title>
+    <link href="https://userjy.github.io/atom.xml" rel="self" />
+    <link href="https://userjy.github.io" />
+    <id>https://userjy.github.io/atom.xml</id>
+    <author>
+        <name>Jason Yang</name>
+        <email>jasonyang299@gmail.com</email>
+    </author>
+    <updated>2021-09-21T00:00:00Z</updated>
+    <entry>
     <title>Panasonic SD-MDX102-K Breadmaker Translated</title>
-    <link>https://userjy.github.io/posts/2021-09-21-Bread.html</link>
-    <description><![CDATA[<div class="info">
+    <link href="https://userjy.github.io/posts/2021-09-21-Bread.html" />
+    <id>https://userjy.github.io/posts/2021-09-21-Bread.html</id>
+    <published>2021-09-21T00:00:00Z</published>
+    <updated>2021-09-21T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
     Posted on September 21, 2021
     
 </div>
@@ -307,15 +311,15 @@
 </tr>
 </tbody>
 </table>
-]]></description>
-    <pubDate>Tue, 21 Sep 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-09-21-Bread.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
+]]></summary>
+</entry>
+<entry>
     <title>HTTP requests - Design proper headers in python</title>
-    <link>https://userjy.github.io/posts/2021-08-25-RequestHeader.html</link>
-    <description><![CDATA[<div class="info">
+    <link href="https://userjy.github.io/posts/2021-08-25-RequestHeader.html" />
+    <id>https://userjy.github.io/posts/2021-08-25-RequestHeader.html</id>
+    <published>2021-08-25T00:00:00Z</published>
+    <updated>2021-08-25T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
     Posted on August 25, 2021
     
 </div>
@@ -363,15 +367,15 @@
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a><span class="st">&#39;Origin&#39;</span>: <span class="st">&#39;https://www.example.com/&#39;</span>,</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a><span class="st">&quot;user-agent&quot;</span>: <span class="st">&quot;Mozilla/5.0 (Windows NT 10.0)&quot;</span></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>            }</span></code></pre></div>
-]]></description>
-    <pubDate>Wed, 25 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-25-RequestHeader.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
+]]></summary>
+</entry>
+<entry>
     <title>PlantUML diagram list</title>
-    <link>https://userjy.github.io/posts/2021-08-25-PlantUMLkey.html</link>
-    <description><![CDATA[<div class="info">
+    <link href="https://userjy.github.io/posts/2021-08-25-PlantUMLkey.html" />
+    <id>https://userjy.github.io/posts/2021-08-25-PlantUMLkey.html</id>
+    <published>2021-08-25T00:00:00Z</published>
+    <updated>2021-08-25T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
     Posted on August 25, 2021
     
 </div>
@@ -493,15 +497,15 @@
 <hr />
 <h3 id="arrow-list">Arrow list</h3>
 <figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6c65667420746f20726967687420646972656374696f6e0a736b696e706172616d206e6f646573657020350a6433207e7e207633203a2022227e7e22225c6e2f2f646f747465642f2f0a6432202e2e207632203a2022222e2e22225c6e2f2f6461736865642f2f0a6431203d3d207631203a2022223d3d22225c6e2f2f626f6c642f2f0a6430202d2d207630203a2022222d2d22225c6e2f2f706c61696e2f2f0a0a0a663133202d2d3020623133203a2022222d2d3022220a663132202d2d4020623132203a2022222d2d4022220a663131202d2d3a7c3e20623131203a2022222d2d3a7c3e22220a663130202d2d7c7c3e20623130203a2022222d2d7c7c3e22220a6639202d2d7c3e206239203a2022222d2d7c3e22220a6638202d2d5e206238203a2022222d2d5e2022220a6637202d2d5c5c206237203a2022222d2d5c5c5c5c22220a6636202d2d23206236203a2022222d2d232022220a6635202d2d2b206235203a2022222d2d2b2022220a6634202d2d6f206234203a2022222d2d6f2022220a6633202d2d2a206233203a2022222d2d2a2022220a6632202d2d3e3e206232203a2022222d2d3e3e22220a6631202d2d3e206231203a2022222d2d3e2022220a6630202d2d206230203a2022222d2d2022220a0a0a67313020302d2d3020723130203a20222220302d2d302022220a673920292d2d28207239203a20222220292d2d2822220a67382030292d2d2830207238203a2022222030292d2d283022220a67372030292d2d207237203a2022222030292d2d2022220a6736202d30292d207236203a202222202d30292d5c6e2022220a6735202d2830292d207235203a202222202d2830292d5c6e22220a6734202d28302d207234203a202222202d28302d5c6e2022220a6733202d2d2830207233203a202222202d2d28302022220a6732202d2d28207232203a202222202d2d282022220a6731202d2d30207231203a202222202d2d302022220a0a0a40656e64756d6c0a'></figure>
-]]></description>
-    <pubDate>Wed, 25 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-25-PlantUMLkey.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
+]]></summary>
+</entry>
+<entry>
     <title>Alexa</title>
-    <link>https://userjy.github.io/posts/2021-08-25-Alexa.html</link>
-    <description><![CDATA[<div class="info">
+    <link href="https://userjy.github.io/posts/2021-08-25-Alexa.html" />
+    <id>https://userjy.github.io/posts/2021-08-25-Alexa.html</id>
+    <published>2021-08-25T00:00:00Z</published>
+    <updated>2021-08-25T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
     Posted on August 25, 2021
     
 </div>
@@ -638,15 +642,15 @@
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>		<span class="dt">&quot;userAgent&quot;</span><span class="fu">:</span> <span class="st">&quot;ask-python/1.11.0 Python/3.7.11&quot;</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>	<span class="fu">}</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a><span class="fu">}</span></span></code></pre></div>
-]]></description>
-    <pubDate>Wed, 25 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-25-Alexa.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
+]]></summary>
+</entry>
+<entry>
     <title>Integrate PlantUML diagrams into Hakyll (Updated)</title>
-    <link>https://userjy.github.io/posts/2021-08-24-HakyllPlantUML2.html</link>
-    <description><![CDATA[<div class="info">
+    <link href="https://userjy.github.io/posts/2021-08-24-HakyllPlantUML2.html" />
+    <id>https://userjy.github.io/posts/2021-08-24-HakyllPlantUML2.html</id>
+    <published>2021-08-24T00:00:00Z</published>
+    <updated>2021-08-24T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
     Posted on August 24, 2021
     
 </div>
@@ -748,15 +752,15 @@ The Content of our CodeBlock is pattern matched as <code class="sourceCode haske
 </ul>
 <div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="ot">simpleCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>simpleCompiler <span class="ot">=</span> pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock</span></code></pre></div>
-]]></description>
-    <pubDate>Tue, 24 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-24-HakyllPlantUML2.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
+]]></summary>
+</entry>
+<entry>
     <title>Hakyll Pandoc filtering</title>
-    <link>https://userjy.github.io/posts/2021-08-23-PandocFiltering.html</link>
-    <description><![CDATA[<div class="info">
+    <link href="https://userjy.github.io/posts/2021-08-23-PandocFiltering.html" />
+    <id>https://userjy.github.io/posts/2021-08-23-PandocFiltering.html</id>
+    <published>2021-08-23T00:00:00Z</published>
+    <updated>2021-08-23T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
     Posted on August 23, 2021
     
 </div>
@@ -809,15 +813,15 @@ type Attr = (Text, [Text], [(Text, Text)])</p>
 <p>We can also convert CodeBlock to Dom Elements with RawBlock.</p>
 <p>RawBlock Format Text</p>
 <p>example: RawBlock (Format “html”) Text</p>
-]]></description>
-    <pubDate>Mon, 23 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-23-PandocFiltering.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
+]]></summary>
+</entry>
+<entry>
     <title>Adding Mathjax to Hakyll in 2021</title>
-    <link>https://userjy.github.io/posts/2021-08-23-HakyllSetupMathjax.html</link>
-    <description><![CDATA[<div class="info">
+    <link href="https://userjy.github.io/posts/2021-08-23-HakyllSetupMathjax.html" />
+    <id>https://userjy.github.io/posts/2021-08-23-HakyllSetupMathjax.html</id>
+    <published>2021-08-23T00:00:00Z</published>
+    <updated>2021-08-23T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
     Posted on August 23, 2021
     
 </div>
@@ -909,15 +913,15 @@ replace “myblog” with the name of your hakyll project</p>
 <h4 id="aside">Aside</h4>
 <p>You can just do the first part(add mathjax js to &lt;head&gt;) for a working mathjax BUT then you would have to escape characters frequently and this would make it unportable to other editors.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">\\</span>[ x <span class="fu">\\</span>in Set <span class="fu">\\</span>]</span></code></pre></div>
-]]></description>
-    <pubDate>Mon, 23 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-23-HakyllSetupMathjax.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
+]]></summary>
+</entry>
+<entry>
     <title>Integrate PlantUML diagrams into Hakyll (Old)</title>
-    <link>https://userjy.github.io/posts/2021-08-23-HakyllPlantUML.html</link>
-    <description><![CDATA[<div class="info">
+    <link href="https://userjy.github.io/posts/2021-08-23-HakyllPlantUML.html" />
+    <id>https://userjy.github.io/posts/2021-08-23-HakyllPlantUML.html</id>
+    <published>2021-08-23T00:00:00Z</published>
+    <updated>2021-08-23T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
     Posted on August 23, 2021
     
 </div>
@@ -1037,20 +1041,27 @@ The Content of our CodeBlock is pattern matched as <code class="sourceCode haske
 </ul>
 <div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="ot">simpleCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>simpleCompiler <span class="ot">=</span> pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock</span></code></pre></div>
-]]></description>
-    <pubDate>Mon, 23 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-23-HakyllPlantUML.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
+]]></summary>
+</entry>
+<entry>
+<<<<<<< HEAD
     <title>Trace and Decorators</title>
-    <link>https://userjy.github.io/posts/2021-08-10-trace.html</link>
-    <description><![CDATA[<div class="info">
+    <link href="https://userjy.github.io/posts/2021-08-10-trace.html" />
+    <id>https://userjy.github.io/posts/2021-08-10-trace.html</id>
+=======
+    <title>Why Hakyll</title>
+    <link href="https://userjy.github.io/posts/2021-08-10-WhyHakyll.html" />
+    <id>https://userjy.github.io/posts/2021-08-10-WhyHakyll.html</id>
+>>>>>>> e5494bbe520d9c20c4f97b5b1c782dd35211df88
+    <published>2021-08-10T00:00:00Z</published>
+    <updated>2021-08-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
     Posted on August 10, 2021
     
 </div>
 <div class="info">
     
+<<<<<<< HEAD
     Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
     
 </div>
@@ -1107,31 +1118,59 @@ The Content of our CodeBlock is pattern matched as <code class="sourceCode haske
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a><span class="co">;&lt; &lt; &lt; 1</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a><span class="co">;&lt; &lt; 2</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a><span class="co">;&lt; 6</span></span></code></pre></div>
-]]></description>
-    <pubDate>Tue, 10 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-10-trace.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
+]]></summary>
+</entry>
+<entry>
     <title>Why Hakyll</title>
-    <link>https://userjy.github.io/posts/2021-08-10-WhyHakyll.html</link>
-    <description><![CDATA[<div class="info">
-    Posted on August 10, 2021
-    
-</div>
-<div class="info">
-    
+    <link href="https://userjy.github.io/posts/2021-08-10-WhyHakyll.html" />
+    <id>https://userjy.github.io/posts/2021-08-10-WhyHakyll.html</id>
+=======
     Tags: <a title="All pages tagged &#39;musings&#39;." href="/tags/musings.html">musings</a>
     
 </div>
 <p>It’s minimalistic.<br />
 It’s fast.<br />
 Plus it’s a good excuse to find a more applied use for Haskell.</p>
-]]></description>
-    <pubDate>Tue, 10 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-10-WhyHakyll.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
+]]></summary>
+</entry>
+<entry>
+    <title>Template Page (Ignore)</title>
+    <link href="https://userjy.github.io/posts/2021-08-10-TemplatePage.html" />
+    <id>https://userjy.github.io/posts/2021-08-10-TemplatePage.html</id>
+>>>>>>> e5494bbe520d9c20c4f97b5b1c782dd35211df88
+    <published>2021-08-10T00:00:00Z</published>
+    <updated>2021-08-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on August 10, 2021
+    
+</div>
+<div class="info">
+    
+<<<<<<< HEAD
+    Tags: <a title="All pages tagged &#39;musings&#39;." href="/tags/musings.html">musings</a>
+    
+</div>
+<p>It’s minimalistic.<br />
+It’s fast.<br />
+Plus it’s a good excuse to find a more applied use for Haskell.</p>
+=======
+    Tags: <a title="All pages tagged &#39;none&#39;." href="/tags/none.html">none</a>
+    
+</div>
+<p>Use this page as a template to building other Hakyll pages.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">git</span> add .</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">git</span> commit -m <span class="st">&quot;some message&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>fac n <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">*</span>) <span class="dv">1</span> [<span class="dv">1</span><span class="op">..</span>n]</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> greet; <span class="st">&quot;Hello, world!&quot;</span>; <span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">&lt;object</span><span class="ot"> type=</span><span class="st">&quot;image/svg+xml&quot;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="ot">data</span> <span class="ot">=</span><span class="st">&quot;https://www.plantuml.com/plantuml/svg/ZP6_RiCW6CHtdeAfGmUpTxBbgL9RjMet2rK4lW29-IFu6FBsmSRUsUwGVdS7Z1b5GcUzSYAIrt_w5H0oeLKjYq6C-OsnaY7T7eEsQCfbi86Xq9avWKRcmQ1RwMVLB_ClvuJse2B6rOBQ4Xe_jOCzXtFQrr-ozVeSq0pdNIY2F8h_ggeGMU6ANMXCGJVqkweadAkzlVV-ALRUvw2W9UoMRhvpz_H-FhSqrWFz095ywoSZU7NyunC0&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="kw">&lt;/object&gt;</span></span></code></pre></div>
+>>>>>>> e5494bbe520d9c20c4f97b5b1c782dd35211df88
+]]></summary>
+</entry>
 
-    </channel>
-</rss>
+</feed>
