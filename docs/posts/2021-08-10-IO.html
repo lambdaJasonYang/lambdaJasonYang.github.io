@@ -234,7 +234,7 @@
     
 </div>
 <h3 id="golang">Golang</h3>
-<div class="sourceCode" id="cb1" data-filename="io.go"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">package</span> main</span>
+<div class="sourceCode" id="cb1" data-filename="singleinput.go"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">package</span> main</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">import</span> (</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>	<span class="st">&quot;fmt&quot;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>)</span>
@@ -243,8 +243,25 @@
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>	fmt.Scanf(<span class="st">&quot;%d&quot;</span>, &amp;p)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>	fmt.Println(p)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>}</span></code></pre></div>
-<h3 id="python">Python</h3>
-<div class="sourceCode" id="cb2" data-filename="io.py"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>a = <span class="dt">int</span>(input())</span></code></pre></div>
+<div class="sourceCode" id="cb2" data-filename="multiplearg_input.go"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>	<span class="kw">var</span> v1,v2 <span class="dt">int64</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>	fmt.Scanln(&amp;v1,&amp;v2)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="st">``</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>### Python</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="st">```{.python filename=&quot;singleinput.py&quot;}</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="st">a = int(input())</span></span></code></pre></div>
+<p>MULTIPLE ARG INPUT: 2 3 5 6</p>
+<div class="sourceCode" id="cb3" data-filename="multiplearg_input.py"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>a, b, c, d <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>, <span class="bu">input</span>().split())</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="co">#why does this work? List is auto-split into args</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>x,y <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="co">#x &lt;- 1, </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="co">#y &lt;- 2</span></span></code></pre></div>
+<p>LIST INPUT: 1 2 3 …</p>
+<div class="sourceCode" id="cb4" data-filename="listinput.py"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>a <span class="op">=</span> <span class="bu">input</span>().split()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="co">#&gt; ['1','2','3']</span></span></code></pre></div>
 
         </div>
         <div id="footer">

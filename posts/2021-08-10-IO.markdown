@@ -5,7 +5,7 @@ tags: prog
 
 ### Golang
 
-```{.go filename="io.go"}
+```{.go filename="singleinput.go"}
 package main
 import (
 	"fmt"
@@ -18,7 +18,30 @@ func main() {
 
 ```
 
+```{.go filename="multiplearg_input.go"}
+	var v1,v2 int64
+	fmt.Scanln(&v1,&v2)
+``
+
+
 ### Python
-```{.go filename="io.py"}
+
+```{.python filename="singleinput.py"}
 a = int(input())
+```
+
+MULTIPLE ARG INPUT: 2 3 5 6
+```{.python filename="multiplearg_input.py"}
+a, b, c, d = map(int, input().split())
+
+#why does this work? List is auto-split into args
+x,y = [1,2]
+#x <- 1, 
+#y <- 2
+```
+
+LIST INPUT: 1 2 3 ...
+```{.python filename="listinput.py"}
+a = input().split()
+#> ['1','2','3']
 ```
