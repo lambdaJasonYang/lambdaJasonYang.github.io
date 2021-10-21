@@ -1,38 +1,123 @@
 ---
 title: Docker
-tags: prog, cloud
+tags: prog, cloud, DevOps
 ---
 
-* Images : templates like OSes 
-  * Containers: Instances of images
+## image
+
+| Command| Shortcut |Defined | 
+| --- | --- | --- |
+| docker image ls| docker images |ls images | 
+| docker image rm \<image\> | docker rmi \<image\> |removes image |
+| docker image pull \<image\> | docker pull \<image\> |pull image from docker registry |
+
+## container
+
+| Command| Shortcut |Defined | 
+| --- | --- | --- |
+| docker container ls -a | docker ps -a|list all containers (-a includes stopped) |
+| docker container run \<image\> | docker run \<image\> |runs container from an image |
+| docker container rm \<containerID or name\> | docker rm \<containerID or name\> |removes container |
+| docker container stop \<containerID or name\> | docker stop \<containerID or name\> |stop container |
+
+> Docker containers don't remove themselves when they terminate, they enter a stopped state.
 
 
 
-| Command| Defined |
-| --- | --- |
-| docker image ls | ls images | 
-| docker image rm <image> | removes image |
-| docker image pull <image> | pull image from docker registry |
-| docker container ls -a | list all containers |
-| docker container run <image> | runs a container from an image |
-| docker container rm <container> | removes a container |
-| docker container stop <container> | stop container |
-| docker container exec <container> | start terminal INSIDE container |
-
-##### Run detached container and removing containers
+### Run detached container and removing containers
 
 ```bash
-docker container run -d nginx
+docker container run -d --name bleh nginx
 #>d89war8wf0489fwa08498w0atr48q0g8949a439w0
 
-docker container ls
+docker container ls -a
  #>CONTAINER ID   IMAGE   COMMAND                  CREATED             STATUS         PORTS     NAMES
- #>d89war8wf048   nginx  "nginx -g 'daemon of…"   35 seconds ago      Up 34 seconds   80/tcp    some_bleh_name
+ #>d89war8wf048   nginx  "nginx -g 'daemon of…"   35 seconds ago      Up 34 seconds   80/tcp    bleh
 
+#docker container kill d89war 
+docker container stop d89war 
+docker container rm d89war
+#docker container stop "bleh"
+#docker container rm "bleh"
+```
+\<container\> = d89war8wf048  
+`--name bleh`{.bash} means we can refer to "bleh" instead of "d89war8wf048"
 
-docker container stop some_bleh_name
-docker container rm some_bleh_name
+`docker container kill d89war`{.bash} is faster than `docker container stop d89war`{.bash}
+
+### Prune
+
+```bash
+docker container prune
+docker image prune
 ```
 
+### pause/unpause container
+
+```bash
+docker pause <containerID or name>
+docker unpause <containerID or name>
+```
+
+### container flags
+
+| Command| Defined | 
+| --- | --- |
+| docker run -d ubuntu | detach running container from current terminal |
+| docker run -it ubuntu | -i lets you write commands to container, -t run terminal inside container |
+| docker run ubuntu --rm | --rm Removes container instead of stopped state on termination|
+| docker run --name Bleh ubuntu | we can refer to "Bleh" instead of \<containerID or name\>  |
+| docker logs -f Bleh | Outputs the log of "Bleh" |
 
 
+
+### --name , logs
+```bash
+docker container run -d -it --name looperA ubuntu sh -c 'while true; do date; sleep 1; done'
+docker logs -f looperA
+
+```
+
+### attach current terminal to container
+```bash
+docker attach looperA
+#hit Ctrl-C to terminate the container looperA
+```
+
+```bash
+docker attach --no-stdin looperA
+#will not terminate container if hit Ctrl-C
+```
+
+### execute terminal inside container
+
+```bash
+docker exec -it <containerID or name> bash 
+docker exec -it looperA bash
+  #>root@d89war8wf048 we are now in as bash inside the container
+  exit #this won't stop the container, let's us exit terminal
+```
+
+---
+
+## Dockerfile
+
+```{.Dockerfile filename=Dockerfile}
+# Start from the alpine image
+FROM alpine:3.13
+
+# Use /usr/src/app as our workdir. The following instructions will be executed in this location.
+WORKDIR /usr/src/app
+
+# Copy the hello.sh file from this location to /usr/src/app/ creating /usr/src/app/hello.sh.
+COPY hello.sh .
+
+# Execute a command with `/bin/sh -c` prefix.
+RUN touch additional.txt
+
+# When running docker run the command will be ./hello.sh
+CMD ./hello.sh
+```
+
+* `WORKDIR`{.Dockerfile} sets the execution directory of commands:  
+  * `RUN CMD ADD COPY ENTRYPOINT`{.Dockerfile}
