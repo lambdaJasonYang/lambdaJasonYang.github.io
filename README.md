@@ -1,8 +1,8 @@
-### Jason's Blog
+### [Jason's Blog](https://userjy.github.io/)
 
 ---
 
-This content of this blog is licensed under [Attribution-NonCommercial-NoDerivatives 4.0 International][cc-by-nc-nd].  
+> This content of this blog is licensed under [Attribution-NonCommercial-NoDerivatives 4.0 International][cc-by-nc-nd].  
 The term "content" refers to all files contained in "/posts", "/docs", "/css", "/images" .
 
 
@@ -10,4 +10,8 @@ The term "content" refers to all files contained in "/posts", "/docs", "/css", "
 
 ---
 
-The source code of this Haskell static site generator is licensed under GPLv2 or later.
+> The source code of this Haskell static site generator is licensed under GPLv2 or later.
+
+---
+
+Website: [https://userjy.github.io/](https://userjy.github.io/)
