@@ -40,7 +40,7 @@ docker container rm d89war
 #docker container stop "bleh"
 #docker container rm "bleh"
 ```
-\<container\> = d89war8wf048  
+\<containerID\> = d89war8wf048  
 `--name bleh`{.bash} means we can refer to "bleh" instead of "d89war8wf048"
 
 `docker container kill d89war`{.bash} is faster than `docker container stop d89war`{.bash}
@@ -48,7 +48,7 @@ docker container rm d89war
 ### Prune
 
 ```bash
-docker container prune
+docker container prune #removes stopped containers
 docker image prune
 ```
 
@@ -71,11 +71,17 @@ docker unpause <containerID or name>
 
 
 
-### --name , logs
+### --name for containers , -t for naming images
 ```bash
 docker container run -d -it --name looperA ubuntu sh -c 'while true; do date; sleep 1; done'
 docker logs -f looperA
 
+```
+
+### logs
+
+```bash
+docker logs -f looperA
 ```
 
 ### attach current terminal to container
@@ -100,7 +106,7 @@ docker exec -it looperA bash
 
 ---
 
-## Dockerfile
+## Dockerfile docker build => outputs image
 
 ```{.Dockerfile filename=Dockerfile}
 # Start from the alpine image
@@ -108,6 +114,9 @@ FROM alpine:3.13
 
 # Use /usr/src/app as our workdir. The following instructions will be executed in this location.
 WORKDIR /usr/src/app
+
+#Set the environment variable LC_ALL
+ENV LC_ALL=C.UTF-8 
 
 # Copy the hello.sh file from this location to /usr/src/app/ creating /usr/src/app/hello.sh.
 COPY hello.sh .
@@ -119,5 +128,148 @@ RUN touch additional.txt
 CMD ./hello.sh
 ```
 
+* /usr/src/app/
+  * Dockerfile
+  * hello.sh
+
+```bash
+docker build . -t bleh
+# REPOSITORY   TAG        IMAGE ID       CREATED          SIZE
+# bleh         latest     b396ac3611b3   21 seconds ago   5.61MB
+```
+
+`docker build . -t bleh:v2`{.bash} add the `:v2`{.bash} to give it a v2 TAG.
+
+
+> Docker build caches from top down.  
+Best practice: Use commands that change less at the top and   
+change more at the bottom of the Dockerfile file.
+
+
+#### WORKDIR
+
 * `WORKDIR`{.Dockerfile} sets the execution directory of commands:  
   * `RUN CMD ADD COPY ENTRYPOINT`{.Dockerfile}
+  * `CMD`{.Dockerfile} is executed when we call "docker run"
+    * All other commands are ran before during build time
+
+---
+
+## Docker run
+
+#### ENTRYPOINT 
+
+Entrypoint is the main binary ran when you call  
+`docker run <containerID or name> args`{.bash}
+
+default `ENTRYPOINT ["/bin/sh"]`{.Dockerfile}  
+
+
+
+Example  
+
+  * Create an image called "youtubeDL"
+  * `ENTRYPOINT ["/usr/local/bin/youtube-dl"]`{.Dockerfile} in Dockerfile
+  * `docker run youtubeDL http://imgur.com/asf`{.bash} =>  
+  Executing `/usr/local/bin/youtube-dl http://imgur.com/asf`{.bash} inside the container
+
+#### docker run \<containerID\> sh -c 'echo hi'
+
+we use `sh -c`{.bash} because it allows us to run shell with $PATH and Environment vars. 
+
+We can have our Dockerfile use `sh -c`{.bash} by **unbracketing** the ENTRYPOINT or CMD
+
+
+
+1. Both w/o Bracket
+
+* `ENTRYPOINT /bin/ping -c 3`{.Dockerfile}
+*  `CMD localhost`{.Dockerfile}
+   * `/bin/sh -c ‘/bin/ping -c 3’ /bin/sh -c localhost`{.bash}
+
+2. Entrypoint w/ Bracket
+
+* `ENTRYPOINT [“/bin/ping”,”-c”,”3”]`{.Dockerfile}
+*  `CMD localhost`{.Dockerfile}
+   * `/bin/ping -c 3 /bin/sh -c localhost`{.bash}
+
+3. CMD w/ Bracket
+
+* `ENTRYPOINT /bin/ping -c 3`{.Dockerfile}
+*  `CMD [“localhost”]`{.Dockerfile}
+   * `/bin/sh -c ‘/bin/ping -c 3’ localhost`{.bash}
+
+4. Both w/ Bracket
+
+* `ENTRYPOINT [“/bin/ping”,”-c”,”3”]`{.Dockerfile}
+*  `CMD [“localhost”]`{.Dockerfile}
+   * `/bin/ping -c 3 localhost`{.bash}
+
+
+
+
+---
+
+### Copy files from local to container
+
+```bash
+touch bleh.txt
+docker cp ./bleh.txt \<containerID or name\>:/usr/src/app/
+```
+
+### docker diff - Check what our container did
+
+```bash
+docker diff \<containerID or name\>
+    # C /usr
+    # C /usr/src
+    # C /usr/src/app
+    # A /usr/src/app/bleh.txt
+    # C /root
+    # A /root/.ash_history
+```
+A = Added  
+C = Changed  
+D = Deleted  
+
+
+
+
+### CMD and docker run
+
+Some containers take commands on "docker run"
+
+```bash
+docker run blehImage:latest startserver
+```
+
+we can instead recreate the image so we don't need to input a command
+
+```Dockerfile
+FROM blehImage:latest
+RUN startserver
+```
+
+
+---
+
+### -v Volume for shared access
+
+Allow your local machine and container to access the same resource
+```bash
+docker run -v "$(pwd)/localdir:/remotedir" ubuntu 
+```
+`-v <localpath>:<remotepath>`{.bash}
+
+## Ports and Network
+
+Expose port - tell container to listen to a certain port(doesn't do much but helps for documentation)
+`EXPOSE <port>`{.Dockerfile} in Dockerfile
+
+Publish port - map local port to container port  
+`-p <local-port>:<remote-container-port>`{.bash}
+
+```bash
+docker run -p 3000:5000 ubuntu
+```
+
