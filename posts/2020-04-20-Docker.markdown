@@ -128,9 +128,6 @@ RUN touch additional.txt
 CMD ./hello.sh
 ```
 
-* /usr/src/app/
-  * Dockerfile
-  * hello.sh
 
 ```bash
 docker build . -t bleh
@@ -141,23 +138,37 @@ docker build . -t bleh
 `docker build . -t bleh:v2`{.bash} add the `:v2`{.bash} to give it a v2 TAG.
 
 
-> Docker build caches from top down.  
-Best practice: Use commands that change less at the top and   
+* Best practice(cache): Use commands that change less at the top and   
 change more at the bottom of the Dockerfile file.
 
+Keywords List: `RUN CMD ADD COPY ENTRYPOINT WORKDIR ENV`{.Dockerfile}
 
-#### WORKDIR
+### WORKDIR
 
 * `WORKDIR`{.Dockerfile} sets the execution directory of commands:  
   * `RUN CMD ADD COPY ENTRYPOINT`{.Dockerfile}
-  * `CMD`{.Dockerfile} is executed when we call "docker run"
+  * `CMD`{.Dockerfile} is executed when we call "docker run $some_command"
     * All other commands are ran before during build time
 
----
+`RUN`{.Dockerfile} is our internal image build terminal which runs before `CMD`{.Dockerfile}.  
+`CMD`{.Dockerfile} is that single command we run when we start our new image as a container.  Therefore only one `CMD`{.Dockerfile} will run, rest is overidden. 
+   
 
-## Docker run
+### CMD
 
-#### ENTRYPOINT 
+The 2 blocks below are equal.
+
+```bash
+docker run blehImage:latest $somecommand
+```
+```Dockerfile
+FROM blehImage:latest
+CMD $somecommand 
+```
+
+
+
+### ENTRYPOINT 
 
 Entrypoint is the main binary ran when you call  
 `docker run <containerID or name> args`{.bash}
@@ -173,7 +184,7 @@ Example
   * `docker run youtubeDL http://imgur.com/asf`{.bash} =>  
   Executing `/usr/local/bin/youtube-dl http://imgur.com/asf`{.bash} inside the container
 
-#### docker run \<containerID\> sh -c 'echo hi'
+### docker run \<containerID\> sh -c 'echo hi'
 
 we use `sh -c`{.bash} because it allows us to run shell with $PATH and Environment vars. 
 
@@ -235,20 +246,6 @@ D = Deleted
 
 
 
-### CMD and docker run
-
-Some containers take commands on "docker run"
-
-```bash
-docker run blehImage:latest startserver
-```
-
-we can instead recreate the image so we don't need to input a command
-
-```Dockerfile
-FROM blehImage:latest
-RUN startserver
-```
 
 
 ---
@@ -263,13 +260,52 @@ docker run -v "$(pwd)/localdir:/remotedir" ubuntu
 
 ## Ports and Network
 
-Expose port - tell container to listen to a certain port(doesn't do much but helps for documentation)
+Expose port: tell container to listen to a certain port(doesn't do much but helps for documentation)
 `EXPOSE <port>`{.Dockerfile} in Dockerfile
 
-Publish port - map local port to container port  
+Publish port: map local port to container port  
 `-p <local-port>:<remote-container-port>`{.bash}
 
 ```bash
 docker run -p 3000:5000 ubuntu
 ```
+We go to http://localhost:3000 to access the site.
 
+---
+
+# Docker-Compose
+
+File Structure  
+ 
+* docker-compose.yml
+* example-frontend
+  * Dockerfile
+* example-backend
+  * Dockerfile
+
+```{.yml .numberLines filename="docker-compose.yml"}
+version: "3.9"
+services:
+     myFront:
+          image: frontend:v1
+          ports: 
+              - "3200:5000"
+          build: ./example-frontend
+     myBack:
+          image: backend:v1
+          ports: 
+              - "3300:8080"
+          build: ./example-backend
+```
+
+```bash
+docker-compose build 
+docker-compose up
+```
+
+line 6 build "Dockerfile" in current dir "."   
+and create image named "ads/wrga:latest" (line 5)
+
+docker-compose `environment`{.yml} vs Dockerfile `ENV`{.Dockerfile}.  
+`ENV`{.Dockerfile} is used on build time.  
+`environment`{.yml} is used on runtime or `docker run $...`{.bash}  

@@ -3,6 +3,38 @@ title: PlantUML diagram list
 tags: musings, prog
 ---
 
+
+```plantuml
+digraph g{
+    graph [
+rankdir = "LR"
+];
+"node1" [
+label = "<f0> String| <f1> List | <f2> Set| <f3> Sorted Set | <f4> Hash"
+shape = "record"
+];
+
+}
+```
+
+```bash
+digraph g{
+    graph [
+rankdir = "LR"
+];
+"node1" [
+label = "<f0> String| <f1> List | <f2> Set| <f3> Sorted Set | <f4> Hash"
+shape = "record"
+];
+
+}
+```
+
+
+
+
+
+
 State Diagram  only have 1 type of arrow.
 Activity Diagram has less control than state diagram.
 

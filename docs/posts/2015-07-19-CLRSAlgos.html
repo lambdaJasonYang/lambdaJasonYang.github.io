@@ -396,6 +396,27 @@
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true"></a><span class="co"># | |--&gt; return None</span></span>
 <span id="cb6-30"><a href="#cb6-30" aria-hidden="true"></a></span>
 <span id="cb6-31"><a href="#cb6-31" aria-hidden="true"></a><span class="co">#where is the problem?</span></span></code></pre></div>
+<h2 id="hashtable-and-hash-function-ch-11">Hashtable and Hash function Ch 11</h2>
+<p>Hash function exploits the fast look time of an array</p>
+<p><span class="math display">\[ \{k_1,k_2,k_3...\} \overset{hash}{\rightarrow} h(k) \rightarrow Val \]</span></p>
+<ul>
+<li>Unused keys = Null Space</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="co">#a is the simplest hashtable</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>a <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>k_1 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>k_2 <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>k_3 <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a><span class="kw">lambda</span> <span class="bu">hash</span> <span class="op">=</span> <span class="kw">lambda</span> x: x</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>Val_1 <span class="op">=</span> a[<span class="bu">hash</span>(k_1)]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>Val_2 <span class="op">=</span> a[<span class="bu">hash</span>(k_2)]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>Val_3 <span class="op">=</span> a[<span class="bu">hash</span>(k_3)]</span></code></pre></div>
+<ul>
+<li>In hashtables, the Index of the Array is the output of the hash function.
+<ul>
+<li>O(1) lookup is due to this</li>
+</ul></li>
+</ul>
 
         </div>
         <div id="footer">

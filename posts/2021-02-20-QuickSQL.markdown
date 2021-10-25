@@ -1,0 +1,16 @@
+---
+title: Quick Microservice
+tags: prog, QuickCode
+---
+
+
+
+```{.sql filename="buildtable.sql"}
+CREATE TABLE bleh (id INTEGER PRIMARY KEY, name TEXT, age INTEGER);
+INSERT INTO bleh (name,age) VALUES ('bob',30);
+INSERT INTO bleh (name,age) VALUES ('rex',2);
+.mode column
+.headers on
+
+```
+

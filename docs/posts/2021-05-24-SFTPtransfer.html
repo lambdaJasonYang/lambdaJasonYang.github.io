@@ -13,7 +13,7 @@
         <!-- Icon end -->
         
         
-        <title>Jason Yang - Posts tagged "QuickCode"</title>
+        <title>Jason Yang - Transfer files SFTP</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -221,64 +221,32 @@
         </div>
 
         <div id="content">
-            <h1>Posts tagged "QuickCode"</h1>
+            <h1>Transfer files SFTP</h1>
             
 
-            <ul style="list-style-type:'\1F344';">
+            <div class="info">
+    Posted on May 24, 2021
     
-        <li>
-            <a href="../posts/2021-03-23-QuickReact.html">Quick React</a> - March 23, 2021
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2021-03-20-QuickNext.html">Quick Next</a> - March 20, 2021
-        </li>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>
     
-        <li>
-            <a href="../posts/2021-02-20-QuickSQL.html">Quick Microservice</a> - February 20, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-02-20-QuickRedis.html">Quick Redis</a> - February 20, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-02-20-QuickMicro.html">Quick Microservice</a> - February 20, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-02-20-QuickMatlab.html">Quick Matlab</a> - February 20, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-02-20-QuickMathematica.html">Quick Mathematica</a> - February 20, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-02-20-QuickGo.html">Quick Go</a> - February 20, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-02-20-QuickASP.html">Quick ASP</a> - February 20, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2019-06-12-CodeIdiosyncrasy.html">Programming Lang Idiosyncrasies and Similarities</a> - June 12, 2019
-        </li>
-    
-        <li>
-            <a href="../posts/2018-07-15-QuickTerraForm.html">Quick TerraForm</a> - July 15, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-07-15-QuickAWS.html">Quick AWS</a> - July 15, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-03-24-QuickC.html">Quick C</a> - March 24, 2018
-        </li>
-    
-</ul>
+</div>
+<h3 id="on-remote-target-linux">On remote target linux</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">service</span> ssh start</span></code></pre></div>
+<h3 id="on-local-windows">On local windows</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">sftp</span> kali@192.168.1.184</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="bu">cd</span> Desktop <span class="co">#this puts us in the remote ~/Desktop</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">ls</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="fu">mkdir</span> transferredFiles <span class="co">#makes new dir in remote ~/Desktop</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="bu">cd</span> transferredFiles</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="ex">put</span> -r C:\Users\User\Desktop\someFolder </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="ex">bye</span></span></code></pre></div>
+<p>transfers file from Windows to Linux, C:to ~/Desktop/transferredFiles</p>
+<p>To transfer file from Linux to Windows, ~/kali/someFolder to C:</p>
+<p>instead of <code class="sourceCode bash"><span class="ex">put</span> -r C:\Users\User\Desktop\someFolder</code><br />
+use <code class="sourceCode bash"><span class="ex">get</span> -r ~/kali/someFolder C:\Users\User\Desktop</code></p>
 
         </div>
         <div id="footer">

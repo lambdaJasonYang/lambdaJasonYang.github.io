@@ -391,36 +391,34 @@
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true"></a></span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true"></a><span class="co"># When running docker run the command will be ./hello.sh</span></span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true"></a><span class="kw">CMD</span> ./hello.sh</span></code></pre></div>
-<ul>
-<li>/usr/src/app/
-<ul>
-<li>Dockerfile</li>
-<li>hello.sh</li>
-</ul></li>
-</ul>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="ex">docker</span> build . -t bleh</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="co"># REPOSITORY   TAG        IMAGE ID       CREATED          SIZE</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="co"># bleh         latest     b396ac3611b3   21 seconds ago   5.61MB</span></span></code></pre></div>
 <p><code class="sourceCode bash"><span class="ex">docker</span> build . -t bleh:v2</code> add the <code class="sourceCode bash">:<span class="ex">v2</span></code> to give it a v2 TAG.</p>
-<blockquote>
-<p>Docker build caches from top down.<br />
-Best practice: Use commands that change less at the top and<br />
-change more at the bottom of the Dockerfile file.</p>
-</blockquote>
-<h4 id="workdir">WORKDIR</h4>
+<ul>
+<li>Best practice(cache): Use commands that change less at the top and<br />
+change more at the bottom of the Dockerfile file.</li>
+</ul>
+<p>Keywords List: <code class="sourceCode dockerfile"><span class="kw">RUN</span> <span class="kw">CMD</span> <span class="kw">ADD</span> <span class="kw">COPY</span> <span class="kw">ENTRYPOINT</span> <span class="kw">WORKDIR</span> <span class="kw">ENV</span></code></p>
+<h3 id="workdir">WORKDIR</h3>
 <ul>
 <li><code class="sourceCode dockerfile"><span class="kw">WORKDIR</span></code> sets the execution directory of commands:
 <ul>
 <li><code class="sourceCode dockerfile"><span class="kw">RUN</span> <span class="kw">CMD</span> <span class="kw">ADD</span> <span class="kw">COPY</span> <span class="kw">ENTRYPOINT</span></code></li>
-<li><code class="sourceCode dockerfile"><span class="kw">CMD</span></code> is executed when we call “docker run”
+<li><code class="sourceCode dockerfile"><span class="kw">CMD</span></code> is executed when we call “docker run $some_command”
 <ul>
 <li>All other commands are ran before during build time</li>
 </ul></li>
 </ul></li>
 </ul>
-<hr />
-<h2 id="docker-run">Docker run</h2>
-<h4 id="entrypoint">ENTRYPOINT</h4>
+<p><code class="sourceCode dockerfile"><span class="kw">RUN</span></code> is our internal image build terminal which runs before <code class="sourceCode dockerfile"><span class="kw">CMD</span></code>.<br />
+<code class="sourceCode dockerfile"><span class="kw">CMD</span></code> is that single command we run when we start our new image as a container. Therefore only one <code class="sourceCode dockerfile"><span class="kw">CMD</span></code> will run, rest is overidden.</p>
+<h3 id="cmd">CMD</h3>
+<p>The 2 blocks below are equal.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="ex">docker</span> run blehImage:latest <span class="va">$somecommand</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="kw">FROM</span> blehImage:latest</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="kw">CMD</span> $somecommand </span></code></pre></div>
+<h3 id="entrypoint">ENTRYPOINT</h3>
 <p>Entrypoint is the main binary ran when you call<br />
 <code class="sourceCode bash"><span class="ex">docker</span> run <span class="op">&lt;</span>containerID or name<span class="op">&gt;</span> args</code></p>
 <p>default <code class="sourceCode dockerfile"><span class="kw">ENTRYPOINT</span> [<span class="st">&quot;/bin/sh&quot;</span>]</code></p>
@@ -431,7 +429,7 @@ change more at the bottom of the Dockerfile file.</p>
 <li><code class="sourceCode bash"><span class="ex">docker</span> run youtubeDL http://imgur.com/asf</code> =&gt;<br />
 Executing <code class="sourceCode bash"><span class="ex">/usr/local/bin/youtube-dl</span> http://imgur.com/asf</code> inside the container</li>
 </ul>
-<h4 id="docker-run-containerid-sh--c-echo-hi">docker run &lt;containerID&gt; sh -c ‘echo hi’</h4>
+<h3 id="docker-run-containerid-sh--c-echo-hi">docker run &lt;containerID&gt; sh -c ‘echo hi’</h3>
 <p>we use <code class="sourceCode bash"><span class="fu">sh</span> -c</code> because it allows us to run shell with $PATH and Environment vars.</p>
 <p>We can have our Dockerfile use <code class="sourceCode bash"><span class="fu">sh</span> -c</code> by <strong>unbracketing</strong> the ENTRYPOINT or CMD</p>
 <ol type="1">
@@ -476,35 +474,63 @@ Executing <code class="sourceCode bash"><span class="ex">/usr/local/bin/youtube-
 </ul>
 <hr />
 <h3 id="copy-files-from-local-to-container">Copy files from local to container</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="fu">touch</span> bleh.txt</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="ex">docker</span> cp ./bleh.txt <span class="dt">\&lt;</span>containerID or name<span class="dt">\&gt;</span>:/usr/src/app/</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="fu">touch</span> bleh.txt</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="ex">docker</span> cp ./bleh.txt <span class="dt">\&lt;</span>containerID or name<span class="dt">\&gt;</span>:/usr/src/app/</span></code></pre></div>
 <h3 id="docker-diff---check-what-our-container-did">docker diff - Check what our container did</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="ex">docker</span> diff <span class="dt">\&lt;</span>containerID or name<span class="dt">\&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>    <span class="co"># C /usr</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>    <span class="co"># C /usr/src</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a>    <span class="co"># C /usr/src/app</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a>    <span class="co"># A /usr/src/app/bleh.txt</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a>    <span class="co"># C /root</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a>    <span class="co"># A /root/.ash_history</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="ex">docker</span> diff <span class="dt">\&lt;</span>containerID or name<span class="dt">\&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>    <span class="co"># C /usr</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>    <span class="co"># C /usr/src</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a>    <span class="co"># C /usr/src/app</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a>    <span class="co"># A /usr/src/app/bleh.txt</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a>    <span class="co"># C /root</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true"></a>    <span class="co"># A /root/.ash_history</span></span></code></pre></div>
 <p>A = Added<br />
 C = Changed<br />
 D = Deleted</p>
-<h3 id="cmd-and-docker-run">CMD and docker run</h3>
-<p>Some containers take commands on “docker run”</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="ex">docker</span> run blehImage:latest startserver</span></code></pre></div>
-<p>we can instead recreate the image so we don’t need to input a command</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="kw">FROM</span> blehImage:latest</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a><span class="kw">RUN</span> startserver</span></code></pre></div>
 <hr />
 <h3 id="v-volume-for-shared-access">-v Volume for shared access</h3>
 <p>Allow your local machine and container to access the same resource</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="ex">docker</span> run -v <span class="st">&quot;</span><span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span><span class="st">/localdir:/remotedir&quot;</span> ubuntu </span></code></pre></div>
 <p><code class="sourceCode bash"><span class="ex">-v</span> <span class="op">&lt;</span>localpath<span class="op">&gt;</span>:<span class="op">&lt;</span>remotepath<span class="op">&gt;</span></code></p>
 <h2 id="ports-and-network">Ports and Network</h2>
-<p>Expose port - tell container to listen to a certain port(doesn’t do much but helps for documentation) <code class="sourceCode dockerfile"><span class="kw">EXPOSE</span> &lt;port&gt;</code> in Dockerfile</p>
-<p>Publish port - map local port to container port<br />
+<p>Expose port: tell container to listen to a certain port(doesn’t do much but helps for documentation) <code class="sourceCode dockerfile"><span class="kw">EXPOSE</span> &lt;port&gt;</code> in Dockerfile</p>
+<p>Publish port: map local port to container port<br />
 <code class="sourceCode bash"><span class="ex">-p</span> <span class="op">&lt;</span>local-port<span class="op">&gt;</span>:<span class="op">&lt;</span>remote-container-port<span class="op">&gt;</span></code></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="ex">docker</span> run -p 3000:5000 ubuntu</span></code></pre></div>
+<p>We go to http://localhost:3000 to access the site.</p>
+<hr />
+<h1 id="docker-compose">Docker-Compose</h1>
+<p>File Structure</p>
+<ul>
+<li>docker-compose.yml</li>
+<li>example-frontend
+<ul>
+<li>Dockerfile</li>
+</ul></li>
+<li>example-backend
+<ul>
+<li>Dockerfile</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb17" data-filename="docker-compose.yml"><pre class="sourceCode numberSource yml numberLines"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;3.9&quot;</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="at">     </span><span class="fu">myFront</span><span class="kw">:</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> frontend:v1</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="at">          </span><span class="fu">ports</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="at">              </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;3200:5000&quot;</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="at">          </span><span class="fu">build</span><span class="kw">:</span><span class="at"> ./example-frontend</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="at">     </span><span class="fu">myBack</span><span class="kw">:</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> backend:v1</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="at">          </span><span class="fu">ports</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="at">              </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;3300:8080&quot;</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a><span class="at">          </span><span class="fu">build</span><span class="kw">:</span><span class="at"> ./example-backend</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="ex">docker-compose</span> build </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a><span class="ex">docker-compose</span> up</span></code></pre></div>
+<p>line 6 build “Dockerfile” in current dir “.”<br />
+and create image named “ads/wrga:latest” (line 5)</p>
+<p>docker-compose <code class="sourceCode yaml"><span class="at">environment</span></code> vs Dockerfile <code class="sourceCode dockerfile"><span class="kw">ENV</span></code>.<br />
+<code class="sourceCode dockerfile"><span class="kw">ENV</span></code> is used on build time.<br />
+<code class="sourceCode yaml"><span class="at">environment</span></code> is used on runtime or <code class="sourceCode bash"><span class="ex">docker</span> run $...</code></p>
 
         </div>
         <div id="footer">

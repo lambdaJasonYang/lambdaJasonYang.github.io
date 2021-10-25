@@ -222,3 +222,30 @@ Insertsort([1,8,3,5],0,0)
 #where is the problem?
 ```
 
+
+## Hashtable and Hash function Ch 11
+
+Hash function exploits the fast look time of an array
+
+
+
+$$ \{k_1,k_2,k_3...\} \overset{hash}{\rightarrow} h(k) \rightarrow Val $$
+
+* Unused keys = Null Space
+
+```python
+#a is the simplest hashtable
+a = [1,2,3]
+k_1 = 0
+k_2 = 1
+k_3 = 2
+lambda hash = lambda x: x
+Val_1 = a[hash(k_1)]
+Val_2 = a[hash(k_2)]
+Val_3 = a[hash(k_3)]
+```
+
+* In hashtables, the Index of the Array is the output of the hash function.
+  * O(1) lookup is due to this
+
+ 
