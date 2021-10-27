@@ -102,7 +102,46 @@ copy(y,x[1:3])
 ```
 
 
-### Functions
+#### Strings
+
+ * A string is a sequence of UTF-8 **code-points**
+* Go strings are immutable meaning when sliced, they automatically make copy; they behave like pythonic strings
+
+```go
+var s string = "Hello"
+s[0] = "p" //ERROR - immutable
+
+var e string = s[1:3] //Slice
+e[0] = "p" //ERROR - immutable 
+```
+
+* Go uses a sequence of bytes to represent a string 
+
+```go
+var b byte = s[2] // b = l
+fmt.Printf("%s\n", string(b)) // output: l
+
+var bb []byte = []byte(s[0:3])
+fmt.Printf("%s\n", string(bb)) // output: Hel
+```
+
+#### Hashmap aka Dictionaries
+
+```go
+var exMap1 map[string]int // value: nil
+
+exMap2 := map[string][]int {
+  "even": []int{0,2,4,6},
+   "odd": []int{1,3,5,7},
+}
+
+val, ok := exMap2["none"] //ok = false, val = 0
+val, ok := exMap2["even"]
+
+exMap3 := make(map[string][]int,4)
+```
+
+#### Functions
 
 ```go
 func typicalfunction() string{
@@ -111,6 +150,32 @@ func typicalfunction() string{
 
 var mylambda = func() string { return "this is lambda string func" }
 fmt.Println(mylambda())
+```
+
+#### Struct and API
+
+```go
+type person struct{
+  name string
+  age int
+}
+
+bob := person{
+  name: "Joe",
+  age: 2
+}
+```
+##### Anonymous Struct
+
+```go
+blob := struct {
+  name string
+  age int
+}{
+  name: "bob"
+  age: 4
+}
+
 ```
 
 ---

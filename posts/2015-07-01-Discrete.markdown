@@ -1,0 +1,41 @@
+---
+title: Discrete Math
+tags: mathcs, mathbasics
+---
+
+main function $f :: D \rightarrow R$
+
+$R$ is the CoDomain
+
+---
+
+#### Surjective
+
+$$ {\color{blue}R \overset{inv}{\longrightarrow}} D \overset{f}{\longrightarrow} R $$
+
+
+* Exists identity for Range (Right identity)
+  * by hitting our main function **From behind**
+  * $f$ partitions it's preimage $D$ meaning $inv$ must **choose** any element within it's partition.
+    * Choice function 
+
+---
+
+#### Injective
+
+$$ D \overset{f}{\longrightarrow} R{\color{blue} \overset{inv}{\longrightarrow} D} $$
+
+* Exists identity for Domain (Left identity)
+  * by **Extending** our main function with an inverse 
+
+---
+
+#### Examples Surjective
+
+$Senators \overset{Elected}{\longrightarrow} PresidentialCandidates$   
+
+$PresidentialCandidates \overset{ElectedBy}{\longrightarrow} Senators$
+
+* In literary terms, passive voice inverts the active action.
+  * Senator Bob and Ruth **Elected** President Bush
+  * President Bush was **Elected By** Senator Bob and Ruth

@@ -315,114 +315,162 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <div class="sourceCode" id="cb7"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>x = []<span class="dt">int</span>{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>}</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>y = <span class="bu">make</span>([]<span class="dt">int</span>,<span class="dv">2</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="bu">copy</span>(y,x[<span class="dv">1</span>:<span class="dv">3</span>])</span></code></pre></div>
-<h3 id="functions">Functions</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">func</span> typicalfunction() <span class="dt">string</span>{</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a> <span class="kw">return</span> <span class="st">&quot;simple function&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>}</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a><span class="kw">var</span> mylambda = <span class="kw">func</span>() <span class="dt">string</span> { <span class="kw">return</span> <span class="st">&quot;this is lambda string func&quot;</span> }</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>fmt.Println(mylambda())</span></code></pre></div>
+<h4 id="strings">Strings</h4>
+<ul>
+<li>A string is a sequence of UTF-8 <strong>code-points</strong></li>
+<li>Go strings are immutable meaning when sliced, they automatically make copy; they behave like pythonic strings</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">var</span> s <span class="dt">string</span> = <span class="st">&quot;Hello&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>s[<span class="dv">0</span>] = <span class="st">&quot;p&quot;</span> <span class="co">//ERROR - immutable</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a><span class="kw">var</span> e <span class="dt">string</span> = s[<span class="dv">1</span>:<span class="dv">3</span>] <span class="co">//Slice</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>e[<span class="dv">0</span>] = <span class="st">&quot;p&quot;</span> <span class="co">//ERROR - immutable </span></span></code></pre></div>
+<ul>
+<li>Go uses a sequence of bytes to represent a string</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">var</span> b <span class="dt">byte</span> = s[<span class="dv">2</span>] <span class="co">// b = l</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>fmt.Printf(<span class="st">&quot;%s</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">string</span>(b)) <span class="co">// output: l</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="kw">var</span> bb []<span class="dt">byte</span> = []<span class="dt">byte</span>(s[<span class="dv">0</span>:<span class="dv">3</span>])</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>fmt.Printf(<span class="st">&quot;%s</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">string</span>(bb)) <span class="co">// output: Hel</span></span></code></pre></div>
+<h4 id="hashmap-aka-dictionaries">Hashmap aka Dictionaries</h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="kw">var</span> exMap1 <span class="kw">map</span>[<span class="dt">string</span>]<span class="dt">int</span> <span class="co">// value: nil</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>exMap2 := <span class="kw">map</span>[<span class="dt">string</span>][]<span class="dt">int</span> {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a>  <span class="st">&quot;even&quot;</span>: []<span class="dt">int</span>{<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>},</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a>   <span class="st">&quot;odd&quot;</span>: []<span class="dt">int</span>{<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>},</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a>}</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a>val, ok := exMap2[<span class="st">&quot;none&quot;</span>] <span class="co">//ok = false, val = 0</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a>val, ok := exMap2[<span class="st">&quot;even&quot;</span>]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a>exMap3 := <span class="bu">make</span>(<span class="kw">map</span>[<span class="dt">string</span>][]<span class="dt">int</span>,<span class="dv">4</span>)</span></code></pre></div>
+<h4 id="functions">Functions</h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">func</span> typicalfunction() <span class="dt">string</span>{</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a> <span class="kw">return</span> <span class="st">&quot;simple function&quot;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>}</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a><span class="kw">var</span> mylambda = <span class="kw">func</span>() <span class="dt">string</span> { <span class="kw">return</span> <span class="st">&quot;this is lambda string func&quot;</span> }</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a>fmt.Println(mylambda())</span></code></pre></div>
+<h4 id="struct-and-api">Struct and API</h4>
+<div class="sourceCode" id="cb12"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="kw">type</span> person <span class="kw">struct</span>{</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>  name <span class="dt">string</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>  age <span class="dt">int</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a>}</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a>bob := person{</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a>  name: <span class="st">&quot;Joe&quot;</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a>  age: <span class="dv">2</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a>}</span></code></pre></div>
+<h5 id="anonymous-struct">Anonymous Struct</h5>
+<div class="sourceCode" id="cb13"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a>blob := <span class="kw">struct</span> {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>  name <span class="dt">string</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>  age <span class="dt">int</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>}{</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a>  name: <span class="st">&quot;bob&quot;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>  age: <span class="dv">4</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>}</span></code></pre></div>
 <hr />
 <h3 id="learn-by-doing">Learn by doing</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a>gofunc Hello(name <span class="dt">string</span>) <span class="dt">string</span> {</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>  <span class="kw">var</span> bleh <span class="dt">string</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>  <span class="kw">var</span> sentinel <span class="dt">string</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a>  arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>  <span class="kw">const</span> heh <span class="dt">int</span> = <span class="dv">3</span>;</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>  <span class="kw">var</span> (</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a>    target = <span class="dv">9</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a>    curr = <span class="dv">3</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a>  )</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a>  <span class="kw">const</span> (</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a>    pi = <span class="dv">3</span><span class="fl">.14</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true"></a>    e = <span class="dv">2</span><span class="fl">.718</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true"></a>  )</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true"></a>	<span class="kw">if</span> name == <span class="st">&quot;bob&quot;</span> {</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true"></a>		sentinel = <span class="st">&quot;pie&quot;</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true"></a>	} <span class="kw">else</span> <span class="kw">if</span> name == <span class="st">&quot;annie&quot;</span> {</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true"></a>		sentinel = <span class="st">&quot;cola&quot;</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true"></a>	}</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true"></a>	<span class="kw">switch</span> sentinel {</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true"></a>	<span class="kw">case</span> <span class="st">&quot;bob&quot;</span>:</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true"></a>		bleh = <span class="st">&quot;bob likes pie&quot;</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true"></a>		fmt.Println(bleh)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true"></a>	}</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true"></a>  fmt.Println(arr[<span class="dv">0</span>])</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true"></a>  fmt.Println(heh)</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true"></a>	<span class="kw">return</span> <span class="st">&quot;Hello World&quot;</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a>gofunc Hello(name <span class="dt">string</span>) <span class="dt">string</span> {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>  <span class="kw">var</span> bleh <span class="dt">string</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>  <span class="kw">var</span> sentinel <span class="dt">string</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a>  arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a>  <span class="kw">const</span> heh <span class="dt">int</span> = <span class="dv">3</span>;</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a>  <span class="kw">var</span> (</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true"></a>    target = <span class="dv">9</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true"></a>    curr = <span class="dv">3</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true"></a>  )</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true"></a>  <span class="kw">const</span> (</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true"></a>    pi = <span class="dv">3</span><span class="fl">.14</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true"></a>    e = <span class="dv">2</span><span class="fl">.718</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true"></a>  )</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true"></a>	<span class="kw">if</span> name == <span class="st">&quot;bob&quot;</span> {</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true"></a>		sentinel = <span class="st">&quot;pie&quot;</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true"></a>	} <span class="kw">else</span> <span class="kw">if</span> name == <span class="st">&quot;annie&quot;</span> {</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true"></a>		sentinel = <span class="st">&quot;cola&quot;</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true"></a>	}</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true"></a>	<span class="kw">switch</span> sentinel {</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true"></a>	<span class="kw">case</span> <span class="st">&quot;bob&quot;</span>:</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true"></a>		bleh = <span class="st">&quot;bob likes pie&quot;</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true"></a>		fmt.Println(bleh)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true"></a>	}</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true"></a>  fmt.Println(arr[<span class="dv">0</span>])</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true"></a>  fmt.Println(heh)</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true"></a>	<span class="kw">return</span> <span class="st">&quot;Hello World&quot;</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true"></a>}</span></code></pre></div>
 <h3 id="loops">loops</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="kw">func</span> main() {</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>  arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a>  arr2 := arr[<span class="dv">0</span>:<span class="dv">2</span>]</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a>  sum := <span class="dv">0</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a>  <span class="kw">for</span> i:=<span class="dv">0</span>; i &lt; <span class="dv">5</span>; i++ {</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a>	  sum += i</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a>  }</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a>  <span class="kw">for</span> keyX, ValX := <span class="kw">range</span> arr {</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a>    fmt.Println(keyX)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a>    fmt.Println(ValX)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true"></a>  }</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true"></a>	fmt.Println(arr[<span class="dv">0</span>])</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true"></a>	fmt.Println(sum)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="kw">func</span> main() {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a>  arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a>  arr2 := arr[<span class="dv">0</span>:<span class="dv">2</span>]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a>  sum := <span class="dv">0</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>  <span class="kw">for</span> i:=<span class="dv">0</span>; i &lt; <span class="dv">5</span>; i++ {</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a>	  sum += i</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true"></a>  }</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true"></a>  <span class="kw">for</span> keyX, ValX := <span class="kw">range</span> arr {</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true"></a>    fmt.Println(keyX)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true"></a>    fmt.Println(ValX)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true"></a>  }</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true"></a>	fmt.Println(arr[<span class="dv">0</span>])</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true"></a>	fmt.Println(sum)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true"></a>}</span></code></pre></div>
 <h3 id="switch-statement">Switch statement</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">if</span> i == <span class="dv">0</span> {</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;Zero&quot;</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>}<span class="kw">else</span> <span class="kw">if</span> i == <span class="dv">1</span> {</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;One&quot;</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a>}<span class="kw">else</span> <span class="kw">if</span> i == <span class="dv">2</span>{</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;Two&quot;</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a>}<span class="kw">else</span> {</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;default&quot;</span>)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="kw">switch</span> i {</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>  <span class="kw">case</span> <span class="dv">0</span>: fmt.Println(<span class="st">&quot;Zero&quot;</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>  <span class="kw">case</span> <span class="dv">1</span>: fmt.Println(<span class="st">&quot;One&quot;</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a>  <span class="kw">case</span> <span class="dv">2</span>: fmt.Println(<span class="st">&quot;Two&quot;</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a>  <span class="kw">default</span>: fmt.Println(<span class="st">&quot;default&quot;</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="kw">if</span> i == <span class="dv">0</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;Zero&quot;</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a>}<span class="kw">else</span> <span class="kw">if</span> i == <span class="dv">1</span> {</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;One&quot;</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a>}<span class="kw">else</span> <span class="kw">if</span> i == <span class="dv">2</span>{</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;Two&quot;</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true"></a>}<span class="kw">else</span> {</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;default&quot;</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a><span class="kw">switch</span> i {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a>  <span class="kw">case</span> <span class="dv">0</span>: fmt.Println(<span class="st">&quot;Zero&quot;</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a>  <span class="kw">case</span> <span class="dv">1</span>: fmt.Println(<span class="st">&quot;One&quot;</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a>  <span class="kw">case</span> <span class="dv">2</span>: fmt.Println(<span class="st">&quot;Two&quot;</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true"></a>  <span class="kw">default</span>: fmt.Println(<span class="st">&quot;default&quot;</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true"></a>}</span></code></pre></div>
 <h3 id="struct">struct</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="kw">type</span> Rectangle <span class="kw">struct</span> {</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>    Width <span class="dt">float64</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>    Height <span class="dt">float64</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a>}</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>funct (r *Rectangle) AreaX <span class="dt">int</span> {</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a> <span class="kw">return</span> <span class="dv">5</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a>}</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true"></a><span class="kw">func</span> (r Rectangle) Area() <span class="dt">int</span> {</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true"></a>	<span class="kw">return</span> <span class="dv">5</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true"></a>}</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true"></a><span class="kw">func</span> main(){</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true"></a>  rect := Rectangle{<span class="dv">12</span>, <span class="dv">6</span>}</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true"></a>  outp := rect.Area()</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true"></a>  outpX := AreaX(&amp;Rect)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true"></a>  fmt.Println(outp)</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true"></a>  <span class="co">//5</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a><span class="kw">type</span> Rectangle <span class="kw">struct</span> {</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a>    Width <span class="dt">float64</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true"></a>    Height <span class="dt">float64</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a>}</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true"></a>funct (r *Rectangle) AreaX <span class="dt">int</span> {</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true"></a> <span class="kw">return</span> <span class="dv">5</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true"></a>}</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true"></a><span class="kw">func</span> (r Rectangle) Area() <span class="dt">int</span> {</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true"></a>	<span class="kw">return</span> <span class="dv">5</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true"></a>}</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true"></a><span class="kw">func</span> main(){</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true"></a>  rect := Rectangle{<span class="dv">12</span>, <span class="dv">6</span>}</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true"></a>  outp := rect.Area()</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true"></a>  outpX := AreaX(&amp;Rect)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true"></a>  fmt.Println(outp)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true"></a>  <span class="co">//5</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true"></a>}</span></code></pre></div>
 <p>Just by passing in the Rectangle argument for a method ‘Area()’, the method automatically is attached to struct ‘Rectangle’</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="kw">type</span> Shape <span class="kw">interface</span> {</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>    Area() <span class="dt">float64</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a><span class="kw">type</span> Shape <span class="kw">interface</span> {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true"></a>    Area() <span class="dt">float64</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true"></a>}</span></code></pre></div>
 <h3 id="pointer">Pointer</h3>
 <p>Just as in our “Quick C” ,</p>
 <ul>
 <li>think of passing pointers in args as passing addresses.</li>
 <li>The temporary <code class="sourceCode go">ptr *<span class="dt">int</span></code> will bind to the passed address <code class="sourceCode go">&amp;x</code>.</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="kw">func</span> trans(ptr *<span class="dt">int</span>){</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a>  *ptr = <span class="dv">0</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a>}</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a><span class="kw">func</span> main(){</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a>  x := <span class="dv">5</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>  trans(&amp;x)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="kw">func</span> trans(ptr *<span class="dt">int</span>){</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a>  *ptr = <span class="dv">0</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>}</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true"></a><span class="kw">func</span> main(){</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true"></a>  x := <span class="dv">5</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true"></a>  trans(&amp;x)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true"></a>}</span></code></pre></div>
 <hr />
 <table>
 <thead>
@@ -468,20 +516,20 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 </table>
 <hr />
 <p>Style</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="co">//BAD</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a>name := <span class="st">&quot;bob&quot;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a>name := name + <span class="st">&quot; ross&quot;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a><span class="co">//GOOD</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a><span class="kw">const</span> fstname = <span class="st">&quot;bob&quot;</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a><span class="kw">const</span> lstname = <span class="st">&quot; ross&quot;</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true"></a><span class="kw">const</span> name = fstname + lstname</span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a><span class="co">//BAD</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a>arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">7</span>}</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a>arr[<span class="dv">1</span>] = <span class="dv">8</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a>arr[<span class="dv">2</span>] = <span class="dv">9</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true"></a><span class="co">//GOOD</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true"></a>arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">7</span>}</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true"></a>arr2 := <span class="bu">append</span>(arr,[<span class="dv">2</span>]<span class="dt">int</span>{<span class="dv">8</span>,<span class="dv">9</span>})</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a><span class="co">//BAD</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a>name := <span class="st">&quot;bob&quot;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true"></a>name := name + <span class="st">&quot; ross&quot;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true"></a><span class="co">//GOOD</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true"></a><span class="kw">const</span> fstname = <span class="st">&quot;bob&quot;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true"></a><span class="kw">const</span> lstname = <span class="st">&quot; ross&quot;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true"></a><span class="kw">const</span> name = fstname + lstname</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a><span class="co">//BAD</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true"></a>arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">7</span>}</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true"></a>arr[<span class="dv">1</span>] = <span class="dv">8</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true"></a>arr[<span class="dv">2</span>] = <span class="dv">9</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true"></a><span class="co">//GOOD</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true"></a>arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">7</span>}</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true"></a>arr2 := <span class="bu">append</span>(arr,[<span class="dv">2</span>]<span class="dt">int</span>{<span class="dv">8</span>,<span class="dv">9</span>})</span></code></pre></div>
 
         </div>
         <div id="footer">

@@ -218,6 +218,11 @@ $$s(t) = \langle rcos(t),rsin(t),c*t \rangle $$
 $$\frac{1}{c} = \# cycles,frequency$$
 $$r = radius $$
 
+
+---
+
+
+
 ### Open Delta neighborhoods
 
 Neighborhood is a set N.
