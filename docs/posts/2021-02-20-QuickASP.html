@@ -239,6 +239,17 @@
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="ex">code</span> -r ../TodoApi</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="ex">dotnet</span> dev-certs https --trust</span></code></pre></div>
+<div class="sourceCode" id="cb2" data-filename="lambdas.cs"><pre class="sourceCode cs"><code class="sourceCode cs"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>Func&lt;<span class="dt">int</span>,<span class="dt">int</span>,<span class="dt">int</span>&gt; Addlambda = (<span class="dt">int</span> x,<span class="dt">int</span> y) =&gt; {<span class="kw">return</span> x + y;};</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>Monoid Addx = <span class="kw">new</span> <span class="fu">Monoid</span>(Addlambda);</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="dt">void</span> <span class="fu">typicalfunction</span>( Monoid passedFunction){</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    Console.<span class="fu">WriteLine</span>($<span class="st">&quot;output is {passedFunction(2,6)}&quot;</span>);</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>  }</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>  </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="fu">SomeFunction</span>(Addx);</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="kw">delegate</span> <span class="dt">int</span> <span class="fu">bleh</span>(<span class="dt">string</span> x, <span class="dt">double</span> y);</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="kw">delegate</span> <span class="dt">int</span> <span class="fu">Monoid</span>(<span class="dt">int</span> lhs, <span class="dt">int</span> rhs);</span></code></pre></div>
 
         </div>
         <div id="footer">

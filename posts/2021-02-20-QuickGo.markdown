@@ -3,6 +3,8 @@ title: Quick Go
 tags: prog, QuickCode
 ---
 
+* Go func pass-by-value
+
 ### Running or Building
 
 ```bash
@@ -14,7 +16,7 @@ go build main.go
 go run main.go
 ```
 
-### Header
+### typical go file
 
 ```go
 package main
@@ -32,6 +34,73 @@ for loops and if statements conditions do not have parenthesis.
 * `for(int i=0;i<5;i++){..}`{.C} $\Rightarrow$ `for i:=0;i<5;i++ {..}`{.go}
 
 
+### := vs =
+
+`var bleh int = 3`{.go} equivalent `bleh := 3`{.go} 
+
+`:=`{.go} is shorthand to create new variable implicity then assign it.
+
+```{.go}
+//Shorthand
+bleh := 2
+
+//Expanded
+var bleh int
+bleh = 2
+```
+
+## Use slice(list) instead of arrays
+
+I will just call slice a list due to preference
+
+* list is just an array without inputting the len arg
+* Only use arrays if you know the exact length ahead of time  
+
+
+| Def | list | Array |
+| --- | --- | --- |
+| init | `var x = []int{4,5,6}`{.go}<br>`var x = make([]int,3)`{.go} | `var x = [3]int{4,5,6}`{.go} |
+|comparison `>=`{.go} `==`{.go} | Only with `nil`{.go} | Yes |
+
+```go 
+//ARRAY
+var x = [6]int{1,3:4,7,5:9} //4 at pos 3, 9 at pos 5
+  //[1,0,0,4,7,9]
+var x2 = [...]int{6,4,3,3}
+x == x2 //false
+
+//SLICE
+var z = make([]int,5) // [0,0,0,0,0]
+var x = []int{1,2,3,4}
+var y = [][]int
+x == y //ERROR
+y == nil //true
+```
+
+`append`{.go} returns a new array or slice.
+
+#### Slicing lists 
+
+* same as in Python **BUT sublists SHARE THE SAME MEMORY**
+
+```go
+x = []int{1,2,3,4}
+y = x[1:3]
+y = []int{9,9}
+//x is [1,9,9,4]
+```
+
+**Never use Append with sublists**
+
+How to do the Pythonic subslice? Use `copy`{.go}  
+Warning if len doesn't fit, it will NOT autoexpand the list; it will get cut off.
+
+```go
+x = []int{1,2,3,4}
+y = make([]int,2)
+copy(y,x[1:3])
+```
+
 
 ### Functions
 
@@ -44,25 +113,10 @@ var mylambda = func() string { return "this is lambda string func" }
 fmt.Println(mylambda())
 ```
 
-```{.cs filename=lambdas.cs}
-Func<int,int,int> Addlambda = (int x,int y) => {return x + y;};
-Monoid Addx = new Monoid(Addlambda);
-
-void typicalfunction( Monoid passedFunction){
-    Console.WriteLine($"output is {passedFunction(2,6)}");
-  }
-  
-SomeFunction(Addx);
-
-delegate int bleh(string x, double y);
-delegate int Monoid(int lhs, int rhs);
-```
-
 ---
 
 ### Learn by doing
 
-`var bleh int = 3`{.go} is same as `bleh := 3`{.go} 
 
 ```go
 gofunc Hello(name string) string {
@@ -206,3 +260,29 @@ func main(){
 | uint16 | [0,65536] |
 | uint32 | [0,4294967295] |
 | uint64 | [0,18446744073709551615] |
+
+
+---
+
+Style
+
+```go
+//BAD
+name := "bob"
+name := name + " ross"
+//GOOD
+const fstname = "bob"
+const lstname = " ross"
+const name = fstname + lstname
+```
+
+```go
+//BAD
+arr := [3]int{7}
+arr[1] = 8
+arr[2] = 9
+//GOOD
+arr := [3]int{7}
+arr2 := append(arr,[2]int{8,9})
+```
+

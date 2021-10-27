@@ -5,6 +5,8 @@ tags: prog
 
 ### Golang
 
+golang fmt IGNORES WHITESPACES  " bleh" => "bleh"
+
 ```{.go filename="singleinput.go"}
 package main
 import (
@@ -22,6 +24,18 @@ func main() {
 	var v1,v2 int64
 	fmt.Scanln(&v1,&v2)
 ``
+
+If input has whitespace that need to be included use `bufio`{.go}
+
+```{.go}
+import(
+  "bufio"
+  "os"
+)
+
+v1 := bufio.NewReader(os.Stdin)
+line, err := v1.ReadString('\n')
+```
 
 
 ### Python

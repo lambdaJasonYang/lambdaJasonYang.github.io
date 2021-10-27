@@ -13,7 +13,7 @@
         <!-- Icon end -->
         
         
-        <title>Jason Yang - IO</title>
+        <title>Jason Yang - Chemistry</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -221,55 +221,55 @@
         </div>
 
         <div id="content">
-            <h1>IO</h1>
+            <h1>Chemistry</h1>
             
 
             <div class="info">
-    Posted on August 10, 2021
+    Posted on July 22, 2015
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'physics'." href="../tags/physics.html">physics</a>
     
 </div>
-<h3 id="golang">Golang</h3>
-<p>golang fmt IGNORES WHITESPACES " bleh" =&gt; “bleh”</p>
-<div class="sourceCode" id="cb1" data-filename="singleinput.go"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">package</span> main</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">import</span> (</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>	<span class="st">&quot;fmt&quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="kw">func</span> main() {</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>	<span class="kw">var</span> p <span class="dt">int</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>	fmt.Scanf(<span class="st">&quot;%d&quot;</span>, &amp;p)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>	fmt.Println(p)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb2" data-filename="multiplearg_input.go"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>	<span class="kw">var</span> v1,v2 <span class="dt">int64</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>	fmt.Scanln(&amp;v1,&amp;v2)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="st">``</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>If input has whitespace that need to be included use <span class="st">`bufio`</span>{.<span class="kw">go</span>}</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="st">```{.go}</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="st">import(</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="st">  &quot;bufio&quot;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="st">  &quot;os&quot;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="st">)</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="st">v1 := bufio.NewReader(os.Stdin)</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="st">line, err := v1.ReadString('</span><span class="ch">\n</span><span class="st">')</span></span></code></pre></div>
-<h3 id="python">Python</h3>
-<div class="sourceCode" id="cb3" data-filename="singleinput.py"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>a <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>())</span></code></pre></div>
-<p>MULTIPLE ARG INPUT: 2 3 5 6</p>
-<div class="sourceCode" id="cb4" data-filename="multiplearg_input.py"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>a, b, c, d <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>, <span class="bu">input</span>().split())</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="co">#why does this work? List is auto-split into args</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>x,y <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>]</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="co">#x &lt;- 1, </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="co">#y &lt;- 2</span></span></code></pre></div>
-<p>LIST INPUT: 1 2 3 …</p>
-<div class="sourceCode" id="cb5" data-filename="listinput.py"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>a <span class="op">=</span> <span class="bu">input</span>().split()</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="co">#&gt; ['1','2','3']</span></span></code></pre></div>
+<blockquote>
+<p>A mole is just a number like pi</p>
+</blockquote>
+<h2 id="vb-theory-vs-mo-theory">VB Theory vs MO Theory</h2>
+<p>Atomic means single atom, Molecule means multiple combined atoms</p>
+<ul>
+<li>MO Theory
+<ul>
+<li>Atomic Orbitals combine to form Molecular Orbitals</li>
+<li>Electrons can occupy the molecular orbitals classified<br />
+{Antibonding, Bonding}</li>
+</ul></li>
+<li>VB Theory
+<ul>
+<li>Molecular Orbitals do not exist</li>
+<li>Molecules consist of Atomic Orbitals and the INTERSECTION of Atomic orbitals classified<br />
+{Sigma-bond, Pi-Bond}</li>
+</ul></li>
+</ul>
+<h2 id="mo-theory">MO Theory</h2>
+<p>Atomic orbitals combine to form Molecular Orbitals .<br />
+Linear combination of atomic orbitals(LCAO) is used to calculate MO.</p>
+<ul>
+<li>INPUT:
+<ul>
+<li><span class="math inline">\(\psi_A :: AtomicOrbital\)</span></li>
+<li><span class="math inline">\(\psi_B :: AtomicOrbital\)</span><br />
+</li>
+</ul></li>
+<li>OUTPUT:
+<ul>
+<li><span class="math inline">\(\psi_A + \psi_B=\psi_{bonding} :: MolecularOrbital\)</span><br />
+</li>
+<li><span class="math inline">\(\psi_A - \psi_B=\psi_{antibonding} :: MolecularOrbital\)</span></li>
+</ul></li>
+</ul>
+<p><strong>Conservation of Orbitals</strong>: If we input n number of Atomic Orbitals we will output n number of Molecular Orbitals.</p>
 
         </div>
         <div id="footer">

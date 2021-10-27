@@ -14,3 +14,17 @@ code -r ../TodoApi
 dotnet dev-certs https --trust
 ```
 
+
+```{.cs filename=lambdas.cs}
+Func<int,int,int> Addlambda = (int x,int y) => {return x + y;};
+Monoid Addx = new Monoid(Addlambda);
+
+void typicalfunction( Monoid passedFunction){
+    Console.WriteLine($"output is {passedFunction(2,6)}");
+  }
+  
+SomeFunction(Addx);
+
+delegate int bleh(string x, double y);
+delegate int Monoid(int lhs, int rhs);
+```
