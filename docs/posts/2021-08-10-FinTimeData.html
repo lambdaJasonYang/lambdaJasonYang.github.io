@@ -318,21 +318,22 @@
 <ul>
 <li>First let’s analyze returns of the SPY</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>pctReturnSERIES.describe()</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="co"># count    251.000000</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="co"># mean      -0.000957</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a><span class="co"># std        0.008594</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a><span class="co"># min       -0.023238</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a><span class="co"># 25%       -0.006424    IQR lower bound</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a><span class="co"># 50%       -0.001255    Median</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a><span class="co"># 75%        0.003340    IQR upper bound</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a><span class="co"># max        0.036579</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a><span class="co"># Name: Close/Last, dtype: float64</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>pctReturnSERIES.describe()</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># count    251.000000</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># mean      -0.000957</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># std        0.008594</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co"># min       -0.023238</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co"># 25%       -0.006424    IQR lower bound</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># 50%       -0.001255    Median</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co"># 75%        0.003340    IQR upper bound</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co"># max        0.036579</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co"># Name: Close/Last, dtype: float64</span></span></code></pre></div>
 <ul>
-<li>The 50% represents the median or most common return.</li>
-<li>(25% 75%) is the IQR or where 50% of our return lines.
+<li>The <code class="sourceCode python"><span class="dv">50</span><span class="op">%</span></code> represents the median or most common return. (line 7)</li>
+<li>(<code class="sourceCode python"><span class="dv">25</span><span class="op">%</span> <span class="dv">75</span><span class="op">%</span></code>) is the IQR or where our returns will lie half of the time. (line 6+8)
 <ul>
-<li>50% of the time, we will see a return that lies in the interval [-0.6424%,0.3340%]</li>
+<li>half of the time, we will see a return that lies in the interval<br />
+[-0.6424%, 0.3340%]</li>
 </ul></li>
 </ul>
 <p>Prefer IQR over std because IQR is a frequency measure resistant to outliers while std depends on the mean.</p>

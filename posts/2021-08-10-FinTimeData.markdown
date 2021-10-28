@@ -105,7 +105,7 @@ pctReturnSERIES.hist()
 
 * First let's analyze returns of the SPY
 
-```python
+```{.python .numberLines}
 pctReturnSERIES.describe()
 # count    251.000000
 # mean      -0.000957
@@ -118,9 +118,10 @@ pctReturnSERIES.describe()
 # Name: Close/Last, dtype: float64
 ```
 
-* The 50% represents the median or most common return.
-* (25% 75%) is the IQR or where 50% of our return lines.
-  * 50% of the time, we will see a return that lies in the interval [-0.6424%,0.3340%]
+* The `50%`{.python} represents the median or most common return. (line 7)
+* (`25% 75%`{.python}) is the IQR or where our returns will lie half of the time. (line 6+8)
+  * half of the time, we will see a return that lies in the interval  
+  [-0.6424%, 0.3340%]
 
 Prefer IQR over std because IQR is a frequency measure resistant to outliers while std depends on the mean.
 

@@ -180,6 +180,24 @@ blob := struct {
 
 ---
 
+#### Scoping 
+
+```{.go filename="BAD_Shadowing.go"}
+func main(){
+  x := 5
+  if x > 0 {
+      fmt.Println(x) //OUT: 5
+      x := 3 
+      fmt.Println(x) //OUT: 3 
+  }
+  fmt.Println(x) //OUT: 5
+} 
+```
+```bash
+go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
+go vet
+```
+
 ### Learn by doing
 
 
