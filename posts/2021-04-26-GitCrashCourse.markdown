@@ -19,7 +19,7 @@ git config --global user.name "example"
 ### Removing Credentials
 
 ``` bash
-git config --global  credential.usehttppath true
+git config --global credential.usehttppath true
 ```
 
 ### Saving remote github Credential on local repo

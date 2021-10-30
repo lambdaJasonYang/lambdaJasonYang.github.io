@@ -13,7 +13,7 @@
         <!-- Icon end -->
         
         
-        <title>Jason Yang - Posts tagged "cloud"</title>
+        <title>Jason Yang - example page</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -221,47 +221,47 @@
         </div>
 
         <div id="content">
-            <h1>Posts tagged "cloud"</h1>
+            <h1>example page</h1>
             
 
-            <ul style="list-style-type:'\1F344';">
+            <div class="info">
+    Posted on March 23, 2021
     
-        <li>
-            <a href="../posts/2021-08-10-CSS.html">CSS</a> - August 10, 2021
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2021-03-23-QuickReact.html">Quick React</a> - March 23, 2021
-        </li>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>
     
-        <li>
-            <a href="../posts/2021-03-23-NextAuth.html">example page</a> - March 23, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2021-03-20-QuickNext.html">Quick Next</a> - March 20, 2021
-        </li>
-    
-        <li>
-            <a href="../posts/2020-04-20-Docker.html">Docker</a> - April 20, 2020
-        </li>
-    
-        <li>
-            <a href="../posts/2018-07-15-QuickTerraForm.html">Quick TerraForm</a> - July 15, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-07-15-QuickAWS.html">Quick AWS</a> - July 15, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2018-06-23-VanillaJS.html">VanillaJS mini scripts</a> - June 23, 2018
-        </li>
-    
-        <li>
-            <a href="../posts/2015-09-17-DistributedSystem.html">Distributed Systems</a> - September 17, 2015
-        </li>
-    
+</div>
+<h3 id="authflow">Authflow</h3>
+<ul>
+<li>Sign up</li>
+<li>client –{user,pass}–&gt; –bcrypt(pass)–&gt; Save bcrypt(pass)+user to DB</li>
+<li>client &lt;–{JWT}– Server</li>
+</ul>
+<p>hash password using bcrypt</p>
+<ul>
+<li><p>bcrypt can increase hash rounds (salt-rounds), slowing time, which resists brute force hash collision attack</p></li>
+<li><p>login</p></li>
+<li><p>client input pass —-&gt; compare bcrypt(pass)+user with DB</p></li>
+<li><p>Server &lt;–{JWT}– Server</p></li>
+</ul>
+<h4 id="jwt">JWT</h4>
+<ul>
+<li>Header - base64</li>
+<li>Payload</li>
+<li>Signature</li>
+</ul>
+<h4 id="persist-auth">persist auth</h4>
+<ul>
+<li>Browser storage
+<ul>
+<li>local storage</li>
+</ul></li>
+<li>Cookie
+<ul>
+<li>Add “secure”, “httpOnly” “SameSite”</li>
+</ul></li>
 </ul>
 
         </div>

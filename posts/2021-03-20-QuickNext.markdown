@@ -3,22 +3,29 @@ title: Quick Next
 tags: prog, QuickCode, cloud, frontend
 ---
 
-```bash
-npx create-next-app --ts
+```{.bash .numberLines}
+npx create-next-app@latest --ts
 
 npm install prettier --save-dev
 npm install eslint-config-prettier --save-dev
 npm install @emotion/babel-plugin --save-dev
 npm install @emotion/eslint-plugin --save-dev
-npm install @typescript-eslint/eslint-plugin --save-dev
 npm install @typescript-eslint/parser --save-dev
+npm install @typescript-eslint/eslint-plugin --save-dev
 
-npm install @mui/material
-npm install @mui/icons-material
+#Dependencies for MUI
 npm install @emotion/react
-npm install @emotion/server
 npm install @emotion/styled
 
+#MUI
+npm install @mui/material
+npm install @mui/icons-material
+
+#SSR MUI+emotion components
+npm install @emotion/server
+
+#auth
+npm install --save next-auth
 ```
 
 
@@ -93,11 +100,57 @@ export default StyledButton;
 ```
 
 
+#### _document
+
+taken from [Official Nextjs example](https://github.com/mui-org/material-ui/blob/master/examples/nextjs/pages/_document.js)
+
+#### _app
+
+taken from [Official Nextjs example](https://github.com/mui-org/material-ui/blob/master/examples/nextjs/pages/_app.js)
+
+#### 
+
 
 #### File structure determines routing
 
 Page filename in nextjs like "landingpage.js" must be lowercase letters  
 React Component filename in nextjs must be Uppercase like "MyCustomButton".
+
+```plantuml
+@startsalt
+
+{
+    {T
+     + /
+     ++ src
+     +++ common
+     ++++ components
+     +++++ ExButton
+     ++++++ ExButton.tsx
+     ++++++ ExButton.test.ts
+     ++++ hooks
+     ++++ utils
+     +++ modules
+     +++ pages
+     ++++ api
+     ++++ [carID]
+     +++++ index.tsx
+     +++++ [modelID]
+     ++++++ index.tsx
+     ++++ _app.tsx
+     ++++ _document.tsx
+     ++++ index.tsx
+     ++ styles
+     ++ public
+     ++
+
+    }
+}
+
+@endsalt
+```
+
+Modules will 
 
 * .next
 * package.json
@@ -127,24 +180,33 @@ const {carID, modelID} = router.query()
 console.log(`the car is {carID} and model {modelID}`)
 ```
 
-getStaticProps only runs serverside even though you may have written it on a clientside file like index.js
-You can write serverside code in the getStaticProps function.
+---
 
-getStaticProps is only allowed in a page file, NOT in a component file.
+#### getStaticProps - SSG
 
-getStaticProps only runs on build time, in dev mode we see it being rebuilt every request which may cause confusion.
+* getStaticProps only runs serverside even though you may have written it on a clientside file like index.js
+* getStaticProps is only allowed in a page file, NOT in a component file.
+* getStaticProps only runs on build time, in dev mode we see it being rebuilt every request which may cause confusion.
 
-Why SSG can be bad?
-SSG at build - getStaticProps
-SSG at first request - getStaticPaths = will not fetch at build but at first request and cache the page for every new request
+##### 2 types of SSG
+
+| getStaticProps() | getStaticPaths() |
+| --- | --- |
+| calls on build | calls on first request |
+
+#### Why SSG can be bad?
+
 
 SSG at build time and SSG at first request both are affected by stale data.
-If db changes once, SSG at build time is already stale
-If db changes more than once, SSG at first request becomes stale
-This means if a single change happens in db we have to rebuild the ENTIRE site.
 
-Solution ISR which basically means the specific static page ONLY will be rebuilt, and 
-if your clientside code auto refreshes every 10 sec, the data will be relativly current. 
+* If db changes once, SSG at build time is already stale
+* If db changes more than once, SSG at first request becomes stale
+This means if more than one update in db we have to rebuild the ENTIRE site.
 
+---
 
-SSR
+#### Solution to Stale SSG - ISR
+
+* Solution ISR which basically means the specific static page ONLY will be rebuilt, 
+* If your clientside code auto refreshes every 10 sec, the data will be relatively current. 
+
