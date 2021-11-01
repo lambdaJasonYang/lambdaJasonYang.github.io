@@ -11,8 +11,9 @@
         <link rel="shortcut icon" href="../images/icons/dodecahedron.svg" />
         <link rel="mask-icon" href="../images/icons/dodecahedron.svg" />
         <!-- Icon end -->
-        
-        
+
+
+         
         <title>Jason Yang - Posts tagged "python"</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
@@ -239,6 +240,10 @@
         </li>
     
         <li>
+            <a href="../posts/2021-03-23-PySpark.html">PySpark</a> - March 23, 2021
+        </li>
+    
+        <li>
             <a href="../posts/2021-03-23-BlockChain.html">Blockchain</a> - March 23, 2021
         </li>
     
@@ -264,6 +269,10 @@
     
         <li>
             <a href="../posts/2018-03-24-Stochastic.html">Stochastic calculus and brownian motion</a> - March 24, 2018
+        </li>
+    
+        <li>
+            <a href="../posts/2017-07-15-thinkScript.html">Thinkscript</a> - July 15, 2017
         </li>
     
         <li>
@@ -309,11 +318,25 @@
         gtag('config', 'G-2W1VXE5GSE');
         </script>
         <!-- Google Analytics TAG END  ---------------------->
-
         <!-- MATH JAX START -------------------------------------- -->
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
 
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
     </footer>
 </html>

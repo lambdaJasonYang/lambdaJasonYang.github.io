@@ -11,9 +11,10 @@
         <link rel="shortcut icon" href="../images/icons/dodecahedron.svg" />
         <link rel="mask-icon" href="../images/icons/dodecahedron.svg" />
         <!-- Icon end -->
-        
-        
-        <title>Jason Yang - Quick Microservice</title>
+
+
+         
+        <title>Jason Yang - Quick SQL</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -221,7 +222,7 @@
         </div>
 
         <div id="content">
-            <h1>Quick Microservice</h1>
+            <h1>Quick SQL</h1>
             
 
             <div class="info">
@@ -238,6 +239,49 @@
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> bleh (name,age) <span class="kw">VALUES</span> (<span class="st">'rex'</span>,<span class="dv">2</span>);</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>.<span class="kw">mode</span> <span class="kw">column</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>.headers <span class="kw">on</span></span></code></pre></div>
+<h3 id="quick-theory">Quick Theory</h3>
+<p>Tables are represented as relations <span class="math inline">\((A\times B\times C)\)</span><br />
+<span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span> are the columns of the table</p>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Name</th>
+<th>Operation</th>
+<th>Related SQL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\pi\)</span></td>
+<td>Projection</td>
+<td><span class="math inline">\((A\times B\times C)\rightarrow (A\times C)\)</span></td>
+<td>Select a,b FROM ..</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sigma\)</span></td>
+<td>Selection</td>
+<td><span class="math inline">\(\{x\in (A\times B\times C)\ |\ Pred(x)\}\)</span></td>
+<td>… WHERE a*b==3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="syntax">Syntax</h3>
+<pre class="rroad"><code>Diagram(Stack(Optional(Sequence(Terminal('WITH','#sql-with'),OneOrMore(Sequence(NonTerminal('name'),'AS','(',NonTerminal('select','#sql-select'),')'),',')),'skip'),Sequence(Terminal('SELECT','#sql-select'),Optional('DISTINCT','skip'),Choice(0,'*',OneOrMore(Choice(0,Sequence(NonTerminal('column'),Optional(Sequence('AS',NonTerminal('output_name')))),Sequence(NonTerminal('expression','#sql-valueexpr'),Sequence('AS',NonTerminal('output_name')))),',')),Terminal('FROM','#sql-from'),OneOrMore(Choice(0,Sequence(NonTerminal('table_name'),Optional(Sequence('AS',NonTerminal('alias')))),Sequence('(',NonTerminal('select'),')',Sequence('AS',NonTerminal('alias')))),',')),OneOrMore(Choice(0,Skip(),Sequence(Choice(0,Sequence(',',Comment('oldsyntaxforcrossjoin')),Sequence(Choice(0,'CROSS','NATURAL'),'JOIN'),Sequence(Choice(0,Sequence(Optional('INNER'),'JOIN'),Sequence(Choice(0,'LEFT','RIGHT','FULL'),Optional('OUTER'),'JOIN')),Choice(0,Sequence('ON',NonTerminal('condition')),Sequence('USING','(',OneOrMore(NonTerminal('join_column'),','),')'),Sequence('NATURAL')))),Choice(0,Sequence(NonTerminal('table_name'),Optional(Sequence('AS',NonTerminal('alias')))),Sequence('(',NonTerminal('select'),')',Sequence('AS',NonTerminal('alias'))))))),Sequence(Optional(Sequence(Terminal('WHERE','#sql-where'),NonTerminal('condition')),'skip'),Optional(Sequence(Terminal('GROUPBY','#sql-groupby'),NonTerminal('expression','#sql-valueexpr')),'skip'),Optional(Sequence(Terminal('HAVING','#sql-having'),NonTerminal('condition')),'skip')),Sequence(Optional(Sequence(Choice(0,'UNION','INTERSECT','EXCEPT'),Choice(0,Skip(),'DISTINCT','ALL'),NonTerminal('select')),'skip'),Optional(Sequence(Terminal('ORDERBY','#sql-orderby'),OneOrMore(Sequence(NonTerminal('expression','#sql-valueexpr'),Choice(0,'ASC','DESC')),',')),'skip')),Sequence(Optional(Sequence(Terminal('LIMIT','#sql-limit'),Choice(0,NonTerminal('count'),'ALL')),'skip'),Optional(Sequence(Terminal('OFFSET','#sql-limit'),NonTerminal('start'),Optional('ROWS')),'skip')),Sequence(Optional(Sequence(Terminal('FETCH FIRST','#sql-limit'),NonTerminal('count'),Optional('ROWS'),'ONLY'),'skip'))))</code></pre>
+<p><a href="http://dbis-uibk.github.io/relax/help">ReLaX</a></p>
+<h3 id="joins">JOINS</h3>
+<p>TableA has 3 cols<br />
+TableB has 7 cols</p>
+<p>TableA Join TableB, we end up with 3+7 cols</p>
+<p>Left Join , 3 cols</p>
+<h2 id="normalization">Normalization</h2>
+<h3 id="nf---remove-redundent-groups">1NF - Remove redundent Groups</h3>
+<p>make separate table for each set of related attr</p>
+<h3 id="nf---eliminate-repeats">2NF - Eliminate Repeats</h3>
+<p>Some value repeats multiple times.<br />
+Collapse the dependency into a new table.</p>
+<h3 id="nf---move-out-cols-not-dependent-on-key">3NF - Move out Cols not dependent on Key</h3>
+<h3 id="nf">4NF</h3>
 
         </div>
         <div id="footer">
@@ -264,11 +308,25 @@
         gtag('config', 'G-2W1VXE5GSE');
         </script>
         <!-- Google Analytics TAG END  ---------------------->
-
         <!-- MATH JAX START -------------------------------------- -->
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
 
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
     </footer>
 </html>

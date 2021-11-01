@@ -16,12 +16,6 @@ git config --global user.email "example@example.com"
 git config --global user.name "example"
 ```
 
-### Removing Credentials
-
-``` bash
-git config --global credential.usehttppath true
-```
-
 ### Saving remote github Credential on local repo
 ```bash
 git config credential.helper store
@@ -29,6 +23,19 @@ git push -u origin main:main
 ```
 By pushing to remote repo you will be asked to enter username and password( password is really the auth token you have to generate in github settings).   
 The above command makes it so the setting is saved.  
+
+### Your .gitconfig data
+```bash
+git config --list
+```
+delete .gitconfig to reset your config
+
+### Removing Credentials
+
+``` bash
+git config --global credential.usehttppath true
+```
+
 
 
 ---

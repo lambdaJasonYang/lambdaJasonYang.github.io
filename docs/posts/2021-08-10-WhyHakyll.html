@@ -11,8 +11,9 @@
         <link rel="shortcut icon" href="../images/icons/dodecahedron.svg" />
         <link rel="mask-icon" href="../images/icons/dodecahedron.svg" />
         <!-- Icon end -->
-        
-        
+
+
+         
         <title>Jason Yang - Why Hakyll</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
@@ -233,9 +234,28 @@
     Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
 </div>
-<p>It’s minimalistic.<br />
-It’s fast.<br />
-Plus it’s a good excuse to find a more applied use for Haskell.</p>
+<p><span class="math display">\[ f(Hello) = World  \]</span></p>
+<p>I’ve found the best way to retain knowledge is by taking notes. Pen and paper is best but I always end up losing my notes so I turned to text documents.</p>
+<p>Well, whenever I’m not on my PC and need to reference my notes, I am at a loss.<br />
+Next solution, Google docs. It’s a huge RAM eater and no LaTeX.<br />
+Next solution, Gitbooks. Actually a pretty good solution but it gets tedious having to make screencaps to insert diagrams.<br />
+CMS solution with Gatsby? The hosting isn’t really free and you’ll end up with a dead page if you go AWOL.<br />
+And now here we are after a deep dive into functional programming.</p>
+<p>The great part is that I can just type my PlantUML(+ GraphViz) and Railroad Syntax diagrams in my markdown files instead of the tedious process of going to draw.io, drawing the diagram then saving it as a img.</p>
+<h4 id="my-hakyll-setup">My Hakyll Setup</h4>
+<ol type="1">
+<li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
+<li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
+<li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
+<li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
+<li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
+</ol>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a0a426f62202d3e20416c6963653a2048656c6c6f0a416c696365202d3e20426f623a20576f726c640a40656e64756d6c"></figure>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020202048656c6c6f202d3e20576f726c640a7d20"></figure>
+<pre class="rroad"><code>Diagram(
+    &quot;Hello&quot;,
+    Optional(&quot;World&quot;,&quot;skip&quot;)
+)</code></pre>
 
         </div>
         <div id="footer">
@@ -262,11 +282,25 @@ Plus it’s a good excuse to find a more applied use for Haskell.</p>
         gtag('config', 'G-2W1VXE5GSE');
         </script>
         <!-- Google Analytics TAG END  ---------------------->
-
         <!-- MATH JAX START -------------------------------------- -->
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
 
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
     </footer>
 </html>

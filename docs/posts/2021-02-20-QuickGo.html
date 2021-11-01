@@ -11,8 +11,9 @@
         <link rel="shortcut icon" href="../images/icons/dodecahedron.svg" />
         <link rel="mask-icon" href="../images/icons/dodecahedron.svg" />
         <!-- Icon end -->
-        
-        
+
+
+         
         <title>Jason Yang - Quick Go</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
@@ -568,11 +569,25 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
         gtag('config', 'G-2W1VXE5GSE');
         </script>
         <!-- Google Analytics TAG END  ---------------------->
-
         <!-- MATH JAX START -------------------------------------- -->
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
 
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
     </footer>
 </html>

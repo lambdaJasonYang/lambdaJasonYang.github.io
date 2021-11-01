@@ -11,8 +11,9 @@
         <link rel="shortcut icon" href="../images/icons/dodecahedron.svg" />
         <link rel="mask-icon" href="../images/icons/dodecahedron.svg" />
         <!-- Icon end -->
-        
-        
+
+
+         
         <title>Jason Yang - Posts tagged "HakyllSetupSeries"</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
@@ -227,6 +228,10 @@
             <ul style="list-style-type:'\1F344';">
     
         <li>
+            <a href="../posts/2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a> - October  1, 2021
+        </li>
+    
+        <li>
             <a href="../posts/2021-08-24-HakyllPlantUML2.html">Integrate PlantUML diagrams into Hakyll (Updated)</a> - August 24, 2021
         </li>
     
@@ -277,11 +282,25 @@
         gtag('config', 'G-2W1VXE5GSE');
         </script>
         <!-- Google Analytics TAG END  ---------------------->
-
         <!-- MATH JAX START -------------------------------------- -->
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
 
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
     </footer>
 </html>

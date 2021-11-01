@@ -1,4 +1,4 @@
-### [Jason's Blog](https://userjy.github.io/)
+### [Jason's Blog built with Hakyll](https://userjy.github.io/)
 
 ---
 

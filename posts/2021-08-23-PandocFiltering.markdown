@@ -3,10 +3,12 @@ title: Hakyll Pandoc filtering
 tags: tech, prog,HakyllSetupSeries
 ---
 #### Hakyll Setup Series
+
 1. [Setup Mathjax](2021-08-23-HakyllSetupMathjax.html)
 2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
 3. [Setup autobuild Hakyll site Git action CI](2021-06-28-HakyllGitAction.html)
 4. [Very Simple Hakyll Pandoc Filtering Example](2021-08-23-PandocFiltering.html)
+5. [Add Railroad Syntax to Hakyll](2021-10-01-RailroadSyntax.html)
 
 
 
@@ -15,15 +17,15 @@ I can control whether I want some pattern or group of text to be transformed in 
 
 Here I will show the simplest example:
 
-Lets append a text "EOF" to all of our codeblocks.
+Lets append a text "EOF" string to all of our codeblocks automatically by modifying the Pandocs copmiler in Hakyll.
 
-```haskell
+```{.haskell filename="site.hs"}
 import           Text.Pandoc.Definition  
 import           Text.Pandoc.Walk
 import           Data.Text  
 ```
 
-```haskell  
+```{.haskell filename="site.hs"}
 addToCodeBlock :: Pandoc -> Pandoc 
 addToCodeBlock  = walk ftranslate 
   where ftranslate :: Block -> Block
@@ -33,6 +35,22 @@ addToCodeBlock  = walk ftranslate
 simpleCompiler :: Compiler (Item String)
 simpleCompiler = pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock
 ```
+
+```{.hs .numberLines filename="site.hs"}
+main :: IO ()
+main = do
+    E.setLocaleEncoding E.utf8
+    hakyllWith config $ do
+    ...
+      match "posts/*" $ do
+                route $ setExtension "html"
+                compile $ simpleCompiler --ONLY CHANGE THIS
+                    >>= loadAndApplyTemplate "templates/post.html"    (postCtxWithTags tags)
+                    ...
+
+```
+
+#### Using it
 
 For example in my hakyll folder, I create a new file "2099-01-01-NewBlogPost.markdown"
 and the contents are 
@@ -59,7 +77,7 @@ EOF
 ```
 
 
-### Aside 
+### Extra 
 
 CodeBlock Attr Text
 CodeBlock takes a Attr type and Text type.   

@@ -7,32 +7,33 @@ tags: tech, prog, HakyllSetupSeries
 2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
 3. [Setup autobuild Hakyll site Git action CI](2021-06-28-HakyllGitAction.html)
 4. [Very Simple Hakyll Pandoc Filtering Example](2021-08-23-PandocFiltering.html)
+5. [Add Railroad Syntax to Hakyll](2021-10-01-RailroadSyntax.html)
 
 
 ### JS setup
 
 Add mathjax js to \<head\> in /templates/default.html   
 
-Insert line 3,4,5
-```{.html .numberLines}
-<head>...
-
-<script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-...</head>
+Insert line 4,5,6 to your footer 
+```{.html .numberLines filename="templates/default.html"}
+<body>
+...
+<footer>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+</footer>
+</body>
 
 ```
 
 ### Add dependencies
-Modify myblog.cabal  
-Note For you it is named myblog.cabal or what you named your hakyll project.
+Modify your *.cabal file
 
 Add "pandoc, containers" under build-depends in myblog.cabal  
 
 Insert line 7,8
-```{.sh .numberLines}
+```{.sh .numberLines filename="myblog.cabal"}
 executable myblog
   ...
   ...
@@ -44,7 +45,7 @@ executable myblog
 ```
 
 ### Setup functions in site.hs
-```haskell
+```{.haskell filename="site.hs"}
    
 --Step 0: Add "import Text.Pandoc.Options" in site.hs
 import Text.Pandoc.Options
@@ -77,7 +78,7 @@ mathJaxAddedCompiler = pandocCompilerWith readMathjaxOptions writeMathjaxOptions
 Replace the line `compile $ pandocCompiler`{.haskell} with   
 `compiler $ mathJaxAddedCompiler`{.haskell}  
 As shown in line 8
-``` {.haskell .numberLines}
+``` {.haskell filename="site.hs"}
 ...
 main :: IO ()
 main = do    
@@ -107,7 +108,7 @@ $$ x \in Set $$
 
 
 #### Aside
-You can just do the first part(add mathjax js to \<head\>) for a working mathjax BUT then you would have to escape characters frequently and this would make it unportable to other editors.
+You can just do the first part(add mathjax js to \<head\>) for a working mathjax BUT this would make it unportable to other editors.
 
 ```{.tex}
 \\[ x \\in Set \\]

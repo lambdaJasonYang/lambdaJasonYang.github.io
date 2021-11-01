@@ -11,8 +11,9 @@
         <link rel="shortcut icon" href="../images/icons/dodecahedron.svg" />
         <link rel="mask-icon" href="../images/icons/dodecahedron.svg" />
         <!-- Icon end -->
-        
-        
+
+
+         
         <title>Jason Yang - Hakyll Pandoc filtering</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
@@ -239,15 +240,16 @@
 <li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
 <li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
 <li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
+<li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
 </ol>
 <p>Pandoc filtering - when I type up a blog post,<br />
 I can control whether I want some pattern or group of text to be transformed in some manner when the site is rebuilt.</p>
 <p>Here I will show the simplest example:</p>
-<p>Lets append a text “EOF” to all of our codeblocks.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc.Definition</span>  </span>
+<p>Lets append a text “EOF” string to all of our codeblocks automatically by modifying the Pandocs copmiler in Hakyll.</p>
+<div class="sourceCode" id="cb1" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc.Definition</span>  </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc.Walk</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">import</span>           <span class="dt">Data.Text</span>  </span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
+<div class="sourceCode" id="cb2" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>addToCodeBlock  <span class="ot">=</span> walk ftranslate </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>  <span class="kw">where</span><span class="ot"> ftranslate ::</span> <span class="dt">Block</span> <span class="ot">-&gt;</span> <span class="dt">Block</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>        ftranslate (<span class="dt">CodeBlock</span> attr txt ) <span class="ot">=</span> <span class="dt">CodeBlock</span> attr (txt <span class="op">&lt;&gt;</span> <span class="st">&quot;EOF&quot;</span>)</span>
@@ -255,22 +257,33 @@ I can control whether I want some pattern or group of text to be transformed in 
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>		</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="ot">simpleCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>simpleCompiler <span class="ot">=</span> pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock</span></code></pre></div>
+<div class="sourceCode" id="cb3" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb3-2"><a href="#cb3-2"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>    E.setLocaleEncoding E.utf8</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="op">...</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>      match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>                route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>                compile <span class="op">$</span> simpleCompiler <span class="co">--ONLY CHANGE THIS</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>                    <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
+<span id="cb3-10"><a href="#cb3-10"></a>                    <span class="op">...</span></span></code></pre></div>
+<h4 id="using-it">Using it</h4>
 <p>For example in my hakyll folder, I create a new file “2099-01-01-NewBlogPost.markdown” and the contents are</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="an">title:</span><span class="co"> Hello World</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="an">tags:</span><span class="co"> tech</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="co">---</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>This is my blog post.</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>'''python</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>print(&quot;Hello World&quot;)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>'''</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="an">title:</span><span class="co"> Hello World</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="an">tags:</span><span class="co"> tech</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="co">---</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>This is my blog post.</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>'''python</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>print(&quot;Hello World&quot;)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>'''</span></code></pre></div>
 <p>note: the triple single quotes <code class="sourceCode python"><span class="co">'''</span></code> above are actually backticks but pandocs won’t let me escape triple backticks.</p>
 <p>The python codeblock will show:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;Hello World&quot;</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>EOF</span></code></pre></div>
-<h3 id="aside">Aside</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;Hello World&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>EOF</span></code></pre></div>
+<h3 id="extra">Extra</h3>
 <p>CodeBlock Attr Text CodeBlock takes a Attr type and Text type.<br />
 type Attr = (Text, [Text], [(Text, Text)])</p>
 <p>Text type is a Data.Text and holds the content of the codeblock. To convert to string do “unpack Text”</p>
@@ -303,11 +316,25 @@ type Attr = (Text, [Text], [(Text, Text)])</p>
         gtag('config', 'G-2W1VXE5GSE');
         </script>
         <!-- Google Analytics TAG END  ---------------------->
-
         <!-- MATH JAX START -------------------------------------- -->
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
 
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
     </footer>
 </html>

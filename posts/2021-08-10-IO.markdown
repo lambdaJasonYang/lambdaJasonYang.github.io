@@ -23,9 +23,10 @@ func main() {
 ```{.go filename="multiplearg_input.go"}
 	var v1,v2 int64
 	fmt.Scanln(&v1,&v2)
-``
+```
 
-If input has whitespace that need to be included use `bufio`{.go}
+Golang automatically strips out white-space for inputs  
+To stop that, use `bufio`{.go}  
 
 ```{.go}
 import(

@@ -28,7 +28,7 @@ import Data.Char (ord)
 
 --------------
 --------------
---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------MATHJAX START
 --Setup Mathjax on Hakyll
 --Step 0: Add "pandoc, containers" under build-depends in stack.yaml   
 --Step 0: "import Text.Pandoc.Options" in site.hs
@@ -57,9 +57,9 @@ mathJaxAddedCompiler :: Compiler (Item String)
 mathJaxAddedCompiler = pandocCompilerWithTransform readMathjaxOptions writeMathjaxOptions addToCodeBlock
 --Step 5: Replace the line "compile $ pandocCompiler" under "match "posts/*" $ do" with 
 --"compiler $ mathJaxAddedCompiler"
---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------MATHJAX END
 
---------------------------------------------- PLANT UML pandoc filter
+------------------------------------------------------------------------------ PLANTUML pandoc filter
 
 -- strToASCII :: [Char] -> [Int]
 -- --strToASCII xs = fmap ord ( filter (\x -> not $ isSpace x) xs )
@@ -80,6 +80,13 @@ mathJaxAddedCompiler = pandocCompilerWithTransform readMathjaxOptions writeMathj
 -- hexCode :: T.Text -> T.Text 
 -- hexCode y = (replaceLF (T.pack ( plantUMLhex (T.unpack y))))
 
+------------------------------------------------RAILROAD START
+
+railroad :: T.Text -> T.Text
+railroad y = T.pack("<div class='rroad'>"<> T.unpack y <> "</div>")
+
+------------------------------------------------RAILROAD END
+
 mhexCode :: T.Text -> String
 mhexCode y = tail $ init ( show ( encode $ C.pack $ T.unpack y ))
 
@@ -92,11 +99,14 @@ addToCodeBlock :: Pandoc -> Pandoc
 addToCodeBlock  = walk ftranslate 
   where ftranslate :: Block -> Block
         ftranslate (CodeBlock ("",["plantuml"],[]) txt ) = RawBlock (Format "html") (planthtml txt)
+        ftranslate (CodeBlock ("",["railroad"],[]) txt ) = RawBlock (Format "html") (railroad txt)
         ftranslate x = x 
 
                 
 
-----------------------------------------------
+-------------------------------------------------------------------------------PLANTUML END
+
+
 
 --ATOM RSS FEED----------------------------------------------------
 myFeedConfiguration :: FeedConfiguration
@@ -120,7 +130,11 @@ main = do
         match "images/**" $ do
             route   idRoute
             compile copyFileCompiler
-        
+
+        match "lib/**" $ do
+            route   idRoute
+            compile copyFileCompiler
+
         match "fonts/*" $ do
             route   idRoute
             compile copyFileCompiler

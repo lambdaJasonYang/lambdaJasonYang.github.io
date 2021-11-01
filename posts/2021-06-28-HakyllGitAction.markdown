@@ -8,6 +8,7 @@ tags: tech, prog, HakyllSetupSeries, DevOps
 2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
 3. [Setup autobuild Hakyll site Git action CI](2021-06-28-HakyllGitAction.html)
 4. [Very Simple Hakyll Pandoc Filtering Example](2021-08-23-PandocFiltering.html)
+5. [Add Railroad Syntax to Hakyll](2021-10-01-RailroadSyntax.html)
 
 ### Autogenerate static site on git push to github
 

@@ -36,5 +36,12 @@ Type
 
 For any type α that has a pre order. 
 
-### Infinite primes 
+### Types
 
+### Numbers
+
+Proofs of numbers typically use type coercion.
+
+```bash
+norm_num
+```

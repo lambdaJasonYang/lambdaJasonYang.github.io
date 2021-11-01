@@ -7,6 +7,7 @@ tags: tech, prog, HakyllSetupSeries
 2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
 3. [Setup autobuild Hakyll site Git action CI](2021-06-28-HakyllGitAction.html)
 4. [Very Simple Hakyll Pandoc Filtering Example](2021-08-23-PandocFiltering.html)
+5. [Add Railroad Syntax to Hakyll](2021-10-01-RailroadSyntax.html)
 
 
 
@@ -26,13 +27,13 @@ http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f622
 2. Converts ASCII decimal into hex
 3. Hex is part of URL of planttext which will generate our image 
 
-```haskell
+```{.haskell filename="site.hs"}
 import qualified Data.ByteString.Char8 as C
 import Data.ByteString.Base16 (encode, decode)
 import qualified Data.Text as T
 ```
 
-``` haskell
+```{.haskell filename="site.hs"}
 mhexCode :: T.Text -> String
 mhexCode y = tail $ init ( show ( encode $ C.pack $ T.unpack y ))
 
@@ -59,7 +60,7 @@ Now we need to modify site.hs so that Hakyll will transform a PlantUML code bloc
 We can do this with Hakyll's Pandocs Filtering.    
   
 
-``` haskell
+```{.haskell filename="site.hs"}
 
 --Pandoc filtering, 
 addToCodeBlock :: Pandoc -> Pandoc 
@@ -94,7 +95,7 @@ Alice->Bob : I am using hex
 ### Full Code
 
 add under "build-depends" in your .cabal file
-```bash
+```{bash filename="myblog.cabal"}
 pandoc,
 pandoc-types,
 text,
@@ -104,7 +105,7 @@ bytestring,
 
 Add to your site.hs
 
-``` haskell
+```{.haskell filename="site.hs"}
 import           Text.Pandoc.Definition  
 import           Text.Pandoc.Walk
 import           Data.Text  
@@ -114,7 +115,7 @@ import Data.ByteString.Base16 (encode, decode)
 import qualified Data.Text as T
 ```
 
-``` haskell
+```{.haskell filename="site.hs"}
 mhexCode :: T.Text -> String
 mhexCode y = tail $ init ( show ( encode $ C.pack $ T.unpack y ))
 
@@ -132,13 +133,13 @@ addToCodeBlock  = walk ftranslate
 
 * If you've followed my [mathjax hakyll tutorial](2021-08-23-HakyllSetupMathjax.html), simply add the code below:
 
-```haskell
+```{.haskell filename="site.hs"}
 mathJaxAddedCompiler :: Compiler (Item String)
 mathJaxAddedCompiler = pandocCompilerWithTransform readMathjaxOptions writeMathjaxOptions addToCodeBlock
 ```
 
 * If you didn't follow my mathjax hakyll tutorial, then add the code below:
-```haskell
+```{.haskell filename="site.hs"}
 simpleCompiler :: Compiler (Item String)
 simpleCompiler = pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock
 ```
