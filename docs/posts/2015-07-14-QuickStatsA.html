@@ -243,6 +243,9 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'stats'." href="../tags/stats.html">stats</a>
     
 </div>
+<blockquote>
+<p>All men are [EQUAL] in innocence until proven otherwise</p>
+</blockquote>
 <p>Keypoints:</p>
 <ul>
 <li>Test = Proof by Contradiction</li>
@@ -251,7 +254,7 @@
 <li>Failing a test with high p-value Doesn’t Imply our Null(=) is True</li>
 </ul>
 <h3 id="tests-are-like-proof-by-contradiction.">Tests are like proof by contradiction.</h3>
-<ol start="2" type="1">
+<ol type="1">
 <li><p>Null hypothesis is our assumption. <span class="math inline">\([T_1 = T_2]^{null}\)</span></p></li>
 <li><p>If p-value is less than alpha, we have a proof by contradiction.</p></li>
 <li><p>Discharge assumption <span class="math inline">\([T_1 = T_2]^{null}\)</span> (Reject the Null)<br />
@@ -259,23 +262,45 @@ thus proving <span class="math inline">\(T_1 \neq T_2\)</span></p></li>
 </ol>
 <p><span class="math display">\[\cfrac{\cfrac{[T_1 = T_2]^{null}}{\cfrac{..p &lt; 0.05..}{\bot}}}{T_1 \neq T_2}\]</span></p>
 <p>alpha or 0.05 is Type 2 error.</p>
-<p>p-value is probability of seeing an unequal outcome given that something is equal.</p>
 <ul>
-<li>p-value is a measure of “if the null hypothesis is true,how surprised are you at the results”</li>
+<li>p-value is a measure of “if we assumed null hypothesis is true,how surprised are you at your empirical observation[data set]”</li>
 </ul>
-<p><span class="math inline">\(Prob(T_1 \neq T_2 | T_1 = T_2) := 0.05\)</span></p>
+<p>P-value does not show you probability of two groups being equal. <span class="math inline">\(\xcancel{pvalue = P(T_1 = T_2)}\)</span></p>
+<p><span class="math display">\[pvalue = P(D|H)\ \text{where H is null hypothesis}\]</span></p>
 <ul>
-<li>Low p-value means "<br />
-</li>
+<li>This means the p-value is the probability we see our data set appear in reality given a true null-hypothesis.
+<ul>
+<li>Example: T-test on 2 groups, Boy and Girl, on chocolate eaten. We empirically collect data on mean and stdev, our T-test shows p-value of 0.024.
+<ul>
+<li>Given our priori model of reality where that girl and boys eat same amount of chocolate, we find there is 2.4% chance that we see our data set happen in this model of reality.
+<ul>
+<li>Either we got really lucky or our priori(null hypothesis) is wrong.</li>
+</ul></li>
+</ul></li>
+<li>Example2: T-test on feathers vs rocks. We empirically collect data on acceleration mean and stdev. Our T-test shows p-value of 0.95.
+<ul>
+<li>Given our priori model of reality [Gravity], we have a 95% chance of seeing this happen.
+<ul>
+<li>BUT NOTICE, OUR feathers vs rocks experiment does not prove gravity(null hypothesis) <span class="math inline">\(P(H|D)\)</span><br />
+<span class="math inline">\(P(D|H) \neq P(H|D)\)</span></li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul>
-<p>P-value does not show you probability of two groups being equal or a coin being fair. <span class="math inline">\(\xcancel{Prob(T_1 = T_2) = pvalue}\)</span></p>
+<hr />
+<blockquote>
+<p>Given our priori model of reality where X and Y are Equal (Null hyp),<br />
+We find there is a {p-value} chance that we see our empirically observed dataset obtained from our experiment.</p>
+</blockquote>
+<p><span class="math display">\[P(H|D) = \frac{P(H)P(D|H)}{P(H)P(D|H)+P(\lnot H)P(D|\lnot H)}\]</span></p>
 <h3 id="chi-squared-test">Chi-Squared test</h3>
 <p>INPUT: function that maps alphabet to frequency, <span class="math inline">\(f_1, f_2\)</span><br />
-Notice the Domain(Alphabet) and CoDomain(Naturals) are discrete variables.</p>
+Notice both the Domain(Alphabet) and CoDomain(Naturals) are discrete aka Countable.</p>
 <p>OUTPUT: <span class="math inline">\(f_1 \overset{?}{=} f_2\)</span></p>
 <p>Example:<br />
 Chi-Square test on Cesar Cipher,</p>
-<p>ANALYZE: <span class="math inline">\(Chi-Squared = 0 \Rightarrow f_1 = f_2\)</span> $Chi-Squared</p>
+<p>ANALYZE:<br />
+<span class="math inline">\(ChiSquared = 0 \Rightarrow f_1 = f_2\)</span> $ChiSquared $</p>
 
         </div>
         <div id="footer">
