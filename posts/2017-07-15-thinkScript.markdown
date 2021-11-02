@@ -56,10 +56,17 @@ if 3 > 2 {
 }
 ```
 
-### plotting lower 
+### plotting lower subgraph
 
 ```bash
 declare lower;
 c = 5;
-plot a = c;
+plot outX = c;
+```
+
+### allow UI dropdown input
+
+```bash
+input a = close; #default value is close
+plot outX = a;
 ```
