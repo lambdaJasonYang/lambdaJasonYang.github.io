@@ -57,18 +57,20 @@ A possible solution is to flash the software with OpenWRT if a firmware exists o
 ### Range 
 Look at antennas and power.
 
+### Mesh Routers
+
+A modern powerful dedicated 5 Ghz router in the $100 range is better than mesh routers. 
 
 ### Other links 
 
 This website is helpful in comparing routers  
 https://www.smallnetbuilder.com/
 
-### On Second hand market routers
-
-Typically they are not worth it unless you are looking to flash OpenWRT(if so look at my other article whether OpenWRT routers are worth it). 
-
-Routers like the archer C7 are already outdated and are around $20-30 for a second-hand one.
-Buying a new tp-link ax wifi 6  budget router on amazon is around $70 and will have better performance and range all around.
+### My Setup
+I have 
+ * a PFsense that routes traffic 
+ * a dedicated 5 Ghz TP-link router as a dumb AP for main internet usage
+ * two OpenWrt 2.4 Ghz router meshed dumb AP for IOT devices
 
 ### On Second hand market Enterprise Access points
 Routers like Ruckus, Aruba, Cisco, Aerohive

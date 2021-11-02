@@ -245,14 +245,22 @@
 </div>
 <p>As of 2021, the default drivers that comes installed with the archer C7 is not compatible with 5Ghz mesh even though it works for 2.5Ghz mesh.</p>
 <p>We have to remove the default drivers( the ct version) and install the non-ct version as shown below.</p>
-<p>opkg remove ath10k-firmware-qca988x-ct kmod-ath10k-ct opkg install ath10k-firmware-qca988x kmod-ath10k</p>
-<p>If you get an error as shown below then you have to run opkg update</p>
-<p>Unknown package ‘ath10k-firmware-qca988x’. Unknown package ‘kmod-ath10k’. Collected errors: * opkg_install_cmd: Cannot install package ath10k-firmware-qca988x. * opkg_install_cmd: Cannot install package kmod-ath10k.</p>
-<p>If you get an error running opkg update then</p>
-<p>root@OpenWrt:~# opkg update Downloading https://downloads.openwrt.org/releases/21.02.0-rc4/targets/ath79/gen eric/packages/Packages.gz Failed to send request: Operation not permitted *** Failed to download the package list from https://downloads.openwrt.org/relea ses/21.02.0-rc4/targets/ath79/generic/packages/Packages.gz</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">opkg</span> remove ath10k-firmware-qca988x-ct kmod-ath10k-ct</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">opkg</span> install ath10k-firmware-qca988x kmod-ath10k</span></code></pre></div>
+<p>If you get an error as shown below then you have to run <code class="sourceCode bash"><span class="ex">opkg</span> update</code></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">Unknown</span> package <span class="st">'ath10k-firmware-qca988x'</span>.</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="ex">Unknown</span> package <span class="st">'kmod-ath10k'</span>.</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="ex">Collected</span> errors:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a> <span class="ex">*</span> opkg_install_cmd: Cannot install package ath10k-firmware-qca988x.</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a> <span class="ex">*</span> opkg_install_cmd: Cannot install package kmod-ath10k.</span></code></pre></div>
+<p>If you get an error running <code class="sourceCode bash"><span class="ex">opkg</span> update</code> then</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ex">root@OpenWrt</span>:~# opkg update</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="ex">Downloading</span> https://downloads.openwrt.org/releases/21.02.0-rc4/targets/ath79/gen        eric/packages/Packages.gz</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="ex">Failed</span> to send request: Operation not permitted</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="ex">***</span> Failed to download the package list from https://downloads.openwrt.org/relea        ses/21.02.0-rc4/targets/ath79/generic/packages/Packages.gz</span></code></pre></div>
 <p>Adjust your settings</p>
 <p>Go to your settings Interfaces &gt; LAN &gt;&gt; Advanced Settings tab, Use Custom DNS servers: 8.8.8.8</p>
-<p>then do opkg update and it should work and continue the previous steps. Afterwards reboot your router and your mesh should work.</p>
+<p>then do <code class="sourceCode bash"><span class="ex">opkg</span> update</code> and it should work and continue the previous steps. Afterwards reboot your router and your mesh should work.</p>
 
         </div>
         <div id="footer">
