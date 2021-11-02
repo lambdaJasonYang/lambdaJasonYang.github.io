@@ -37,3 +37,19 @@ $Prob(T_1 \neq T_2 | T_1 = T_2) := 0.05$
 P-value does not show you probability of two groups being equal or a coin being fair.
 $\xcancel{Prob(T_1 = T_2) = pvalue}$
 
+
+### Chi-Squared test
+
+INPUT:
+function that maps alphabet to frequency, $f_1, f_2$  
+Notice the Domain(Alphabet) and CoDomain(Naturals) are discrete variables.   
+
+OUTPUT:
+$f_1 \overset{?}{=} f_2$
+
+Example:  
+Chi-Square test on Cesar Cipher,
+
+ANALYZE:
+$Chi-Squared = 0 \Rightarrow f_1 = f_2$
+$Chi-Squared  

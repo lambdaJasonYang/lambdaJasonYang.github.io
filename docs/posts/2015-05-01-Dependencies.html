@@ -23,7 +23,7 @@
         <!-- Google Analytics TAG END  ---------------------->
 
          
-        <title>Jason Yang - Posts tagged "statistics"</title>
+        <title>Jason Yang - Dependencies, Arrows and Confusion</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -231,20 +231,39 @@
         </div>
 
         <div id="content">
-            <h1>Posts tagged "statistics"</h1>
+            <h1>Dependencies, Arrows and Confusion</h1>
             
 
-            <ul style="list-style-type:'\1F344';">
+            <div class="info">
+    Posted on May  1, 2015
     
-        <li>
-            <a href="../posts/2020-10-05-mathmlNotes.html">Math for ML Notes</a> - October  5, 2020
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2018-01-05-MarkovChain.html">Markov Chain and State machines</a> - January  5, 2018
-        </li>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>
     
+</div>
+<h3 id="pure-functions">Pure Functions</h3>
+<p>AST is used for functional programming</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">def</span> plus(x,y):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    <span class="cf">return</span> x <span class="op">+</span> y</span></code></pre></div>
+<ul>
+<li>plus is pure</li>
+<li>plus is pass-by-value
+<ul>
+<li>plus does not modify args, x y</li>
+</ul></li>
 </ul>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h6469677261706820477b0a0a20202020706c75730a20202020706c7573202d3e2078205b636f6c6f72203d207265645d0a20202020706c7573202d3e2079205b636f6c6f72203d207265645d0a7d"></figure>
+<p><strong>The arrows in red DO NOT REPRESENT dependency like in OO or UML diagram</strong></p>
+<p>In OO, the same diagram does not exist because the arrows now represent object dependency.</p>
+<p>Therefore plus does not have an object dependency diagram.</p>
+<hr />
+<h3 id="oo">OO</h3>
+<h4 id="pointers">pointers</h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="dt">int</span> *a = &amp;b;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="dt">void</span> plus(&amp;x,&amp;y,&amp;z):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    z = x + y</span></code></pre></div>
 
         </div>
         <div id="footer">

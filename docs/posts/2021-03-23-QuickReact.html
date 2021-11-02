@@ -11,7 +11,16 @@
         <link rel="shortcut icon" href="../images/icons/dodecahedron.svg" />
         <link rel="mask-icon" href="../images/icons/dodecahedron.svg" />
         <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
 
          
         <title>Jason Yang - Quick React</title>
@@ -392,22 +401,13 @@ But in this case the hook depends on the JSX element.</p>
         
     </body>
     <footer>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
 
-        gtag('config', 'G-2W1VXE5GSE');
-        </script>
-        <!-- Google Analytics TAG END  ---------------------->
         <!-- MATH JAX START -------------------------------------- -->
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
-        <script type="module">
+        <script async type="module">
             import rr,* as rrClass from "/lib/railroad/railroad.js";
             Object.assign(window,rr)
             window.rrOptions = rrClass.Options;
