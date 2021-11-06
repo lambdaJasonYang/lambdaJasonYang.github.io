@@ -1,5 +1,5 @@
 ---
-title: Linux troubleshooting commands
+title: Linux annoying setup commands
 tags: tech, DevOps
 ---
 
@@ -83,3 +83,29 @@ All your header files or ".h" files will be inside /usr/include
 ```bash
 find /usr -name libc-header-start.h  
 ```
+
+---
+
+### Setup code-server
+
+~/.config/code-server/config.yaml
+
+CONVERT FROM THIS
+
+```{.yaml filename="config.yaml"}
+bind-addr: 127.0.0.1:8080
+auth: password
+password: idsjawij2382ruqfo
+cert: false
+```
+TO 
+
+```{.yaml filename="config.yaml"}
+bind-addr: 0.0.0.0:8080
+auth: password
+password: root
+cert: false
+```
+
+**In linux 127.0.0.1 means localhost but doesn't allow access from LAN**  
+**0.0.0.0 allows access from LAN**  
