@@ -338,8 +338,12 @@ Now we will plot a 2d vector and have the color represent a static label of x-ax
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="cf">with</span> torch.no_grad():</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>    Output <span class="op">=</span> model(dataset)</span></code></pre></div>
 <h3 id="non-linear-transformations">Non-linear Transformations</h3>
-<hr />
-<h3 id="autodifferentiation">Autodifferentiation</h3>
+<h3 id="linear-classifier">Linear Classifier</h3>
+<p><span class="math display">\[ y = sign(W \cdot X + b)\]</span> Partitions the input space into two spaces divided by a hyperplane.</p>
+<p>$y {-1,0,1} :: Classification $$</p>
+<p>We are computing dot product of input vector against the weight vector. If these two vectors are orthogonal then <span class="math inline">\(y\)</span> is 0 which is the separating hyperplane.</p>
+<p><strong>The hyperplane is NOT the weight vector</strong></p>
+<p>Imagine in 3d space, we have a 1d weight vector. The set of points that are orthogonal to this vector make up a 2d hyperplane. <span class="math inline">\(hyperplane = \{x \in \mathbb{R}^2 | w\cdot x = 0\}\)</span></p>
 
         </div>
         <div id="footer">
@@ -362,7 +366,7 @@ Now we will plot a 2d vector and have the color represent a static label of x-ax
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
-        <script async type="module">
+        <script type="module">
             import rr,* as rrClass from "/lib/railroad/railroad.js";
             Object.assign(window,rr)
             window.rrOptions = rrClass.Options;

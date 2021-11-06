@@ -148,3 +148,20 @@ with torch.no_grad():
 
 ---
 ###  Autodifferentiation
+
+
+---
+
+### Linear Classifier
+
+$$ y = sign(W \cdot X + b)$$
+Partitions the input space into two spaces divided by a hyperplane.
+
+$y \in \{-1,0,1\} :: Classification $$
+
+We are computing dot product of input vector against the weight vector. If these two vectors are orthogonal then $y$ is 0 which is the separating hyperplane.
+
+**The hyperplane is NOT the weight vector**
+
+Imagine in 3d space, we  have a 1d weight vector. The set of points that are orthogonal to this vector make up a 2d hyperplane.
+$hyperplane = \{x \in \mathbb{R}^2 | w\cdot x = 0\}$

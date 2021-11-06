@@ -255,6 +255,18 @@
 </ul></li>
 </ul>
 <p>```</p>
+<h4 id="direct-sum">Direct Sum</h4>
+<blockquote>
+<p>Find two unrelated spaces in your universe and slam them together</p>
+</blockquote>
+<p>Given some vector space S, we have subspaces {X,Y,Z…}</p>
+<ol type="1">
+<li>None of these subspaces share any element but the null vector</li>
+<li>there is no combination of {Y,Z…} that can form an element of X.</li>
+</ol>
+<p>Inner Direct Sum is the set of possible sums that can be formed from taking one element from each of the subspaces {X,Y,Z…}</p>
+<p><span class="math inline">\(\{(x,0) | x\in \mathbb{R}\} \oplus \{(0,y) | x\in \mathbb{R}\}=\mathbb{R}^2\)</span> or written as<br />
+<span class="math inline">\((\mathbb{R},0) \oplus (0,\mathbb{R})\)</span> but some might even do notational abuse and just write <span class="math inline">\(\mathbb{R} \oplus \mathbb{R}\)</span></p>
 
         </div>
         <div id="footer">
@@ -277,7 +289,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
-        <script async type="module">
+        <script type="module">
             import rr,* as rrClass from "/lib/railroad/railroad.js";
             Object.assign(window,rr)
             window.rrOptions = rrClass.Options;

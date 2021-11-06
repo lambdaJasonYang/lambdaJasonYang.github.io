@@ -247,6 +247,65 @@
 <p>Nested HomSets are simply the types of curried functions.</p>
 <h3 id="translate-homset-to-function-type-notation">Translate Homset to function type notation</h3>
 <p><span class="math display">\[ f :: A \rightarrow B := f \in Hom(A, B) \]</span> <span class="math display">\[ f :: A \rightarrow (B \rightarrow C) := f \in Hom(A, Hom(B,C)) \]</span> <span class="math display">\[ f :: (A \rightarrow B) \rightarrow C := f \in Hom(Hom(A,B),C) \]</span></p>
+<hr />
+<h3 id="free-monoid">Free Monoid</h3>
+<ul>
+<li>object : T</li>
+<li>Morphism : Alphabet = {a,b,c…} map T –&gt; T</li>
+<li>Composition : Append</li>
+</ul>
+<p>The Free Monoid on the alphabet results in the set of all possible words/strings created from the alphabet.</p>
+<h5 id="free-monoid-on-number">Free monoid on number</h5>
+<p>Addition mod 2 group is a category</p>
+<ul>
+<li>1+1 = 0</li>
+<li>1+0 = 1</li>
+</ul>
+<p>Category</p>
+<ul>
+<li>object : T</li>
+<li>morphisms: numbers {0,1}</li>
+<li>composition: addition</li>
+<li>Identity morphism: 0</li>
+</ul>
+<p>Checking composition: (1+1)+1 = 1+(1+1)</p>
+<hr />
+<table>
+<thead>
+<tr class="header">
+<th>Cat</th>
+<th>object</th>
+<th>morphism</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vect</td>
+<td>vector space</td>
+<td>linear maps</td>
+</tr>
+<tr class="even">
+<td>Groups</td>
+<td>groups</td>
+<td>group homomorphisms</td>
+</tr>
+<tr class="odd">
+<td>MetricSpc</td>
+<td>Metric Spaces</td>
+<td>Continuous Maps</td>
+</tr>
+<tr class="even">
+<td>Rel</td>
+<td>Sets</td>
+<td>Binary relations</td>
+</tr>
+<tr class="odd">
+<td>Par</td>
+<td>sets</td>
+<td>partial functions</td>
+</tr>
+</tbody>
+</table>
 
         </div>
         <div id="footer">
@@ -269,7 +328,7 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
-        <script async type="module">
+        <script type="module">
             import rr,* as rrClass from "/lib/railroad/railroad.js";
             Object.assign(window,rr)
             window.rrOptions = rrClass.Options;
