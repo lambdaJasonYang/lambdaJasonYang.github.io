@@ -484,7 +484,7 @@ You can even push this new pre-merge state commit to remote github. But clearly 
 <p>esc-:diffget LO to apply Local, left most window esc-:diffget remote to apply Remote, right most window esc-:diffget BA to apply base, top center window</p>
 <p>esc-i to insert mode esc-dd to delete line</p>
 <p>esc-]-c to move to next conflict esc-[-c to move to prev conflict</p>
-<h3 id="undo-last-commit">Undo last commit</h3>
+<h3 id="undo-last-commit-abort-changes">Undo last commit Abort Changes</h3>
 <p>Undo last commit but keep content changes</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a><span class="fu">git</span> reset --soft HEAD~1</span></code></pre></div>
 <p>Undo last commit, do not keep content change</p>
@@ -499,6 +499,9 @@ Then you made a local repo with some web server and used git init.<br />
 Now you want to push your local repo on that “empty” remote repo.</p>
 <p>Not so simple, we first have to merge it but it will give us an error on a naive merge since your local and remote repo have no common ancestor</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a><span class="fu">git</span> pull origin main --allow-unrelated-histories </span></code></pre></div>
+<h3 id="removing-untracked-changes">Removing untracked changes</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a><span class="fu">git</span> clean -f</span></code></pre></div>
+<p>You might use this when you did a merge but Ctrl-C or exited out in the middle so now you’re left with temp MERGE files.</p>
 
         </div>
         <div id="footer">

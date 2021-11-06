@@ -348,7 +348,7 @@ esc-dd to delete line
 esc-]-c to move to next conflict
 esc-[-c to move to prev conflict
 
-### Undo last commit
+### Undo last commit Abort Changes
 
 Undo last commit but keep content changes
 ```bash
@@ -381,3 +381,10 @@ Not so simple, we first have to merge it but it will give us an error on a naive
 git pull origin main --allow-unrelated-histories 
 ```
 
+### Removing untracked changes
+
+```bash
+git clean -f
+```
+
+You might use this when you did a merge but Ctrl-C or exited out in the middle so now you're left with temp MERGE files.
