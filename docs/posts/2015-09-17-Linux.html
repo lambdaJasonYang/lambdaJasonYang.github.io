@@ -273,6 +273,11 @@
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
 <p><strong>In linux 127.0.0.1 means localhost but doesn’t allow access from LAN</strong><br />
 <strong>0.0.0.0 allows access from LAN</strong></p>
+<h3 id="accessing-linux-webpages-from-lan">Accessing Linux webpages from LAN</h3>
+<ol type="1">
+<li>linux hakyll webserver to listen on 127.0.0.1:8000</li>
+<li>LAN can’t access server without linux first running <code class="sourceCode bash"><span class="ex">sysctl</span> -w net.ipv4.conf.eth0.route_localnet=1</code></li>
+</ol>
 
         </div>
         <div id="footer">

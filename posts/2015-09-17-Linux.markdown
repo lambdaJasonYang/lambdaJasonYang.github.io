@@ -109,3 +109,8 @@ cert: false
 
 **In linux 127.0.0.1 means localhost but doesn't allow access from LAN**  
 **0.0.0.0 allows access from LAN**  
+
+### Accessing Linux webpages from LAN
+
+1. linux hakyll webserver to listen on 127.0.0.1:8000
+2. LAN can't access server without linux first running `sysctl -w net.ipv4.conf.eth0.route_localnet=1`{.bash}
