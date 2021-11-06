@@ -23,7 +23,7 @@
         <!-- Google Analytics TAG END  ---------------------->
 
          
-        <title>Jason Yang - Linux troubleshooting commands</title>
+        <title>Jason Yang - Linux annoying setup commands</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -231,7 +231,7 @@
         </div>
 
         <div id="content">
-            <h1>Linux troubleshooting commands</h1>
+            <h1>Linux annoying setup commands</h1>
             
 
             <div class="info">
@@ -258,6 +258,21 @@
 <h3 id="files">Files</h3>
 <p>All your header files or “.h” files will be inside /usr/include</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">find</span> /usr -name libc-header-start.h  </span></code></pre></div>
+<hr />
+<h3 id="setup-code-server">Setup code-server</h3>
+<p>~/.config/code-server/config.yaml</p>
+<p>CONVERT FROM THIS</p>
+<div class="sourceCode" id="cb5" data-filename="config.yaml"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">bind-addr</span><span class="kw">:</span><span class="at"> 127.0.0.1:8080</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="fu">auth</span><span class="kw">:</span><span class="at"> password</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> idsjawij2382ruqfo</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
+<p>TO</p>
+<div class="sourceCode" id="cb6" data-filename="config.yaml"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">bind-addr</span><span class="kw">:</span><span class="at"> 0.0.0.0:8080</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="fu">auth</span><span class="kw">:</span><span class="at"> password</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> root</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
+<p><strong>In linux 127.0.0.1 means localhost but doesn’t allow access from LAN</strong><br />
+<strong>0.0.0.0 allows access from LAN</strong></p>
 
         </div>
         <div id="footer">
