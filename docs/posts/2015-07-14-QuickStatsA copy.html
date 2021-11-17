@@ -23,7 +23,7 @@
         <!-- Google Analytics TAG END  ---------------------->
 
          
-        <title>Jason Yang - Abstract Linear Algebra</title>
+        <title>Jason Yang - Quick Stats Part 1</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -231,7 +231,7 @@
         </div>
 
         <div id="content">
-            <h1>Abstract Linear Algebra</h1>
+            <h1>Quick Stats Part 1</h1>
             
 
             <div class="info">
@@ -240,53 +240,67 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'stats'." href="../tags/stats.html">stats</a>
     
 </div>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6672616d6520224162656c69616e2047726f7570227b0a202020206672616d652047726f75707b0a20202020202020206672616d65204d6f6e6f6964207b0a2020202020202020202020206672616d652053656d6967726f7570207b0a2020202020202020202020206f626a6563742022536574204d22206173205365740a2020202020202020202020206f626a656374202242696e617279204f7065726174696f6e222061732042696e0a2020202020202020202020207d0a2020202020202020202020206f626a65637420226964656e7469747920656c656d656e7422206173204f6e650a2020202020202020202020204f6e65202d2d3e205365740a20202020202020207d0a20202020202020206f626a6563742022696e766572736520656c656d656e74732220617320496e760a2020202020202020496e76202d2d3e205365740a202020207d0a202020206f626a6563742022436f6d6d756e617469746976652220617320436f6d6d0a20202020436f6d6d202d2d3e2042696e0a7d0a0a40656e64756d6c6d6c"></figure>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">#print vector_space</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">vector_space</span> (R: Type u) <span class="kw">(</span><span class="ex">M</span>: Type v<span class="kw">)</span> [<span class="ex">field</span> R] [add_comm_group M] := semimodule R M</span></code></pre></div>
-<p>vector space is a</p>
+<blockquote>
+<p>All men are [EQUAL] in innocence until proven otherwise</p>
+</blockquote>
+<p>Keypoints:</p>
 <ul>
-<li>semi-module over a
+<li>Test = Proof by Contradiction</li>
+<li>Null = Assumption Of Equality(=)</li>
+<li>Failing a Proof by Contradiction Doesn’t Imply our Assumption is True</li>
+<li>Failing a test with high p-value Doesn’t Imply our Null(=) is True</li>
+</ul>
+<h3 id="tests-are-like-proof-by-contradiction.">Tests are like proof by contradiction.</h3>
+<ol type="1">
+<li><p>Null hypothesis is our assumption. <span class="math inline">\([T_1 = T_2]^{null}\)</span></p></li>
+<li><p>If p-value is less than alpha, we have a proof by contradiction.</p></li>
+<li><p>Discharge assumption <span class="math inline">\([T_1 = T_2]^{null}\)</span> (Reject the Null)<br />
+thus proving <span class="math inline">\(T_1 \neq T_2\)</span></p></li>
+</ol>
+<p><span class="math display">\[\cfrac{\cfrac{[T_1 = T_2]^{null}}{\cfrac{..p &lt; 0.05..}{\bot}}}{T_1 \neq T_2}\]</span></p>
+<p>alpha or 0.05 is Type 2 error.</p>
 <ul>
-<li>field R</li>
-<li>additive communitative group M ```plantuml</li>
+<li>p-value is a measure of “if we assumed null hypothesis is true,how surprised are you at your empirical observation[data set]”</li>
+</ul>
+<p>P-value does not show you probability of two groups being equal. <span class="math inline">\(\xcancel{pvalue = P(T_1 = T_2)}\)</span></p>
+<p><span class="math display">\[pvalue = P(D|H)\ \text{where H is null hypothesis}\]</span></p>
+<ul>
+<li>This means the p-value is the probability we see our data set appear in reality given a true null-hypothesis.
+<ul>
+<li>Example: T-test on 2 groups, Boy and Girl, on chocolate eaten. We empirically collect data on mean and stdev, our T-test shows p-value of 0.024.
+<ul>
+<li>Given our priori model of reality where that girl and boys eat same amount of chocolate, we find there is 2.4% chance that we see our data set happen in this model of reality.
+<ul>
+<li>Either we got really lucky or our priori(null hypothesis) is wrong.</li>
+</ul></li>
+</ul></li>
+<li>Example2: T-test on feathers vs rocks. We empirically collect data on acceleration mean and stdev. Our T-test shows p-value of 0.95.
+<ul>
+<li>Given our priori model of reality [Gravity], we have a 95% chance of seeing this happen.
+<ul>
+<li>BUT NOTICE, OUR feathers vs rocks experiment does not prove gravity(null hypothesis) <span class="math inline">\(P(H|D)\)</span><br />
+<span class="math inline">\(P(D|H) \neq P(H|D)\)</span></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
-<p>```</p>
-<h4 id="direct-sum">Direct Sum</h4>
+<hr />
 <blockquote>
-<p>Find two unrelated spaces in your universe and slam them together</p>
+<p>Given our priori model of reality where X and Y are Equal (Null hyp),<br />
+We find there is a {p-value} chance that we see our empirically observed dataset obtained from our experiment.</p>
 </blockquote>
-<p>Given some vector space <span class="math inline">\(S\)</span>, we choose some subspaces <span class="math inline">\(\{X,Y,Z...\}\)</span></p>
-<ol type="1">
-<li>None of these subspaces share any element but the null vector</li>
-<li>there is no combination of <span class="math inline">\(\{Y,Z...\}\)</span> that can form an element of <span class="math inline">\(X\)</span>.</li>
-</ol>
-<p>take an element from each subspace in <span class="math inline">\(\{X,Y,Z...\}\)</span> then add them.<br />
-<span class="math display">\[\oplus \{X,Y,Z...\} = \{x + y + ... | x \in X, y \in Y ...\}\]</span></p>
-<h5 id="direct-sum-of-matrices">Direct Sum of matrices</h5>
-<p>Given that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices themselves.<br />
-Note that <span class="math inline">\(0\)</span> stands for zero matrices of varying sizes.<br />
-Block matrix notation of direct sum:</p>
-<p><span class="math display">\[A \oplus B = \begin{bmatrix}
-A &amp; 0 \\
-0 &amp; B 
-\end{bmatrix}\]</span></p>
-<p><span class="math display">\[B \oplus A = \begin{bmatrix}
-B &amp; 0 \\
-0 &amp; A 
-\end{bmatrix}\]</span></p>
-<p><span class="math display">\[ A \oplus B \cong B \oplus A \]</span></p>
-<ul>
-<li>Direct sum is commutative up to isomorphism</li>
-</ul>
-<h5 id="example">Example</h5>
-<p><span class="math inline">\(\{(x,0) | x\in \mathbb{R}\} \oplus \{(0,y) | x\in \mathbb{R}\}=\mathbb{R}^2\)</span> or written as<br />
-<span class="math inline">\((\mathbb{R},0) \oplus (0,\mathbb{R})\)</span><br />
-but some might even do notational abuse and just write<br />
-<span class="math inline">\(\mathbb{R} \oplus \mathbb{R}\)</span></p>
+<p><span class="math display">\[P(H|D) = \frac{P(H)P(D|H)}{P(H)P(D|H)+P(\lnot H)P(D|\lnot H)}\]</span></p>
+<h3 id="chi-squared-test">Chi-Squared test</h3>
+<p>INPUT: function that maps alphabet to frequency, <span class="math inline">\(f_1, f_2\)</span><br />
+Notice both the Domain(Alphabet) and CoDomain(Naturals) are discrete aka Countable.</p>
+<p>OUTPUT: <span class="math inline">\(f_1 \overset{?}{=} f_2\)</span></p>
+<p>Example:<br />
+Chi-Square test on Cesar Cipher,</p>
+<p>ANALYZE:<br />
+<span class="math inline">\(ChiSquared = 0 \Rightarrow f_1 = f_2\)</span> $ChiSquared $</p>
 
         </div>
         <div id="footer">

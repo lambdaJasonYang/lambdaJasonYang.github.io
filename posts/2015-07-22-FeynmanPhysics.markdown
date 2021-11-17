@@ -9,7 +9,16 @@ tags: mathcs, physics, appliedmath
 
 * very broad intro on states of matter and molecule
 
-### Chapter 2
+### 2 Basic Physics
+
+* A charge creates an electromagnetic field
+* Shaking a charge causes electromagnetic waves
+  * different frequency causes different EM radiation
+
+* Quantum Physics
+  * Perpetual ambiguity of position and momentum of charges
+  
+### 6 Probability
 
 ### Chapter 22 Algebra
 

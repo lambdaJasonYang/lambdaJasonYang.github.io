@@ -5,7 +5,10 @@ tags: mathcs, puremath
 
 * $\mathbb{N}$ : Naturals
 * $\mathbb{Z}$ : Integers, Naturals + Negatives 
-  * -3,-2,-1,0,1...
+  * -3,-2,-1.5,0,0.5,1...
+  * One can think of integers as equivalence classes or sets
+  * 3/2 = {3/2,6/4,9/6,...}
+  * This allows to use the min function
 * $\mathbb{Q}$ : $\frac{p}{q}$ where p,q are Integers
 
 ##### Dedekind cuts

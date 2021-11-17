@@ -23,7 +23,7 @@
         <!-- Google Analytics TAG END  ---------------------->
 
          
-        <title>Jason Yang - Abstract Linear Algebra</title>
+        <title>Jason Yang - Bayesian Probability</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -231,7 +231,7 @@
         </div>
 
         <div id="content">
-            <h1>Abstract Linear Algebra</h1>
+            <h1>Bayesian Probability</h1>
             
 
             <div class="info">
@@ -240,53 +240,77 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'physics'." href="../tags/physics.html">physics</a>
     
 </div>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6672616d6520224162656c69616e2047726f7570227b0a202020206672616d652047726f75707b0a20202020202020206672616d65204d6f6e6f6964207b0a2020202020202020202020206672616d652053656d6967726f7570207b0a2020202020202020202020206f626a6563742022536574204d22206173205365740a2020202020202020202020206f626a656374202242696e617279204f7065726174696f6e222061732042696e0a2020202020202020202020207d0a2020202020202020202020206f626a65637420226964656e7469747920656c656d656e7422206173204f6e650a2020202020202020202020204f6e65202d2d3e205365740a20202020202020207d0a20202020202020206f626a6563742022696e766572736520656c656d656e74732220617320496e760a2020202020202020496e76202d2d3e205365740a202020207d0a202020206f626a6563742022436f6d6d756e617469746976652220617320436f6d6d0a20202020436f6d6d202d2d3e2042696e0a7d0a0a40656e64756d6c6d6c"></figure>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">#print vector_space</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">vector_space</span> (R: Type u) <span class="kw">(</span><span class="ex">M</span>: Type v<span class="kw">)</span> [<span class="ex">field</span> R] [add_comm_group M] := semimodule R M</span></code></pre></div>
-<p>vector space is a</p>
+<p><a href="http://www.acsu.buffalo.edu/~adamcunn/probability/probability.html">Probability playground</a></p>
+<h5 id="logic-analogy">Logic Analogy</h5>
+<p><span class="math display">\[P(B | A) \cdot P(A) = P(A \land B)\]</span></p>
+<p>Logically the greatest fix point</p>
+<p><span class="math display">\[ A \Rightarrow B, A \vdash A \land B \]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P(B | A)\)</span></th>
+<th><span class="math inline">\(P(A)\)</span></th>
+<th><span class="math inline">\(=\)</span></th>
+<th><span class="math inline">\(P(A \land B)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(A \Rightarrow B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(\vdash\)</span></td>
+<td><span class="math inline">\(A \land B\)</span></td>
+</tr>
+</tbody>
+</table>
+<h5 id="developer-analogy">Developer Analogy</h5>
+<p>One can see conditional probabilities in terms of <strong>states</strong></p>
+<ol type="1">
+<li>State 1: <span class="math inline">\(P(A)\)</span> [prior]</li>
+<li>State 2: <span class="math inline">\(P(A | B)\)</span></li>
+<li>State 3: <span class="math inline">\(P(A | B C)\)</span></li>
+<li>State 4. <span class="math inline">\(P(A | B C ...)\)</span></li>
+</ol>
+<p>We call State 1 our <strong>prior</strong> and the<br />
+conditional probability or final state <strong>post-erior</strong></p>
+<h5 id="new-interpretation">New Interpretation</h5>
 <ul>
-<li>semi-module over a
+<li>Shaded node <span class="math inline">\(P(A)\)</span> behaves like <strong>existential intro</strong></li>
+</ul>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a202072616e6b646972203d204c520a636f6d706f756e643d747275650a0a09737562677261706820636c75737465725f31207b0a09096e6f6465205b7374796c653d22225d3b0a09096c6162656c203d202250284129223b0a090941205b6c6162656c3d224122207374796c653d66696c6c65645d3b0a2020200a097d0a0a7d0a40656e64756d6c"></figure>
 <ul>
-<li>field R</li>
-<li>additive communitative group M ```plantuml</li>
+<li><span class="math inline">\(P(A | B)\)</span> shows a relation between <strong>partitions</strong> of A and B.
+<ul>
+<li>Behaves like function or <strong>Implication</strong> that is only activated when an object A is given.</li>
 </ul></li>
 </ul>
-<p>```</p>
-<h4 id="direct-sum">Direct Sum</h4>
-<blockquote>
-<p>Find two unrelated spaces in your universe and slam them together</p>
-</blockquote>
-<p>Given some vector space <span class="math inline">\(S\)</span>, we choose some subspaces <span class="math inline">\(\{X,Y,Z...\}\)</span></p>
-<ol type="1">
-<li>None of these subspaces share any element but the null vector</li>
-<li>there is no combination of <span class="math inline">\(\{Y,Z...\}\)</span> that can form an element of <span class="math inline">\(X\)</span>.</li>
-</ol>
-<p>take an element from each subspace in <span class="math inline">\(\{X,Y,Z...\}\)</span> then add them.<br />
-<span class="math display">\[\oplus \{X,Y,Z...\} = \{x + y + ... | x \in X, y \in Y ...\}\]</span></p>
-<h5 id="direct-sum-of-matrices">Direct Sum of matrices</h5>
-<p>Given that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices themselves.<br />
-Note that <span class="math inline">\(0\)</span> stands for zero matrices of varying sizes.<br />
-Block matrix notation of direct sum:</p>
-<p><span class="math display">\[A \oplus B = \begin{bmatrix}
-A &amp; 0 \\
-0 &amp; B 
-\end{bmatrix}\]</span></p>
-<p><span class="math display">\[B \oplus A = \begin{bmatrix}
-B &amp; 0 \\
-0 &amp; A 
-\end{bmatrix}\]</span></p>
-<p><span class="math display">\[ A \oplus B \cong B \oplus A \]</span></p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a202072616e6b646972203d204c520a636f6d706f756e643d747275650a0a09737562677261706820636c75737465725f31207b0a09096e6f6465205b7374796c653d22225d3b0a09096c6162656c203d2022502842207c204129223b0a090941205b6c6162656c3d224122207374796c653d6461736865645d3b0a2020202042205b6c6162656c3d224222207374796c653d6461736865645d3b0a2020202041202d3e2042205b6c6162656c203d2022502842207c204129225d3b0a097d0a0a7d0a40656e64756d6c"></figure>
 <ul>
-<li>Direct sum is commutative up to isomorphism</li>
+<li><span class="math inline">\(P(A)P(A | B)\)</span> merges the partitions A and B together.</li>
 </ul>
-<h5 id="example">Example</h5>
-<p><span class="math inline">\(\{(x,0) | x\in \mathbb{R}\} \oplus \{(0,y) | x\in \mathbb{R}\}=\mathbb{R}^2\)</span> or written as<br />
-<span class="math inline">\((\mathbb{R},0) \oplus (0,\mathbb{R})\)</span><br />
-but some might even do notational abuse and just write<br />
-<span class="math inline">\(\mathbb{R} \oplus \mathbb{R}\)</span></p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a202072616e6b646972203d204c520a636f6d706f756e643d747275650a09737562677261706820636c75737465725f30207b0a090a09096c6162656c203d202250284120616e64204229223b0a2020202078205b6c6162656c3d22412020616e6420204222207374796c653d66696c6c65645d203b0a097d0a0a09737562677261706820636c75737465725f31207b0a09096e6f6465205b7374796c653d66696c6c65645d3b0a09096c6162656c203d2022502841292a502842207c204129223b0a090941205b6c6162656c3d224122207374796c653d2266696c6c65642c646173686564225d3b0a2020202042205b6c6162656c3d224222207374796c653d22646173686564225d3b0a2020202041202d3e2042205b6c6162656c203d2022502842207c204129225d3b0a097d0a09422d3e78205b6c6162656c3d226f757470757422206c7461696c3d636c75737465725f31206c686561643d636c75737465725f30206469723d626f7468207374796c653d6461736865645d0a7d0a40656e64756d6c"></figure>
+<h5 id="misconceptions">Misconceptions</h5>
+<p><strong>Multiplying 2 priors <span class="math inline">\(P(A)P(B)\)</span> typically is a dead end.</strong><br />
+<strong>We need the conditional probability to understand the relationship between 2 priors</strong></p>
+<p><span class="math display">\[P(A)P(B) \neq P(A\land B)\]</span></p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a202072616e6b646972203d204c520a636f6d706f756e643d747275650a0a09737562677261706820636c75737465725f31207b0a09090a09096e6f6465205b7374796c653d22225d3b0a09096c6162656c203d202257524f4e47223b0a20202020202020202020202020737562677261706820636c75737465725f32207b0a09090909200a090920207374796c653d2266696c6c65642c726f756e646564220a2020202020202020202020202020202020206c6162656c203d202250284120616e64204329220a20202020202020202020202020202020202043205b7374796c653d226e6f6e65225d0a20202020202020202020202020202020202041205b6c6162656c3d224122207374796c653d6461736865645d3b0a0a202020202020202020202020202020207d0a2020202042205b6c6162656c3d224222207374796c653d22646173686564225d3b0a2020202041202d3e2042205b6c6162656c203d2022502842207c204129225d3b0a097d0a0a7d0a40656e64756d6c"></figure>
+<p>We cannot Overshoot the prior condition of the conditional probability.<br />
+Example is fueling <span class="math inline">\(P(B|A)\)</span> with <span class="math inline">\(P(A \land C)\)</span> which overshoots the condition of requiring only <span class="math inline">\(P(A)\)</span>. WRONG!</p>
+<h5 id="another-logic-example">Another logic example</h5>
+<p><span class="math display">\[P(B|A)P(A) + P(B| \lnot A)P(\lnot A)\]</span> <span class="math display">\[ (A \land B) \lor (A \land \lnot B) \vdash A \]</span></p>
+<h4 id="chain-rule">Chain rule</h4>
+<p><span class="math display">\[\begin{aligned} P(A \land B \land C \land D) &amp;= P(A | B \land C \land D) \cdot P(B \land C \land D) \\ &amp;= P(A | B \land C \land D) \cdot P(B | C \land D) \cdot P(C \land D) \\ &amp;= P(A | B \land C \land D) \cdot P(B | C \land D) \cdot P(C | D) \cdot P(D) \end{aligned}\]</span></p>
+<blockquote>
+<p>All nodes are called priors. The bridge between nodes are called conditional probabilites.</p>
+</blockquote>
+<p>Question: We want to know what the probability that a set of events happen simultaneously. Given that we know all possible transitions or conditionals. Answer: Say we have n nodes(events). Partition n nodes to 1 and […n-1] nodes. We can find the P(n) = P(A| …n-1)P(…n-1)<br />
+What if we don’t know the probability of the […n-1] nodes,<br />
+PARTITION n-1 nodes to 1 and […n-2] nodes. …</p>
+<p>Know this is only easy if we know all the conditional probabilities before hand.</p>
+<p>Prove <span class="math inline">\(P(A | B \land C ) \cdot P(B | C) = P(B | A \land C) \cdot P(A | C)\)</span></p>
 
         </div>
         <div id="footer">

@@ -38,6 +38,18 @@ For any type α that has a pre order.
 
 ### Types
 
+if ` p : Prop `{.hs}  then
+`x:p`{.hs} is a proof of proposition `p : Prop`{.hs}.
+if `y:p`{.hs} is also a proof then **proof irrelevance** means `x:p`{.hs} and `y:p`{.hs} are indistinguishable.  
+
+
+* Props, terms 
+  * Given $P:Prop$ , the term $h:P$ is a proof of $P$
+  * Implication $P \rightarrow Q : Prop$ is the function type
+  * Given $h1: P \rightarrow Q$ , $h2:P$ conclude $h1\ h2: Q$
+* Quantifier and Dependent Function type
+  * Given $P:X \rightarrow Prop$ represents $\forall( x: X). P\ x: Prop$
+
 ### Numbers
 
 Proofs of numbers typically use type coercion.
@@ -45,3 +57,128 @@ Proofs of numbers typically use type coercion.
 ```bash
 norm_num
 ```
+
+### Inductive type
+
+```bash
+inductive mynat
+| zero : mynat
+| succ (n : mynat) : mynat
+```
+
+### Definitional Equality and Reduction
+Given  
+  : $A \overset{reduces}{\rightarrow} X$  
+  : $B \overset{reduces}{\rightarrow} X$  
+
+Implies  
+  : $A \underset{def}{\equiv} B$
+   
+| Conversion | Definition | Example |
+| --- | --- | --- |
+| alpha | renaming | $\lambda x. P x \equiv \lambda y. P y$  |
+| beta | computing |  $(\lambda x. x + 2) 3 \equiv 3 + 2$ |
+
+
+
+
+### Dependent type
+
+
+##### Inspiring the dependent type
+
+`cons 2 [3,4] : List Nat`{.hs}  
+`cons : Nat -> List Nat -> List Nat`{.hs}  
+
+What if we wanted a polymorphic `cons`{.hs}?  
+Give first argument as the Type  
+`cons Nat 2 [3,4] : Type -> T -> List T -> List T`{.hs}   
+
+* **Nat** : Type
+* 2 : **T**
+* [3,4] : List **T**
+
+Notice `T`{.hs} = `Nat`{.hs}  
+
+We need `T`{.hs} in Type-Space to relate to `Nat`{.hs} in Term-Space. How?    
+Abstract away the term `Nat`{.hs} to a **bound term variable** `Π T`{.hs}   
+`Type -> T -> List T -> List T`{.hs} =>  
+` Π T : Type -> T -> List T -> List T`{.hs}
+
+
+
+```bash
+namespace hidden
+
+universe u
+
+constant list   : Type u → Type u
+
+constant cons   : Π α : Type u, α → list α → list α
+constant nil    : Π α : Type u, list α
+constant head   : Π α : Type u, list α → α
+constant tail   : Π α : Type u, list α → list α
+constant append : Π α : Type u, list α → list α → list α
+
+#check cons α a (nil α)
+
+end hidden
+```
+Observe how we can use Dependent Product Type for polymorphism.
+
+$$\prod_{x: \alpha} \beta = \prod_{x: \alpha} (x \rightarrow list\ x \rightarrow list\ x)$$
+
+> Pi-type or dependent product type behaves like lambda in the type space
+
+**β is an EXPRESSION that can be expanded.**  
+**β may or may not include bound variable x in it's expression**
+
+`cons :: Π x : α, β `{.hs}   
+What is the type of `cons int`{.hs}?  
+We apply `(Π x : α, β) `{.hs} to `int` in the type space.  
+`cons int :: (Π x : α, β)(int)`{.hs}
+
+* `(Π x : α, β)(int) `{.hs}
+* Beta-reduction: `β[int/x]`{.hs}  
+* `β`{.hs} expanded is `x -> list x -> list x`{.hs}  
+* `β[int/x]`{.hs} is `(x -> list x -> list x)[int/x]`{.hs}  
+* replace x with int in expression
+  * `(int -> list int -> list int)`{.hs}  
+
+`cons int :: (Π x : α, β)(int)`{.hs} is  
+`cons int :: int -> list int -> list int`{.hs}  
+
+Example of a list is `cons int 3 (nil int)`{.hs}  
+
+Since `cons`{.hs} and `nil`{.hs} are dependent types, they must take an extra parameter [in this case] `int`{.hs}  
+
+### function type is just a Pi-type 
+
+> when `β`{.hs} expanded expression does not include   
+bound variable `Π x : α`{.hs} then  
+`Π x : α, β`{.hs} is just `α -> β`{.hs}
+
+example `β` is `bool`, `α` is `nat`  
+Notice `bool` is an expression that does not include any bound variable `x:nat`
+
+* `even :: Π x : α, β`{.hs} 
+* `even :: Π x : nat, bool`{.hs}
+* `even :: nat -> bool`{.hs}
+
+
+### Sigma Type
+
+```hs
+def f (α : Type) (β : α → Type) (a : α) (b : β a) : (a : α) × β a :=
+  ⟨a, b⟩
+def h1 (x : Nat) : Nat :=
+  (f Type (fun p => p) Nat x).2
+
+-- (α : Type) is (Type : Type)
+-- β is (fun p => p : Type -> Type)
+-- (a : α) is (Nat : Type)
+-- (b : β a) is (x : (fun p => p)(Nat)) which is (x : Nat)
+```
+
+How to look at `f`? Extract the types  
+`Type -> (α → Type) -> α -> β a -> ((a : α) × β a)`{.hs}

@@ -1,5 +1,5 @@
 ---
-title: Linear and Abstract Algebra
+title: Abstract Linear Algebra
 tags: mathcs, appliedmath
 ---
 
@@ -43,14 +43,41 @@ vector space is a
 
 > Find two unrelated spaces in your universe and slam them together 
 
-Given some vector space S, we have subspaces {X,Y,Z...}
+Given some vector space $S$, we choose some subspaces $\{X,Y,Z...\}$
 
 1. None of these subspaces share any element but the null vector
-2. there is no combination of {Y,Z...} that can form an element of X.
+2. there is no combination of $\{Y,Z...\}$ that can form an element of $X$.
 
-Inner Direct Sum is the set of possible sums that can be formed from taking one element from each of the subspaces {X,Y,Z...}  
+take an element from each subspace in $\{X,Y,Z...\}$ then add them.  
+$$\oplus \{X,Y,Z...\} = \{x + y + ... | x \in X, y \in Y ...\}$$ 
 
+##### Direct Sum of matrices
+
+Given that $A$ and $B$ are matrices themselves.  
+Note that $0$ stands for zero matrices of varying sizes.  
+Block matrix notation of direct sum:  
+
+$$A \oplus B = \begin{bmatrix}
+A & 0 \\
+0 & B 
+\end{bmatrix}$$
+
+$$B \oplus A = \begin{bmatrix}
+B & 0 \\
+0 & A 
+\end{bmatrix}$$
+
+$$ A \oplus B \cong B \oplus A $$
+
+* Direct sum is commutative up to isomorphism
+
+##### Example
 
 $\{(x,0) | x\in \mathbb{R}\} \oplus \{(0,y) | x\in \mathbb{R}\}=\mathbb{R}^2$ or written as   
-$(\mathbb{R},0) \oplus (0,\mathbb{R})$ but some might even do notational abuse and just write 
- $\mathbb{R} \oplus \mathbb{R}$
+$(\mathbb{R},0) \oplus (0,\mathbb{R})$   
+but some might even do notational abuse and just write   
+$\mathbb{R} \oplus \mathbb{R}$
+
+
+
+

@@ -23,7 +23,7 @@
         <!-- Google Analytics TAG END  ---------------------->
 
          
-        <title>Jason Yang - Abstract Linear Algebra</title>
+        <title>Jason Yang - Intro To Statistical Learning Notes</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -231,62 +231,52 @@
         </div>
 
         <div id="content">
-            <h1>Abstract Linear Algebra</h1>
+            <h1>Intro To Statistical Learning Notes</h1>
             
 
             <div class="info">
-    Posted on July 14, 2015
+    Posted on July 15, 2015
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'stats'." href="../tags/stats.html">stats</a>
     
 </div>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6672616d6520224162656c69616e2047726f7570227b0a202020206672616d652047726f75707b0a20202020202020206672616d65204d6f6e6f6964207b0a2020202020202020202020206672616d652053656d6967726f7570207b0a2020202020202020202020206f626a6563742022536574204d22206173205365740a2020202020202020202020206f626a656374202242696e617279204f7065726174696f6e222061732042696e0a2020202020202020202020207d0a2020202020202020202020206f626a65637420226964656e7469747920656c656d656e7422206173204f6e650a2020202020202020202020204f6e65202d2d3e205365740a20202020202020207d0a20202020202020206f626a6563742022696e766572736520656c656d656e74732220617320496e760a2020202020202020496e76202d2d3e205365740a202020207d0a202020206f626a6563742022436f6d6d756e617469746976652220617320436f6d6d0a20202020436f6d6d202d2d3e2042696e0a7d0a0a40656e64756d6c6d6c"></figure>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">#print vector_space</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">vector_space</span> (R: Type u) <span class="kw">(</span><span class="ex">M</span>: Type v<span class="kw">)</span> [<span class="ex">field</span> R] [add_comm_group M] := semimodule R M</span></code></pre></div>
-<p>vector space is a</p>
-<ul>
-<li>semi-module over a
-<ul>
-<li>field R</li>
-<li>additive communitative group M ```plantuml</li>
-</ul></li>
-</ul>
-<p>```</p>
-<h4 id="direct-sum">Direct Sum</h4>
-<blockquote>
-<p>Find two unrelated spaces in your universe and slam them together</p>
-</blockquote>
-<p>Given some vector space <span class="math inline">\(S\)</span>, we choose some subspaces <span class="math inline">\(\{X,Y,Z...\}\)</span></p>
+<p><code class="sourceCode r">Wage</code> : Linear Regression How does <code class="sourceCode r">age</code> affect <code class="sourceCode r">wage</code></p>
+<p><code class="sourceCode r">Smarket</code> : Classification Classification</p>
+<h3 id="chapter-2">Chapter 2</h3>
+<p>below is the platonic ideal function that maps inputs <span class="math inline">\(X\)</span> to reality</p>
+<p><span class="math display">\[ Y = f(X_1,X_2,...) + \epsilon \]</span></p>
+<p><span class="math display">\[\epsilon := noise \]</span></p>
+<p>We can’t ever know the ideal <span class="math inline">\(Y\)</span> or <span class="math inline">\(f\)</span> so we estimate.</p>
+<p><span class="math inline">\(\hat{Y} \hat{f}\)</span> are our estimated variabes<br />
+<span class="math inline">\(e\)</span> averages out to 0</p>
+<p><span class="math display">\[ \hat{Y} = \hat{f}(X) \]</span></p>
+<p><span class="math display">\[ E[Y-\hat{Y}]^2 = E[f(X)+\epsilon -\hat{f}(X)]^2 = {\color{red}E[f(X)-\hat{f}(X)]^2} + Var(\epsilon)\]</span> Overarching Goal: find <span class="math inline">\(f\)</span> st. term in RED is minimized</p>
+<p>Steps:</p>
 <ol type="1">
-<li>None of these subspaces share any element but the null vector</li>
-<li>there is no combination of <span class="math inline">\(\{Y,Z...\}\)</span> that can form an element of <span class="math inline">\(X\)</span>.</li>
+<li>Choose model: Linear equation</li>
 </ol>
-<p>take an element from each subspace in <span class="math inline">\(\{X,Y,Z...\}\)</span> then add them.<br />
-<span class="math display">\[\oplus \{X,Y,Z...\} = \{x + y + ... | x \in X, y \in Y ...\}\]</span></p>
-<h5 id="direct-sum-of-matrices">Direct Sum of matrices</h5>
-<p>Given that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices themselves.<br />
-Note that <span class="math inline">\(0\)</span> stands for zero matrices of varying sizes.<br />
-Block matrix notation of direct sum:</p>
-<p><span class="math display">\[A \oplus B = \begin{bmatrix}
-A &amp; 0 \\
-0 &amp; B 
-\end{bmatrix}\]</span></p>
-<p><span class="math display">\[B \oplus A = \begin{bmatrix}
-B &amp; 0 \\
-0 &amp; A 
-\end{bmatrix}\]</span></p>
-<p><span class="math display">\[ A \oplus B \cong B \oplus A \]</span></p>
-<ul>
-<li>Direct sum is commutative up to isomorphism</li>
-</ul>
-<h5 id="example">Example</h5>
-<p><span class="math inline">\(\{(x,0) | x\in \mathbb{R}\} \oplus \{(0,y) | x\in \mathbb{R}\}=\mathbb{R}^2\)</span> or written as<br />
-<span class="math inline">\((\mathbb{R},0) \oplus (0,\mathbb{R})\)</span><br />
-but some might even do notational abuse and just write<br />
-<span class="math inline">\(\mathbb{R} \oplus \mathbb{R}\)</span></p>
+<p><span class="math display">\[ Y = f(X_1,X_2,...) + \epsilon\]</span></p>
+<p><span class="math inline">\(f\)</span> is matrix multiplication with weight vector <span class="math inline">\(\beta\)</span></p>
+<p><span class="math display">\[Y = X\beta + \epsilon\]</span></p>
+<ol start="2" type="1">
+<li>Train parameters: Ordinary Least Squares(OLS)</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">library</span>(ISLR)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>,<span class="dt">mean =</span> <span class="dv">0</span>,<span class="dt">sd =</span> <span class="dv">1</span>)  <span class="co"># creates 50 points</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>y &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>,<span class="dt">mean=</span><span class="dv">1</span>,<span class="dt">sd=</span><span class="fl">0.5</span>) <span class="co"># creates 50 points </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="kw">cor</span>(x,y) <span class="co"># correlation</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="co">#&gt; 0.8344</span></span></code></pre></div>
+<h5 id="conceptual">Conceptual</h5>
+<h6 id="flexible-vs-understandable">flexible vs understandable</h6>
+<hr />
 
         </div>
         <div id="footer">

@@ -23,7 +23,7 @@
         <!-- Google Analytics TAG END  ---------------------->
 
          
-        <title>Jason Yang - Abstract Linear Algebra</title>
+        <title>Jason Yang - Quick Setup</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -231,62 +231,111 @@
         </div>
 
         <div id="content">
-            <h1>Abstract Linear Algebra</h1>
+            <h1>Quick Setup</h1>
             
 
             <div class="info">
-    Posted on July 14, 2015
+    Posted on March 24, 2018
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'C'." href="../tags/C.html">C</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'OS'." href="../tags/OS.html">OS</a>
     
 </div>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6672616d6520224162656c69616e2047726f7570227b0a202020206672616d652047726f75707b0a20202020202020206672616d65204d6f6e6f6964207b0a2020202020202020202020206672616d652053656d6967726f7570207b0a2020202020202020202020206f626a6563742022536574204d22206173205365740a2020202020202020202020206f626a656374202242696e617279204f7065726174696f6e222061732042696e0a2020202020202020202020207d0a2020202020202020202020206f626a65637420226964656e7469747920656c656d656e7422206173204f6e650a2020202020202020202020204f6e65202d2d3e205365740a20202020202020207d0a20202020202020206f626a6563742022696e766572736520656c656d656e74732220617320496e760a2020202020202020496e76202d2d3e205365740a202020207d0a202020206f626a6563742022436f6d6d756e617469746976652220617320436f6d6d0a20202020436f6d6d202d2d3e2042696e0a7d0a0a40656e64756d6c6d6c"></figure>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">#print vector_space</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">vector_space</span> (R: Type u) <span class="kw">(</span><span class="ex">M</span>: Type v<span class="kw">)</span> [<span class="ex">field</span> R] [add_comm_group M] := semimodule R M</span></code></pre></div>
-<p>vector space is a</p>
-<ul>
-<li>semi-module over a
-<ul>
-<li>field R</li>
-<li>additive communitative group M ```plantuml</li>
-</ul></li>
-</ul>
-<p>```</p>
-<h4 id="direct-sum">Direct Sum</h4>
-<blockquote>
-<p>Find two unrelated spaces in your universe and slam them together</p>
-</blockquote>
-<p>Given some vector space <span class="math inline">\(S\)</span>, we choose some subspaces <span class="math inline">\(\{X,Y,Z...\}\)</span></p>
+<h3 id="haskell">Haskell</h3>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h090a40737461727473616c740a7b0a7b540a202b2068656c6c6f776f726c640a202b2b206170700a202b2b2b204d61696e2e68730a202b2b207372630a202b2b2b204c69622e68730a202b2b20746573740a202b2b2b20537065632e68730a202b2b2068656c6c6f776f726c642e636162616c0a202b2b207061636b6167652e79616d6c0a202b2b20737461636b2e79616d6c0a7d0a7d0a40656e6473616c74"></figure>
+<p>Creates a new folder helloworld at current directory</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">stack</span> new helloworld new-template</span></code></pre></div>
+<h5 id="running">running</h5>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">stack</span> run ./app/Main.hs</span></code></pre></div>
+<h5 id="running-interactive">running interactive</h5>
+<p>runs an interactive env</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ex">stack</span> ghci ./app/Main.hs</span></code></pre></div>
+<h5 id="buildexecute">build+execute</h5>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="ex">stack</span> build</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="ex">stack</span> exec hello-world</span></code></pre></div>
+<hr />
+<h3 id="go">Go</h3>
+<div class="sourceCode" id="cb5" data-filename="hello.go"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">package</span> main</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="kw">import</span> (</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>	<span class="st">&quot;fmt&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="kw">func</span> main() {</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a>	<span class="kw">var</span> a <span class="dt">string</span> = <span class="st">&quot;hello&quot;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a>	<span class="kw">var</span> bb []<span class="dt">byte</span> = []<span class="dt">byte</span>(a[<span class="dv">0</span>:<span class="dv">3</span>])</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>	<span class="kw">var</span> c <span class="dt">string</span> = a[<span class="dv">1</span>:<span class="dv">3</span>]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a>	fmt.Printf(<span class="st">&quot;%s</span><span class="ch">\n</span><span class="st">&quot;</span>, a)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a>	fmt.Printf(<span class="st">&quot;%s</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">string</span>(bb))</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a>	fmt.Printf(<span class="st">&quot;%s</span><span class="ch">\n</span><span class="st">&quot;</span>, c)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="ex">go</span> run hello.go</span></code></pre></div>
+<h3 id="go-modules">Go Modules</h3>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h090a40737461727473616c740a7b0a7b540a202b20676f776f726c640a202b2b206772656574696e67730a202b2b2b20676f2e6d6f640a202b2b2b206772656574696e67732e676f0a202b2b2068656c6c6f0a202b2b2b20676f2e6d6f640a202b2b2b2068656c6c6f2e676f0a7d0a7d0a40656e6473616c74"></figure>
 <ol type="1">
-<li>None of these subspaces share any element but the null vector</li>
-<li>there is no combination of <span class="math inline">\(\{Y,Z...\}\)</span> that can form an element of <span class="math inline">\(X\)</span>.</li>
+<li><h5 id="project-folder">project folder</h5></li>
 </ol>
-<p>take an element from each subspace in <span class="math inline">\(\{X,Y,Z...\}\)</span> then add them.<br />
-<span class="math display">\[\oplus \{X,Y,Z...\} = \{x + y + ... | x \in X, y \in Y ...\}\]</span></p>
-<h5 id="direct-sum-of-matrices">Direct Sum of matrices</h5>
-<p>Given that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices themselves.<br />
-Note that <span class="math inline">\(0\)</span> stands for zero matrices of varying sizes.<br />
-Block matrix notation of direct sum:</p>
-<p><span class="math display">\[A \oplus B = \begin{bmatrix}
-A &amp; 0 \\
-0 &amp; B 
-\end{bmatrix}\]</span></p>
-<p><span class="math display">\[B \oplus A = \begin{bmatrix}
-B &amp; 0 \\
-0 &amp; A 
-\end{bmatrix}\]</span></p>
-<p><span class="math display">\[ A \oplus B \cong B \oplus A \]</span></p>
-<ul>
-<li>Direct sum is commutative up to isomorphism</li>
-</ul>
-<h5 id="example">Example</h5>
-<p><span class="math inline">\(\{(x,0) | x\in \mathbb{R}\} \oplus \{(0,y) | x\in \mathbb{R}\}=\mathbb{R}^2\)</span> or written as<br />
-<span class="math inline">\((\mathbb{R},0) \oplus (0,\mathbb{R})\)</span><br />
-but some might even do notational abuse and just write<br />
-<span class="math inline">\(\mathbb{R} \oplus \mathbb{R}\)</span></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">mkdir</span> goworld</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="bu">cd</span> goworld</span></code></pre></div>
+<ol start="2" type="1">
+<li><h5 id="create-greetings-modules">Create greetings modules</h5></li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="fu">mkdir</span> greetings</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="bu">cd</span> greetings</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="ex">go</span> mod init example.com/greetings</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a><span class="co">#this creates go.mod</span></span></code></pre></div>
+<p>create a file called greetings.go</p>
+<div class="sourceCode" id="cb9" data-filename="greetings.go"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">package</span> greetings</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a><span class="co">// Hello returns a greeting for the named person.</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a><span class="kw">func</span> Hello(name <span class="dt">string</span>) <span class="dt">string</span> {</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a>    <span class="co">// Return a greeting that embeds the name in a message.</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a>    message := fmt.Sprintf(<span class="st">&quot;Hi, %v. Welcome!&quot;</span>, name)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a>    <span class="kw">return</span> message</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a>}</span></code></pre></div>
+<ol start="3" type="1">
+<li><h5 id="executable-folder">executable folder</h5></li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="bu">cd</span> ..</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="fu">mkdir</span> hello</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="bu">cd</span> hello</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="ex">go</span> mod init example.com/hello</span></code></pre></div>
+<div class="sourceCode" id="cb11" data-filename="hello.go"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">package</span> main</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a><span class="kw">import</span> (</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>    <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a>    <span class="st">&quot;example.com/greetings&quot;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a><span class="kw">func</span> main() {</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true"></a>    <span class="co">// Get a greeting message and print it.</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true"></a>    message := greetings.Hello(<span class="st">&quot;Gladys&quot;</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true"></a>    fmt.Println(message)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true"></a>}</span></code></pre></div>
+<ol start="4" type="1">
+<li><h5 id="setup-local">setup local</h5>
+typically our modules will be held on our webserver at (in this case) “example.com/greetings”<br />
+To run locally</li>
+</ol>
+<p>in your hello dir</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="ex">go</span> mod edit -replace example.com/greetings=../greetings</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="ex">go</span> mod tidy</span></code></pre></div>
+<ol start="5" type="1">
+<li><h5 id="running-1">running</h5></li>
+</ol>
+<p>inside hello dir</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="ex">go</span> run .</span></code></pre></div>
+<hr />
+<h3 id="c">C</h3>
+<p><strong>running</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="fu">gcc</span> -o bleh main.c</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a><span class="ex">./bleh</span></span></code></pre></div>
 
         </div>
         <div id="footer">

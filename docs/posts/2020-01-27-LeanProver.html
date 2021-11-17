@@ -314,9 +314,143 @@
 <p>Type</p>
 <p>For any type α that has a pre order.</p>
 <h3 id="types">Types</h3>
+<p>if <code class="sourceCode haskell">p <span class="op">:</span> <span class="dt">Prop</span></code> then <code class="sourceCode haskell">x<span class="op">:</span>p</code> is a proof of proposition <code class="sourceCode haskell">p <span class="op">:</span> <span class="dt">Prop</span></code>. if <code class="sourceCode haskell">y<span class="op">:</span>p</code> is also a proof then <strong>proof irrelevance</strong> means <code class="sourceCode haskell">x<span class="op">:</span>p</code> and <code class="sourceCode haskell">y<span class="op">:</span>p</code> are indistinguishable.</p>
+<ul>
+<li>Props, terms
+<ul>
+<li>Given <span class="math inline">\(P:Prop\)</span> , the term <span class="math inline">\(h:P\)</span> is a proof of <span class="math inline">\(P\)</span></li>
+<li>Implication <span class="math inline">\(P \rightarrow Q : Prop\)</span> is the function type</li>
+<li>Given <span class="math inline">\(h1: P \rightarrow Q\)</span> , <span class="math inline">\(h2:P\)</span> conclude <span class="math inline">\(h1\ h2: Q\)</span></li>
+</ul></li>
+<li>Quantifier and Dependent Function type
+<ul>
+<li>Given <span class="math inline">\(P:X \rightarrow Prop\)</span> represents <span class="math inline">\(\forall( x: X). P\ x: Prop\)</span></li>
+</ul></li>
+</ul>
 <h3 id="numbers">Numbers</h3>
 <p>Proofs of numbers typically use type coercion.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">norm_num</span></span></code></pre></div>
+<h3 id="inductive-type">Inductive type</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ex">inductive</span> mynat</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">|</span> <span class="ex">zero</span> : mynat</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="kw">|</span> <span class="ex">succ</span> (n : mynat) <span class="bu">:</span> mynat</span></code></pre></div>
+<h3 id="definitional-equality-and-reduction">Definitional Equality and Reduction</h3>
+<dl>
+<dt>Given</dt>
+<dd><span class="math inline">\(A \overset{reduces}{\rightarrow} X\)</span>
+</dd>
+<dd><span class="math inline">\(B \overset{reduces}{\rightarrow} X\)</span>
+</dd>
+<dt>Implies</dt>
+<dd><span class="math inline">\(A \underset{def}{\equiv} B\)</span>
+</dd>
+</dl>
+<table>
+<thead>
+<tr class="header">
+<th>Conversion</th>
+<th>Definition</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>alpha</td>
+<td>renaming</td>
+<td><span class="math inline">\(\lambda x. P x \equiv \lambda y. P y\)</span></td>
+</tr>
+<tr class="even">
+<td>beta</td>
+<td>computing</td>
+<td><span class="math inline">\((\lambda x. x + 2) 3 \equiv 3 + 2\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="dependent-type">Dependent type</h3>
+<h5 id="inspiring-the-dependent-type">Inspiring the dependent type</h5>
+<p><code class="sourceCode haskell">cons <span class="dv">2</span> [<span class="dv">3</span>,<span class="dv">4</span>] <span class="op">:</span> <span class="dt">List</span> <span class="dt">Nat</span></code><br />
+<code class="sourceCode haskell">cons <span class="op">:</span> <span class="dt">Nat</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">Nat</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">Nat</span></code></p>
+<p>What if we wanted a polymorphic <code class="sourceCode haskell">cons</code>?<br />
+Give first argument as the Type<br />
+<code class="sourceCode haskell">cons <span class="dt">Nat</span> <span class="dv">2</span> [<span class="dv">3</span>,<span class="dv">4</span>] <span class="op">:</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">T</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">T</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">T</span></code></p>
+<ul>
+<li><strong>Nat</strong> : Type</li>
+<li>2 : <strong>T</strong></li>
+<li>[3,4] : List <strong>T</strong></li>
+</ul>
+<p>Notice <code class="sourceCode haskell"><span class="dt">T</span></code> = <code class="sourceCode haskell"><span class="dt">Nat</span></code></p>
+<p>We need <code class="sourceCode haskell"><span class="dt">T</span></code> in Type-Space to relate to <code class="sourceCode haskell"><span class="dt">Nat</span></code> in Term-Space. How?<br />
+Abstract away the term <code class="sourceCode haskell"><span class="dt">Nat</span></code> to a <strong>bound term variable</strong> <code class="sourceCode haskell">Π <span class="dt">T</span></code><br />
+<code class="sourceCode haskell"><span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">T</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">T</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">T</span></code> =&gt;<br />
+<code class="sourceCode haskell">Π <span class="dt">T</span> <span class="op">:</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">T</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">T</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">T</span></code></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="ex">namespace</span> hidden</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="ex">universe</span> u</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="ex">constant</span> list   : Type u → Type u</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="ex">constant</span> cons   : Π α : Type u, α → list α → list α</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="ex">constant</span> nil    : Π α : Type u, list α</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="ex">constant</span> head   : Π α : Type u, list α → α</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a><span class="ex">constant</span> tail   : Π α : Type u, list α → list α</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="ex">constant</span> append : Π α : Type u, list α → list α → list α</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a><span class="co">#check cons α a (nil α)</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a><span class="ex">end</span> hidden</span></code></pre></div>
+<p>Observe how we can use Dependent Product Type for polymorphism.</p>
+<p><span class="math display">\[\prod_{x: \alpha} \beta = \prod_{x: \alpha} (x \rightarrow list\ x \rightarrow list\ x)\]</span></p>
+<blockquote>
+<p>Pi-type or dependent product type behaves like lambda in the type space</p>
+</blockquote>
+<p><strong>β is an EXPRESSION that can be expanded.</strong><br />
+<strong>β may or may not include bound variable x in it’s expression</strong></p>
+<p><code class="sourceCode haskell"><span class="ot">cons ::</span> Π x <span class="op">:</span> α, β</code><br />
+What is the type of <code class="sourceCode haskell">cons int</code>?<br />
+We apply <code class="sourceCode haskell">(Π x <span class="op">:</span> α, β)</code> to <code>int</code> in the type space.<br />
+<code class="sourceCode haskell">cons<span class="ot"> int ::</span> (Π x <span class="op">:</span> α, β)(int)</code></p>
+<ul>
+<li><code class="sourceCode haskell">(Π x <span class="op">:</span> α, β)(int)</code></li>
+<li>Beta-reduction: <code class="sourceCode haskell">β[int<span class="op">/</span>x]</code><br />
+</li>
+<li><code class="sourceCode haskell">β</code> expanded is <code class="sourceCode haskell">x <span class="ot">-&gt;</span> list x <span class="ot">-&gt;</span> list x</code><br />
+</li>
+<li><code class="sourceCode haskell">β[int<span class="op">/</span>x]</code> is <code class="sourceCode haskell">(x <span class="ot">-&gt;</span> list x <span class="ot">-&gt;</span> list x)[int<span class="op">/</span>x]</code><br />
+</li>
+<li>replace x with int in expression
+<ul>
+<li><code class="sourceCode haskell">(int <span class="ot">-&gt;</span> list int <span class="ot">-&gt;</span> list int)</code></li>
+</ul></li>
+</ul>
+<p><code class="sourceCode haskell">cons<span class="ot"> int ::</span> (Π x <span class="op">:</span> α, β)(int)</code> is<br />
+<code class="sourceCode haskell">cons<span class="ot"> int ::</span> int <span class="ot">-&gt;</span> list int <span class="ot">-&gt;</span> list int</code></p>
+<p>Example of a list is <code class="sourceCode haskell">cons int <span class="dv">3</span> (nil int)</code></p>
+<p>Since <code class="sourceCode haskell">cons</code> and <code class="sourceCode haskell">nil</code> are dependent types, they must take an extra parameter [in this case] <code class="sourceCode haskell">int</code></p>
+<h3 id="function-type-is-just-a-pi-type">function type is just a Pi-type</h3>
+<blockquote>
+<p>when <code class="sourceCode haskell">β</code> expanded expression does not include<br />
+bound variable <code class="sourceCode haskell">Π x <span class="op">:</span> α</code> then<br />
+<code class="sourceCode haskell">Π x <span class="op">:</span> α, β</code> is just <code class="sourceCode haskell">α <span class="ot">-&gt;</span> β</code></p>
+</blockquote>
+<p>example <code>β</code> is <code>bool</code>, <code>α</code> is <code>nat</code><br />
+Notice <code>bool</code> is an expression that does not include any bound variable <code>x:nat</code></p>
+<ul>
+<li><code class="sourceCode haskell"><span class="fu">even</span><span class="ot"> ::</span> Π x <span class="op">:</span> α, β</code></li>
+<li><code class="sourceCode haskell"><span class="fu">even</span><span class="ot"> ::</span> Π x <span class="op">:</span> nat, bool</code></li>
+<li><code class="sourceCode haskell"><span class="fu">even</span><span class="ot"> ::</span> nat <span class="ot">-&gt;</span> bool</code></li>
+</ul>
+<h3 id="sigma-type">Sigma Type</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>def f (α <span class="op">:</span> <span class="dt">Type</span>) (β <span class="op">:</span> α <span class="ot">→</span> <span class="dt">Type</span>) (a <span class="op">:</span> α) (b <span class="op">:</span> β a) <span class="op">:</span> (a <span class="op">:</span> α) × β a <span class="op">:=</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>  ⟨a, b⟩</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>def h1 (x <span class="op">:</span> <span class="dt">Nat</span>) <span class="op">:</span> <span class="dt">Nat</span> <span class="op">:=</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>  (f <span class="dt">Type</span> (fun p <span class="ot">=&gt;</span> p) <span class="dt">Nat</span> x)<span class="op">.</span><span class="dv">2</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a><span class="co">-- (α : Type) is (Type : Type)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="co">-- β is (fun p =&gt; p : Type -&gt; Type)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="co">-- (a : α) is (Nat : Type)</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="co">-- (b : β a) is (x : (fun p =&gt; p)(Nat)) which is (x : Nat)</span></span></code></pre></div>
+<p>How to look at <code>f</code>? Extract the types<br />
+<code class="sourceCode haskell"><span class="dt">Type</span> <span class="ot">-&gt;</span> (α <span class="ot">→</span> <span class="dt">Type</span>) <span class="ot">-&gt;</span> α <span class="ot">-&gt;</span> β a <span class="ot">-&gt;</span> ((a <span class="op">:</span> α) × β a)</code></p>
 
         </div>
         <div id="footer">

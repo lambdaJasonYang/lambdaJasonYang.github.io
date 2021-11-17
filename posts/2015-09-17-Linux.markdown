@@ -98,7 +98,7 @@ auth: password
 password: idsjawij2382ruqfo
 cert: false
 ```
-TO 
+TO  
 
 ```{.yaml filename="config.yaml"}
 bind-addr: 0.0.0.0:8080
@@ -109,6 +109,8 @@ cert: false
 
 **In linux 127.0.0.1 means localhost but doesn't allow access from LAN**  
 **0.0.0.0 allows access from LAN**  
+
+run `code-server`{.bash} instead of `sudo code-server`{.bash} because the latter will assume root's config.yaml.
 
 ### Accessing Linux webpages from LAN
 

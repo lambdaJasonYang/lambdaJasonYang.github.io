@@ -23,7 +23,7 @@
         <!-- Google Analytics TAG END  ---------------------->
 
          
-        <title>Jason Yang - Abstract Linear Algebra</title>
+        <title>Jason Yang - Probability Theory</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -231,7 +231,7 @@
         </div>
 
         <div id="content">
-            <h1>Abstract Linear Algebra</h1>
+            <h1>Probability Theory</h1>
             
 
             <div class="info">
@@ -240,53 +240,11 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'physics'." href="../tags/physics.html">physics</a>
     
 </div>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6672616d6520224162656c69616e2047726f7570227b0a202020206672616d652047726f75707b0a20202020202020206672616d65204d6f6e6f6964207b0a2020202020202020202020206672616d652053656d6967726f7570207b0a2020202020202020202020206f626a6563742022536574204d22206173205365740a2020202020202020202020206f626a656374202242696e617279204f7065726174696f6e222061732042696e0a2020202020202020202020207d0a2020202020202020202020206f626a65637420226964656e7469747920656c656d656e7422206173204f6e650a2020202020202020202020204f6e65202d2d3e205365740a20202020202020207d0a20202020202020206f626a6563742022696e766572736520656c656d656e74732220617320496e760a2020202020202020496e76202d2d3e205365740a202020207d0a202020206f626a6563742022436f6d6d756e617469746976652220617320436f6d6d0a20202020436f6d6d202d2d3e2042696e0a7d0a0a40656e64756d6c6d6c"></figure>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">#print vector_space</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">vector_space</span> (R: Type u) <span class="kw">(</span><span class="ex">M</span>: Type v<span class="kw">)</span> [<span class="ex">field</span> R] [add_comm_group M] := semimodule R M</span></code></pre></div>
-<p>vector space is a</p>
-<ul>
-<li>semi-module over a
-<ul>
-<li>field R</li>
-<li>additive communitative group M ```plantuml</li>
-</ul></li>
-</ul>
-<p>```</p>
-<h4 id="direct-sum">Direct Sum</h4>
-<blockquote>
-<p>Find two unrelated spaces in your universe and slam them together</p>
-</blockquote>
-<p>Given some vector space <span class="math inline">\(S\)</span>, we choose some subspaces <span class="math inline">\(\{X,Y,Z...\}\)</span></p>
-<ol type="1">
-<li>None of these subspaces share any element but the null vector</li>
-<li>there is no combination of <span class="math inline">\(\{Y,Z...\}\)</span> that can form an element of <span class="math inline">\(X\)</span>.</li>
-</ol>
-<p>take an element from each subspace in <span class="math inline">\(\{X,Y,Z...\}\)</span> then add them.<br />
-<span class="math display">\[\oplus \{X,Y,Z...\} = \{x + y + ... | x \in X, y \in Y ...\}\]</span></p>
-<h5 id="direct-sum-of-matrices">Direct Sum of matrices</h5>
-<p>Given that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices themselves.<br />
-Note that <span class="math inline">\(0\)</span> stands for zero matrices of varying sizes.<br />
-Block matrix notation of direct sum:</p>
-<p><span class="math display">\[A \oplus B = \begin{bmatrix}
-A &amp; 0 \\
-0 &amp; B 
-\end{bmatrix}\]</span></p>
-<p><span class="math display">\[B \oplus A = \begin{bmatrix}
-B &amp; 0 \\
-0 &amp; A 
-\end{bmatrix}\]</span></p>
-<p><span class="math display">\[ A \oplus B \cong B \oplus A \]</span></p>
-<ul>
-<li>Direct sum is commutative up to isomorphism</li>
-</ul>
-<h5 id="example">Example</h5>
-<p><span class="math inline">\(\{(x,0) | x\in \mathbb{R}\} \oplus \{(0,y) | x\in \mathbb{R}\}=\mathbb{R}^2\)</span> or written as<br />
-<span class="math inline">\((\mathbb{R},0) \oplus (0,\mathbb{R})\)</span><br />
-but some might even do notational abuse and just write<br />
-<span class="math inline">\(\mathbb{R} \oplus \mathbb{R}\)</span></p>
+<p><a href="http://www.acsu.buffalo.edu/~adamcunn/probability/probability.html">Probability playground</a></p>
+<p><span class="math display">\[\mu = E[Y] = \sum_Y y\cdot f(y)\]</span></p>
 
         </div>
         <div id="footer">
