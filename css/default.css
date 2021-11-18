@@ -95,6 +95,7 @@ nav.sidenav > li{
   
 }
 
+/* --------------------------Table of Content */
 div#TOC {
   width: 20rem;
   position: absolute;
@@ -106,6 +107,7 @@ div#TOC ul{
   list-style-type:none;
 
 }
+/* --------------------------Table of Content */
 /*  */
 blockquote {
   
@@ -280,7 +282,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     padding: 0;
     height: 100vh;
     min-height: 100vh;
-    width: 6rem; /* 5 * font pixel */
+    width: 5.3rem; /* 5 * font pixel */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     background-color: var(--bg-primary); /* Black */
     left: 0;
@@ -391,14 +393,27 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-/* BEGIN SMALL SCREEN CSS--------------------------------------------------- */
+/* BEGIN SMALL SCREEN CSS MOBILE PHONE--------------------------------------------------- */
   @media only screen and (max-width: 800px) {
       .sidenav {
           display: none;
       }
+      /* --------------------------Table of Content */
+      div#TOC {
+        width: 100rem;
+        position: inherit;
+        left: 0vw;
+      }
+
+
+      div#TOC ul{
+        list-style-type:none;
+
+      }
+      /* --------------------------Table of Content */
   }
 
-  /*END OF SMALL SCREEN CSS  ----------------------------------------------------*/
+  /*END OF SMALL SCREEN CSS MOBILE PHONE ----------------------------------------------------*/
 
   
   /* START PRINT */
