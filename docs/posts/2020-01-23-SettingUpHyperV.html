@@ -243,7 +243,8 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>
     
 </div>
-<h3 id="on-client-windows-pc">On Client Windows PC</h3>
+<section id="on-client-windows-pc" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> On Client Windows PC</h3>
 <p><code class="sourceCode bash"><span class="ex">Get-NetConnectionProfile</span></code><br />
 For me it returns “Wi-Fi” in the name field, use this in the next command.</p>
 <p><code class="sourceCode bash"><span class="ex">Set-NetConnectionProfile</span> -InterfaceAlias Wi-Fi -NetworkCategory Private</code> <code class="sourceCode bash"><span class="ex">winrm</span> quickconfig</code></p>
@@ -256,11 +257,14 @@ Add value”wsman/*"</p>
 <p>Click on hyper-v manager “Connect to Server…”<br />
 DESKTOP-ABCD2E Your password to login to Administrator</p>
 <p>“DESKTOP-ABCD2E” will be replaced by the name of your PC.</p>
-<h2 id="bad-server-wifi-startup-fix">Bad Server Wifi startup fix</h2>
+</section>
+<section id="bad-server-wifi-startup-fix" class="level2" data-number="0.1">
+<h2 data-number="0.1"><span class="header-section-number">0.1</span> Bad Server Wifi startup fix</h2>
 <p>I noticed that my server never startups with the internet on and I have to reset the network adapter everytime which means physically being at the server PC and running commands.</p>
 <p>Here is the command to rest the Network adapter on Powershell.<br />
 <code class="sourceCode bash"><span class="ex">Restart-NetAdapter</span> (Get-NetAdapter <span class="kw">|</span> <span class="kw">select</span> <span class="ex">-expand</span> Name)</code></p>
-<h5 id="automate-the-wifi-restart-fix">Automate the wifi restart fix</h5>
+<section id="automate-the-wifi-restart-fix" class="level5" data-number="0.1.0.0.1">
+<h5 data-number="0.1.0.0.1"><span class="header-section-number">0.1.0.0.1</span> Automate the wifi restart fix</h5>
 <p>To call the command on startup, we create a config file in powershell</p>
 <p><code class="sourceCode bash"><span class="ex">New-Item</span> -Path . -Name <span class="st">&quot;Config.ps1&quot;</span> -ItemType <span class="st">&quot;file&quot;</span> -Value <span class="st">&quot;Restart-NetAdapter (Get-NetAdapter | select -expand Name)&quot;</span></code></p>
 <p>Credit to stackoverflow “vkrams”, a startup script that sets any task to run at startup.</p>
@@ -268,10 +272,14 @@ DESKTOP-ABCD2E Your password to login to Administrator</p>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="va">$TaskTrigger</span> = <span class="ex">New-ScheduledTaskTrigger</span> -AtStartup</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="va">$TaskPrincipal</span> = <span class="ex">New-ScheduledTaskPrincipal</span> -UserID <span class="st">&quot;NT AUTHORITY\SYSTEM&quot;</span> -LogonType ServiceAccount -RunLevel Highest</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="ex">Register-ScheduledTask</span> -Action <span class="va">$TaskAction1</span> -Trigger <span class="va">$TaskTrigger</span> -Principal <span class="va">$TaskPrincipal</span> -TaskName <span class="st">&quot;Config&quot;</span> -Description <span class="st">&quot;Config Script&quot;</span></span></code></pre></div>
-<h5 id="irrelevant-tidbits">Irrelevant tidbits</h5>
+</section>
+<section id="irrelevant-tidbits" class="level5" data-number="0.1.0.0.2">
+<h5 data-number="0.1.0.0.2"><span class="header-section-number">0.1.0.0.2</span> Irrelevant tidbits</h5>
 <p>The wget of linux in powershell is:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">(</span><span class="ex">New-Object</span> System.Net.WebClient<span class="kw">)</span><span class="ex">.DownloadFile</span>(<span class="st">&quot;https://github.com/macchrome/winchrome/releases/download/v92.0.4515.107-r885287-Win64/92.0.4515.107_ungoogled_mini_installer.exe&quot;</span>, <span class="st">&quot;ChromeSetup.exe&quot;</span>)</span></code></pre></div>
 <p>We can download a fully functioning Chrome on a barebones Hyper-V core server.</p>
+</section>
+</section>
 
         </div>
         <div id="footer">

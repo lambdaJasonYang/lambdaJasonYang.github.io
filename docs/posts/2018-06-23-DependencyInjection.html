@@ -243,14 +243,17 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<h4 id="what-are-dependencies">What are dependencies</h4>
+<section id="what-are-dependencies" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> What are dependencies</h4>
 <p>Dependencies in software engineering terms means an object dependency. I’d like to extend that meaning to also include informational dependency.</p>
 <p>This allows us to simply add an interface and the DI system will automatically initialize a class to fill that interface.</p>
 <p>What is code reflection? It’s a form of meta-programming, where your code understands it’s own code.<br />
 An example is python <code class="sourceCode python"><span class="bu">eval</span>(<span class="st">&quot;print('hello')&quot;</span>)</code> which can evaluate strings as code.<br />
 ASP.NET Core uses reflection which is the only way it could swap a concrete class with an interface without the programmer’s “consent”.</p>
 <hr />
-<h4 id="interfaces---class-is-a-subset-relation">Interfaces - Class is a subset relation</h4>
+</section>
+<section id="interfaces---class-is-a-subset-relation" class="level4" data-number="0.0.0.2">
+<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Interfaces - Class is a subset relation</h4>
 <ul>
 <li>Class Implements Interface</li>
 <li>Class Superset Interface</li>
@@ -267,8 +270,11 @@ ASP.NET Core uses reflection which is the only way it could swap a concrete clas
 <p>Notice these are <strong>strict subsets</strong>.<br />
 <span class="math inline">\(IMammel \nsubseteq Dog\)</span> since <span class="math inline">\(Dog\)</span> will always contain a constructor method new() which interfaces cannot have.</p>
 <hr />
-<h4 id="without-di">Without DI</h4>
-<h5 id="all-concrete-classes-depend-on-their-constructor-new-method">All Concrete classes depend on their constructor new() method</h5>
+</section>
+<section id="without-di" class="level4" data-number="0.0.0.3">
+<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> Without DI</h4>
+<section id="all-concrete-classes-depend-on-their-constructor-new-method" class="level5" data-number="0.0.0.3.1">
+<h5 data-number="0.0.0.3.1"><span class="header-section-number">0.0.0.3.1</span> All Concrete classes depend on their constructor new() method</h5>
 <p>This constructor dependency can be broken using DI.</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a0a737562677261706820636c75737465725f617b0a2020202054776f205b6c6162656c3d224e617422207374796c653d66696c6c65643b5d3b0a202020205468726565205b6c6162656c3d224e617422207374796c653d66696c6c65643b5d3b0a7d0a0a506c7573205b7374796c653d66696c6c65643b5d3b0a0a494e6174205b73686170653d22626f78225d3b0a0a6e657754776f205b6c6162656c203d20226e657728293a3a4e6174222073686170653d706c61696e746578745d0a6e65775468726565205b6c6162656c203d20226e657728293a3a4e6174222073686170653d706c61696e746578745d0a0a54776f202d3e206e657754776f205b6c6162656c3d22646570656e64732220636f6c6f723d7265645d0a5468726565202d3e206e65775468726565205b6c6162656c3d22646570656e64732220636f6c6f723d7265645d0a0a506c7573202d3e2054776f205b6c6162656c3d22646570656e6473225d0a506c7573202d3e205468726565205b6c6162656c3d22646570656e6473225d0a0a54776f202d3e20494e6174205b6c6162656c3d22737570657273657422207374796c653d6461736865645d0a5468726565202d3e20494e6174205b6c6162656c3d22737570657273657422207374796c653d6461736865645d0a0a0a7d"></figure>
 <blockquote>
@@ -280,7 +286,10 @@ ASP.NET Core uses reflection which is the only way it could swap a concrete clas
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    b <span class="op">=</span> new()::Nat<span class="op">;</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code></pre></div>
 <hr />
-<h4 id="with-di">With DI</h4>
+</section>
+</section>
+<section id="with-di" class="level4" data-number="0.0.0.4">
+<h4 data-number="0.0.0.4"><span class="header-section-number">0.0.0.4</span> With DI</h4>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a0a737562677261706820636c75737465725f617b0a2020202054776f205b6c6162656c3d22494e6174222073686170653d22626f78223b5d3b0a202020205468726565205b6c6162656c3d22494e6174222073686170653d22626f78223b5d3b0a202020200a7d0a0a506c7573205b7374796c653d66696c6c65643b5d3b0a0a0a494e6174496e6a6563746f72205b73686170653d646f75626c65636972636c6520636f6e73747261696e743d66616c73655d3b0a0a0a0a0a506c7573202d3e2054776f205b6c6162656c3d646570656e64735d0a506c7573202d3e205468726565205b6c6162656c3d646570656e64735d0a0a0a494e6174496e6a6563746f72202d3e2054776f205b6c6162656c3d696e6a65637473207374796c653d22646f747465642220636f6e73747261696e743d66616c73655d0a494e6174496e6a6563746f72202d3e205468726565205b6c6162656c3d696e6a65637473207374796c653d22646f7474656422205d636f6e73747261696e743d66616c73650a0a0a7d"></figure>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>INatInjector <span class="op">=</span> new Injector(new()::Nat)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a></span>
@@ -291,7 +300,9 @@ ASP.NET Core uses reflection which is the only way it could swap a concrete clas
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code></pre></div>
 <hr />
-<h3 id="compare-oo-vs-fp">Compare OO vs FP</h3>
+</section>
+<section id="compare-oo-vs-fp" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Compare OO vs FP</h3>
 <p>FP version</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">def</span> plus_FP(a::INat,b::INat):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code></pre></div>
@@ -315,6 +326,7 @@ We need to modify add new customer data to type “Bool” and convert it to “
 </ul></li>
 </ul></li>
 </ul>
+</section>
 
         </div>
         <div id="footer">

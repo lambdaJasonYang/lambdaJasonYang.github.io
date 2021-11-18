@@ -243,9 +243,12 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'OS'." href="../tags/OS.html">OS</a>
     
 </div>
-<h3 id="the-problem">The Problem</h3>
+<section id="the-problem" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> The Problem</h3>
 <p>Online forums and tutorials tend to introduce C pointers and memory model as some complex behemoth. Professors introduce the memory model with a bucketload of terms like stacks, heaps, address space, registers.</p>
-<h3 id="solution">Solution</h3>
+</section>
+<section id="solution" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Solution</h3>
 <p>To understand pointers we must understand memory. Here is a simple way to describe memory which makes me surprised why no one has taught it or introduced it this way. Let’s just do alway with all the OS terminology.</p>
 <p>We will design an very simplified model that I will name the EZ model . For a non-low level programmer.</p>
 <blockquote>
@@ -275,12 +278,15 @@ The red boxes indicate the values of our array.</p>
 <p>Calling Dereference(MEM[1]) can be reduced to Dereference(2), which can be reduced to MEM[2] which is just 6.</p>
 <p>Dereference(MEM[1]) == MEM[MEM[1]]</p>
 <p>Let’s say “3” is a pointer. then dereference(3) will return 1 For the intents of this section of understanding pointers, let’s just assume we can magically determine which indexes of MEM are pointers.</p>
-<h3 id="ez2-model">EZ2 Model</h3>
+</section>
+<section id="ez2-model" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> EZ2 Model</h3>
 <p>In our EZ model, we magically decided which indexes are pointers which is not correct. Pointers are a implementation in assembly that uses registers. The functionality of pointers to a C programmer is analogous to the functionality of registers to a assembly programmer.</p>
 <p>The real pointers in computers aren’t those “int* x” that programmers code up but computer registers like eax, ebx… Just think of these registers as powerful as pointers. someaddr = 3</p>
 <p>Let’s clear things up, we call the assembly model and the EZ Model.</p>
 <p>the assembly notation [EAX] notationally equivalent to our EZ MEM[EAX]</p>
 <p>How pointers behave to C programmers is analogous to how registers work to assembly programmers.</p>
+</section>
 
         </div>
         <div id="footer">

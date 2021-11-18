@@ -258,7 +258,8 @@
 <li>Use Multi-processing</li>
 </ul></li>
 </ul>
-<h4 id="threading">Threading</h4>
+<section id="threading" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Threading</h4>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="im">import</span> threading</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">def</span> fstThread(): <span class="co">#parent thread</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    sndThread <span class="op">=</span> threading.Thread(target<span class="op">=</span>someFunction,args<span class="op">=</span>(<span class="dv">2</span>,))</span>
@@ -271,7 +272,9 @@
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>fstThread()</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="co">#&gt;2 from Thread-6</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="co">#&gt;1 from MainThread</span></span></code></pre></div>
-<h4 id="multiprocessing">Multiprocessing</h4>
+</section>
+<section id="multiprocessing" class="level4" data-number="0.0.0.2">
+<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Multiprocessing</h4>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="im">import</span> multiprocessing</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">def</span> fstProcess():</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    sndProcess <span class="op">=</span> multiprocessing.Process(target<span class="op">=</span>someFunctionA,args<span class="op">=</span>(<span class="dv">2</span>,))</span>
@@ -283,7 +286,9 @@
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>fstProcess()</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">##Note using IDLE or Jupyter, the Child process shows no output </span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">##Using python script the output would look similar to the threading output, 2 prints</span></span></code></pre></div>
-<h4 id="race-condition">Race condition</h4>
+</section>
+<section id="race-condition" class="level4" data-number="0.0.0.3">
+<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> Race condition</h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="im">import</span> threading</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="im">from</span> time <span class="im">import</span> sleep</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a></span>
@@ -298,7 +303,9 @@
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>other.start()</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>inc()</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a><span class="bu">print</span>(<span class="ss">f&quot;count is </span><span class="sc">{</span>count[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">&quot;</span>) <span class="co">#output is sometimes 2, sometimes 1</span></span></code></pre></div>
-<h4 id="producer-consumer-non-synchronized">Producer Consumer non-synchronized</h4>
+</section>
+<section id="producer-consumer-non-synchronized" class="level4" data-number="0.0.0.4">
+<h4 data-number="0.0.0.4"><span class="header-section-number">0.0.0.4</span> Producer Consumer non-synchronized</h4>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="im">import</span> threading</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="im">from</span> time <span class="im">import</span> sleep</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a></span>
@@ -317,7 +324,9 @@
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true"></a>        Items.append(i)</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true"></a>    Commands.append(<span class="st">&quot;go&quot;</span>)</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true"></a>produce()</span></code></pre></div>
-<h4 id="producer-consumer-synchronized">Producer Consumer synchronized</h4>
+</section>
+<section id="producer-consumer-synchronized" class="level4" data-number="0.0.0.5">
+<h4 data-number="0.0.0.5"><span class="header-section-number">0.0.0.5</span> Producer Consumer synchronized</h4>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="im">from</span> queue <span class="im">import</span> Queue</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>queue <span class="op">=</span> Queue()</span>
@@ -336,7 +345,9 @@
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a>    queue.join()</span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a></span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a>synchronized_produce()</span></code></pre></div>
-<h4 id="lock">Lock</h4>
+</section>
+<section id="lock" class="level4" data-number="0.0.0.6">
+<h4 data-number="0.0.0.6"><span class="header-section-number">0.0.0.6</span> Lock</h4>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>seen <span class="op">=</span> <span class="bu">set</span>()  <span class="co">##The set that we will sychronize with a lock</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>seen_lock <span class="op">=</span> threading.Lock()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a></span>
@@ -346,7 +357,9 @@
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>            seen.add(item)   <span class="co">#modifying a sychronized set, means only one thread can add to the set seen</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a>            <span class="cf">return</span> <span class="va">False</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a>        <span class="cf">return</span> <span class="va">True</span></span></code></pre></div>
-<h4 id="barrier">Barrier</h4>
+</section>
+<section id="barrier" class="level4" data-number="0.0.0.7">
+<h4 data-number="0.0.0.7"><span class="header-section-number">0.0.0.7</span> Barrier</h4>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>counters <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>barrier <span class="op">=</span> threading.Barrier(<span class="dv">2</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a></span>
@@ -364,7 +377,9 @@
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">'counters:'</span>, counters)</span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a></span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a>threaded_count(<span class="dv">10</span>)</span></code></pre></div>
-<h4 id="message-passing">Message passing</h4>
+</section>
+<section id="message-passing" class="level4" data-number="0.0.0.8">
+<h4 data-number="0.0.0.8"><span class="header-section-number">0.0.0.8</span> Message passing</h4>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">def</span> process_consume(in_pipe):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>        item <span class="op">=</span> in_pipe.recv()</span>
@@ -381,6 +396,7 @@
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a>    pipe[<span class="dv">1</span>].send(<span class="va">None</span>) <span class="co"># done signal</span></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true"></a></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true"></a>process_produce()</span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">

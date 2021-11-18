@@ -244,7 +244,8 @@
     
 </div>
 <p>A literature review of Folds with Hutton et al.</p>
-<h3 id="foldr">Foldr</h3>
+<section id="foldr" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Foldr</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">foldr</span><span class="ot"> ::</span> (a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> ([a] <span class="ot">-&gt;</span> b)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">type</span> recurse <span class="ot">=</span> (a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> b)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">type</span> base <span class="ot">=</span> b</span>
@@ -291,7 +292,9 @@ fold length monoid act: 	 5
 fold reverse monoid act: 	 [5, 4, 3, 2, 1]
 fold map monoid act: 		 [2, 4, 6, 8, 10]
 fold even monoid act: 		 [2, 4]</code></pre>
-<h3 id="universal-property">Universal property</h3>
+</section>
+<section id="universal-property" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Universal property</h3>
 <p>In Hutton’s paper he tells us when fold can be used. Essentially it’s just an inductive proof of correctness packaged into the function g.</p>
 <p><span class="math display">\[   \begin{aligned}
     g  \ []  &amp;=  v\\
@@ -313,7 +316,9 @@ The left hand side of the iff is just an inductive proof over length of list.</p
 <li>f x (g xs) = f x IH, meaning when we apply our function f to our inductive hypothesis IH and the dangling element x, we will return our expected results.</li>
 </ul></li>
 </ul>
-<h3 id="fusion">Fusion</h3>
+</section>
+<section id="fusion" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Fusion</h3>
 <p>When can we some arbitrary function h with a fold to return another fold? <span class="math display">\[ h \circ fold\ a\ b \overset{?}{=} fold\ c\ d\]</span></p>
 <p>We denote the 2 folds in the eqn above:</p>
 <ul>
@@ -336,6 +341,7 @@ a = (+)<br />
 b = 0<br />
 c = (+)<br />
 d = 1</p>
+</section>
 
         </div>
         <div id="footer">

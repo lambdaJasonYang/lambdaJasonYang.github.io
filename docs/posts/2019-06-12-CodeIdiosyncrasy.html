@@ -243,7 +243,8 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>
     
 </div>
-<h3 id="destructuring">Destructuring</h3>
+<section id="destructuring" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Destructuring</h3>
 <p>Changing property “size” to 3:</p>
 <ul>
 <li>haskell record type
@@ -255,12 +256,16 @@
 <li><code class="sourceCode javascript">{<span class="op">...</span>props<span class="op">,</span><span class="st">&quot;size&quot;</span><span class="op">:</span><span class="dv">3</span>}</code></li>
 </ul></li>
 </ul>
-<h3 id="case-sensititivity">Case sensititivity</h3>
+</section>
+<section id="case-sensititivity" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Case sensititivity</h3>
 <ul>
 <li>Haskell functions must be lowercase</li>
 <li>React components must be Uppercase</li>
 </ul>
-<h3 id="file-naming">File naming</h3>
+</section>
+<section id="file-naming" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> File naming</h3>
 <ul>
 <li>Golang test files must end in “test”
 <ul>
@@ -271,15 +276,20 @@
 <li><code class="sourceCode go"><span class="kw">func</span> TestHello( *testing.T){...}</code></li>
 </ul></li>
 </ul>
-<h3 id="react">React</h3>
+</section>
+<section id="react" class="level3" data-number="0.0.4">
+<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> React</h3>
 <ul>
 <li>React &lt;li key=.. &gt; must have a “key” property</li>
 </ul>
-<h3 id="js-fetch">JS fetch</h3>
+</section>
+<section id="js-fetch" class="level3" data-number="0.0.5">
+<h3 data-number="0.0.5"><span class="header-section-number">0.0.5</span> JS fetch</h3>
 <p>Try fetch request with no-cors If returns opaque response, it means cors is not allowed by the website</p>
 <p>const res = fetch(<code>https://bleh.com/examples/data/asset/data/tempdata.json</code>,{mode: “no-cors”}).then((data)=&gt;{console.log(data.body)})</p>
 <p>If data.body is a readable stream, you first have to convert it to Know that .json() returns a promise so you have to pass it again</p>
 <p>const res = fetch(<code>https://bleh.com/examples/data/asset/data/tempdata.json</code>,{mode: “no-cors”}).then((re)=&gt;{return re.json()}).then(response =&gt; {console.log(response)})</p>
+</section>
 
         </div>
         <div id="footer">

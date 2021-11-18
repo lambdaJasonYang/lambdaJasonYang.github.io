@@ -243,13 +243,19 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'algorithms'." href="../tags/algorithms.html">algorithms</a>, <a title="All pages tagged 'proofs'." href="../tags/proofs.html">proofs</a>
     
 </div>
-<h3 id="greedy-swap-proof">Greedy Swap Proof</h3>
-<h4 id="example-problem">Example problem:</h4>
+<section id="greedy-swap-proof" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Greedy Swap Proof</h3>
+<section id="example-problem" class="level4" data-number="0.0.1.1">
+<h4 data-number="0.0.1.1"><span class="header-section-number">0.0.1.1</span> Example problem:</h4>
 <p><span class="math display">\[ A = [a_1 , a_2, a_3 ...]\]</span> <span class="math display">\[ O = [o_1, o_2, o_3 ...]\]</span> Each element of A represents a state.<br />
 <span class="math display">\[ Assume\ A \neq O \]</span> (NOTE THIS IS NOT A PROOF BY CONTRADICTION AS THERE MAY BE MULTIPLE OPTIMAL SOLUTIONS THAT ARE NOT EQUAL) Therefore <span class="math display">\[ Either\ \]</span> <span class="math display">\[\exists x \in O , x \notin A \]</span> <span class="math display">\[ \exists x \in A, x \notin O\]</span> <span class="math display">\[ a_p = o_q , a_q = o_p \ Swap\]</span></p>
 <p>Prove by contradiction</p>
-<h3 id="greedy-inductive-lookahead-proof">Greedy Inductive Lookahead Proof</h3>
-<h4 id="example-problem-a-frog-can-take-1..k-steps-each-turn-get-least-number-of-turns-to-reach-the-n-step.">Example problem: A frog can take 1..k Steps each turn, get least number of turns to reach the n Step.</h4>
+</section>
+</section>
+<section id="greedy-inductive-lookahead-proof" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Greedy Inductive Lookahead Proof</h3>
+<section id="example-problem-a-frog-can-take-1..k-steps-each-turn-get-least-number-of-turns-to-reach-the-n-step." class="level4" data-number="0.0.2.1">
+<h4 data-number="0.0.2.1"><span class="header-section-number">0.0.2.1</span> Example problem: A frog can take 1..k Steps each turn, get least number of turns to reach the n Step.</h4>
 <p>State = turn<br />
 Greedy Solution, take the max k Step each State</p>
 <p>Proof of Correctness: Show by induction that for all states, the current state is the most optimal</p>
@@ -297,6 +303,8 @@ In general, finding terminal objects is a hint at optimality.</p>
 </ul>
 <p>By induction we shown our greedy algo will always be ahead in terms of position which is correlated to optimality.</p>
 <p>remarks: Now that I look at it, LEM may not have been necessary but technically the proof is still correct.</p>
+</section>
+</section>
 
         </div>
         <div id="footer">

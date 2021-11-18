@@ -7,6 +7,17 @@ tags: AI, mathcs, prog, python
 ML Simplified:
 $$Data Input \overset{linear}{\Rightarrow} s \overset{non-linear}{\Rightarrow} z$$
 
+### Libraries
+
+```python
+import torch
+import torch.nn as nn
+from res.plot_lib import set_default, show_scatterplot, plot_bases
+#from matplotlib.pyplot import plot, title, axis
+import matplotlib.pyplot as plt
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+```
+
 ### Prelude
 Drawing basis
 ```python
@@ -28,14 +39,7 @@ def plot_bases(bases, width=0.04):
 
 ### Basics
 
-```python
-# Load libraries
-import torch
-import torch.nn as nn
-from res.plot_lib import set_default, show_scatterplot, plot_bases
-from matplotlib.pyplot import plot, title, axis
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-```
+
 
 Plot 3d vector representing (x,y,color)
 
@@ -50,6 +54,7 @@ dataset = torch.tensor([[0,4,0.1],[0.5,5,0.2]]).to("cpu")
 colors = dataset[:,2]
 points = dataset[:,(0,1)]
 
+plot_bases(mbases)
 plt.scatter(points[:,0],points[:,1],c=colors)
 plt.axis('square')
 plt.show()
@@ -81,6 +86,7 @@ dataset = torch.randn(1000,2).to("cpu")
 colors = dataset[:,0]    #color will be a 2nd representation of x-axis
 points = dataset[:,(0,1)]
 
+plot_bases(mbases)
 plt.scatter(points[:,0],points[:,1],c=colors)
 plt.axis('square')
 plt.title("ScatterPoint")

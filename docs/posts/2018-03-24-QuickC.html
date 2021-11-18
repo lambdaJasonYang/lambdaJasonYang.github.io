@@ -307,7 +307,8 @@
 <p>ifndef tells us if not defined then define it else skip it.</p>
 <p><code class="sourceCode c"><span class="pp">#define MAX(a,b) a &gt; b ? a : b</span></code></p>
 <hr />
-<h3 id="example-linking-multiple-object-files">Example linking multiple object files</h3>
+<section id="example-linking-multiple-object-files" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Example linking multiple object files</h3>
 <div class="sourceCode" id="cb4" data-filename="main.c"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;helper.h&quot;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="pp">#ifndef two</span></span>
@@ -339,7 +340,9 @@
 <p>Alternatively we can just do</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="fu">gcc</span> main.c helper.c -o myexecutable -Wall</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="ex">./myexecutable</span>    </span></code></pre></div>
-<h3 id="makefile">makefile</h3>
+</section>
+<section id="makefile" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> makefile</h3>
 <ul>
 <li>“make” is analogous to “npm build”<br />
 </li>
@@ -369,7 +372,9 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 </ul></li>
 </ul>
 <hr />
-<h3 id="strings">Strings</h3>
+</section>
+<section id="strings" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Strings</h3>
 <ul>
 <li>Strings are really just arrays of chars
 <ul>
@@ -378,7 +383,8 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 </ul></li>
 <li>last entry of string is either 0 or ‘\0’</li>
 </ul>
-<h4 id="string-literals-are-immutable-in-memory">String literals are immutable in memory</h4>
+<section id="string-literals-are-immutable-in-memory" class="level4" data-number="0.0.3.1">
+<h4 data-number="0.0.3.1"><span class="header-section-number">0.0.3.1</span> String literals are immutable in memory</h4>
 <ul>
 <li>Typing a string like “hello” in your code editor means your progam will allocate a permanent address and memory for “hello” that all other “hello” in your code will refer to.</li>
 </ul>
@@ -389,7 +395,9 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a>printf(<span class="st">&quot;%s&quot;</span>,<span class="st">&quot;hello&quot;</span>); </span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a><span class="co">//REUSE same string literal at SAME address</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a><span class="co">//0xfffeee -&gt; &quot;hello&quot;</span></span></code></pre></div>
-<h4 id="different-ways-to-init-string">Different ways to init String</h4>
+</section>
+<section id="different-ways-to-init-string" class="level4" data-number="0.0.3.2">
+<h4 data-number="0.0.3.2"><span class="header-section-number">0.0.3.2</span> Different ways to init String</h4>
 <div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="dt">char</span> s[<span class="dv">256</span>];</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="co">//MUTABLE array of 256 initialized.</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a></span>
@@ -413,7 +421,10 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 <span id="cb13-21"><a href="#cb13-21" aria-hidden="true"></a><span class="co">//LHS: s POINTS to IMMUTABLE string</span></span>
 <span id="cb13-22"><a href="#cb13-22" aria-hidden="true"></a><span class="co">//We Crash for trying to modify an immutable string literal</span></span></code></pre></div>
 <hr />
-<h3 id="dynamic-mem-allocation">Dynamic mem allocation</h3>
+</section>
+</section>
+<section id="dynamic-mem-allocation" class="level3" data-number="0.0.4">
+<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> Dynamic mem allocation</h3>
 <p>malloc(size_t x) allocates x bytes of heap memory return address for x return a void pointer, void <em> int </em>a; a = malloc(5 * sizeof(int));</p>
 <p>free(void * p) release dynamically allocated memory input: pointer[aka address] to the beginning of a dynamically allocated block of memory</p>
 <p>calloc(size_t n, size_t x) basically just malloc with n*x bytes of memory</p>
@@ -500,6 +511,7 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 <li>Client exits, server closes any connections to the client.</li>
 <li>Server recreates the WKP waits for another client.</li>
 </ul>
+</section>
 
         </div>
         <div id="footer">

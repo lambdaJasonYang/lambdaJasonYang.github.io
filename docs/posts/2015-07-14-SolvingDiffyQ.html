@@ -243,7 +243,8 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'physics'." href="../tags/physics.html">physics</a>
     
 </div>
-<h3 id="differential-equations">Differential Equations</h3>
+<section id="differential-equations" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Differential Equations</h3>
 <p>Properties</p>
 <ul>
 <li>Order: order of highest derivative</li>
@@ -252,7 +253,8 @@
 <li>Homogeneity</li>
 </ul>
 <hr />
-<h5 id="initial-value-problems">Initial Value Problems</h5>
+<section id="initial-value-problems" class="level5" data-number="0.0.1.0.1">
+<h5 data-number="0.0.1.0.1"><span class="header-section-number">0.0.1.0.1</span> Initial Value Problems</h5>
 <p>notation: <span class="math inline">\(y' := \frac{dy}{dx}\)</span> <span class="math inline">\(y := y(x)\)</span></p>
 <p>Given Differential Equation <span class="math display">\[y'' - 5y' + 6y = 0\]</span><br />
 Solve for set of equations that satisfy Differential equation:</p>
@@ -301,14 +303,20 @@ Solve for set of equations that satisfy Differential equation:</p>
 <p><span class="math display">\[\{\{c_1\to 8,c_2\to -5\}\}\]</span></p>
 <p>Solution: <span class="math display">\[y = 8e^{2x}-5e^{3x}\]</span></p>
 <hr />
-<h3 id="examples">Examples</h3>
-<h5 id="radioactive-decay-substance-amount-yt">Radioactive Decay , substance amount y[t]</h5>
+</section>
+</section>
+<section id="examples" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Examples</h3>
+<section id="radioactive-decay-substance-amount-yt" class="level5" data-number="0.0.2.0.1">
+<h5 data-number="0.0.2.0.1"><span class="header-section-number">0.0.2.0.1</span> Radioactive Decay , substance amount y[t]</h5>
 <p><span class="math display">\[\frac{dy}{dt} = -ky(t)\]</span></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">DSolve</span>[y'[<span class="fu">t</span>] == -k*<span class="fu">y</span>[<span class="fu">t</span>], <span class="fu">y</span>[<span class="fu">t</span>], <span class="fu">t</span>] // <span class="fu">TeXForm</span></span></code></pre></div>
 <p><span class="math display">\[\left\{\left\{y(t)\to c_1 e^{-k t}\right\}\right\}\]</span></p>
 <p><span class="math display">\[y(0)=k\]</span></p>
 <hr />
-<h5 id="newtons-second-law">Newton’s Second Law</h5>
+</section>
+<section id="newtons-second-law" class="level5" data-number="0.0.2.0.2">
+<h5 data-number="0.0.2.0.2"><span class="header-section-number">0.0.2.0.2</span> Newton’s Second Law</h5>
 <p>Solving the differential equation F=ma<br />
 Solving for 1) distance function and 2) velocity function, each wrt time</p>
 <ol type="1">
@@ -324,9 +332,13 @@ Solving for 1) distance function and 2) velocity function, each wrt time</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">DSolve</span>[<span class="fu">m</span>*v'[<span class="fu">t</span>] == <span class="fu">f</span>, <span class="fu">v</span>[<span class="fu">t</span>], <span class="fu">t</span>] // <span class="fu">TeXForm</span></span></code></pre></div>
 <p><span class="math display">\[\left\{\left\{v(t)\to \frac{f t}{m}+c_1\right\}\right\}\]</span> looks familiar <span class="math inline">\(v_n=at+v_0\)</span></p>
 <hr />
-<h5 id="uniqueness-and-existence-problems">Uniqueness and Existence Problems</h5>
+</section>
+<section id="uniqueness-and-existence-problems" class="level5" data-number="0.0.2.0.3">
+<h5 data-number="0.0.2.0.3"><span class="header-section-number">0.0.2.0.3</span> Uniqueness and Existence Problems</h5>
 <p>Theorem:<br />
 Given f(x,y) continous</p>
+</section>
+</section>
 
         </div>
         <div id="footer">

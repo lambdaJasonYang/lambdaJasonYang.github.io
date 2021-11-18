@@ -243,12 +243,15 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>
     
 </div>
-<h3 id="energy-based-model-vs-probablistic-model">Energy Based Model vs Probablistic Model</h3>
+<section id="energy-based-model-vs-probablistic-model" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Energy Based Model vs Probablistic Model</h3>
 <p>Probablistic Model are based on a distribution derived from the possible solution set.<br />
 What if the solution set is intractable or infinite?</p>
 <p>Probablistic Model result in extremely steep gradients, more like fractured crevices where the solution is at the bottom and everywhere else is infinitely wrong. There is no nuance to the model.<br />
 EBM have much smoother gradients.</p>
-<h3 id="energy-based-model-vs-regular-neural-nets-training-and-inference">Energy Based Model vs regular Neural nets (Training and Inference)</h3>
+</section>
+<section id="energy-based-model-vs-regular-neural-nets-training-and-inference" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Energy Based Model vs regular Neural nets (Training and Inference)</h3>
 <p>Regular Neural nets predict a single output.<br />
 Energy Based Model predicts a set of plausible outputs.</p>
 <p>It is possible to convert EBM to probablistic model using Boltzmann probability distribution.</p>
@@ -257,6 +260,7 @@ Example2 include giving high energy to all data other than our dataset (WARNING,
 <p>Two types of inference architectures.<br />
 Latent energy variable.</p>
 <p><span class="math display">\[P(y|x) = \frac{e^{-\beta E(x,y)}}{\int_{y'}e^{-\beta E(x,y')}} \]</span></p>
+</section>
 
         </div>
         <div id="footer">

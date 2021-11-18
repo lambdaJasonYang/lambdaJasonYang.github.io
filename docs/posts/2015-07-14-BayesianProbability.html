@@ -244,7 +244,8 @@
     
 </div>
 <p><a href="http://www.acsu.buffalo.edu/~adamcunn/probability/probability.html">Probability playground</a></p>
-<h5 id="logic-analogy">Logic Analogy</h5>
+<section id="logic-analogy" class="level5" data-number="0.0.0.0.1">
+<h5 data-number="0.0.0.0.1"><span class="header-section-number">0.0.0.0.1</span> Logic Analogy</h5>
 <p><span class="math display">\[P(B | A) \cdot P(A) = P(A \land B)\]</span></p>
 <p>Logically the greatest fix point</p>
 <p><span class="math display">\[ A \Rightarrow B, A \vdash A \land B \]</span></p>
@@ -266,7 +267,9 @@
 </tr>
 </tbody>
 </table>
-<h5 id="developer-analogy">Developer Analogy</h5>
+</section>
+<section id="developer-analogy" class="level5" data-number="0.0.0.0.2">
+<h5 data-number="0.0.0.0.2"><span class="header-section-number">0.0.0.0.2</span> Developer Analogy</h5>
 <p>One can see conditional probabilities in terms of <strong>states</strong></p>
 <ol type="1">
 <li>State 1: <span class="math inline">\(P(A)\)</span> [prior]</li>
@@ -276,7 +279,9 @@
 </ol>
 <p>We call State 1 our <strong>prior</strong> and the<br />
 conditional probability or final state <strong>post-erior</strong></p>
-<h5 id="new-interpretation">New Interpretation</h5>
+</section>
+<section id="new-interpretation" class="level5" data-number="0.0.0.0.3">
+<h5 data-number="0.0.0.0.3"><span class="header-section-number">0.0.0.0.3</span> New Interpretation</h5>
 <ul>
 <li>Shaded node <span class="math inline">\(P(A)\)</span> behaves like <strong>existential intro</strong></li>
 </ul>
@@ -292,16 +297,22 @@ conditional probability or final state <strong>post-erior</strong></p>
 <li><span class="math inline">\(P(A)P(A | B)\)</span> merges the partitions A and B together.</li>
 </ul>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a202072616e6b646972203d204c520a636f6d706f756e643d747275650a09737562677261706820636c75737465725f30207b0a090a09096c6162656c203d202250284120616e64204229223b0a2020202078205b6c6162656c3d22412020616e6420204222207374796c653d66696c6c65645d203b0a097d0a0a09737562677261706820636c75737465725f31207b0a09096e6f6465205b7374796c653d66696c6c65645d3b0a09096c6162656c203d2022502841292a502842207c204129223b0a090941205b6c6162656c3d224122207374796c653d2266696c6c65642c646173686564225d3b0a2020202042205b6c6162656c3d224222207374796c653d22646173686564225d3b0a2020202041202d3e2042205b6c6162656c203d2022502842207c204129225d3b0a097d0a09422d3e78205b6c6162656c3d226f757470757422206c7461696c3d636c75737465725f31206c686561643d636c75737465725f30206469723d626f7468207374796c653d6461736865645d0a7d0a40656e64756d6c"></figure>
-<h5 id="misconceptions">Misconceptions</h5>
+</section>
+<section id="misconceptions" class="level5" data-number="0.0.0.0.4">
+<h5 data-number="0.0.0.0.4"><span class="header-section-number">0.0.0.0.4</span> Misconceptions</h5>
 <p><strong>Multiplying 2 priors <span class="math inline">\(P(A)P(B)\)</span> typically is a dead end.</strong><br />
 <strong>We need the conditional probability to understand the relationship between 2 priors</strong></p>
 <p><span class="math display">\[P(A)P(B) \neq P(A\land B)\]</span></p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a202072616e6b646972203d204c520a636f6d706f756e643d747275650a0a09737562677261706820636c75737465725f31207b0a09090a09096e6f6465205b7374796c653d22225d3b0a09096c6162656c203d202257524f4e47223b0a20202020202020202020202020737562677261706820636c75737465725f32207b0a09090909200a090920207374796c653d2266696c6c65642c726f756e646564220a2020202020202020202020202020202020206c6162656c203d202250284120616e64204329220a20202020202020202020202020202020202043205b7374796c653d226e6f6e65225d0a20202020202020202020202020202020202041205b6c6162656c3d224122207374796c653d6461736865645d3b0a0a202020202020202020202020202020207d0a2020202042205b6c6162656c3d224222207374796c653d22646173686564225d3b0a2020202041202d3e2042205b6c6162656c203d2022502842207c204129225d3b0a097d0a0a7d0a40656e64756d6c"></figure>
 <p>We cannot Overshoot the prior condition of the conditional probability.<br />
 Example is fueling <span class="math inline">\(P(B|A)\)</span> with <span class="math inline">\(P(A \land C)\)</span> which overshoots the condition of requiring only <span class="math inline">\(P(A)\)</span>. WRONG!</p>
-<h5 id="another-logic-example">Another logic example</h5>
+</section>
+<section id="another-logic-example" class="level5" data-number="0.0.0.0.5">
+<h5 data-number="0.0.0.0.5"><span class="header-section-number">0.0.0.0.5</span> Another logic example</h5>
 <p><span class="math display">\[P(B|A)P(A) + P(B| \lnot A)P(\lnot A)\]</span> <span class="math display">\[ (A \land B) \lor (A \land \lnot B) \vdash A \]</span></p>
-<h4 id="chain-rule">Chain rule</h4>
+</section>
+<section id="chain-rule" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Chain rule</h4>
 <p><span class="math display">\[\begin{aligned} P(A \land B \land C \land D) &amp;= P(A | B \land C \land D) \cdot P(B \land C \land D) \\ &amp;= P(A | B \land C \land D) \cdot P(B | C \land D) \cdot P(C \land D) \\ &amp;= P(A | B \land C \land D) \cdot P(B | C \land D) \cdot P(C | D) \cdot P(D) \end{aligned}\]</span></p>
 <blockquote>
 <p>All nodes are called priors. The bridge between nodes are called conditional probabilites.</p>
@@ -311,6 +322,7 @@ What if we don’t know the probability of the […n-1] nodes,<br />
 PARTITION n-1 nodes to 1 and […n-2] nodes. …</p>
 <p>Know this is only easy if we know all the conditional probabilities before hand.</p>
 <p>Prove <span class="math inline">\(P(A | B \land C ) \cdot P(B | C) = P(B | A \land C) \cdot P(A | C)\)</span></p>
+</section>
 
         </div>
         <div id="footer">

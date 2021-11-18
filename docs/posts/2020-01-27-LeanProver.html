@@ -301,7 +301,8 @@
 </table>
 <p>Classical logic <code class="sourceCode bash"><span class="ex">open_locale</span> classical</code> use <code class="sourceCode bash"><span class="ex">by_contradiction</span></code> tactic</p>
 <p>Most of the time, implication and universal quantifier are treated the same.</p>
-<h5 id="example">Example</h5>
+<section id="example" class="level5" data-number="0.0.0.0.1">
+<h5 data-number="0.0.0.0.1"><span class="header-section-number">0.0.0.0.1</span> Example</h5>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">expected</span> type:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">abcd</span>: ℝ</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">h</span>₁: a ≤ b</span>
@@ -313,7 +314,9 @@
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>, <span class="ex">a</span> ≤ b → c ≤ d → a + c ≤ b + d</span></code></pre></div>
 <p>Type</p>
 <p>For any type α that has a pre order.</p>
-<h3 id="types">Types</h3>
+</section>
+<section id="types" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Types</h3>
 <p>if <code class="sourceCode haskell">p <span class="op">:</span> <span class="dt">Prop</span></code> then <code class="sourceCode haskell">x<span class="op">:</span>p</code> is a proof of proposition <code class="sourceCode haskell">p <span class="op">:</span> <span class="dt">Prop</span></code>. if <code class="sourceCode haskell">y<span class="op">:</span>p</code> is also a proof then <strong>proof irrelevance</strong> means <code class="sourceCode haskell">x<span class="op">:</span>p</code> and <code class="sourceCode haskell">y<span class="op">:</span>p</code> are indistinguishable.</p>
 <ul>
 <li>Props, terms
@@ -327,14 +330,20 @@
 <li>Given <span class="math inline">\(P:X \rightarrow Prop\)</span> represents <span class="math inline">\(\forall( x: X). P\ x: Prop\)</span></li>
 </ul></li>
 </ul>
-<h3 id="numbers">Numbers</h3>
+</section>
+<section id="numbers" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Numbers</h3>
 <p>Proofs of numbers typically use type coercion.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">norm_num</span></span></code></pre></div>
-<h3 id="inductive-type">Inductive type</h3>
+</section>
+<section id="inductive-type" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Inductive type</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ex">inductive</span> mynat</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">|</span> <span class="ex">zero</span> : mynat</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="kw">|</span> <span class="ex">succ</span> (n : mynat) <span class="bu">:</span> mynat</span></code></pre></div>
-<h3 id="definitional-equality-and-reduction">Definitional Equality and Reduction</h3>
+</section>
+<section id="definitional-equality-and-reduction" class="level3" data-number="0.0.4">
+<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> Definitional Equality and Reduction</h3>
 <dl>
 <dt>Given</dt>
 <dd><span class="math inline">\(A \overset{reduces}{\rightarrow} X\)</span>
@@ -366,8 +375,11 @@
 </tr>
 </tbody>
 </table>
-<h3 id="dependent-type">Dependent type</h3>
-<h5 id="inspiring-the-dependent-type">Inspiring the dependent type</h5>
+</section>
+<section id="dependent-type" class="level3" data-number="0.0.5">
+<h3 data-number="0.0.5"><span class="header-section-number">0.0.5</span> Dependent type</h3>
+<section id="inspiring-the-dependent-type" class="level5" data-number="0.0.5.0.1">
+<h5 data-number="0.0.5.0.1"><span class="header-section-number">0.0.5.0.1</span> Inspiring the dependent type</h5>
 <p><code class="sourceCode haskell">cons <span class="dv">2</span> [<span class="dv">3</span>,<span class="dv">4</span>] <span class="op">:</span> <span class="dt">List</span> <span class="dt">Nat</span></code><br />
 <code class="sourceCode haskell">cons <span class="op">:</span> <span class="dt">Nat</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">Nat</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">Nat</span></code></p>
 <p>What if we wanted a polymorphic <code class="sourceCode haskell">cons</code>?<br />
@@ -426,7 +438,10 @@ We apply <code class="sourceCode haskell">(Π x <span class="op">:</span> α, β
 <code class="sourceCode haskell">cons<span class="ot"> int ::</span> int <span class="ot">-&gt;</span> list int <span class="ot">-&gt;</span> list int</code></p>
 <p>Example of a list is <code class="sourceCode haskell">cons int <span class="dv">3</span> (nil int)</code></p>
 <p>Since <code class="sourceCode haskell">cons</code> and <code class="sourceCode haskell">nil</code> are dependent types, they must take an extra parameter [in this case] <code class="sourceCode haskell">int</code></p>
-<h3 id="function-type-is-just-a-pi-type">function type is just a Pi-type</h3>
+</section>
+</section>
+<section id="function-type-is-just-a-pi-type" class="level3" data-number="0.0.6">
+<h3 data-number="0.0.6"><span class="header-section-number">0.0.6</span> function type is just a Pi-type</h3>
 <blockquote>
 <p>when <code class="sourceCode haskell">β</code> expanded expression does not include<br />
 bound variable <code class="sourceCode haskell">Π x <span class="op">:</span> α</code> then<br />
@@ -439,7 +454,9 @@ Notice <code>bool</code> is an expression that does not include any bound variab
 <li><code class="sourceCode haskell"><span class="fu">even</span><span class="ot"> ::</span> Π x <span class="op">:</span> nat, bool</code></li>
 <li><code class="sourceCode haskell"><span class="fu">even</span><span class="ot"> ::</span> nat <span class="ot">-&gt;</span> bool</code></li>
 </ul>
-<h3 id="sigma-type">Sigma Type</h3>
+</section>
+<section id="sigma-type" class="level3" data-number="0.0.7">
+<h3 data-number="0.0.7"><span class="header-section-number">0.0.7</span> Sigma Type</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>def f (α <span class="op">:</span> <span class="dt">Type</span>) (β <span class="op">:</span> α <span class="ot">→</span> <span class="dt">Type</span>) (a <span class="op">:</span> α) (b <span class="op">:</span> β a) <span class="op">:</span> (a <span class="op">:</span> α) × β a <span class="op">:=</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>  ⟨a, b⟩</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>def h1 (x <span class="op">:</span> <span class="dt">Nat</span>) <span class="op">:</span> <span class="dt">Nat</span> <span class="op">:=</span></span>
@@ -451,6 +468,7 @@ Notice <code>bool</code> is an expression that does not include any bound variab
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="co">-- (b : β a) is (x : (fun p =&gt; p)(Nat)) which is (x : Nat)</span></span></code></pre></div>
 <p>How to look at <code>f</code>? Extract the types<br />
 <code class="sourceCode haskell"><span class="dt">Type</span> <span class="ot">-&gt;</span> (α <span class="ot">→</span> <span class="dt">Type</span>) <span class="ot">-&gt;</span> α <span class="ot">-&gt;</span> β a <span class="ot">-&gt;</span> ((a <span class="op">:</span> α) × β a)</code></p>
+</section>
 
         </div>
         <div id="footer">

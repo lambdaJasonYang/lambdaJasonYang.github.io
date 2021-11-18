@@ -243,7 +243,8 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>
     
 </div>
-<h3 id="image-label-and-training">Image label and training</h3>
+<section id="image-label-and-training" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Image label and training</h3>
 <p>Matlab use Simulink image labeler export will output: gTruth</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode matlab"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="va">trainingDataTable</span> <span class="op">=</span> <span class="va">objectDetectorTrainingData</span>(<span class="va">gTruth</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="va">acfDetector</span> <span class="op">=</span> <span class="va">trainACFObjectDetector</span>(<span class="va">trainingDataTable</span><span class="op">,</span><span class="ss">'NegativeSamplesFactor'</span><span class="op">,</span><span class="fl">2</span>)<span class="op">;</span></span>
@@ -253,6 +254,7 @@
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="va">I</span> <span class="op">=</span> <span class="va">insertObjectAnnotation</span>(<span class="va">I</span><span class="op">,</span><span class="ss">'rectangle'</span><span class="op">,</span><span class="va">bboxes</span><span class="op">,</span><span class="va">annotation</span>)<span class="op">;</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="va">figure</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="va">imshow</span>(<span class="va">I</span>)</span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">

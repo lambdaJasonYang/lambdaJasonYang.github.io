@@ -243,7 +243,8 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'HakyllSetupSeries'." href="../tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
     
 </div>
-<h4 id="hakyll-setup-series">Hakyll Setup Series</h4>
+<section id="hakyll-setup-series" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Hakyll Setup Series</h4>
 <ol type="1">
 <li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
 <li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
@@ -276,7 +277,9 @@ I can control whether I want some pattern or group of text to be transformed in 
 <span id="cb3-8"><a href="#cb3-8"></a>                compile <span class="op">$</span> simpleCompiler <span class="co">--ONLY CHANGE THIS</span></span>
 <span id="cb3-9"><a href="#cb3-9"></a>                    <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
 <span id="cb3-10"><a href="#cb3-10"></a>                    <span class="op">...</span></span></code></pre></div>
-<h4 id="using-it">Using it</h4>
+</section>
+<section id="using-it" class="level4" data-number="0.0.0.2">
+<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Using it</h4>
 <p>For example in my hakyll folder, I create a new file “2099-01-01-NewBlogPost.markdown” and the contents are</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="co">---</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="an">title:</span><span class="co"> Hello World</span></span>
@@ -292,13 +295,16 @@ I can control whether I want some pattern or group of text to be transformed in 
 <p>The python codeblock will show:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;Hello World&quot;</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>EOF</span></code></pre></div>
-<h3 id="extra">Extra</h3>
+</section>
+<section id="extra" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Extra</h3>
 <p>CodeBlock Attr Text CodeBlock takes a Attr type and Text type.<br />
 type Attr = (Text, [Text], [(Text, Text)])</p>
 <p>Text type is a Data.Text and holds the content of the codeblock. To convert to string do “unpack Text”</p>
 <p>We can also convert CodeBlock to Dom Elements with RawBlock.</p>
 <p>RawBlock Format Text</p>
 <p>example: RawBlock (Format “html”) Text</p>
+</section>
 
         </div>
         <div id="footer">

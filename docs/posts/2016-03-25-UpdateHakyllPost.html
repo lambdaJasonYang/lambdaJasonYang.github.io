@@ -243,7 +243,8 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'HakyllSetupSeries'." href="../tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
     
 </div>
-<h3 id="how-does-hakyll-site.hs-work">How does Hakyll site.hs work?</h3>
+<section id="how-does-hakyll-site.hs-work" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> How does Hakyll site.hs work?</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>    match <span class="st">&quot;images/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>        route   idRoute</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>        compile copyFileCompiler</span></code></pre></div>
@@ -253,7 +254,9 @@
 route basically transforms the filename<br />
 In this case idRoute is the identity function meaning no change to the name “dog.png”</p>
 <p><code class="sourceCode haskell">compile copyFileCompiler</code> we copy “/images/dog.png” to the same path meaning no change.</p>
-<h3 id="updating-hakyll-posts">Updating hakyll posts</h3>
+</section>
+<section id="updating-hakyll-posts" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Updating hakyll posts</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">chcp</span> 65001</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="ex">stack</span> exec myblog clean</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="ex">stack</span> exec myblog build</span></code></pre></div>
@@ -263,11 +266,15 @@ In this case idRoute is the identity function meaning no change to the name “d
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="fu">git</span> push origin main:main</span></code></pre></div>
 <p>Hot reload</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>stack exec myblog watch</span></code></pre></div>
-<h3 id="updating-hakyll-site.hs">Updating Hakyll site.hs</h3>
+</section>
+<section id="updating-hakyll-site.hs" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Updating Hakyll site.hs</h3>
 <p>if you messed around in site.hs , you need to do</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>stack build</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>stack exec myblog rebuild</span></code></pre></div>
-<h3 id="pandoc-formatting">Pandoc formatting</h3>
+</section>
+<section id="pandoc-formatting" class="level3" data-number="0.0.4">
+<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> Pandoc formatting</h3>
 <p>Example codeblock uses 3 backquotes then name of language<br />
 we can also do {.haskell .numberLines} to have a numbered codeblock</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource haskell numberLines"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">--```haskell</span></span>
@@ -283,6 +290,7 @@ we can also do {.haskell .numberLines} to have a numbered codeblock</p>
 <p>For Latex</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode numberSource ruby numberLines"><code class="sourceCode ruby"><span id="cb9-1"><a href="#cb9-1"></a><span class="dt">$$</span> bleh \<span class="kw">in</span> <span class="dt">Set</span>  <span class="dt">$$</span></span></code></pre></div>
 <p><span class="math display">\[ bleh \in Set \]</span></p>
+</section>
 
         </div>
         <div id="footer">

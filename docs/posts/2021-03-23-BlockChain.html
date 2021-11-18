@@ -243,22 +243,30 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'python'." href="../tags/python.html">python</a>
     
 </div>
-<h4 id="chaina-a">Chain(A) = [A]</h4>
+<section id="chaina-a" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Chain(A) = [A]</h4>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a200a72616e6b6469723d22524c220a636f6d706f756e643d747275650a0a0a737562677261706820636c7573746572417b0a2020202044617461410a7d0a0a7d200a40656e64756d6c"></figure>
 <hr />
-<h4 id="chainb-a-b">Chain(B) = [[A]] + [B]</h4>
+</section>
+<section id="chainb-a-b" class="level4" data-number="0.0.0.2">
+<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Chain(B) = [[A]] + [B]</h4>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a200a72616e6b6469723d22524c220a636f6d706f756e643d747275650a0a737562677261706820636c757374657268417b0a737562677261706820636c7573746572417b0a2020202044617461410a7d0a7d0a737562677261706820636c7573746572427b0a44617461420a7d0a0a0a44617461422d3e4461746141205b6c6162656c3d22646570656e6422206c7461696c3d636c757374657242206c686561643d636c757374657268415d0a7d200a40656e64756d6c"></figure>
 <hr />
-<h4 id="chainc-a-b-c">Chain(C) = [[[A]] + [B]] + [C]</h4>
+</section>
+<section id="chainc-a-b-c" class="level4" data-number="0.0.0.3">
+<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> Chain(C) = [[[A]] + [B]] + [C]</h4>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a72616e6b6469723d22524c220a636f6d706f756e643d747275650a737562677261706820636c757374657268427b0a737562677261706820636c757374657268417b0a737562677261706820636c7573746572417b0a2020202044617461410a7d0a7d0a0a737562677261706820636c7573746572427b0a44617461420a7d0a7d0a0a44617461422d3e4461746141205b6c6162656c3d22646570656e6422206c7461696c3d636c757374657242206c686561643d636c757374657268415d0a737562677261706820636c7573746572437b0a44617461430a7d0a44617461432d3e4461746142205b6c6162656c3d22646570656e6422206c7461696c3d636c757374657243206c686561643d636c757374657268425d0a7d200a40656e64756d6c"></figure>
 <hr />
-<h3 id="analysis">Analysis</h3>
+</section>
+<section id="analysis" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Analysis</h3>
 <ul>
 <li>Chain(A) = [A]</li>
 <li>Chain(B) = [[A]] + [B]</li>
 <li>Chain(C) = [[[A]] + [B]] + [C]</li>
 </ul>
-<h4 id="general-form">General Form</h4>
+<section id="general-form" class="level4" data-number="0.0.1.1">
+<h4 data-number="0.0.1.1"><span class="header-section-number">0.0.1.1</span> General Form</h4>
 <p><span class="math display">\[ Chain(N) = [Chain(N-1)] + [N] \]</span></p>
 <p>Analogous to <a href="../posts/2018-08-23-BuildNatSets.html">Set theoretical natural numbers</a><br />
 <span class="math display">\[ N = \{N-1\} \cup Pred(N) \]</span></p>
@@ -341,6 +349,8 @@
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i] <span class="op">!=</span> chain_2.blocks[i]:</span>
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true"></a>                <span class="cf">return</span> <span class="va">self</span>.fork(i<span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true"></a>        <span class="cf">return</span> <span class="va">self</span>.fork(min_chain_size)</span></code></pre></div>
+</section>
+</section>
 
         </div>
         <div id="footer">

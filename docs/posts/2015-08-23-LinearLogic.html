@@ -243,9 +243,11 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'logic'." href="../tags/logic.html">logic</a>
     
 </div>
-<h4 id="prelude">Prelude</h4>
+<section id="prelude" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Prelude</h4>
 <p><span class="math display">\[\Delta \vdash A\]</span> <span class="math inline">\(\Delta\)</span> is a resource that can be consumed to produce goal A.</p>
-<h5 id="coin-exchange-example">Coin Exchange example:</h5>
+<section id="coin-exchange-example" class="level5" data-number="0.0.0.1.1">
+<h5 data-number="0.0.0.1.1"><span class="header-section-number">0.0.0.1.1</span> Coin Exchange example:</h5>
 <ul>
 <li>d,d,n (dime,dime,nickel) is our resources <span class="math inline">\(\Delta\)</span></li>
 <li>q (quarter) is what is produced by using up those resources</li>
@@ -254,7 +256,9 @@
 <p>Tree form <span class="math display">\[ \cfrac{(d\qquad d\qquad n)^{\Delta}}{q} \]</span></p>
 <p>Invalid example:</p>
 <p><span class="math display">\[ \xcancel{\cfrac{\cfrac{(d\qquad d\qquad n)^{\Delta}}{q} \qquad \cfrac{(d\qquad d\qquad n)^{\Delta}}{q} }{h}} \]</span> Above would be perfectly valid in typical ND but not in linear logic. We used resource <span class="math inline">\(\Delta\)</span> twice which is not allowed.</p>
-<h5 id="graph-walk-example">Graph Walk Example:</h5>
+</section>
+<section id="graph-walk-example" class="level5" data-number="0.0.0.1.2">
+<h5 data-number="0.0.0.1.2"><span class="header-section-number">0.0.0.1.2</span> Graph Walk Example:</h5>
 <p>If we are given Resource Node(A) and all edges of the graph Edge(A,B), Edge(B,A), Edge(A,C) … we can walk though the entire graph using up alledges.<br />
 <span class="math inline">\({\color{red}\Delta = Node(A),Edge(A,B),Edge(B,A),Edge(A,C)}\)</span></p>
 <p>with a linear rule</p>
@@ -265,7 +269,10 @@
 We will underline the resources if it is a reusable resource which is basically typical ND if we underlined all resources.</p>
 <hr />
 <p><span class="math display">\[u: A \vdash A\]</span></p>
-<h4 id="simultaneous-conjunction">Simultaneous Conjunction</h4>
+</section>
+</section>
+<section id="simultaneous-conjunction" class="level4" data-number="0.0.0.2">
+<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Simultaneous Conjunction</h4>
 <p>A and B are both true in the same state.</p>
 <p>Intro</p>
 <p><span class="math display">\[\cfrac{\Delta \vdash A \qquad \Delta' \vdash B}{\Delta, \Delta' \vdash A \otimes B}\]</span></p>
@@ -275,8 +282,11 @@ We will underline the resources if it is a reusable resource which is basically 
 </ul>
 <p>Elim</p>
 <p><span class="math display">\[\cfrac{\cfrac{\Delta ...}{A \otimes B} \qquad \cfrac{[u:A, w:B]}{\cfrac{\Delta'...}{C}}}{C}\]</span></p>
-<h4 id="alternative-conjunction">Alternative Conjunction</h4>
+</section>
+<section id="alternative-conjunction" class="level4" data-number="0.0.0.3">
+<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> Alternative Conjunction</h4>
 <p>Intro</p>
+</section>
 
         </div>
         <div id="footer">

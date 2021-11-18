@@ -281,7 +281,8 @@
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="ex">nvram</span> commit</span></code></pre></div>
 <p>Then disconnect your router by unplugging the power. You may notice this portion of the guide differs from the OpenWRT wiki.</p>
 <p>Well that is because when I followed the wiki, everytime I ran the commands in their order, the router just factory reset back to the original mi firmware.</p>
-<h3 id="turning-on-the-wifi">Turning on the Wifi</h3>
+<section id="turning-on-the-wifi" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Turning on the Wifi</h3>
 <ul>
 <li>connect your PC to your router by ethernet cable</li>
 </ul>
@@ -291,7 +292,9 @@
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="ex">uci</span> commit wireless</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="ex">wifi</span> up</span></code></pre></div>
 <p>WARNING: THE DEFAULT SSID is OpenWrt So if you had an old OpenWrt router setup already, be aware.</p>
-<h3 id="setting-up-a-web-gui-interface">Setting up a Web GUI interface</h3>
+</section>
+<section id="setting-up-a-web-gui-interface" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Setting up a Web GUI interface</h3>
 <ul>
 <li>Connect your router to the internet by ethernet</li>
 <li>Connect your PC to the router by wifi</li>
@@ -299,7 +302,9 @@
 <p>Take note that there is no Luci web GUI installed on this snapshot build so you have to configure the router using command line.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="ex">opkg</span> update</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="ex">opkg</span> install luci</span></code></pre></div>
-<h3 id="setting-up-as-ap-mode">Setting up as AP Mode</h3>
+</section>
+<section id="setting-up-as-ap-mode" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Setting up as AP Mode</h3>
 <p>My real router is pfsense so I always use the “routers” that I buy as dumb APs.</p>
 <ul>
 <li>Interface &gt; General Settings &gt; Protocol
@@ -337,8 +342,11 @@ enter 8.8.8.8 or 1.1.1.1 as Custom DNS servers.(Google DNS and Cloudflare DNS re
 </ul></li>
 </ul></li>
 </ul>
-<h3 id="some-issues-with-openwrt">Some issues with OpenWRT</h3>
+</section>
+<section id="some-issues-with-openwrt" class="level3" data-number="0.0.4">
+<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> Some issues with OpenWRT</h3>
 <p>Your wifi SSID may not appear while searching for networks if you use the incorrect channels and channel width. You have to keep playing around with the configuration. If your wifi disappears, then you have to play around with the channels and channel width and country origin settings on your wifi radio tab.</p>
+</section>
 
         </div>
         <div id="footer">

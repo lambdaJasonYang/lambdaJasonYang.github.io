@@ -293,7 +293,8 @@ Subset = Predicate = Function Universe U to Bool</p>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a><span class="ot">(|/=) ::</span> <span class="dt">Set</span> <span class="ot">-&gt;</span> <span class="dt">Set</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a>(<span class="op">|/=</span>) a b <span class="ot">=</span> <span class="fu">not</span> (a <span class="op">|=</span> b)</span></code></pre></div>
 <hr />
-<h2 id="gentzen-cut">Gentzen Cut</h2>
+<section id="gentzen-cut" class="level2" data-number="0.1">
+<h2 data-number="0.1"><span class="header-section-number">0.1</span> Gentzen Cut</h2>
 <p>Gentzen Cut is simply a syntatic trick</p>
 <p><span class="math display">\[
 \frac{a \vDash b \ \ \ \ b \vDash c}{a \vDash c}
@@ -310,6 +311,7 @@ Absorbing c into Delta<br />
 \frac{\Gamma' \vDash b , \Delta' \ \ \ \ \Gamma' , b \vDash \Delta'}{\Gamma' \vDash  \Delta'}
 \]</span></p>
 <p>Why? Remember <span class="math inline">\(AND \vdash OR\)</span></p>
+</section>
 
         </div>
         <div id="footer">

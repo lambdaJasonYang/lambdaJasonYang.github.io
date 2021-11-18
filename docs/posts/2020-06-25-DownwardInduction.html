@@ -243,7 +243,8 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<h3 id="analogy">Analogy</h3>
+<section id="analogy" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Analogy</h3>
 <p>Building a number line with gaps with typical induction<br />
 0 ⟶ 5 ⟶ 10 ⟶ 15 ⟶ (5n)…</p>
 <p>Filling in these gaps with downward induction<br />
@@ -252,7 +253,9 @@
 11 ⟵ 12 ⟵ 13 ⟵ 14 ⟵ 15<br />
 …<br />
 (k-4) ⟵ (k-3) ⟵ (k-2) ⟵ (k-1) ⟵ k</p>
-<h3 id="problem-statement">Problem statement</h3>
+</section>
+<section id="problem-statement" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Problem statement</h3>
 <p>Implement the identity function <span class="math inline">\(id\)</span>:</p>
 <ul>
 <li>Upward induction on powers of 2
@@ -265,9 +268,12 @@
 <li><span class="math inline">\(P(n) \rightarrow P(n-1)\)</span></li>
 </ul></li>
 </ul>
-<h4 id="overview">Overview</h4>
+<section id="overview" class="level4" data-number="0.0.2.1">
+<h4 data-number="0.0.2.1"><span class="header-section-number">0.0.2.1</span> Overview</h4>
 <p>Find the least power of 2 greater than input n.</p>
-<h4 id="downward-induction-using-dynamic-programming">Downward induction using dynamic programming</h4>
+</section>
+<section id="downward-induction-using-dynamic-programming" class="level4" data-number="0.0.2.2">
+<h4 data-number="0.0.2.2"><span class="header-section-number">0.0.2.2</span> Downward induction using dynamic programming</h4>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="co">#dynamic programming version</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="co">#upward induction by doubling, therefore each step is a power of 2</span></span>
@@ -290,7 +296,9 @@
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="co">#&gt; 17</span></span></code></pre></div>
 <p>In an empty array, the upward induction is just filling up arrays indexed at 1,2,2<sup>2,2</sup>3 …2^n</p>
 <p>The downward induction is then filling in the gaps by looping downwards.</p>
-<h4 id="downward-induction-using-recursion">Downward induction using recursion</h4>
+</section>
+<section id="downward-induction-using-recursion" class="level4" data-number="0.0.2.3">
+<h4 data-number="0.0.2.3"><span class="header-section-number">0.0.2.3</span> Downward induction using recursion</h4>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">def</span> is_integer_num(n):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(n, <span class="bu">int</span>):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>        <span class="cf">return</span> <span class="va">True</span></span>
@@ -328,6 +336,8 @@ Induction tells us some chain of increasing P(n) is true.<br />
 Recursion uses that knowledge of induction to safely climb down that chain of truths to the base case.<br />
 -me</p>
 </blockquote>
+</section>
+</section>
 
         </div>
         <div id="footer">

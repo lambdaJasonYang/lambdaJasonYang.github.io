@@ -246,23 +246,30 @@
 <ul>
 <li>Go func pass-by-value</li>
 </ul>
-<h3 id="running-or-building">Running or Building</h3>
+<section id="running-or-building" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Running or Building</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">go</span> build main.go</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">./main</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">go</span> run main.go</span></code></pre></div>
-<h3 id="typical-go-file">typical go file</h3>
+</section>
+<section id="typical-go-file" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> typical go file</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">package</span> main</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">import</span> (</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>	<span class="st">&quot;fmt&quot;</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="kw">func</span> main(){...}</span></code></pre></div>
-<h3 id="some-surprises">Some surprises</h3>
+</section>
+<section id="some-surprises" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Some surprises</h3>
 <p>for loops and if statements conditions do not have parenthesis.</p>
 <ul>
 <li><code class="sourceCode c"><span class="cf">if</span>(x == <span class="dv">2</span>){..}</code> <span class="math inline">\(\Rightarrow\)</span> <code class="sourceCode go"><span class="kw">if</span> x == <span class="dv">2</span> {..}</code></li>
 <li><code class="sourceCode c"><span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;<span class="dv">5</span>;i++){..}</code> <span class="math inline">\(\Rightarrow\)</span> <code class="sourceCode go"><span class="kw">for</span> i:=<span class="dv">0</span>;i&lt;<span class="dv">5</span>;i++ {..}</code></li>
 </ul>
-<h3 id="vs">:= vs =</h3>
+</section>
+<section id="vs" class="level3" data-number="0.0.4">
+<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> := vs =</h3>
 <p><code class="sourceCode go"><span class="kw">var</span> bleh <span class="dt">int</span> = <span class="dv">3</span></code> equivalent <code class="sourceCode go">bleh := <span class="dv">3</span></code></p>
 <p><code class="sourceCode go">:=</code> is shorthand to create new variable implicity then assign it.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="co">//Shorthand</span></span>
@@ -271,7 +278,9 @@
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="co">//Expanded</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="kw">var</span> bleh <span class="dt">int</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>bleh = <span class="dv">2</span></span></code></pre></div>
-<h2 id="use-slicelist-instead-of-arrays">Use slice(list) instead of arrays</h2>
+</section>
+<section id="use-slicelist-instead-of-arrays" class="level2" data-number="0.1">
+<h2 data-number="0.1"><span class="header-section-number">0.1</span> Use slice(list) instead of arrays</h2>
 <p>I will just call slice a list due to preference</p>
 <ul>
 <li>list is just an array without inputting the len arg</li>
@@ -311,7 +320,8 @@
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>x == y <span class="co">//ERROR</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a>y == <span class="ot">nil</span> <span class="co">//true</span></span></code></pre></div>
 <p><code class="sourceCode go"><span class="bu">append</span></code> returns a new array or slice.</p>
-<h4 id="slicing-lists">Slicing lists</h4>
+<section id="slicing-lists" class="level4" data-number="0.1.0.1">
+<h4 data-number="0.1.0.1"><span class="header-section-number">0.1.0.1</span> Slicing lists</h4>
 <ul>
 <li>same as in Python <strong>BUT sublists SHARE THE SAME MEMORY</strong></li>
 </ul>
@@ -325,7 +335,9 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <div class="sourceCode" id="cb7"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>x = []<span class="dt">int</span>{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>}</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>y = <span class="bu">make</span>([]<span class="dt">int</span>,<span class="dv">2</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="bu">copy</span>(y,x[<span class="dv">1</span>:<span class="dv">3</span>])</span></code></pre></div>
-<h4 id="strings">Strings</h4>
+</section>
+<section id="strings" class="level4" data-number="0.1.0.2">
+<h4 data-number="0.1.0.2"><span class="header-section-number">0.1.0.2</span> Strings</h4>
 <ul>
 <li>A string is a sequence of UTF-8 <strong>code-points</strong></li>
 <li>Go strings are immutable meaning when sliced, they automatically make copy; they behave like pythonic strings</li>
@@ -343,7 +355,9 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="kw">var</span> bb []<span class="dt">byte</span> = []<span class="dt">byte</span>(s[<span class="dv">0</span>:<span class="dv">3</span>])</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>fmt.Printf(<span class="st">&quot;%s</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">string</span>(bb)) <span class="co">// output: Hel</span></span></code></pre></div>
-<h4 id="hashmap-aka-dictionaries">Hashmap aka Dictionaries</h4>
+</section>
+<section id="hashmap-aka-dictionaries" class="level4" data-number="0.1.0.3">
+<h4 data-number="0.1.0.3"><span class="header-section-number">0.1.0.3</span> Hashmap aka Dictionaries</h4>
 <div class="sourceCode" id="cb10"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="kw">var</span> exMap1 <span class="kw">map</span>[<span class="dt">string</span>]<span class="dt">int</span> <span class="co">// value: nil</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>exMap2 := <span class="kw">map</span>[<span class="dt">string</span>][]<span class="dt">int</span> {</span>
@@ -355,14 +369,18 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a>val, ok := exMap2[<span class="st">&quot;even&quot;</span>]</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a>exMap3 := <span class="bu">make</span>(<span class="kw">map</span>[<span class="dt">string</span>][]<span class="dt">int</span>,<span class="dv">4</span>)</span></code></pre></div>
-<h4 id="functions">Functions</h4>
+</section>
+<section id="functions" class="level4" data-number="0.1.0.4">
+<h4 data-number="0.1.0.4"><span class="header-section-number">0.1.0.4</span> Functions</h4>
 <div class="sourceCode" id="cb11"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">func</span> typicalfunction() <span class="dt">string</span>{</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a> <span class="kw">return</span> <span class="st">&quot;simple function&quot;</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>}</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a><span class="kw">var</span> mylambda = <span class="kw">func</span>() <span class="dt">string</span> { <span class="kw">return</span> <span class="st">&quot;this is lambda string func&quot;</span> }</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a>fmt.Println(mylambda())</span></code></pre></div>
-<h4 id="struct-and-api">Struct and API</h4>
+</section>
+<section id="struct-and-api" class="level4" data-number="0.1.0.5">
+<h4 data-number="0.1.0.5"><span class="header-section-number">0.1.0.5</span> Struct and API</h4>
 <div class="sourceCode" id="cb12"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="kw">type</span> person <span class="kw">struct</span>{</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>  name <span class="dt">string</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>  age <span class="dt">int</span></span>
@@ -372,7 +390,8 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a>  name: <span class="st">&quot;Joe&quot;</span>,</span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a>  age: <span class="dv">2</span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a>}</span></code></pre></div>
-<h5 id="anonymous-struct">Anonymous Struct</h5>
+<section id="anonymous-struct" class="level5" data-number="0.1.0.5.1">
+<h5 data-number="0.1.0.5.1"><span class="header-section-number">0.1.0.5.1</span> Anonymous Struct</h5>
 <div class="sourceCode" id="cb13"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a>blob := <span class="kw">struct</span> {</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>  name <span class="dt">string</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>  age <span class="dt">int</span></span>
@@ -381,7 +400,10 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>  age: <span class="dv">4</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>}</span></code></pre></div>
 <hr />
-<h4 id="scoping">Scoping</h4>
+</section>
+</section>
+<section id="scoping" class="level4" data-number="0.1.0.6">
+<h4 data-number="0.1.0.6"><span class="header-section-number">0.1.0.6</span> Scoping</h4>
 <div class="sourceCode" id="cb14" data-filename="BAD_Shadowing.go"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="kw">func</span> main(){</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>  x := <span class="dv">5</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>  <span class="kw">if</span> x &gt; <span class="dv">0</span> {</span>
@@ -393,7 +415,9 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true"></a>} </span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="ex">go</span> install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="ex">go</span> vet</span></code></pre></div>
-<h3 id="learn-by-doing">Learn by doing</h3>
+</section>
+<section id="learn-by-doing" class="level3" data-number="0.1.1">
+<h3 data-number="0.1.1"><span class="header-section-number">0.1.1</span> Learn by doing</h3>
 <div class="sourceCode" id="cb16"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a>gofunc Hello(name <span class="dt">string</span>) <span class="dt">string</span> {</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a>  <span class="kw">var</span> bleh <span class="dt">string</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a>  <span class="kw">var</span> sentinel <span class="dt">string</span></span>
@@ -421,7 +445,9 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <span id="cb16-25"><a href="#cb16-25" aria-hidden="true"></a>  fmt.Println(heh)</span>
 <span id="cb16-26"><a href="#cb16-26" aria-hidden="true"></a>	<span class="kw">return</span> <span class="st">&quot;Hello World&quot;</span></span>
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true"></a>}</span></code></pre></div>
-<h3 id="loops">loops</h3>
+</section>
+<section id="loops" class="level3" data-number="0.1.2">
+<h3 data-number="0.1.2"><span class="header-section-number">0.1.2</span> loops</h3>
 <div class="sourceCode" id="cb17"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a><span class="kw">func</span> main() {</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a>  arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}</span>
@@ -437,7 +463,9 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true"></a>	fmt.Println(arr[<span class="dv">0</span>])</span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true"></a>	fmt.Println(sum)</span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true"></a>}</span></code></pre></div>
-<h3 id="switch-statement">Switch statement</h3>
+</section>
+<section id="switch-statement" class="level3" data-number="0.1.3">
+<h3 data-number="0.1.3"><span class="header-section-number">0.1.3</span> Switch statement</h3>
 <div class="sourceCode" id="cb18"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="kw">if</span> i == <span class="dv">0</span> {</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a>  fmt.Println(<span class="st">&quot;Zero&quot;</span>)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a>}<span class="kw">else</span> <span class="kw">if</span> i == <span class="dv">1</span> {</span>
@@ -453,7 +481,9 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true"></a>  <span class="kw">case</span> <span class="dv">2</span>: fmt.Println(<span class="st">&quot;Two&quot;</span>)</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true"></a>  <span class="kw">default</span>: fmt.Println(<span class="st">&quot;default&quot;</span>)</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true"></a>}</span></code></pre></div>
-<h3 id="struct">struct</h3>
+</section>
+<section id="struct" class="level3" data-number="0.1.4">
+<h3 data-number="0.1.4"><span class="header-section-number">0.1.4</span> struct</h3>
 <div class="sourceCode" id="cb20"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a><span class="kw">type</span> Rectangle <span class="kw">struct</span> {</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>    Width <span class="dt">float64</span></span>
@@ -479,7 +509,9 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <div class="sourceCode" id="cb21"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a><span class="kw">type</span> Shape <span class="kw">interface</span> {</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a>    Area() <span class="dt">float64</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true"></a>}</span></code></pre></div>
-<h3 id="pointer">Pointer</h3>
+</section>
+<section id="pointer" class="level3" data-number="0.1.5">
+<h3 data-number="0.1.5"><span class="header-section-number">0.1.5</span> Pointer</h3>
 <p>Just as in our “Quick C” ,</p>
 <ul>
 <li>think of passing pointers in args as passing addresses.</li>
@@ -552,6 +584,8 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true"></a><span class="co">//GOOD</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true"></a>arr := [<span class="dv">3</span>]<span class="dt">int</span>{<span class="dv">7</span>}</span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true"></a>arr2 := <span class="bu">append</span>(arr,[<span class="dv">2</span>]<span class="dt">int</span>{<span class="dv">8</span>,<span class="dv">9</span>})</span></code></pre></div>
+</section>
+</section>
 
         </div>
         <div id="footer">

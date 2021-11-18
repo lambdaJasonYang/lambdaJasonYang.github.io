@@ -258,7 +258,8 @@
 <li>Function Map (Black)</li>
 </ul></li>
 </ul>
-<h4 id="syntax-dependency-are-ast-in-fp">Syntax Dependency are AST in FP</h4>
+<section id="syntax-dependency-are-ast-in-fp" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Syntax Dependency are AST in FP</h4>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">def</span> plus(x,y):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    <span class="cf">return</span> x <span class="op">+</span> y</span></code></pre></div>
 <ul>
@@ -274,8 +275,11 @@ Blue arrows DO NOT represent Semantic Dependency</p>
 <p>In OO, the same diagram does not exist because the arrows now represent object dependency.</p>
 <p>Therefore plus does not have an object dependency diagram.</p>
 <hr />
-<h3 id="oo">OO</h3>
-<h4 id="semantic-dependency">Semantic Dependency</h4>
+</section>
+<section id="oo" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> OO</h3>
+<section id="semantic-dependency" class="level4" data-number="0.0.1.1">
+<h4 data-number="0.0.1.1"><span class="header-section-number">0.0.1.1</span> Semantic Dependency</h4>
 <p>Arguments to functions are NOT semantic dependencies even though they are syntax dependencies.</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020202072616e6b646972203d204c520a2020202042205b636f6c6f723d6f72616e67655d3b0a2020202041202d3e2042205b636f6c6f723d7265645d0a7d"></figure>
 <p>B is orange meaning it has a <strong>possibility of mutation</strong></p>
@@ -311,7 +315,9 @@ Blue arrows DO NOT represent Semantic Dependency</p>
 </ul>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020202072616e6b646972203d204c523b0a20202020737562677261706820636c757374657241207b0a202020202020202056616c7565205b6c6162656c3d436f446f6d61696e2073686170653d706c61696e746578745d0a2020202020202020737562677261706820636c7573746572427b0a202020202020202020202020496e646578205b6c6162656c3d446f6d61696e2073686170653d706c61696e746578745d0a2020202020202020202020200a20202020202020207d0a202020207d0a202020202020496e646578202d3e2056616c7565205b6c6162656c3d2257524f4e475c6e5c6e6d61707320746f225d3b0a2020202056616c7565202d3e20496e646578205b6c6162656c3d3c3c733e646570656e64733c2f733e3e20636f6c6f723d227265642220666f6e74636f6c6f723d2272656422207374796c653d6461736865645d3b0a7d"></figure>
 <p>WRONG because this is a pure function, meaning Domain will never mutate.</p>
-<h4 id="semantic-modification">Semantic Modification</h4>
+</section>
+<section id="semantic-modification" class="level4" data-number="0.0.1.2">
+<h4 data-number="0.0.1.2"><span class="header-section-number">0.0.1.2</span> Semantic Modification</h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="dt">void</span> plus(&amp;x,&amp;y,&amp;z):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    z = x + y</span></code></pre></div>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020202072616e6b646972203d204c523b0a20202020706c7573202d3e207a205b636f6c6f723d707572706c655d3b0a7d"></figure>
@@ -328,7 +334,9 @@ Blue arrows DO NOT represent Semantic Dependency</p>
 <p>Tidbit: Passing x,y by reference is same as pass-by-value if we don’t modify the values.<br />
 <code class="sourceCode c"><span class="dt">void</span> plus(&amp;x,&amp;y,&amp;z)</code> is effectively the same as <code class="sourceCode c"><span class="dt">void</span> plus(x,y,&amp;z)</code></p>
 <hr />
-<h4 id="arrays-function-map-vs-dependency-duality-misconception">Arrays , Function Map vs Dependency Duality misconception</h4>
+</section>
+<section id="arrays-function-map-vs-dependency-duality-misconception" class="level4" data-number="0.0.1.3">
+<h4 data-number="0.0.1.3"><span class="header-section-number">0.0.1.3</span> Arrays , Function Map vs Dependency Duality misconception</h4>
 <blockquote>
 <p>An array is simply a function.<br />
 OO Objects can be modeled as functions.</p>
@@ -345,7 +353,9 @@ OO Objects can be modeled as functions.</p>
 Or more precisely there is no point in showing semantic dependencies.</p>
 <p><strong>Black arrows = Function map</strong></p>
 <hr />
-<h4 id="functional-method-to-simulate-oo-objects">Functional method to simulate OO objects</h4>
+</section>
+<section id="functional-method-to-simulate-oo-objects" class="level4" data-number="0.0.1.4">
+<h4 data-number="0.0.1.4"><span class="header-section-number">0.0.1.4</span> Functional method to simulate OO objects</h4>
 <div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>Record_A bobby{name:<span class="st">&quot;bob&quot;</span>,age:<span class="dv">3</span>}</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>String name(x):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>    <span class="cf">return</span> x.name</span>
@@ -356,7 +366,8 @@ Or more precisely there is no point in showing semantic dependencies.</p>
 <p><img src="../images/BoxDependency/Anameage.svg" /></p>
 <p>Notice no semantic dependency. This is the reason FP doesn’t require dependency injection.</p>
 <hr />
-<h5 id="comparing-with-oo-version">Comparing with OO version</h5>
+<section id="comparing-with-oo-version" class="level5" data-number="0.0.1.4.1">
+<h5 data-number="0.0.1.4.1"><span class="header-section-number">0.0.1.4.1</span> Comparing with OO version</h5>
 <ul>
 <li>Notice in OO, we wouldn’t see the entire Domain, Nat and String but the objects age and name.</li>
 <li>The objects age and name would also be inside the object A</li>
@@ -371,7 +382,10 @@ Or more precisely there is no point in showing semantic dependencies.</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020202041202d3e20616765205b636f6c6f723d7265645d0a2020202041202d3e206e616d65205b636f6c6f723d7265645d0a2020202041202d3e20616765205b6c6162656c3d70726f6a656374696f6e5d0a2020202041202d3e206e616d65205b6c6162656c3d70726f6a656374696f6e5d0a7d"></figure>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h6469677261706820477b0a202020200a2020202020202020737562677261706820636c757374657241207b0a202020202020202041205b6c6162656c3d22415c6e5c6e4f4f2076657273696f6e222073686170653d706c61696e746578745d0a2020202020202020737562677261706820636c7573746572427b0a2020202020202020202020206e616d65205b73686170653d706c61696e746578745d0a2020202020202020202020200a20202020202020207d0a2020202020202020737562677261706820636c7573746572437b0a202020202020202020202020616765205b73686170653d706c61696e746578745d0a20202020202020207d0a202020207d0a0a7d"></figure>
 <hr />
-<h4 id="pointers">Pointers</h4>
+</section>
+</section>
+<section id="pointers" class="level4" data-number="0.0.1.5">
+<h4 data-number="0.0.1.5"><span class="header-section-number">0.0.1.5</span> Pointers</h4>
 <blockquote>
 <p>Everything in memory is just one big array<br />
 Arrays are just functions<br />
@@ -395,13 +409,17 @@ So whenever we initialize a new variable, we are causing a mutation. So Yes.</p>
 <li>Mutated Address propagates change to Value</li>
 </ul></li>
 </ul>
-<h4 id="linked-lists-recursive-dependency">Linked Lists, recursive dependency</h4>
+</section>
+<section id="linked-lists-recursive-dependency" class="level4" data-number="0.0.1.6">
+<h4 data-number="0.0.1.6"><span class="header-section-number">0.0.1.6</span> Linked Lists, recursive dependency</h4>
 <div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>class linkedlist{</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>    <span class="dt">int</span> head = data;</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>    linkedlist* next = &amp;second </span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>}</span></code></pre></div>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a20202020737562677261706820636c757374657241207b0a20202020202020204c696e6b65644c697374205b73686170653d706c61696e746578745d0a2020202020202020737562677261706820636c7573746572427b0a20202020202020202020202042205b6c6162656c3d222a4c696e6b65644c697374222073686170653d706c61696e746578745d0a2020202020202020202020200a20202020202020207d0a202020207d0a7d"></figure>
+</section>
+</section>
 
         </div>
         <div id="footer">

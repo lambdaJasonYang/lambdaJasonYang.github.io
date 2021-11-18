@@ -247,7 +247,8 @@
 <p>A total recursive function is an illusion.</p>
 </blockquote>
 <p>A total recursive function simply a partial function that approximates the recursive function by nesting within itself an infinite number of times.</p>
-<h3 id="partial-recursive-factorial">Partial recursive factorial</h3>
+<section id="partial-recursive-factorial" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Partial recursive factorial</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">def</span> fact0(n):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    <span class="cf">return</span> <span class="dv">1</span></span>
@@ -269,7 +270,9 @@
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a>    <span class="cf">return</span> <span class="dv">1</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a>  <span class="cf">else</span>:</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a>    <span class="cf">return</span> n <span class="op">*</span> fact2(n<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
-<h3 id="a-more-general-example">A more general example</h3>
+</section>
+<section id="a-more-general-example" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> A more general example</h3>
 <p>The partial recursive function takes itself as the parameter which it will use for the IH or recursive case.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>partialrecursivefunction <span class="op">=</span> <span class="kw">lambda</span> f: (<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="cf">if</span> x <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> x <span class="op">*</span> (f(x<span class="op">-</span><span class="dv">1</span>)))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>sentinel <span class="op">=</span> <span class="kw">lambda</span> x: <span class="st">&quot;error&quot;</span></span>
@@ -292,7 +295,9 @@
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>p(p(s))(<span class="dv">2</span>)</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a><span class="co">#&gt; 'errorerror'</span></span></code></pre></div>
 <p>Observe that the input domain is limited by how nested the partial recursive function is.</p>
-<h3 id="y-combinator">Y-combinator</h3>
+</section>
+<section id="y-combinator" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Y-combinator</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>Y <span class="op">=</span> <span class="kw">lambda</span> f: (<span class="kw">lambda</span> x: x(x))(<span class="kw">lambda</span> x: f(<span class="kw">lambda</span> <span class="op">*</span>args: x(x)(<span class="op">*</span>args)))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>Y(p)(<span class="dv">5</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="co">#&gt; 120</span></span></code></pre></div>
@@ -317,7 +322,9 @@
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>  <span class="cf">return</span> app(hh)</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>Y4(p)(<span class="dv">5</span>)</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a><span class="co">#&gt; 120</span></span></code></pre></div>
-<h3 id="a-total-recursive-factorial">A total recursive factorial</h3>
+</section>
+<section id="a-total-recursive-factorial" class="level3" data-number="0.0.4">
+<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> A total recursive factorial</h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">def</span> fac(s,n):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>  <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>    <span class="cf">return</span> <span class="dv">1</span></span>
@@ -326,10 +333,15 @@
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>fac(fac,<span class="dv">5</span>)</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a><span class="co">#&gt; 120</span></span></code></pre></div>
-<h3 id="analogy">Analogy</h3>
-<h5 id="taylor-series">Taylor Series</h5>
+</section>
+<section id="analogy" class="level3" data-number="0.0.5">
+<h3 data-number="0.0.5"><span class="header-section-number">0.0.5</span> Analogy</h3>
+<section id="taylor-series" class="level5" data-number="0.0.5.0.1">
+<h5 data-number="0.0.5.0.1"><span class="header-section-number">0.0.5.0.1</span> Taylor Series</h5>
 <p>Similar to the taylor series, as we add more terms to the series, the series becomes a closer approximate to the function.</p>
-<h5 id="transitive-relation">Transitive relation</h5>
+</section>
+<section id="transitive-relation" class="level5" data-number="0.0.5.0.2">
+<h5 data-number="0.0.5.0.2"><span class="header-section-number">0.0.5.0.2</span> Transitive relation</h5>
 <p>mini background:</p>
 <ul>
 <li>Let <span class="math inline">\(R\)</span> be a relation from a set to itself,<br />
@@ -343,6 +355,8 @@
 </ul>
 <p><span class="math inline">\(R \cup R^2 \cup R^3\)</span> would be analogous to our partial function <code class="sourceCode python">p(p(p(s)))</code></p>
 <p><span class="math inline">\(\bigcup R^{n\in \mathbb{N}}\)</span> would be the total recursive function.</p>
+</section>
+</section>
 
         </div>
         <div id="footer">

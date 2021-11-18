@@ -12,7 +12,7 @@ import Text.Pandoc.Options
       Extensions,
       HTMLMathMethod(MathJax),
       ReaderOptions(readerExtensions),
-      WriterOptions(writerHTMLMathMethod) )
+      WriterOptions(writerHTMLMathMethod, writerNumberSections, writerTableOfContents, writerTOCDepth, writerTemplate) )
 
 import Hakyll.Web.Tags (renderTagCloud)
 import qualified Data.ByteString.Char8 as C
@@ -24,6 +24,8 @@ import GHC.IO.Handle.Types (BufferMode(BlockBuffering))
 
 import Numeric (showHex)
 import Data.Char (ord)
+import Data.Functor.Identity
+import Text.Pandoc
 
 
 --------------
@@ -48,16 +50,48 @@ readMathjaxOptions = defaultHakyllReaderOptions
                 }
 --Step 3: Setup WriterOptions
 writeMathjaxOptions :: WriterOptions
+--writeMathjaxOptions = defaultHakyllWriterOptions
 writeMathjaxOptions = defaultHakyllWriterOptions 
-                {
-                    writerHTMLMathMethod = MathJax ""
+                {          
+                    writerSectionDivs = True
+                    ,writerNumberSections  = True
+                    ,writerColumns = 130
+                    , writerTableOfContents = True
+                   , writerTOCDepth        = 3
+                   , writerHTMLMathMethod = MathJax ""
                 }
+
+
+---------------------------------------------------TOC
+tocTemplate :: Text.Pandoc.Template T.Text
+tocTemplate =
+    either error id $ either (error . show) id $
+    runPure $ runWithDefaultPartials $
+    compileTemplate "" "<div id=\"TOC\">$toc$</div>\n$body$"
+
+writeTOCMathjaxOptions :: WriterOptions
+writeTOCMathjaxOptions = writeMathjaxOptions{
+                   
+                    writerTemplate        = Just tocTemplate
+                    
+}
+---------------------------------------------------END TOC
+
 --Step 4: Build the compiler using the ReaderOption and Writer Option from Step 2, 3.
 mathJaxAddedCompiler :: Compiler (Item String)
-mathJaxAddedCompiler = pandocCompilerWithTransform readMathjaxOptions writeMathjaxOptions addToCodeBlock
+mathJaxAddedCompiler = pandocCompilerWithTransform readMathjaxOptions writeTOCMathjaxOptions addToCodeBlock
 --Step 5: Replace the line "compile $ pandocCompiler" under "match "posts/*" $ do" with 
 --"compiler $ mathJaxAddedCompiler"
+
+--exclude Table of Content
+mathJaxAddedCompilerExTOC :: Compiler (Item String)
+mathJaxAddedCompilerExTOC = pandocCompilerWithTransform readMathjaxOptions writeMathjaxOptions addToCodeBlock
+
 --------------------------------------------------------------------------------MATHJAX END
+
+
+
+
 
 ------------------------------------------------------------------------------ PLANTUML pandoc filter
 
@@ -184,11 +218,19 @@ main = do
 ----------------------
         match "posts/*" $ do
             route $ setExtension "html"
-            compile $ mathJaxAddedCompiler
-                >>= loadAndApplyTemplate "templates/post.html"    (postCtxWithTags tags)
-                >>= saveSnapshot "content"
-                >>= loadAndApplyTemplate "templates/default.html" (postCtxWithTags tags)
-                >>= relativizeUrls
+            compile $ do
+                --Check TOC metadata field filled START
+                ident <- getUnderlying                                 
+                toc   <- getMetadataField ident "toc"             
+                let chosenCompiler = case toc of
+                      Nothing -> mathJaxAddedCompilerExTOC
+                      Just _ -> mathJaxAddedCompiler                        
+                --Check TOC metadata field filled END
+                chosenCompiler
+                    >>= loadAndApplyTemplate "templates/post.html"    (postCtxWithTags tags)
+                    >>= saveSnapshot "content"
+                    >>= loadAndApplyTemplate "templates/default.html" (postCtxWithTags tags)
+                    >>= relativizeUrls
 
         create ["archive.html"] $ do
             route idRoute

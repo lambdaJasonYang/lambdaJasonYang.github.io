@@ -245,7 +245,8 @@
 </div>
 <p>AM-GM Theorem<br />
 <span class="math display">\[ (x_1 x_2 .. x_n)^{1/n} \leq \frac{x_1 + x_2 + .. x_n}{n} \]</span></p>
-<h3 id="upward-induction-step-1">Upward induction step 1</h3>
+<section id="upward-induction-step-1" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Upward induction step 1</h3>
 <p>Base step: n = 1, obvious<br />
 Base step: n = 2, obvious</p>
 <p><span class="math inline">\((P(k) \rightarrow P(2k) )\)</span>:</p>
@@ -293,7 +294,9 @@ Base step: n = 2, obvious</p>
 <p>QED: <span class="math inline">\((\frac{{}^{+}A \times {}^{+}B}{k^2})^{k} \leq (\frac{{}^{+}A + {}^{+}B}{2k})^{2k}\)</span></p>
 <p>Thoughts: Don’t fall in to the trap of believing IH should only be used with obvious cases like n-1, n/2<br />
 IH(2) is the crux of this proof.</p>
-<h3 id="downward-induction-step-2">Downward induction step 2</h3>
+</section>
+<section id="downward-induction-step-2" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Downward induction step 2</h3>
 <p><span class="math inline">\((P(k) \rightarrow P(k-1) )\)</span>:<br />
 After shifting complexity LHS to RHS:</p>
 <p><strong>IMPORTANT</strong> WRITE OUT <span class="math inline">\(x_{n-1}\)</span> instead of just abstracting it into the ellipse.If not you will hit a roadblock when using IH.<br />
@@ -311,7 +314,8 @@ After shifting complexity LHS to RHS:</p>
 <li>We can FREELY add one more variable/expression <span class="math inline">\(\framebox{}\)</span> to starting point so we can use IH. How do we Choose?</li>
 </ul></li>
 </ul>
-<h4 id="pause-reverse-meta-guessing-possible-pathway-to-solution">Pause: Reverse meta-guessing possible pathway to solution</h4>
+<section id="pause-reverse-meta-guessing-possible-pathway-to-solution" class="level4" data-number="0.0.2.1">
+<h4 data-number="0.0.2.1"><span class="header-section-number">0.0.2.1</span> Pause: Reverse meta-guessing possible pathway to solution</h4>
 <p>Choosing an expression will gives us this IH: <span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \tag{1}\]</span></p>
 <p>Relating IH back to the Goal.<br />
 <span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{2}\]</span></p>
@@ -338,13 +342,19 @@ After shifting complexity LHS to RHS:</p>
 <li>Looks good</li>
 </ul></li>
 </ul>
-<h4 id="resume-continue-proof">Resume: continue proof</h4>
+</section>
+<section id="resume-continue-proof" class="level4" data-number="0.0.2.2">
+<h4 data-number="0.0.2.2"><span class="header-section-number">0.0.2.2</span> Resume: continue proof</h4>
 <p>Solving Goal:</p>
 <p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\frac{A}{n-1}})(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
 <p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{-1}(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
 <p>QED: <span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{n-1}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
-<h3 id="step-3-combining-results-from-upwards-and-downward-induction">Step 3 Combining results from Upwards and Downward induction</h3>
+</section>
+</section>
+<section id="step-3-combining-results-from-upwards-and-downward-induction" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Step 3 Combining results from Upwards and Downward induction</h3>
 <p>QED Combining Upward and Downward induction constitutes a full proof the inequality is true for all naturals.</p>
+</section>
 
         </div>
         <div id="footer">

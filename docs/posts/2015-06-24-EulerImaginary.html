@@ -243,13 +243,16 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'mathbasics'." href="../tags/mathbasics.html">mathbasics</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
     
 </div>
-<h3 id="fundamental-theorem-of-algebra">Fundamental Theorem of Algebra</h3>
+<section id="fundamental-theorem-of-algebra" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Fundamental Theorem of Algebra</h3>
 <ul>
 <li>Complex polynomials(complex coefficients) can be factored in to n factors with n roots that may not be distinct.</li>
 <li>Since reals are subset of complex, implies typical real polynomials can always be factored resulting in real or complex roots.</li>
 <li>Complex numbers have a closure property in factoring</li>
 </ul>
-<h3 id="coordinate-systems">Coordinate systems</h3>
+</section>
+<section id="coordinate-systems" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Coordinate systems</h3>
 <p>Everything in the table is equal</p>
 <table>
 <colgroup>
@@ -293,7 +296,9 @@
 </ul>
 <p>One can think of all of these as vectors.</p>
 <p>Shorthand notation <span class="math inline">\(rcis\theta = \langle r,\theta \rangle\)</span></p>
-<h3 id="de-moivre-theorem">De Moivre Theorem</h3>
+</section>
+<section id="de-moivre-theorem" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> De Moivre Theorem</h3>
 <p><span class="math inline">\((r\ cis\ \alpha)(s\ cis\ \beta) = (r\cdot s)cis\ (\alpha + \beta)\)</span></p>
 <p>We can derive this by converting polar to geocomplex then multiplying.</p>
 <p><strong>multiplying vectors in polar results in</strong></p>
@@ -321,12 +326,15 @@
 <li>GOOD <span class="math inline">\((r\ cis\ \alpha)(s\ cis\ \beta) = r(cos \alpha + i sin \alpha) \cdot s(cos\beta + i sin \beta) = ...\)</span></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">z</span> = <span class="fu">Sqrt</span>[<span class="dv">2</span>] + <span class="fu">I</span> * <span class="fu">Sqrt</span>[<span class="dv">2</span>]</span></code></pre></div>
-<h3 id="functional-identities">Functional identities</h3>
+</section>
+<section id="functional-identities" class="level3" data-number="0.0.4">
+<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> Functional identities</h3>
 <p>Imagine if we had a functional identity <span class="math display">\[ \forall a: \forall f : f(a) = 1 \]</span></p>
 <p>The only function that satisfies this is <span class="math inline">\(f(x) = 1\)</span></p>
 <p>Note <span class="math inline">\(\{\forall a: \forall f : f(a) = 1\} \neq \{f(x) = 1\}\)</span></p>
 <p>One is a functional identity and the other is a single function.</p>
-<h5 id="substitution-method">Substitution method</h5>
+<section id="substitution-method" class="level5" data-number="0.0.4.0.1">
+<h5 data-number="0.0.4.0.1"><span class="header-section-number">0.0.4.0.1</span> Substitution method</h5>
 <p>Logarithm satisfies <span class="math inline">\(\forall x,y : \forall f:f(x \cdot y) = f(x) + f(y)\)</span></p>
 <ul>
 <li><span class="math inline">\([assume\ \hat{a}]\)</span>
@@ -351,16 +359,23 @@
 <p>Notice <span class="math inline">\(Log(1) = 0\)</span></p>
 <p><span class="math inline">\(f(1) = 0\)</span> is true for any function f that satisfies the identity <span class="math inline">\(f(x \cdot y) = f(x) + f(y)\)</span></p>
 <hr />
-<h3 id="derivatives">Derivatives</h3>
+</section>
+</section>
+<section id="derivatives" class="level3" data-number="0.0.5">
+<h3 data-number="0.0.5"><span class="header-section-number">0.0.5</span> Derivatives</h3>
 <p>Derivatives operate on functions</p>
 <p><span class="math inline">\(D(f(x)) + D(g(x)) = D(f+g)(x)\)</span><br />
 <span class="math inline">\(c \cdot D(f)(x) = D(c \cdot f)(x) ,\ given\ constant\  c\in \mathbb{R}\)</span><br />
 Derivative operator is a linear operator</p>
 <p>Functional identity for trig functions <span class="math inline">\(f(x+y) = f(x)g(y) + f(y)g(x)\)</span></p>
-<h3 id="partial-fractions">Partial Fractions</h3>
+</section>
+<section id="partial-fractions" class="level3" data-number="0.0.6">
+<h3 data-number="0.0.6"><span class="header-section-number">0.0.6</span> Partial Fractions</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">Apart</span>[(<span class="dv">6</span> <span class="fu">x</span>^<span class="dv">2</span> + <span class="dv">12</span> <span class="fu">x</span> + <span class="dv">14</span>)/(<span class="fu">x</span>^<span class="dv">3</span> + <span class="dv">5</span> <span class="fu">x</span>^<span class="dv">2</span> + <span class="dv">3</span> <span class="fu">x</span> + <span class="dv">15</span>)]</span></code></pre></div>
 <p><span class="math display">\[\frac{4 (4 x+1)}{7 \left(x^2+3\right)}+\frac{26}{7 (x+5)}\]</span></p>
-<h3 id="taylor-series">Taylor Series</h3>
+</section>
+<section id="taylor-series" class="level3" data-number="0.0.7">
+<h3 data-number="0.0.7"><span class="header-section-number">0.0.7</span> Taylor Series</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">Series</span>[<span class="fu">E</span>^(<span class="fu">I</span>*<span class="fu">x</span>), {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">Series</span>[<span class="fu">Cos</span>[<span class="fu">x</span>], {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}] + (<span class="fu">I</span>*<span class="fu">Series</span>[<span class="fu">Sin</span>[<span class="fu">x</span>], {<span class="fu">x</span>, <span class="dv">0</span>, <span class="dv">7</span>}])</span></code></pre></div>
 <p><span class="math display">\[
@@ -376,7 +391,9 @@ i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
 \]</span></p>
 <p><span class="math display">\[e^{ix} = cos(x) + i\cdot sin(x)\]</span> <span class="math display">\[e^{i\pi} + 1 = 0\ when\ x = \pi \]</span></p>
 <hr />
-<h3 id="practical">Practical</h3>
+</section>
+<section id="practical" class="level3" data-number="0.0.8">
+<h3 data-number="0.0.8"><span class="header-section-number">0.0.8</span> Practical</h3>
 <ul>
 <li>A speed limit is 15mph, a driver moves 40mi in 2 hour. Did the driver ever break the speed limit?
 <ul>
@@ -390,7 +407,9 @@ i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
 <li>To minimize the maximum speed, the driver should move at the same constant speed the whole duration.</li>
 </ul></li>
 </ul>
-<h3 id="integral">Integral</h3>
+</section>
+<section id="integral" class="level3" data-number="0.0.9">
+<h3 data-number="0.0.9"><span class="header-section-number">0.0.9</span> Integral</h3>
 <ul>
 <li>Find something x that can be enumerated or indexed.
 <ul>
@@ -412,7 +431,9 @@ i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
 <p><img src="\images\BasicMath\Integram.svg" /></p>
 <p>The arrows denote velocity being indexed by time.<br />
 The binary operation multiply is applied to each pair then summed.</p>
-<h3 id="helices">Helices</h3>
+</section>
+<section id="helices" class="level3" data-number="0.0.10">
+<h3 data-number="0.0.10"><span class="header-section-number">0.0.10</span> Helices</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">r</span> := <span class="dv">1</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">c</span> := <span class="dv">1</span>/<span class="dv">4</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">ParametricPlot3D</span>[</span>
@@ -424,7 +445,9 @@ The binary operation multiply is applied to each pair then summed.</p>
 <p><img src="\images\BasicMath\helix.svg" /></p>
 <p><span class="math display">\[s(t) = \langle rcos(t),rsin(t),c*t \rangle \]</span> <span class="math display">\[\frac{1}{c} = \# cycles,frequency\]</span> <span class="math display">\[r = radius \]</span></p>
 <hr />
-<h3 id="open-delta-neighborhoods">Open Delta neighborhoods</h3>
+</section>
+<section id="open-delta-neighborhoods" class="level3" data-number="0.0.11">
+<h3 data-number="0.0.11"><span class="header-section-number">0.0.11</span> Open Delta neighborhoods</h3>
 <p>Neighborhood is a set N.</p>
 <p><span class="math display">\[N(x_0,\delta) = \{x\in\mathbb{R}^n\ |\ \lvert x-x_0 \rvert &lt; \delta \}\]</span></p>
 <ul>
@@ -432,7 +455,10 @@ The binary operation multiply is applied to each pair then summed.</p>
 <li>2-D neighborhood: points in circle</li>
 <li>3-D neighborhood: points in ball</li>
 </ul>
-<h5 id="interior-point---ball-inside-ball">Interior Point - Ball inside Ball</h5>
+<section id="interior-point---ball-inside-ball" class="level5" data-number="0.0.11.0.1">
+<h5 data-number="0.0.11.0.1"><span class="header-section-number">0.0.11.0.1</span> Interior Point - Ball inside Ball</h5>
+</section>
+</section>
 
         </div>
         <div id="footer">

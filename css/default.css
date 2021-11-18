@@ -69,7 +69,9 @@ div.sourceCode::before {
 
 
 /* Link decoration END */
-
+section > h1 {
+  color: darkcyan
+}
 h2, h3, h4, h5, h6 { 
   color: darkcyan 
 }
@@ -91,6 +93,18 @@ nav.sidenav > li{
   margin: 0;
   padding-left: 0;
   
+}
+
+div#TOC {
+  width: 20rem;
+  position: absolute;
+  left: 4.3vw;
+}
+
+
+div#TOC ul{
+  list-style-type:none;
+
 }
 /*  */
 blockquote {
@@ -200,10 +214,7 @@ div.sourceCode { overflow: auto; }
 .sourceCode{
   background-color: #e9e9dc;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
+
 pre.numberSource code
   { counter-reset: source-line 0; }
 pre.numberSource code > span
@@ -392,13 +403,23 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   
   /* START PRINT */
 
+
   @media print
   {    
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      
       .sidenav
       {
           display: none !important;
       }
+      
       .nav-item
+      {
+        display: none !important;
+      }
+
+      div#TOC
       {
         display: none !important;
       }

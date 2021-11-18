@@ -251,12 +251,15 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">def</span> a = open + high + low + close </span></code></pre></div>
 <p>default variables have implicit index of current day <span class="math inline">\(n\)</span></p>
 <p><code class="sourceCode bash"><span class="ex">open</span></code> := <span class="math inline">\(Open(n)\)</span></p>
-<h4 id="index">Index</h4>
+<section id="index" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Index</h4>
 <p>Index is relative to the current day <span class="math inline">\(n\)</span> in the negative direction.</p>
 <p><code class="sourceCode bash"><span class="ex">volume</span>[1]</code> := <span class="math inline">\(Volume(n-1)\)</span></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">def</span> diff = close - close[1]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="co">#close - previous day close</span></span></code></pre></div>
-<h4 id="recursive">Recursive</h4>
+</section>
+<section id="recursive" class="level4" data-number="0.0.0.2">
+<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Recursive</h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ex">def</span> data = data[1] + volume<span class="kw">;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="ex">plot</span> stuff = data<span class="kw">;</span></span></code></pre></div>
 <p><span class="math display">\[ F_n = F_{n-1} + P(n) \]</span></p>
@@ -269,17 +272,24 @@
 <p>ToS assumes base case <span class="math inline">\(F_0=0\)</span></p>
 <p>plot <span class="math inline">\(n \mapsto F_n\)</span></p>
 <p>The above will plot cumulative Volume over time.</p>
-<h3 id="flow-control">Flow control</h3>
+</section>
+<section id="flow-control" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Flow control</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">if</span> <span class="ex">3</span> <span class="op">&gt;</span> 2 {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>  <span class="ex">def</span> a = 44 </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>}</span></code></pre></div>
-<h3 id="plotting-lower-subgraph">plotting lower subgraph</h3>
+</section>
+<section id="plotting-lower-subgraph" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> plotting lower subgraph</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="bu">declare</span> <span class="va">lower</span>;</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="ex">c</span> = 5<span class="kw">;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="ex">plot</span> outX = c<span class="kw">;</span></span></code></pre></div>
-<h3 id="allow-ui-dropdown-input">allow UI dropdown input</h3>
+</section>
+<section id="allow-ui-dropdown-input" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> allow UI dropdown input</h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="ex">input</span> a = close<span class="kw">;</span> #<span class="ex">default</span> value is close</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="ex">plot</span> outX = a<span class="kw">;</span></span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">

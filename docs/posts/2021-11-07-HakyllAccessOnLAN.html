@@ -23,7 +23,7 @@
         <!-- Google Analytics TAG END  ---------------------->
 
          
-        <title>Jason Yang - CI/CD in GithubAction</title>
+        <title>Jason Yang - Access Hakyll website on LAN and iptables</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -231,112 +231,43 @@
         </div>
 
         <div id="content">
-            <h1>CI/CD in GithubAction</h1>
+            <h1>Access Hakyll website on LAN and iptables</h1>
             
 
             <div class="info">
-    Posted on April 22, 2021
+    Posted on November  7, 2021
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'DevOps'." href="../tags/DevOps.html">DevOps</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<section id="ci---runs-after-pushing-local-repo-to-github" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> CI - runs after pushing local repo to github</h3>
-<p>CI is used to integrate tests, typically your github action will run tests on the code.</p>
-<ol type="1">
-<li>Give name</li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> SomeRandomName</span></span></code></pre></div>
-<ol start="2" type="1">
-<li>Run on push to main branch</li>
-</ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="at">	</span><span class="fu">push</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="at">		</span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span></code></pre></div>
-<ol start="3" type="1">
-<li>Define the job to start Steps) are the instructions to test and run code actions/checkout@v2 is what clones the repo to your VM</li>
-</ol>
-<p>WARNING jobs will run in parallel, steps do not if you need a job to wait, add a “needs:…” parameter under</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="at">	</span><span class="fu">build-job</span><span class="kw">:</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="at">		...</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="at">	</span><span class="fu">publish-job</span><span class="kw">:</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="at">		needs:build-job</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="at">	</span><span class="fu">yourJobName</span><span class="kw">:</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="at">		</span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="at">		</span><span class="fu">steps</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v2</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-node@v1</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="at">			  </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="at">				</span><span class="fu">node-version</span><span class="kw">:</span><span class="at"> </span><span class="dv">12</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="at">				</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm ci  &lt;--- npm install</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm test</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm run build</span></span></code></pre></div>
+<p>Hakyll website listens on 127.0.0.1 port 8000<br />
+Client in LAN must hit 192.168.1.245 port 8000 to see the website<br />
+Hakyll 127.0.0.1 in 8000 cant be seen in LAN<br />
+Hakyll must open 127.0.0.1 port 8000 for LAN</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">sudo</span> sysctl -w net.ipv4.conf.all.route_localnet=1</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">sudo</span> iptables -t nat -I PREROUTING -p tcp -d 192.168.1.0/24 --dport 8000 -j DNAT --to-destination 127.0.0.1:8000</span></code></pre></div>
+<p>go to <a href="https://open-vsx.org/">open-vsx.org</a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">wget</span> https://open-vsx.org/api/redhat/vscode-yaml/1.2.0/file/redhat.vscode-yaml-1.2.0.vsix</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="ex">code-server</span> --install-extension redhat.vscode-yaml-1.2.0.vsix</span></code></pre></div>
+<p><img src="https://www.karlrupp.net/en/computer/computer/graphics/nat-chains.gif" /></p>
+<section id="netstat-diagnose" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> netstat diagnose</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">netstat</span> -lnp</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="co">#tcp        0      0 0.0.0.0:8787            0.0.0.0:*               LISTEN      734/rserver </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="co">#tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN      149480/myblog </span></span></code></pre></div>
 </section>
-<section id="cd---runs-after-merging-a-pull-request" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> CD - runs after merging a pull-request</h3>
-<p>CD is used to push your updates to some cloud server so the internet can see your new updated website.</p>
-<p>You have to connect to servers like AWS to deploy your website First you need a secret token from AWS on Github: Settings &gt; Secrets &gt; Add a new secret Now you can securely access with github action securely</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="at">	</span><span class="fu">pull_request</span><span class="kw">:</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="at">		</span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="at">	</span><span class="fu">yourJobName</span><span class="kw">:</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="at">		</span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="at">		</span><span class="fu">steps</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v2</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-node@v1</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a><span class="at">			  </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a><span class="at">				</span><span class="fu">node-version</span><span class="kw">:</span><span class="at"> </span><span class="dv">12</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a><span class="at">				</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm ci  &lt;--- npm install</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm test</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm run build</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a><span class="at">			</span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> bleh/someAWSaction@main</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a><span class="at">			  </span><span class="fu">with</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a><span class="at">				</span><span class="fu">args</span><span class="kw">:</span><span class="at"> deploy --only hosting</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a><span class="at">			  </span><span class="fu">env</span><span class="kw">:</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a><span class="at">				</span><span class="fu">AWS_TOKEN</span><span class="kw">:</span><span class="at"> ${{ secrets.myAWS_TOKENNAME }}</span></span></code></pre></div>
-</section>
-<section id="conclusion" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Conclusion</h3>
-<ol type="1">
-<li>push local dev branch to remote github</li>
-<li>CI Starts test on new code</li>
-<li><ul>
-<li>if tests fail -&gt; fix bugs</li>
-<li>if tests succeed -&gt; Ask PR to merge dev with main branch</li>
-</ul></li>
-<li>Maintainer accepts PR</li>
-<li>main branch merges with dev</li>
-<li>CD Starts uploading new main branch to servers</li>
-<li>new update live on internet or server</li>
-</ol>
-</section>
-<section id="quirks" class="level3" data-number="0.0.4">
-<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> Quirks</h3>
-<section id="concurrent-behavior-in-run" class="level5" data-number="0.0.4.0.1">
-<h5 data-number="0.0.4.0.1"><span class="header-section-number">0.0.4.0.1</span> Concurrent behavior in run</h5>
-<div class="sourceCode" id="cb7"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>	 bleh=4</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>	 echo $bleh</span></code></pre></div>
-<p>The echo will show no output because run will call the two commands concurrently.<br />
-To call sequentially, the commands need to be in two separate run.</p>
-</section>
-<section id="github-environment-variable" class="level5" data-number="0.0.4.0.2">
-<h5 data-number="0.0.4.0.2"><span class="header-section-number">0.0.4.0.2</span> Github environment variable</h5>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource yml numberLines"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1"></a><span class="at">echo &quot;somevar=3&quot; &gt;&gt; $GITHUB_ENV</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="at">${{ env.somevar }}</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="at">$somevar</span></span></code></pre></div>
-<p>line 2 and 3 are the same<br />
-use $somevar over ${{ env.somevar }}</p>
-<p>The local environment is decarded on separate runs, so its best to store variables in $GITHUB_ENV.</p>
-</section>
+<section id="iptables" class="level4" data-number="0.0.0.2">
+<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> iptables</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">sudo</span> iptables -L</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="co">### list INPUT rules</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="fu">sudo</span> iptables -L INPUT --line-numbers</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="co">### delete rule 2</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="fu">sudo</span> iptables -D INPUT 2</span></code></pre></div>
 </section>
 
         </div>

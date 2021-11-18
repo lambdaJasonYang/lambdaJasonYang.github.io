@@ -23,6 +23,21 @@ background-color: #f8f8f8;
 
 ```
 
+### General matching
+
+```css
+ul { /* targets all ul elements */
+    /* general styles */
+}
+ul li { /* targets all li elements within a ul */
+    /* general styles */
+}
+ul li ul { /* targets all ul elements within an li element, itself within a ul */
+    /* overrule general 'outer' styles */
+}
+```
+
+
 ### Wildcard class names ^=  *=
 
 Below the CSS selector matches beginning occurrences of "sourceCode..." within a div element when using class^.  

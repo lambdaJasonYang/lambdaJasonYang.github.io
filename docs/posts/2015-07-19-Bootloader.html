@@ -286,15 +286,19 @@ db := define byte</p>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a><span class="bu">mov</span><span class="bn"> ah, 0x0e</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a><span class="bu">mov</span> <span class="kw">al</span>, 0b1000001</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a><span class="bu">int</span><span class="bn"> 0x10</span></span></code></pre></div>
-<h3 id="disks">Disks</h3>
+<section id="disks" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Disks</h3>
 <p>Memory is divided into 512 chunks.</p>
 <p>Cylinder = [0..) Head = [0..) Sector = [1..)</p>
 <p>The location of each 512 chunk of memory on a disk is determined by<br />
 (Cylinder,Head,Sector)</p>
 <p>The first chunk of memory = “Boot Sector” at (C=0,H=0,S=1)</p>
-<h3 id="os">OS</h3>
+</section>
+<section id="os" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> OS</h3>
 <p>We need to write a bootloader.<br />
 To compiler</p>
+</section>
 
         </div>
         <div id="footer">

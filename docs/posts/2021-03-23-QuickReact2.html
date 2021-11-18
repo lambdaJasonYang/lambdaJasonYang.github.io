@@ -301,12 +301,15 @@
 but after finishing it will signal to the JSX that hp state has changed and rerender the component to a new state.</p>
 <p>In many ways the upgradehp() is similar to being an IO monad.</p>
 <p>To understand react, trust that every function behaves in a functional deterministic manner wrt to it’s current state. (shown in line 6 and line 8)</p>
-<h3 id="when-does-react-component-rerender">When does React component rerender</h3>
+<section id="when-does-react-component-rerender" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> When does React component rerender</h3>
 <ul>
 <li>setState hook() is called</li>
 <li>All children of the component will also be rerendered</li>
 </ul>
-<h3 id="usestate">UseState</h3>
+</section>
+<section id="usestate" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> UseState</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">const</span> hp<span class="op">,</span> sethp <span class="op">=</span> <span class="fu">useState</span>(() <span class="kw">=&gt;</span> <span class="dv">0</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">const</span> <span class="fu">upgradehp</span>() <span class="op">=</span> {</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>    <span class="fu">sethp</span>(prevhp <span class="kw">=&gt;</span> prevhp<span class="op">*</span><span class="dv">2</span>)</span>
@@ -324,7 +327,9 @@ but after finishing it will signal to the JSX that hp state has changed and rere
 <li>Similar reason we pass a lazy callback function in jsx element like <code class="sourceCode javascript">onClick<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">doSomething</span>()}</code></li>
 </ul></li>
 </ul>
-<h3 id="useeffect">UseEffect</h3>
+</section>
+<section id="useeffect" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> UseEffect</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    <span class="co">//Mount begin--------------</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    <span class="co">//setup event listener, subscribe api</span></span>
@@ -369,7 +374,9 @@ but after finishing it will signal to the JSX that hp state has changed and rere
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a>}<span class="op">,</span></span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a>[target] </span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a>)</span></code></pre></div>
-<h3 id="useref">UseRef</h3>
+</section>
+<section id="useref" class="level3" data-number="0.0.4">
+<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> UseRef</h3>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6f626a656374206173640a6e6f7465206c6566740a203c26776966693e0a656e64206e6f74650a6469616d6f6e6420730a0a40656e64756d6c"></figure>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
 <span id="cb6-2"><a href="#cb6-2"></a>    <span class="kw">const</span> refContainer <span class="op">=</span> <span class="fu">useRef</span>(<span class="kw">null</span>)<span class="op">;</span></span>
@@ -385,6 +392,7 @@ but after finishing it will signal to the JSX that hp state has changed and rere
 <p>line 7, the JSX <code class="sourceCode javascript"><span class="op">&lt;</span>div ref<span class="op">=</span>{refContainer}<span class="op">&gt;</span></code> is what binds the ref Hook to the Dom Element.</p>
 <p>In most cases of hooks like useEffect or useState, it’s the JSX element that depends on the hook.<br />
 But in this case the hook depends on the JSX element.</p>
+</section>
 
         </div>
         <div id="footer">

@@ -243,7 +243,8 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'logic'." href="../tags/logic.html">logic</a>
     
 </div>
-<h3 id="russells-paradox-with-sets">Russell’s paradox with Sets</h3>
+<section id="russells-paradox-with-sets" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Russell’s paradox with Sets</h3>
 <p>Russell’s paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself. (Note everything in our current model is a set; even the elements of sets are sets) <span class="math display">\[ S = \{ x | x \notin x \} \tag{1}\]</span> Next we ask can S be an element of S?<br />
 [Assume S is element of itself] <span class="math display">\[S \in S \tag{2}\]</span><br />
 [This would imply by definition (1)] <span class="math display">\[S \notin S \tag{3}\]</span> [By contradiction (2) and (3)]<br />
@@ -253,9 +254,13 @@
 …thus the whole process repeats infinitely<br />
 It is a paradox because there is no end to this proof ( we cannot conclude whether it is true or false )</p>
 <p>The resolution is to bound the universe so that S must be within a universe.</p>
-<h4 id="russells-paradoxal-set-s-as-an-ast">Russell’s paradoxal set S as an AST</h4>
+<section id="russells-paradoxal-set-s-as-an-ast" class="level4" data-number="0.0.1.1">
+<h4 data-number="0.0.1.1"><span class="header-section-number">0.0.1.1</span> Russell’s paradoxal set S as an AST</h4>
 <p><img src="../images/ycomb/ycombinator.svg" /></p>
-<h3 id="analogy-and-abstracting-russells-paradox-with-bears">Analogy and Abstracting Russell’s paradox with bears</h3>
+</section>
+</section>
+<section id="analogy-and-abstracting-russells-paradox-with-bears" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Analogy and Abstracting Russell’s paradox with bears</h3>
 <p>In set theory, the propositional function is elementhood. Elementhood takes two sets (lets call the universe that contain our sets of interest, <span class="math inline">\(SET\)</span>) and return a truth value. Also remember everything is a set.<br />
 We can think of our standard set theory as a pair that contains the universe and it’s associated function. <span class="math display">\[(SET,\in)\]</span></p>
 <p><span class="math display">\[ \in :: (SET,SET) \rightarrow bool \]</span></p>
@@ -273,7 +278,9 @@ We can think of our standard set theory as a pair that contains the universe and
 <p>Note the similarities between our Set theory and Bear theory.</p>
 <p>In other words,<br />
 any bear y must like bear B if and only if bear y does not like itself</p>
-<h3 id="ast-with-bears">AST with Bears</h3>
+</section>
+<section id="ast-with-bears" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> AST with Bears</h3>
 <p>[Let us define bear B as this AST]</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a73697a653d22332c33223b0a6c626561725b6c6162656c203d20226c616d6264612d62656172225d0a62656172325b6c6162656c203d202262656172225d0a0a6c62656172202d3e206e6f74200a6e6f74202d3e206c696b65730a6c696b6573202d3e20626561720a6c696b6573202d3e2062656172320a7d0a40656e64756d6c"></figure>
 <p>[bear B likes itself]</p>
@@ -284,10 +291,13 @@ any bear y must like bear B if and only if bear y does not like itself</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a73697a653d22332c33223b0a6e6f74415b6c6162656c203d20226e6f74225d0a6e6f74425b6c6162656c203d20226e6f74225d0a6c62656172315b6c6162656c203d20226c616d6264612d62656172225d0a6c62656172325b6c6162656c203d20226c616d6264612d62656172225d0a62656172315b6c6162656c203d202262656172225d0a62656172325b6c6162656c203d202262656172225d0a62656172335b6c6162656c203d202262656172225d0a62656172345b6c6162656c203d202262656172225d0a6e6f74315b6c6162656c203d20226e6f74225d0a6e6f74325b6c6162656c203d20226e6f74225d0a6c696b65315b6c6162656c203d2020226c696b6573225d0a6c696b65325b6c6162656c203d20226c696b6573225d0a6c696b65335b6c6162656c203d20226c696b6573225d0a6e6f7441202d3e206e6f74420a6e6f7442202d3e206c696b65310a6c696b6531202d3e206c62656172310a6c696b6531202d3e206c62656172320a6c6265617231202d3e206e6f74310a6c6265617232202d3e206e6f74320a6e6f7431202d3e206c696b65320a6e6f7432202d3e206c696b65330a6c696b6532202d3e2062656172310a6c696b6532202d3e2062656172320a6c696b6533202d3e2062656172330a6c696b6533202d3e2062656172340a7d0a40656e64756d6c"></figure>
 <p>[and so on and so forth…]</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a73697a653d22332c33223b0a646f74735b6c6162656c203d20222e2e2e225d0a6c62656172315b6c6162656c203d20226c616d6264612d62656172225d0a6c62656172325b6c6162656c203d20226c616d6264612d62656172225d0a62656172315b6c6162656c203d202262656172225d0a62656172325b6c6162656c203d202262656172225d0a62656172335b6c6162656c203d202262656172225d0a62656172345b6c6162656c203d202262656172225d0a6e6f74315b6c6162656c203d20226e6f74225d0a6e6f74325b6c6162656c203d20226e6f74225d0a6c696b65315b6c6162656c203d2020226c696b6573225d0a6c696b65325b6c6162656c203d20226c696b6573225d0a6c696b65335b6c6162656c203d20226c696b6573225d0a646f7473202d3e206c696b65310a6c696b6531202d3e206c62656172310a6c696b6531202d3e206c62656172320a6c6265617231202d3e206e6f74310a6c6265617232202d3e206e6f74320a6e6f7431202d3e206c696b65320a6e6f7432202d3e206c696b65330a6c696b6532202d3e2062656172310a6c696b6532202d3e2062656172320a6c696b6533202d3e2062656172330a6c696b6533202d3e2062656172340a7d0a40656e64756d6c"></figure>
-<h3 id="end">End</h3>
+</section>
+<section id="end" class="level3" data-number="0.0.4">
+<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> End</h3>
 <p>I hope this helped elucidate your understanding of this fundamental paradox.<br />
 Next post will be short one showcasing the powerful Y-combinator which is closely related to this paradox.<br />
 <a href="../posts/2018-05-23-YParadox2.html">Part2 - YCombinator and Recursive functions</a></p>
+</section>
 
         </div>
         <div id="footer">

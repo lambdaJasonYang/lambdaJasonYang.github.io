@@ -243,7 +243,8 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'HakyllSetupSeries'." href="../tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
     
 </div>
-<h4 id="hakyll-setup-series">Hakyll Setup Series</h4>
+<section id="hakyll-setup-series" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Hakyll Setup Series</h4>
 <ol type="1">
 <li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
 <li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
@@ -251,7 +252,9 @@
 <li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
 <li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
 </ol>
-<h3 id="plant-uml-hex-image-link">Plant UML hex image link</h3>
+</section>
+<section id="plant-uml-hex-image-link" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Plant UML hex image link</h3>
 <p>Plant UML allows us to draw UML diagram using simple code.</p>
 <p>Our goal is to allow us to write code in our pandocs markdown files in hakyll that will automatically generate the UML.<br />
 PlantUML has a server that can convert links to image urls.</p>
@@ -279,7 +282,9 @@ INPUT Markdown codeblock content : <code class="sourceCode bash"><span class="ex
 </ol>
 <p>Notice in the plantuml image link above http://www.plantuml.com/plantuml/svg/~h407374617274756d6c…<br />
 the string after “~h” begins with “407374617274756D6C” which is our result.</p>
-<h3 id="pandocs-filtering">Pandocs filtering</h3>
+</section>
+<section id="pandocs-filtering" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Pandocs filtering</h3>
 <p>Now we need to modify site.hs so that Hakyll will transform a PlantUML code block into a html img that links to the Planttext generated image.<br />
 We can do this with Hakyll’s Pandocs Filtering.</p>
 <div class="sourceCode" id="cb4" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a></span>
@@ -300,7 +305,9 @@ The Content of our CodeBlock is pattern matched as <code class="sourceCode haske
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="st">'''</span></span></code></pre></div>
 <p>Output DOM element :</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f62203a204920616d207573696e67206865780a40656e64756d6c"></figure>
-<h3 id="full-code">Full Code</h3>
+</section>
+<section id="full-code" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Full Code</h3>
 <p>add under “build-depends” in your .cabal file <code>{bash filename="myblog.cabal"} pandoc, pandoc-types, text, base16-bytestring, bytestring,</code></p>
 <p>Add to your site.hs</p>
 <div class="sourceCode" id="cb6" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc.Definition</span>  </span>
@@ -332,6 +339,7 @@ The Content of our CodeBlock is pattern matched as <code class="sourceCode haske
 </ul>
 <div class="sourceCode" id="cb9" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="ot">simpleCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>simpleCompiler <span class="ot">=</span> pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock</span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">

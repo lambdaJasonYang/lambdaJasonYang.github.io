@@ -1,11 +1,12 @@
 ---
 title: Git Crashcourse
 tags: prog, DevOps
+toc: y
 ---
 
 WARNING: The terms I use are nonstandard from most other tutorials.
 
-### Setup Credentials
+# Setup Credentials
 
 Setting email and username for local repo or global env
 ```bash
