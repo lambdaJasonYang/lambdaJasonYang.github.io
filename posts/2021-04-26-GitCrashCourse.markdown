@@ -162,6 +162,12 @@ HEAD pointer can point to alias like "main" or refs like "3bed42g..."
 git branch makes a new alias and branch, BUT HEAD stays on current branch  
 git checkout -b behaves the same as git branch BUT moves HEAD to new branch  
 
+# Remove unstaged changes
+
+```bash
+git restore .
+```
+
 ### Extras
 
 tags are just renaming refs, they are NOT at the same level as aliases.
