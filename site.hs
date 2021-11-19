@@ -122,6 +122,13 @@ addToCodeBlock  = walk ftranslate
 
 -------------------------------------------------------------------------------PLANTUML END
 
+--------------------------------Outputs build to /docs folder for GithubPages START
+config :: Configuration
+config = defaultConfiguration
+  { destinationDirectory = "docs"
+  }
+--------------------------------Outputs build to /docs folder for GithubPages END
+
 myFeedConfiguration :: FeedConfiguration
 myFeedConfiguration = FeedConfiguration
     { feedTitle       = "Jason Yang: Math and Computer Science Blog"
@@ -133,7 +140,7 @@ myFeedConfiguration = FeedConfiguration
 
 
 main :: IO ()
-main = hakyll $ do
+main = hakyllWith config $ do
     match "images/**" $ do
         route   idRoute
         compile copyFileCompiler
