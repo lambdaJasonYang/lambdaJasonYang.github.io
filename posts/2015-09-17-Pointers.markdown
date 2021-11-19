@@ -1,0 +1,27 @@
+---
+title: C Pointers
+tags: prog, C
+---
+
+$$ Address \rightarrow Value $$
+$$ Pointer \rightarrow Address \rightarrow Value $$
+
+* pass-by-pointer vs pass-by-ref
+  * pass-by-pointer when you need a NULL placeholder.
+* the way to use pass-by-ref is similar to pass-by-value  
+* pass-by-pointer requires passing an address
+
+```C
+//pass-by-pointer
+int &x = ...;
+void func(*p){
+  p = x;
+}
+
+//pass-by-ref
+int x = ...;
+void func(&p){
+  p = x;
+}
+```
+

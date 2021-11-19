@@ -1,0 +1,53 @@
+---
+title: HomSet
+tags: mathcs, puremath, categorytheory
+---
+
+HomSet in programming terms are simply the types of the functions.
+
+Nested HomSets are simply the types of curried functions.
+
+### Translate Homset to function type notation
+
+$$ f :: A \rightarrow B := f \in Hom(A, B) $$
+$$ f :: A \rightarrow (B \rightarrow C) := f \in Hom(A, Hom(B,C)) $$
+$$ f :: (A \rightarrow B) \rightarrow C := f \in Hom(Hom(A,B),C) $$
+
+---
+
+### Free Monoid
+
+* object : T
+* Morphism : Alphabet = {a,b,c...} map T --> T
+* Composition : Append
+
+The Free Monoid on the alphabet results in the set of all possible words/strings created from the alphabet.
+
+##### Free monoid on number 
+
+Addition mod 2 group is a category 
+
+* 1+1 = 0
+* 1+0 = 1
+
+Category
+
+* object : T
+* morphisms: numbers {0,1} 
+* composition: addition
+* Identity morphism: 0
+
+Checking composition:
+(1+1)+1 = 1+(1+1) 
+
+---
+
+
+
+| Cat | object | morphism |
+| --- | --- | --- |
+| Vect | vector space | linear maps |
+| Groups | groups | group homomorphisms |
+| MetricSpc | Metric Spaces | Continuous Maps |
+| Rel | Sets | Binary relations |
+|Par | sets | partial functions |

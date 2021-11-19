@@ -1,0 +1,57 @@
+---
+title: Pyplot matplotlib
+tags: prog, python, AI
+---
+
+![](/images/pyimage/pyplot.svg)
+
+
+``` {.python .numberLines}
+import matplotlib.pyplot as plt
+import numpy as np
+arr = np.arange(6)
+plt.plot(arr) # plot the points in the array a
+plt.title("My first fitgure")
+plt.xlabel("my x-axis")
+plt.ylabel("y")
+plt.show()
+```
+
+``` python
+fig,ax = plt.subplots(2,2)
+ax[0,0].plot(arr) #top left
+ax[0,1].plot(arr) #top right
+ax[1,0].plot(arr)
+ax[1,1].plot(arr)
+fig.show()
+
+painting=plt.imread("painting.png")
+plt.imshow(painting)
+plt.imshow(painting[:,::-1]) #mirror image in x direction
+
+```
+
+### subplots quirk - axes can be: non-array, 1D, 2D
+axes parameter is usually a 2d array `ax[2,3].plot(arr)`{.python}
+
+When using subplots for (1,1) which is 1 graph, axes parmeter is not an array of subplots but a single plot `ax.plot(arr)`{.python}
+``` python
+fig,ax = plt.subplots(1,1) #this same as line below
+#fig,ax = plt.subplots()
+
+ax[0,0].plot(arr) ###WILL RETURN ERROR
+ax.plot(arr) ###OK
+fig.show()
+```
+
+When using subplots where any parameter is (n,1) or (1,n), the axes parameter is a single array. `ax[3].plot(arr)`{.python}
+
+``` python
+fig,ax = plt.subplots(1,2) #this same as line below
+
+ax[0,0].plot(arr) ###WILL RETURN ERROR
+
+ax[0].plot(arr) ###OK
+ax[1].plot(arr)
+fig.show()
+```

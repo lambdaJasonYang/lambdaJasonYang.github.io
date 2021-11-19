@@ -1,0 +1,25 @@
+---
+title: Quick R
+tags: prog, QuickCode
+---
+
+
+
+```bash
+sudo rstudio-server start
+```
+
+go to 192.168.245:8787  
+
+[most popular packages](https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages)
+
+Ctrl+Shift+Enter to run code  
+
+```R
+fredr_set_key("XXXXXXXXXXXXXXXXXXXXXXXXX")
+fredr(
+  series_id = "NYGDPMKTPCDWLD",
+  observation_start = as.Date("2019-01-01"),
+  observation_end = as.Date("2020-01-01")
+  )
+```

@@ -1,0 +1,87 @@
+---
+title: Discrete Math
+tags: mathcs, mathbasics
+---
+
+main function $f :: D \rightarrow R$
+
+$R$ is the CoDomain
+
+---
+
+#### Surjective
+
+$$ {\color{blue}R \overset{inv}{\longrightarrow}} D \overset{f}{\longrightarrow} R $$
+
+
+* Exists identity for Range (Right identity)
+  * by hitting our main function **From behind**
+  * $f$ partitions it's preimage $D$ meaning $inv$ must **choose** any element within it's partition.
+    * Choice function 
+
+---
+
+#### Injective
+
+$$ D \overset{f}{\longrightarrow} R{\color{blue} \overset{inv}{\longrightarrow} D} $$
+
+* Exists identity for Domain (Left identity)
+  * by **Extending** our main function with an inverse 
+
+---
+
+#### Examples Surjective
+
+$Senators \overset{Elected}{\longrightarrow} PresidentialCandidates$   
+
+$PresidentialCandidates \overset{ElectedBy}{\longrightarrow} Senators$
+
+* In literary terms, passive voice inverts the active action.
+  * Senator Bob and Ruth **Elected** President Bush
+  * President Bush was **Elected By** Senator Bob and Ruth
+
+
+#### 
+
+All linear functions f(x) have f''(x) = 0
+
+
+#### Inverses
+
+Given exponential function f(x), find g(x) st. f(g(x)) = kx with k as constant
+
+We can solve using inflection point 2nd derivative method.
+We know that the second derivative of 
+$$f(g(x))'' = 0$$
+$$(f'(g(x)) \cdot g'(x))' = 0$$
+
+
+
+#### Even and Odd
+
+$$\times \mapsto OR $$
+$$+ \mapsto XAND $$
+
+XAND means true iff both parity are the same
+
+
+$\times \mapsto OR$
+
+| $P$ | $Q$ | $P \times Q$ |
+| --- | --- | --- |
+| E | E | E |
+| E | O | E |
+| O | E | E |
+| O | O | O |
+
+
+$+ \mapsto XAND$
+
+| $P$ | $Q$ | $P + Q$ |
+| --- | --- | --- |
+| E | E | E |
+| E | O | O |
+| O | E | O |
+| O | O | E |
+
+* XAND is also known as XNOR
