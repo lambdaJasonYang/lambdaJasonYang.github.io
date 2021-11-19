@@ -1,6 +1,7 @@
-### [Jason's Blog built with Hakyll](https://userjy.github.io/)
+### [Jason's Blog built with Hakyll v4.15.1.0](https://userjy.github.io/)
 
 ---
+
 
 > This content of this blog is licensed under [Attribution-NonCommercial-NoDerivatives 4.0 International][cc-by-nc-nd].  
 The term "content" refers to all files contained in "/posts", "/docs", "/css", "/images" .

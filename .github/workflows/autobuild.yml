@@ -61,7 +61,7 @@ jobs:
            
       - name: Formatting full path to basename
         run: |
-            echo "autotarget=$(grep "executable" my-site.cabal | cut -d' ' -f 2)" >> $GITHUB_ENV
+            echo "autotarget=$(grep "executable" $tpath | cut -d' ' -f 2)" >> $GITHUB_ENV
             
 
       - name: Checking
