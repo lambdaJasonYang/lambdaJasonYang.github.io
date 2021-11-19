@@ -87,9 +87,10 @@ jobs:
         run: |
             echo "tpath=$( find ${{ github.workspace }} -name '*.cabal' | head )" >> $GITHUB_ENV
            
-      - name: Formatting full path to basename
+      - name: Detect executable name through cabal file
         run: |
-            echo "autotarget=$(basename $tpath .cabal)" >> $GITHUB_ENV
+            echo "autotarget=$(grep "executable" $tpath | cut -d' ' -f 2)" >> $GITHUB_ENV
+            
 
       - name: Checking
         run: echo $autotarget
