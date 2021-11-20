@@ -16,6 +16,8 @@ HTTPS linked terms: SSL, Root Authority, Certificate Authority, TLS, 443
 
 ## Cert confirm identity
 
+> Certificate Authorities validate the identity of the certificate holder(website) for the user(browser)
+
 We want to talk to a website but how do we are not talking to a faker?  
 A website needs to confirm it's identity using a Cert.   
 But how do we know to trust the Cert?  
@@ -51,33 +53,133 @@ Website <-> Browser: Communication w/ SecretKey
   Example CA: LetsEncrypt
 
 
+Generates a public-private key pair as `domain.key`{.bash}   
+and a Certificate Signing Request `domain.csr`{.bash}
 
+```bash
+openssl req -newkey rsa:2048 -nodes -keyout domain.key -out domain.csr
+```
 
 ```plantuml
 @startuml
-skinparam shadowing false
-class Website {
-  PrivateKey
-__
-  PublicKey
+digraph G {
+  size="7"
+compound=true
+ subgraph cluster_0{
+  label="Website"
+   subgraph cluster_0a{
+     label = ""
+     A [label="Private Key"]
+     B [label="Public Key"]
+   }
+   K [label="Real-life identity\nValidation" constraint=false] 
+   
+
+   
+   }
+A->Dia [color=blue fontcolor=blue label="1.CSR" ltail=cluster_0a constraint=false]
+K->Dia [color=blue ltail=cluster_0a ]
+
+Dia->DGC [color=red ] 
+Dia [color=blue fontcolor=blue label = "CSR" shape="diamond"]
+ subgraph cluster_1{
+  label="LetsEncrypt"
+DGC [label = "Digital Cert\nGeneration" color=red fontcolor=red shape="diamond"]
+C -> DGC [color=red fontcolor=red label="2.signs"];
+
+   subgraph cluster_1a{
+     label = ""
+     C [label="Private Key"]
+     D [label="Public Key"]
+   }
+   
+ 
 }
+DGC -> E [ color=red lhead=cluster_1b]
+subgraph cluster_1b{
+     
+     label = "SSL Website\nServer Cert"
+     E [label="Website\nPublic Key"]
+     Q [label="Website\nIdentifier"]
+     P [label="LetsEncrypt\nidentifier"]
+E -> Q [style=invis]
+Q -> P [style=invis]
+     
 
-object Browser
+    } 
 
+ E -> K [color=green fontcolor=green label="3.return\nSSL Cert" ltail=cluster_1b lhead=cluster_0 constraint=false]
 
-
-class LetsEncrypt {
-   PrivateKey
-__
-  PublicKey
+ Browser [shape=rectangle constraint=false]
+Browser -> D [color=brown constraint=false];
 }
-
-
-Browser -- LetsEncrypt::PublicKey : pre-installed\nPublicKey
-LetsEncrypt::PrivateKey <-- Website : 1)Certificate Signing Request\nSend Key-pair to be signed
-LetsEncrypt --> Website : 2)Signed Request Sent back.\nAnyone \nw/ LetsEncrypt PublicKey \ncan verify authenticity
 @enduml
 ```
+
+1. Validation: is the SSL cert really from the Website?  
+ Check in authenticity of SSL cert using LetsEncrypt PublicKey
+2. After-Validation: Ok, the cert is legit so it's safe to take the SSL cert public key
+3. Encrypt: Now I can use the website's SSL cert public key to encrypt my own(browser) Secret Key
+4. Share Secret Key: I can send this encrypted Secret Key back to the website which the website can decrypt with it's private key. 
+
+```plantuml
+@startuml
+digraph G {
+  size="5"
+compound=true
+ subgraph cluster_0{
+  label="??Website??"
+
+   
+subgraph cluster_1b{
+     
+     label = "SSL Website\nServer Cert"
+     E [label="Website\nPublic Key"]
+     Q [label="Website\nIdentifier"]
+     P [label="LetsEncrypt\nidentifier"]
+E -> Q [style=invis]
+Q -> P [style=invis]
+     
+
+    } 
+   
+   }
+
+
+
+ subgraph cluster_1{
+  label="LetsEncrypt"
+
+
+
+   subgraph cluster_1a{
+     label = ""
+     C [label="Private Key"]
+     D [label="Public Key"]
+D -> C [style=invis]
+   }
+   
+ 
+}
+
+D -> E [color=brown lhead=cluster_1b constraint=false]
+
+subgraph cluster_2{
+ Browser [constraint=false]
+
+SecretKey
+SS [label="Encrypted\nSecretKey"]
+Browser -> SecretKey [ style=invis constraint=false] 
+}
+ 
+Browser -> D [fontcolor=brown label="1.validation" color=brown ];
+Browser -> E [fontcolor=red color=red label="2.after\nvalidation"];
+E -> SS [label="3.Encrypt" fontcolor=blue color=blue constraint=false]
+SecretKey -> SS [color=blue constraint=false]
+}
+@enduml
+```
+
 
 
 # HTTP/1.1 
