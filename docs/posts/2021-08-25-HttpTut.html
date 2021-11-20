@@ -243,36 +243,55 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a3d3d20544350203d3d0a0a436c69656e74202d3e205365727665723a2053594e0a536572766572202d2d3e20436c69656e743a2053594e2d41434b0a436c69656e74202d3e205365727665723a2041434b0a0a3d3d20544c53203d3d0a0a436c69656e74202d3e205365727665723a20436c69656e742048656c6c6f0a536572766572202d2d3e20436c69656e743a205365727665722048656c6c6f0a436c69656e74202d3e205365727665723a20436c69656e74204b65792045786368616e67652053746172740a536572766572202d2d3e20436c69656e743a205365727665722066696e69736865640a436c69656e74202d2d3e205365727665723a20436c69656e742066696e69736865640a0a3d3d2048545450203d3d0a0a436c69656e74202d3e205365727665723a2048545450207265710a536572766572202d2d3e20436c69656e743a204854545020726573700a40656e64756d6c"></figure>
+<div id="TOC"><ul>
+<li><a href="#http-vs-https"><span class="toc-section-number">1</span> HTTP vs HTTPS</a></li>
+<li><a href="#https-certificate-authority"><span class="toc-section-number">2</span> HTTPS Certificate Authority</a></li>
+<li><a href="#http1.1"><span class="toc-section-number">3</span> HTTP/1.1</a></li>
+<li><a href="#http2"><span class="toc-section-number">4</span> HTTP/2</a></li>
+<li><a href="#http3"><span class="toc-section-number">5</span> HTTP/3</a></li>
+<li><a href="#practical"><span class="toc-section-number">6</span> Practical</a></li>
+</ul></div>
 <section id="http-vs-https" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> HTTP vs HTTPS</h1>
 <ul>
-<li>HTTP: HTTP – TCP – IP –&gt; Ethernet<br />
+<li>HTTP : HTTP —————– TCP – IP – Ethernet<br />
 </li>
-<li>HTTPS: HTTP – TLS(SSL) – TCP – IP – Ethernet</li>
+<li>HTTPS:HTTP – TLS(SSL) – TCP – IP – Ethernet</li>
 </ul>
+<p>HTTPS linked terms: SSL, Root Authority, Certificate Authority, TLS, 443</p>
 </section>
-<section id="http1.1" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> HTTP/1.1</h1>
-<p>Sequential,</p>
-<ul>
-<li>can only send 1 request at time</li>
-<li>must wait for response before sending a new request</li>
-</ul>
-</section>
-<section id="http2" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> HTTP/2</h1>
-<p>Multiplex(Async),</p>
-<ul>
-<li>send multiple requests</li>
-<li>wait for response in any order</li>
-</ul>
-<p>### Certificate Authority</p>
+<section id="https-certificate-authority" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> HTTPS Certificate Authority</h1>
 <ul>
 <li>CA public key is pre-installed in most Client browsers</li>
 <li>CA private key: Some lesser website will ask the CA to sign their public-private key pairs to certify authenticity.</li>
 </ul>
 <p>Example CA: LetsEncrypt</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a736b696e706172616d20736861646f77696e672066616c73650a636c6173732057656273697465207b0a2020507269766174654b65790a5f5f0a20205075626c69634b65790a7d0a0a6f626a6563742042726f777365720a0a0a0a636c617373204c657473456e6372797074207b0a202020507269766174654b65790a5f5f0a20205075626c69634b65790a7d0a0a0a42726f77736572202d2d204c657473456e63727970743a3a5075626c69634b6579203a207072652d696e7374616c6c65645c6e5075626c69634b65790a4c657473456e63727970743a3a507269766174654b6579203c2d2d2057656273697465203a2031294365727469666963617465205369676e696e6720526571756573745c6e53656e64204b65792d7061697220746f206265207369676e65640a4c657473456e6372797074202d2d3e2057656273697465203a2032295369676e656420526571756573742053656e74206261636b2e5c6e416e796f6e65205c6e772f204c657473456e6372797074205075626c69634b6579205c6e63616e207665726966792061757468656e7469636974790a40656e64756d6c"></figure>
+</section>
+<section id="http1.1" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> HTTP/1.1</h1>
+<p>Sequential</p>
+<ul>
+<li>can only send 1 request at time</li>
+<li>must wait for response before sending a new request</li>
+</ul>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a736b696e706172616d20736861646f77696e672066616c73650a3d3d20544350203d3d0a0a436c69656e74202d3e205365727665723a2053594e0a536572766572202d2d3e20436c69656e743a2053594e2d41434b0a436c69656e74202d3e205365727665723a2041434b0a0a3d3d20544c53203d3d0a0a436c69656e74202d3e205365727665723a20436c69656e742048656c6c6f0a536572766572202d2d3e20436c69656e743a205365727665722048656c6c6f0a436c69656e74202d3e205365727665723a20436c69656e74204b65792045786368616e67652053746172740a536572766572202d2d3e20436c69656e743a205365727665722066696e69736865640a436c69656e74202d2d3e205365727665723a20436c69656e742066696e69736865640a0a3d3d2048545450203d3d0a0a436c69656e74202d3e205365727665723a2048545450207265710a536572766572202d2d3e20436c69656e743a204854545020726573700a40656e64756d6c"></figure>
+</section>
+<section id="http2" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> HTTP/2</h1>
+<p>Multiplex(Async) implemented as “SPDY by Google”</p>
+<ul>
+<li>send multiple requests</li>
+<li>wait for response in any order</li>
+</ul>
+</section>
+<section id="http3" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> HTTP/3</h1>
+</section>
+<section id="practical" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Practical</h1>
+<p>Using chrome inspect &gt; Network can find which version of HTML you’re using</p>
 </section>
 
         </div>

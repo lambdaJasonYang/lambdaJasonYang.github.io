@@ -1,10 +1,63 @@
 ---
 title: HTTP TLS(SSL) Certificates 
 tags: prog
+toc: y
 ---
+
+
+# HTTP vs HTTPS
+
+* HTTP  : HTTP ----------------- TCP -- IP -- Ethernet  
+* HTTPS:HTTP -- TLS(SSL) -- TCP -- IP -- Ethernet
+
+HTTPS linked terms: SSL, Root Authority, Certificate Authority, TLS, 443
+
+# HTTPS Certificate Authority
+
+  * CA public key is pre-installed in most Client browsers
+  * CA private key: Some lesser website will ask the CA to sign their public-private key pairs to certify authenticity.
+
+  Example CA: LetsEncrypt
+
 
 ```plantuml
 @startuml
+skinparam shadowing false
+class Website {
+  PrivateKey
+__
+  PublicKey
+}
+
+object Browser
+
+
+
+class LetsEncrypt {
+   PrivateKey
+__
+  PublicKey
+}
+
+
+Browser -- LetsEncrypt::PublicKey : pre-installed\nPublicKey
+LetsEncrypt::PrivateKey <-- Website : 1)Certificate Signing Request\nSend Key-pair to be signed
+LetsEncrypt --> Website : 2)Signed Request Sent back.\nAnyone \nw/ LetsEncrypt PublicKey \ncan verify authenticity
+@enduml
+```
+
+
+# HTTP/1.1 
+
+Sequential
+
+  * can only send 1 request at time
+  * must wait for response before sending a new request
+
+
+```plantuml
+@startuml
+skinparam shadowing false
 == TCP ==
 
 Client -> Server: SYN
@@ -26,30 +79,17 @@ Server --> Client: HTTP resp
 @enduml
 ```
 
-# HTTP vs HTTPS
-
-* HTTP: HTTP -- TCP -- IP --> Ethernet  
-* HTTPS: HTTP -- TLS(SSL) -- TCP -- IP -- Ethernet
-
-# HTTP/1.1 
-
-Sequential, 
-
-  * can only send 1 request at time
-  * must wait for response before sending a new request
-
 # HTTP/2
 
-Multiplex(Async), 
+Multiplex(Async) implemented as "SPDY by Google" 
 
   * send multiple requests
   * wait for response in any order
 
+# HTTP/3
 
-  ### Certificate Authority
 
-  * CA public key is pre-installed in most Client browsers
-  * CA private key: Some lesser website will ask the CA to sign their public-private key pairs to certify authenticity.
 
-  Example CA: LetsEncrypt
+# Practical
 
+Using chrome inspect > Network can find which version of HTML you're using

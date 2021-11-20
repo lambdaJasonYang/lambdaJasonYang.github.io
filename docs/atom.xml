@@ -67,36 +67,59 @@ extensions that show “previews” won’t work like Lean</p>
     Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
     
 </div>
+<div id="TOC"><ul>
+<li><a href="#scenario"><span class="toc-section-number">1</span> Scenario</a></li>
+<li><a href="#solution"><span class="toc-section-number">2</span> Solution</a></li>
+<li><a href="#theory"><span class="toc-section-number">3</span> Theory</a></li>
+<li><a href="#iptables-netstat-diagnosis"><span class="toc-section-number">4</span> iptables netstat diagnosis</a>
+<ul>
+<li><a href="#netstat"><span class="toc-section-number">4.1</span> netstat</a></li>
+<li><a href="#iptables"><span class="toc-section-number">4.2</span> iptables</a></li>
+</ul></li>
+<li><a href="#occupied-port-scenario"><span class="toc-section-number">5</span> Occupied port scenario</a></li>
+</ul></div>
 <p><strong>Hakyll Setup Series</strong></p>
 <ol type="1">
-<li><p><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></p></li>
-<li><p><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></p></li>
-<li><p><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></p></li>
-<li><p><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></p></li>
-<li><p><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></p></li>
-<li><p><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></p></li>
-<li><p><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></p></li>
-<li><p>Hakyll website listens on 127.0.0.1 port 8000<br />
-</p></li>
-<li><p>Client in LAN must hit 192.168.1.245 port 8000 to see the website<br />
-</p></li>
-<li><p>Hakyll 127.0.0.1 in 8000 cant be seen in LAN</p></li>
+<li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
+<li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
+<li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
+<li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
+<li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
+<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
+<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
 </ol>
-<p>Hakyll must open 127.0.0.1 port 8000 for LAN</p>
+<section id="scenario" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Scenario</h1>
+<ol type="1">
+<li>Hakyll server: <code class="sourceCode bash"><span class="ex">listening</span> on 127.0.0.1 port 8000...</code><br />
+</li>
+<li>Client in LAN: must hit 192.168.1.245 port 8000 to see the website<br />
+Client goes to http://192.168.1.245:8000 but sees ERROR<br />
+</li>
+<li>Hakyll server: 127.0.0.1 in port 8000 cant be seen in LAN</li>
+</ol>
+<p><strong>GOAL</strong> Hakyll server: must open 127.0.0.1 port 8000 for LAN</p>
+</section>
+<section id="solution" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Solution</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sysctl <span class="at">-w</span> net.ipv4.conf.all.route_localnet=1</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-t</span> nat <span class="at">-I</span> PREROUTING <span class="at">-p</span> tcp <span class="at">-d</span> 192.168.1.0/24 <span class="at">--dport</span> 8000 <span class="at">-j</span> DNAT <span class="at">--to-destination</span> 127.0.0.1:8000</span></code></pre></div>
+</section>
+<section id="theory" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Theory</h1>
 <p><img src="https://www.karlrupp.net/en/computer/computer/graphics/nat-chains.gif" /></p>
-<section id="iptables-netstat-diagnosis" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> iptables netstat diagnosis</h1>
-<section id="netstat" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> netstat</h2>
+</section>
+<section id="iptables-netstat-diagnosis" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> iptables netstat diagnosis</h1>
+<section id="netstat" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> netstat</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-lnp</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 0.0.0.0:8787            0.0.0.0:*               LISTEN      734/rserver </span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN      149480/myblog </span></span></code></pre></div>
 </section>
-<section id="iptables" class="level2" data-number="1.2">
-<h2 data-number="1.2"><span class="header-section-number">1.2</span> iptables</h2>
+<section id="iptables" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> iptables</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">### list INPUT rules</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span> INPUT <span class="at">--line-numbers</span></span>
@@ -105,8 +128,8 @@ extensions that show “previews” won’t work like Lean</p>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-D</span> INPUT 2</span></code></pre></div>
 </section>
 </section>
-<section id="occupied-port-scenario" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Occupied port scenario</h1>
+<section id="occupied-port-scenario" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Occupied port scenario</h1>
 <p>Say you launch a server to listen on port 8000<br />
 but ERROR: port 8000 being used</p>
 <p>first check what process is running on port 8000</p>
@@ -754,6 +777,7 @@ The bash version is .bashrc</p>
 </div>
 <p>https://www.cl.cam.ac.uk/teaching/1617/L28/materials.html</p>
 <p>https://faculty.math.illinois.edu/~r-ash/</p>
+<p>https://book.hacktricks.xyz/brute-force</p>
 ]]></summary>
 </entry>
 <entry>

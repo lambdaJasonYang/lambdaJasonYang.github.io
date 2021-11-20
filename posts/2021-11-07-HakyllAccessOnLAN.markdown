@@ -1,6 +1,7 @@
 ---
 title: Access Hakyll website on LAN and iptables
 tags: prog
+toc: y
 ---
 
 **Hakyll Setup Series**  
@@ -14,19 +15,23 @@ tags: prog
 7. [Hakyll Access on LAN server](2021-11-07-HakyllAccessOnLAN.html)
 
 
+# Scenario
 
-1. Hakyll website listens on 127.0.0.1 port 8000  
-2. Client in LAN must hit 192.168.1.245 port 8000 to see the website    
-3. Hakyll 127.0.0.1 in 8000 cant be seen in LAN  
+1. Hakyll server: `listening on 127.0.0.1 port 8000...`{.bash}  
+2. Client in LAN: must hit 192.168.1.245 port 8000 to see the website  
+Client goes to http://192.168.1.245:8000 but sees ERROR    
+3. Hakyll server: 127.0.0.1 in port 8000 cant be seen in LAN  
 
-Hakyll must open 127.0.0.1 port 8000 for LAN   
+**GOAL** Hakyll server: must open 127.0.0.1 port 8000 for LAN   
+
+# Solution
 
 ```bash
 sudo sysctl -w net.ipv4.conf.all.route_localnet=1
 sudo iptables -t nat -I PREROUTING -p tcp -d 192.168.1.0/24 --dport 8000 -j DNAT --to-destination 127.0.0.1:8000
 ```
 
-
+# Theory
 
 ![](https://www.karlrupp.net/en/computer/computer/graphics/nat-chains.gif)
 
