@@ -33,3 +33,13 @@ auth: password
 password: root
 cert: true
 ```
+
+
+# Extensions
+
+go to [open-vsx.org](https://open-vsx.org/)
+
+```bash
+wget https://open-vsx.org/api/something/vscode-bleh/1.2.0/file/something.vscode-bleh-1.2.0.vsix
+code-server --install-extension something.vscode-bleh-1.2.0.vsix
+```

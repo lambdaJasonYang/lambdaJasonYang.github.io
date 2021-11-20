@@ -243,19 +243,20 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'HakyllSetupSeries'." href="../tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
     
 </div>
-<section id="hakyll-setup-series" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Hakyll Setup Series</h4>
+<p><strong>Hakyll Setup Series</strong></p>
 <ol type="1">
 <li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
 <li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
 <li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
 <li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
 <li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
+<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
+<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
 </ol>
-<p>Pandoc filtering - when I type up a blog post,<br />
-I can control whether I want some pattern or group of text to be transformed in some manner when the site is rebuilt.</p>
+<p>Pandoc filtering and translation - similar to a compiler<br />
+It will translate certain markdown strings you type up into another form.</p>
 <p>Here I will show the simplest example:</p>
-<p>Lets append a text “EOF” string to all of our codeblocks automatically by modifying the Pandocs copmiler in Hakyll.</p>
+<p>Append a text “EOF” string to all of our codeblocks automatically</p>
 <div class="sourceCode" id="cb1" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc</span> </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc.Walk</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span>           <span class="dt">Data.Text</span>  </span></code></pre></div>
@@ -276,9 +277,8 @@ I can control whether I want some pattern or group of text to be transformed in 
 <span id="cb3-7"><a href="#cb3-7"></a>                compile <span class="op">$</span> simpleCompiler <span class="co">--ONLY CHANGE THIS</span></span>
 <span id="cb3-8"><a href="#cb3-8"></a>                    <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
 <span id="cb3-9"><a href="#cb3-9"></a>                    <span class="op">...</span></span></code></pre></div>
-</section>
-<section id="using-it" class="level4" data-number="0.0.0.2">
-<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Using it</h4>
+<section id="showcase" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Showcase</h1>
 <p>For example in my hakyll folder, I create a new file “2099-01-01-NewBlogPost.markdown” and the contents are</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Hello World</span></span>
@@ -290,19 +290,18 @@ I can control whether I want some pattern or group of text to be transformed in 
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>print(&quot;Hello World&quot;)</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>'''</span></code></pre></div>
-<p>note: the triple single quotes <code class="sourceCode python"><span class="co">'''</span></code> above are actually backticks but pandocs won’t let me escape triple backticks.</p>
-<p>The python codeblock will show:</p>
+<p>The codeblock will show:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Hello World&quot;</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>EOF</span></code></pre></div>
 </section>
-<section id="extra" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Extra</h3>
-<p>CodeBlock Attr Text CodeBlock takes a Attr type and Text type.<br />
-type Attr = (Text, [Text], [(Text, Text)])</p>
-<p>Text type is a Data.Text and holds the content of the codeblock. To convert to string do “unpack Text”</p>
-<p>We can also convert CodeBlock to Dom Elements with RawBlock.</p>
+<section id="extra" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Extra</h1>
+<p>Text refers to Data.Text.Text</p>
+<p>CodeBlock Attr Text Attr = (Text, [Text], [(Text, Text)])</p>
+<p><code class="sourceCode haskell"><span class="dt">CodeBlock</span> (<span class="dt">Text</span>, [<span class="dt">Text</span>], [(<span class="dt">Text</span>, <span class="dt">Text</span>)]) <span class="dt">Text</span></code></p>
+<p>We can convert CodeBlock to Dom Elements with RawBlock.</p>
 <p>RawBlock Format Text</p>
-<p>example: RawBlock (Format “html”) Text</p>
+<p>example: <code class="sourceCode haskell"><span class="dt">RawBlock</span> (<span class="dt">Format</span> <span class="st">&quot;html&quot;</span>) <span class="dt">Text</span></code></p>
 </section>
 
         </div>

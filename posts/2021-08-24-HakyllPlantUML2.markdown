@@ -36,7 +36,7 @@ http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f622
 
 ## Cabal file
 
-```{bash filename="myblog.cabal"}
+```{.bash filename="myblog.cabal"}
 pandoc,
 pandoc-types,
 text,

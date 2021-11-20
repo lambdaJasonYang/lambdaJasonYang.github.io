@@ -2,22 +2,25 @@
 title: Hakyll Pandoc filtering
 tags: tech, prog,HakyllSetupSeries
 ---
-#### Hakyll Setup Series
+**Hakyll Setup Series**  
 
 1. [Setup Mathjax](2021-08-23-HakyllSetupMathjax.html)
 2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
 3. [Setup autobuild Hakyll site Git action CI](2021-06-28-HakyllGitAction.html)
 4. [Very Simple Hakyll Pandoc Filtering Example](2021-08-23-PandocFiltering.html)
 5. [Add Railroad Syntax to Hakyll](2021-10-01-RailroadSyntax.html)
+6. [Table Of Content in Hakyll](2021-10-01-TableOfContent.html)
+7. [Hakyll Access on LAN server](2021-11-07-HakyllAccessOnLAN.html)
 
 
 
-Pandoc filtering - when I type up a blog post,  
-I can control whether I want some pattern or group of text to be transformed in some manner when the site is rebuilt.
+
+Pandoc filtering and translation - similar to a compiler  
+It will translate certain markdown strings you type up into another form.
 
 Here I will show the simplest example:
 
-Lets append a text "EOF" string to all of our codeblocks automatically by modifying the Pandocs copmiler in Hakyll.
+Append a text "EOF" string to all of our codeblocks automatically  
 
 ```{.haskell filename="site.hs"}
 import           Text.Pandoc 
@@ -49,7 +52,7 @@ main = do
 
 ```
 
-#### Using it
+# Showcase
 
 For example in my hakyll folder, I create a new file "2099-01-01-NewBlogPost.markdown"
 and the contents are 
@@ -66,9 +69,9 @@ print("Hello World")
 '''
 
 ```
-note: the triple single quotes `'''`{.python} above are actually backticks but pandocs won't let me escape triple backticks.
 
-The python codeblock will show:  
+
+The codeblock will show:  
 
 ```python
 print("Hello World")
@@ -76,17 +79,18 @@ EOF
 ```
 
 
-### Extra 
+# Extra 
+
+Text refers to Data.Text.Text
 
 CodeBlock Attr Text
-CodeBlock takes a Attr type and Text type.   
-type Attr = (Text, [Text], [(Text, Text)])  
+Attr = (Text, [Text], [(Text, Text)])  
 
-Text type is a Data.Text and holds the content of the codeblock. To convert to string do "unpack Text"
+`CodeBlock (Text, [Text], [(Text, Text)]) Text`{.hs}
 
-We can also convert CodeBlock to Dom Elements with RawBlock.
+We can convert CodeBlock to Dom Elements with RawBlock.
 
 RawBlock Format Text
 
 example: 
-RawBlock (Format "html") Text
+`RawBlock (Format "html") Text`{.hs}

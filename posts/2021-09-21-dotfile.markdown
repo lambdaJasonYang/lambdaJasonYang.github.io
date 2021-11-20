@@ -22,3 +22,17 @@ The bash version is .bashrc
 ```bash
 export PATH = "$PATH:$HOME/.local/bin"
 ```
+
+# alias
+
+```bash
+ps -aef --forest
+
+# user     PID     Parent 
+# 
+# root     114032   1170  0 Apr05 ?        00:00:00  \_ sshd: root@pts/4
+# root     114039 114032  0 Apr05 pts/4    00:00:00  |   \_ -bash
+# root      56225 114039  0 13:47 pts/4    00:00:16  |       \_ top
+# root     114034   1170  0 Apr05 ?        00:00:00  \_ sshd: root@notty
+# root     114036 114034  0 Apr05 ?        00:00:00  |   \_ /usr/libexec/openssh/sftp-server
+```

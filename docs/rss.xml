@@ -40,6 +40,12 @@ extensions that show “previews” won’t work like Lean</p>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> root</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 </section>
+<section id="extensions" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Extensions</h1>
+<p>go to <a href="https://open-vsx.org/">open-vsx.org</a></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://open-vsx.org/api/something/vscode-bleh/1.2.0/file/something.vscode-bleh-1.2.0.vsix</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code-server</span> <span class="at">--install-extension</span> something.vscode-bleh-1.2.0.vsix</span></code></pre></div>
+</section>
 ]]></description>
     <pubDate>Wed, 10 Nov 2021 00:00:00 UT</pubDate>
     <guid>https://userjy.github.io/posts/2021-11-10-CodeServer.html</guid>
@@ -57,31 +63,54 @@ extensions that show “previews” won’t work like Lean</p>
     Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
     
 </div>
-<p>Hakyll website listens on 127.0.0.1 port 8000<br />
-Client in LAN must hit 192.168.1.245 port 8000 to see the website<br />
-Hakyll 127.0.0.1 in 8000 cant be seen in LAN<br />
-Hakyll must open 127.0.0.1 port 8000 for LAN</p>
+<p><strong>Hakyll Setup Series</strong></p>
+<ol type="1">
+<li><p><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></p></li>
+<li><p><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></p></li>
+<li><p><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></p></li>
+<li><p><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></p></li>
+<li><p><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></p></li>
+<li><p><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></p></li>
+<li><p><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></p></li>
+<li><p>Hakyll website listens on 127.0.0.1 port 8000<br />
+</p></li>
+<li><p>Client in LAN must hit 192.168.1.245 port 8000 to see the website<br />
+</p></li>
+<li><p>Hakyll 127.0.0.1 in 8000 cant be seen in LAN</p></li>
+</ol>
+<p>Hakyll must open 127.0.0.1 port 8000 for LAN</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sysctl <span class="at">-w</span> net.ipv4.conf.all.route_localnet=1</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-t</span> nat <span class="at">-I</span> PREROUTING <span class="at">-p</span> tcp <span class="at">-d</span> 192.168.1.0/24 <span class="at">--dport</span> 8000 <span class="at">-j</span> DNAT <span class="at">--to-destination</span> 127.0.0.1:8000</span></code></pre></div>
-<p>go to <a href="https://open-vsx.org/">open-vsx.org</a></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://open-vsx.org/api/redhat/vscode-yaml/1.2.0/file/redhat.vscode-yaml-1.2.0.vsix</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code-server</span> <span class="at">--install-extension</span> redhat.vscode-yaml-1.2.0.vsix</span></code></pre></div>
 <p><img src="https://www.karlrupp.net/en/computer/computer/graphics/nat-chains.gif" /></p>
-<section id="netstat-diagnose" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> netstat diagnose</h4>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">netstat</span> <span class="at">-lnp</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 0.0.0.0:8787            0.0.0.0:*               LISTEN      734/rserver </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN      149480/myblog </span></span></code></pre></div>
+<section id="iptables-netstat-diagnosis" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> iptables netstat diagnosis</h1>
+<section id="netstat" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> netstat</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-lnp</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 0.0.0.0:8787            0.0.0.0:*               LISTEN      734/rserver </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN      149480/myblog </span></span></code></pre></div>
 </section>
-<section id="iptables" class="level4" data-number="0.0.0.2">
-<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> iptables</h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">### list INPUT rules</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span> INPUT <span class="at">--line-numbers</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">### delete rule 2</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-D</span> INPUT 2</span></code></pre></div>
+<section id="iptables" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> iptables</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">### list INPUT rules</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span> INPUT <span class="at">--line-numbers</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">### delete rule 2</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-D</span> INPUT 2</span></code></pre></div>
+</section>
+</section>
+<section id="occupied-port-scenario" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Occupied port scenario</h1>
+<p>Say you launch a server to listen on port 8000<br />
+but ERROR: port 8000 being used</p>
+<p>first check what process is running on port 8000</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-lnp</span></span></code></pre></div>
+<p>next check what the parent process is</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-aef</span> <span class="at">--forest</span> <span class="co">#outputs PID ParentPID tree</span></span></code></pre></div>
+<p>terminate the process or it’s parent</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-9</span> <span class="op">&lt;</span>PID<span class="op">&gt;</span></span></code></pre></div>
 </section>
 ]]></description>
     <pubDate>Sun, 07 Nov 2021 00:00:00 UT</pubDate>
@@ -385,6 +414,18 @@ The bash version is .bashrc</p>
 <h1 data-number="3"><span class="header-section-number">3</span> PATH</h1>
 <p><code class="sourceCode bash"><span class="va">$HOME</span></code> is same as <code class="sourceCode bash"><span class="ex">~</span></code></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span> <span class="op">=</span> <span class="st">&quot;</span><span class="va">$PATH</span><span class="st">:</span><span class="va">$HOME</span><span class="st">/.local/bin&quot;</span></span></code></pre></div>
+</section>
+<section id="alias" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> alias</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-aef</span> <span class="at">--forest</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># user     PID     Parent </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># root     114032   1170  0 Apr05 ?        00:00:00  \_ sshd: root@pts/4</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># root     114039 114032  0 Apr05 pts/4    00:00:00  |   \_ -bash</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># root      56225 114039  0 13:47 pts/4    00:00:16  |       \_ top</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># root     114034   1170  0 Apr05 ?        00:00:00  \_ sshd: root@notty</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># root     114036 114034  0 Apr05 ?        00:00:00  |   \_ /usr/libexec/openssh/sftp-server</span></span></code></pre></div>
 </section>
 ]]></description>
     <pubDate>Tue, 21 Sep 2021 00:00:00 UT</pubDate>
