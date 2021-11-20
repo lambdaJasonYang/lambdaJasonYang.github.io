@@ -28,8 +28,8 @@ Server --> Client: HTTP resp
 
 # HTTP vs HTTPS
 
-* HTTP: HTTP --> TCP --> IP --> Ethernet  
-* HTTPS: HTTP --> TLS(SSL) --> TCP --> IP --> Ethernet
+* HTTP: HTTP -- TCP -- IP --> Ethernet  
+* HTTPS: HTTP -- TLS(SSL) -- TCP -- IP -- Ethernet
 
 # HTTP/1.1 
 
@@ -44,3 +44,12 @@ Multiplex(Async),
 
   * send multiple requests
   * wait for response in any order
+
+
+  ### Certificate Authority
+
+  * CA public key is pre-installed in most Client browsers
+  * CA private key: Some lesser website will ask the CA to sign their public-private key pairs to certify authenticity.
+
+  Example CA: LetsEncrypt
+

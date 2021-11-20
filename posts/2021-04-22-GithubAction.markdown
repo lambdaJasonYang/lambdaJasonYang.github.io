@@ -1,10 +1,11 @@
 ---
 title: CI/CD in GithubAction
 tags: prog, DevOps
+toc: y
 ---
 
 
-### CI - runs after pushing local repo to github
+# CI :exec after push local repo to github
 CI is used to integrate tests, typically your github action will run tests on the code.
 
 1) Give name
@@ -49,7 +50,7 @@ jobs:
 ```
 
 
-### CD - runs after merging a pull-request
+# CD :exec on merge PullRequest
 CD is used to push your updates to some cloud server so the internet can see your new updated website.
 
 You have to connect to servers like AWS to deploy your website
@@ -82,7 +83,7 @@ jobs:
 				AWS_TOKEN: ${{ secrets.myAWS_TOKENNAME }}
 ```
 
-### Conclusion
+# Conclusion
 1. push local dev branch to remote github
 2. CI Starts test on new code
 3. * if tests fail -> fix bugs
@@ -92,8 +93,8 @@ jobs:
 6. CD Starts uploading new main branch to servers
 7. new update live on internet or server
 
-### Quirks
-##### Concurrent behavior in run
+# Quirks
+## Concurrent behavior in run
 ``` yml
 run: |
 	 bleh=4
@@ -102,7 +103,7 @@ run: |
 The echo will show no output because run will call the two commands concurrently.  
 To call sequentially, the commands need to be in two separate run.
 
-##### Github environment variable
+## Github environment variable
 ``` {.yml .numberLines}
 echo "somevar=3" >> $GITHUB_ENV
 ${{ env.somevar }}

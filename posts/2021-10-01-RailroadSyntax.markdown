@@ -2,15 +2,18 @@
 title: Add Railroad Syntax to Hakyll
 tags: tech, prog, HakyllSetupSeries
 ---
-#### Hakyll Setup Series
+**Hakyll Setup Series**  
+
 1. [Setup Mathjax](2021-08-23-HakyllSetupMathjax.html)
 2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
 3. [Setup autobuild Hakyll site Git action CI](2021-06-28-HakyllGitAction.html)
 4. [Very Simple Hakyll Pandoc Filtering Example](2021-08-23-PandocFiltering.html)
 5. [Add Railroad Syntax to Hakyll](2021-10-01-RailroadSyntax.html)
+6. [Table Of Content in Hakyll](2021-10-01-TableOfContent.html)
+7. [Hakyll Access on LAN server](2021-11-07-HakyllAccessOnLAN.html)
 
 
-### Setup
+# Setup
 
 add the script to your templates/default.html
 
@@ -37,10 +40,9 @@ add the script to your templates/default.html
 add lines 8-10 to your site.hs
 
 ```{.hs .numberLines filename=site.hs}
---add lines 7-9 to your site.hs
+--add lines 6-8 to your site.hs
 main :: IO ()
 main = do
-    E.setLocaleEncoding E.utf8
     hakyllWith config $ do
         ...
 
@@ -63,17 +65,17 @@ Line **3, 4, 20** is what we added to our previous plantuml-hakyll integration c
 ```{.hs .numberLines}
 ------------------------------------------------RAILROAD START
 
-railroad :: T.Text -> T.Text
-railroad y = T.pack("<div class='rroad'>"<> T.unpack y <> "</div>")
+railroad :: Data.Text.Text -> Data.Text.Text
+railroad y = Data.Text.pack("<div class='rroad'>"<> Data.Text.unpack y <> "</div>")
 
 ------------------------------------------------RAILROAD END
 
-mhexCode :: T.Text -> String
-mhexCode y = tail $ init ( show ( encode $ C.pack $ T.unpack y ))
+mhexCode :: Data.Text.Text -> String
+mhexCode y = tail $ init ( show ( Data.ByteString.Base16.encode $ Data.ByteString.Char8.pack $ Data.Text.unpack y ))
 
-planthtml :: T.Text -> T.Text 
+planthtml :: Data.Text.Text -> Data.Text.Text 
 --planthtml y = T.pack ("<figure><img src='http://www.plantuml.com/plantuml/svg/~h" <> (T.unpack $ hexCode y) <>"'></figure>") 
-planthtml y = T.pack ("<figure><img src='http://www.plantuml.com/plantuml/svg/~h" <> (mhexCode $ y) <>"'></figure>") 
+planthtml y = Data.Text.pack ("<figure><img src='http://www.plantuml.com/plantuml/svg/~h" <> (mhexCode $ y) <>"'></figure>") 
 
 --Pandoc filtering, 
 addToCodeBlock :: Pandoc -> Pandoc 
@@ -105,8 +107,8 @@ Add the codeblock below to your site.hs
 ```{.hs filename="site.hs"}
 ------------------------------------------------RAILROAD START
 
-railroad :: T.Text -> T.Text
-railroad y = T.pack("<div class='rroad'>"<> T.unpack y <> "</div>")
+railroad :: Data.Text.Text -> Data.Text.Text
+railroad y = Data.Text.pack("<div class='rroad'>"<> Data.Text.unpack y <> "</div>")
 
 ------------------------------------------------RAILROAD END
 
@@ -121,12 +123,11 @@ modAddedCompiler :: Compiler (Item String)
 modAddedCompiler = pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock
 ```
 
-In your site.hs find the `match "posts/*" $ do`{.hs} and ONLY change the compiler in line 8 to `modAddedCompiler`{.hs} 
+In your site.hs find the `match "posts/*" $ do`{.hs} and ONLY change the compiler in line 7 to `modAddedCompiler`{.hs} 
 
 ```{.hs .numberLines filename="site.hs"}
 main :: IO ()
 main = do
-    E.setLocaleEncoding E.utf8
     hakyllWith config $ do
     ...
       match "posts/*" $ do

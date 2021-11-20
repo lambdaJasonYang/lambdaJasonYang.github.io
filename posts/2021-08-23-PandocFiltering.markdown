@@ -20,7 +20,7 @@ Here I will show the simplest example:
 Lets append a text "EOF" string to all of our codeblocks automatically by modifying the Pandocs copmiler in Hakyll.
 
 ```{.haskell filename="site.hs"}
-import           Text.Pandoc.Definition  
+import           Text.Pandoc 
 import           Text.Pandoc.Walk
 import           Data.Text  
 ```
@@ -39,7 +39,6 @@ simpleCompiler = pandocCompilerWithTransform defaultHakyllReaderOptions defaultH
 ```{.hs .numberLines filename="site.hs"}
 main :: IO ()
 main = do
-    E.setLocaleEncoding E.utf8
     hakyllWith config $ do
     ...
       match "posts/*" $ do

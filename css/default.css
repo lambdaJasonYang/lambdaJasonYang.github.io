@@ -96,6 +96,15 @@ nav.sidenav > li{
 }
 
 /* --------------------------Table of Content */
+.header-section-number{
+  color: gray;
+  opacity:70%;
+}
+
+#TOC a:link{
+  color: #265301
+}
+
 div#TOC {
   width: 20rem;
   position: absolute;
@@ -399,12 +408,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           display: none;
       }
       /* --------------------------Table of Content */
+      #TOC a:link{
+        font-size: 0.8rem;
+      }
+
       div#TOC {
         width: 100rem;
         position: inherit;
         left: 0vw;
       }
-
+      
 
       div#TOC ul{
         list-style-type:none;

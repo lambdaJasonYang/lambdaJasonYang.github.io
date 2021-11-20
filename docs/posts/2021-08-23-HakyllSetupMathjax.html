@@ -243,18 +243,25 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'HakyllSetupSeries'." href="../tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
     
 </div>
-<section id="hakyll-setup-series" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Hakyll Setup Series</h4>
+<div id="TOC"><ul>
+<li><a href="#js-setup"><span class="toc-section-number">1</span> JS setup</a></li>
+<li><a href="#cabal"><span class="toc-section-number">2</span> Cabal</a></li>
+<li><a href="#site.hs"><span class="toc-section-number">3</span> site.hs</a></li>
+<li><a href="#using-the-compiler"><span class="toc-section-number">4</span> using the Compiler</a></li>
+<li><a href="#showcase"><span class="toc-section-number">5</span> Showcase</a></li>
+</ul></div>
+<p><strong>Hakyll Setup Series</strong></p>
 <ol type="1">
 <li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
 <li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
 <li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
 <li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
 <li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
+<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
+<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
 </ol>
-</section>
-<section id="js-setup" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> JS setup</h3>
+<section id="js-setup" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> JS setup</h1>
 <p>Add mathjax js to &lt;head&gt; in /templates/default.html</p>
 <p>Insert line 4,5,6 to your footer</p>
 <div class="sourceCode" id="cb1" data-filename="templates/default.html"><pre class="sourceCode numberSource html numberLines"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">&lt;body&gt;</span></span>
@@ -266,25 +273,24 @@
 <span id="cb1-7"><a href="#cb1-7"></a><span class="kw">&lt;/footer&gt;</span></span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="kw">&lt;/body&gt;</span></span></code></pre></div>
 </section>
-<section id="add-dependencies" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Add dependencies</h3>
+<section id="cabal" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Cabal</h1>
 <p>Modify your *.cabal file</p>
-<p>Add “pandoc, containers” under build-depends in myblog.cabal</p>
+<p>Add “pandoc” under build-depends in my-site.cabal</p>
 <p>Insert line 7,8</p>
-<div class="sourceCode" id="cb2" data-filename="myblog.cabal"><pre class="sourceCode numberSource sh numberLines"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">executable</span> myblog</span>
+<div class="sourceCode" id="cb2" data-filename="my-site.cabal"><pre class="sourceCode numberSource sh numberLines"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">executable</span> myblog</span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="ex">...</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>  <span class="ex">...</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>  <span class="ex">build-depends:</span>       </span>
 <span id="cb2-5"><a href="#cb2-5"></a>    <span class="ex">base</span> <span class="op">&gt;</span>= 4.7 <span class="kw">&amp;&amp;</span> <span class="op">&lt;</span> 5,</span>
 <span id="cb2-6"><a href="#cb2-6"></a>    <span class="ex">hakyll,</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="ex">pandoc,</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="ex">containers</span>   </span></code></pre></div>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="ex">pandoc</span></span></code></pre></div>
 </section>
-<section id="setup-functions-in-site.hs" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Setup functions in site.hs</h3>
+<section id="site.hs" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> site.hs</h1>
 <div class="sourceCode" id="cb3" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">--Step 0: Add &quot;import Text.Pandoc.Options&quot; in site.hs</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="dt">Text.Pandoc.Options</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">--Step 0: Add &quot;import Text.Pandoc&quot; in site.hs</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="dt">Text.Pandoc</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">--..</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">--Step 1: Get the mathjax Extensions that recognizes single $ in our pandocs</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ot">mathjaxExtensions ::</span> <span class="dt">Extensions</span></span>
@@ -310,8 +316,8 @@
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="ot">mathJaxAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
 <span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>mathJaxAddedCompiler <span class="ot">=</span> pandocCompilerWith readMathjaxOptions writeMathjaxOptions</span></code></pre></div>
 </section>
-<section id="modifying-compiler-in-site.hs" class="level3" data-number="0.0.4">
-<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> Modifying compiler in site.hs</h3>
+<section id="using-the-compiler" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> using the Compiler</h1>
 <p>Replace the line <code class="sourceCode haskell">compile <span class="op">$</span> pandocCompiler</code> with<br />
 <code class="sourceCode haskell">compiler <span class="op">$</span> mathJaxAddedCompiler</code><br />
 As shown in line 8</p>
@@ -330,16 +336,11 @@ As shown in line 8</p>
 <p>to rebuild your site.hs<br />
 replace “myblog” with the name of your hakyll project</p>
 </section>
-<section id="conclusion" class="level3" data-number="0.0.5">
-<h3 data-number="0.0.5"><span class="header-section-number">0.0.5</span> Conclusion</h3>
+<section id="showcase" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Showcase</h1>
 <p>After doing all this you should be able to simply write your latex using</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>$$ x \in Set $$</span></code></pre></div>
 <p><span class="math display">\[ x \in Set \]</span></p>
-<section id="aside" class="level4" data-number="0.0.5.1">
-<h4 data-number="0.0.5.1"><span class="header-section-number">0.0.5.1</span> Aside</h4>
-<p>You can just do the first part(add mathjax js to &lt;head&gt;) for a working mathjax BUT this would make it unportable to other editors.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\\</span>[ x <span class="fu">\\</span>in Set <span class="fu">\\</span>]</span></code></pre></div>
-</section>
 </section>
 
         </div>

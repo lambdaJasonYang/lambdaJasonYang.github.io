@@ -140,6 +140,104 @@ Hakyll must open 127.0.0.1 port 8000 for LAN</p>
 ]]></summary>
 </entry>
 <entry>
+    <title>Table Of Content in Hakyll</title>
+    <link href="https://userjy.github.io/posts/2021-10-01-TableOfContent.html" />
+    <id>https://userjy.github.io/posts/2021-10-01-TableOfContent.html</id>
+    <published>2021-10-01T00:00:00Z</published>
+    <updated>2021-10-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on October  1, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;tech&#39;." href="/tags/tech.html">tech</a>, <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>, <a title="All pages tagged &#39;HakyllSetupSeries&#39;." href="/tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#showcase"><span class="toc-section-number">1</span> Showcase</a></li>
+<li><a href="#setup"><span class="toc-section-number">2</span> Setup</a></li>
+</ul></div>
+<p><strong>Hakyll Setup Series</strong></p>
+<ol type="1">
+<li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
+<li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
+<li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
+<li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
+<li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
+<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
+<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
+</ol>
+<section id="showcase" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Showcase</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> TableOfContent</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">tags:</span><span class="co"> tech, prog, HakyllSetupSeries</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> y</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>...content body...</span></code></pre></div>
+<p>Any value (in our case <code class="sourceCode markdown">y</code>) given to <code class="sourceCode markdown">toc</code> metafield activates the table of content.</p>
+</section>
+<section id="setup" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Setup</h1>
+<div class="sourceCode" id="cb2" data-filename="site.hs"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">--Step 3: Setup WriterOptions</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ot">writeMathjaxOptions ::</span> <span class="dt">WriterOptions</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">--writeMathjaxOptions = defaultHakyllWriterOptions</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>writeMathjaxOptions <span class="ot">=</span> defaultHakyllWriterOptions </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                {          </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                    writerSectionDivs <span class="ot">=</span> <span class="dt">True</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                    ,writerNumberSections  <span class="ot">=</span> <span class="dt">True</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                    ,writerColumns <span class="ot">=</span> <span class="dv">130</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                    , writerTableOfContents <span class="ot">=</span> <span class="dt">True</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                   , writerTOCDepth        <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                   , writerHTMLMathMethod <span class="ot">=</span> <span class="dt">MathJax</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                }</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">---------------------------------------------------TOC</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ot">tocTemplate ::</span> <span class="dt">Text.Pandoc.Template</span> <span class="dt">Data.Text.Text</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>tocTemplate <span class="ot">=</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">either</span> <span class="fu">error</span> <span class="fu">id</span> <span class="op">$</span> <span class="fu">either</span> (<span class="fu">error</span> <span class="op">.</span> <span class="fu">show</span>) <span class="fu">id</span> <span class="op">$</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    runPure <span class="op">$</span> runWithDefaultPartials <span class="op">$</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    compileTemplate <span class="st">&quot;&quot;</span> <span class="st">&quot;&lt;div id=\&quot;TOC\&quot;&gt;$toc$&lt;/div&gt;\n$body$&quot;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ot">writeTOCMathjaxOptions ::</span> <span class="dt">WriterOptions</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>writeTOCMathjaxOptions <span class="ot">=</span> writeMathjaxOptions{</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                   </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                    writerTemplate        <span class="ot">=</span> <span class="dt">Just</span> tocTemplate</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">---------------------------------------------------</span><span class="re">END</span><span class="co"> TOC</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co">--Step 4: Build the compiler using the ReaderOption and Writer Option from Step 2, 3.</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="ot">mathJaxAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>mathJaxAddedCompiler <span class="ot">=</span> pandocCompilerWithTransform readMathjaxOptions writeTOCMathjaxOptions addToCodeBlock</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co">--Step 5: Replace the line &quot;compile $ pandocCompiler&quot; under &quot;match &quot;posts/*&quot; $ do&quot; with </span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co">--&quot;compiler $ mathJaxAddedCompiler&quot;</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">--exclude Table of Content</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ot">mathJaxAddedCompilerExTOC ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>mathJaxAddedCompilerExTOC <span class="ot">=</span> pandocCompilerWithTransform readMathjaxOptions writeMathjaxOptions addToCodeBlock</span></code></pre></div>
+<div class="sourceCode" id="cb3" data-filename="site.hs"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        compile <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="co">--Check TOC metadata field filled START</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            ident <span class="ot">&lt;-</span> getUnderlying                                 </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            toc   <span class="ot">&lt;-</span> getMetadataField ident <span class="st">&quot;toc&quot;</span>             </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="kw">let</span> chosenCompiler <span class="ot">=</span> <span class="kw">case</span> toc <span class="kw">of</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                    <span class="dt">Nothing</span> <span class="ot">-&gt;</span> mathJaxAddedCompilerExTOC</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                    <span class="dt">Just</span> _ <span class="ot">-&gt;</span> mathJaxAddedCompiler                        </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            <span class="co">--Check TOC metadata field filled </span><span class="re">END</span><span class="co"> </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            chosenCompiler</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;content&quot;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> (postCtxWithTags tags)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> relativizeUrls</span></code></pre></div>
+</section>
+]]></summary>
+</entry>
+<entry>
     <title>Add Railroad Syntax to Hakyll</title>
     <link href="https://userjy.github.io/posts/2021-10-01-RailroadSyntax.html" />
     <id>https://userjy.github.io/posts/2021-10-01-RailroadSyntax.html</id>
@@ -154,18 +252,18 @@ Hakyll must open 127.0.0.1 port 8000 for LAN</p>
     Tags: <a title="All pages tagged &#39;tech&#39;." href="/tags/tech.html">tech</a>, <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>, <a title="All pages tagged &#39;HakyllSetupSeries&#39;." href="/tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
     
 </div>
-<section id="hakyll-setup-series" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Hakyll Setup Series</h4>
+<p><strong>Hakyll Setup Series</strong></p>
 <ol type="1">
 <li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
 <li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
 <li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
 <li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
 <li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
+<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
+<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
 </ol>
-</section>
-<section id="setup" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Setup</h3>
+<section id="setup" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Setup</h1>
 <p>add the script to your templates/default.html</p>
 <div class="sourceCode" id="cb1" data-filename="templates\default.html"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co">&lt;!-- RAILROAD START </span><span class="er">--------------------------------------</span><span class="co"> --&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;module&quot;</span><span class="kw">&gt;</span></span>
@@ -184,16 +282,15 @@ Hakyll must open 127.0.0.1 port 8000 for LAN</p>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">&quot;stylesheet&quot;</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;/lib/railroad/railroad-diagrams.css&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- RAILROAD </span><span class="re">END</span><span class="co"> </span><span class="er">-----------------------------------------</span><span class="co"> --&gt;</span></span></code></pre></div>
 <p>add lines 8-10 to your site.hs</p>
-<div class="sourceCode" id="cb2" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">--add lines 7-9 to your site.hs</span></span>
+<div class="sourceCode" id="cb2" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">--add lines 6-8 to your site.hs</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
 <span id="cb2-3"><a href="#cb2-3"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>    E.setLocaleEncoding E.utf8</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>        <span class="op">...</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8"></a>        match <span class="st">&quot;lib/**&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>            route   idRoute</span>
-<span id="cb2-10"><a href="#cb2-10"></a>            compile copyFileCompiler</span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>        <span class="op">...</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>        match <span class="st">&quot;lib/**&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>            route   idRoute</span>
+<span id="cb2-9"><a href="#cb2-9"></a>            compile copyFileCompiler</span></code></pre></div>
 <p>Create a lib directory and create a railroad directory within the newly created lib directory.</p>
 <p>Create a file “railroad.js” inside you /lib/railroad directory and copy the contents from <a href="https://raw.githubusercontent.com/tabatkins/railroad-diagrams/gh-pages/railroad.js">this link</a></p>
 <p>Create a file “railroad-diagrams.css” /lib/railroad directory and copy the contents from <a href="https://raw.githubusercontent.com/tabatkins/railroad-diagrams/gh-pages/railroad-diagrams.css">this link</a></p>
@@ -201,17 +298,17 @@ Hakyll must open 127.0.0.1 port 8000 for LAN</p>
 <p>Line <strong>3, 4, 20</strong> is what we added to our previous plantuml-hakyll integration code.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">------------------------------------------------RAILROAD START</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="ot">railroad ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>railroad y <span class="ot">=</span> T.pack(<span class="st">&quot;&lt;div class=&#39;rroad&#39;&gt;&quot;</span><span class="op">&lt;&gt;</span> T.unpack y <span class="op">&lt;&gt;</span> <span class="st">&quot;&lt;/div&gt;&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="ot">railroad ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">Data.Text.Text</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>railroad y <span class="ot">=</span> Data.Text.pack(<span class="st">&quot;&lt;div class=&#39;rroad&#39;&gt;&quot;</span><span class="op">&lt;&gt;</span> Data.Text.unpack y <span class="op">&lt;&gt;</span> <span class="st">&quot;&lt;/div&gt;&quot;</span>)</span>
 <span id="cb3-5"><a href="#cb3-5"></a></span>
 <span id="cb3-6"><a href="#cb3-6"></a><span class="co">------------------------------------------------RAILROAD </span><span class="re">END</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="ot">mhexCode ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">String</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>mhexCode y <span class="ot">=</span> <span class="fu">tail</span> <span class="op">$</span> <span class="fu">init</span> ( <span class="fu">show</span> ( encode <span class="op">$</span> C.pack <span class="op">$</span> T.unpack y ))</span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="ot">mhexCode ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">String</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>mhexCode y <span class="ot">=</span> <span class="fu">tail</span> <span class="op">$</span> <span class="fu">init</span> ( <span class="fu">show</span> ( Data.ByteString.Base16.encode <span class="op">$</span> Data.ByteString.Char8.pack <span class="op">$</span> Data.Text.unpack y ))</span>
 <span id="cb3-10"><a href="#cb3-10"></a></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="ot">planthtml ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span> </span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="ot">planthtml ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">Data.Text.Text</span> </span>
 <span id="cb3-12"><a href="#cb3-12"></a><span class="co">--planthtml y = T.pack (&quot;&lt;figure&gt;&lt;img src=&#39;http://www.plantuml.com/plantuml/svg/~h&quot; &lt;&gt; (T.unpack $ hexCode y) &lt;&gt;&quot;&#39;&gt;&lt;/figure&gt;&quot;) </span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>planthtml y <span class="ot">=</span> T.pack (<span class="st">&quot;&lt;figure&gt;&lt;img src=&#39;http://www.plantuml.com/plantuml/svg/~h&quot;</span> <span class="op">&lt;&gt;</span> (mhexCode <span class="op">$</span> y) <span class="op">&lt;&gt;</span><span class="st">&quot;&#39;&gt;&lt;/figure&gt;&quot;</span>) </span>
+<span id="cb3-13"><a href="#cb3-13"></a>planthtml y <span class="ot">=</span> Data.Text.pack (<span class="st">&quot;&lt;figure&gt;&lt;img src=&#39;http://www.plantuml.com/plantuml/svg/~h&quot;</span> <span class="op">&lt;&gt;</span> (mhexCode <span class="op">$</span> y) <span class="op">&lt;&gt;</span><span class="st">&quot;&#39;&gt;&lt;/figure&gt;&quot;</span>) </span>
 <span id="cb3-14"><a href="#cb3-14"></a></span>
 <span id="cb3-15"><a href="#cb3-15"></a><span class="co">--Pandoc filtering, </span></span>
 <span id="cb3-16"><a href="#cb3-16"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
@@ -230,8 +327,8 @@ Diagram(&quot;foo&quot;)
 <p>Add the codeblock below to your site.hs</p>
 <div class="sourceCode" id="cb6" data-filename="site.hs"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">------------------------------------------------RAILROAD START</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ot">railroad ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>railroad y <span class="ot">=</span> T.pack(<span class="st">&quot;&lt;div class=&#39;rroad&#39;&gt;&quot;</span><span class="op">&lt;&gt;</span> T.unpack y <span class="op">&lt;&gt;</span> <span class="st">&quot;&lt;/div&gt;&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ot">railroad ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">Data.Text.Text</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>railroad y <span class="ot">=</span> Data.Text.pack(<span class="st">&quot;&lt;div class=&#39;rroad&#39;&gt;&quot;</span><span class="op">&lt;&gt;</span> Data.Text.unpack y <span class="op">&lt;&gt;</span> <span class="st">&quot;&lt;/div&gt;&quot;</span>)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">------------------------------------------------RAILROAD </span><span class="re">END</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
@@ -244,22 +341,54 @@ Diagram(&quot;foo&quot;)
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">--New document compiler</span></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="ot">modAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>modAddedCompiler <span class="ot">=</span> pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock</span></code></pre></div>
-<p>In your site.hs find the <code class="sourceCode haskell">match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></code> and ONLY change the compiler in line 8 to <code class="sourceCode haskell">modAddedCompiler</code></p>
+<p>In your site.hs find the <code class="sourceCode haskell">match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></code> and ONLY change the compiler in line 7 to <code class="sourceCode haskell">modAddedCompiler</code></p>
 <div class="sourceCode" id="cb7" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
 <span id="cb7-2"><a href="#cb7-2"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>    E.setLocaleEncoding E.utf8</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>    <span class="op">...</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>      match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>                route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>                compile <span class="op">$</span> modAddedCompiler <span class="co">--ONLY THIS</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>                    <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
-<span id="cb7-10"><a href="#cb7-10"></a>                    <span class="op">...</span></span></code></pre></div>
+<span id="cb7-3"><a href="#cb7-3"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="op">...</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>      match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>                route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>                compile <span class="op">$</span> modAddedCompiler <span class="co">--ONLY THIS</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>                    <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
+<span id="cb7-9"><a href="#cb7-9"></a>                    <span class="op">...</span></span></code></pre></div>
 <p>Now it should work when you input codeblocks your pandoc markdown with “rroad” tag as shown below (use backticks instead of single quotes in your pandoc markdown).</p>
 <pre><code>&#39;&#39;&#39;rroad
 Diagram(&quot;foo&quot;)
 &#39;&#39;&#39;</code></pre>
 <pre class="rroad"><code>Diagram(&quot;foo&quot;)</code></pre>
+</section>
+]]></summary>
+</entry>
+<entry>
+    <title>dotfile</title>
+    <link href="https://userjy.github.io/posts/2021-09-21-dotfile.html" />
+    <id>https://userjy.github.io/posts/2021-09-21-dotfile.html</id>
+    <published>2021-09-21T00:00:00Z</published>
+    <updated>2021-09-21T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on September 21, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;mathcs&#39;." href="/tags/mathcs.html">mathcs</a>, <a title="All pages tagged &#39;puremath&#39;." href="/tags/puremath.html">puremath</a>, <a title="All pages tagged &#39;recursion&#39;." href="/tags/recursion.html">recursion</a>
+    
+</div>
+<section id="profile-on-login" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> .profile : on login</h1>
+<p><code>~/.profile</code>{bash} is used as a fallback<br />
+zsh uses <code>~/.zprofile</code>{bash}</p>
+<p>bash uses ~/.bash_profile or ~/.bash_login instead of ~/.profile</p>
+</section>
+<section id="zsh-on-new-shell" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> .zsh : on new shell</h1>
+<p>more universal than .zprofile because it runs everytime you open a new terminal.<br />
+The bash version is .bashrc</p>
+</section>
+<section id="path" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> PATH</h1>
+<p><code class="sourceCode bash"><span class="va">$HOME</span></code> is same as <code class="sourceCode bash"><span class="ex">~</span></code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span> <span class="op">=</span> <span class="st">&quot;</span><span class="va">$PATH</span><span class="st">:</span><span class="va">$HOME</span><span class="st">/.local/bin&quot;</span></span></code></pre></div>
 </section>
 ]]></summary>
 </entry>
@@ -790,195 +919,6 @@ Diagram(&quot;foo&quot;)
 <section id="arrow-list" class="level3" data-number="0.0.5">
 <h3 data-number="0.0.5"><span class="header-section-number">0.0.5</span> Arrow list</h3>
 <figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6c65667420746f20726967687420646972656374696f6e0a736b696e706172616d206e6f646573657020350a6433207e7e207633203a2022227e7e22225c6e2f2f646f747465642f2f0a6432202e2e207632203a2022222e2e22225c6e2f2f6461736865642f2f0a6431203d3d207631203a2022223d3d22225c6e2f2f626f6c642f2f0a6430202d2d207630203a2022222d2d22225c6e2f2f706c61696e2f2f0a0a0a663133202d2d3020623133203a2022222d2d3022220a663132202d2d4020623132203a2022222d2d4022220a663131202d2d3a7c3e20623131203a2022222d2d3a7c3e22220a663130202d2d7c7c3e20623130203a2022222d2d7c7c3e22220a6639202d2d7c3e206239203a2022222d2d7c3e22220a6638202d2d5e206238203a2022222d2d5e2022220a6637202d2d5c5c206237203a2022222d2d5c5c5c5c22220a6636202d2d23206236203a2022222d2d232022220a6635202d2d2b206235203a2022222d2d2b2022220a6634202d2d6f206234203a2022222d2d6f2022220a6633202d2d2a206233203a2022222d2d2a2022220a6632202d2d3e3e206232203a2022222d2d3e3e22220a6631202d2d3e206231203a2022222d2d3e2022220a6630202d2d206230203a2022222d2d2022220a0a0a67313020302d2d3020723130203a20222220302d2d302022220a673920292d2d28207239203a20222220292d2d2822220a67382030292d2d2830207238203a2022222030292d2d283022220a67372030292d2d207237203a2022222030292d2d2022220a6736202d30292d207236203a202222202d30292d5c6e2022220a6735202d2830292d207235203a202222202d2830292d5c6e22220a6734202d28302d207234203a202222202d28302d5c6e2022220a6733202d2d2830207233203a202222202d2d28302022220a6732202d2d28207232203a202222202d2d282022220a6731202d2d30207231203a202222202d2d302022220a0a0a40656e64756d6c0a'></figure>
-</section>
-]]></summary>
-</entry>
-<entry>
-    <title>HTTP TLS(SSL) Certificates</title>
-    <link href="https://userjy.github.io/posts/2021-08-25-HttpTut.html" />
-    <id>https://userjy.github.io/posts/2021-08-25-HttpTut.html</id>
-    <published>2021-08-25T00:00:00Z</published>
-    <updated>2021-08-25T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on August 25, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
-    
-</div>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a3d3d20544350203d3d0a0a436c69656e74202d3e205365727665723a2053594e0a536572766572202d2d3e20436c69656e743a2053594e2d41434b0a436c69656e74202d3e205365727665723a2041434b0a0a3d3d20544c53203d3d0a0a436c69656e74202d3e205365727665723a20436c69656e742048656c6c6f0a536572766572202d2d3e20436c69656e743a205365727665722048656c6c6f0a436c69656e74202d3e205365727665723a20436c69656e74204b65792045786368616e67652053746172740a536572766572202d2d3e20436c69656e743a205365727665722066696e69736865640a436c69656e74202d2d3e205365727665723a20436c69656e742066696e69736865640a0a3d3d2048545450203d3d0a0a436c69656e74202d3e205365727665723a2048545450207265710a536572766572202d2d3e20436c69656e743a204854545020726573700a40656e64756d6c'></figure>
-<section id="http-vs-https" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> HTTP vs HTTPS</h1>
-<ul>
-<li>HTTP: HTTP –&gt; TCP –&gt; IP –&gt; Ethernet<br />
-</li>
-<li>HTTPS: HTTP –&gt; TLS(SSL) –&gt; TCP –&gt; IP –&gt; Ethernet</li>
-</ul>
-</section>
-<section id="http1.1" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> HTTP/1.1</h1>
-<p>Sequential,</p>
-<ul>
-<li>can only send 1 request at time</li>
-<li>must wait for response before sending a new request</li>
-</ul>
-</section>
-<section id="http2" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> HTTP/2</h1>
-<p>Multiplex(Async),</p>
-<ul>
-<li>send multiple requests</li>
-<li>wait for response in any order</li>
-</ul>
-</section>
-]]></summary>
-</entry>
-<entry>
-    <title>Alexa</title>
-    <link href="https://userjy.github.io/posts/2021-08-25-Alexa.html" />
-    <id>https://userjy.github.io/posts/2021-08-25-Alexa.html</id>
-    <published>2021-08-25T00:00:00Z</published>
-    <updated>2021-08-25T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on August 25, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;musings&#39;." href="/tags/musings.html">musings</a>
-    
-</div>
-<section id="alexa-example-action" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Alexa example action</h3>
-<p>“alexa ask bleh bot hello”</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>	<span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>	<span class="dt">&quot;session&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;new&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;sessionId&quot;</span><span class="fu">:</span> <span class="st">&quot;amzn1.echo-api.session.AAAAAAAAAAAAAAAAAAAAAAA&quot;</span><span class="fu">,</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;application&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;applicationId&quot;</span><span class="fu">:</span> <span class="st">&quot;amzn1.ask.skill.17d3bbb3-90c7-4c1e-b901-fc82f111ff3d&quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>		<span class="fu">},</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;attributes&quot;</span><span class="fu">:</span> <span class="fu">{},</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;user&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;userId&quot;</span><span class="fu">:</span> <span class="st">&quot;amzn1.ask.account.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&quot;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>		<span class="fu">}</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>	<span class="fu">},</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>	<span class="dt">&quot;context&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;Viewports&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>			<span class="fu">{</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;APL&quot;</span><span class="fu">,</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;main&quot;</span><span class="fu">,</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;shape&quot;</span><span class="fu">:</span> <span class="st">&quot;RECTANGLE&quot;</span><span class="fu">,</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;dpi&quot;</span><span class="fu">:</span> <span class="dv">213</span><span class="fu">,</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;presentationType&quot;</span><span class="fu">:</span> <span class="st">&quot;STANDARD&quot;</span><span class="fu">,</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;canRotate&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;configuration&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>					<span class="dt">&quot;current&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>						<span class="dt">&quot;mode&quot;</span><span class="fu">:</span> <span class="st">&quot;HUB&quot;</span><span class="fu">,</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>						<span class="dt">&quot;video&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>							<span class="dt">&quot;codecs&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>								<span class="st">&quot;H_264_42&quot;</span><span class="ot">,</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>								<span class="st">&quot;H_264_41&quot;</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>							<span class="ot">]</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>						<span class="fu">},</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>						<span class="dt">&quot;size&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>							<span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;DISCRETE&quot;</span><span class="fu">,</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>							<span class="dt">&quot;pixelWidth&quot;</span><span class="fu">:</span> <span class="dv">1280</span><span class="fu">,</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>							<span class="dt">&quot;pixelHeight&quot;</span><span class="fu">:</span> <span class="dv">800</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>						<span class="fu">}</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>					<span class="fu">}</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>				<span class="fu">}</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>			<span class="fu">}</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>		<span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;Viewport&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;experiences&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>				<span class="fu">{</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>					<span class="dt">&quot;arcMinuteWidth&quot;</span><span class="fu">:</span> <span class="dv">346</span><span class="fu">,</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>					<span class="dt">&quot;arcMinuteHeight&quot;</span><span class="fu">:</span> <span class="dv">216</span><span class="fu">,</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>					<span class="dt">&quot;canRotate&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>					<span class="dt">&quot;canResize&quot;</span><span class="fu">:</span> <span class="kw">false</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>				<span class="fu">}</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>			<span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;mode&quot;</span><span class="fu">:</span> <span class="st">&quot;HUB&quot;</span><span class="fu">,</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;shape&quot;</span><span class="fu">:</span> <span class="st">&quot;RECTANGLE&quot;</span><span class="fu">,</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;pixelWidth&quot;</span><span class="fu">:</span> <span class="dv">1280</span><span class="fu">,</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;pixelHeight&quot;</span><span class="fu">:</span> <span class="dv">800</span><span class="fu">,</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;dpi&quot;</span><span class="fu">:</span> <span class="dv">213</span><span class="fu">,</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;currentPixelWidth&quot;</span><span class="fu">:</span> <span class="dv">1280</span><span class="fu">,</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;currentPixelHeight&quot;</span><span class="fu">:</span> <span class="dv">800</span><span class="fu">,</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;touch&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>				<span class="st">&quot;SINGLE&quot;</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>			<span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;video&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;codecs&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>					<span class="st">&quot;H_264_42&quot;</span><span class="ot">,</span></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>					<span class="st">&quot;H_264_41&quot;</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>				<span class="ot">]</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>			<span class="fu">}</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>		<span class="fu">},</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;Extensions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;available&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;aplext:backstack:10&quot;</span><span class="fu">:</span> <span class="fu">{}</span></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>			<span class="fu">}</span></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>		<span class="fu">},</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;System&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;application&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;applicationId&quot;</span><span class="fu">:</span> <span class="st">&quot;amzn1.ask.skill.17d3bbb3-90c7-4c1e-b901-fc82f111ff3d&quot;</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>			<span class="fu">},</span></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;user&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;userId&quot;</span><span class="fu">:</span> <span class="st">&quot;amzn1.ask.account.AAAAAAAAAAAAAAAAAAAAAAAAAAA&quot;</span></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>			<span class="fu">},</span></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;device&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;deviceId&quot;</span><span class="fu">:</span> <span class="st">&quot;amzn1.ask.device.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&quot;</span><span class="fu">,</span></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;supportedInterfaces&quot;</span><span class="fu">:</span> <span class="fu">{}</span></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>			<span class="fu">},</span></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;apiEndpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.amazonalexa.com&quot;</span><span class="fu">,</span></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;apiAccessToken&quot;</span><span class="fu">:</span> <span class="st">&quot;AAAAAAAAAAAAAAAAAAAAAAAAAAAAA&quot;</span></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>		<span class="fu">}</span></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>	<span class="fu">},</span></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>	<span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;IntentRequest&quot;</span><span class="fu">,</span></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;requestId&quot;</span><span class="fu">:</span> <span class="st">&quot;amzn1.echo-api.request.9999-9999-9999&quot;</span><span class="fu">,</span></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;locale&quot;</span><span class="fu">:</span> <span class="st">&quot;en-US&quot;</span><span class="fu">,</span></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2021-08-31T18:37:26Z&quot;</span><span class="fu">,</span></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;intent&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;HelloWorldIntent&quot;</span><span class="fu">,</span></span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;confirmationStatus&quot;</span><span class="fu">:</span> <span class="st">&quot;NONE&quot;</span></span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>		<span class="fu">}</span></span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>	<span class="fu">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HelloWorldIntentHandler(AbstractRequestHandler):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Handler for Hello World Intent.&quot;&quot;&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> can_handle(<span class="va">self</span>, handler_input):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># type: (HandlerInput) -&gt; bool</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ask_utils.is_intent_name(<span class="st">&quot;HelloWorldIntent&quot;</span>)(handler_input)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> handle(<span class="va">self</span>, handler_input):</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># type: (HandlerInput) -&gt; Response</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        speak_output <span class="op">=</span> <span class="st">&quot;Hello World Boo!&quot;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            handler_input.response_builder</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                .speak(speak_output)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                <span class="co"># .ask(&quot;add a reprompt if you want to keep the session open for the user to respond&quot;)</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                .response</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        )</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>	<span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;outputSpeech&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;SSML&quot;</span><span class="fu">,</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>				<span class="dt">&quot;ssml&quot;</span><span class="fu">:</span> <span class="st">&quot;&lt;speak&gt;Hello World Boo!&lt;/speak&gt;&quot;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>			<span class="fu">},</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>			<span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;_DEFAULT_RESPONSE&quot;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>		<span class="fu">},</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;sessionAttributes&quot;</span><span class="fu">:</span> <span class="fu">{},</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>		<span class="dt">&quot;userAgent&quot;</span><span class="fu">:</span> <span class="st">&quot;ask-python/1.11.0 Python/3.7.11&quot;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>	<span class="fu">}</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 </section>
 ]]></summary>
 </entry>

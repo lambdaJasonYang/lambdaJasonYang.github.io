@@ -1,0 +1,24 @@
+---
+title: dotfile
+tags: mathcs, puremath, recursion
+---
+
+# .profile : on login
+
+`~/.profile`{bash} is used as a fallback  
+zsh uses `~/.zprofile`{bash}
+
+bash uses ~/.bash_profile or ~/.bash_login instead of ~/.profile
+
+# .zsh : on new shell
+
+more universal than .zprofile because it runs everytime you open a new terminal.  
+The bash version is .bashrc
+
+# PATH
+
+`$HOME`{.bash} is same as `~`{.bash}  
+
+```bash
+export PATH = "$PATH:$HOME/.local/bin"
+```

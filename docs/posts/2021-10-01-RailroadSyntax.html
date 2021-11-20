@@ -243,18 +243,18 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'HakyllSetupSeries'." href="../tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
     
 </div>
-<section id="hakyll-setup-series" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Hakyll Setup Series</h4>
+<p><strong>Hakyll Setup Series</strong></p>
 <ol type="1">
 <li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
 <li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
 <li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
 <li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
 <li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
+<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
+<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
 </ol>
-</section>
-<section id="setup" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Setup</h3>
+<section id="setup" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Setup</h1>
 <p>add the script to your templates/default.html</p>
 <div class="sourceCode" id="cb1" data-filename="templates\default.html"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co">&lt;!-- RAILROAD START </span><span class="er">--------------------------------------</span><span class="co"> --&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;module&quot;</span><span class="kw">&gt;</span></span>
@@ -273,16 +273,15 @@
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">&quot;stylesheet&quot;</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;/lib/railroad/railroad-diagrams.css&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- RAILROAD </span><span class="re">END</span><span class="co"> </span><span class="er">-----------------------------------------</span><span class="co"> --&gt;</span></span></code></pre></div>
 <p>add lines 8-10 to your site.hs</p>
-<div class="sourceCode" id="cb2" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">--add lines 7-9 to your site.hs</span></span>
+<div class="sourceCode" id="cb2" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">--add lines 6-8 to your site.hs</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
 <span id="cb2-3"><a href="#cb2-3"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>    E.setLocaleEncoding E.utf8</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>        <span class="op">...</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8"></a>        match <span class="st">&quot;lib/**&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>            route   idRoute</span>
-<span id="cb2-10"><a href="#cb2-10"></a>            compile copyFileCompiler</span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>        <span class="op">...</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>        match <span class="st">&quot;lib/**&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>            route   idRoute</span>
+<span id="cb2-9"><a href="#cb2-9"></a>            compile copyFileCompiler</span></code></pre></div>
 <p>Create a lib directory and create a railroad directory within the newly created lib directory.</p>
 <p>Create a file “railroad.js” inside you /lib/railroad directory and copy the contents from <a href="https://raw.githubusercontent.com/tabatkins/railroad-diagrams/gh-pages/railroad.js">this link</a></p>
 <p>Create a file “railroad-diagrams.css” /lib/railroad directory and copy the contents from <a href="https://raw.githubusercontent.com/tabatkins/railroad-diagrams/gh-pages/railroad-diagrams.css">this link</a></p>
@@ -290,17 +289,17 @@
 <p>Line <strong>3, 4, 20</strong> is what we added to our previous plantuml-hakyll integration code.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">------------------------------------------------RAILROAD START</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="ot">railroad ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>railroad y <span class="ot">=</span> T.pack(<span class="st">&quot;&lt;div class='rroad'&gt;&quot;</span><span class="op">&lt;&gt;</span> T.unpack y <span class="op">&lt;&gt;</span> <span class="st">&quot;&lt;/div&gt;&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="ot">railroad ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">Data.Text.Text</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>railroad y <span class="ot">=</span> Data.Text.pack(<span class="st">&quot;&lt;div class='rroad'&gt;&quot;</span><span class="op">&lt;&gt;</span> Data.Text.unpack y <span class="op">&lt;&gt;</span> <span class="st">&quot;&lt;/div&gt;&quot;</span>)</span>
 <span id="cb3-5"><a href="#cb3-5"></a></span>
 <span id="cb3-6"><a href="#cb3-6"></a><span class="co">------------------------------------------------RAILROAD </span><span class="re">END</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="ot">mhexCode ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">String</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>mhexCode y <span class="ot">=</span> <span class="fu">tail</span> <span class="op">$</span> <span class="fu">init</span> ( <span class="fu">show</span> ( encode <span class="op">$</span> C.pack <span class="op">$</span> T.unpack y ))</span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="ot">mhexCode ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">String</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>mhexCode y <span class="ot">=</span> <span class="fu">tail</span> <span class="op">$</span> <span class="fu">init</span> ( <span class="fu">show</span> ( Data.ByteString.Base16.encode <span class="op">$</span> Data.ByteString.Char8.pack <span class="op">$</span> Data.Text.unpack y ))</span>
 <span id="cb3-10"><a href="#cb3-10"></a></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="ot">planthtml ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span> </span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="ot">planthtml ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">Data.Text.Text</span> </span>
 <span id="cb3-12"><a href="#cb3-12"></a><span class="co">--planthtml y = T.pack (&quot;&lt;figure&gt;&lt;img src='http://www.plantuml.com/plantuml/svg/~h&quot; &lt;&gt; (T.unpack $ hexCode y) &lt;&gt;&quot;'&gt;&lt;/figure&gt;&quot;) </span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>planthtml y <span class="ot">=</span> T.pack (<span class="st">&quot;&lt;figure&gt;&lt;img src='http://www.plantuml.com/plantuml/svg/~h&quot;</span> <span class="op">&lt;&gt;</span> (mhexCode <span class="op">$</span> y) <span class="op">&lt;&gt;</span><span class="st">&quot;'&gt;&lt;/figure&gt;&quot;</span>) </span>
+<span id="cb3-13"><a href="#cb3-13"></a>planthtml y <span class="ot">=</span> Data.Text.pack (<span class="st">&quot;&lt;figure&gt;&lt;img src='http://www.plantuml.com/plantuml/svg/~h&quot;</span> <span class="op">&lt;&gt;</span> (mhexCode <span class="op">$</span> y) <span class="op">&lt;&gt;</span><span class="st">&quot;'&gt;&lt;/figure&gt;&quot;</span>) </span>
 <span id="cb3-14"><a href="#cb3-14"></a></span>
 <span id="cb3-15"><a href="#cb3-15"></a><span class="co">--Pandoc filtering, </span></span>
 <span id="cb3-16"><a href="#cb3-16"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
@@ -319,8 +318,8 @@ Diagram(&quot;foo&quot;)
 <p>Add the codeblock below to your site.hs</p>
 <div class="sourceCode" id="cb6" data-filename="site.hs"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">------------------------------------------------RAILROAD START</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ot">railroad ::</span> <span class="dt">T.Text</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>railroad y <span class="ot">=</span> T.pack(<span class="st">&quot;&lt;div class='rroad'&gt;&quot;</span><span class="op">&lt;&gt;</span> T.unpack y <span class="op">&lt;&gt;</span> <span class="st">&quot;&lt;/div&gt;&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ot">railroad ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">Data.Text.Text</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>railroad y <span class="ot">=</span> Data.Text.pack(<span class="st">&quot;&lt;div class='rroad'&gt;&quot;</span><span class="op">&lt;&gt;</span> Data.Text.unpack y <span class="op">&lt;&gt;</span> <span class="st">&quot;&lt;/div&gt;&quot;</span>)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">------------------------------------------------RAILROAD </span><span class="re">END</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
@@ -333,17 +332,16 @@ Diagram(&quot;foo&quot;)
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">--New document compiler</span></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="ot">modAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>modAddedCompiler <span class="ot">=</span> pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock</span></code></pre></div>
-<p>In your site.hs find the <code class="sourceCode haskell">match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></code> and ONLY change the compiler in line 8 to <code class="sourceCode haskell">modAddedCompiler</code></p>
+<p>In your site.hs find the <code class="sourceCode haskell">match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></code> and ONLY change the compiler in line 7 to <code class="sourceCode haskell">modAddedCompiler</code></p>
 <div class="sourceCode" id="cb7" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
 <span id="cb7-2"><a href="#cb7-2"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>    E.setLocaleEncoding E.utf8</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>    <span class="op">...</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>      match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>                route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>                compile <span class="op">$</span> modAddedCompiler <span class="co">--ONLY THIS</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>                    <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
-<span id="cb7-10"><a href="#cb7-10"></a>                    <span class="op">...</span></span></code></pre></div>
+<span id="cb7-3"><a href="#cb7-3"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="op">...</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>      match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>                route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>                compile <span class="op">$</span> modAddedCompiler <span class="co">--ONLY THIS</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>                    <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
+<span id="cb7-9"><a href="#cb7-9"></a>                    <span class="op">...</span></span></code></pre></div>
 <p>Now it should work when you input codeblocks your pandoc markdown with “rroad” tag as shown below (use backticks instead of single quotes in your pandoc markdown).</p>
 <pre><code>'''rroad
 Diagram(&quot;foo&quot;)

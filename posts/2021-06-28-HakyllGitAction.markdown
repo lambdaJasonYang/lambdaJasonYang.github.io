@@ -3,14 +3,17 @@ title: Autobuild Hakyll
 tags: tech, prog, HakyllSetupSeries, DevOps
 ---
 
-#### Hakyll Setup Series
+**Hakyll Setup Series**  
+
 1. [Setup Mathjax](2021-08-23-HakyllSetupMathjax.html)
 2. [Setup PlantUML](2021-08-24-HakyllPlantUML2.html)
 3. [Setup autobuild Hakyll site Git action CI](2021-06-28-HakyllGitAction.html)
 4. [Very Simple Hakyll Pandoc Filtering Example](2021-08-23-PandocFiltering.html)
 5. [Add Railroad Syntax to Hakyll](2021-10-01-RailroadSyntax.html)
+6. [Table Of Content in Hakyll](2021-10-01-TableOfContent.html)
+7. [Hakyll Access on LAN server](2021-11-07-HakyllAccessOnLAN.html)
 
-### Autogenerate static site on git push to github
+# Autogenerate static site on git push to github
 
 Building a Hakyll site from source takes an hour the first time you do it.  
 Once it is cached, it only takes a few seconds.  

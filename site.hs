@@ -19,8 +19,8 @@ import Text.Pandoc.Walk --for post-processing pandoc, requires cabal 'pandoc-typ
 
 --------------------------------------------------------------------------------MATHJAX START
 --Setup Mathjax on Hakyll
---Step 0: Add "pandoc, containers" under build-depends in stack.yaml   
---Step 0: "import Text.Pandoc.Options" in site.hs
+--Step 0: Add "pandoc," under build-depends in stack.yaml   
+--Step 0: "import Text.Pandoc" in site.hs
 --Step 1: Get the mathjax Extensions that recognizes single $ in our pandocs
 mathjaxExtensions :: Extensions
 mathjaxExtensions = extensionsFromList 

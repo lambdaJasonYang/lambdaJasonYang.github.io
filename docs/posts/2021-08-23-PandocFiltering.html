@@ -256,7 +256,7 @@
 I can control whether I want some pattern or group of text to be transformed in some manner when the site is rebuilt.</p>
 <p>Here I will show the simplest example:</p>
 <p>Lets append a text “EOF” string to all of our codeblocks automatically by modifying the Pandocs copmiler in Hakyll.</p>
-<div class="sourceCode" id="cb1" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc.Definition</span>  </span>
+<div class="sourceCode" id="cb1" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc</span> </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span>           <span class="dt">Text.Pandoc.Walk</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span>           <span class="dt">Data.Text</span>  </span></code></pre></div>
 <div class="sourceCode" id="cb2" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
@@ -269,14 +269,13 @@ I can control whether I want some pattern or group of text to be transformed in 
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>simpleCompiler <span class="ot">=</span> pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock</span></code></pre></div>
 <div class="sourceCode" id="cb3" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
 <span id="cb3-2"><a href="#cb3-2"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>    E.setLocaleEncoding E.utf8</span>
-<span id="cb3-4"><a href="#cb3-4"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>    <span class="op">...</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>      match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>                route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>                compile <span class="op">$</span> simpleCompiler <span class="co">--ONLY CHANGE THIS</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>                    <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
-<span id="cb3-10"><a href="#cb3-10"></a>                    <span class="op">...</span></span></code></pre></div>
+<span id="cb3-3"><a href="#cb3-3"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="op">...</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>      match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>                route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>                compile <span class="op">$</span> simpleCompiler <span class="co">--ONLY CHANGE THIS</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>                    <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>                    <span class="op">...</span></span></code></pre></div>
 </section>
 <section id="using-it" class="level4" data-number="0.0.0.2">
 <h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Using it</h4>

@@ -247,9 +247,9 @@
 <section id="http-vs-https" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> HTTP vs HTTPS</h1>
 <ul>
-<li>HTTP: HTTP –&gt; TCP –&gt; IP –&gt; Ethernet<br />
+<li>HTTP: HTTP – TCP – IP –&gt; Ethernet<br />
 </li>
-<li>HTTPS: HTTP –&gt; TLS(SSL) –&gt; TCP –&gt; IP –&gt; Ethernet</li>
+<li>HTTPS: HTTP – TLS(SSL) – TCP – IP – Ethernet</li>
 </ul>
 </section>
 <section id="http1.1" class="level1" data-number="2">
@@ -267,6 +267,12 @@
 <li>send multiple requests</li>
 <li>wait for response in any order</li>
 </ul>
+<p>### Certificate Authority</p>
+<ul>
+<li>CA public key is pre-installed in most Client browsers</li>
+<li>CA private key: Some lesser website will ask the CA to sign their public-private key pairs to certify authenticity.</li>
+</ul>
+<p>Example CA: LetsEncrypt</p>
 </section>
 
         </div>
