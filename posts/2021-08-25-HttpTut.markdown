@@ -1,0 +1,46 @@
+---
+title: HTTP TLS(SSL) Certificates 
+tags: prog
+---
+
+```plantuml
+@startuml
+== TCP ==
+
+Client -> Server: SYN
+Server --> Client: SYN-ACK
+Client -> Server: ACK
+
+== TLS ==
+
+Client -> Server: Client Hello
+Server --> Client: Server Hello
+Client -> Server: Client Key Exchange Start
+Server --> Client: Server finished
+Client --> Server: Client finished
+
+== HTTP ==
+
+Client -> Server: HTTP req
+Server --> Client: HTTP resp
+@enduml
+```
+
+# HTTP vs HTTPS
+
+* HTTP: HTTP --> TCP --> IP --> Ethernet  
+* HTTPS: HTTP --> TLS(SSL) --> TCP --> IP --> Ethernet
+
+# HTTP/1.1 
+
+Sequential, 
+
+  * can only send 1 request at time
+  * must wait for response before sending a new request
+
+# HTTP/2
+
+Multiplex(Async), 
+
+  * send multiple requests
+  * wait for response in any order
