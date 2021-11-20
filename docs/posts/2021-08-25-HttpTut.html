@@ -245,7 +245,11 @@
 </div>
 <div id="TOC"><ul>
 <li><a href="#http-vs-https"><span class="toc-section-number">1</span> HTTP vs HTTPS</a></li>
-<li><a href="#https-certificate-authority"><span class="toc-section-number">2</span> HTTPS Certificate Authority</a></li>
+<li><a href="#https-certificate-authority"><span class="toc-section-number">2</span> HTTPS Certificate Authority</a>
+<ul>
+<li><a href="#cert-confirm-identity"><span class="toc-section-number">2.1</span> Cert confirm identity</a></li>
+<li><a href="#cert-signing-request"><span class="toc-section-number">2.2</span> Cert Signing Request</a></li>
+</ul></li>
 <li><a href="#http1.1"><span class="toc-section-number">3</span> HTTP/1.1</a></li>
 <li><a href="#http2"><span class="toc-section-number">4</span> HTTP/2</a></li>
 <li><a href="#http3"><span class="toc-section-number">5</span> HTTP/3</a></li>
@@ -262,12 +266,23 @@
 </section>
 <section id="https-certificate-authority" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> HTTPS Certificate Authority</h1>
+<section id="cert-confirm-identity" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Cert confirm identity</h2>
+<p>We want to talk to a website but how do we are not talking to a faker?<br />
+A website needs to confirm it’s identity using a Cert.<br />
+But how do we know to trust the Cert?<br />
+Using Certificate Authorities(CA) like LetsEncrypt</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a736b696e706172616d20736861646f77696e672066616c73650a42726f77736572202d3e2057656273697465203a20476574206578616d706c652e636f6d0a57656273697465202d2d3e2042726f777365723a206f6b2c2068657265206973206d792053534c2063657274205c6e636f6e7461696e696e67206d79207075626c69636b65795c6e7369676e6564206279204c657473456e63727970740a6e6f7465206f7665722042726f777365720a557365207072652d696e7374616c6c6564204c657473456e63727970740a5075626c69634b657920696e2042726f7773657220746f0a766572696679207468652053534c2063657274207369676e6564207573696e670a4c657473456e6372797074277320507269766174654b65790a656e646e6f74650a42726f77736572202d3e20576562736974653a2049207472757374204c657473456e63727970745c6e5468657265666f7265204920747275737420796f757220636572742e5c6e49206d6164652061205365637265744b6579205c6e656e6372797074656420697420772f20796f7572205075626c69634b65790a6e6f7465206f76657220576562736974650a576562736974652063616e2072657665616c200a746865205365637265744b6579200a62792064656372797074696e6720746865206d657373616765200a772f2057656273697465277320507269766174654b6579200a656e646e6f74650a57656273697465203c2d3e2042726f777365723a20436f6d6d756e69636174696f6e20772f205365637265744b65790a40656e64756d6c"></figure>
+</section>
+<section id="cert-signing-request" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Cert Signing Request</h2>
 <ul>
 <li>CA public key is pre-installed in most Client browsers</li>
-<li>CA private key: Some lesser website will ask the CA to sign their public-private key pairs to certify authenticity.</li>
+<li>CA private key: Every month you may ask let’s encrypt to sign your SSL Cert.</li>
 </ul>
 <p>Example CA: LetsEncrypt</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a736b696e706172616d20736861646f77696e672066616c73650a636c6173732057656273697465207b0a2020507269766174654b65790a5f5f0a20205075626c69634b65790a7d0a0a6f626a6563742042726f777365720a0a0a0a636c617373204c657473456e6372797074207b0a202020507269766174654b65790a5f5f0a20205075626c69634b65790a7d0a0a0a42726f77736572202d2d204c657473456e63727970743a3a5075626c69634b6579203a207072652d696e7374616c6c65645c6e5075626c69634b65790a4c657473456e63727970743a3a507269766174654b6579203c2d2d2057656273697465203a2031294365727469666963617465205369676e696e6720526571756573745c6e53656e64204b65792d7061697220746f206265207369676e65640a4c657473456e6372797074202d2d3e2057656273697465203a2032295369676e656420526571756573742053656e74206261636b2e5c6e416e796f6e65205c6e772f204c657473456e6372797074205075626c69634b6579205c6e63616e207665726966792061757468656e7469636974790a40656e64756d6c"></figure>
+</section>
 </section>
 <section id="http1.1" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> HTTP/1.1</h1>

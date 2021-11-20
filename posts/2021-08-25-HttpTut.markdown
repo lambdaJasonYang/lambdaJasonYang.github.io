@@ -14,10 +14,43 @@ HTTPS linked terms: SSL, Root Authority, Certificate Authority, TLS, 443
 
 # HTTPS Certificate Authority
 
+## Cert confirm identity
+
+We want to talk to a website but how do we are not talking to a faker?  
+A website needs to confirm it's identity using a Cert.   
+But how do we know to trust the Cert?  
+Using Certificate Authorities(CA) like LetsEncrypt
+
+```plantuml
+@startuml
+skinparam shadowing false
+Browser -> Website : Get example.com
+Website --> Browser: ok, here is my SSL cert \ncontaining my publickey\nsigned by LetsEncrypt
+note over Browser
+Use pre-installed LetsEncrypt
+PublicKey in Browser to
+verify the SSL cert signed using
+LetsEncrypt's PrivateKey
+endnote
+Browser -> Website: I trust LetsEncrypt\nTherefore I trust your cert.\nI made a SecretKey \nencrypted it w/ your PublicKey
+note over Website
+Website can reveal 
+the SecretKey 
+by decrypting the message 
+w/ Website's PrivateKey 
+endnote
+Website <-> Browser: Communication w/ SecretKey
+@enduml
+```
+
+## Cert Signing Request
+
   * CA public key is pre-installed in most Client browsers
-  * CA private key: Some lesser website will ask the CA to sign their public-private key pairs to certify authenticity.
+  * CA private key: Every month you may ask let's encrypt to sign your SSL Cert.
 
   Example CA: LetsEncrypt
+
+
 
 
 ```plantuml
