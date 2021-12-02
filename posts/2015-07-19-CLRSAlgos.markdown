@@ -4,7 +4,7 @@ title: CLRS Algos
 tags: mathcs, algorithms
 ---
 
-### Problem Solving Heuristic
+# Problem Solving Heuristic
 
 ```plantuml
 digraph G {
@@ -43,7 +43,19 @@ D1 -> D2;
 
 ```
 
-##### Generative 
+# Recursion vs Tail-recursion
+
+We will not refer to tail-recursion as recursion.  
+tail-recursion can store state and is isomorphic to iterative solutions.  
+
+# Recursion vs DP
+
+Although we can always go from recursion TO DP, they are not the same.  
+
+Problems that require us to FIRST store local optimas work well with DP but not recursion.  
+Recursion has no memory.  
+
+# Generative 
 
 * Typically problems that ask to find all possible combinations that fulfils some constraint or target
 * We create a generative tree of states using a tail recursive function

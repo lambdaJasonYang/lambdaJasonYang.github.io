@@ -2,12 +2,47 @@
 title: Regression and OLS
 tags: mathcs, appliedmath, AI, stats
 ---
+# Abstract
 
-$$Y = X\beta + \epsilon$$
+Goal: Find $\beta$ weight vector that minimizes sum square residual  
 
-Regression is the best fit line that is minimizes some chosen error.
+Method: 
+1. Find inflection(min/max): Solve derivative of Error wrt. weight equal to 0 
+2. Prove that this is a min, not a max: Check 2nd derivative is positive definite(analogous to postive in real numbers)  
 
-Chosen Error: Least Square Residual
+# Reality vs Estimate
 
-Through algebraic manipulation of matrices, we can find a normal form equation that minimizes the Least Square Residual.
+Ideal Model of Reality
+$$\dot{Y} = X\dot{\beta} + \epsilon$$
 
+Estimated Model
+$$Y=X\beta + e$$
+
+$$e \neq \epsilon$$
+
+Conceptually there is no relation between $\epsilon$ and $e$
+
+* $\epsilon$ is random noise.  
+* $e$ is our residual error: vertical distance of datapoint from best-fit line   
+
+> We can **ignore our Ideal Model**  $\dot{Y},\dot{\beta},\epsilon$ because they are simply model of an impossible ideal.  
+
+# Finding best fit
+
+Regression is the best fit line that is minimizes $e$ or residual squared error.
+
+$$Y=X\beta + e$$
+
+$$e=Y-X\beta$$
+
+
+
+## RSS: Residual Sum Squared
+
+Sum of Squared residuals
+
+$$e^Te = (y-X\beta)^T(y-X\beta)$$
+
+$$\frac{\partial e^Te}{\partial\beta}=-2X^Ty+2X^TX\beta = 0$$
+
+$$(X^TX)\beta=X^TY$$

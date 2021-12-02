@@ -11,3 +11,22 @@ The resulting 2 axis PCA-1,PCA-2 are orthogonal
 To interpret a 2d PCA chart, look at how closely the points are to each other in each axis.  
 Two points that are the most different will be diagonally distant (far x distance, far y distance)
 
+# Gradient (Partial Derivative)
+INPUT `f :: R^n -> R`{.hs}  
+OUTPUT Vector of Partial derivatives
+
+$$ {\color{blue} \nabla f(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} )}= \begin{bmatrix} \frac{\partial f}{\partial x_1} \\ \frac{\partial f}{\partial x_2} \\ \frac{\partial f}{\partial x_3} \end{bmatrix}$$
+
+# Jacobian (Matrix Partial Derivative)
+
+INPUT: `f :: R^n -> R^m`{.hs}  
+OUTPUT: `Jacobian(f) :: n by m matrix`{.hs}
+
+$$ f(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} )= \begin{bmatrix} f_1(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}) \\ f_2(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}) \end{bmatrix}$$
+
+$$ \begin{align} Jacobian(f(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} )) &= \begin{bmatrix} \frac{\partial f}{\partial x_1} && \frac{\partial f}{\partial x_2} && \frac{\partial f}{\partial x_3} \end{bmatrix} \\
+&= \begin{bmatrix} ({\color{blue} \nabla f_1(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix})})^T\\ (\nabla f_2(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}))^T \end{bmatrix}\\
+&= \begin{bmatrix} \frac{\partial f_1}{\partial x_1} && \frac{\partial f_1}{\partial x_2} && \frac{\partial f_1}{\partial x_3} \\ \frac{\partial f_2}{\partial x_1} && \frac{\partial f_2}{\partial x_2} && \frac{\partial f_2}{\partial x_3} \\  \end{bmatrix}\\
+\end{align}
+$$
+

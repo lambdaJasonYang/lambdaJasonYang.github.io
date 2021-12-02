@@ -333,16 +333,14 @@ but ERROR: port 8000 being used</p>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">&quot;stylesheet&quot;</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;/lib/railroad/railroad-diagrams.css&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- RAILROAD </span><span class="re">END</span><span class="co"> </span><span class="er">-----------------------------------------</span><span class="co"> --&gt;</span></span></code></pre></div>
-<p>add lines 8-10 to your site.hs</p>
-<div class="sourceCode" id="cb2" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">--add lines 6-8 to your site.hs</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
-<span id="cb2-3"><a href="#cb2-3"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>        <span class="op">...</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a>        match <span class="st">&quot;lib/**&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>            route   idRoute</span>
-<span id="cb2-9"><a href="#cb2-9"></a>            compile copyFileCompiler</span></code></pre></div>
+<div class="sourceCode" id="cb2" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb2-2"><a href="#cb2-2"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>        <span class="op">...</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>        match <span class="st">&quot;lib/**&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>            route   idRoute</span>
+<span id="cb2-8"><a href="#cb2-8"></a>            compile copyFileCompiler</span></code></pre></div>
 <p>Create a lib directory and create a railroad directory within the newly created lib directory.</p>
 <p>Create a file “railroad.js” inside you /lib/railroad directory and copy the contents from <a href="https://raw.githubusercontent.com/tabatkins/railroad-diagrams/gh-pages/railroad.js">this link</a></p>
 <p>Create a file “railroad-diagrams.css” /lib/railroad directory and copy the contents from <a href="https://raw.githubusercontent.com/tabatkins/railroad-diagrams/gh-pages/railroad-diagrams.css">this link</a></p>
@@ -778,6 +776,7 @@ The bash version is .bashrc</p>
 <p>https://www.cl.cam.ac.uk/teaching/1617/L28/materials.html</p>
 <p>https://faculty.math.illinois.edu/~r-ash/</p>
 <p>https://book.hacktricks.xyz/brute-force</p>
+<p>https://quuxplusone.github.io/blog/2020/01/24/openssl-part-1/</p>
 ]]></summary>
 </entry>
 <entry>

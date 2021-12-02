@@ -243,16 +243,41 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'mathbasics'." href="../tags/mathbasics.html">mathbasics</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
     
 </div>
-<section id="fundamental-theorem-of-algebra" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Fundamental Theorem of Algebra</h3>
+<div id="TOC"><ul>
+<li><a href="#fundamental-theorem-of-algebra"><span class="toc-section-number">1</span> Fundamental Theorem of Algebra</a></li>
+<li><a href="#euler"><span class="toc-section-number">2</span> Euler</a>
+<ul>
+<li><a href="#coordinate-systems"><span class="toc-section-number">2.1</span> Coordinate systems</a></li>
+<li><a href="#de-moivre-theorem"><span class="toc-section-number">2.2</span> De Moivre Theorem</a></li>
+<li><a href="#exponent-in-complex-field"><span class="toc-section-number">2.3</span> Exponent in Complex field</a></li>
+</ul></li>
+<li><a href="#functional-identities"><span class="toc-section-number">3</span> Functional identities</a>
+<ul>
+<li><a href="#substitution-method"><span class="toc-section-number">3.1</span> Substitution method</a></li>
+</ul></li>
+<li><a href="#derivatives"><span class="toc-section-number">4</span> Derivatives</a>
+<ul>
+<li><a href="#partial-fractions"><span class="toc-section-number">4.1</span> Partial Fractions</a></li>
+<li><a href="#taylor-series"><span class="toc-section-number">4.2</span> Taylor Series</a></li>
+</ul></li>
+<li><a href="#practical"><span class="toc-section-number">5</span> Practical</a>
+<ul>
+<li><a href="#integral"><span class="toc-section-number">5.1</span> Integral</a></li>
+<li><a href="#helices"><span class="toc-section-number">5.2</span> Helices</a></li>
+</ul></li>
+</ul></div>
+<section id="fundamental-theorem-of-algebra" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Fundamental Theorem of Algebra</h1>
 <ul>
 <li>Complex polynomials(complex coefficients) can be factored in to n factors with n roots that may not be distinct.</li>
 <li>Since reals are subset of complex, implies typical real polynomials can always be factored resulting in real or complex roots.</li>
 <li>Complex numbers have a closure property in factoring</li>
 </ul>
 </section>
-<section id="coordinate-systems" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Coordinate systems</h3>
+<section id="euler" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Euler</h1>
+<section id="coordinate-systems" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Coordinate systems</h2>
 <p>Everything in the table is equal</p>
 <table>
 <colgroup>
@@ -297,8 +322,8 @@
 <p>One can think of all of these as vectors.</p>
 <p>Shorthand notation <span class="math inline">\(rcis\theta = \langle r,\theta \rangle\)</span></p>
 </section>
-<section id="de-moivre-theorem" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> De Moivre Theorem</h3>
+<section id="de-moivre-theorem" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> De Moivre Theorem</h2>
 <p><span class="math inline">\((r\ cis\ \alpha)(s\ cis\ \beta) = (r\cdot s)cis\ (\alpha + \beta)\)</span></p>
 <p>We can derive this by converting polar to geocomplex then multiplying.</p>
 <p><strong>multiplying vectors in polar results in</strong></p>
@@ -326,31 +351,45 @@
 <li>GOOD <span class="math inline">\((r\ cis\ \alpha)(s\ cis\ \beta) = r(cos \alpha + i sin \alpha) \cdot s(cos\beta + i sin \beta) = ...\)</span></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">z</span> <span class="ex">=</span> <span class="fu">Sqrt</span><span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="sc">+</span> <span class="fu">I</span> <span class="sc">*</span> <span class="fu">Sqrt</span><span class="op">[</span><span class="dv">2</span><span class="op">]</span></span></code></pre></div>
-<table style="width:5%;">
-<colgroup>
-<col style="width: 5%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Group of n-th roots of unity</td>
-</tr>
-<tr class="even">
-<td><span class="math display">\[U_n =\{z \in \mathbb{C} | z^n = 1 \}= \{cos\frac{2k\pi}{n}+isin\frac{2k\pi}{n} | k = 1..n-1\}\]</span></td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(\underset{n\rightarrow\infty}{lim}(1+\frac{1}{n})^n = e\)</span></td>
-</tr>
-</tbody>
-</table>
+<p>Group of n-th roots of unity</p>
+<p><span class="math display">\[U_n =\{z \in \mathbb{C} | z^n = 1 \}= \{cos\frac{2k\pi}{n}+isin\frac{2k\pi}{n} | k = 1..n-1\}\]</span></p>
+<p><span class="math inline">\(\underset{n\rightarrow\infty}{lim}(1+\frac{1}{n})^n = e\)</span></p>
 </section>
-<section id="functional-identities" class="level3" data-number="0.0.4">
-<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> Functional identities</h3>
+<section id="exponent-in-complex-field" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> Exponent in Complex field</h2>
+<p>What do imaginary exponents even mean?</p>
+<p><span class="math display">\[a^i = ?\]</span></p>
+<p><strong>First</strong> look at what relates the Imaginary with Reals? <span class="math inline">\(e\)</span></p>
+<p>Proof using derivative of <span class="math inline">\(e^x\)</span> and Taylor series tells us <span class="math inline">\(e^x\)</span> is a series.</p>
+<p><span class="math display">\[ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + ... \]</span></p>
+<ol type="1">
+<li><span class="math inline">\(e^{ix}\)</span> can be expressed as a sum of series as well.<br />
+</li>
+<li>The series can be realigned to sum of 2 series.<br />
+</li>
+<li>These 2 series represent the Taylor expansion of <span class="math inline">\(sin \theta\)</span> and <span class="math inline">\(icos \theta\)</span></li>
+</ol>
+<p><span class="math display">\[ e^{ix} = sin(x) + i cos(x)\]</span></p>
+<p>It is obvious <span class="math inline">\(e^{a+ib} = e^a e^{ib} = e^a (sin(b)+i cos(b))\)</span></p>
+<p><strong>Second</strong> look at what relates the real with <span class="math inline">\(e\)</span>?</p>
+<p><span class="math display">\[a = e^{ln(a)}\]</span></p>
+<p>convert base of power to <span class="math inline">\(e\)</span></p>
+<p><span class="math display">\[\begin{align} a^{(b+ic)} &amp;= e^{ln(a^{(b+ic)})} \\
+&amp;= e^{(b+ic)ln(a)} \\
+&amp;= e^{b\cdot ln(a)}e^{ic\cdot ln(a)} \\
+&amp;=e^{b\cdot ln(a)}[cos(c\cdot ln(a)) + i sin(c\cdot ln(a)) ] \\
+&amp;= a^b[cos(c\cdot ln(a)) + i sin(c\cdot ln(a)) ] \\
+\end{align} \]</span></p>
+</section>
+</section>
+<section id="functional-identities" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Functional identities</h1>
 <p>Imagine if we had a functional identity <span class="math display">\[ \forall a: \forall f : f(a) = 1 \]</span></p>
 <p>The only function that satisfies this is <span class="math inline">\(f(x) = 1\)</span></p>
 <p>Note <span class="math inline">\(\{\forall a: \forall f : f(a) = 1\} \neq \{f(x) = 1\}\)</span></p>
 <p>One is a functional identity and the other is a single function.</p>
-<section id="substitution-method" class="level5" data-number="0.0.4.0.1">
-<h5 data-number="0.0.4.0.1"><span class="header-section-number">0.0.4.0.1</span> Substitution method</h5>
+<section id="substitution-method" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Substitution method</h2>
 <p>Logarithm satisfies <span class="math inline">\(\forall x,y : \forall f:f(x \cdot y) = f(x) + f(y)\)</span></p>
 <ul>
 <li><span class="math inline">\([assume\ \hat{a}]\)</span>
@@ -374,24 +413,22 @@
 <p>Plug back our conclusion back into original functional identity for verification (not shown here).</p>
 <p>Notice <span class="math inline">\(Log(1) = 0\)</span></p>
 <p><span class="math inline">\(f(1) = 0\)</span> is true for any function f that satisfies the identity <span class="math inline">\(f(x \cdot y) = f(x) + f(y)\)</span></p>
-<hr />
 </section>
 </section>
-<section id="derivatives" class="level3" data-number="0.0.5">
-<h3 data-number="0.0.5"><span class="header-section-number">0.0.5</span> Derivatives</h3>
+<section id="derivatives" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Derivatives</h1>
 <p>Derivatives operate on functions</p>
 <p><span class="math inline">\(D(f(x)) + D(g(x)) = D(f+g)(x)\)</span><br />
 <span class="math inline">\(c \cdot D(f)(x) = D(c \cdot f)(x) ,\ given\ constant\  c\in \mathbb{R}\)</span><br />
 Derivative operator is a linear operator</p>
 <p>Functional identity for trig functions <span class="math inline">\(f(x+y) = f(x)g(y) + f(y)g(x)\)</span></p>
-</section>
-<section id="partial-fractions" class="level3" data-number="0.0.6">
-<h3 data-number="0.0.6"><span class="header-section-number">0.0.6</span> Partial Fractions</h3>
+<section id="partial-fractions" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Partial Fractions</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Apart</span><span class="op">[</span>(<span class="dv">6</span> <span class="fu">x</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">12</span> <span class="fu">x</span> <span class="sc">+</span> <span class="dv">14</span>)<span class="sc">/</span>(<span class="fu">x</span><span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span> <span class="fu">x</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="fu">x</span> <span class="sc">+</span> <span class="dv">15</span>)<span class="op">]</span></span></code></pre></div>
 <p><span class="math display">\[\frac{4 (4 x+1)}{7 \left(x^2+3\right)}+\frac{26}{7 (x+5)}\]</span></p>
 </section>
-<section id="taylor-series" class="level3" data-number="0.0.7">
-<h3 data-number="0.0.7"><span class="header-section-number">0.0.7</span> Taylor Series</h3>
+<section id="taylor-series" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> Taylor Series</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Series</span><span class="op">[</span><span class="fu">E</span><span class="sc">^</span>(<span class="fu">I</span><span class="sc">*</span><span class="fu">x</span>)<span class="op">,</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">7</span><span class="op">}]</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Series</span><span class="op">[</span><span class="fu">Cos</span><span class="op">[</span><span class="fu">x</span><span class="op">],</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">7</span><span class="op">}]</span> <span class="sc">+</span> (<span class="fu">I</span><span class="sc">*</span><span class="fu">Series</span><span class="op">[</span><span class="fu">Sin</span><span class="op">[</span><span class="fu">x</span><span class="op">],</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">7</span><span class="op">}]</span>)</span></code></pre></div>
 <p><span class="math display">\[
@@ -406,10 +443,10 @@ i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
    x^7}{5040}+O\left(x^8\right)
 \]</span></p>
 <p><span class="math display">\[e^{ix} = cos(x) + i\cdot sin(x)\]</span> <span class="math display">\[e^{i\pi} + 1 = 0\ when\ x = \pi \]</span></p>
-<hr />
 </section>
-<section id="practical" class="level3" data-number="0.0.8">
-<h3 data-number="0.0.8"><span class="header-section-number">0.0.8</span> Practical</h3>
+</section>
+<section id="practical" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Practical</h1>
 <ul>
 <li>A speed limit is 15mph, a driver moves 40mi in 2 hour. Did the driver ever break the speed limit?
 <ul>
@@ -423,9 +460,8 @@ i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
 <li>To minimize the maximum speed, the driver should move at the same constant speed the whole duration.</li>
 </ul></li>
 </ul>
-</section>
-<section id="integral" class="level3" data-number="0.0.9">
-<h3 data-number="0.0.9"><span class="header-section-number">0.0.9</span> Integral</h3>
+<section id="integral" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Integral</h2>
 <ul>
 <li>Find something x that can be enumerated or indexed.
 <ul>
@@ -448,8 +484,8 @@ i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
 <p>The arrows denote velocity being indexed by time.<br />
 The binary operation multiply is applied to each pair then summed.</p>
 </section>
-<section id="helices" class="level3" data-number="0.0.10">
-<h3 data-number="0.0.10"><span class="header-section-number">0.0.10</span> Helices</h3>
+<section id="helices" class="level2" data-number="5.2">
+<h2 data-number="5.2"><span class="header-section-number">5.2</span> Helices</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r</span> <span class="ex">:=</span> <span class="dv">1</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span> <span class="ex">:=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ParametricPlot3D</span><span class="op">[</span></span>
@@ -461,18 +497,6 @@ The binary operation multiply is applied to each pair then summed.</p>
 <p><img src="\images\BasicMath\helix.svg" /></p>
 <p><span class="math display">\[s(t) = \langle rcos(t),rsin(t),c*t \rangle \]</span> <span class="math display">\[\frac{1}{c} = \# cycles,frequency\]</span> <span class="math display">\[r = radius \]</span></p>
 <hr />
-</section>
-<section id="open-delta-neighborhoods" class="level3" data-number="0.0.11">
-<h3 data-number="0.0.11"><span class="header-section-number">0.0.11</span> Open Delta neighborhoods</h3>
-<p>Neighborhood is a set N.</p>
-<p><span class="math display">\[N(x_0,\delta) = \{x\in\mathbb{R}^n\ |\ \lvert x-x_0 \rvert &lt; \delta \}\]</span></p>
-<ul>
-<li>1-D neigborhood : Interval</li>
-<li>2-D neighborhood: points in circle</li>
-<li>3-D neighborhood: points in ball</li>
-</ul>
-<section id="interior-point---ball-inside-ball" class="level5" data-number="0.0.11.0.1">
-<h5 data-number="0.0.11.0.1"><span class="header-section-number">0.0.11.0.1</span> Interior Point - Ball inside Ball</h5>
 </section>
 </section>
 

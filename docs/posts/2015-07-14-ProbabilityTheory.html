@@ -243,8 +243,80 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'physics'." href="../tags/physics.html">physics</a>
     
 </div>
+<div id="TOC"><ul>
+<li><a href="#terms"><span class="toc-section-number">1</span> Terms</a></li>
+<li><a href="#probability-density-function-pdf"><span class="toc-section-number">2</span> Probability density function (pdf)</a></li>
+<li><a href="#cdf-integrate-pdf"><span class="toc-section-number">3</span> CDF: Integrate PDF</a>
+<ul>
+<li><a href="#cdf"><span class="toc-section-number">3.1</span> CDF</a></li>
+<li><a href="#rule"><span class="toc-section-number">3.2</span> 68-95-99 Rule</a></li>
+</ul></li>
+</ul></div>
 <p><a href="http://www.acsu.buffalo.edu/~adamcunn/probability/probability.html">Probability playground</a></p>
-<p><span class="math display">\[\mu = E[Y] = \sum_Y y\cdot f(y)\]</span></p>
+<section id="terms" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Terms</h1>
+<p><span class="math display">\[P(X=\text{&quot;it will rain today&quot;})\]</span><br />
+<span class="math inline">\(X\)</span> is the random variable<br />
+<span class="math inline">\(\mu\)</span> mu is the mean<br />
+<span class="math inline">\(\sigma\)</span> sigma is std<br />
+<span class="math inline">\(\sigma^2\)</span> sigma squared is variance</p>
+</section>
+<section id="probability-density-function-pdf" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Probability density function (pdf)</h1>
+<p><span class="math display">\[pdf(x;\mu , \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}}\]</span></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#METHOD 1 using scipy library</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>variance <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> np.sqrt(variance)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(mu <span class="op">-</span> <span class="dv">3</span><span class="op">*</span>sigma, mu <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>sigma, <span class="dv">100</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> stats.norm.pdf(x, mu, sigma) <span class="co">#stats lib pdf</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y )</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#METHOD 2 manual calculation</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">0</span> <span class="co">#mean</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> <span class="dv">1</span> <span class="co">#sigma-squared is variance</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>pdf <span class="op">=</span> <span class="kw">lambda</span> x: (<span class="dv">1</span><span class="op">/</span>(np.sqrt(<span class="dv">2</span><span class="op">*</span>np.pi<span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)))<span class="op">*</span>(np.e<span class="op">**</span>((<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>(mu<span class="op">-</span>x)<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span>(sigma<span class="op">**</span><span class="dv">2</span>)))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(mu <span class="op">-</span> <span class="dv">3</span><span class="op">*</span>sigma, mu <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>sigma, <span class="dv">100</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(f,x))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                                        </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="../images/probTheory/pdf.svg" /></p>
+</section>
+<section id="cdf-integrate-pdf" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> CDF: Integrate PDF</h1>
+<p><span class="math display">\[cdf(x;\mu , \sigma^2) = \int_{-\infty}^{x} pdf(x;\mu , \sigma^2) \partial x \]</span></p>
+<section id="cdf" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> CDF</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.integrate <span class="im">as</span> integrate</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cdf <span class="op">=</span> <span class="kw">lambda</span> x: integrate.quad(f,<span class="op">-</span>np.inf,x)[<span class="dv">0</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(mu <span class="op">-</span> <span class="dv">3</span><span class="op">*</span>sigma, mu <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>sigma, <span class="dv">100</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span><span class="bu">list</span>(<span class="bu">map</span>(cdf,x))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y)</span></code></pre></div>
+<p><img src="../images/probTheory/cdf.svg" /></p>
+</section>
+<section id="rule" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> 68-95-99 Rule</h2>
+<p><span class="math display">\[ 68 = \int_{-1\sigma}^{1\sigma}pdf(x;\mu , \sigma^2) \partial x \]</span> <span class="math display">\[ 95 = \int_{-2\sigma}^{2\sigma}pdf(x;\mu , \sigma^2) \partial x \]</span> <span class="math display">\[ 99 = \int_{-3\sigma}^{3\sigma}pdf(x;\mu , \sigma^2) \partial x \]</span></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>std1 <span class="op">=</span> integrate.quad(f,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>std2 <span class="op">=</span> integrate.quad(f,<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>std3 <span class="op">=</span> integrate.quad(f,<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>full <span class="op">=</span> integrate.quad(f,<span class="op">-</span>np.inf,np.inf)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(std1,std2,std3,full)</span></code></pre></div>
+<pre><code>(INTEGRAL         , ERROR-BOUND          )
+(0.682689492137086, 7.579375928402476e-15) 
+(0.9544997361036417, 1.8403560456416157e-11) 
+(0.9973002039367399, 1.1072256503105314e-14) 
+(0.9999999999999997, 1.017819138786878e-08)</code></pre>
+</section>
+</section>
 
         </div>
         <div id="footer">

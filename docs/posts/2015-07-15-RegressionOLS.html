@@ -243,10 +243,39 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'stats'." href="../tags/stats.html">stats</a>
     
 </div>
-<p><span class="math display">\[Y = X\beta + \epsilon\]</span></p>
-<p>Regression is the best fit line that is minimizes some chosen error.</p>
-<p>Chosen Error: Least Square Residual</p>
-<p>Through algebraic manipulation of matrices, we can find a normal form equation that minimizes the Least Square Residual.</p>
+<section id="abstract" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Abstract</h1>
+<p>Goal: Find <span class="math inline">\(\beta\)</span> weight vector that minimizes sum square residual</p>
+<p>Method: 1. Find inflection(min/max): Solve derivative of Error wrt. weight equal to 0 2. Prove that this is a min, not a max: Check 2nd derivative is positive definite(analogous to postive in real numbers)</p>
+</section>
+<section id="reality-vs-estimate" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Reality vs Estimate</h1>
+<p>Ideal Model of Reality <span class="math display">\[\dot{Y} = X\dot{\beta} + \epsilon\]</span></p>
+<p>Estimated Model <span class="math display">\[Y=X\beta + e\]</span></p>
+<p><span class="math display">\[e \neq \epsilon\]</span></p>
+<p>Conceptually there is no relation between <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(e\)</span></p>
+<ul>
+<li><span class="math inline">\(\epsilon\)</span> is random noise.<br />
+</li>
+<li><span class="math inline">\(e\)</span> is our residual error: vertical distance of datapoint from best-fit line</li>
+</ul>
+<blockquote>
+<p>We can <strong>ignore our Ideal Model</strong> <span class="math inline">\(\dot{Y},\dot{\beta},\epsilon\)</span> because they are simply model of an impossible ideal.</p>
+</blockquote>
+</section>
+<section id="finding-best-fit" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Finding best fit</h1>
+<p>Regression is the best fit line that is minimizes <span class="math inline">\(e\)</span> or residual squared error.</p>
+<p><span class="math display">\[Y=X\beta + e\]</span></p>
+<p><span class="math display">\[e=Y-X\beta\]</span></p>
+<section id="rss-residual-sum-squared" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> RSS: Residual Sum Squared</h2>
+<p>Sum of Squared residuals</p>
+<p><span class="math display">\[e^Te = (y-X\beta)^T(y-X\beta)\]</span></p>
+<p><span class="math display">\[\frac{\partial e^Te}{\partial\beta}=-2X^Ty+2X^TX\beta = 0\]</span></p>
+<p><span class="math display">\[(X^TX)\beta=X^TY\]</span></p>
+</section>
+</section>
 
         </div>
         <div id="footer">

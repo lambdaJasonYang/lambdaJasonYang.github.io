@@ -243,11 +243,23 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'algorithms'." href="../tags/algorithms.html">algorithms</a>
     
 </div>
-<section id="problem-solving-heuristic" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Problem Solving Heuristic</h3>
+<section id="problem-solving-heuristic" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Problem Solving Heuristic</h1>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a0a6e6f6465205b72616e6b7365703d302e325d3b0a0a7b72616e6b3d2273616d65223b204131203b2042313b2044313b207d0a7b72616e6b3d2273616d65223b204132203b2041333b2044323b7d0a0a5031205b6c6162656c203d202270726f626c656d225d0a0a4231205b6c6162656c203d2022497465726174697665225d0a4232205b6c6162656c203d20225375626c6973745c6e4c6f6f7020496e76617269616e742049483a5b302e2e695d5c6e7b5b302e2e695d2c6a2e2e6e7d225d0a0a4131205b6c6162656c203d2022526563757273697665225d0a4331205b6c6162656c203d2022537472656e677468656e2070726f626c656d225d0a4431205b6c6162656c203d202247656e65726174697665225d0a4432205b6c6162656c203d20225461696c2d5265632053746174652074726565225d0a0a4132205b6c6162656c203d202253706c69745c6e49482866737448616c663a3a6c697374295c6e494828736e6448616c663a3a6c69737429225d0a0a4133205b6c6162656c203d202241746f6d69635c6e686561643a3a656c656d656e745c6e4948287461696c3a3a6c6973742920225d0a0a0a5031202d3e204131205b6c6162656c3d2244657465726d696e65735c6e4948225d3b0a5031202d3e2042313b0a4131202d3e2041323b0a4131202d3e2041333b0a4131202d3e2043313b0a4331202d3e205031205b6c6162656c3d22537472656e677468656e5c6e49482220636f6e73747261696e743d66616c73655d3b0a4231202d3e2042323b0a0a5031202d3e2044313b0a4431202d3e2044323b0a7d0a"></figure>
-<section id="generative" class="level5" data-number="0.0.1.0.1">
-<h5 data-number="0.0.1.0.1"><span class="header-section-number">0.0.1.0.1</span> Generative</h5>
+</section>
+<section id="recursion-vs-tail-recursion" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Recursion vs Tail-recursion</h1>
+<p>We will not refer to tail-recursion as recursion.<br />
+tail-recursion can store state and is isomorphic to iterative solutions.</p>
+</section>
+<section id="recursion-vs-dp" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Recursion vs DP</h1>
+<p>Although we can always go from recursion TO DP, they are not the same.</p>
+<p>Problems that require us to FIRST store local optimas work well with DP but not recursion.<br />
+Recursion has no memory.</p>
+</section>
+<section id="generative" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Generative</h1>
 <ul>
 <li>Typically problems that ask to find all possible combinations that fulfils some constraint or target</li>
 <li>We create a generative tree of states using a tail recursive function</li>
@@ -261,10 +273,8 @@
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="co">#backtrack</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> mylist:</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        func(target<span class="op">-</span>i,buildsol<span class="op">+</span>[i],mylist...)</span></code></pre></div>
-</section>
-</section>
-<section id="examples" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Examples</h3>
+<section id="examples" class="level3" data-number="4.0.1">
+<h3 data-number="4.0.1"><span class="header-section-number">4.0.1</span> Examples</h3>
 <ul>
 <li>problem: Sorting =&gt; IH: Sorted
 <ul>
@@ -346,8 +356,8 @@
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>printLCS(b,X,<span class="bu">len</span>(X),<span class="bu">len</span>(Y))</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; BCBA</span></span></code></pre></div>
-<section id="insertion-sort" class="level5" data-number="0.0.2.0.1">
-<h5 data-number="0.0.2.0.1"><span class="header-section-number">0.0.2.0.1</span> Insertion Sort</h5>
+<section id="insertion-sort" class="level5" data-number="4.0.1.0.1">
+<h5 data-number="4.0.1.0.1"><span class="header-section-number">4.0.1.0.1</span> Insertion Sort</h5>
 <ul>
 <li>Sublist [{0..i,j}…]</li>
 <li>IH : [0..i] is Sorted sublist
@@ -414,8 +424,8 @@
 <span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#where is the problem?</span></span></code></pre></div>
 </section>
 </section>
-<section id="hashtable-and-hash-function-ch-11" class="level2" data-number="0.1">
-<h2 data-number="0.1"><span class="header-section-number">0.1</span> Hashtable and Hash function Ch 11</h2>
+<section id="hashtable-and-hash-function-ch-11" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Hashtable and Hash function Ch 11</h2>
 <p>Hash function exploits the fast look time of an array</p>
 <p><span class="math display">\[ \{k_1,k_2,k_3...\} \overset{hash}{\rightarrow} h(k) \rightarrow Val \]</span></p>
 <ul>
@@ -436,6 +446,7 @@
 <li>O(1) lookup is due to this</li>
 </ul></li>
 </ul>
+</section>
 </section>
 
         </div>

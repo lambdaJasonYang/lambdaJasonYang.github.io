@@ -243,6 +243,15 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
     
 </div>
+<div id="TOC"><ul>
+<li><a href="#direct-sum"><span class="toc-section-number">0.1</span> Direct Sum</a></li>
+<li><a href="#direct-sum-of-matrices"><span class="toc-section-number">0.2</span> Direct Sum of matrices</a>
+<ul>
+<li><a href="#example"><span class="toc-section-number">0.2.1</span> Example</a></li>
+</ul></li>
+<li><a href="#linear-map"><span class="toc-section-number">1</span> Linear Map</a></li>
+<li><a href="#storytime"><span class="toc-section-number">2</span> StoryTime</a></li>
+</ul></div>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6672616d6520224162656c69616e2047726f7570227b0a202020206672616d652047726f75707b0a20202020202020206672616d65204d6f6e6f6964207b0a2020202020202020202020206672616d652053656d6967726f7570207b0a2020202020202020202020206f626a6563742022536574204d22206173205365740a2020202020202020202020206f626a656374202242696e617279204f7065726174696f6e222061732042696e0a2020202020202020202020207d0a2020202020202020202020206f626a65637420226964656e7469747920656c656d656e7422206173204f6e650a2020202020202020202020204f6e65202d2d3e205365740a20202020202020207d0a20202020202020206f626a6563742022696e766572736520656c656d656e74732220617320496e760a2020202020202020496e76202d2d3e205365740a202020207d0a202020206f626a6563742022436f6d6d756e617469746976652220617320436f6d6d0a20202020436f6d6d202d2d3e2042696e0a7d0a0a40656e64756d6c6d6c"></figure>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print vector_space</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vector_space</span> <span class="er">(</span><span class="ex">R:</span> Type u<span class="kw">)</span> <span class="kw">(</span><span class="ex">M:</span> Type v<span class="kw">)</span> <span class="ex">[field</span> R] [add_comm_group M] := semimodule R M</span></code></pre></div>
@@ -255,8 +264,8 @@
 </ul></li>
 </ul>
 <p>```</p>
-<section id="direct-sum" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Direct Sum</h4>
+<section id="direct-sum" class="level2" data-number="0.1">
+<h2 data-number="0.1"><span class="header-section-number">0.1</span> Direct Sum</h2>
 <blockquote>
 <p>Find two unrelated spaces in your universe and slam them together</p>
 </blockquote>
@@ -267,8 +276,9 @@
 </ol>
 <p>take an element from each subspace in <span class="math inline">\(\{X,Y,Z...\}\)</span> then add them.<br />
 <span class="math display">\[\oplus \{X,Y,Z...\} = \{x + y + ... | x \in X, y \in Y ...\}\]</span></p>
-<section id="direct-sum-of-matrices" class="level5" data-number="0.0.0.1.1">
-<h5 data-number="0.0.0.1.1"><span class="header-section-number">0.0.0.1.1</span> Direct Sum of matrices</h5>
+</section>
+<section id="direct-sum-of-matrices" class="level2" data-number="0.2">
+<h2 data-number="0.2"><span class="header-section-number">0.2</span> Direct Sum of matrices</h2>
 <p>Given that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices themselves.<br />
 Note that <span class="math inline">\(0\)</span> stands for zero matrices of varying sizes.<br />
 Block matrix notation of direct sum:</p>
@@ -284,14 +294,48 @@ B &amp; 0 \\
 <ul>
 <li>Direct sum is commutative up to isomorphism</li>
 </ul>
-</section>
-<section id="example" class="level5" data-number="0.0.0.1.2">
-<h5 data-number="0.0.0.1.2"><span class="header-section-number">0.0.0.1.2</span> Example</h5>
+<section id="example" class="level3" data-number="0.2.1">
+<h3 data-number="0.2.1"><span class="header-section-number">0.2.1</span> Example</h3>
 <p><span class="math inline">\(\{(x,0) | x\in \mathbb{R}\} \oplus \{(0,y) | x\in \mathbb{R}\}=\mathbb{R}^2\)</span> or written as<br />
 <span class="math inline">\((\mathbb{R},0) \oplus (0,\mathbb{R})\)</span><br />
 but some might even do notational abuse and just write<br />
 <span class="math inline">\(\mathbb{R} \oplus \mathbb{R}\)</span></p>
 </section>
+</section>
+<section id="linear-map" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Linear Map</h1>
+<p><span class="math display">\[ T \in \mathcal{L}(V,W) \]</span></p>
+<p><code class="sourceCode haskell"><span class="dt">T</span><span class="ot"> ::</span> <span class="dt">V</span> <span class="ot">-&gt;</span> <span class="dt">W</span></code></p>
+</section>
+<section id="storytime" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> StoryTime</h1>
+<p>Vector space of cars Field of colors Add means “mix”</p>
+<p>Red car mix Blue car can be exchanged for a purple Car and vice-versa.</p>
+<p>Vector space of cars equivalent to saying a magic rainbow brush that can paint any car.</p>
+<ul>
+<li>Basis vectorspace: cars of fundamental colors.<br />
+</li>
+<li>Zero-Vector: The no-car when painted with any color still results in the no-car.</li>
+<li>Inverse: Green car mix Red car makes the no-car. Green is known as anti-red.</li>
+</ul>
+<p>Linear Map <code class="sourceCode haskell"><span class="dt">T</span><span class="ot"> ::</span> <span class="dt">Cars</span> <span class="ot">-&gt;</span> <span class="dt">Trucks</span></code><br />
+We can exchange our painted cars for painted trucks.</p>
+<p>T is linear map if</p>
+<ul>
+<li>we can trade a red car for a red truck, blue car blue truck, etc.<br />
+</li>
+<li>we can trade “red car mix blue car” for a “purple truck”</li>
+</ul>
+<p>Proof: Dim Range + Dim Null</p>
+<ul>
+<li>red car trades for purple truck</li>
+<li>yellow car trade for purple truck</li>
+<li>red car mix anti-yellow car trades for no-truck.</li>
+<li>Null space = red mix anti-yellow car</li>
+<li>Range = purple truck</li>
+</ul>
+<p>Notice how the 2 cars collapse into the 1 purple truck in the range<br />
+is given back through the 1 “red mix anti-yellow car” in the null space</p>
 </section>
 
         </div>

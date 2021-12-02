@@ -1,6 +1,7 @@
 ---
 title: Abstract Linear Algebra
 tags: mathcs, appliedmath
+toc: y
 ---
 
 ```plantuml
@@ -39,7 +40,7 @@ vector space is a
 
 ```
 
-#### Direct Sum
+## Direct Sum
 
 > Find two unrelated spaces in your universe and slam them together 
 
@@ -51,7 +52,7 @@ Given some vector space $S$, we choose some subspaces $\{X,Y,Z...\}$
 take an element from each subspace in $\{X,Y,Z...\}$ then add them.  
 $$\oplus \{X,Y,Z...\} = \{x + y + ... | x \in X, y \in Y ...\}$$ 
 
-##### Direct Sum of matrices
+## Direct Sum of matrices
 
 Given that $A$ and $B$ are matrices themselves.  
 Note that $0$ stands for zero matrices of varying sizes.  
@@ -71,7 +72,7 @@ $$ A \oplus B \cong B \oplus A $$
 
 * Direct sum is commutative up to isomorphism
 
-##### Example
+### Example
 
 $\{(x,0) | x\in \mathbb{R}\} \oplus \{(0,y) | x\in \mathbb{R}\}=\mathbb{R}^2$ or written as   
 $(\mathbb{R},0) \oplus (0,\mathbb{R})$   
@@ -80,4 +81,42 @@ $\mathbb{R} \oplus \mathbb{R}$
 
 
 
+# Linear Map
 
+$$ T \in \mathcal{L}(V,W) $$
+
+`T :: V -> W`{.hs}
+
+# StoryTime
+
+Vector space of cars
+Field of colors
+Add means "mix"
+  
+Red car mix Blue car can be exchanged for a purple Car and vice-versa.   
+
+Vector space of cars equivalent to saying a magic rainbow brush that can paint any car.  
+
+* Basis vectorspace: cars of fundamental colors.  
+* Zero-Vector: The no-car when painted with any color still results in the no-car. 
+* Inverse: Green car mix Red car makes the no-car. Green is known as anti-red.
+
+Linear Map `T :: Cars -> Trucks`{.hs}  
+We can exchange our painted cars for painted trucks.  
+
+T is linear map if 
+
+* we can trade a red car for a red truck, blue car blue truck, etc.  
+* we can trade "red car mix blue car" for a "purple truck"
+
+
+Proof: Dim Range + Dim Null
+
+* red car trades for purple truck
+* yellow car trade for purple truck
+* red car mix anti-yellow car trades for no-truck.
+* Null space = red mix anti-yellow car
+* Range = purple truck
+
+Notice how the 2 cars collapse into the 1 purple truck in the range  
+is given back through the 1 "red mix anti-yellow car" in the null space

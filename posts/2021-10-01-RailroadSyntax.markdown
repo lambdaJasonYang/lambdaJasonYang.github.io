@@ -37,10 +37,8 @@ add the script to your templates/default.html
 
 ```
 
-add lines 8-10 to your site.hs
 
 ```{.hs .numberLines filename=site.hs}
---add lines 6-8 to your site.hs
 main :: IO ()
 main = do
     hakyllWith config $ do

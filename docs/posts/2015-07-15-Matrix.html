@@ -248,6 +248,23 @@ Multiple features can be reduced to 2 axis, PCA-1, PCA-2<br />
 The resulting 2 axis PCA-1,PCA-2 are orthogonal</p>
 <p>To interpret a 2d PCA chart, look at how closely the points are to each other in each axis.<br />
 Two points that are the most different will be diagonally distant (far x distance, far y distance)</p>
+<section id="gradient-partial-derivative" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Gradient (Partial Derivative)</h1>
+<p>INPUT <code class="sourceCode haskell"><span class="ot">f ::</span> <span class="dt">R</span><span class="op">^</span>n <span class="ot">-&gt;</span> <span class="dt">R</span></code><br />
+OUTPUT Vector of Partial derivatives</p>
+<p><span class="math display">\[ {\color{blue} \nabla f(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} )}= \begin{bmatrix} \frac{\partial f}{\partial x_1} \\ \frac{\partial f}{\partial x_2} \\ \frac{\partial f}{\partial x_3} \end{bmatrix}\]</span></p>
+</section>
+<section id="jacobian-matrix-partial-derivative" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Jacobian (Matrix Partial Derivative)</h1>
+<p>INPUT: <code class="sourceCode haskell"><span class="ot">f ::</span> <span class="dt">R</span><span class="op">^</span>n <span class="ot">-&gt;</span> <span class="dt">R</span><span class="op">^</span>m</code><br />
+OUTPUT: <code class="sourceCode haskell"><span class="dt">Jacobian</span>(f)<span class="ot"> ::</span> n by m matrix</code></p>
+<p><span class="math display">\[ f(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} )= \begin{bmatrix} f_1(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}) \\ f_2(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}) \end{bmatrix}\]</span></p>
+<p><span class="math display">\[ \begin{align} Jacobian(f(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} )) &amp;= \begin{bmatrix} \frac{\partial f}{\partial x_1} &amp;&amp; \frac{\partial f}{\partial x_2} &amp;&amp; \frac{\partial f}{\partial x_3} \end{bmatrix} \\
+&amp;= \begin{bmatrix} ({\color{blue} \nabla f_1(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix})})^T\\ (\nabla f_2(\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}))^T \end{bmatrix}\\
+&amp;= \begin{bmatrix} \frac{\partial f_1}{\partial x_1} &amp;&amp; \frac{\partial f_1}{\partial x_2} &amp;&amp; \frac{\partial f_1}{\partial x_3} \\ \frac{\partial f_2}{\partial x_1} &amp;&amp; \frac{\partial f_2}{\partial x_2} &amp;&amp; \frac{\partial f_2}{\partial x_3} \\  \end{bmatrix}\\
+\end{align}
+\]</span></p>
+</section>
 
         </div>
         <div id="footer">

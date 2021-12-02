@@ -1,16 +1,19 @@
 ---
 title: Euler, Complex and Imaginary
 tags: mathcs, mathbasics, appliedmath
+toc: y
 ---
 
 
-### Fundamental Theorem of Algebra 
+# Fundamental Theorem of Algebra 
 
 * Complex polynomials(complex coefficients) can be factored in to n factors with n roots that may not be distinct.
 * Since reals are subset of complex, implies typical real polynomials can always be factored resulting in real or complex roots.
 * Complex numbers have a closure property in factoring
   
-### Coordinate systems
+# Euler 
+
+## Coordinate systems
 
 Everything in the table is equal
 
@@ -37,7 +40,7 @@ One can think of all of these as vectors.
 
 Shorthand notation $rcis\theta = \langle r,\theta \rangle$
 
-### De Moivre Theorem  
+## De Moivre Theorem  
 
 $(r\ cis\ \alpha)(s\ cis\ \beta) = (r\cdot s)cis\ (\alpha + \beta)$
 
@@ -74,18 +77,50 @@ z = Sqrt[2] + I * Sqrt[2]
 
 ```
 
----
 Group of n-th roots of unity
 
 $$U_n =\{z \in \mathbb{C} | z^n = 1 \}= \{cos\frac{2k\pi}{n}+isin\frac{2k\pi}{n} | k = 1..n-1\}$$
 
-
 $\underset{n\rightarrow\infty}{lim}(1+\frac{1}{n})^n = e$ 
 
 
----
+## Exponent in Complex field
 
-### Functional identities
+What do imaginary exponents even mean?
+
+$$a^i = ?$$
+
+**First** look at what relates the Imaginary with Reals? $e$  
+
+Proof using derivative of $e^x$ and Taylor series tells us $e^x$ is a series.  
+
+$$ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + ... $$
+
+1. $e^{ix}$ can be expressed as a sum of series as well.  
+2. The series can be realigned to sum of 2 series.  
+3. These 2 series represent the Taylor expansion of $sin \theta$ and $icos \theta$
+
+$$ e^{ix} = sin(x) + i cos(x)$$
+
+It is obvious $e^{a+ib} = e^a e^{ib} = e^a (sin(b)+i cos(b))$
+
+**Second** look at what relates the real with $e$?
+
+$$a = e^{ln(a)}$$
+
+convert base of power to $e$
+
+$$\begin{align} a^{(b+ic)} &= e^{ln(a^{(b+ic)})} \\
+&= e^{(b+ic)ln(a)} \\
+&= e^{b\cdot ln(a)}e^{ic\cdot ln(a)} \\
+&=e^{b\cdot ln(a)}[cos(c\cdot ln(a)) + i sin(c\cdot ln(a)) ] \\
+&= a^b[cos(c\cdot ln(a)) + i sin(c\cdot ln(a)) ] \\
+\end{align} $$ 
+
+
+
+
+# Functional identities
 
 Imagine if we had a functional identity
 $$ \forall a: \forall f : f(a) = 1 $$
@@ -97,7 +132,7 @@ Note $\{\forall a: \forall f : f(a) = 1\} \neq \{f(x) = 1\}$
 One is a functional identity and the other is a single function.
 
 
-##### Substitution method
+## Substitution method
 
 Logarithm satisfies
 $\forall x,y : \forall f:f(x \cdot y) = f(x) + f(y)$
@@ -122,10 +157,9 @@ $f(1) = 0$ is true for any function f that satisfies the identity $f(x \cdot y) 
 
 
 
----
 
 
-### Derivatives
+# Derivatives
 
 Derivatives operate on functions
 
@@ -137,14 +171,14 @@ Derivative operator is a linear operator
 Functional identity for trig functions
 $f(x+y) = f(x)g(y) + f(y)g(x)$
 
-### Partial Fractions
+## Partial Fractions
 
 ```mathematica
 Apart[(6 x^2 + 12 x + 14)/(x^3 + 5 x^2 + 3 x + 15)]
 ```
 $$\frac{4 (4 x+1)}{7 \left(x^2+3\right)}+\frac{26}{7 (x+5)}$$
 
-### Taylor Series 
+## Taylor Series 
 
 ```mathematica
 Series[E^(I*x), {x, 0, 7}]
@@ -168,9 +202,8 @@ $$e^{ix} = cos(x) + i\cdot sin(x)$$
 $$e^{i\pi} + 1 = 0\ when\ x = \pi $$
 
 
----
 
-### Practical
+# Practical
 
 * A speed limit is 15mph, a driver moves 40mi in 2 hour. Did the driver ever break the speed limit?
   * Draw a graph, $\frac{dx}{dt}\ vs\ t$, the area or integral must always be 40mi.
@@ -180,7 +213,7 @@ $$e^{i\pi} + 1 = 0\ when\ x = \pi $$
     * The graph is like a bubble, push down on one area(slow down in speed) results in push up on other area(speed up)
   * To minimize the maximum speed, the driver should move at the same constant speed the whole duration.
 
-### Integral
+## Integral
 * Find something x that can be enumerated or indexed.
   * velocity can be indexed by time
   * stockprice can be indexed by volume
@@ -200,7 +233,7 @@ Examples: pairs (x,f(x),x*fx) =  {(time,velocity,distance),(volume,stock price,m
 The arrows denote velocity being indexed by time.  
 The binary operation multiply is applied to each pair then summed.
 
-### Helices
+## Helices
 
 ```mathematica
 r := 1
@@ -220,20 +253,6 @@ $$r = radius $$
 
 
 ---
-
-
-
-### Open Delta neighborhoods
-
-Neighborhood is a set N.
-
-$$N(x_0,\delta) = \{x\in\mathbb{R}^n\ |\ \lvert x-x_0 \rvert < \delta \}$$
-
-* 1-D neigborhood : Interval
-* 2-D neighborhood: points in circle
-* 3-D neighborhood: points in ball
-
-##### Interior Point - Ball inside Ball 
 
 
 

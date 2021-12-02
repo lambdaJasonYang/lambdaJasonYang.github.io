@@ -1,0 +1,70 @@
+---
+title: Category theory Notes
+tags: mathcs, puremath, categorytheory
+---
+
+
+| Cat | object | morphism |
+| --- | --- | --- |
+| Vect | vector space | linear maps |
+| Groups | unit | group homomorphisms |
+| Mfd(manifolds) | smooth manifolds | Continuous Maps |
+| Top | Topological Spaces | Continuous Maps |
+| Rel | Sets | Binary relations |
+| Meas | Measurable Spaces | measurable maps |
+|Par | sets | partial functions |
+
+# Basics
+
+## Isomorphisms
+
+* Set: bijective maps
+* Mfd(manifolds):  diffeomorphisms
+* Top : homeomorphisms which are invertible continuous map with continuous inverses.
+
+## Monomorphisms
+
+* Set: Injective maps
+* Top: Injective continuous maps
+* FVect(finite-dimension Vect): injective linear map
+* Group: injective group homeomorphisms
+
+## Split monomorphisms
+
+* Set: Every injective function has a left inverse. Therefore every monomorphism is split.
+* FVect: Every injective linear map has a left inverse. Therefore every monomorphism is split.
+
+* Top: 
+
+> Generally, monomorphisms are not conceptually related to splits even though it looks the case in Set and FVect. General case is Top
+
+## Epimorphism
+
+* Set: Surjective map
+* FVect: Surjective continuous linear map
+* Algebra: inclusion
+  * Natural number is Included in Integers
+
+## Split Epimorphism
+
+
+
+# Functors
+
+## Cocycle
+
+Functors are just 1-cocycles
+
+# Yoneda Embedding Theorem
+
+## Matrix Example
+
+A matrix transformation through row operation is a natural transformation between presheaves.  
+
+Matrix transformation by row operation is isomorphic to a matrix
+
+# PreSheaf
+
+A functor that takes a dual morphism to set category.
+
+$$f^{OP} \Rightarrow Set$$

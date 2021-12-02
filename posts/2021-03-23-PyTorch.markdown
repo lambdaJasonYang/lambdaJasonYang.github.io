@@ -7,18 +7,18 @@ tags: AI, mathcs, prog, python
 ML Simplified:
 $$Data Input \overset{linear}{\Rightarrow} s \overset{non-linear}{\Rightarrow} z$$
 
-### Libraries
+# Libraries
 
 ```python
 import torch
 import torch.nn as nn
-from res.plot_lib import set_default, show_scatterplot, plot_bases
+#from res.plot_lib import set_default, show_scatterplot, plot_bases
 #from matplotlib.pyplot import plot, title, axis
 import matplotlib.pyplot as plt
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 ```
 
-### Prelude
+# Prelude
 Drawing basis
 ```python
 mbases = torch.cat((torch.zeros(2, 2), torch.eye(2))).to("cpu")  
@@ -37,7 +37,7 @@ def plot_bases(bases, width=0.04):
 ```
 
 
-### Basics
+# Basics
 
 
 
@@ -72,7 +72,7 @@ BLUE: Extract 2 respective colors 0.1 and 0.2 for the two points.
 
 ---
 
-### Transformations
+# Transformations
 
 Above we had a 3d vector representing (x,y,color)  
 Now we will plot a 2d vector and have the color represent a static label of x-axis. (x,y,color=x)   
@@ -95,7 +95,13 @@ plt.show()
 
 ![](/images/pytorchimg/Figure_2.svg)
 
-#### SVD
+
+Notice that 99% of the points fall within an imaginary circle of radius of 3 units.  
+Remember in statistics **68-95-99 rule**  (assuming normal dist )
+The 3 unit radius circle = 3 standard deviations containing 99% of points  
+Therefore 1 unit radius circle = 1 standard deviation
+
+# SVD
 
 ```python
 Weight = torch.randn(2,2).to("cpu")
@@ -149,12 +155,6 @@ with torch.no_grad():
     Output = model(dataset)
 
 ```
-### Non-linear Transformations
-
-
----
-###  Autodifferentiation
-
 
 ---
 
@@ -171,3 +171,16 @@ We are computing dot product of input vector against the weight vector. If these
 
 Imagine in 3d space, we  have a 1d weight vector. The set of points that are orthogonal to this vector make up a 2d hyperplane.
 $hyperplane = \{x \in \mathbb{R}^2 | w\cdot x = 0\}$
+
+---
+
+# Autograd
+
+```python
+import torch
+# Create a 2x2 tensor with gradient-accumulation capabilities
+x = torch.tensor([[1, 2], [3, 4]], requires_grad=True, dtype=torch.float32)
+print(x)
+# tensor([[1., 2.],
+#         [3., 4.]], requires_grad=True)
+```
