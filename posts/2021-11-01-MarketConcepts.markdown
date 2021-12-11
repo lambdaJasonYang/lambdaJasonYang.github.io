@@ -1,6 +1,6 @@
 ---
 title: Market Concepts
-tags: mathcs, puremath, recursion
+tags: musings, misc
 toc: yes
 ---
 

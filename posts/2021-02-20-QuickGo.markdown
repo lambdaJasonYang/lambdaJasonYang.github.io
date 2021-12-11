@@ -5,7 +5,7 @@ tags: prog, QuickCode
 
 * Go func pass-by-value
 
-### Running or Building
+# Running or Building
 
 ```bash
 go build main.go
@@ -16,7 +16,7 @@ go build main.go
 go run main.go
 ```
 
-### typical go file
+# typical go file
 
 ```go
 package main
@@ -26,7 +26,7 @@ import (
 func main(){...}
 ```
 
-### Some surprises
+# Some surprises
 
 for loops and if statements conditions do not have parenthesis.
 
@@ -34,7 +34,7 @@ for loops and if statements conditions do not have parenthesis.
 * `for(int i=0;i<5;i++){..}`{.C} $\Rightarrow$ `for i:=0;i<5;i++ {..}`{.go}
 
 
-### := vs =
+## := vs =
 
 `var bleh int = 3`{.go} equivalent `bleh := 3`{.go} 
 
@@ -49,7 +49,7 @@ var bleh int
 bleh = 2
 ```
 
-## Use slice(list) instead of arrays
+# Use slice(list) instead of arrays
 
 I will just call slice a list due to preference
 
@@ -79,7 +79,7 @@ y == nil //true
 
 `append`{.go} returns a new array or slice.
 
-#### Slicing lists 
+## Slicing lists 
 
 * same as in Python **BUT sublists SHARE THE SAME MEMORY**
 
@@ -102,7 +102,7 @@ copy(y,x[1:3])
 ```
 
 
-#### Strings
+# Strings
 
  * A string is a sequence of UTF-8 **code-points**
 * Go strings are immutable meaning when sliced, they automatically make copy; they behave like pythonic strings
@@ -125,7 +125,7 @@ var bb []byte = []byte(s[0:3])
 fmt.Printf("%s\n", string(bb)) // output: Hel
 ```
 
-#### Hashmap aka Dictionaries
+# Hashmap aka Dictionaries
 
 ```go
 var exMap1 map[string]int // value: nil
@@ -141,7 +141,7 @@ val, ok := exMap2["even"]
 exMap3 := make(map[string][]int,4)
 ```
 
-#### Functions
+# Functions
 
 ```go
 func typicalfunction() string{
@@ -152,7 +152,7 @@ var mylambda = func() string { return "this is lambda string func" }
 fmt.Println(mylambda())
 ```
 
-#### Struct and API
+# Struct and API
 
 ```go
 type person struct{
@@ -165,7 +165,7 @@ bob := person{
   age: 2
 }
 ```
-##### Anonymous Struct
+## Anonymous Struct
 
 ```go
 blob := struct {
@@ -180,7 +180,7 @@ blob := struct {
 
 ---
 
-#### Scoping 
+# Scoping 
 
 ```{.go filename="BAD_Shadowing.go"}
 func main(){
@@ -198,7 +198,7 @@ go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
 go vet
 ```
 
-### Learn by doing
+# Learn by doing
 
 
 ```go
@@ -231,7 +231,7 @@ gofunc Hello(name string) string {
 }
 ```
 
-### loops
+# loops
 
 
 
@@ -254,7 +254,7 @@ func main() {
 
 ```
 
-### Switch statement
+# Switch statement
 
 ```go
 if i == 0 {
@@ -276,7 +276,7 @@ switch i {
   default: fmt.Println("default")
 }
 ```
-### struct
+# struct
 
 ```go
 
@@ -312,7 +312,7 @@ type Shape interface {
 ```
 
 
-### Pointer
+# Pointer
 Just as in our "Quick C" , 
 
 * think of passing pointers in args as passing addresses. 

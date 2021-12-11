@@ -4,7 +4,7 @@ title: Algorithm Problem Sets
 tags: mathcs, algorithms
 ---
 
-### Documenting some random algorithmic problems:
+# Documenting some random algorithmic problems:
 
 ---
 
@@ -67,7 +67,7 @@ D--C
 
 > Take Tree T as an input. For every node C, output the shortest path from C to the closest leaf.
 
-### TwoSum
+# TwoSum
 
 ```bash
 #Psuedocode
@@ -186,4 +186,4 @@ UC1 --> UC2 : "1) hashmap hit\n Line 20 True"
 ---
 
 
-### Container with most water
+# Container with most water

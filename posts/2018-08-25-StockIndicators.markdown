@@ -1,6 +1,6 @@
 ---
 title: Trading Indicators
-tags: musings
+tags: musings, misc
 ---
 
 * Related: Related fundamentals

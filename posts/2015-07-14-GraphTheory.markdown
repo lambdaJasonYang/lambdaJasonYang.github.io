@@ -1,9 +1,10 @@
 ---
 title: Graph theory
 tags: mathcs, algorithms
+toc: y
 ---
 
-### Cuts
+# Cuts
 
 Analogous to the partitions of set. 
 In fact, when forming possible cuts, only the elements of the set matter.  
@@ -21,7 +22,7 @@ $$Cut_B=\{b0,b1,b2,b3\}$$
 ---
 
 
-##### Undirected Graph 
+# Undirected Graph 
 
 ```plantuml
 digraph G {
@@ -60,7 +61,7 @@ $${\color{red}\text{Cut-Set(A,B)}}=\{e \in edges\ |\ e\ is\ {\color{red}RED}\}$$
 
 ---
 
-##### Directed Graph
+# Directed Graph
 
 ```plantuml
 @startuml
@@ -106,7 +107,7 @@ $${\color{purple}\text{Cut-Set(B,A)}}=\{e \in edges\ |\ e\ is\ {\color{purple}PU
   * Most efficient way to divide a network assuming equal weight
 
 
-### MST
+# MST
 
 Obviously to Span a tree, one must choose at least 1 edge of a Cut-Set.
 
@@ -115,9 +116,9 @@ Obviously to Span a tree, one must choose at least 1 edge of a Cut-Set.
 The minimum element in a Cut-Set is the edge contained in all MST.  
 
 
-### BFS
+## BFS
 
-##### Adjacency list
+### Adjacency list
 
 ```plantuml
 @startuml

@@ -243,21 +243,21 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'logic'." href="../tags/logic.html">logic</a>
     
 </div>
-<section id="conjunction" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Conjunction</h4>
+<section id="conjunction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Conjunction</h1>
 <p><span class="math display">\[\frac{\Gamma \vdash M : A \qquad \Gamma \vdash N : B }{ \Gamma \vdash &lt;M,N&gt; : A \land B}\]</span></p>
 <p><span class="math display">\[\frac{\Gamma \vdash M : A \land B}{\Gamma \vdash fst\ M : A}\]</span></p>
 </section>
-<section id="implication" class="level4" data-number="0.0.0.2">
-<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Implication</h4>
+<section id="implication" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Implication</h1>
 <p><span class="math display">\[ \frac{\Gamma, u: A \vdash M:B}{\Gamma \vdash (\lambda u: A. M): A \rightarrow B}\]</span></p>
 <p><span class="math display">\[\frac{\Gamma \vdash M: A \rightarrow B \qquad \Gamma \vdash N: A}{\Gamma \vdash M\ N : B}\]</span></p>
 <hr />
 <p><span class="math display">\[\cfrac{[A]^u}{\cfrac{...}{\cfrac{B}{A \rightarrow B}}}\]</span></p>
 <p><span class="math display">\[\cfrac{A \rightarrow B \qquad A}{B}\]</span></p>
 </section>
-<section id="disjunction" class="level4" data-number="0.0.0.3">
-<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> Disjunction</h4>
+<section id="disjunction" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Disjunction</h1>
 <p><span class="math display">\[\cfrac{\Gamma \vdash M : A}{\Gamma \vdash inl\ M  : A \lor B}\]</span></p>
 <p><span class="math display">\[\cfrac{\Gamma \vdash M : A \lor B \qquad \Gamma,u:A \vdash p : C \qquad \Gamma,w:B \vdash q: C}{\Gamma \vdash case\ M\ of\ (inl\ u \Rightarrow p\ |\ inr\ w \Rightarrow q): C}\]</span></p>
 <hr />

@@ -250,7 +250,7 @@
 <li>JSX: the JSX or virtual DOM it returns.</li>
 </ul></li>
 </ul>
-<p>The moment we enter a new state, 0.1 and 0.2 is what happens first.</p>
+<p>The moment we enter a new state, 0.1 and 0.2 starts first.</p>
 <p><strong><em>localenv behaves asynchronously</em></strong> Don’t trust your own ordering of ESPECIALLY WHEN INITAIZLING JSON variables because your INIT may depend on side effects it may mix side effects.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>App <span class="op">=</span> ({data}) <span class="kw">=&gt;</span> {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">//data outputs some modified garbage data </span></span>
@@ -269,7 +269,8 @@
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> data <span class="op">=</span> <span class="fu">fetch</span>(<span class="op">...</span>)</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Initializing a json “optionVar” but initialization depends on a sideeffect function. We expect data to output clean data but the “SideEffectFunc” already touched and corrupted our data. <strong>Server side on our console it looks like clean data BUT WHEN RENDERED USING chrome inspect we see data is actually modified</strong></p>
+<p>Initializing a json “optionVar” but initialization depends on a sideeffect function. We expect data to output clean data but the “SideEffectFunc” corrupted our data.<br />
+<strong>Server side on our terminal outputs misleading clean data BUT WHEN RENDERED USING chrome inspect we see that the data is actually modified</strong></p>
 <ul>
 <li>DO NOT USE STATEFUL VARIABLES OR SIDE EFFECTS IN localenv</li>
 <li>DO NOT MODIFY THE “props” IN localenv</li>

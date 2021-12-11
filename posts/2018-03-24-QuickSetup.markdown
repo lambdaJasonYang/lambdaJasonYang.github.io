@@ -3,7 +3,7 @@ title: Quick Setup
 tags: prog, C, QuickCode, OS
 ---
 
-### Haskell
+# Haskell
 
 ```plantuml
 	
@@ -30,7 +30,7 @@ Creates a new folder helloworld at current directory
 stack new helloworld new-template
 ```
 
-##### running
+## running
 ```bash
 stack run ./app/Main.hs
 ```

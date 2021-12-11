@@ -1,6 +1,6 @@
 ---
 title: Econ terms
-tags: musings
+tags: musings, misc
 ---
 
 Oct. 1 to Sept. 30
@@ -22,20 +22,7 @@ Federal reserve chair saying "Inflation" will hurt equities
 
 Treasury bond price inverse to Yield
 
-* Full green arrow means when A goes up, B goes Up
-* Half red-green means  when A goes down, B goes Up.
-* Half green-red means  when A goes up, B goes down.
-* Note (red-green) and (green-red) are interchangeable.
 
-Composition of arrows : multiply weight of edges 
- 
-* red-green arrows = (-1) weight edges 
-* Full green arrow = (1) weight edges
-* Example: how does A affect C?
-  * A --red-green-> B --red-green-> C
-  * A ---(-1)---> B ---(-1)---> C
-  * A ---(1)---> C
-  * A ---green---> C
 
 Red nodes indicate news events or one-off catalysts.
 

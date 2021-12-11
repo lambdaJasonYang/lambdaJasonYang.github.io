@@ -1,6 +1,7 @@
 ---
 title: Quick Next
 tags: prog, QuickCode, cloud, frontend
+toc: y
 ---
 
 ```{.bash .numberLines}
@@ -100,18 +101,18 @@ export default StyledButton;
 ```
 
 
-#### _document
+# _document
 
 taken from [Official Nextjs example](https://github.com/mui-org/material-ui/blob/master/examples/nextjs/pages/_document.js)
 
-#### _app
+# _app
 
 taken from [Official Nextjs example](https://github.com/mui-org/material-ui/blob/master/examples/nextjs/pages/_app.js)
 
-#### 
+ 
 
 
-#### File structure determines routing
+# File structure determines routing
 
 Page filename in nextjs like "landingpage.js" must be lowercase letters  
 React Component filename in nextjs must be Uppercase like "MyCustomButton".
@@ -172,7 +173,7 @@ Modules will
  * theme.tsx
 
  
-##### Capturing the [carID] and [modelID] as variables
+# Capturing the [carID] and [modelID] as variables
 
 ```javascript
 const router = useRouter()
@@ -180,21 +181,21 @@ const {carID, modelID} = router.query()
 console.log(`the car is {carID} and model {modelID}`)
 ```
 
----
+# ServerSide Render
 
-#### getStaticProps - SSG
+## getStaticProps - SSG
 
 * getStaticProps only runs serverside even though you may have written it on a clientside file like index.js
 * getStaticProps is only allowed in a page file, NOT in a component file.
 * getStaticProps only runs on build time, in dev mode we see it being rebuilt every request which may cause confusion.
 
-##### 2 types of SSG
+### 2 types of SSG
 
 | getStaticProps() | getStaticPaths() |
 | --- | --- |
 | calls on build | calls on first request |
 
-#### Why SSG can be bad?
+### Why SSG can be bad?
 
 
 SSG at build time and SSG at first request both are affected by stale data.
@@ -205,7 +206,7 @@ This means if more than one update in db we have to rebuild the ENTIRE site.
 
 ---
 
-#### Solution to Stale SSG - ISR
+## Solution to Stale SSG - ISR
 
 * Solution ISR which basically means the specific static page ONLY will be rebuilt, 
 * If your clientside code auto refreshes every 10 sec, the data will be relatively current. 

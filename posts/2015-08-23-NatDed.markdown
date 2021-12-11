@@ -5,7 +5,7 @@ tags: mathcs, logic
 
 
 
-#### Conjunction
+# Conjunction
 
 $$\frac{\Gamma \vdash M : A \qquad \Gamma \vdash N : B }{ \Gamma \vdash <M,N> : A \land B}$$
 
@@ -14,7 +14,7 @@ $$\frac{\Gamma \vdash M : A \land B}{\Gamma \vdash fst\ M : A}$$
 
 
 
-#### Implication
+# Implication
 
 $$ \frac{\Gamma, u: A \vdash M:B}{\Gamma \vdash (\lambda u: A. M): A \rightarrow B}$$
 
@@ -26,7 +26,7 @@ $$\cfrac{[A]^u}{\cfrac{...}{\cfrac{B}{A \rightarrow B}}}$$
 
 $$\cfrac{A \rightarrow B \qquad A}{B}$$
 
-#### Disjunction
+# Disjunction
 
 $$\cfrac{\Gamma \vdash M : A}{\Gamma \vdash inl\ M  : A \lor B}$$
 

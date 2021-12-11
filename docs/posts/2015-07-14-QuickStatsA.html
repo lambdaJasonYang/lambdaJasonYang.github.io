@@ -243,6 +243,20 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'stats'." href="../tags/stats.html">stats</a>
     
 </div>
+<div id="TOC"><ul>
+<li><a href="#terms"><span class="toc-section-number">1</span> Terms</a></li>
+<li><a href="#tests-are-like-proof-by-contradiction."><span class="toc-section-number">2</span> Tests are like proof by contradiction.</a>
+<ul>
+<li><a href="#p-value"><span class="toc-section-number">2.1</span> P-value</a></li>
+</ul></li>
+<li><a href="#chi-squared-test"><span class="toc-section-number">3</span> Chi-Squared test</a></li>
+<li><a href="#f-test"><span class="toc-section-number">4</span> F-test</a></li>
+<li><a href="#z-test"><span class="toc-section-number">5</span> Z-test</a></li>
+<li><a href="#t-distribution"><span class="toc-section-number">6</span> T-distribution</a>
+<ul>
+<li><a href="#degree-of-freedom"><span class="toc-section-number">6.0.1</span> degree of freedom</a></li>
+</ul></li>
+</ul></div>
 <blockquote>
 <p>All men are [EQUAL] in innocence until proven otherwise</p>
 </blockquote>
@@ -253,8 +267,15 @@
 <li>Failing a Proof by Contradiction Doesn’t Imply our Assumption is True</li>
 <li>Failing a test with high p-value Doesn’t Imply our Null(=) is True</li>
 </ul>
-<section id="tests-are-like-proof-by-contradiction." class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Tests are like proof by contradiction.</h3>
+<section id="terms" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Terms</h1>
+<p><span class="math display">\[P(X=\text{&quot;it will rain today&quot;})\]</span><br />
+<span class="math inline">\(X\)</span> is the random variable<br />
+<span class="math inline">\(\mu\)</span> mu is the mean<br />
+<span class="math inline">\(\sigma\)</span> sigma is std (z-score = sigma) <span class="math inline">\(\sigma^2\)</span> sigma squared is variance. Variance is a measure of how dispersed the data is in absolute measure.</p>
+</section>
+<section id="tests-are-like-proof-by-contradiction." class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Tests are like proof by contradiction.</h1>
 <ol type="1">
 <li><p>Null hypothesis is our assumption. <span class="math inline">\([T_1 = T_2]^{null}\)</span></p></li>
 <li><p>If p-value is less than alpha, we have a proof by contradiction.</p></li>
@@ -263,9 +284,27 @@ thus proving <span class="math inline">\(T_1 \neq T_2\)</span></p></li>
 </ol>
 <p><span class="math display">\[\cfrac{\cfrac{[T_1 = T_2]^{null}}{\cfrac{..p &lt; 0.05..}{\bot}}}{T_1 \neq T_2}\]</span></p>
 <p>alpha or 0.05 is Type 2 error.</p>
+<p>Another interpretation: <span class="math inline">\([T_1 - T_2 = 0]^{null} \overset{?}{\Rightarrow} T_1 - T_2 \neq 0\)</span><br />
+This looks similar to the T-test for linear regression <span class="math inline">\([\beta = 0]^{null} \overset{?}{\Rightarrow} \beta \neq 0\)</span></p>
 <ul>
 <li>p-value is a measure of “if we assumed null hypothesis is true,how surprised are you at your empirical observation[data set]”</li>
 </ul>
+<section id="p-value" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> P-value</h2>
+<p>t-score=2.8 p-value=0.006</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">A</span><span class="ot"> ::</span> population</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">B</span><span class="ot"> ::</span> population</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ot">x ::</span> sample</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ot">y ::</span> sample</span></code></pre></div>
+<p>Given 2 sets of populations A,B<br />
+We perform a random sampling and observe sample subsets of population A which is x and population B which is y.</p>
+<p><span class="math inline">\(x \subseteq A\)</span><br />
+<span class="math inline">\(y \subseteq B\)</span></p>
+<blockquote>
+<p>Assuming that the population A and B are equal, random sampling of pairs (x,y) taken from populations A and B which is our observations, would result in a t-score that is at least 2.8 with a probability of 0.6%</p>
+</blockquote>
+<p><span class="math display">\[ P( tscore(x,y) \geq 2.8 | A = B) = 0.6% \]</span></p>
+<p>note the t-score reflect difference between sample means: <span class="math inline">\(\bar{x} - \bar{y}\)</span></p>
 <p>P-value does not show you probability of two groups being equal. <span class="math inline">\(\xcancel{pvalue = P(T_1 = T_2)}\)</span></p>
 <p><span class="math display">\[pvalue = P(D|H)\ \text{where H is null hypothesis}\]</span></p>
 <ul>
@@ -295,15 +334,37 @@ We find there is a {p-value} chance that we see our empirically observed dataset
 </blockquote>
 <p><span class="math display">\[P(H|D) = \frac{P(H)P(D|H)}{P(H)P(D|H)+P(\lnot H)P(D|\lnot H)}\]</span></p>
 </section>
-<section id="chi-squared-test" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Chi-Squared test</h3>
+</section>
+<section id="chi-squared-test" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Chi-Squared test</h1>
 <p>INPUT: function that maps alphabet to frequency, <span class="math inline">\(f_1, f_2\)</span><br />
 Notice both the Domain(Alphabet) and CoDomain(Naturals) are discrete aka Countable.</p>
 <p>OUTPUT: <span class="math inline">\(f_1 \overset{?}{=} f_2\)</span></p>
 <p>Example:<br />
 Chi-Square test on Cesar Cipher,</p>
 <p>ANALYZE:<br />
-<span class="math inline">\(ChiSquared = 0 \Rightarrow f_1 = f_2\)</span> $ChiSquared $</p>
+<span class="math inline">\(ChiSquared = 0 \Rightarrow f_1 = f_2\)</span> <span class="math inline">\(ChiSquared \propto\)</span></p>
+</section>
+<section id="f-test" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> F-test</h1>
+</section>
+<section id="z-test" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Z-test</h1>
+<p><span class="math display">\[ z-score = \sigma = stddev \]</span></p>
+</section>
+<section id="t-distribution" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> T-distribution</h1>
+<ul>
+<li>T-dist is a probability dist like a normal-dist but bigger tails
+<ul>
+<li>infinite degree of freedom result in T-dist = normal-dist</li>
+</ul></li>
+<li>smaller degree of freedoms imply bigger tails</li>
+<li>Can be useful to model returns with fat fails</li>
+</ul>
+<section id="degree-of-freedom" class="level3" data-number="6.0.1">
+<h3 data-number="6.0.1"><span class="header-section-number">6.0.1</span> degree of freedom</h3>
+</section>
 </section>
 
         </div>

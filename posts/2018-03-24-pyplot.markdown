@@ -6,6 +6,8 @@ tags: prog, python, AI
 ![](/images/pyimage/pyplot.svg)
 
 
+# plt
+
 ``` {.python .numberLines}
 import matplotlib.pyplot as plt
 import numpy as np
@@ -16,6 +18,31 @@ plt.xlabel("my x-axis")
 plt.ylabel("y")
 plt.show()
 ```
+
+# single subplots()
+
+Everytime we need to plot we must reinstantiate object with plt.subplots()
+
+```python
+fig, ax = plt.subplots()
+ax.plot(...) 
+plt.show() 
+
+fig, ax = plt.subplots() 
+ax.plot(...)
+plt.show()
+```
+
+
+```python
+fig, ax = plt.subplots()
+ax.set_xlabel("sigma aka Std")
+ax.set_ylabel("Prob")
+ax.plot(..)
+plt.show()
+```
+
+# multiplot subplot
 
 ``` python
 fig,ax = plt.subplots(2,2)
@@ -31,7 +58,9 @@ plt.imshow(painting[:,::-1]) #mirror image in x direction
 
 ```
 
-### subplots quirk - axes can be: non-array, 1D, 2D
+
+
+# subplots quirk - axes can be: non-array, 1D, 2D
 axes parameter is usually a 2d array `ax[2,3].plot(arr)`{.python}
 
 When using subplots for (1,1) which is 1 graph, axes parmeter is not an array of subplots but a single plot `ax.plot(arr)`{.python}

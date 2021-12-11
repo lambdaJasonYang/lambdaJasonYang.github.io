@@ -1,6 +1,7 @@
 ---
 title: Dependencies, Arrows and Confusion
 tags: mathcs, puremath, recursion
+toc: y
 ---
 
 * AST
@@ -11,7 +12,7 @@ tags: mathcs, puremath, recursion
 * Math
   * Function Map (Black)
     
-#### Syntax Dependency are AST in FP
+# Syntax Dependency are AST in FP
 
 
 ```python
@@ -41,9 +42,9 @@ Therefore plus does not have an object dependency diagram.
 
 ---
 
-### OO
 
-#### Semantic Dependency
+
+# Semantic Dependency
 
 Arguments to functions are NOT semantic dependencies even though they are syntax dependencies.
 
@@ -119,35 +120,9 @@ digraph G {
 WRONG because this is a pure function, meaning Domain will never mutate.
 
 
-#### Semantic Modification
-
-
-```C
-void plus(&x,&y,&z):
-    z = x + y
-```
-
-```plantuml
-digraph G {
-    rankdir = LR;
-    plus -> z [color=purple];
-}
-```
-**Purple arrows = Semantic Modification**
-
-**Semantic Modification Test** vs Semantic Dependency
-
-  * **The target does not depend on the modifier, aka the target can still exist if the modifier is gone**
-    * "z" does not semantically depend on plus.  
-    * "z" will still exist even if "plus" does not exist 
- 
-
-Tidbit: Passing x,y by reference is same as pass-by-value if we don't modify the values.  
-`void plus(&x,&y,&z)`{.C} is effectively the same as `void plus(x,y,&z)`{.C} 
-
 ---
 
-#### Arrays , Function Map vs Dependency Duality misconception
+## Arrays , Function Map vs Dependency Duality misconception
 
 > An array is simply a function.  
 OO Objects can be modeled as functions.
@@ -177,7 +152,7 @@ Or more precisely there is no point in showing semantic dependencies.
 
 ---
 
-#### Functional method to simulate OO objects
+## Functional method to simulate OO objects
 
 ```C
 Record_A bobby{name:"bob",age:3}
@@ -202,7 +177,7 @@ Notice no semantic dependency. This is the reason FP doesn't require dependency 
 
 ---
 
-##### Comparing with OO version
+### Comparing with OO version
 
 * Notice in OO, we wouldn't see the entire Domain, Nat and String but the objects age and name.
 * The objects age and name would also be inside the object A
@@ -244,9 +219,47 @@ digraph G{
 }
 ```
 
----
+# Read/Write arrow
 
-#### Pointers
+## Write-To
+
+```C
+void plus(&x,&y,&z):
+    z = x + y
+```
+
+```plantuml
+digraph G {
+    rankdir = LR;
+    plus -> z [color=purple];
+}
+```
+**Purple arrows = Write-To**
+
+**Write-To Test** vs Semantic Dependency
+
+  * **The target does not depend on the modifier, aka the target can still exist if the modifier is gone**
+    * "z" does not semantically depend on plus.  
+    * "z" will still exist even if "plus" does not exist 
+ 
+
+Tidbit: Passing x,y by reference is same as pass-by-value if we don't modify the values.  
+`void plus(&x,&y,&z)`{.C} is effectively the same as `void plus(x,y,&z)`{.C} 
+
+#### := is a Meta Write-To
+
+```C
+x := 5
+```
+
+## Read To
+
+```C
+n = 5
+f = lambda x : print x
+```
+
+## Pointers
 
 > Everything in memory is just one big array  
 Arrays are just functions  
@@ -265,6 +278,52 @@ Value Depends on Address, we have to check **does Address have the possibility o
 Mutation includes object creation.  
 Addresses are isomorphic to variable names.  
 So whenever we initialize a new variable, we are causing a mutation. So Yes.
+
+```plantuml
+@startuml
+digraph g {
+graph [
+rankdir = "LR"
+];
+node [
+fontsize = "16"
+shape = "ellipse"
+];
+edge [
+];
+"node0" [
+label = "<f0> 0x10ba8 (int y)| <f1>23"
+shape = "record"
+];
+"node1" [
+label = "<f0> 0xf7fc (string p)| <f1> 'hello' "
+shape = "record"
+];
+
+"node3" [
+label = "<f0> 0x9g3c (int* x)| <f1> 0x10ba8 | <f2> 23"
+shape = "record"
+];
+
+
+"node2" [
+label = "<f0> Addr (Variable)| Value "
+shape = "record"
+];
+
+"node5" [
+label = "<f0> Ptr Addr (Variable)| Target Addr | Target Value "
+shape = "record"
+];
+
+"node3"-> "node0" [label="depends" id=1 color=red]
+
+}
+@enduml
+
+```
+
+A pointer can semantically modify the object it points to but it is not dependent on the object it points to.
 
 ```plantuml
 digraph G {
@@ -296,7 +355,7 @@ digraph G {
 * Pointer can modify Address (purple)
   * Mutated Address propagates change to Value 
 
-#### Linked Lists, recursive dependency
+## Linked Lists, recursive dependency
 
 ```C
 class linkedlist{
@@ -311,9 +370,14 @@ digraph G {
     subgraph clusterA {
         LinkedList [shape=plaintext]
         subgraph clusterB{
-            B [label="*LinkedList" shape=plaintext]
+            B [label="*pointer" shape=plaintext]
             
         }
+    }
+
+    subgraph clusterB{
+        LinkedList2 [label=LinkedList shape=plaintext]
+        null [shape=rectangle]
     }
 }
 ```

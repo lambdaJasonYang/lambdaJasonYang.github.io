@@ -11,7 +11,7 @@ tags: mathcs, puremath
   * This allows to use the min function
 * $\mathbb{Q}$ : $\frac{p}{q}$ where p,q are Integers
 
-##### Dedekind cuts
+# Dedekind cuts
 
 * `Dedekind_cuts := (A,B) :: (Partition(Q),Partition(Q))`{.haskell}
   * $A,B \subseteq \mathbb{Q},\ A,B \neq \emptyset$
@@ -26,16 +26,16 @@ A real number is a Dedekind cut.
 A real number is represented by a partition of $\mathbb{Q}$.
 
 
-##### Cauchy Sequence
+# Cauchy Sequence
 
 $\underset{n \rightarrow \infty}{lim}a_n=b$
 
 
-##### Cauchy Condition
+# Cauchy Condition
 
 
 
-##### Inner product
+# Inner product
 
 Inner product on a vector space V = Operation on a pair of vectors in V
 
@@ -45,7 +45,7 @@ All inner products define a norm but not all norms are inner products.
 
 ---
 
-### Topology
+## Topology
 
 ##### Metric Space
 

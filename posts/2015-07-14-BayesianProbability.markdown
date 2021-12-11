@@ -1,12 +1,12 @@
 ---
 title: Bayesian Probability
-tags: mathcs, appliedmath, physics
+tags: mathcs, appliedmath, stats
 ---
 
 [Probability playground](http://www.acsu.buffalo.edu/~adamcunn/probability/probability.html)
 
 
-##### Logic Analogy
+# Logic Analogy
 
 $$P(B | A) \cdot P(A) = P(A \land B)$$
 
@@ -19,7 +19,7 @@ $$ A \Rightarrow B, A \vdash A \land B $$
 | --- | --- | --- | --- |
 | $A \Rightarrow B$ | $A$ | $\vdash$ | $A \land B$ |
 
-##### Developer Analogy
+# Developer Analogy
 One can see conditional probabilities in terms of **states**  
 
 1. State 1: $P(A)$ [prior]
@@ -33,7 +33,7 @@ We call State 1 our **prior** and the
 conditional probability or final state **post-erior**
 
 
-##### New Interpretation
+# My Interpretation
 
 
 
@@ -103,7 +103,7 @@ compound=true
 @enduml
 ```
 
-##### Misconceptions
+# Misconceptions
 
 **Multiplying 2 priors $P(A)P(B)$ typically is a dead end.**  
 **We need the conditional probability to understand the relationship between 2 priors**
@@ -140,12 +140,12 @@ We cannot Overshoot the prior condition of the conditional probability.
 Example is fueling $P(B|A)$ with $P(A \land C)$ which overshoots the condition of requiring only $P(A)$. WRONG!
 
 
-##### Another logic example
+# Another logic example
 
 $$P(B|A)P(A) + P(B| \lnot A)P(\lnot A)$$
 $$ (A \land B) \lor (A \land \lnot B) \vdash A $$
 
-#### Chain rule
+## Chain rule
 
 $$\begin{aligned} P(A \land B \land C \land D) &= P(A | B \land C \land D) \cdot P(B \land C \land D) \\ &= P(A | B \land C \land D) \cdot P(B | C \land D) \cdot P(C \land D) \\ &= P(A | B \land C \land D) \cdot P(B | C \land D) \cdot P(C | D) \cdot P(D) \end{aligned}$$
 

@@ -7,7 +7,7 @@ tags: prog, QuickCode, cloud, frontend
   * localenv: local environment's variable,hooks,functions 
   * JSX: the JSX or virtual DOM it returns.   
 
-The moment we enter a new state, 0.1 and 0.2 is what happens first.
+The moment we enter a new state, 0.1 and 0.2 starts first.
 
 ***localenv behaves asynchronously*** Don't trust your own ordering of ESPECIALLY WHEN INITAIZLING JSON variables because your INIT may depend on side effects it may mix side effects.
 ```javascript
@@ -31,8 +31,8 @@ export async func getStaticProps(context){
 ```
 
 Initializing a json "optionVar" but initialization depends on a sideeffect function.
-We expect data to output clean data but the "SideEffectFunc" already touched and corrupted our data.
-**Server side on our console it looks like clean data BUT WHEN RENDERED USING chrome inspect we see data is actually modified**
+We expect data to output clean data but the "SideEffectFunc" corrupted our data.  
+**Server side on our terminal outputs misleading clean data BUT WHEN RENDERED USING chrome inspect we see that the data is actually modified**
 
 * DO NOT USE STATEFUL VARIABLES OR SIDE EFFECTS IN localenv
 * DO NOT MODIFY THE "props" IN localenv

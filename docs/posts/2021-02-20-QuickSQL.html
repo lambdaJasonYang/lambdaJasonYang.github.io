@@ -243,13 +243,26 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>
     
 </div>
+<div id="TOC"><ul>
+<li><a href="#quick-theory"><span class="toc-section-number">1</span> Quick Theory</a></li>
+<li><a href="#syntax"><span class="toc-section-number">2</span> Syntax</a></li>
+<li><a href="#joins"><span class="toc-section-number">3</span> JOINS</a></li>
+<li><a href="#normalization"><span class="toc-section-number">4</span> Normalization</a>
+<ul>
+<li><a href="#nf---remove-redundent-groups"><span class="toc-section-number">4.1</span> 1NF - Remove redundent Groups</a></li>
+<li><a href="#nf---eliminate-repeats"><span class="toc-section-number">4.2</span> 2NF - Eliminate Repeats</a></li>
+<li><a href="#nf---move-out-cols-not-dependent-on-key"><span class="toc-section-number">4.3</span> 3NF - Move out Cols not dependent on Key</a></li>
+<li><a href="#nf"><span class="toc-section-number">4.4</span> 4NF</a></li>
+</ul></li>
+<li><a href="#entity-relation"><span class="toc-section-number">5</span> Entity Relation</a></li>
+</ul></div>
 <div class="sourceCode" id="cb1" data-filename="buildtable.sql"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> bleh (<span class="kw">id</span> <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, name TEXT, age <span class="dt">INTEGER</span>);</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> bleh (name,age) <span class="kw">VALUES</span> (<span class="st">'bob'</span>,<span class="dv">30</span>);</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> bleh (name,age) <span class="kw">VALUES</span> (<span class="st">'rex'</span>,<span class="dv">2</span>);</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>.<span class="kw">mode</span> <span class="kw">column</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>.headers <span class="kw">on</span></span></code></pre></div>
-<section id="quick-theory" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Quick Theory</h3>
+<section id="quick-theory" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Quick Theory</h1>
 <p>Tables are represented as relations <span class="math inline">\((A\times B\times C)\)</span><br />
 <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span> are the columns of the table</p>
 <table>
@@ -277,35 +290,55 @@
 </tbody>
 </table>
 </section>
-<section id="syntax" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Syntax</h3>
+<section id="syntax" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Syntax</h1>
 <pre class="rroad"><code>Diagram(Stack(Optional(Sequence(Terminal('WITH','#sql-with'),OneOrMore(Sequence(NonTerminal('name'),'AS','(',NonTerminal('select','#sql-select'),')'),',')),'skip'),Sequence(Terminal('SELECT','#sql-select'),Optional('DISTINCT','skip'),Choice(0,'*',OneOrMore(Choice(0,Sequence(NonTerminal('column'),Optional(Sequence('AS',NonTerminal('output_name')))),Sequence(NonTerminal('expression','#sql-valueexpr'),Sequence('AS',NonTerminal('output_name')))),',')),Terminal('FROM','#sql-from'),OneOrMore(Choice(0,Sequence(NonTerminal('table_name'),Optional(Sequence('AS',NonTerminal('alias')))),Sequence('(',NonTerminal('select'),')',Sequence('AS',NonTerminal('alias')))),',')),OneOrMore(Choice(0,Skip(),Sequence(Choice(0,Sequence(',',Comment('oldsyntaxforcrossjoin')),Sequence(Choice(0,'CROSS','NATURAL'),'JOIN'),Sequence(Choice(0,Sequence(Optional('INNER'),'JOIN'),Sequence(Choice(0,'LEFT','RIGHT','FULL'),Optional('OUTER'),'JOIN')),Choice(0,Sequence('ON',NonTerminal('condition')),Sequence('USING','(',OneOrMore(NonTerminal('join_column'),','),')'),Sequence('NATURAL')))),Choice(0,Sequence(NonTerminal('table_name'),Optional(Sequence('AS',NonTerminal('alias')))),Sequence('(',NonTerminal('select'),')',Sequence('AS',NonTerminal('alias'))))))),Sequence(Optional(Sequence(Terminal('WHERE','#sql-where'),NonTerminal('condition')),'skip'),Optional(Sequence(Terminal('GROUPBY','#sql-groupby'),NonTerminal('expression','#sql-valueexpr')),'skip'),Optional(Sequence(Terminal('HAVING','#sql-having'),NonTerminal('condition')),'skip')),Sequence(Optional(Sequence(Choice(0,'UNION','INTERSECT','EXCEPT'),Choice(0,Skip(),'DISTINCT','ALL'),NonTerminal('select')),'skip'),Optional(Sequence(Terminal('ORDERBY','#sql-orderby'),OneOrMore(Sequence(NonTerminal('expression','#sql-valueexpr'),Choice(0,'ASC','DESC')),',')),'skip')),Sequence(Optional(Sequence(Terminal('LIMIT','#sql-limit'),Choice(0,NonTerminal('count'),'ALL')),'skip'),Optional(Sequence(Terminal('OFFSET','#sql-limit'),NonTerminal('start'),Optional('ROWS')),'skip')),Sequence(Optional(Sequence(Terminal('FETCH FIRST','#sql-limit'),NonTerminal('count'),Optional('ROWS'),'ONLY'),'skip'))))</code></pre>
 <p><a href="http://dbis-uibk.github.io/relax/help">ReLaX</a></p>
 </section>
-<section id="joins" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> JOINS</h3>
+<section id="joins" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> JOINS</h1>
 <p>TableA has 3 cols<br />
 TableB has 7 cols</p>
 <p>TableA Join TableB, we end up with 3+7 cols</p>
 <p>Left Join , 3 cols</p>
 </section>
-<section id="normalization" class="level2" data-number="0.1">
-<h2 data-number="0.1"><span class="header-section-number">0.1</span> Normalization</h2>
-<section id="nf---remove-redundent-groups" class="level3" data-number="0.1.1">
-<h3 data-number="0.1.1"><span class="header-section-number">0.1.1</span> 1NF - Remove redundent Groups</h3>
+<section id="normalization" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Normalization</h1>
+<section id="nf---remove-redundent-groups" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> 1NF - Remove redundent Groups</h2>
 <p>make separate table for each set of related attr</p>
 </section>
-<section id="nf---eliminate-repeats" class="level3" data-number="0.1.2">
-<h3 data-number="0.1.2"><span class="header-section-number">0.1.2</span> 2NF - Eliminate Repeats</h3>
+<section id="nf---eliminate-repeats" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> 2NF - Eliminate Repeats</h2>
 <p>Some value repeats multiple times.<br />
 Collapse the dependency into a new table.</p>
 </section>
-<section id="nf---move-out-cols-not-dependent-on-key" class="level3" data-number="0.1.3">
-<h3 data-number="0.1.3"><span class="header-section-number">0.1.3</span> 3NF - Move out Cols not dependent on Key</h3>
+<section id="nf---move-out-cols-not-dependent-on-key" class="level2" data-number="4.3">
+<h2 data-number="4.3"><span class="header-section-number">4.3</span> 3NF - Move out Cols not dependent on Key</h2>
 </section>
-<section id="nf" class="level3" data-number="0.1.4">
-<h3 data-number="0.1.4"><span class="header-section-number">0.1.4</span> 4NF</h3>
+<section id="nf" class="level2" data-number="4.4">
+<h2 data-number="4.4"><span class="header-section-number">4.4</span> 4NF</h2>
 </section>
+</section>
+<section id="entity-relation" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Entity Relation</h1>
+<p><img src="https://i.stack.imgur.com/XixbQ.jpg" /></p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a456e746974793031207d7c2d2d7c7c20456e7469747930320a456e746974793033207d6f2d2d6f7c20456e7469747930340a456e746974793035207c7c2d2d6f7b20456e7469747930360a456e746974793037207c6f2d2d7c7c20456e7469747930380a0a656e7469747920456e7469747931317b0a202a20757365725f6964203a20494e544547455220504b0a7d0a656e7469747920456e7469747931327b0a202a20706f73745f6964203a205445585420504b0a7d0a0a456e7469747931313a3a757365725f6964207d7c2d2d7c7c20456e7469747931323a3a706f73745f69640a40656e64756d6c"></figure>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">@startuml</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Entity01</span> }<span class="kw">|</span><span class="ex">--</span><span class="kw">||</span> <span class="ex">Entity02</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Entity03</span> }o--o<span class="kw">|</span> <span class="ex">Entity04</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Entity05</span> <span class="kw">||</span><span class="ex">--o{</span> Entity06</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Entity07</span> <span class="kw">|</span><span class="ex">o--</span><span class="kw">||</span> <span class="ex">Entity08</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">entity</span> Entity11{</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">*</span> user_id : INTEGER PK</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">entity</span> Entity12{</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">*</span> post_id : TEXT PK</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Entity11::user_id</span> }<span class="kw">|</span><span class="ex">--</span><span class="kw">||</span> <span class="ex">Entity12::post_id</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ex">@enduml</span></span></code></pre></div>
 </section>
 
         </div>

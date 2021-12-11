@@ -5,7 +5,7 @@ tags: mathcs, physics
 
 >   A mole is just a number like pi
 
-## VB Theory vs MO Theory
+# VB Theory vs MO Theory
 
 Atomic means single atom, Molecule means multiple combined atoms
 
@@ -19,7 +19,7 @@ Atomic means single atom, Molecule means multiple combined atoms
   * Molecules consist of Atomic Orbitals and the INTERSECTION of Atomic orbitals classified   
     {Sigma-bond, Pi-Bond}
 
-## MO Theory
+# MO Theory
 
 Atomic orbitals combine to form Molecular Orbitals .  
 Linear combination of atomic orbitals(LCAO) is used to calculate MO.

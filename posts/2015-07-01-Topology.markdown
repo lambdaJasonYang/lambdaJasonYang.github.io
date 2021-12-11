@@ -13,7 +13,46 @@ $$N(x_0,\delta) = \{x\in\mathbb{R}^n\ |\ \lvert x-x_0 \rvert < \delta \}$$
 * 2-D neighborhood: points in circle
 * 3-D neighborhood: points in ball
 
-##### Interior Point - Ball inside Ball 
+# Interior Point - Ball inside Ball 
 
 
 
+
+`Metric_Space := (M,dist) :: (Set,binary_operation)`{.haskell}
+
+
+Fields of knowledge as Metric Spaces (M,d)
+
+* Metric Space of Proofs in Math  
+$(M,d) := (math,dist_{math})$
+* Metric Space of Reactions in Chemistry  
+$(M,d) := (chem,dist_{chem})$
+
+Mapping metric spaces of knowledge AKA analogies  
+
+* Analogies as a mapping between Metric Spaces of Knowledge
+  * "Reagents is-to Reaction" as "Antecedents is-to Theorem"
+  * $dist_{chem}(reagents,reaction) \approx dist_{math}(antecedents,theorem)$
+
+    
+
+# Limit aka Limit point
+
+* Given Metric Space $(M,d)$
+* $S \subseteq M$
+* p is a limit of S iff $\exists p_n :: sequence$ s.t. $p_n converges to p$
+
+
+# Open Set
+
+Let A = (0,0)
+OpenSet((1,2)) = {(x,y) | (x-1)^2 + (y-2)^2 < r^2 }
+Boundary((1,2)) = {(x,y) | (x-1)^2 + (y-2)^2 = r^2}
+ClosedSet((1,2)) = OpenSet((1,2)) + Boundary((1,2))
+
+
+# Topological Spaces
+
+Topology(X) = subsets of X s.t.  
+if a, b are subsets in the topology(X) then a UNION b in topology(X) and a INTERSECT b in topology(X).
+Nullset and set X are in the topology(X) by default.

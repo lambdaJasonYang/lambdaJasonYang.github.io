@@ -11,7 +11,7 @@ toc: y
 $$P(X=\text{"it will rain today"})$$  
 $X$ is the random variable  
 $\mu$ mu is the mean  
-$\sigma$ sigma is std  
+$\sigma$ sigma is std  (z-score = sigma)
 $\sigma^2$ sigma squared is variance
 
 # Probability density function (pdf)
@@ -26,8 +26,7 @@ import numpy as np
 import scipy.stats as stats
 
 mu = 0
-variance = 1
-sigma = np.sqrt(variance)
+sigma = 1
 x = np.linspace(mu - 3*sigma, mu + 3*sigma, 100)
 y = stats.norm.pdf(x, mu, sigma) #stats lib pdf
 
@@ -42,7 +41,7 @@ mu = 0 #mean
 sigma = 1 #sigma-squared is variance
 pdf = lambda x: (1/(np.sqrt(2*np.pi*sigma**2)))*(np.e**((-0.5*(mu-x)**2)/(sigma**2)))
 x = np.linspace(mu - 3*sigma, mu + 3*sigma, 100)
-y = list(map(f,x))
+y = list(map(pdf,x))
                                         
 plt.plot(x,y)
 plt.show()

@@ -243,6 +243,21 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
     
 </div>
+<div id="TOC"><ul>
+<li><a href="#document"><span class="toc-section-number">1</span> _document</a></li>
+<li><a href="#app"><span class="toc-section-number">2</span> _app</a></li>
+<li><a href="#file-structure-determines-routing"><span class="toc-section-number">3</span> File structure determines routing</a></li>
+<li><a href="#capturing-the-carid-and-modelid-as-variables"><span class="toc-section-number">4</span> Capturing the [carID] and [modelID] as variables</a></li>
+<li><a href="#serverside-render"><span class="toc-section-number">5</span> ServerSide Render</a>
+<ul>
+<li><a href="#getstaticprops---ssg"><span class="toc-section-number">5.1</span> getStaticProps - SSG</a>
+<ul>
+<li><a href="#types-of-ssg"><span class="toc-section-number">5.1.1</span> 2 types of SSG</a></li>
+<li><a href="#why-ssg-can-be-bad"><span class="toc-section-number">5.1.2</span> Why SSG can be bad?</a></li>
+</ul></li>
+<li><a href="#solution-to-stale-ssg---isr"><span class="toc-section-number">5.2</span> Solution to Stale SSG - ISR</a></li>
+</ul></li>
+</ul></div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">npx</span> create-next-app@latest <span class="at">--ts</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="ex">npm</span> install prettier <span class="at">--save-dev</span></span>
@@ -324,19 +339,16 @@
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  return <span class="op">&lt;</span>MyButton backColor<span class="op">=</span><span class="st">&quot;green&quot;</span><span class="op">&gt;</span>hello<span class="op">&lt;/</span>MyButton<span class="op">&gt;</span></span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>export default StyledButton<span class="op">;</span></span></code></pre></div>
-<section id="document" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> _document</h4>
+<section id="document" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> _document</h1>
 <p>taken from <a href="https://github.com/mui-org/material-ui/blob/master/examples/nextjs/pages/_document.js">Official Nextjs example</a></p>
 </section>
-<section id="app" class="level4" data-number="0.0.0.2">
-<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> _app</h4>
+<section id="app" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> _app</h1>
 <p>taken from <a href="https://github.com/mui-org/material-ui/blob/master/examples/nextjs/pages/_app.js">Official Nextjs example</a></p>
 </section>
-<section id="section" class="level4" data-number="0.0.0.3">
-<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> </h4>
-</section>
-<section id="file-structure-determines-routing" class="level4" data-number="0.0.0.4">
-<h4 data-number="0.0.0.4"><span class="header-section-number">0.0.0.4</span> File structure determines routing</h4>
+<section id="file-structure-determines-routing" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> File structure determines routing</h1>
 <p>Page filename in nextjs like “landingpage.js” must be lowercase letters<br />
 React Component filename in nextjs must be Uppercase like “MyCustomButton”.</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h40737461727473616c740a0a7b0a202020207b540a20202020202b202f0a20202020202b2b207372630a20202020202b2b2b20636f6d6d6f6e0a20202020202b2b2b2b20636f6d706f6e656e74730a20202020202b2b2b2b2b204578427574746f6e0a20202020202b2b2b2b2b2b204578427574746f6e2e7473780a20202020202b2b2b2b2b2b204578427574746f6e2e746573742e74730a20202020202b2b2b2b20686f6f6b730a20202020202b2b2b2b207574696c730a20202020202b2b2b206d6f64756c65730a20202020202b2b2b2070616765730a20202020202b2b2b2b206170690a20202020202b2b2b2b205b63617249445d0a20202020202b2b2b2b2b20696e6465782e7473780a20202020202b2b2b2b2b205b6d6f64656c49445d0a20202020202b2b2b2b2b2b20696e6465782e7473780a20202020202b2b2b2b205f6170702e7473780a20202020202b2b2b2b205f646f63756d656e742e7473780a20202020202b2b2b2b20696e6465782e7473780a20202020202b2b207374796c65730a20202020202b2b207075626c69630a20202020202b2b0a0a202020207d0a7d0a0a40656e6473616c74"></figure>
@@ -369,23 +381,24 @@ React Component filename in nextjs must be Uppercase like “MyCustomButton”.<
 <li>styles</li>
 <li>theme.tsx</li>
 </ul>
-<section id="capturing-the-carid-and-modelid-as-variables" class="level5" data-number="0.0.0.4.1">
-<h5 data-number="0.0.0.4.1"><span class="header-section-number">0.0.0.4.1</span> Capturing the [carID] and [modelID] as variables</h5>
+</section>
+<section id="capturing-the-carid-and-modelid-as-variables" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Capturing the [carID] and [modelID] as variables</h1>
 <div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> {carID<span class="op">,</span> modelID} <span class="op">=</span> router<span class="op">.</span><span class="fu">query</span>()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`the car is {carID} and model {modelID}`</span>)</span></code></pre></div>
-<hr />
 </section>
-</section>
-<section id="getstaticprops---ssg" class="level4" data-number="0.0.0.5">
-<h4 data-number="0.0.0.5"><span class="header-section-number">0.0.0.5</span> getStaticProps - SSG</h4>
+<section id="serverside-render" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> ServerSide Render</h1>
+<section id="getstaticprops---ssg" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> getStaticProps - SSG</h2>
 <ul>
 <li>getStaticProps only runs serverside even though you may have written it on a clientside file like index.js</li>
 <li>getStaticProps is only allowed in a page file, NOT in a component file.</li>
 <li>getStaticProps only runs on build time, in dev mode we see it being rebuilt every request which may cause confusion.</li>
 </ul>
-<section id="types-of-ssg" class="level5" data-number="0.0.0.5.1">
-<h5 data-number="0.0.0.5.1"><span class="header-section-number">0.0.0.5.1</span> 2 types of SSG</h5>
+<section id="types-of-ssg" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1"><span class="header-section-number">5.1.1</span> 2 types of SSG</h3>
 <table>
 <thead>
 <tr class="header">
@@ -401,9 +414,8 @@ React Component filename in nextjs must be Uppercase like “MyCustomButton”.<
 </tbody>
 </table>
 </section>
-</section>
-<section id="why-ssg-can-be-bad" class="level4" data-number="0.0.0.6">
-<h4 data-number="0.0.0.6"><span class="header-section-number">0.0.0.6</span> Why SSG can be bad?</h4>
+<section id="why-ssg-can-be-bad" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2"><span class="header-section-number">5.1.2</span> Why SSG can be bad?</h3>
 <p>SSG at build time and SSG at first request both are affected by stale data.</p>
 <ul>
 <li>If db changes once, SSG at build time is already stale</li>
@@ -411,12 +423,14 @@ React Component filename in nextjs must be Uppercase like “MyCustomButton”.<
 </ul>
 <hr />
 </section>
-<section id="solution-to-stale-ssg---isr" class="level4" data-number="0.0.0.7">
-<h4 data-number="0.0.0.7"><span class="header-section-number">0.0.0.7</span> Solution to Stale SSG - ISR</h4>
+</section>
+<section id="solution-to-stale-ssg---isr" class="level2" data-number="5.2">
+<h2 data-number="5.2"><span class="header-section-number">5.2</span> Solution to Stale SSG - ISR</h2>
 <ul>
 <li>Solution ISR which basically means the specific static page ONLY will be rebuilt,</li>
 <li>If your clientside code auto refreshes every 10 sec, the data will be relatively current.</li>
 </ul>
+</section>
 </section>
 
         </div>

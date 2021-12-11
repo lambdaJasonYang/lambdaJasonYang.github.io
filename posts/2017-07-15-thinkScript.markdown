@@ -1,6 +1,6 @@
 ---
 title: Thinkscript
-tags: python, prog
+tags: musings, misc
 ---
 
 * `def`{.bash} to instantiate variables

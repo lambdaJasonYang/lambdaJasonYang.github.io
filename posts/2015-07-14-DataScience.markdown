@@ -1,6 +1,6 @@
 ---
 title: Data Science
-tags: mathcs, appliedmath, physics
+tags: mathcs, appliedmath, stats
 ---
 
 # Common tactics

@@ -1,6 +1,7 @@
 ---
 title: Lean
 tags: mathcs, puremath ,categorytheory
+toc: y
 ---
 
 | Logic | Intro | Elim |
@@ -19,7 +20,7 @@ Classical logic `open_locale classical`{.bash} use `by_contradiction`{.bash} tac
 
 Most of the time, implication and universal quantifier are treated the same.
 
-##### Example
+## Example
 
 ```bash
 expected type:
@@ -36,7 +37,7 @@ Type
 
 For any type α that has a pre order. 
 
-### Types
+# Types
 
 if ` p : Prop `{.hs}  then
 `x:p`{.hs} is a proof of proposition `p : Prop`{.hs}.
@@ -50,7 +51,7 @@ if `y:p`{.hs} is also a proof then **proof irrelevance** means `x:p`{.hs} and `y
 * Quantifier and Dependent Function type
   * Given $P:X \rightarrow Prop$ represents $\forall( x: X). P\ x: Prop$
 
-### Numbers
+# Numbers
 
 Proofs of numbers typically use type coercion.
 
@@ -58,7 +59,7 @@ Proofs of numbers typically use type coercion.
 norm_num
 ```
 
-### Inductive type
+# Inductive type
 
 ```bash
 inductive mynat
@@ -66,7 +67,7 @@ inductive mynat
 | succ (n : mynat) : mynat
 ```
 
-### Definitional Equality and Reduction
+# Definitional Equality and Reduction
 Given  
   : $A \overset{reduces}{\rightarrow} X$  
   : $B \overset{reduces}{\rightarrow} X$  
@@ -82,10 +83,10 @@ Implies
 
 
 
-### Dependent type
+# Dependent type
 
 
-##### Inspiring the dependent type
+## Inspiring the dependent type
 
 `cons 2 [3,4] : List Nat`{.hs}  
 `cons : Nat -> List Nat -> List Nat`{.hs}  
@@ -138,12 +139,12 @@ What is the type of `cons int`{.hs}?
 We apply `(Π x : α, β) `{.hs} to `int` in the type space.  
 `cons int :: (Π x : α, β)(int)`{.hs}
 
-* `(Π x : α, β)(int) `{.hs}
-* Beta-reduction: `β[int/x]`{.hs}  
-* `β`{.hs} expanded is `x -> list x -> list x`{.hs}  
-* `β[int/x]`{.hs} is `(x -> list x -> list x)[int/x]`{.hs}  
-* replace x with int in expression
-  * `(int -> list int -> list int)`{.hs}  
+1. `(Π x : α, β)(int) `{.hs}
+2. Beta-reduction: `β[int/x]`{.hs}  
+3. `β`{.hs} expanded is `x -> list x -> list x`{.hs}  
+4. `β[int/x]`{.hs} is `(x -> list x -> list x)[int/x]`{.hs}  
+5. replace x with int resulting in  
+  `(int -> list int -> list int)`{.hs}  
 
 `cons int :: (Π x : α, β)(int)`{.hs} is  
 `cons int :: int -> list int -> list int`{.hs}  
@@ -152,11 +153,18 @@ Example of a list is `cons int 3 (nil int)`{.hs}
 
 Since `cons`{.hs} and `nil`{.hs} are dependent types, they must take an extra parameter [in this case] `int`{.hs}  
 
+`f :: Π x : α, β`{.hs} =  `f x :: β[x]`{.hs} where `x :: α`{.hs}
+
 ### function type is just a Pi-type 
 
 > when `β`{.hs} expanded expression does not include   
 bound variable `Π x : α`{.hs} then  
-`Π x : α, β`{.hs} is just `α -> β`{.hs}
+`β[x]`{.hs} = `β`{.hs}  
+
+example: 
+`f :: Π x : α, β`{.hs} = `f x :: β[x]`{.hs} = `f x :: β`{.hs} = `f :: α -> β`{.hs}
+
+
 
 example `β` is `bool`, `α` is `nat`  
 Notice `bool` is an expression that does not include any bound variable `x:nat`
@@ -166,7 +174,7 @@ Notice `bool` is an expression that does not include any bound variable `x:nat`
 * `even :: nat -> bool`{.hs}
 
 
-### Sigma Type
+## Sigma Type
 
 ```hs
 def f (α : Type) (β : α → Type) (a : α) (b : β a) : (a : α) × β a :=

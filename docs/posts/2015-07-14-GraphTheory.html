@@ -243,8 +243,20 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'algorithms'." href="../tags/algorithms.html">algorithms</a>
     
 </div>
-<section id="cuts" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Cuts</h3>
+<div id="TOC"><ul>
+<li><a href="#cuts"><span class="toc-section-number">1</span> Cuts</a></li>
+<li><a href="#undirected-graph"><span class="toc-section-number">2</span> Undirected Graph</a></li>
+<li><a href="#directed-graph"><span class="toc-section-number">3</span> Directed Graph</a></li>
+<li><a href="#mst"><span class="toc-section-number">4</span> MST</a>
+<ul>
+<li><a href="#bfs"><span class="toc-section-number">4.1</span> BFS</a>
+<ul>
+<li><a href="#adjacency-list"><span class="toc-section-number">4.1.1</span> Adjacency list</a></li>
+</ul></li>
+</ul></li>
+</ul></div>
+<section id="cuts" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Cuts</h1>
 <p>Analogous to the partitions of set. In fact, when forming possible cuts, only the elements of the set matter.</p>
 <ul>
 <li>Cut : a partition of the NODES of a graph, NOT the edges.</li>
@@ -256,15 +268,16 @@
 </ul>
 <p><span class="math display">\[Cut_A= \{a0,a1,a2,a3\}\]</span> <span class="math display">\[Cut_B=\{b0,b1,b2,b3\}\]</span></p>
 <hr />
-<section id="undirected-graph" class="level5" data-number="0.0.1.0.1">
-<h5 data-number="0.0.1.0.1"><span class="header-section-number">0.0.1.0.1</span> Undirected Graph</h5>
+</section>
+<section id="undirected-graph" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Undirected Graph</h1>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020200a202020200a2020737562677261706820636c75737465725f30207b0a202020207374796c653d66696c6c65643b0a20202020636f6c6f723d6c69676874677265793b0a202020206e6f6465205b7374796c653d66696c6c65642c636f6c6f723d77686974655d3b0a202020206130202d3e206131202d3e206132205b6172726f77686561643d6e6f6e655d3b0a202020206133202d3e206132205b6172726f77686561643d6e6f6e655d3b200a202020206c6162656c203d20224375742041223b0a20207d0a0a2020737562677261706820636c75737465725f31207b0a202020206e6f6465205b7374796c653d66696c6c65645d3b0a202020206230202d3e206231202d3e206232202d3e206233205b6172726f77686561643d6e6f6e655d3b0a202020206c6162656c203d20224375742042223b0a20202020636f6c6f723d626c75650a20207d0a20206133202d3e206231205b6172726f77686561643d6e6f6e6520636f6c6f723d7265645d3b0a20206131202d3e206233205b6172726f77686561643d6e6f6e6520636f6c6f723d7265645d3b0a20206232202d3e206131205b6172726f77686561643d6e6f6e6520636f6c6f723d7265645d3b0a20206133202d3e206130205b6172726f77686561643d6e6f6e655d3b0a0a0a7d"></figure>
 <p><span class="math display">\[\text{Cut-Set(A,B) = Cut-Set(B,A)}\]</span></p>
 <p><span class="math display">\[{\color{red}\text{Cut-Set(A,B)}}=\{e \in edges\ |\ e\ is\ {\color{red}RED}\}\]</span></p>
 <hr />
 </section>
-<section id="directed-graph" class="level5" data-number="0.0.1.0.2">
-<h5 data-number="0.0.1.0.2"><span class="header-section-number">0.0.1.0.2</span> Directed Graph</h5>
+<section id="directed-graph" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Directed Graph</h1>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a2020200a202020200a2020737562677261706820636c75737465725f30207b0a202020207374796c653d66696c6c65643b0a20202020636f6c6f723d6c69676874677265793b0a202020206e6f6465205b7374796c653d66696c6c65642c636f6c6f723d77686974655d3b0a202020206130202d3e206131202d3e206132203b0a202020206133202d3e206132203b200a202020206c6162656c203d20224375742041223b0a20207d0a0a2020737562677261706820636c75737465725f31207b0a202020206e6f6465205b7374796c653d66696c6c65645d3b0a202020206230202d3e206231202d3e206232202d3e206233203b0a202020206c6162656c203d20224375742042223b0a20202020636f6c6f723d626c75650a20207d0a20206133202d3e206231205b636f6c6f723d7265645d3b0a20206131202d3e206233205b636f6c6f723d7265645d3b0a20206232202d3e206131205b636f6c6f723d707572706c655d3b0a20206133202d3e206130203b0a0a0a7d0a40656e64756d6c"></figure>
 <p><span class="math display">\[{\color{red}\text{Cut-Set(A,B)}}=\{e \in edges\ |\ e\ is\ {\color{red}RED}\}\]</span></p>
 <p><span class="math display">\[{\color{purple}\text{Cut-Set(B,A)}}=\{e \in edges\ |\ e\ is\ {\color{purple}PURPLE}\}\]</span></p>
@@ -282,19 +295,17 @@
 </ul></li>
 </ul>
 </section>
-</section>
-<section id="mst" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> MST</h3>
+<section id="mst" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> MST</h1>
 <p>Obviously to Span a tree, one must choose at least 1 edge of a Cut-Set.</p>
 <ul>
 <li>Choosing an edge to a cut-set = Union of 2 partitions</li>
 </ul>
 <p>The minimum element in a Cut-Set is the edge contained in all MST.</p>
-</section>
-<section id="bfs" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> BFS</h3>
-<section id="adjacency-list" class="level5" data-number="0.0.3.0.1">
-<h5 data-number="0.0.3.0.1"><span class="header-section-number">0.0.3.0.1</span> Adjacency list</h5>
+<section id="bfs" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> BFS</h2>
+<section id="adjacency-list" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1"><span class="header-section-number">4.1.1</span> Adjacency list</h3>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a2020200a2020323b0a0a202030202d3e2031202d3e20343b0a202031202d3e20333b0a202030202d3e20333b0a202033202d3e20353b0a202035202d3e20330a0a7d0a40656e64756d6c"></figure>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">3</span>],[<span class="dv">3</span>,<span class="dv">4</span>],[<span class="dv">2</span>],[<span class="dv">5</span>],[],[<span class="dv">3</span>]]</span>
@@ -331,6 +342,7 @@
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 [0, 0, 0, 0, 0, 1]</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 [0, 0, 0, 0, 0, 0]</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 [0, 0, 0, 1, 0, 0]</span></span></code></pre></div>
+</section>
 </section>
 </section>
 

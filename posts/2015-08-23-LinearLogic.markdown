@@ -3,12 +3,12 @@ title: Linear Logic
 tags: mathcs, logic
 ---
 
-#### Prelude
+# Prelude
 
 $$\Delta \vdash A$$
 $\Delta$ is a resource that can be consumed to produce goal A. 
 
-##### Coin Exchange example:
+# Coin Exchange example:
 
 * d,d,n (dime,dime,nickel) is our resources $\Delta$
 * q (quarter) is what is produced by using up those resources  
@@ -26,7 +26,7 @@ Invalid example:
 $$ \xcancel{\cfrac{\cfrac{(d\qquad d\qquad n)^{\Delta}}{q} \qquad \cfrac{(d\qquad d\qquad n)^{\Delta}}{q} }{h}} $$
 Above would be perfectly valid in typical ND but not in linear logic. We used resource $\Delta$ twice which is not allowed.
 
-##### Graph Walk Example:
+# Graph Walk Example:
 
 If we are given Resource Node(A) and all edges of the graph Edge(A,B), Edge(B,A), Edge(A,C) ... we can walk though the entire graph using up alledges.   
 ${\color{red}\Delta = Node(A),Edge(A,B),Edge(B,A),Edge(A,C)}$
@@ -48,7 +48,7 @@ We will underline the resources if it is a reusable resource which is basically 
 $$u: A \vdash A$$
 
 
-#### Simultaneous Conjunction
+# Simultaneous Conjunction
 
 A and B are both true in the same state.
 

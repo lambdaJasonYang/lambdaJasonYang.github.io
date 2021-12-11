@@ -1,6 +1,6 @@
 ---
 title: Benchmarks for algotrading
-tags: musings
+tags: musings, misc
 ---
 
 Total Return         82.61%  

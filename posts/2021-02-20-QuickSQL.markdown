@@ -1,6 +1,7 @@
 ---
 title: Quick SQL
 tags: prog, QuickCode
+toc: y
 ---
 
 
@@ -14,7 +15,7 @@ INSERT INTO bleh (name,age) VALUES ('rex',2);
 
 ```
 
-### Quick Theory
+# Quick Theory
 
 Tables are represented as relations $(A\times B\times C)$  
 $A$, $B$, $C$ are the columns of the table
@@ -27,7 +28,7 @@ $A$, $B$, $C$ are the columns of the table
 
 
 
-### Syntax
+# Syntax
 
 ```rroad
 Diagram(Stack(Optional(Sequence(Terminal('WITH','#sql-with'),OneOrMore(Sequence(NonTerminal('name'),'AS','(',NonTerminal('select','#sql-select'),')'),',')),'skip'),Sequence(Terminal('SELECT','#sql-select'),Optional('DISTINCT','skip'),Choice(0,'*',OneOrMore(Choice(0,Sequence(NonTerminal('column'),Optional(Sequence('AS',NonTerminal('output_name')))),Sequence(NonTerminal('expression','#sql-valueexpr'),Sequence('AS',NonTerminal('output_name')))),',')),Terminal('FROM','#sql-from'),OneOrMore(Choice(0,Sequence(NonTerminal('table_name'),Optional(Sequence('AS',NonTerminal('alias')))),Sequence('(',NonTerminal('select'),')',Sequence('AS',NonTerminal('alias')))),',')),OneOrMore(Choice(0,Skip(),Sequence(Choice(0,Sequence(',',Comment('oldsyntaxforcrossjoin')),Sequence(Choice(0,'CROSS','NATURAL'),'JOIN'),Sequence(Choice(0,Sequence(Optional('INNER'),'JOIN'),Sequence(Choice(0,'LEFT','RIGHT','FULL'),Optional('OUTER'),'JOIN')),Choice(0,Sequence('ON',NonTerminal('condition')),Sequence('USING','(',OneOrMore(NonTerminal('join_column'),','),')'),Sequence('NATURAL')))),Choice(0,Sequence(NonTerminal('table_name'),Optional(Sequence('AS',NonTerminal('alias')))),Sequence('(',NonTerminal('select'),')',Sequence('AS',NonTerminal('alias'))))))),Sequence(Optional(Sequence(Terminal('WHERE','#sql-where'),NonTerminal('condition')),'skip'),Optional(Sequence(Terminal('GROUPBY','#sql-groupby'),NonTerminal('expression','#sql-valueexpr')),'skip'),Optional(Sequence(Terminal('HAVING','#sql-having'),NonTerminal('condition')),'skip')),Sequence(Optional(Sequence(Choice(0,'UNION','INTERSECT','EXCEPT'),Choice(0,Skip(),'DISTINCT','ALL'),NonTerminal('select')),'skip'),Optional(Sequence(Terminal('ORDERBY','#sql-orderby'),OneOrMore(Sequence(NonTerminal('expression','#sql-valueexpr'),Choice(0,'ASC','DESC')),',')),'skip')),Sequence(Optional(Sequence(Terminal('LIMIT','#sql-limit'),Choice(0,NonTerminal('count'),'ALL')),'skip'),Optional(Sequence(Terminal('OFFSET','#sql-limit'),NonTerminal('start'),Optional('ROWS')),'skip')),Sequence(Optional(Sequence(Terminal('FETCH FIRST','#sql-limit'),NonTerminal('count'),Optional('ROWS'),'ONLY'),'skip'))))
@@ -37,7 +38,7 @@ Diagram(Stack(Optional(Sequence(Terminal('WITH','#sql-with'),OneOrMore(Sequence(
 [ReLaX](http://dbis-uibk.github.io/relax/help)
 
 
-### JOINS
+# JOINS
 
 
 TableA has 3 cols  
@@ -48,17 +49,58 @@ TableA Join TableB, we end up with 3+7 cols
 Left Join , 3 cols
 
 
-## Normalization
+# Normalization
 
-### 1NF - Remove redundent Groups
+## 1NF - Remove redundent Groups
 
 make separate table for each set of related attr
 
-### 2NF - Eliminate Repeats
+## 2NF - Eliminate Repeats
 
 Some value repeats multiple times.  
 Collapse the dependency into a new table.  
 
-### 3NF - Move out Cols not dependent on Key
+## 3NF - Move out Cols not dependent on Key
 
-### 4NF 
+## 4NF 
+
+# Entity Relation
+
+![](https://i.stack.imgur.com/XixbQ.jpg)
+
+
+```plantuml
+@startuml
+Entity01 }|--|| Entity02
+Entity03 }o--o| Entity04
+Entity05 ||--o{ Entity06
+Entity07 |o--|| Entity08
+
+entity Entity11{
+ * user_id : INTEGER PK
+}
+entity Entity12{
+ * post_id : TEXT PK
+}
+
+Entity11::user_id }|--|| Entity12::post_id
+@enduml
+```
+
+```bash
+@startuml
+Entity01 }|--|| Entity02
+Entity03 }o--o| Entity04
+Entity05 ||--o{ Entity06
+Entity07 |o--|| Entity08
+
+entity Entity11{
+ * user_id : INTEGER PK
+}
+entity Entity12{
+ * post_id : TEXT PK
+}
+
+Entity11::user_id }|--|| Entity12::post_id
+@enduml
+```
