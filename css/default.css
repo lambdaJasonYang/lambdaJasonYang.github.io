@@ -10,13 +10,17 @@ body {
     color: black;
     font-family: "Nunito",Verdana, Helvetica, Palatino; 
     font-size: 16px;
-    margin: 0px auto 0px 25vw;
+    margin: 0px auto 0px 27vw;
     --text-primary: #b6b6b6;
     --text-secondary: #ececec;
     --bg-primary: #23232e;
     --bg-secondary: #141418;
 }
-
+/* highlight inline codeblock START*/
+code:not([class]), code[class=""]{
+  background-color: #e9e9e9;
+}
+/* highlight inline codeblack END */
 /* Adding filename to codeblock START */
 div.sourceCode::before {
   content: attr(data-filename);
@@ -104,12 +108,15 @@ nav.sidenav > li{
 }
 
 div#TOC {
-  overflow-y: scroll;
+  overflow-y: hidden;
   width: 20vw;
   max-height:70%;
   height: min-content;
   position: fixed;;
   left: 4.3vw;
+}
+div#TOC:hover {
+  overflow-y: scroll;
 }
 
 #TOC a:link{
@@ -147,7 +154,9 @@ td, th {
   text-align: left;
 }
 /* table css  end */
-body::-webkit-scrollbar {
+
+/* purple SCROLLBAR START */
+/* body::-webkit-scrollbar {
     width: 0.25rem;
     height: 0.25rem;
 }
@@ -167,8 +176,8 @@ div::-webkit-scrollbar-track {
 }
 div::-webkit-scrollbar-thumb {
   background: #6649b8;
-}
-
+} */
+/* purple SCROLLBAR END */
 
 div#header {
     border-bottom: 2px solid black;
