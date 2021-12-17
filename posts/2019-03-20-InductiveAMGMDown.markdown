@@ -1,6 +1,7 @@
 ---
 title: Proof Downward Induction AM-GM
 tags: mathcs, puremath, proofs, recursion
+toc: y
 ---
 
 
@@ -8,7 +9,7 @@ tags: mathcs, puremath, proofs, recursion
 AM-GM Theorem  
 $$ (x_1 x_2 .. x_n)^{1/n} \leq \frac{x_1 + x_2 + .. x_n}{n} $$  
 
-### Upward induction step 1  
+# Upward induction step 1  
 
 
 Base step: n = 1, obvious  
@@ -59,19 +60,25 @@ QED:  $(\frac{{}^{+}A \times {}^{+}B}{k^2})^{k} \leq (\frac{{}^{+}A + {}^{+}B}{2
 Thoughts: Don't fall in to the trap of believing IH should only be used with obvious cases like n-1, n/2   
 IH(2) is the crux of this proof.
 
-### Downward induction step 2  
+# Downward induction step 2  
 
 $(P(k) \rightarrow P(k-1) )$:  
 After shifting complexity LHS to RHS:
 
 **IMPORTANT** WRITE OUT $x_{n-1}$ instead of just abstracting it into the ellipse.If not you will hit a roadblock when using IH.   
 $x_1 + x_2 + .. x_{n}$ is BAD.   
-$x_1 + x_2 + ..+x_{n-1}+x_{n}$ is GOOD.   
+$x_1 + x_2 + .. x_{n-1}+x_{n}$ is GOOD.   
 
+let $C^+ = x_1 + x_2 + ..x_{n-1}$  
+let $C^{\times} = (x_1 x_2 ..x_{n-1})$
  
 IH: $$ (x_1 x_2 ..x_{n-1} x_n) \leq (\frac{x_1 + x_2 + .. x_{n-1} + x_n}{n})^{n} $$  
 
+$$ (C^{\times} \times x_n) \leq (\frac{C^+ + x_n}{n})^n \tag{IH}$$
+ 
 Goal: $$ (x_1 x_2 .. x_{n-1}) \leq (\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1} $$ 
+
+$$ (C^{\times}) \leq (\frac{C^+ }{n-1})^{n-1} \tag{Goal} $$
 
 
 * Find starting point:
@@ -79,19 +86,23 @@ Goal: $$ (x_1 x_2 .. x_{n-1}) \leq (\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1} $$
 * Notice similarity of IH LHS $(x_1 x_2 ..x_{n-1} x_n)$ with starting point
   * We can FREELY add one more variable/expression $\framebox{}$ to starting point so we can use IH. How do we Choose?
 
-#### Pause: Reverse meta-guessing possible pathway to solution
+## Pause Real Proof:  Reverse meta-Rewrite Goal
 
-Choosing an expression will gives us this IH:
+Find an expression that fits the criteria to use $(IH)$ :
 $$(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \tag{1}$$
 
 
-Relating IH back to the Goal.  
+Relating IH back to the Goal :   
+Algebraic manipulation: multiply bothside of $(Goal)$ with $\framebox{}$  
 $$(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{2}$$
 
-Combined (1) and (2):
+Combined (1) and (2):  
+Meta-choose the non-striked out combination because it leads us closer to our goal.  
+How did we get that equation? It's a Meta-choice, meaning later in the real proof we HOPE to achieve this equation .
+$$\xcancel{(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1} \leq(\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n}}$$
 $$(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n}\leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{3}$$
 
-New Goal by r:  
+New Goal by multiplying $(3)$ by $\frac{1}{\framebox{}}$:  
 $$ (x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\framebox{}})(\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \leq (\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{4}$$
 
 Thoughts:
@@ -102,7 +113,7 @@ Thoughts:
   * $A = x_1 + x_2 + .. x_{n-1}$
 
 Renamed Goal:
-$$ (x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\framebox{}})(\frac{A + \framebox{}}{n})^{n} \leq (\frac{A}{n-1})^{n-1}$$
+$$ (x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\framebox{}})(\frac{A + \framebox{}}{n})^{n} \leq (\frac{A}{n-1})^{n-1}\tag{Renamed(Goal)}$$
 
 Try: $\framebox{} = \frac{A}{n-1}$
 
@@ -110,7 +121,7 @@ Try: $\framebox{} = \frac{A}{n-1}$
   * $\frac{A + \framebox{}}{n} =\frac{A+\frac{A}{n-1}}{n} = \frac{\frac{An-A+A}{n-1}}{n}=\frac{A}{n-1}$ 
   * Looks good
 
-#### Resume: continue proof
+## Resume Real Proof
 
 Solving Goal:
 
@@ -118,8 +129,14 @@ $$(x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\frac{A}{n-1}})(\frac{A}{n-1})^{n}\leq (\f
 
 $$(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{-1}(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}$$
 
-QED: $$(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{n-1}\leq (\frac{A}{n-1})^{n-1}$$
+$$(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{n-1}\leq (\frac{A}{n-1})^{n-1}$$
 
-### Step 3 Combining results from Upwards and Downward induction
+Backtrack Meta:
+
+Reverse operation fill in  $\framebox{}$ in $(1)$ to get our $new IH$
+\frac{A}{n-1}
+$$(x_1 x_2 .. x_{n-1}\frac{A}{n-1}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \frac{A}{n-1}}{n})^{n} \tag{new IH}$$
+
+# Step 3 Combining results from Upwards and Downward induction
 
 QED Combining Upward and Downward induction constitutes a full proof the inequality is true for all naturals.

@@ -30,6 +30,12 @@ https://fred.stlouisfed.org/series/GPDI
 https://fred.stlouisfed.org/series/FGEXPND
 https://fred.stlouisfed.org/series/NETEXP
 
+
+GDP
+
+nominal gdp does control for inflation
+
+
 ---
 
 ### CEF - Closed Ended funds

@@ -5,11 +5,12 @@
 }
 /* COMMON BEGIN ----------------------------------------*/
 body {
+    position:relative;
+    width: 70vw;
     color: black;
     font-family: "Nunito",Verdana, Helvetica, Palatino; 
     font-size: 16px;
-    margin: 0px auto 0px auto;
-    width: 600px;
+    margin: 0px auto 0px 25vw;
     --text-primary: #b6b6b6;
     --text-secondary: #ececec;
     --bg-primary: #23232e;
@@ -96,9 +97,19 @@ nav.sidenav > li{
 }
 
 /* --------------------------Table of Content */
+
 .header-section-number{
   color: gray;
   opacity:70%;
+}
+
+div#TOC {
+  overflow-y: scroll;
+  width: 20vw;
+  max-height:70%;
+  height: min-content;
+  position: fixed;;
+  left: 4.3vw;
 }
 
 #TOC a:link{
@@ -109,13 +120,6 @@ nav.sidenav > li{
   border-bottom: 1px solid;
   background: #d4d4d4;
 }
-
-div#TOC {
-  width: 20rem;
-  position: absolute;
-  left: 4.3vw;
-}
-
 
 div#TOC ul{
   list-style-type:none;
@@ -408,7 +412,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 
 /* BEGIN SMALL SCREEN CSS MOBILE PHONE--------------------------------------------------- */
-  @media only screen and (max-width: 800px) {
+@media only screen and (max-width: 800px) {
       .sidenav {
           display: none;
       }
@@ -427,7 +431,25 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
       }
       /* --------------------------Table of Content */
-  }
+}
+@media only screen and (max-width: 1290px) {
+
+      /* --------------------------Table of Content */
+      #TOC a:link{
+        font-size: 0.8rem;
+      }
+
+      div#TOC {
+        display: none !important;
+      }
+      
+
+      div#TOC ul{
+        list-style-type:none;
+
+      }
+      /* --------------------------Table of Content */
+}
 
   /*END OF SMALL SCREEN CSS MOBILE PHONE ----------------------------------------------------*/
 

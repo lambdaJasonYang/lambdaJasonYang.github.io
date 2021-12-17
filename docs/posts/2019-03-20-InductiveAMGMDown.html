@@ -243,10 +243,19 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'proofs'." href="../tags/proofs.html">proofs</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>
     
 </div>
+<div id="TOC"><ul>
+<li><a href="#upward-induction-step-1"><span class="toc-section-number">1</span> Upward induction step 1</a></li>
+<li><a href="#downward-induction-step-2"><span class="toc-section-number">2</span> Downward induction step 2</a>
+<ul>
+<li><a href="#pause-real-proof-reverse-meta-rewrite-goal"><span class="toc-section-number">2.1</span> Pause Real Proof: Reverse meta-Rewrite Goal</a></li>
+<li><a href="#resume-real-proof"><span class="toc-section-number">2.2</span> Resume Real Proof</a></li>
+</ul></li>
+<li><a href="#step-3-combining-results-from-upwards-and-downward-induction"><span class="toc-section-number">3</span> Step 3 Combining results from Upwards and Downward induction</a></li>
+</ul></div>
 <p>AM-GM Theorem<br />
 <span class="math display">\[ (x_1 x_2 .. x_n)^{1/n} \leq \frac{x_1 + x_2 + .. x_n}{n} \]</span></p>
-<section id="upward-induction-step-1" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Upward induction step 1</h3>
+<section id="upward-induction-step-1" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Upward induction step 1</h1>
 <p>Base step: n = 1, obvious<br />
 Base step: n = 2, obvious</p>
 <p><span class="math inline">\((P(k) \rightarrow P(2k) )\)</span>:</p>
@@ -295,15 +304,19 @@ Base step: n = 2, obvious</p>
 <p>Thoughts: Don’t fall in to the trap of believing IH should only be used with obvious cases like n-1, n/2<br />
 IH(2) is the crux of this proof.</p>
 </section>
-<section id="downward-induction-step-2" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Downward induction step 2</h3>
+<section id="downward-induction-step-2" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Downward induction step 2</h1>
 <p><span class="math inline">\((P(k) \rightarrow P(k-1) )\)</span>:<br />
 After shifting complexity LHS to RHS:</p>
 <p><strong>IMPORTANT</strong> WRITE OUT <span class="math inline">\(x_{n-1}\)</span> instead of just abstracting it into the ellipse.If not you will hit a roadblock when using IH.<br />
 <span class="math inline">\(x_1 + x_2 + .. x_{n}\)</span> is BAD.<br />
-<span class="math inline">\(x_1 + x_2 + ..+x_{n-1}+x_{n}\)</span> is GOOD.</p>
+<span class="math inline">\(x_1 + x_2 + .. x_{n-1}+x_{n}\)</span> is GOOD.</p>
+<p>let <span class="math inline">\(C^+ = x_1 + x_2 + ..x_{n-1}\)</span><br />
+let <span class="math inline">\(C^{\times} = (x_1 x_2 ..x_{n-1})\)</span></p>
 <p>IH: <span class="math display">\[ (x_1 x_2 ..x_{n-1} x_n) \leq (\frac{x_1 + x_2 + .. x_{n-1} + x_n}{n})^{n} \]</span></p>
+<p><span class="math display">\[ (C^{\times} \times x_n) \leq (\frac{C^+ + x_n}{n})^n \tag{IH}\]</span></p>
 <p>Goal: <span class="math display">\[ (x_1 x_2 .. x_{n-1}) \leq (\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1} \]</span></p>
+<p><span class="math display">\[ (C^{\times}) \leq (\frac{C^+ }{n-1})^{n-1} \tag{Goal} \]</span></p>
 <ul>
 <li>Find starting point:
 <ul>
@@ -314,13 +327,16 @@ After shifting complexity LHS to RHS:</p>
 <li>We can FREELY add one more variable/expression <span class="math inline">\(\framebox{}\)</span> to starting point so we can use IH. How do we Choose?</li>
 </ul></li>
 </ul>
-<section id="pause-reverse-meta-guessing-possible-pathway-to-solution" class="level4" data-number="0.0.2.1">
-<h4 data-number="0.0.2.1"><span class="header-section-number">0.0.2.1</span> Pause: Reverse meta-guessing possible pathway to solution</h4>
-<p>Choosing an expression will gives us this IH: <span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \tag{1}\]</span></p>
-<p>Relating IH back to the Goal.<br />
+<section id="pause-real-proof-reverse-meta-rewrite-goal" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Pause Real Proof: Reverse meta-Rewrite Goal</h2>
+<p>Find an expression that fits the criteria to use <span class="math inline">\((IH)\)</span> : <span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \tag{1}\]</span></p>
+<p>Relating IH back to the Goal :<br />
+Algebraic manipulation: multiply bothside of <span class="math inline">\((Goal)\)</span> with <span class="math inline">\(\framebox{}\)</span><br />
 <span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{2}\]</span></p>
-<p>Combined (1) and (2): <span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n}\leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{3}\]</span></p>
-<p>New Goal by r:<br />
+<p>Combined (1) and (2):<br />
+Meta-choose the non-striked out combination because it leads us closer to our goal.<br />
+How did we get that equation? It’s a Meta-choice, meaning later in the real proof we HOPE to achieve this equation . <span class="math display">\[\xcancel{(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1} \leq(\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n}}\]</span> <span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n}\leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{3}\]</span></p>
+<p>New Goal by multiplying <span class="math inline">\((3)\)</span> by <span class="math inline">\(\frac{1}{\framebox{}}\)</span>:<br />
 <span class="math display">\[ (x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\framebox{}})(\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \leq (\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{4}\]</span></p>
 <p>Thoughts:</p>
 <ul>
@@ -333,7 +349,7 @@ After shifting complexity LHS to RHS:</p>
 <li><span class="math inline">\(A = x_1 + x_2 + .. x_{n-1}\)</span></li>
 </ul></li>
 </ul>
-<p>Renamed Goal: <span class="math display">\[ (x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\framebox{}})(\frac{A + \framebox{}}{n})^{n} \leq (\frac{A}{n-1})^{n-1}\]</span></p>
+<p>Renamed Goal: <span class="math display">\[ (x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\framebox{}})(\frac{A + \framebox{}}{n})^{n} \leq (\frac{A}{n-1})^{n-1}\tag{Renamed(Goal)}\]</span></p>
 <p>Try: <span class="math inline">\(\framebox{} = \frac{A}{n-1}\)</span></p>
 <ul>
 <li>Backenvelop calculations to see where this could go:
@@ -343,22 +359,24 @@ After shifting complexity LHS to RHS:</p>
 </ul></li>
 </ul>
 </section>
-<section id="resume-continue-proof" class="level4" data-number="0.0.2.2">
-<h4 data-number="0.0.2.2"><span class="header-section-number">0.0.2.2</span> Resume: continue proof</h4>
+<section id="resume-real-proof" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Resume Real Proof</h2>
 <p>Solving Goal:</p>
 <p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\frac{A}{n-1}})(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
 <p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{-1}(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
-<p>QED: <span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{n-1}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
+<p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{n-1}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
+<p>Backtrack Meta:</p>
+<p>Reverse operation fill in <span class="math inline">\(\framebox{}\)</span> in <span class="math inline">\((1)\)</span> to get our <span class="math inline">\(new IH\)</span>  <span class="math display">\[(x_1 x_2 .. x_{n-1}\frac{A}{n-1}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \frac{A}{n-1}}{n})^{n} \tag{new IH}\]</span></p>
 </section>
 </section>
-<section id="step-3-combining-results-from-upwards-and-downward-induction" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Step 3 Combining results from Upwards and Downward induction</h3>
+<section id="step-3-combining-results-from-upwards-and-downward-induction" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Step 3 Combining results from Upwards and Downward induction</h1>
 <p>QED Combining Upward and Downward induction constitutes a full proof the inequality is true for all naturals.</p>
 </section>
 
         </div>
         <div id="footer">
-            <div class="flex-container" style="display:flex;">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
                 <div>
             Site proudly generated by
             <a href="http://jaspervdj.be/hakyll">Hakyll</a>

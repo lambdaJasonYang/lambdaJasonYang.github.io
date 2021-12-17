@@ -109,6 +109,20 @@ Show that this inflection point is minimum by proving the 2nd derivative is posi
 $$\frac{\partial^2 e^Te}{\partial\beta \partial\beta^T} = 2X^T X$$  
 Assuming X has full column rank, $X^T X$ can be shown to be positive definite.
 
+#### Ax=b
+
+Tricky
+
+* $X\beta = Y$
+* $Ax = b$
+
+The $\beta$ represents $x$.  
+The input $X$ does NOT represent $x$   
+
+Each input or row of $X$ represent an equation or constraint which constrains the beta coefficients.  
+This is an overdetermined system (too many constraints/equation against too few variables)  
+Overdetermined systems have no exact solutions but we can find the best fit solution or $x$(in our case coefficient $\beta$)
+
 
 ### Covariance matrix
 
@@ -119,15 +133,13 @@ $$\Sigma = Cov(X,X) = (X_i - \mu_i)(X_j-\mu_j)
 
 
 
-## Residual
-
-$e$ is the residual.  
-$e$ is not related to $\epsilon$ is anyway.
-
 
 $$ E[Y-\hat{Y}]^2 = E[f(X)+\epsilon -\hat{f}(X)]^2 = {\color{red}E[f(X)-\hat{f}(X)]^2} + Var(\epsilon)$$
-Overarching Goal: find $f$ st. term in RED is minimized
 
+$${\color{red}e = f(X)-\hat{f}(X)}$$
+
+* reducible error : ${\color{red}E[f(X)-\hat{f}(X)]^2}$
+* irreducible error: $Var(\epsilon)$
 
 Steps: 
 
@@ -199,12 +211,14 @@ High BETWEEN group Variance
 
 * Height: 15, 30
 
-## Model fit
+## Model fit ( Loss Function )
 
 ### MSE
 
 * MSE(Mean Squared Error) : used to check how well our regression model fits  
   * Add the squared distance from point to regression, then divide by count of datapoints
+
+* Notice $MSE = \frac{1}{n} RSS$
 
 Goal is to minimize MSE of test dataset, not training dataset
 

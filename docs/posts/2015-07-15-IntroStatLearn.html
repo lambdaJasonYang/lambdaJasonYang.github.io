@@ -257,19 +257,18 @@
 <li><a href="#rss-residual-sum-squared"><span class="toc-section-number">2.3.1</span> RSS: Residual Sum Squared</a></li>
 <li><a href="#covariance-matrix"><span class="toc-section-number">2.3.2</span> Covariance matrix</a></li>
 </ul></li>
-<li><a href="#residual"><span class="toc-section-number">2.4</span> Residual</a></li>
-<li><a href="#validate-linearity"><span class="toc-section-number">2.5</span> Validate linearity</a>
+<li><a href="#validate-linearity"><span class="toc-section-number">2.4</span> Validate linearity</a>
 <ul>
-<li><a href="#t-test"><span class="toc-section-number">2.5.1</span> T-test</a></li>
-<li><a href="#validate-multi-linear-regression-model"><span class="toc-section-number">2.5.2</span> Validate multi-linear regression model</a></li>
+<li><a href="#t-test"><span class="toc-section-number">2.4.1</span> T-test</a></li>
+<li><a href="#validate-multi-linear-regression-model"><span class="toc-section-number">2.4.2</span> Validate multi-linear regression model</a></li>
 </ul></li>
-<li><a href="#model-fit"><span class="toc-section-number">2.6</span> Model fit</a>
+<li><a href="#model-fit-loss-function"><span class="toc-section-number">2.5</span> Model fit ( Loss Function )</a>
 <ul>
-<li><a href="#mse"><span class="toc-section-number">2.6.1</span> MSE</a></li>
-<li><a href="#r2"><span class="toc-section-number">2.6.2</span> R^2</a></li>
-<li><a href="#cor"><span class="toc-section-number">2.6.3</span> Cor</a></li>
+<li><a href="#mse"><span class="toc-section-number">2.5.1</span> MSE</a></li>
+<li><a href="#r2"><span class="toc-section-number">2.5.2</span> R^2</a></li>
+<li><a href="#cor"><span class="toc-section-number">2.5.3</span> Cor</a></li>
 </ul></li>
-<li><a href="#prediction"><span class="toc-section-number">2.7</span> Prediction</a></li>
+<li><a href="#prediction"><span class="toc-section-number">2.6</span> Prediction</a></li>
 </ul></li>
 <li><a href="#chapter-4-classification"><span class="toc-section-number">3</span> Chapter 4 Classification</a></li>
 <li><a href="#chapter-5-resampling"><span class="toc-section-number">4</span> Chapter 5 Resampling</a></li>
@@ -344,18 +343,30 @@ The square operation has an absolute value like effect.</p>
 <p>Show that this inflection point is minimum by proving the 2nd derivative is positive (or positive definite for matrices).</p>
 <p><span class="math display">\[\frac{\partial^2 e^Te}{\partial\beta \partial\beta^T} = 2X^T X\]</span><br />
 Assuming X has full column rank, <span class="math inline">\(X^T X\)</span> can be shown to be positive definite.</p>
+<section id="axb" class="level4" data-number="2.3.1.1">
+<h4 data-number="2.3.1.1"><span class="header-section-number">2.3.1.1</span> Ax=b</h4>
+<p>Tricky</p>
+<ul>
+<li><span class="math inline">\(X\beta = Y\)</span></li>
+<li><span class="math inline">\(Ax = b\)</span></li>
+</ul>
+<p>The <span class="math inline">\(\beta\)</span> represents <span class="math inline">\(x\)</span>.<br />
+The input <span class="math inline">\(X\)</span> does NOT represent <span class="math inline">\(x\)</span></p>
+<p>Each input or row of <span class="math inline">\(X\)</span> represent an equation or constraint which constrains the beta coefficients.<br />
+This is an overdetermined system (too many constraints/equation against too few variables)<br />
+Overdetermined systems have no exact solutions but we can find the best fit solution or <span class="math inline">\(x\)</span>(in our case coefficient <span class="math inline">\(\beta\)</span>)</p>
+</section>
 </section>
 <section id="covariance-matrix" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2"><span class="header-section-number">2.3.2</span> Covariance matrix</h3>
 <p>The <span class="math inline">\(X^T X\)</span> is the Covariance Matrix in multivariate normal distribution.</p>
 <p>$$= Cov(X,X) = (X_i - _i)(X_j-_j)</p>
-</section>
-</section>
-<section id="residual" class="level2" data-number="2.4">
-<h2 data-number="2.4"><span class="header-section-number">2.4</span> Residual</h2>
-<p><span class="math inline">\(e\)</span> is the residual.<br />
-<span class="math inline">\(e\)</span> is not related to <span class="math inline">\(\epsilon\)</span> is anyway.</p>
-<p><span class="math display">\[ E[Y-\hat{Y}]^2 = E[f(X)+\epsilon -\hat{f}(X)]^2 = {\color{red}E[f(X)-\hat{f}(X)]^2} + Var(\epsilon)\]</span> Overarching Goal: find <span class="math inline">\(f\)</span> st. term in RED is minimized</p>
+<p><span class="math display">\[ E[Y-\hat{Y}]^2 = E[f(X)+\epsilon -\hat{f}(X)]^2 = {\color{red}E[f(X)-\hat{f}(X)]^2} + Var(\epsilon)\]</span></p>
+<p><span class="math display">\[{\color{red}e = f(X)-\hat{f}(X)}\]</span></p>
+<ul>
+<li>reducible error : <span class="math inline">\({\color{red}E[f(X)-\hat{f}(X)]^2}\)</span></li>
+<li>irreducible error: <span class="math inline">\(Var(\epsilon)\)</span></li>
+</ul>
 <p>Steps:</p>
 <ol type="1">
 <li>Choose model: Linear equation</li>
@@ -377,15 +388,16 @@ Assuming X has full column rank, <span class="math inline">\(X^T X\)</span> can 
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(x,y) <span class="co"># correlation</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0.8344</span></span></code></pre></div>
 </section>
-<section id="validate-linearity" class="level2" data-number="2.5">
-<h2 data-number="2.5"><span class="header-section-number">2.5</span> Validate linearity</h2>
+</section>
+<section id="validate-linearity" class="level2" data-number="2.4">
+<h2 data-number="2.4"><span class="header-section-number">2.4</span> Validate linearity</h2>
 <ul>
 <li>We can use linear regression on any dataset but that DOES NOT imply a linear relation exists.<br />
 </li>
 <li>We must perform t-test(single independent var) or ANOVA F-test(multiple independent var) on the linear regression model’s coefficients to prove whether a linear relation exists.</li>
 </ul>
-<section id="t-test" class="level3" data-number="2.5.1">
-<h3 data-number="2.5.1"><span class="header-section-number">2.5.1</span> T-test</h3>
+<section id="t-test" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1"><span class="header-section-number">2.4.1</span> T-test</h3>
 <ul>
 <li>T-dist is a probability dist like a normal-dist but bigger tails
 <ul>
@@ -400,14 +412,14 @@ Alt H: There is a linear relationship between independent variable and output <s
 What happens when only some coefficient are significant and others arent.<br />
 ANSWER: Typically, we throw out nonsignificant (high p-value) coefficients to sacrifice some bias to reduce variance.<br />
 Remember high variance leads to overfit.</p>
-<section id="degree-of-freedom" class="level4" data-number="2.5.1.1">
-<h4 data-number="2.5.1.1"><span class="header-section-number">2.5.1.1</span> degree of freedom</h4>
+<section id="degree-of-freedom" class="level4" data-number="2.4.1.1">
+<h4 data-number="2.4.1.1"><span class="header-section-number">2.4.1.1</span> degree of freedom</h4>
 </section>
 </section>
-<section id="validate-multi-linear-regression-model" class="level3" data-number="2.5.2">
-<h3 data-number="2.5.2"><span class="header-section-number">2.5.2</span> Validate multi-linear regression model</h3>
-<section id="f-test" class="level4" data-number="2.5.2.1">
-<h4 data-number="2.5.2.1"><span class="header-section-number">2.5.2.1</span> F-test</h4>
+<section id="validate-multi-linear-regression-model" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2"><span class="header-section-number">2.4.2</span> Validate multi-linear regression model</h3>
+<section id="f-test" class="level4" data-number="2.4.2.1">
+<h4 data-number="2.4.2.1"><span class="header-section-number">2.4.2.1</span> F-test</h4>
 <p>Null H: None of the independent variable have a linear relationship with output <span class="math inline">\(\forall n, \beta_n = 0\)</span><br />
 Alt H: At least one of the independent variable have a linear relationship with output<span class="math inline">\(\exists n, \beta_n \neq 0\)</span></p>
 <p>Variance WITHIN groups vs Variance BETWEEN groups</p>
@@ -425,30 +437,31 @@ Alt H: At least one of the independent variable have a linear relationship with 
 </section>
 </section>
 </section>
-<section id="model-fit" class="level2" data-number="2.6">
-<h2 data-number="2.6"><span class="header-section-number">2.6</span> Model fit</h2>
-<section id="mse" class="level3" data-number="2.6.1">
-<h3 data-number="2.6.1"><span class="header-section-number">2.6.1</span> MSE</h3>
+<section id="model-fit-loss-function" class="level2" data-number="2.5">
+<h2 data-number="2.5"><span class="header-section-number">2.5</span> Model fit ( Loss Function )</h2>
+<section id="mse" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1"><span class="header-section-number">2.5.1</span> MSE</h3>
 <ul>
 <li>MSE(Mean Squared Error) : used to check how well our regression model fits
 <ul>
 <li>Add the squared distance from point to regression, then divide by count of datapoints</li>
 </ul></li>
+<li>Notice <span class="math inline">\(MSE = \frac{1}{n} RSS\)</span></li>
 </ul>
 <p>Goal is to minimize MSE of test dataset, not training dataset</p>
-<section id="standard-error-se" class="level4" data-number="2.6.1.1">
-<h4 data-number="2.6.1.1"><span class="header-section-number">2.6.1.1</span> Standard Error SE</h4>
+<section id="standard-error-se" class="level4" data-number="2.5.1.1">
+<h4 data-number="2.5.1.1"><span class="header-section-number">2.5.1.1</span> Standard Error SE</h4>
 <ul>
 <li>how far the sample {mean,weights,residuals} are from the reality or population {mean,weights,residuals}</li>
 </ul>
 </section>
-<section id="rse-serss" class="level4" data-number="2.6.1.2">
-<h4 data-number="2.6.1.2"><span class="header-section-number">2.6.1.2</span> RSE = SE(RSS)</h4>
+<section id="rse-serss" class="level4" data-number="2.5.1.2">
+<h4 data-number="2.5.1.2"><span class="header-section-number">2.5.1.2</span> RSE = SE(RSS)</h4>
 <p>Standard Error of RSS is RSE</p>
 </section>
 </section>
-<section id="r2" class="level3" data-number="2.6.2">
-<h3 data-number="2.6.2"><span class="header-section-number">2.6.2</span> R^2</h3>
+<section id="r2" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2"><span class="header-section-number">2.5.2</span> R^2</h3>
 <p><span class="math inline">\(R^2\)</span> is a number in [0,1] and related to Variance(Scatter or Clumped)<br />
 <span class="math inline">\(R^2\)</span> measure how scattered or clumped the data WRT our regression line aka model.</p>
 <ul>
@@ -466,14 +479,14 @@ We can safely drop height variable</p>
 </ul></li>
 </ul>
 </section>
-<section id="cor" class="level3" data-number="2.6.3">
-<h3 data-number="2.6.3"><span class="header-section-number">2.6.3</span> Cor</h3>
+<section id="cor" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3"><span class="header-section-number">2.5.3</span> Cor</h3>
 <p><span class="math display">\[R^2 = Cor(Y,\hat{Y})^2 \text{ for multiple lin reg}\]</span><br />
 Linear fit models aim to <span class="math inline">\(max(Cor(Y,\hat{Y}))\)</span></p>
 </section>
 </section>
-<section id="prediction" class="level2" data-number="2.7">
-<h2 data-number="2.7"><span class="header-section-number">2.7</span> Prediction</h2>
+<section id="prediction" class="level2" data-number="2.6">
+<h2 data-number="2.6"><span class="header-section-number">2.6</span> Prediction</h2>
 <p>Prediction interval</p>
 </section>
 </section>
@@ -492,7 +505,7 @@ We Can but only for binary outcomes</p>
 
         </div>
         <div id="footer">
-            <div class="flex-container" style="display:flex;">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
                 <div>
             Site proudly generated by
             <a href="http://jaspervdj.be/hakyll">Hakyll</a>
