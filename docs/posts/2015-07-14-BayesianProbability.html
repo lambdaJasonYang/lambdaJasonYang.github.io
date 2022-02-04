@@ -280,10 +280,17 @@
 <p>We call State 1 our <strong>prior</strong> and the<br />
 conditional probability or final state <strong>post-erior</strong></p>
 </section>
-<section id="my-interpretation" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> My Interpretation</h1>
+<section id="conditional-probability-and-statistical-alpha" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Conditional Probability and statistical Alpha</h1>
+<p>http://www.columbia.edu/~cjd11/charles_dimaggio/DIRE/styled-4/code-12/</p>
+<p><img src="http://www.columbia.edu/~cjd11/charles_dimaggio/DIRE/resources/power/curves.png" /></p>
+<p>Eg. We run a t-test between 2 sample populations. This returns 2 normal curves with one mean 0, and the other delta representing the <strong>DIFFERENCE between populations</strong>.<br />
+WARNING: <strong>The normal curves DO NOT represent each of the 2 sample populations</strong></p>
 <ul>
-<li>Shaded node <span class="math inline">\(P(A)\)</span> behaves like <strong>existential intro</strong></li>
+<li><p>Type 1 or alpha: P(t-test tells us there is difference | Reality there is no difference)</p></li>
+<li><p>Type 2 or beta: P(t-test tells us there is no difference | Reality there is a difference)</p></li>
+<li><p>Power or (1-beta): P(t-test tells us there is a difference | Reality there is a difference) # My Interpretation</p></li>
+<li><p>Shaded node <span class="math inline">\(P(A)\)</span> behaves like <strong>existential intro</strong></p></li>
 </ul>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a202072616e6b646972203d204c520a636f6d706f756e643d747275650a0a09737562677261706820636c75737465725f31207b0a09096e6f6465205b7374796c653d22225d3b0a09096c6162656c203d202250284129223b0a090941205b6c6162656c3d224122207374796c653d66696c6c65645d3b0a2020200a097d0a0a7d0a40656e64756d6c"></figure>
 <ul>

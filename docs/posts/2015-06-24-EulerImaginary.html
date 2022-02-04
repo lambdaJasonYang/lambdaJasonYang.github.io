@@ -251,20 +251,17 @@
 <li><a href="#de-moivre-theorem"><span class="toc-section-number">2.2</span> De Moivre Theorem</a></li>
 <li><a href="#exponent-in-complex-field"><span class="toc-section-number">2.3</span> Exponent in Complex field</a></li>
 </ul></li>
-<li><a href="#functional-identities"><span class="toc-section-number">3</span> Functional identities</a>
+<li><a href="#derivatives"><span class="toc-section-number">3</span> Derivatives</a>
 <ul>
-<li><a href="#substitution-method"><span class="toc-section-number">3.1</span> Substitution method</a></li>
+<li><a href="#partial-fractions"><span class="toc-section-number">3.1</span> Partial Fractions</a></li>
+<li><a href="#taylor-series"><span class="toc-section-number">3.2</span> Taylor Series</a></li>
 </ul></li>
-<li><a href="#derivatives"><span class="toc-section-number">4</span> Derivatives</a>
+<li><a href="#practical"><span class="toc-section-number">4</span> Practical</a>
 <ul>
-<li><a href="#partial-fractions"><span class="toc-section-number">4.1</span> Partial Fractions</a></li>
-<li><a href="#taylor-series"><span class="toc-section-number">4.2</span> Taylor Series</a></li>
+<li><a href="#integral"><span class="toc-section-number">4.1</span> Integral</a></li>
+<li><a href="#helices"><span class="toc-section-number">4.2</span> Helices</a></li>
 </ul></li>
-<li><a href="#practical"><span class="toc-section-number">5</span> Practical</a>
-<ul>
-<li><a href="#integral"><span class="toc-section-number">5.1</span> Integral</a></li>
-<li><a href="#helices"><span class="toc-section-number">5.2</span> Helices</a></li>
-</ul></li>
+<li><a href="#random-problems"><span class="toc-section-number">5</span> Random Problems</a></li>
 </ul></div>
 <section id="fundamental-theorem-of-algebra" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Fundamental Theorem of Algebra</h1>
@@ -276,6 +273,9 @@
 </section>
 <section id="euler" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Euler</h1>
+<p><span class="math inline">\(e^x\)</span> is not really a power.<br />
+<span class="math inline">\(e^x\)</span> is really a series <span class="math inline">\(1 + x + \frac{x^2}{2} + ,,,\)</span><br />
+This makes it easier to understand <span class="math inline">\(e^i\)</span></p>
 <section id="coordinate-systems" class="level2" data-number="2.1">
 <h2 data-number="2.1"><span class="header-section-number">2.1</span> Coordinate systems</h2>
 <p>Everything in the table is equal</p>
@@ -382,53 +382,20 @@
 \end{align} \]</span></p>
 </section>
 </section>
-<section id="functional-identities" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Functional identities</h1>
-<p>Imagine if we had a functional identity <span class="math display">\[ \forall a: \forall f : f(a) = 1 \]</span></p>
-<p>The only function that satisfies this is <span class="math inline">\(f(x) = 1\)</span></p>
-<p>Note <span class="math inline">\(\{\forall a: \forall f : f(a) = 1\} \neq \{f(x) = 1\}\)</span></p>
-<p>One is a functional identity and the other is a single function.</p>
-<section id="substitution-method" class="level2" data-number="3.1">
-<h2 data-number="3.1"><span class="header-section-number">3.1</span> Substitution method</h2>
-<p>Logarithm satisfies <span class="math inline">\(\forall x,y : \forall f:f(x \cdot y) = f(x) + f(y)\)</span></p>
-<ul>
-<li><span class="math inline">\([assume\ \hat{a}]\)</span>
-<ul>
-<li><span class="math inline">\([let\ \exists \bar{b}, \bar{b}= 1]\)</span>
-<ul>
-<li><span class="math inline">\([assume\ \hat{f}]\)</span>
-<ul>
-<li>plug in <span class="math inline">\(\hat{a} , \bar{b}, \hat{f}\)</span> into functional identity</li>
-<li><span class="math inline">\(\hat{f}(\hat{a} \cdot \bar{b}) = \hat{f}(\hat{a}) + \hat{f}(\bar{b})\)</span> , apply substitution <span class="math inline">\(\bar{b} = 1\)</span></li>
-<li><span class="math inline">\(\hat{f}(\hat{a} \cdot 1) = \hat{f}(\hat{a}) + \hat{f}(1)\)</span></li>
-<li><span class="math inline">\(\hat{f}(\hat{a}) = \hat{f}(\hat{a}) + \hat{f}(1)\)</span></li>
-<li>conclude <span class="math inline">\(\hat{f}(1) = 0\)</span></li>
-</ul></li>
-<li><span class="math inline">\(\forall f:f(1) = 0\)</span> discharge arbitrary <span class="math inline">\(\hat{f}\)</span></li>
-</ul></li>
-<li><span class="math inline">\(b\)</span> is no longer in context; Simply drop existential quantifier instead of discharging</li>
-</ul></li>
-<li><span class="math inline">\(\forall a : \forall f: f(1) = 0\)</span> discharge arbitrary <span class="math inline">\(\hat{a}\)</span></li>
-</ul>
-<p>Plug back our conclusion back into original functional identity for verification (not shown here).</p>
-<p>Notice <span class="math inline">\(Log(1) = 0\)</span></p>
-<p><span class="math inline">\(f(1) = 0\)</span> is true for any function f that satisfies the identity <span class="math inline">\(f(x \cdot y) = f(x) + f(y)\)</span></p>
-</section>
-</section>
-<section id="derivatives" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Derivatives</h1>
+<section id="derivatives" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Derivatives</h1>
 <p>Derivatives operate on functions</p>
 <p><span class="math inline">\(D(f(x)) + D(g(x)) = D(f+g)(x)\)</span><br />
 <span class="math inline">\(c \cdot D(f)(x) = D(c \cdot f)(x) ,\ given\ constant\  c\in \mathbb{R}\)</span><br />
 Derivative operator is a linear operator</p>
 <p>Functional identity for trig functions <span class="math inline">\(f(x+y) = f(x)g(y) + f(y)g(x)\)</span></p>
-<section id="partial-fractions" class="level2" data-number="4.1">
-<h2 data-number="4.1"><span class="header-section-number">4.1</span> Partial Fractions</h2>
+<section id="partial-fractions" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Partial Fractions</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Apart</span><span class="op">[</span>(<span class="dv">6</span> <span class="fu">x</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">12</span> <span class="fu">x</span> <span class="sc">+</span> <span class="dv">14</span>)<span class="sc">/</span>(<span class="fu">x</span><span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span> <span class="fu">x</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="fu">x</span> <span class="sc">+</span> <span class="dv">15</span>)<span class="op">]</span></span></code></pre></div>
 <p><span class="math display">\[\frac{4 (4 x+1)}{7 \left(x^2+3\right)}+\frac{26}{7 (x+5)}\]</span></p>
 </section>
-<section id="taylor-series" class="level2" data-number="4.2">
-<h2 data-number="4.2"><span class="header-section-number">4.2</span> Taylor Series</h2>
+<section id="taylor-series" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Taylor Series</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Series</span><span class="op">[</span><span class="fu">E</span><span class="sc">^</span>(<span class="fu">I</span><span class="sc">*</span><span class="fu">x</span>)<span class="op">,</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">7</span><span class="op">}]</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Series</span><span class="op">[</span><span class="fu">Cos</span><span class="op">[</span><span class="fu">x</span><span class="op">],</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">7</span><span class="op">}]</span> <span class="sc">+</span> (<span class="fu">I</span><span class="sc">*</span><span class="fu">Series</span><span class="op">[</span><span class="fu">Sin</span><span class="op">[</span><span class="fu">x</span><span class="op">],</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">7</span><span class="op">}]</span>)</span></code></pre></div>
 <p><span class="math display">\[
@@ -445,8 +412,8 @@ i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
 <p><span class="math display">\[e^{ix} = cos(x) + i\cdot sin(x)\]</span> <span class="math display">\[e^{i\pi} + 1 = 0\ when\ x = \pi \]</span></p>
 </section>
 </section>
-<section id="practical" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Practical</h1>
+<section id="practical" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Practical</h1>
 <ul>
 <li>A speed limit is 15mph, a driver moves 40mi in 2 hour. Did the driver ever break the speed limit?
 <ul>
@@ -460,8 +427,8 @@ i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
 <li>To minimize the maximum speed, the driver should move at the same constant speed the whole duration.</li>
 </ul></li>
 </ul>
-<section id="integral" class="level2" data-number="5.1">
-<h2 data-number="5.1"><span class="header-section-number">5.1</span> Integral</h2>
+<section id="integral" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Integral</h2>
 <ul>
 <li>Find something x that can be enumerated or indexed.
 <ul>
@@ -484,8 +451,8 @@ i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
 <p>The arrows denote velocity being indexed by time.<br />
 The binary operation multiply is applied to each pair then summed.</p>
 </section>
-<section id="helices" class="level2" data-number="5.2">
-<h2 data-number="5.2"><span class="header-section-number">5.2</span> Helices</h2>
+<section id="helices" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> Helices</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r</span> <span class="ex">:=</span> <span class="dv">1</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span> <span class="ex">:=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ParametricPlot3D</span><span class="op">[</span></span>
@@ -498,6 +465,11 @@ The binary operation multiply is applied to each pair then summed.</p>
 <p><span class="math display">\[s(t) = \langle rcos(t),rsin(t),c*t \rangle \]</span> <span class="math display">\[\frac{1}{c} = \# cycles,frequency\]</span> <span class="math display">\[r = radius \]</span></p>
 <hr />
 </section>
+</section>
+<section id="random-problems" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Random Problems</h1>
+<p><a href="https://artofproblemsolving.com/wiki/index.php/2021_AMC_12A_Problems/Problem_19">2021 AMC 12A</a></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Solve</span><span class="op">[</span><span class="fu">Sin</span><span class="op">[</span>(<span class="fu">Pi</span><span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span><span class="fu">Cos</span><span class="op">[</span><span class="fu">x</span><span class="op">]]</span><span class="ex">==</span><span class="fu">Cos</span><span class="op">[</span>(<span class="fu">Pi</span><span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span><span class="fu">Sin</span><span class="op">[</span><span class="fu">x</span><span class="op">]]</span> &amp;&amp; <span class="fu">x</span> &gt;<span class="ex">=</span> <span class="dv">0</span> &amp;&amp; <span class="fu">Pi</span> &gt;<span class="ex">=</span> <span class="fu">x</span><span class="op">,</span><span class="fu">x</span><span class="op">,</span><span class="bu">Reals</span><span class="op">]</span></span></code></pre></div>
 </section>
 
         </div>

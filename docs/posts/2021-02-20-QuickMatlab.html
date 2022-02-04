@@ -243,17 +243,97 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>
     
 </div>
-<section id="image-label-and-training" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Image label and training</h3>
+<section id="basics" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Basics</h1>
+<section id="variables" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Variables</h2>
+<p>Semicolon suppress output</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode matlab"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">a</span> <span class="op">=</span> <span class="fl">5</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">b</span> <span class="op">=</span> <span class="fl">9</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">% Saving variables to file</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="va">save</span> <span class="va">datafile</span>.<span class="va">mat</span> <span class="co">%save all variable to file</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="va">save</span> <span class="va">datafile</span>.<span class="va">mat</span> <span class="va">a</span>  <span class="co">%save variable a to file</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="va">clear</span> <span class="co">%clear variables</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">% Loading variable from file</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="va">load</span> <span class="va">datafile</span>.<span class="va">mat</span> <span class="co">%load all variable from file</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="va">load</span> <span class="va">datafile</span>.<span class="va">mat</span> <span class="va">a</span> <span class="co">%load variable a from file</span></span></code></pre></div>
+</section>
+<section id="common-math-functions" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Common math functions</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode matlab"><code class="sourceCode matlab"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">%constants and functions</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">pi_</span> <span class="op">=</span> <span class="va">pi</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">sin_</span> <span class="op">=</span> <span class="va">sin</span>(<span class="fl">90</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">eig_</span> <span class="op">=</span> <span class="va">eig</span>(<span class="va">ones</span>(<span class="fl">5</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">abs_</span> <span class="op">=</span> <span class="va">abs</span>(<span class="op">-</span><span class="fl">5</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="va">imaginaryNum</span> <span class="op">=</span> <span class="fl">1i</span><span class="op">^</span><span class="fl">2</span></span></code></pre></div>
+</section>
+<section id="matrices-and-vectors" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> Matrices and Vectors</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode matlab"><code class="sourceCode matlab"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">%row vector</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">x1</span> <span class="op">=</span> [<span class="fl">3</span><span class="op">,</span> <span class="fl">5</span><span class="op">,</span> <span class="fl">7</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">x2</span> <span class="op">=</span> [<span class="fl">3</span> <span class="fl">5</span> <span class="fl">7</span>] <span class="co">%we can use comma or space</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">%col vector</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="va">y</span> <span class="op">=</span> [<span class="fl">3</span><span class="op">;</span><span class="fl">5</span><span class="op">;</span><span class="fl">7</span>] </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="va">z</span> <span class="op">=</span> [<span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span><span class="op">;</span><span class="fl">4</span> <span class="fl">5</span> <span class="fl">6</span>] <span class="co">%2 by 3 matrix</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">%select element in matrix</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="va">z</span>(<span class="fl">2</span><span class="op">,</span><span class="fl">3</span>) <span class="co">% element in position 2,3</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">z</span>(<span class="op">:,</span><span class="fl">3</span>) <span class="co">% allrow,third column</span></span></code></pre></div>
+<section id="transpose" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1"><span class="header-section-number">1.3.1</span> Transpose</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode matlab"><code class="sourceCode matlab"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">%Transpose using single  quote '</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">xT</span> <span class="op">=</span> [<span class="fl">3</span> <span class="fl">5</span> <span class="fl">7</span>]<span class="op">'</span> </span></code></pre></div>
+</section>
+</section>
+<section id="matrix-operations" class="level2" data-number="1.4">
+<h2 data-number="1.4"><span class="header-section-number">1.4</span> Matrix Operations</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode matlab"><code class="sourceCode matlab"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span> <span class="op">=</span> [<span class="fl">3</span> <span class="fl">5</span> <span class="fl">7</span> <span class="fl">12</span> <span class="fl">10</span>] <span class="co">%we can use comma or space</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>(<span class="fl">1</span>) <span class="co">%output 3, first element</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>(<span class="fl">1</span>) <span class="op">=</span> <span class="fl">9</span> <span class="co">%change first element</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>) <span class="op">=</span> [<span class="fl">4</span> <span class="fl">2</span>] <span class="co">%change first 2 elements</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>([<span class="fl">1</span> <span class="fl">3</span>]) <span class="co">%output 1st and 3rd element </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>(<span class="kw">end</span>) <span class="co">%last element</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>(<span class="kw">end</span><span class="op">-</span><span class="fl">1</span>) <span class="co">%next to last element </span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span> <span class="op">=</span> [<span class="fl">3</span> <span class="fl">5</span> <span class="fl">7</span> <span class="fl">12</span> <span class="fl">10</span>] </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">%logical indexing</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span> <span class="op">&gt;</span> <span class="fl">3</span> <span class="co">%outputs a mask</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>(<span class="va">test1</span> <span class="op">&gt;</span> <span class="fl">3</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>(<span class="va">test1</span> <span class="op">==</span> <span class="fl">3</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>(<span class="va">test1</span> <span class="op">~=</span> <span class="fl">3</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>(<span class="va">test1</span> <span class="op">&gt;</span> <span class="fl">3</span> <span class="op">&amp;</span> <span class="va">test1</span> <span class="op">&lt;</span> <span class="fl">7</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>(<span class="va">test1</span> <span class="op">&gt;</span> <span class="fl">3</span> <span class="op">|</span> <span class="va">test1</span> <span class="op">&lt;</span> <span class="fl">7</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="va">test1</span>(<span class="va">test1</span> <span class="op">~=</span> <span class="fl">3</span>) <span class="op">=</span> <span class="fl">99</span> <span class="co">%replace elem neq 3 with 99</span></span></code></pre></div>
+</section>
+<section id="plotting" class="level2" data-number="1.5">
+<h2 data-number="1.5"><span class="header-section-number">1.5</span> Plotting</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode matlab"><code class="sourceCode matlab"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">xaxis</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">yaxis</span> <span class="op">=</span> <span class="va">rand</span>(<span class="fl">1</span><span class="op">,</span><span class="fl">12</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">xaxis</span><span class="op">,</span><span class="va">yaxis</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="va">hold</span> <span class="va">on</span> <span class="co">%plots both graph on top instead of separate plots</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">xaxis</span><span class="op">,</span><span class="va">yaxis</span><span class="op">+</span><span class="fl">0.1</span><span class="op">,</span><span class="st">&quot;r--o&quot;</span>) <span class="co">%r for red, -- with o as marker</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="va">hold</span> <span class="va">off</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">yaxis</span>) <span class="co">%x-axis auto ranges from 1 to size of yaxis</span></span></code></pre></div>
+</section>
+</section>
+<section id="image-label-and-training" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Image label and training</h1>
 <p>Matlab use Simulink image labeler export will output: gTruth</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode matlab"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">trainingDataTable</span> <span class="op">=</span> <span class="va">objectDetectorTrainingData</span>(<span class="va">gTruth</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">acfDetector</span> <span class="op">=</span> <span class="va">trainACFObjectDetector</span>(<span class="va">trainingDataTable</span><span class="op">,</span><span class="ss">'NegativeSamplesFactor'</span><span class="op">,</span><span class="fl">2</span>)<span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">I</span> <span class="op">=</span> <span class="va">imread</span>(<span class="st">&quot;C:\Users\User\Downloads\archive\shapes\squares\drawing(28).png&quot;</span>)<span class="op">;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">bboxes</span> <span class="op">=</span> <span class="va">detect</span>(<span class="va">acfDetector</span><span class="op">,</span><span class="va">I</span>)<span class="op">;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="va">annotation</span> <span class="op">=</span> <span class="va">acfDetector</span>.<span class="va">ModelName</span><span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="va">I</span> <span class="op">=</span> <span class="va">insertObjectAnnotation</span>(<span class="va">I</span><span class="op">,</span><span class="ss">'rectangle'</span><span class="op">,</span><span class="va">bboxes</span><span class="op">,</span><span class="va">annotation</span>)<span class="op">;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="va">figure</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="va">imshow</span>(<span class="va">I</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode matlab"><code class="sourceCode matlab"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="va">trainingDataTable</span> <span class="op">=</span> <span class="va">objectDetectorTrainingData</span>(<span class="va">gTruth</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="va">acfDetector</span> <span class="op">=</span> <span class="va">trainACFObjectDetector</span>(<span class="va">trainingDataTable</span><span class="op">,</span><span class="ss">'NegativeSamplesFactor'</span><span class="op">,</span><span class="fl">2</span>)<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="va">I</span> <span class="op">=</span> <span class="va">imread</span>(<span class="st">&quot;C:\Users\User\Downloads\archive\shapes\squares\drawing(28).png&quot;</span>)<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="va">bboxes</span> <span class="op">=</span> <span class="va">detect</span>(<span class="va">acfDetector</span><span class="op">,</span><span class="va">I</span>)<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="va">annotation</span> <span class="op">=</span> <span class="va">acfDetector</span>.<span class="va">ModelName</span><span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="va">I</span> <span class="op">=</span> <span class="va">insertObjectAnnotation</span>(<span class="va">I</span><span class="op">,</span><span class="ss">'rectangle'</span><span class="op">,</span><span class="va">bboxes</span><span class="op">,</span><span class="va">annotation</span>)<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="va">figure</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="va">imshow</span>(<span class="va">I</span>)</span></code></pre></div>
 </section>
 
         </div>

@@ -243,8 +243,8 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
     
 </div>
-<section id="send-html-request-with-js" class="level5" data-number="0.0.0.0.1">
-<h5 data-number="0.0.0.0.1"><span class="header-section-number">0.0.0.0.1</span> Send HTML request with js</h5>
+<section id="send-html-request-with-js" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Send HTML request with js</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> xmlHttp <span class="op">=</span> <span class="kw">new</span> <span class="bu">XMLHttpRequest</span>()<span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>xmlHttp<span class="op">.</span><span class="at">onreadystatechange</span> <span class="op">=</span> <span class="kw">function</span>() {</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (xmlHttp<span class="op">.</span><span class="at">readyState</span> <span class="op">==</span> <span class="dv">4</span> <span class="op">&amp;&amp;</span> xmlHttp<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="dv">200</span>) {</span>
@@ -255,23 +255,23 @@
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>xmlHttp<span class="op">.</span><span class="fu">open</span>(<span class="st">&quot;GET&quot;</span><span class="op">,</span> <span class="st">&quot;https://api.icndb.com/jokes/random/&quot;</span><span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>xmlHttp<span class="op">.</span><span class="fu">send</span>(<span class="kw">null</span>)<span class="op">;</span></span></code></pre></div>
 </section>
-<section id="select-element-by-class-or-id" class="level5" data-number="0.0.0.0.2">
-<h5 data-number="0.0.0.0.2"><span class="header-section-number">0.0.0.0.2</span> Select element by class or id</h5>
+<section id="select-element-by-class-or-id" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Select element by class or id</h1>
 <div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;#content&quot;</span>)<span class="op">.</span><span class="at">value</span> <span class="op">=</span> <span class="st">&quot;new value&quot;</span><span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">//this will select by id</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;.myclass&quot;</span>)<span class="op">;</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">//this will select by class</span></span></code></pre></div>
 </section>
-<section id="more-complex-selector" class="level5" data-number="0.0.0.0.3">
-<h5 data-number="0.0.0.0.3"><span class="header-section-number">0.0.0.0.3</span> More Complex selector</h5>
+<section id="more-complex-selector" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> More Complex selector</h1>
 <div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> el <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;div.user-panel.main input[name='login']&quot;</span>)<span class="op">;</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;user-panel main&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;input</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;login&quot;</span><span class="kw">/&gt;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
 </section>
-<section id="building-html-element-through-vanilla-js" class="level5" data-number="0.0.0.0.4">
-<h5 data-number="0.0.0.0.4"><span class="header-section-number">0.0.0.0.4</span> Building HTML element through vanilla JS</h5>
+<section id="building-html-element-through-vanilla-js" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Building HTML element through vanilla JS</h1>
 <div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> paragraph <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">&quot;p&quot;</span>)<span class="op">;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> textContent <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createTextNode</span>(<span class="st">&quot;content&quot;</span>)<span class="op">;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>paragraph<span class="op">.</span><span class="fu">appendChild</span>(textContent)<span class="op">;</span></span>
@@ -279,8 +279,8 @@
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;#messages&quot;</span>)<span class="op">.</span><span class="fu">appendChild</span>(paragraph)<span class="op">;</span></span></code></pre></div>
 <hr />
 </section>
-<section id="promises-async-timeout" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Promises, Async, Timeout</h3>
+<section id="promises-async-timeout" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Promises, Async, Timeout</h1>
 <p>sdfs</p>
 <hr />
 <div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">navigator</span><span class="op">.</span><span class="at">geolocation</span><span class="op">.</span><span class="fu">getCurrentPosition</span>((loc)<span class="kw">=&gt;</span>{</span>
@@ -295,15 +295,15 @@
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>sessionStorage<span class="op">.</span><span class="fu">getItem</span>(<span class="st">&quot;key&quot;</span>)<span class="op">;</span></span></code></pre></div>
 <hr />
 </section>
-<section id="location.hash" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> location.hash</h3>
+<section id="location.hash" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> location.hash</h1>
 <p>Not the hash function! Given a url: <code class="sourceCode javascript">https<span class="op">:</span><span class="co">//example.com/stuff#blah%20ads%20bah</span></code></p>
 <p><code class="sourceCode javascript">location<span class="op">.</span><span class="at">hash</span></code> –&gt; <code class="sourceCode javascript">#blah<span class="op">%</span>20ads<span class="op">%</span>20bah</code></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">decodeURIComponent</span>(location<span class="op">.</span><span class="at">hash</span><span class="op">.</span><span class="fu">substr</span>(<span class="dv">1</span>))</span></code></pre></div>
 <hr />
 </section>
-<section id="js-for-react" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> JS for React</h3>
+<section id="js-for-react" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> JS for React</h1>
 <ul>
 <li>event object
 <ul>
@@ -315,6 +315,38 @@
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(e<span class="op">.</span><span class="at">type</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event#interfaces_based_on_event">List of event types</a></p>
+</section>
+<section id="this-and-bind" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> this and bind</h1>
+<ul>
+<li><code>this</code> is an OO construct that allows vision of the outer closure similar to <code>self</code> in python.
+<ul>
+<li><code>this</code> varys depending on where it is instantiated, assigned or called</li>
+<li>On assignment to variable the <code>context</code> changes
+<ul>
+<li><code>let a = b</code> means <code>context</code> of <code>b</code> depends on where this assignment happened.</li>
+</ul></li>
+<li><code>.bind()</code> allows us change the <code>context</code> <!--  --></li>
+</ul></li>
+<li>idiosyncrasy:<code>const f = ()=&gt;{}</code> keeps the <code>this</code> or <code>context</code> where the function was declared but <code>function(){}</code> does not.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">//global context</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> dog <span class="op">=</span> {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">//dog context</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sound</span> <span class="op">:</span> <span class="st">&quot;wolf&quot;</span><span class="op">,</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">talk</span> <span class="op">:</span> <span class="kw">function</span>(){ <span class="co">//note we didnt use arrow notation ()=&gt;{}</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="kw">this</span><span class="op">.</span><span class="at">sound</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">//'this' -&gt; dog context</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>dog<span class="op">.</span><span class="fu">talk</span>() <span class="co">// prints wolf</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> newdogtalk <span class="op">=</span> dog<span class="op">.</span><span class="at">talk</span> <span class="co">//we basically copied the talk function so </span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">//'this' now points to place of assignment which is global context</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">newdogtalk</span>() <span class="co">//output undefined since there is no 'sound' in global</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> newnewdogtalk <span class="op">=</span> (dog<span class="op">.</span><span class="at">talk</span>)<span class="op">.</span><span class="fu">bind</span>(dog) <span class="co">//bind forces 'this' to point to dog context</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="fu">newnewdogtalk</span>() <span class="co">//output wolf</span></span></code></pre></div>
 </section>
 
         </div>

@@ -246,9 +246,17 @@
 <p>Redis uses port 6379</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> start <span class="at">-p</span> 4000:6379 redis:latest </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">redis-cli</span> <span class="at">-h</span> 127.0.0.1 <span class="at">-p</span> 4000</span></code></pre></div>
+<section id="basics" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Basics</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">redis-server</span> /path/redis.conf        <span class="co"># start redis with the related configuration file</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">redis-cli</span>                            <span class="co"># opens a redis prompt</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart redis.service <span class="co"># Restart Redis</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status redis          <span class="co"># Check Redis status</span></span></code></pre></div>
 <p>Redis is a hashtable {key::TypeX -&gt; value::TypeY}</p>
-<section id="basic-data-types-polymorphism---datatypes-can-change" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Basic data types, Polymorphism - datatypes can change</h3>
+</section>
+<section id="basic-data-types-polymorphism---datatypes-can-change" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Basic data types, Polymorphism - datatypes can change</h1>
 <p>Basic data type for VALUE</p>
 <ul>
 <li>String</li>
@@ -260,17 +268,17 @@
 </li>
 <li>Hash</li>
 </ul>
-<section id="setting-a-key-value" class="level4" data-number="0.0.1.1">
-<h4 data-number="0.0.1.1"><span class="header-section-number">0.0.1.1</span> Setting a KEY VALUE</h4>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> event:Bleh <span class="st">&quot;heh&quot;</span></span></code></pre></div>
+</section>
+<section id="setting-a-key-value" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Setting a KEY VALUE</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> event:Bleh <span class="st">&quot;heh&quot;</span></span></code></pre></div>
 <ul>
 <li>KEY - event:Bleh</li>
 <li>VALUE - “heh”</li>
 </ul>
-<section id="list" class="level5" data-number="0.0.1.1.1">
-<h5 data-number="0.0.1.1.1"><span class="header-section-number">0.0.1.1.1</span> List</h5>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lpop</span> events</span></code></pre></div>
-</section>
+<section id="list" class="level5" data-number="3.0.0.0.1">
+<h5 data-number="3.0.0.0.1"><span class="header-section-number">3.0.0.0.1</span> List</h5>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lpop</span> events</span></code></pre></div>
 </section>
 </section>
 

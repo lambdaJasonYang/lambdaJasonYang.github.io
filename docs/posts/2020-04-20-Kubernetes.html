@@ -243,7 +243,38 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
 </div>
-<p>Kub</p>
+<section id="sunmmary" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Sunmmary</h1>
+<ul>
+<li><span class="math inline">\(\{Pod...\} \in Node\)</span></li>
+<li><span class="math inline">\(\{Container...\} \in Pod\)</span></li>
+<li>A Node controls labeled sets of containers called pods.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> cluster-info</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Kubernetes control plane is running at https://172.17.0.28:8443</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># KubeDNS is running at https://172.17.0.28:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> get nodes</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># NAME       STATUS   ROLES                  AGE    VERSION</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># minikube   Ready    control-plane,master   108s   v1.20.2</span></span></code></pre></div>
+</section>
+<section id="deploying-and-pods" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Deploying and Pods</h1>
+<ul>
+<li>Pod = Set of containers that are all under 1 IP address
+<ul>
+<li>similar to docker-compose in a way</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># deploys blehname to a pod</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> create deployment blehname <span class="at">--image</span><span class="op">=</span>gcr.io/google-samples/kubernetes-bootcamp:v1</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> get deployments</span></code></pre></div>
+</section>
+<section id="proxy-our-network-into-kubectl-cluster" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Proxy our network into kubectl cluster</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#in another terminal this will run a proxy </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> proxy</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8001/version</span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">

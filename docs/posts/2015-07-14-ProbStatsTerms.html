@@ -247,8 +247,9 @@
 <li><a href="#terms"><span class="toc-section-number">1</span> Terms</a>
 <ul>
 <li><a href="#z-test-t-test-anova"><span class="toc-section-number">1.1</span> Z-test T-test ANOVA</a></li>
-<li><a href="#jaynes"><span class="toc-section-number">1.2</span> Jaynes</a></li>
 </ul></li>
+<li><a href="#clt"><span class="toc-section-number">2</span> CLT</a></li>
+<li><a href="#distributions"><span class="toc-section-number">3</span> Distributions</a></li>
 </ul></div>
 <p><a href="http://www.acsu.buffalo.edu/~adamcunn/probability/probability.html">Probability playground</a></p>
 <section id="terms" class="level1" data-number="1">
@@ -285,7 +286,7 @@
 </ul>
 <p>Sample Mean</p>
 <ul>
-<li><span class="math inline">\(\bar{x}~N(\mu,\frac{\sigma^2}{n})\)</span></li>
+<li><span class="math inline">\(\bar{x}\~N(\mu,\frac{\sigma^2}{n})\)</span></li>
 <li>How does a sample mean have a distribution?
 <ul>
 <li>The sample mean is a RANDOM VARIABLE, not a constant, since it’s value will differ depending on the subset of population sampled. This variability allows thie sample mean to have a distribution.
@@ -324,10 +325,57 @@
 </ul></li>
 <li>Multivariate means more than one dependent variable</li>
 </ul>
+<p><strong>independent random variable = Subset</strong><br />
+Note these Subsets can come from the same or different populations.</p>
 </section>
-<section id="jaynes" class="level2" data-number="1.2">
-<h2 data-number="1.2"><span class="header-section-number">1.2</span> Jaynes</h2>
 </section>
+<section id="clt" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> CLT</h1>
+<ul>
+<li>no matter what type of distribution the population distribution is, if we sample enough times, the sample distribution AKA the means of all our samplings form a normal distribution.</li>
+<li>The sum of multiple independent random variable converges to a normal dist as the # of variables increases.</li>
+</ul>
+</section>
+<section id="distributions" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Distributions</h1>
+<ul>
+<li>Bernoulli = LEM in probability
+<ul>
+<li>VERY SIMPLE</li>
+<li>An event either happens or it doesnt.
+<ul>
+<li>Bernoulli distribution is just these a plot of 2 probabilities that add up to 1.</li>
+</ul></li>
+<li>Eg. we draw sticks, probability we get red is 0.2, probability of other color is (1-0.2).</li>
+</ul></li>
+<li>Binomial = repeated Bernoulli
+<ul>
+<li>Bernoulli but Sample multiple times</li>
+<li>Eg. we draw sticks multiple times, probability we get red 5 times.</li>
+</ul></li>
+<li>Beta-distribution = Ordering
+<ul>
+<li>if n points are randomly chosen from interval [0,1], the j-th point has beta(j,n-j+1) as the beta-dist</li>
+<li></li>
+</ul></li>
+<li>Hyper-geom = Finite resources
+<ul>
+<li>1000 chocolate bars, 5 golden tickets and 20 chocolate bars are bought. What is prob we get X golden tickets?</li>
+</ul></li>
+<li>Logistic dist = Closely related to Logistic regression
+<ul>
+<li>CDF is the logistic function (sigmoid is an example of a logistic function)
+<ul>
+<li>Maps the real number line [-inf,inf] to probabilities [0,1]</li>
+</ul></li>
+</ul></li>
+<li>Lognormal = dist where the log is normally distributed
+<ul>
+<li>The log of stock returns is normally distributed.</li>
+<li>Given what is the probability we achieve a log(0.05%) return for today? To answer this, look up log(0.05%) in the lognormal dist</li>
+</ul></li>
+<li>Chi-Squared ## Jaynes</li>
+</ul>
 </section>
 
         </div>

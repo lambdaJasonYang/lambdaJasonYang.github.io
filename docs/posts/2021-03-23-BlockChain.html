@@ -243,112 +243,158 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'python'." href="../tags/python.html">python</a>
     
 </div>
-<section id="chaina-a" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Chain(A) = [A]</h4>
+<section id="diagrams" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Diagrams</h1>
+<section id="chaina-a" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Chain(A) = [A]</h2>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a200a72616e6b6469723d22524c220a636f6d706f756e643d747275650a0a0a737562677261706820636c7573746572417b0a2020202044617461410a7d0a0a7d200a40656e64756d6c"></figure>
 <hr />
 </section>
-<section id="chainb-a-b" class="level4" data-number="0.0.0.2">
-<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Chain(B) = [[A]] + [B]</h4>
+<section id="chainb-a-b" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Chain(B) = [[A]] + [B]</h2>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a200a72616e6b6469723d22524c220a636f6d706f756e643d747275650a0a737562677261706820636c757374657268417b0a737562677261706820636c7573746572417b0a2020202044617461410a7d0a7d0a737562677261706820636c7573746572427b0a44617461420a7d0a0a0a44617461422d3e4461746141205b6c6162656c3d22646570656e6422206c7461696c3d636c757374657242206c686561643d636c757374657268415d0a7d200a40656e64756d6c"></figure>
 <hr />
 </section>
-<section id="chainc-a-b-c" class="level4" data-number="0.0.0.3">
-<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> Chain(C) = [[[A]] + [B]] + [C]</h4>
+<section id="chainc-a-b-c" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> Chain(C) = [[[A]] + [B]] + [C]</h2>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a72616e6b6469723d22524c220a636f6d706f756e643d747275650a737562677261706820636c757374657268427b0a737562677261706820636c757374657268417b0a737562677261706820636c7573746572417b0a2020202044617461410a7d0a7d0a0a737562677261706820636c7573746572427b0a44617461420a7d0a7d0a0a44617461422d3e4461746141205b6c6162656c3d22646570656e6422206c7461696c3d636c757374657242206c686561643d636c757374657268415d0a737562677261706820636c7573746572437b0a44617461430a7d0a44617461432d3e4461746142205b6c6162656c3d22646570656e6422206c7461696c3d636c757374657243206c686561643d636c757374657268425d0a7d200a40656e64756d6c"></figure>
 <hr />
 </section>
-<section id="analysis" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Analysis</h3>
+</section>
+<section id="analysis" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Analysis</h1>
+<p>_ + A = (_,A)</p>
 <ul>
-<li>Chain(A) = [A]</li>
-<li>Chain(B) = [[A]] + [B]</li>
-<li>Chain(C) = [[[A]] + [B]] + [C]</li>
+<li>Chain(A) =</li>
+<li>Chain(B) =</li>
+<li>Chain(C) =</li>
 </ul>
-<section id="general-form" class="level4" data-number="0.0.1.1">
-<h4 data-number="0.0.1.1"><span class="header-section-number">0.0.1.1</span> General Form</h4>
+<section id="general-form" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> General Form</h2>
 <p><span class="math display">\[ Chain(N) = [Chain(N-1)] + [N] \]</span></p>
 <p>Analogous to <a href="../posts/2018-08-23-BuildNatSets.html">Set theoretical natural numbers</a><br />
-<span class="math display">\[ N = \{N-1\} \cup Pred(N) \]</span></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MinimalBlock():</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, index, timestamp, data, previous_hash):</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.index <span class="op">=</span> index</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.timestamp <span class="op">=</span> timestamp</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.previous_hash <span class="op">=</span> previous_hash</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">hash</span> <span class="op">=</span> <span class="va">self</span>.hashing()</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> hashing(<span class="va">self</span>):</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        key <span class="op">=</span> hashlib.sha256()</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        encodeUTF8 <span class="op">=</span> <span class="kw">lambda</span> x: <span class="bu">str</span>(x).encode(<span class="st">&quot;utf-8&quot;</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> encodeUTF8(<span class="va">self</span>.index <span class="op">+</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                          <span class="va">self</span>.timestamp <span class="op">+</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                          <span class="va">self</span>.data <span class="op">+</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                          <span class="va">self</span>.previous_hash)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.index).encode(<span class="st">'utf-8'</span>))</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.timestamp).encode(<span class="st">'utf-8'</span>))</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.data).encode(<span class="st">'utf-8'</span>))</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.previous_hash).encode(<span class="st">'utf-8'</span>))</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> key.hexdigest()</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MinimalChain():</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>): <span class="co"># initialize when creating a chain</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.blocks <span class="op">=</span> [<span class="va">self</span>.get_genesis_block()]</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_genesis_block(<span class="va">self</span>): </span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> MinimalBlock(<span class="dv">0</span>, </span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>                            datetime.datetime.utcnow(), </span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Genesis'</span>, </span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'arbitrary'</span>)</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add_block(<span class="va">self</span>, data):</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.blocks.append(MinimalBlock(<span class="bu">len</span>(<span class="va">self</span>.blocks), </span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>                                        datetime.datetime.utcnow(), </span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>                                        data, </span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                                        <span class="va">self</span>.blocks[<span class="bu">len</span>(<span class="va">self</span>.blocks)<span class="op">-</span><span class="dv">1</span>].<span class="bu">hash</span>))</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_chain_size(<span class="va">self</span>): <span class="co"># exclude genesis block</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.blocks)<span class="op">-</span><span class="dv">1</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> verify(<span class="va">self</span>, verbose<span class="op">=</span><span class="va">True</span>): </span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        flag <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="bu">len</span>(<span class="va">self</span>.blocks)):</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i].index <span class="op">!=</span> i:</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Wrong block index at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i<span class="op">-</span><span class="dv">1</span>].<span class="bu">hash</span> <span class="op">!=</span> <span class="va">self</span>.blocks[i].previous_hash:</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Wrong previous hash at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i].<span class="bu">hash</span> <span class="op">!=</span> <span class="va">self</span>.blocks[i].hashing():</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Wrong hash at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i<span class="op">-</span><span class="dv">1</span>].timestamp <span class="op">&gt;=</span> <span class="va">self</span>.blocks[i].timestamp:</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Backdating at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> flag</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fork(<span class="va">self</span>, head<span class="op">=</span><span class="st">'latest'</span>):</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> head <span class="kw">in</span> [<span class="st">'latest'</span>, <span class="st">'whole'</span>, <span class="st">'all'</span>]:</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> copy.deepcopy(<span class="va">self</span>) <span class="co"># deepcopy since they are mutable</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>            c <span class="op">=</span> copy.deepcopy(<span class="va">self</span>)</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>            c.blocks <span class="op">=</span> c.blocks[<span class="dv">0</span>:head<span class="op">+</span><span class="dv">1</span>]</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> c</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_root(<span class="va">self</span>, chain_2):</span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>        min_chain_size <span class="op">=</span> <span class="bu">min</span>(<span class="va">self</span>.get_chain_size(), chain_2.get_chain_size())</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,min_chain_size<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i] <span class="op">!=</span> chain_2.blocks[i]:</span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">self</span>.fork(i<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.fork(min_chain_size)</span></code></pre></div>
+<span class="math display">\[ N = \{N-1\} \cup Pred(N) \]</span> $$ N = Set(Pred(N)) + Pred(N)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Set</span><span class="er">(</span><span class="ex">Expand</span><span class="er">(</span><span class="ex">A</span><span class="kw">))</span> <span class="ex">=</span> Expand<span class="er">(</span><span class="ex">Set</span><span class="er">(</span><span class="ex">A</span><span class="kw">))</span> <span class="ex">=</span> A</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">A</span> Union B = Set<span class="er">(</span><span class="ex">Expand</span><span class="er">(</span><span class="ex">A</span><span class="kw">)</span> <span class="ex">+</span> Expand<span class="er">(</span><span class="ex">B</span><span class="kw">))</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Expand</span><span class="er">(</span><span class="ex">{{2}}</span><span class="kw">)</span> <span class="ex">=</span> {2}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">N</span> = Set<span class="er">(</span><span class="ex">n-1</span><span class="kw">)</span> <span class="ex">Union</span> <span class="er">(</span><span class="ex">n-1</span><span class="kw">)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">N</span> = Set<span class="er">(</span> <span class="ex">Expand</span><span class="er">(</span><span class="ex">Set</span><span class="er">(</span><span class="ex">n-1</span><span class="kw">))</span> <span class="ex">+</span> Expand<span class="er">(</span><span class="ex">n-1</span><span class="kw">)</span> <span class="kw">)</span> <span class="ex">=</span> Set<span class="er">(</span><span class="kw">(</span><span class="ex">n-1</span><span class="kw">)</span> <span class="ex">+</span> Expand<span class="er">(</span><span class="ex">n-1</span><span class="kw">))</span></span></code></pre></div>
+</section>
+<section id="example-node" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Example node</h2>
+<p>Example data of the nth node of the chain:</p>
+<ul>
+<li>n-text</li>
+<li>n-timestamp</li>
+<li>n-index</li>
+<li>HASH of:
+<ul>
+<li>n-text</li>
+<li>n-timestamp</li>
+<li>n-index</li>
+<li>HASH(PREVIOUS-CHAIN)</li>
+</ul></li>
+</ul>
+<p>PERSONAL-DATA = {n-text,n-timestamp,n-index}<br />
+CURRENT-NODE = PERSONAL-DATA + HASH(PERSONAL-DATA,HASH(PREVIOUS-CHAIN))<br />
+F = lambda x: x + HASH(x,y)<br />
+P(N) + F(Pred(N))</p>
+<p>Adversary tampers with the the PERSONAL-DATA of the CURRENT-NODE with EVIL-PERSONAL-DATA.</p>
+<p><img src="https://ars.els-cdn.com/content/image/1-s2.0-S240595951930164X-gr1.jpg" /></p>
+</section>
+</section>
+<section id="adversarial-attack" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Adversarial Attack</h1>
+<section id="making-fake-transactions" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Making fake transactions</h2>
+<p>The adversary(receiver) is to forge a fake transaction.<br />
+Won’t work because the private-key is linked to the identity of the (sender).<br />
+Imagine if the adversary(receiver) did fake a transaction from the victim(sender), anyone could tell it was fake by taking the victim(sender) public key to verify the signature.</p>
+<p><img src="https://www.cryptocompare.com/media/1284/digital_signature.png" /></p>
+</section>
+<section id="doubling-transaction" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Doubling transaction</h2>
+<p>Example. Say we have a chain [Block Genesis…Block P, Block Q]<br />
+An adversary wants to modify Block Q BUT to do so he must</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MinimalBlock():</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, index, timestamp, data, previous_hash):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.index <span class="op">=</span> index</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.timestamp <span class="op">=</span> timestamp</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.previous_hash <span class="op">=</span> previous_hash</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">hash</span> <span class="op">=</span> <span class="va">self</span>.hashing()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> hashing(<span class="va">self</span>):</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        key <span class="op">=</span> hashlib.sha256()</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        encodeUTF8 <span class="op">=</span> <span class="kw">lambda</span> x: <span class="bu">str</span>(x).encode(<span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> encodeUTF8(<span class="va">self</span>.index <span class="op">+</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                          <span class="va">self</span>.timestamp <span class="op">+</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                          <span class="va">self</span>.data <span class="op">+</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                          <span class="va">self</span>.previous_hash)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.index).encode(<span class="st">'utf-8'</span>))</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.timestamp).encode(<span class="st">'utf-8'</span>))</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.data).encode(<span class="st">'utf-8'</span>))</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.previous_hash).encode(<span class="st">'utf-8'</span>))</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> key.hexdigest()</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MinimalChain():</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>): <span class="co"># initialize when creating a chain</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.blocks <span class="op">=</span> [<span class="va">self</span>.get_genesis_block()]</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_genesis_block(<span class="va">self</span>): </span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> MinimalBlock(<span class="dv">0</span>, </span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                            datetime.datetime.utcnow(), </span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Genesis'</span>, </span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'arbitrary'</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add_block(<span class="va">self</span>, data):</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.blocks.append(MinimalBlock(<span class="bu">len</span>(<span class="va">self</span>.blocks), </span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>                                        datetime.datetime.utcnow(), </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>                                        data, </span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                                        <span class="va">self</span>.blocks[<span class="bu">len</span>(<span class="va">self</span>.blocks)<span class="op">-</span><span class="dv">1</span>].<span class="bu">hash</span>))</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_chain_size(<span class="va">self</span>): <span class="co"># exclude genesis block</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.blocks)<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> verify(<span class="va">self</span>, verbose<span class="op">=</span><span class="va">True</span>): </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        flag <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="bu">len</span>(<span class="va">self</span>.blocks)):</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i].index <span class="op">!=</span> i:</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Wrong block index at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i<span class="op">-</span><span class="dv">1</span>].<span class="bu">hash</span> <span class="op">!=</span> <span class="va">self</span>.blocks[i].previous_hash:</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Wrong previous hash at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i].<span class="bu">hash</span> <span class="op">!=</span> <span class="va">self</span>.blocks[i].hashing():</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Wrong hash at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i<span class="op">-</span><span class="dv">1</span>].timestamp <span class="op">&gt;=</span> <span class="va">self</span>.blocks[i].timestamp:</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Backdating at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> flag</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fork(<span class="va">self</span>, head<span class="op">=</span><span class="st">'latest'</span>):</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> head <span class="kw">in</span> [<span class="st">'latest'</span>, <span class="st">'whole'</span>, <span class="st">'all'</span>]:</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> copy.deepcopy(<span class="va">self</span>) <span class="co"># deepcopy since they are mutable</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>            c <span class="op">=</span> copy.deepcopy(<span class="va">self</span>)</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>            c.blocks <span class="op">=</span> c.blocks[<span class="dv">0</span>:head<span class="op">+</span><span class="dv">1</span>]</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> c</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_root(<span class="va">self</span>, chain_2):</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        min_chain_size <span class="op">=</span> <span class="bu">min</span>(<span class="va">self</span>.get_chain_size(), chain_2.get_chain_size())</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,min_chain_size<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i] <span class="op">!=</span> chain_2.blocks[i]:</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">self</span>.fork(i<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.fork(min_chain_size)</span></code></pre></div>
 </section>
 </section>
 

@@ -243,156 +243,150 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
     
 </div>
-<ul>
-<li>React components have 2 parts
-<ul>
-<li>localenv: local environment’s variable,hooks,functions</li>
-<li>JSX: the JSX or virtual DOM it returns.</li>
-</ul></li>
-</ul>
-<p>The moment we enter a new state, 0.1 and 0.2 starts first.</p>
-<p><strong><em>localenv behaves asynchronously</em></strong> Don’t trust your own ordering of ESPECIALLY WHEN INITAIZLING JSON variables because your INIT may depend on side effects it may mix side effects.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>App <span class="op">=</span> ({data}) <span class="kw">=&gt;</span> {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">//data outputs some modified garbage data </span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">//because of asynchronous side effect below</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(data) </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">/////////////////////////////////////////</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> optionVar <span class="op">=</span> {</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">price</span><span class="op">:</span> <span class="fu">SideEffectFunc</span>(data) </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">//BIG NONO</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">/////////////////////////////////////////</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span>(<span class="op">..</span><span class="at">JSX</span><span class="op">..</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">//1st fetches data from db</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> func <span class="fu">getStaticProps</span>(context){</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> data <span class="op">=</span> <span class="fu">fetch</span>(<span class="op">...</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data</span>
+<section id="intro" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Intro</h1>
+<p>Component goes through 3 phases. * Function Body * useEffect * return()</p>
+<p>In each phase code is ran by the order they are declared. (eg. if we have 2 useEffect() on line 2 and line 5, the first one at line 2 will always run first)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// function body START</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> a <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> b <span class="op">=</span> <span class="kw">new</span> <span class="fu">TextEncoder</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// function body </span><span class="re">END</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// useEffect START</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">useEffect</span>(()<span class="kw">=&gt;</span>{</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> c <span class="op">=</span> <span class="dv">6</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span>[])</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// useEffect </span><span class="re">END</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">//return() START</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(<span class="op">&lt;</span>div<span class="op">&gt;</span>my stuff<span class="op">&lt;/</span>div<span class="op">&gt;</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">//return() </span><span class="re">END</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Initializing a json “optionVar” but initialization depends on a sideeffect function. We expect data to output clean data but the “SideEffectFunc” corrupted our data.<br />
-<strong>Server side on our terminal outputs misleading clean data BUT WHEN RENDERED USING chrome inspect we see that the data is actually modified</strong></p>
-<ul>
-<li>DO NOT USE STATEFUL VARIABLES OR SIDE EFFECTS IN localenv</li>
-<li>DO NOT MODIFY THE “props” IN localenv</li>
-</ul>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a736b696e706172616d20736861646f77696e672066616c73650a7374617465203020617320227374617465203022207b0a2020737461746520226c6f63616c656e7622206173206c656e7631203c3c73646c726563656976653e3e0a2020737461746520226a737822206173206a737831203c3c73646c726563656976653e3e0a20206c656e7631202d5b23626c75655d2d3e206c656e7631203a20302e312e2052656e646572200a20206a737831202d5b23626c75655d2d3e206a737831203a20302e322e2052656e6465720a20205b2a5d202d2d3e206a737831203a20312e20636c69636b20627574746f6e0a20206a737831202d2d3e206c656e7631203a20322e2063616c6c6261636b2063616c6c732075706772616465687028297b2e2e2e207365746870282e297d0a20206c656e7631202d2d3e206c656e7631203a20332e2075706772616465687028292072756e7320746f205c6e636f6d706c6574696f6e2077697468206e6f207374617465206368616e6765206d69647761790a20200a20200a7d0a0a7374617465203120617320227374617465203122207b0a2020737461746520226c6f63616c656e7622206173206c656e7632203c3c73646c726563656976653e3e0a2020737461746520226a737822206173206a737832203c3c73646c726563656976653e3e0a20206c656e7632202d5b23626c75655d2d3e206c656e7632203a20302e312052656e6465720a20206a737832202d5b23626c75655d2d3e206a737832203a20302e322052656e6465720a20205b2a5d202d5b646f747465645d2d3e206a737832203a20352e20536565207570646174656420706167650a7d0a6c656e7631202d5b23677265656e5d2d3e2031203a20342e207374617465206368616e67650a40656e64756d6c"></figure>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">//LOCALENV START ------------</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;0.1 render&quot;</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">const</span> hp<span class="op">,</span> sethp <span class="op">=</span> <span class="fu">useState</span>(() <span class="kw">=&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">const</span> <span class="fu">upgradehp</span>() <span class="op">=</span> {</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(hp) <span class="co">//2. outputs 0</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="fu">sethp</span>(prevhp <span class="kw">=&gt;</span> prevhp<span class="op">*</span><span class="dv">2</span>)</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(hp) <span class="co">//2. outputs 0</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>}<span class="co">//3. after running to completion our state update takes effect</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">//LOCALENV End --------------</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">//JSX START ------------------</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="cf">return</span> (</span>
-<span id="cb2-14"><a href="#cb2-14"></a>    <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>    <span class="co">//1. click some button that calls upgradehp()</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>    {<span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;0.2 render&quot;</span>)}</span>
-<span id="cb2-17"><a href="#cb2-17"></a>    {hp}</span>
-<span id="cb2-18"><a href="#cb2-18"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>)</span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co">//JSX End --------------------</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a>}</span></code></pre></div>
-<p>Line 6 and Line 8 will always output the same value. The local env maintains some level of functional purity.</p>
-<p>The pure upgradehp() function will run through completion (ignoring the state change of hp)<br />
-but after finishing it will signal to the JSX that hp state has changed and rerender the component to a new state.</p>
-<p>In many ways the upgradehp() is similar to being an IO monad.</p>
-<p>To understand react, trust that every function behaves in a functional deterministic manner wrt to it’s current state. (shown in line 6 and line 8)</p>
-<section id="when-does-react-component-rerender" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> When does React component rerender</h3>
-<ul>
-<li>setState hook() is called</li>
-<li>All children of the component will also be rerendered</li>
-</ul>
 </section>
-<section id="usestate" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> UseState</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> hp<span class="op">,</span> sethp <span class="op">=</span> <span class="fu">useState</span>(() <span class="kw">=&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> <span class="fu">upgradehp</span>() <span class="op">=</span> {</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sethp</span>(prevhp <span class="kw">=&gt;</span> prevhp<span class="op">*</span><span class="dv">2</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sethp</span>(prevhp <span class="kw">=&gt;</span> prevhp<span class="op">*</span><span class="dv">2</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span></code></pre></div>
+<section id="compositionextending-components" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Composition/Extending Components</h1>
 <ul>
-<li>DO pass a lambda function <code class="sourceCode javascript">prevhp <span class="kw">=&gt;</span> prevhp<span class="op">*</span><span class="dv">2</span></code> to setState</li>
-<li>DO NOT do <code class="sourceCode javascript"><span class="fu">sethealth</span>(hp<span class="op">*</span><span class="dv">2</span>)</code>
-<ul>
-<li>The behavior may be indeterminant if we called it twice like in the above code.</li>
-</ul></li>
-<li>we pass in a lazy function <code class="sourceCode javascript">() <span class="kw">=&gt;</span> <span class="dv">0</span></code> on useState so that it isn’t called on every render.
-<ul>
-<li>Similar reason we pass a lazy callback function in jsx element like <code class="sourceCode javascript">onClick<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">doSomething</span>()}</code></li>
-</ul></li>
+<li><code>FancyBorder :: (color,h1-className,pclassName, title, message) -&gt; FancyBorderComponent</code></li>
+<li><code>Dialog = FancyBorder ("blue","Dialog-title","Dialog-message") :: (title,message) -&gt; FancyBorderComponent</code></li>
+<li><code>WelcomeDialog = Dialog ("Welcome","Thank you for visiting our spacecraft!") :: FancyBorderComponent</code></li>
 </ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Dialog</span>(props) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>FancyBorder color<span class="op">=</span><span class="st">&quot;blue&quot;</span><span class="op">&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="op">&lt;</span>h1 className<span class="op">=</span><span class="st">&quot;Dialog-title&quot;</span><span class="op">&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        {props<span class="op">.</span><span class="at">title</span>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="op">&lt;</span>p className<span class="op">=</span><span class="st">&quot;Dialog-message&quot;</span><span class="op">&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        {props<span class="op">.</span><span class="at">message</span>}</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;/</span>FancyBorder<span class="op">&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">WelcomeDialog</span>() {</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>Dialog</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      title<span class="op">=</span><span class="st">&quot;Welcome&quot;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      message<span class="op">=</span><span class="st">&quot;Thank you for visiting our spacecraft!&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
-<section id="useeffect" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> UseEffect</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">//Mount begin--------------</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">//setup event listener, subscribe api</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">//mount</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">'target changed'</span>) </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">//Mount end----------------</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">//UnMount begin------------</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">'return from unmount changed'</span>) </span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">//clean up event listener, unsubscribe api</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">//unmount</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">//UnMount end ------------</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>}<span class="op">,</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>[] <span class="co">//target is empty</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<ul>
-<li>Mount - can only happen once</li>
-<li>Update - can happen as much as possible</li>
-<li>unMount - can only happen once</li>
-</ul>
-<p><strong>When UseEffect tracks a target or variable</strong></p>
-<ul>
-<li>It will also call on mount/unmount but this time it will also call when the target is changed.</li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// begin--------------</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">//on mount 1 call</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">//setup event listener, subscribe api</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">'target changed'</span>) </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// end----------------</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// begin------------</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">'return from unmount changed'</span>) </span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">//clean up event listener, unsubscribe api</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">//unmount</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// end ------------</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>}<span class="op">,</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>[target] </span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<section id="ssr-and-window-object" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> SSR and window object</h1>
+<p>PROBLEM: The below will fail because the page is rendered on the server, meaning there is no <code>window</code> object.</p>
+<div class="sourceCode" id="cb3" data-filename="error.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bleh<span class="op">:</span>NextPage <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>div<span class="op">&gt;</span>{<span class="bu">window</span><span class="op">.</span><span class="at">clientInformation</span>}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>SOLUTION: Use-effect is clientside render</p>
+<section id="convert-js-api-objects-to-react-usable-hooks" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Convert JS Api objects to React usable hooks</h2>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API">mozilla web api</a> has a list of API’s for vanilla JS. Typically you call a global object then use the object’s function to use the API.</p>
+<p>Ideally in functional React, we don’t like to call global variables so we use hooks.</p>
+<div class="sourceCode" id="cb4" data-filename="bad.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bleh<span class="op">:</span>NextPage <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> bleh <span class="op">=</span> <span class="kw">new</span> <span class="fu">TextEncoder</span>() <span class="co">//BAD</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">useEffect</span>(()<span class="kw">=&gt;</span>{</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span>[])</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(<span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        {bleh <span class="op">&amp;&amp;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(bleh<span class="op">.</span><span class="fu">encode</span>(<span class="st">&quot;a&quot;</span>))}</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>the <code>new</code> is a side-effect. Remember to only put side-effects in hooks.</p>
+<div class="sourceCode" id="cb5" data-filename="good.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bleh<span class="op">:</span>NextPage <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> bleh <span class="op">=</span> <span class="kw">new</span> <span class="fu">TextEncoder</span>() <span class="co">//BAD</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">useEffect</span>(()<span class="kw">=&gt;</span>{</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span>[])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(<span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        {bleh <span class="op">&amp;&amp;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(bleh<span class="op">.</span><span class="fu">encode</span>(<span class="st">&quot;a&quot;</span>))}</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
-<section id="useref" class="level3" data-number="0.0.4">
-<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> UseRef</h3>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6f626a656374206173640a6e6f7465206c6566740a203c26776966693e0a656e64206e6f74650a6469616d6f6e6420730a0a40656e64756d6c"></figure>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb6-2"><a href="#cb6-2"></a>    <span class="kw">const</span> refContainer <span class="op">=</span> <span class="fu">useRef</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>    <span class="kw">const</span> onButtonClick <span class="op">=</span> () <span class="kw">=&gt;</span> {<span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(refContainer<span class="op">.</span><span class="at">current</span>)}</span>
-<span id="cb6-4"><a href="#cb6-4"></a>    <span class="co">//refContainer.current will return the DOM object</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>    <span class="cf">return</span>(</span>
-<span id="cb6-6"><a href="#cb6-6"></a>        <span class="op">&lt;&gt;</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>            <span class="op">&lt;</span>div ref<span class="op">=</span>{refContainer}<span class="op">&gt;</span>SomeText <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>            <span class="op">&lt;</span>button onClick<span class="op">=</span>{onButtonClick}<span class="op">&gt;</span>button<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>        <span class="op">&lt;/&gt;</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>    )</span>
-<span id="cb6-11"><a href="#cb6-11"></a>}</span></code></pre></div>
-<p>line 7, the JSX <code class="sourceCode javascript"><span class="op">&lt;</span>div ref<span class="op">=</span>{refContainer}<span class="op">&gt;</span></code> is what binds the ref Hook to the Dom Element.</p>
-<p>In most cases of hooks like useEffect or useState, it’s the JSX element that depends on the hook.<br />
-But in this case the hook depends on the JSX element.</p>
+</section>
+<section id="closures" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Closures</h1>
+<div class="sourceCode" id="cb6"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- untyped lambda calculus values are functions</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Value</span> <span class="ot">=</span> <span class="dt">FunVal</span> (<span class="dt">Value</span> <span class="ot">-&gt;</span> <span class="dt">Value</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- we write expressions where variables take string-based names, but we'll</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- also just assume that nobody ever shadows names to avoid having to do</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- capture-avoiding substitutions</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> <span class="dt">Name</span> <span class="ot">=</span> <span class="dt">String</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Expr</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">Var</span> <span class="dt">Name</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">App</span> <span class="dt">Expr</span> <span class="dt">Expr</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">Abs</span> <span class="dt">Name</span> <span class="dt">Expr</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">-- We model the environment as function from strings to values, </span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">-- notably ignoring any kind of smooth lookup failures</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> <span class="dt">Env</span> <span class="ot">=</span> <span class="dt">Name</span> <span class="ot">-&gt;</span> <span class="dt">Value</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">-- The empty environment</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="ot">env0 ::</span> <span class="dt">Env</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>env0 _ <span class="ot">=</span> <span class="fu">error</span> <span class="st">&quot;Nope!&quot;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">-- Augmenting the environment with a value, &quot;closing over&quot; it!</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="ot">addEnv ::</span> <span class="dt">Name</span> <span class="ot">-&gt;</span> <span class="dt">Value</span> <span class="ot">-&gt;</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">Env</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>addEnv nm v e nm' <span class="op">|</span> nm' <span class="op">==</span> nm <span class="ot">=</span> v</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>                  <span class="op">|</span> <span class="fu">otherwise</span> <span class="ot">=</span> e nm</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">-- And finally the interpreter itself</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="ot">interp ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Value</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>interp e (<span class="dt">Var</span> name) <span class="ot">=</span> e name          <span class="co">-- variable lookup in the env</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>interp e (<span class="dt">App</span> ef ex) <span class="ot">=</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> <span class="dt">FunVal</span> f <span class="ot">=</span> interp e ef</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>      x        <span class="ot">=</span> interp e ex</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="kw">in</span> f x                              <span class="co">-- application to lambda terms</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>interp e (<span class="dt">Abs</span> name expr) <span class="ot">=</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- augmentation of a local (lexical) environment</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="dt">FunVal</span> (\value <span class="ot">-&gt;</span> interp (addEnv name value e) expr)</span></code></pre></div>
+</section>
+<section id="hooks" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Hooks</h1>
+<p>https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Example 0</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">useState</span>(initialValue) {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> _val <span class="op">=</span> initialValue <span class="co">// _val is a local variable created by useState</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">state</span>() {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// state is an inner function, a closure</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _val <span class="co">// state() uses _val, declared by parent funciton</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">setState</span>(newVal) {</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// same</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    _val <span class="op">=</span> newVal <span class="co">// setting _val without exposing _val</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> [state<span class="op">,</span> setState] <span class="co">// exposing functions for external use</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> [foo<span class="op">,</span> setFoo] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>) <span class="co">// using array destructuring</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="fu">foo</span>()) <span class="co">// logs 0 - the initialValue we gave</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">setFoo</span>(<span class="dv">1</span>) <span class="co">// sets _val inside useState's scope</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="fu">foo</span>()) <span class="co">// logs 1 - new initialValue, despite exact same call</span></span></code></pre></div>
+<p>What this says is _val</p>
 </section>
 
         </div>

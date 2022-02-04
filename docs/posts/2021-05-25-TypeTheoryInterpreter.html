@@ -23,7 +23,7 @@
         <!-- Google Analytics TAG END  ---------------------->
 
          
-        <title>Jason Yang - Type Theory</title>
+        <title>Jason Yang - Interpreter</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -231,7 +231,7 @@
         </div>
 
         <div id="content">
-            <h1>Type Theory</h1>
+            <h1>Interpreter</h1>
             
 
             <div class="info">
@@ -243,7 +243,22 @@
     Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
 </div>
-<p>Lexer -&gt; Parser</p>
+<section id="overview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<ul>
+<li>Type-Checker: Takes code as input, Returns Boolean based on whether code has consistent typing</li>
+<li>verifier: Takes code as input, Returns Boolean based on whether some invariant is satisfied</li>
+<li>Compiler: Converts code in one lang to code in another lang</li>
+</ul>
+</section>
+<section id="tokenizer" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Tokenizer</h1>
+<p>Converts code string to tokens</p>
+</section>
+<section id="parser" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Parser</h1>
+<p>Converts sets of tokens to AST.</p>
+</section>
 
         </div>
         <div id="footer">

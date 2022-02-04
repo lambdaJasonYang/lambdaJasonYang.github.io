@@ -23,7 +23,7 @@
         <!-- Google Analytics TAG END  ---------------------->
 
          
-        <title>Jason Yang - Distributed Systems</title>
+        <title>Jason Yang - Distributed Systems, CAP, Raft</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -231,7 +231,7 @@
         </div>
 
         <div id="content">
-            <h1>Distributed Systems</h1>
+            <h1>Distributed Systems, CAP, Raft</h1>
             
 
             <div class="info">
@@ -243,12 +243,88 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>
     
 </div>
+<div id="TOC"><ul>
+<li><a href="#rpc"><span class="toc-section-number">1</span> RPC</a></li>
+<li><a href="#raft-and-paxos"><span class="toc-section-number">2</span> Raft and Paxos</a></li>
+<li><a href="#cap-and-distributed-databases"><span class="toc-section-number">3</span> CAP and distributed Databases</a>
+<ul>
+<li><a href="#distributed-db"><span class="toc-section-number">3.1</span> Distributed DB</a></li>
+<li><a href="#cap"><span class="toc-section-number">3.2</span> CAP</a></li>
+<li><a href="#linearisable-consistency-aka-atomic"><span class="toc-section-number">3.3</span> Linearisable Consistency aka Atomic</a></li>
+<li><a href="#availability"><span class="toc-section-number">3.4</span> Availability</a></li>
+</ul></li>
+</ul></div>
 <p>Issues:</p>
 <ul>
 <li>bad performance in parallel algorithms due to load imbalance</li>
 <li>deadlocks</li>
 </ul>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h4073746172746d696e646d61700a0a2a2044697374726962757465645c6e53797374656d0a202a205368617265642d4d656d6f7279206d6f64656c0a0a6c65667420736964650a0a202a204d6573736167652d50617373696e67206d6f64656c0a40656e646d696e646d61700a"></figure>
+<section id="rpc" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> RPC</h1>
+<div class="sourceCode" id="cb1" data-filename="Client"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Result result <span class="op">=</span> paymentService<span class="op">.</span><span class="fu">processPayment</span>(<span class="st">&quot;192831823&quot;</span><span class="op">,</span><span class="fl">4.99</span><span class="op">,</span><span class="st">&quot;USD&quot;</span>)</span></code></pre></div>
+<ul>
+<li>Example: paying for an item on a webpage and sending the payment request to a credit card server</li>
+<li><strong>Stub</strong></li>
+</ul>
+</section>
+<section id="raft-and-paxos" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Raft and Paxos</h1>
+<ul>
+<li>Raft is a better Paxos</li>
+<li>Each node of the distributed system has 1 of 3 states:
+<ul>
+<li>Follower : All Nodes begin in this state
+<ul>
+<li>Followers that dont hear from Leaders become Candidates</li>
+</ul></li>
+<li>Candidate : Request votes from other nodes and hear their reply
+<ul>
+<li>Leader Election: Candidate becomes leader if it hears the vote from majority of nodes</li>
+</ul></li>
+<li>Leader : All changes in the system goes through the leader</li>
+</ul></li>
+</ul>
+</section>
+<section id="cap-and-distributed-databases" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> CAP and distributed Databases</h1>
+<section id="distributed-db" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Distributed DB</h2>
+<ul>
+<li>we can think of distributed DBs as read-write storage with just 2 operations <code>get()</code> <code>set(X)</code> on a single register but operations are labeled by clients A,B,… <code>A:get(), B:set(10) A:set(10)</code></li>
+<li><code>A:get(), B:set(10) A:set(10)</code> means client A sent get request to the distributed DB and client B sent a set request to the distributed DB but we don’t know who sent it first. But we do know <code>A:get</code> is before <code>A:set(10)</code>.</li>
+</ul>
+</section>
+<section id="cap" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> CAP</h2>
+<ul>
+<li>CAP is not a choice of CA,CP,AP …</li>
+<li>P aka Partition is not a choice, it is an act of nature aka a unforeseen crisis</li>
+<li>CAP really means <strong>If P happens we can choose to save either C or A but not both</strong>.
+<ul>
+<li>Paxos/Spinnaker/Raft choose C</li>
+</ul></li>
+</ul>
+</section>
+<section id="linearisable-consistency-aka-atomic" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> Linearisable Consistency aka Atomic</h2>
+<ul>
+<li><p>C in CAP means Strong Consistency aka Linearisable Consistency aka Atomic</p></li>
+<li><p>Atomic: Everything appears to be a sequential serial operation on the register</p></li>
+<li><p>eventual consistency: <code>set(10), set(5), get()=10</code></p>
+<ul>
+<li>Eventual Consistency mutually exclusive to Atomicity</li>
+</ul></li>
+</ul>
+</section>
+<section id="availability" class="level2" data-number="3.4">
+<h2 data-number="3.4"><span class="header-section-number">3.4</span> Availability</h2>
+<ul>
+<li>Availability means all request to DB must return non-error requests is a finite amount of time</li>
+<li>Async means no bound on receiving the response of a message, it may never return</li>
+</ul>
+</section>
+</section>
 
         </div>
         <div id="footer">

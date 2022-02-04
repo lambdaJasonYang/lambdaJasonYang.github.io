@@ -243,71 +243,183 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>
     
 </div>
-<section id="post-apply-and-latex-output" class="level5" data-number="0.0.0.0.1">
-<h5 data-number="0.0.0.0.1"><span class="header-section-number">0.0.0.0.1</span> Post apply and LateX output</h5>
+<div id="TOC"><ul>
+<li><a href="#common-functions"><span class="toc-section-number">1</span> Common functions</a></li>
+<li><a href="#map-fold"><span class="toc-section-number">2</span> Map Fold</a>
+<ul>
+<li><a href="#table"><span class="toc-section-number">2.1</span> Table</a></li>
+</ul></li>
+<li><a href="#lambda"><span class="toc-section-number">3</span> Lambda</a></li>
+<li><a href="#post-apply-and-latex-output"><span class="toc-section-number">4</span> Post apply and LateX output</a></li>
+<li><a href="#simplify-with-condition"><span class="toc-section-number">5</span> Simplify with condition</a></li>
+<li><a href="#print-out-ast"><span class="toc-section-number">6</span> print out AST</a></li>
+<li><a href="#list"><span class="toc-section-number">7</span> List</a></li>
+<li><a href="#show-all-prob-dist"><span class="toc-section-number">8</span> show all prob dist</a></li>
+<li><a href="#module"><span class="toc-section-number">9</span> Module</a></li>
+<li><a href="#print-out-probability-distributions"><span class="toc-section-number">10</span> print out probability Distributions</a></li>
+<li><a href="#solve-implicit-differentiation"><span class="toc-section-number">11</span> Solve implicit differentiation</a></li>
+<li><a href="#taylor-series"><span class="toc-section-number">12</span> Taylor Series</a></li>
+<li><a href="#importing-fred-data"><span class="toc-section-number">13</span> Importing Fred Data</a></li>
+<li><a href="#equity-timeseries-forecast"><span class="toc-section-number">14</span> Equity Timeseries Forecast</a></li>
+<li><a href="#visualize-network-related-keywords"><span class="toc-section-number">15</span> Visualize network related keywords</a></li>
+</ul></div>
+<section id="common-functions" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Common functions</h1>
+<ul>
+<li><code>D[expr,x]</code> Derivative</li>
+<li><code>Integrate[expr,x]</code></li>
+<li><code>DSolve[x]</code> Analytically Solve diffyq</li>
+<li><code>NDSolve[x]</code> Numerically Solve diffyq</li>
+<li><code>N</code> Reduce expr to numeric value</li>
+<li><code>FixedPoint[x,7]</code> Find closest fixed point from x = 7</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>f[3]</td>
+<td>original</td>
+</tr>
+<tr class="even">
+<td>f@3</td>
+<td>preapply</td>
+</tr>
+<tr class="odd">
+<td>3 // f</td>
+<td>postapply</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="map-fold" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Map Fold</h1>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/@</code></td>
+<td>Map</td>
+</tr>
+<tr class="even">
+<td><code>NestList[,,]</code></td>
+<td>Fold</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mapf <span class="ex">:=</span> <span class="fu">f</span> <span class="sc">/</span>@ <span class="op">{</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">(* {1,4,9} *)</span></span></code></pre></div>
+<p><code>NestList[function,initial-value, number-of-function-app]</code></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">NestList</span><span class="op">[</span><span class="fu">f</span><span class="op">,</span> <span class="fu">x</span><span class="op">,</span> <span class="dv">4</span><span class="op">]</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">(* {f[x],f^2[x],f^3[x],f^4[x]}*)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>NestGraph<span class="op">[{</span><span class="fu">f</span><span class="op">[</span>#<span class="dv">1</span><span class="op">],</span> <span class="fu">g</span><span class="op">[</span>#<span class="dv">1</span><span class="op">]}</span> &amp;<span class="op">,</span> <span class="fu">x</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="fu">VertexLabels</span> <span class="ot">-&gt;</span> <span class="cn">All</span><span class="op">]</span></span></code></pre></div>
+<section id="table" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Table</h2>
+<p>Table is basically a map.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Table</span><span class="op">[</span><span class="fu">f</span><span class="op">,{</span><span class="fu">x</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span><span class="dv">10</span><span class="op">}]</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">(* {f[0],f[1],...*)</span></span></code></pre></div>
+</section>
+</section>
+<section id="lambda" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Lambda</h1>
+<ul>
+<li><code>#1, #2</code> are the bound variables of the lambda</li>
+<li><code>&amp;</code> indicates the expr is a lambda</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span><span class="op">[</span><span class="at">x_</span><span class="op">,</span><span class="at">y_</span><span class="op">]</span> <span class="ex">:=</span> <span class="fu">x</span><span class="sc">*</span><span class="fu">y</span> <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span> <span class="ex">:=</span> (#<span class="dv">1</span><span class="sc">*</span>#<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)&amp;</span></code></pre></div>
+</section>
+<section id="post-apply-and-latex-output" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Post apply and LateX output</h1>
 <p>double backslash for post application</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">A</span> <span class="ex">=</span><span class="op">{{</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">},{</span><span class="sc">-</span><span class="dv">1</span><span class="op">,</span><span class="dv">3</span><span class="op">,</span><span class="dv">0</span><span class="op">}}</span> <span class="sc">//</span> <span class="fu">MatrixForm</span> <span class="sc">//</span> <span class="fu">TeXForm</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">A</span> <span class="ex">=</span> <span class="fu">TeXForm</span><span class="op">[</span><span class="fu">MatrixForm</span><span class="op">[{{</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">},{</span><span class="sc">-</span><span class="dv">1</span><span class="op">,</span><span class="dv">3</span><span class="op">,</span><span class="dv">0</span><span class="op">}}]]</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">A</span> <span class="ex">=</span><span class="op">{{</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">},{</span><span class="sc">-</span><span class="dv">1</span><span class="op">,</span><span class="dv">3</span><span class="op">,</span><span class="dv">0</span><span class="op">}}</span> <span class="sc">//</span> <span class="fu">MatrixForm</span> <span class="sc">//</span> <span class="fu">TeXForm</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">A</span> <span class="ex">=</span> <span class="fu">TeXForm</span><span class="op">[</span><span class="fu">MatrixForm</span><span class="op">[{{</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">},{</span><span class="sc">-</span><span class="dv">1</span><span class="op">,</span><span class="dv">3</span><span class="op">,</span><span class="dv">0</span><span class="op">}}]]</span></span></code></pre></div>
 </section>
-<section id="simplify-with-condition" class="level5" data-number="0.0.0.0.2">
-<h5 data-number="0.0.0.0.2"><span class="header-section-number">0.0.0.0.2</span> Simplify with condition</h5>
+<section id="simplify-with-condition" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Simplify with condition</h1>
 <p>Simplify[expr,assum] : simjply with assumptions Expand[expr,patt] : expand all but pattern patt ExpandAll[expr] : expand product and exponents ExpandAll[expr,patt] : expand when matching pattern patt</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Assuming</span><span class="op">[</span><span class="fu">Element</span><span class="op">[</span><span class="fu">n</span><span class="op">,</span> <span class="bu">Integers</span><span class="op">]</span> &amp;&amp; <span class="fu">n</span> &gt; <span class="dv">0</span><span class="op">,</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">Integrate</span><span class="op">[</span><span class="fu">Sin</span><span class="op">[</span><span class="fu">n</span> <span class="fu">x</span><span class="op">]</span><span class="sc">^</span><span class="dv">2</span><span class="op">,</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="fu">Pi</span><span class="op">}]]</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Assuming</span><span class="op">[</span><span class="fu">Element</span><span class="op">[</span><span class="fu">n</span><span class="op">,</span> <span class="bu">Integers</span><span class="op">]</span> &amp;&amp; <span class="fu">n</span> &gt; <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">Integrate</span><span class="op">[</span><span class="fu">Sin</span><span class="op">[</span><span class="fu">n</span> <span class="fu">x</span><span class="op">]</span><span class="sc">^</span><span class="dv">2</span><span class="op">,</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="fu">Pi</span><span class="op">}]]</span></span></code></pre></div>
 </section>
-<section id="print-out-ast" class="level5" data-number="0.0.0.0.3">
-<h5 data-number="0.0.0.0.3"><span class="header-section-number">0.0.0.0.3</span> print out AST</h5>
-<div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">x</span><span class="sc">*</span><span class="fu">Tan</span><span class="op">[</span><span class="fu">y</span> <span class="sc">+</span> <span class="fu">z</span><span class="op">]</span> <span class="sc">//</span> <span class="fu">TreeForm</span></span></code></pre></div>
+<section id="print-out-ast" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> print out AST</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">x</span><span class="sc">*</span><span class="fu">Tan</span><span class="op">[</span><span class="fu">y</span> <span class="sc">+</span> <span class="fu">z</span><span class="op">]</span> <span class="sc">//</span> <span class="fu">TreeForm</span></span></code></pre></div>
 </section>
-<section id="map-apply-lambda-function" class="level5" data-number="0.0.0.0.4">
-<h5 data-number="0.0.0.0.4"><span class="header-section-number">0.0.0.0.4</span> /@ map apply, (#…) &amp; lambda function</h5>
-<p><code class="sourceCode mathematica">(# <span class="sc">+</span> <span class="dv">3</span>) &amp;</code> = <code class="sourceCode python"><span class="kw">lambda</span> x: x <span class="op">+</span> <span class="dv">3</span></code><br />
-<code class="sourceCode mathematica">(#<span class="dv">1</span> <span class="sc">+</span> #<span class="dv">2</span> ...) &amp;<span class="op">[</span><span class="dv">5</span><span class="op">,</span><span class="dv">8</span><span class="op">]</span></code> is a lambda function that takes 2 args</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">In</span><span class="op">[</span><span class="dv">1</span><span class="op">]</span><span class="ex">:=</span> (# <span class="sc">+</span> <span class="dv">3</span>) &amp; <span class="sc">/</span>@ <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">}</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Out</span><span class="op">[</span><span class="dv">1</span><span class="op">]</span><span class="ex">=</span> <span class="op">{</span><span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">}</span></span></code></pre></div>
+<section id="list" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> List</h1>
 </section>
-<section id="functions" class="level5" data-number="0.0.0.0.5">
-<h5 data-number="0.0.0.0.5"><span class="header-section-number">0.0.0.0.5</span> Functions</h5>
-<pre><code>F[x_] = x*2+1
-F[x_] = Module[
-  {a,b},
-  a=2;
-  b=1;
-  x*a+b
-]</code></pre>
+<section id="show-all-prob-dist" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> show all prob dist</h1>
+<div class="sourceCode" id="cb8"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">StringCases</span><span class="op">[</span>#<span class="op">,</span> <span class="at">___</span> ~~ <span class="st">&quot;Distribution&quot;</span> ~~ <span class="at">___</span> :&gt; #<span class="op">]</span> &amp; <span class="sc">/</span>@ <span class="fu">Names</span><span class="op">[</span><span class="st">&quot;System`*&quot;</span><span class="op">]</span>; </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">DeleteCases</span><span class="op">[</span><span class="sc">%</span><span class="op">,</span> <span class="op">{}]</span></span></code></pre></div>
+</section>
+<section id="module" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Module</h1>
+<div class="sourceCode" id="cb9"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">F</span><span class="op">[</span><span class="at">x_</span><span class="op">]</span> <span class="ex">=</span> <span class="fu">x</span><span class="sc">*</span><span class="dv">2</span><span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">F</span><span class="op">[</span><span class="at">x_</span><span class="op">]</span> <span class="ex">=</span> <span class="fu">Module</span><span class="op">[</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span><span class="fu">a</span><span class="op">,</span><span class="fu">b</span><span class="op">},</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">a</span><span class="ex">=</span><span class="dv">2</span>;</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">b</span><span class="ex">=</span><span class="dv">1</span>;</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">x</span><span class="sc">*</span><span class="fu">a</span><span class="sc">+</span><span class="fu">b</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="op">]</span></span></code></pre></div>
 <p>x_ the underscore means function arg<br />
 Module allows a local env</p>
 </section>
-<section id="print-out-probability-distributions" class="level5" data-number="0.0.0.0.6">
-<h5 data-number="0.0.0.0.6"><span class="header-section-number">0.0.0.0.6</span> print out probability Distributions</h5>
-<div class="sourceCode" id="cb6"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">StringCases</span><span class="op">[</span>#<span class="op">,</span> <span class="at">___</span> ~~ <span class="st">&quot;Distribution&quot;</span> ~~ <span class="at">___</span> :&gt; #<span class="op">]</span> &amp; <span class="sc">/</span>@ </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Names</span><span class="op">[</span><span class="st">&quot;System`*&quot;</span><span class="op">]</span>;</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">DeleteCases</span><span class="op">[</span><span class="sc">%</span><span class="op">,</span> <span class="op">{}]</span></span></code></pre></div>
+<section id="print-out-probability-distributions" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> print out probability Distributions</h1>
+<div class="sourceCode" id="cb10"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">StringCases</span><span class="op">[</span>#<span class="op">,</span> <span class="at">___</span> ~~ <span class="st">&quot;Distribution&quot;</span> ~~ <span class="at">___</span> :&gt; #<span class="op">]</span> &amp; <span class="sc">/</span>@ </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Names</span><span class="op">[</span><span class="st">&quot;System`*&quot;</span><span class="op">]</span>;</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">DeleteCases</span><span class="op">[</span><span class="sc">%</span><span class="op">,</span> <span class="op">{}]</span></span></code></pre></div>
 </section>
-<section id="solve-implicit-differentiation" class="level5" data-number="0.0.0.0.7">
-<h5 data-number="0.0.0.0.7"><span class="header-section-number">0.0.0.0.7</span> Solve implicit differentiation</h5>
-<div class="sourceCode" id="cb7"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">x</span><span class="op">[</span><span class="at">t_</span><span class="op">]</span> <span class="ex">:=</span> <span class="fu">Cosh</span><span class="op">[</span><span class="fu">t</span><span class="op">]</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">y</span><span class="op">[</span><span class="at">s_</span><span class="op">]</span> <span class="ex">:=</span> <span class="fu">Cos</span><span class="op">[</span><span class="fu">s</span><span class="op">]</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">z</span><span class="op">[</span><span class="at">x_</span><span class="op">,</span> <span class="at">y_</span><span class="op">]</span> <span class="ex">:=</span> <span class="fu">x</span><span class="op">[</span><span class="fu">t</span><span class="op">]</span> <span class="fu">Exp</span><span class="op">[</span><span class="sc">-</span><span class="fu">y</span><span class="op">[</span><span class="fu">s</span><span class="op">]]</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">D</span><span class="op">[</span><span class="fu">z</span><span class="op">[</span><span class="fu">x</span><span class="op">,</span> <span class="fu">y</span><span class="op">],</span> <span class="fu">s</span><span class="op">]</span></span></code></pre></div>
+<section id="solve-implicit-differentiation" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Solve implicit differentiation</h1>
+<div class="sourceCode" id="cb11"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">x</span><span class="op">[</span><span class="at">t_</span><span class="op">]</span> <span class="ex">:=</span> <span class="fu">Cosh</span><span class="op">[</span><span class="fu">t</span><span class="op">]</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">y</span><span class="op">[</span><span class="at">s_</span><span class="op">]</span> <span class="ex">:=</span> <span class="fu">Cos</span><span class="op">[</span><span class="fu">s</span><span class="op">]</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">z</span><span class="op">[</span><span class="at">x_</span><span class="op">,</span> <span class="at">y_</span><span class="op">]</span> <span class="ex">:=</span> <span class="fu">x</span><span class="op">[</span><span class="fu">t</span><span class="op">]</span> <span class="fu">Exp</span><span class="op">[</span><span class="sc">-</span><span class="fu">y</span><span class="op">[</span><span class="fu">s</span><span class="op">]]</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">D</span><span class="op">[</span><span class="fu">z</span><span class="op">[</span><span class="fu">x</span><span class="op">,</span> <span class="fu">y</span><span class="op">],</span> <span class="fu">s</span><span class="op">]</span></span></code></pre></div>
 </section>
-<section id="taylor-series" class="level5" data-number="0.0.0.0.8">
-<h5 data-number="0.0.0.0.8"><span class="header-section-number">0.0.0.0.8</span> Taylor Series</h5>
-<div class="sourceCode" id="cb8"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Series</span><span class="op">[</span><span class="fu">E</span><span class="sc">^</span><span class="fu">x</span><span class="op">,</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">7</span><span class="op">}]</span></span></code></pre></div>
+<section id="taylor-series" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Taylor Series</h1>
+<div class="sourceCode" id="cb12"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Series</span><span class="op">[</span><span class="fu">E</span><span class="sc">^</span><span class="fu">x</span><span class="op">,</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">7</span><span class="op">}]</span></span></code></pre></div>
 <hr />
 </section>
-<section id="importing-fred-data" class="level5" data-number="0.0.0.0.9">
-<h5 data-number="0.0.0.0.9"><span class="header-section-number">0.0.0.0.9</span> Importing Fred Data</h5>
-<div class="sourceCode" id="cb9"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">y</span> <span class="ex">=</span> <span class="fu">Import</span><span class="op">[</span><span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">User</span><span class="sc">\\</span><span class="st">Downloads</span><span class="sc">\\</span><span class="st">DCOILWTICO.csv&quot;</span><span class="op">,</span> <span class="st">&quot;Dataset&quot;</span><span class="op">,</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;HeaderLines&quot;</span> <span class="ot">-&gt;</span> <span class="dv">1</span><span class="op">]</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">DateListPlot</span><span class="op">[</span><span class="fu">y</span><span class="op">]</span></span></code></pre></div>
+<section id="importing-fred-data" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Importing Fred Data</h1>
+<div class="sourceCode" id="cb13"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">y</span> <span class="ex">=</span> <span class="fu">Import</span><span class="op">[</span><span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">User</span><span class="sc">\\</span><span class="st">Downloads</span><span class="sc">\\</span><span class="st">DCOILWTICO.csv&quot;</span><span class="op">,</span> <span class="st">&quot;Dataset&quot;</span><span class="op">,</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;HeaderLines&quot;</span> <span class="ot">-&gt;</span> <span class="dv">1</span><span class="op">]</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">DateListPlot</span><span class="op">[</span><span class="fu">y</span><span class="op">]</span></span></code></pre></div>
 </section>
-<section id="equity-timeseries-forecast" class="level5" data-number="0.0.0.0.10">
-<h5 data-number="0.0.0.0.10"><span class="header-section-number">0.0.0.0.10</span> Equity Timeseries Forecast</h5>
-<div class="sourceCode" id="cb10"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">x</span> <span class="ex">=</span> <span class="fu">FinancialData</span><span class="op">[</span><span class="st">&quot;SPX&quot;</span><span class="op">,</span> <span class="op">{{</span><span class="dv">2020</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">},</span> <span class="op">{</span><span class="dv">2021</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">}}]</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tsm <span class="ex">=</span> TimeSeriesModelFit<span class="op">[</span><span class="fu">x</span><span class="op">]</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ListLinePlot</span><span class="op">[{</span>tsm<span class="op">[</span><span class="st">&quot;TemporalData&quot;</span><span class="op">],</span> TimeSeriesForecast<span class="op">[</span><span class="fu">x</span><span class="op">,</span> <span class="op">{</span><span class="dv">10</span><span class="op">}]}]</span></span></code></pre></div>
+<section id="equity-timeseries-forecast" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Equity Timeseries Forecast</h1>
+<div class="sourceCode" id="cb14"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">x</span> <span class="ex">=</span> <span class="fu">FinancialData</span><span class="op">[</span><span class="st">&quot;SPX&quot;</span><span class="op">,</span> <span class="op">{{</span><span class="dv">2020</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">},</span> <span class="op">{</span><span class="dv">2021</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">}}]</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>tsm <span class="ex">=</span> TimeSeriesModelFit<span class="op">[</span><span class="fu">x</span><span class="op">]</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ListLinePlot</span><span class="op">[{</span>tsm<span class="op">[</span><span class="st">&quot;TemporalData&quot;</span><span class="op">],</span> TimeSeriesForecast<span class="op">[</span><span class="fu">x</span><span class="op">,</span> <span class="op">{</span><span class="dv">10</span><span class="op">}]}]</span></span></code></pre></div>
+<hr />
+</section>
+<section id="visualize-network-related-keywords" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Visualize network related keywords</h1>
+<div class="sourceCode" id="cb15"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>docCrawler<span class="op">[</span><span class="at">startSymbol_</span><span class="op">,</span> <span class="at">depth_</span><span class="op">]</span> <span class="ex">:=</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Flatten</span><span class="op">[</span><span class="fu">Rest</span><span class="op">[</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">NestList</span><span class="op">[</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">Union</span><span class="op">[</span><span class="fu">Flatten</span><span class="op">[</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Thread</span><span class="op">[</span># <span class="ot">-&gt;</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>            CommonName<span class="op">[</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>             Entity<span class="op">[</span><span class="st">&quot;WolframLanguageSymbol&quot;</span><span class="op">,</span> #<span class="op">][</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;RelatedSymbols&quot;</span><span class="op">]]]</span> &amp; <span class="sc">/</span>@ <span class="fu">Last</span> <span class="sc">/</span>@ #<span class="op">]]</span> &amp;<span class="op">,</span> <span class="op">{</span><span class="st">&quot;&quot;</span> <span class="ot">-&gt;</span> </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>       startSymbol<span class="op">},</span> <span class="fu">depth</span><span class="op">]]]</span>;</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>edges <span class="ex">=</span> docCrawler<span class="op">[</span><span class="st">&quot;ProbabilityDistribution&quot;</span><span class="op">,</span> <span class="dv">3</span><span class="op">]</span>;</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">Graph</span><span class="op">[</span>edges<span class="op">,</span> <span class="fu">VertexLabels</span> <span class="ot">-&gt;</span> <span class="st">&quot;Name&quot;</span><span class="op">,</span> <span class="fu">ImageSize</span> <span class="ot">-&gt;</span> <span class="dv">1200</span><span class="op">]</span></span></code></pre></div>
 </section>
 
         </div>

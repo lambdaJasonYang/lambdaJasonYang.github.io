@@ -257,6 +257,7 @@
 </ul></li>
 <li><a href="#solution-to-stale-ssg---isr"><span class="toc-section-number">5.2</span> Solution to Stale SSG - ISR</a></li>
 </ul></li>
+<li><a href="#self-is-not-defined"><span class="toc-section-number">6</span> Self is Not Defined</a></li>
 </ul></div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">npx</span> create-next-app@latest <span class="at">--ts</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
@@ -431,6 +432,18 @@ React Component filename in nextjs must be Uppercase like “MyCustomButton”.<
 <li>If your clientside code auto refreshes every 10 sec, the data will be relatively current.</li>
 </ul>
 </section>
+</section>
+<section id="self-is-not-defined" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Self is Not Defined</h1>
+<ul>
+<li>When importing react Pixi</li>
+</ul>
+<p>Reason for error: Pixi library uses ‘self’ or ‘window’ which is only defined in the client side. NextJS does prerendering always on the serverside meaning it will run Pixi on the serverside where there is no ‘self’ or ‘window’.</p>
+<p>Fix:</p>
+<ol type="1">
+<li><p>Use <code>import dynamic from 'next/dynamic';</code></p></li>
+<li><p>Use useEffect because it only runs on client side</p></li>
+</ol>
 </section>
 
         </div>

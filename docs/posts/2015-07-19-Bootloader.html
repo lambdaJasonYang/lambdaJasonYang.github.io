@@ -243,9 +243,41 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'OS'." href="../tags/OS.html">OS</a>
     
 </div>
+<div id="TOC"><ul>
+<li><a href="#summary"><span class="toc-section-number">1</span> Summary</a>
+<ul>
+<li><a href="#simple"><span class="toc-section-number">1.1</span> Simple</a></li>
+<li><a href="#extra"><span class="toc-section-number">1.2</span> Extra</a></li>
+</ul></li>
+<li><a href="#implement"><span class="toc-section-number">2</span> Implement</a></li>
+<li><a href="#disks"><span class="toc-section-number">3</span> Disks</a>
+<ul>
+<li><a href="#os"><span class="toc-section-number">3.0.1</span> OS</a></li>
+</ul></li>
+</ul></div>
+<section id="summary" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Summary</h1>
+<section id="simple" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Simple</h2>
+<ol type="1">
+<li>BIOS reads first 512 bytes<br />
+</li>
+<li>Check for magic 2-byte at end<br />
+</li>
+<li>Loads the 512 bytes</li>
+</ol>
+</section>
+<section id="extra" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Extra</h2>
+<ul>
+<li>The 512 bytes is in the first boot sector of the bootable drive.</li>
+<li>The magic 2-bytes is <code>0x55 0xaa</code></li>
+</ul>
+</section>
+</section>
+<section id="implement" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Implement</h1>
 <p>Using nasm x86 asm</p>
-<p>The first thing PC does is look for the Boot Sector (first sector of a bootable drive).</p>
-<p>A bootsector is 512 bytes,</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install nasm</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install qemu-system</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -286,18 +318,19 @@ db := define byte</p>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="bu">mov</span> <span class="kw">ah</span><span class="op">,</span> <span class="bn">0x0e</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="bu">mov</span> <span class="kw">al</span><span class="op">,</span> <span class="bn">0b</span><span class="er">1000001</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span> <span class="bn">0x10</span></span></code></pre></div>
-<section id="disks" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Disks</h3>
+</section>
+<section id="disks" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Disks</h1>
 <p>Memory is divided into 512 chunks.</p>
 <p>Cylinder = [0..) Head = [0..) Sector = [1..)</p>
 <p>The location of each 512 chunk of memory on a disk is determined by<br />
 (Cylinder,Head,Sector)</p>
 <p>The first chunk of memory = “Boot Sector” at (C=0,H=0,S=1)</p>
-</section>
-<section id="os" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> OS</h3>
+<section id="os" class="level3" data-number="3.0.1">
+<h3 data-number="3.0.1"><span class="header-section-number">3.0.1</span> OS</h3>
 <p>We need to write a bootloader.<br />
 To compiler</p>
+</section>
 </section>
 
         </div>

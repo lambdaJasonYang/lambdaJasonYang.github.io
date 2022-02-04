@@ -243,6 +243,32 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'logic'." href="../tags/logic.html">logic</a>
     
 </div>
+<div id="TOC"><ul>
+<li><a href="#terms"><span class="toc-section-number">1</span> Terms</a>
+<ul>
+<li><a href="#soundness"><span class="toc-section-number">1.1</span> Soundness</a></li>
+<li><a href="#completeness"><span class="toc-section-number">1.2</span> Completeness</a></li>
+</ul></li>
+<li><a href="#gentzen-cut"><span class="toc-section-number">2</span> Gentzen Cut</a></li>
+</ul></div>
+<section id="terms" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Terms</h1>
+<ul>
+<li>Syntatic consequence: <span class="math inline">\(p \vdash q\)</span>: sentence q is provable from the set of assumptions p.</li>
+<li>Semantic Consequence: <span class="math inline">\(p \vDash q\)</span>: sentence q is true in all models of p.</li>
+</ul>
+<p>In propositional logic,</p>
+<ul>
+<li>Syntatic consequence : <span class="math inline">\(p \vdash q\)</span> = Propositional Calculus</li>
+<li>Semantic consequence : <span class="math inline">\(p \vDash q\)</span> = Truth tables</li>
+</ul>
+<section id="soundness" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Soundness</h2>
+<p><span class="math display">\[ p \vdash q \Rightarrow p \vDash q \]</span></p>
+<p>Prove propositional calculus correct using</p>
+</section>
+<section id="completeness" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Completeness</h2>
 <p><span class="math display">\[a \vDash b\]</span><br />
 <span class="math display">\[\{x | a(x)\} \subset \{x | b(x)\}\]</span> a satisfies b</p>
 <p><span class="math inline">\(x :: U\)</span><br />
@@ -293,8 +319,10 @@ Subset = Predicate = Function Universe U to Bool</p>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ot">(|/=) ::</span> <span class="dt">Set</span> <span class="ot">-&gt;</span> <span class="dt">Set</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>(<span class="op">|/=</span>) a b <span class="ot">=</span> <span class="fu">not</span> (a <span class="op">|=</span> b)</span></code></pre></div>
 <hr />
-<section id="gentzen-cut" class="level2" data-number="0.1">
-<h2 data-number="0.1"><span class="header-section-number">0.1</span> Gentzen Cut</h2>
+</section>
+</section>
+<section id="gentzen-cut" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Gentzen Cut</h1>
 <p>Gentzen Cut is simply a syntatic trick</p>
 <p><span class="math display">\[
 \frac{a \vDash b \ \ \ \ b \vDash c}{a \vDash c}

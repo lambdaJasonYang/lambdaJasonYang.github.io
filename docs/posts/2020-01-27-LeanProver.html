@@ -257,6 +257,12 @@
 </ul></li>
 <li><a href="#sigma-type"><span class="toc-section-number">5.2</span> Sigma Type</a></li>
 </ul></li>
+<li><a href="#notation"><span class="toc-section-number">6</span> Notation</a>
+<ul>
+<li><a href="#curly-vs-smooth-parenthesis"><span class="toc-section-number">6.1</span> Curly vs Smooth Parenthesis</a></li>
+<li><a href="#pi-type-forall-parenthesis"><span class="toc-section-number">6.2</span> Pi-type, forall, parenthesis</a></li>
+</ul></li>
+<li><a href="#simple-interpreter"><span class="toc-section-number">7</span> Simple interpreter</a></li>
 </ul></div>
 <table>
 <thead>
@@ -316,6 +322,7 @@
 </table>
 <p>Classical logic <code class="sourceCode bash"><span class="ex">open_locale</span> classical</code> use <code class="sourceCode bash"><span class="ex">by_contradiction</span></code> tactic</p>
 <p>Most of the time, implication and universal quantifier are treated the same.</p>
+<p><img src="../images/Notes_220119_214554.jpg" style="width:50.0%" /></p>
 <section id="example" class="level2" data-number="0.1">
 <h2 data-number="0.1"><span class="header-section-number">0.1</span> Example</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">expected</span> type:</span>
@@ -483,6 +490,136 @@ Notice <code>bool</code> is an expression that does not include any bound variab
 <p>How to look at <code>f</code>? Extract the types<br />
 <code class="sourceCode haskell"><span class="dt">Type</span> <span class="ot">-&gt;</span> (α → <span class="dt">Type</span>) <span class="ot">-&gt;</span> α <span class="ot">-&gt;</span> β a <span class="ot">-&gt;</span> ((a <span class="op">:</span> α) × β a)</code></p>
 </section>
+</section>
+<section id="notation" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Notation</h1>
+<section id="curly-vs-smooth-parenthesis" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> Curly vs Smooth Parenthesis</h2>
+<ul>
+<li>Curly <code>{a: Type u}</code> stands for notational shortcuts aka implicit arguments that do not need to be written</li>
+<li>Smooth <code>(a: Type u)</code> stands for explicit aka we need to write out the type as an argument</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---- Curly vs Bracket</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">---- {a: Type u} vs (a: Type u)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">---- implicit argument vs explicit</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">--They mean the same but implicit argument allows us to omit arguments for shorter declarations.</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">--implicit argument means that {a: Type u} will get autofilled</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- ex1: &quot;nil nat&quot; becomes &quot;nil&quot;, the &quot;nat&quot; is the implicit argument that gets autofilled</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- ex2: &quot;cons nat 4 (nil nat)&quot; becomes &quot;cons 4 nil&quot;, here we see {a: Type u} is &quot;nat&quot;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">--</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>variables p <span class="op">:</span> list nat </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>universe u</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">--implicit arguments are just notation shortcuts</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>constant consImplicit {a <span class="op">:</span> <span class="dt">Type</span> u } <span class="op">:</span>  a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>constant nilImplicit <span class="op">:</span> Π {a <span class="op">:</span> <span class="dt">Type</span> u}, list a</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="pp">#check consImplicit --?M_1 → list ?M_1 → list ?M_1 </span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">--consA shows metavar like ?M_1</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">--using @ fills in the metavar with types</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="pp">#check @consImplicit</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="pp">#check nilImplicit </span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="pp">#check consImplicit 4 nilImplicit  </span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">--explicit arguments</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>constant consExplicit (a <span class="op">:</span> <span class="dt">Type</span> u) <span class="op">:</span> a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>constant nilExplicit <span class="op">:</span> Π (a <span class="op">:</span> <span class="dt">Type</span> u), list a</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="pp">#check consExplicit</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="pp">#check consExplicit</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="pp">#check consExplicit 4 nilExplicit --error</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="pp">#check consExplicit 4 nilExplicit --error</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="pp">#check consExplicit nat 4 (nilExplicit nat) --ok</span></span></code></pre></div>
+</section>
+<section id="pi-type-forall-parenthesis" class="level2" data-number="6.2">
+<h2 data-number="6.2"><span class="header-section-number">6.2</span> Pi-type, forall, parenthesis</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- notice that we Pi-type == forall or we can push the quantifier into a parenthesis. </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- three cons below are the same.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>constant consA <span class="op">:</span>  Πa  <span class="op">:</span> <span class="dt">Type</span> u , a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>constant consB <span class="op">:</span> ∀a  <span class="op">:</span> <span class="dt">Type</span> u , a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>constant consC <span class="op">:</span> ∀(a <span class="op">:</span> <span class="dt">Type</span> u), a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>constant consD <span class="op">:</span> Π(a <span class="op">:</span> <span class="dt">Type</span> u) , a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>constant consE (a <span class="op">:</span> <span class="dt">Type</span> u) <span class="op">:</span> a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a</span></code></pre></div>
+</section>
+</section>
+<section id="simple-interpreter" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Simple interpreter</h1>
+<div class="sourceCode" id="cb8"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>section basiclang</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>inductive <span class="dt">Term</span> <span class="op">:</span> <span class="dt">Type</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dt">T</span> <span class="op">:</span> <span class="dt">Term</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dt">F</span> <span class="op">:</span> <span class="dt">Term</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dt">O</span> <span class="op">:</span> <span class="dt">Term</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dt">IfThenElse</span> <span class="op">:</span> <span class="dt">Term</span> <span class="ot">-&gt;</span> <span class="dt">Term</span> <span class="ot">-&gt;</span> <span class="dt">Term</span> <span class="ot">-&gt;</span> <span class="dt">Term</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dt">S</span> <span class="op">:</span> <span class="dt">Term</span> <span class="ot">-&gt;</span> <span class="dt">Term</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dt">P</span> <span class="op">:</span> <span class="dt">Term</span> <span class="ot">-&gt;</span> <span class="dt">Term</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dt">IsZero</span> <span class="op">:</span> <span class="dt">Term</span> <span class="ot">-&gt;</span> <span class="dt">Term</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>open <span class="dt">Term</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>def eval <span class="op">:</span> <span class="dt">Term</span> <span class="ot">-&gt;</span> <span class="dt">Term</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (<span class="dt">IfThenElse</span> <span class="dt">T</span> s2 s3) <span class="op">:=</span> s2 </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (<span class="dt">IfThenElse</span> <span class="dt">F</span> s2 s3) <span class="op">:=</span> s3</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (<span class="dt">IfThenElse</span> s1 s2 s3) <span class="op">:=</span> </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> ns1 <span class="op">:=</span> eval s1 <span class="kw">in</span> (<span class="dt">IfThenElse</span> ns1 s1 s2) </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (<span class="dt">S</span> s1) <span class="op">:=</span> </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> ns1 <span class="op">:=</span> eval s1 <span class="kw">in</span> (<span class="dt">S</span> ns1)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (<span class="dt">P</span> <span class="dt">O</span>) <span class="op">:=</span> <span class="dt">O</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (<span class="dt">P</span> (<span class="dt">S</span> k)) <span class="op">:=</span> k </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (<span class="dt">P</span> s1) <span class="op">:=</span> </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> ns1 <span class="op">:=</span> eval s1 <span class="kw">in</span> (<span class="dt">P</span> ns1)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (<span class="dt">IsZero</span> <span class="dt">O</span>) <span class="op">:=</span> <span class="dt">T</span> </span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (<span class="dt">IsZero</span> (<span class="dt">S</span> k)) <span class="op">:=</span> <span class="dt">F</span> </span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (<span class="dt">IsZero</span> s1) <span class="op">:=</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> ns1 <span class="op">:=</span> eval s1 <span class="kw">in</span> (<span class="dt">IsZero</span> ns1)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> _ <span class="op">:=</span> <span class="dt">F</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="pp">#reduce eval $ P $ S $ P O</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="pp">#reduce eval $ IsZero O</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="pp">#reduce eval $ IfThenElse (IsZero O) (S O) (S $ S O)</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co">---  s1 -&gt; ns1</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co">--- ---------------</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co">---  S s1 -&gt; S ns1</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>def <span class="dt">ToNat</span> <span class="op">:</span> <span class="dt">Term</span> <span class="ot">-&gt;</span> nat </span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dt">O</span> <span class="op">:=</span> <span class="dv">0</span> </span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (<span class="dt">S</span> (n<span class="op">:</span> <span class="dt">Term</span>)) <span class="op">:=</span> <span class="dv">1</span> <span class="op">+</span> <span class="dt">ToNat</span> n </span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> _ <span class="op">:=</span> <span class="dv">1</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="pp">#reduce ToNat (eval $ S $ S $ S $ O)</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>end basiclang</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="co">--extensionality vs intensionality</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="co">--extensionality means functions that behave the same are the same</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="co">--intensionality means functions that behave the same but built differently are not the same</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>def foo <span class="op">:</span> ℕ → ℕ → ℕ</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">0</span>     n     <span class="op">:=</span> <span class="dv">0</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (m<span class="op">+</span><span class="dv">1</span>) <span class="dv">0</span>     <span class="op">:=</span> <span class="dv">1</span></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (m<span class="op">+</span><span class="dv">1</span>) (n<span class="op">+</span><span class="dv">1</span>) <span class="op">:=</span> <span class="dv">2</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="pp">#reduce foo 5 0</span></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>section <span class="dt">Combinators</span></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>def <span class="dt">I</span> {a <span class="op">:</span> <span class="dt">Type</span><span class="op">*</span>} <span class="op">:</span> a <span class="ot">-&gt;</span> a <span class="op">:=</span>  λx , x</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>def <span class="dt">K</span> {a b<span class="op">:</span> <span class="dt">Type</span><span class="op">*</span>} <span class="op">:</span> a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> a <span class="op">:=</span> λx , λy, x</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>def app {a b<span class="op">:</span> <span class="dt">Type</span><span class="op">*</span>} <span class="op">:</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> b <span class="op">:=</span> λf, λx, f x </span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>def <span class="dt">S</span> {a b c<span class="op">:</span> <span class="dt">Type</span><span class="op">*</span>} <span class="op">:</span> (a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> c) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> c <span class="op">:=</span> λf, λg, λa , f a (g a)</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="pp">#eval I 2</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="pp">#check S K S K</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="pp">#check K K (S K)</span></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="pp">#check (S I I)</span></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>end <span class="dt">Combinators</span></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="pp">#reduce (λx, x + 2)5</span></span></code></pre></div>
 </section>
 
         </div>

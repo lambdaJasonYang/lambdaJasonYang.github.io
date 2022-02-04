@@ -15,6 +15,7 @@ import Text.Pandoc.Walk --for post-processing pandoc, requires cabal 'pandoc-typ
 
 
 
+
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------MATHJAX START
@@ -149,6 +150,7 @@ main = hakyllWith config $ do
         route   idRoute
         compile compressCssCompiler
 
+
 ------------------------------CUSTOM PATTERN MATCH START
     match "lib/**" $ do
         route   idRoute
@@ -157,6 +159,10 @@ main = hakyllWith config $ do
     match "fonts/*" $ do
         route   idRoute
         compile copyFileCompiler
+    match "labs/*" $ do
+        route idRoute
+        compile copyFileCompiler
+
 ------------------------------CUSTOM PATTERN MATCH END
 
 
@@ -166,24 +172,25 @@ main = hakyllWith config $ do
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
+            
 --------------------------------------ADD ATOM RSS FEED BEGIN
     create ["atom.xml"] $ do
         route idRoute
         compile $ do
             let feedCtx = postCtx `mappend` bodyField "description"
             posts <- fmap (take 10) . recentFirst =<<
-                loadAllSnapshots "posts/*" "content"
+                loadAllSnapshots ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown")  "content"
             renderAtom myFeedConfiguration feedCtx posts
     create ["rss.xml"] $ do
         route idRoute
         compile $ do
             let feedCtx = postCtx `mappend` bodyField "description"
             posts <- fmap (take 10) . recentFirst =<<
-                loadAllSnapshots "posts/*" "content"
+                loadAllSnapshots ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown")  "content"
             renderRss myFeedConfiguration feedCtx posts
 --------------------------------------ADD ATOM RSS FEED END
 ---------------------- TAGS START
-    tags <- buildTags "posts/*" (fromCapture "tags/*.html")
+    tags <- buildTags ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown")  (fromCapture "tags/*.html")
     tagsRules tags $ \tag tagpattern -> do
         let title = tag ++ " category"-- "Posts tagged \"" ++ tag ++ "\""
         route idRoute
@@ -198,6 +205,31 @@ main = hakyllWith config $ do
                 >>= loadAndApplyTemplate "templates/default.html" ctx
                 >>= relativizeUrls
 ---------------------- TAGS END
+
+-------------------------------------------------FOLDER POST IMG BEGIN
+
+    match "posts/*/*.png" $ do
+        -- route $ (gsubRoute "posts/" (\x -> "images")) --this means replace 'posts/' with 'images' so 'posts/1-1-2001-fae/something.png' => 'images/1-1-2001-fae/something.png'
+        route $ (gsubRoute "posts/.*/" (\x -> "images/")) --this puts the image directly into the image folder
+        compile copyFileCompiler
+
+    match "posts/*/*.md" $ do
+        route $ (gsubRoute "posts/.*/" (\x -> "posts/")) `composeRoutes` (setExtension "html")
+        --moves 'posts/1-1-2001-fae/1-1-2001-fae.md' => 'posts/1-1-2001-fae.html'
+        compile $ do
+            --Check TOC metadata field filled START
+            ident <- getUnderlying                                 
+            toc   <- getMetadataField ident "toc"             
+            let chosenCompiler = case toc of
+                    Nothing -> mathJaxAddedCompilerExTOC
+                    Just _ -> mathJaxAddedCompiler                        
+            --Check TOC metadata field filled END 
+            chosenCompiler
+                >>= loadAndApplyTemplate "templates/post.html"    (postCtxWithTags tags)
+                >>= saveSnapshot "content"
+                >>= loadAndApplyTemplate "templates/default.html" (postCtxWithTags tags)
+                >>= relativizeUrls
+-------------------------------------------------FOLDER POST IMG END
     match "posts/*" $ do
         route $ setExtension "html"
         compile $ do
@@ -217,7 +249,7 @@ main = hakyllWith config $ do
     create ["archive.html"] $ do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
+            posts <- recentFirst =<< loadAll ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown") 
             taglist <- renderTagCloud 90 130 tags
             let archiveCtx =
                     listField "posts" postCtx (return posts) `mappend`
@@ -234,7 +266,7 @@ main = hakyllWith config $ do
     match "index.html" $ do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
+            posts <- recentFirst =<< loadAll ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown") 
             let indexCtx =
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Home"                `mappend`
@@ -251,7 +283,7 @@ main = hakyllWith config $ do
     create ["sitemap.xml"] $ do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
+            posts <- recentFirst =<< loadAll ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown")
             singlePages <- loadAll (fromList ["about.rst", "contact.markdown"])
             let pages = posts <> singlePages
                 sitemapCtx =

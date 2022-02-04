@@ -243,13 +243,25 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'statistics'." href="../tags/statistics.html">statistics</a>
     
 </div>
-<p>Markov Chains</p>
+<div id="TOC"><ul>
+<li><a href="#markov-chains"><span class="toc-section-number">1</span> Markov Chains</a></li>
+<li><a href="#markov-simulation"><span class="toc-section-number">2</span> Markov Simulation</a></li>
+</ul></div>
+<section id="markov-chains" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Markov Chains</h1>
 <p>Given a state machine labeled by probability of transitions. We can find the most probability of landing on a certain state.</p>
 <p>Example in a game, you are given 3 level up potions that probabilisticly grants from 1 to 10 levels depending on your current level. At a lower level there is higher chance of gaining more levels and etc.</p>
 <p>The states are your current character level, and the probability transitions are described by the potion’s effect.</p>
 <p>We design a transition matrix that represents our state machine and multiple itself 3 times to get the 3-step transition matrix. This will tells us the probability of landing on a certain level after taking 3 potions.</p>
 <p>The steady state means at a certain step n, our transition matrix converges or simply put the probabilities don’t change much. The T^n = lim T^k</p>
 <p>Note not all state machines have a steady state</p>
+</section>
+<section id="markov-simulation" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Markov Simulation</h1>
+<p>Given a known probability distribution, simulate random selection.<br />
+Then operate on the data.</p>
+<p>Example:</p>
+</section>
 
         </div>
         <div id="footer">

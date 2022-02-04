@@ -244,22 +244,35 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#code"><span class="toc-section-number">1</span> code</a>
+<li><a href="#example-api"><span class="toc-section-number">1</span> Example api</a></li>
+<li><a href="#code"><span class="toc-section-number">2</span> code</a>
 <ul>
-<li><a href="#index"><span class="toc-section-number">1.1</span> Index</a></li>
-<li><a href="#recursive"><span class="toc-section-number">1.2</span> Recursive</a></li>
-<li><a href="#flow-control"><span class="toc-section-number">1.3</span> Flow control</a></li>
-<li><a href="#plotting-lower-subgraph"><span class="toc-section-number">1.4</span> plotting lower subgraph</a></li>
-<li><a href="#allow-ui-dropdown-input"><span class="toc-section-number">1.5</span> allow UI dropdown input</a></li>
+<li><a href="#index"><span class="toc-section-number">2.1</span> Index</a></li>
+<li><a href="#recursive"><span class="toc-section-number">2.2</span> Recursive</a></li>
+<li><a href="#flow-control"><span class="toc-section-number">2.3</span> Flow control</a></li>
+<li><a href="#plotting-lower-subgraph"><span class="toc-section-number">2.4</span> plotting lower subgraph</a></li>
+<li><a href="#allow-ui-dropdown-input"><span class="toc-section-number">2.5</span> allow UI dropdown input</a></li>
 </ul></li>
-<li><a href="#tdapi"><span class="toc-section-number">2</span> TDAPI</a>
+<li><a href="#tdapi"><span class="toc-section-number">3</span> TDAPI</a>
 <ul>
-<li><a href="#price-access"><span class="toc-section-number">2.1</span> Price access</a></li>
-<li><a href="#account-access"><span class="toc-section-number">2.2</span> Account access</a></li>
+<li><a href="#price-access"><span class="toc-section-number">3.1</span> Price access</a></li>
+<li><a href="#account-access"><span class="toc-section-number">3.2</span> Account access</a></li>
 </ul></li>
 </ul></div>
-<section id="code" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> code</h1>
+<section id="example-api" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Example api</h1>
+<p>5 Day / 1 Minute, including today’s data:</p>
+<p>https://api.tdameritrade.com/v1/marketdata/XYZ/pricehistory?periodType=day&amp;period=5&amp;frequencyType=minute&amp;frequency=1&amp;endDate=1464825600000</p>
+<p>5 Day / 1 Minute, excluding today’s data:</p>
+<p>https://api.tdameritrade.com/v1/marketdata/XYZ/pricehistory?periodType=day&amp;period=5&amp;frequencyType=minute&amp;frequency=1</p>
+<p>6 Months / 1 Day, including today’s data:</p>
+<p>https://api.tdameritrade.com/v1/marketdata/XYZ/pricehistory?periodType=month&amp;frequencyType=daily&amp;endDate=1464825600000</p>
+<p>Note that periodType=month is specified because the default periodType is day which is not compatible with the frequencyType daily</p>
+<p>Daily from May 25th, 2016 to today:</p>
+<p>https://api.tdameritrade.com/v1/marketdata/XYZ/pricehistory?periodType=month&amp;frequencyType=daily&amp;startDate=1464148800000&amp;endDate=1464825600000</p>
+</section>
+<section id="code" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> code</h1>
 <ul>
 <li><code class="sourceCode bash"><span class="ex">def</span></code> to instantiate variables</li>
 <li>Booleans are 1 or 0 , “yes” or “no”</li>
@@ -268,15 +281,15 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">def</span> a = open + high + low + close </span></code></pre></div>
 <p>default variables have implicit index of current day <span class="math inline">\(n\)</span></p>
 <p><code class="sourceCode bash"><span class="ex">open</span></code> := <span class="math inline">\(Open(n)\)</span></p>
-<section id="index" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> Index</h2>
+<section id="index" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Index</h2>
 <p>Index is relative to the current day <span class="math inline">\(n\)</span> in the negative direction.</p>
 <p><code class="sourceCode bash"><span class="va">volume</span><span class="op">[</span><span class="dv">1</span><span class="op">]</span></code> := <span class="math inline">\(Volume(n-1)\)</span></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">def</span> diff = close <span class="at">-</span> close[1]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#close - previous day close</span></span></code></pre></div>
 </section>
-<section id="recursive" class="level2" data-number="1.2">
-<h2 data-number="1.2"><span class="header-section-number">1.2</span> Recursive</h2>
+<section id="recursive" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Recursive</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">def</span> data = data[1] + volume<span class="kw">;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">plot</span> stuff = data<span class="kw">;</span></span></code></pre></div>
 <p><span class="math display">\[ F_n = F_{n-1} + P(n) \]</span></p>
@@ -290,36 +303,36 @@
 <p>plot <span class="math inline">\(n \mapsto F_n\)</span></p>
 <p>The above will plot cumulative Volume over time.</p>
 </section>
-<section id="flow-control" class="level2" data-number="1.3">
-<h2 data-number="1.3"><span class="header-section-number">1.3</span> Flow control</h2>
+<section id="flow-control" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> Flow control</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="ex">3</span> <span class="op">&gt;</span> 2 {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">def</span> a = 44 </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
 </section>
-<section id="plotting-lower-subgraph" class="level2" data-number="1.4">
-<h2 data-number="1.4"><span class="header-section-number">1.4</span> plotting lower subgraph</h2>
+<section id="plotting-lower-subgraph" class="level2" data-number="2.4">
+<h2 data-number="2.4"><span class="header-section-number">2.4</span> plotting lower subgraph</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">declare</span> <span class="va">lower</span><span class="kw">;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">c</span> = 5<span class="kw">;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">plot</span> outX = c<span class="kw">;</span></span></code></pre></div>
 </section>
-<section id="allow-ui-dropdown-input" class="level2" data-number="1.5">
-<h2 data-number="1.5"><span class="header-section-number">1.5</span> allow UI dropdown input</h2>
+<section id="allow-ui-dropdown-input" class="level2" data-number="2.5">
+<h2 data-number="2.5"><span class="header-section-number">2.5</span> allow UI dropdown input</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">input</span> a = close<span class="kw">;</span> <span class="co">#default value is close</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">plot</span> outX = a<span class="kw">;</span></span></code></pre></div>
 </section>
 </section>
-<section id="tdapi" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> TDAPI</h1>
+<section id="tdapi" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> TDAPI</h1>
 <p>CONSUMER KEY is XXXXXXXXXXXXXXXXXXX<br />
 The only thing permanent is the CONSUMER KEY.</p>
-<section id="price-access" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> Price access</h2>
+<section id="price-access" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Price access</h2>
 <p>We have no need to get a refresh token and access token if we just need price.<br />
 Just use CONSUMER KEY.</p>
 <p>https://api.tdameritrade.com/v1/marketdata/AAPL/pricehistory?apikey=XXXXXXXXXXXXXXXXXXX&amp;periodType=day</p>
 </section>
-<section id="account-access" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> Account access</h2>
+<section id="account-access" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Account access</h2>
 <ul>
 <li>PERMANENT: CONSUMER KEY
 <ul>

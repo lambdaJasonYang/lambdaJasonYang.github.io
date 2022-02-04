@@ -255,7 +255,18 @@
 <li><a href="#nf"><span class="toc-section-number">4.4</span> 4NF</a></li>
 </ul></li>
 <li><a href="#entity-relation"><span class="toc-section-number">5</span> Entity Relation</a></li>
+<li><a href="#timescale"><span class="toc-section-number">6</span> Timescale</a></li>
+<li><a href="#db-driver"><span class="toc-section-number">7</span> Db Driver</a></li>
+<li><a href="#orm"><span class="toc-section-number">8</span> ORM</a></li>
+<li><a href="#psql-commands"><span class="toc-section-number">9</span> psql commands</a></li>
+<li><a href="#sql-scenarios"><span class="toc-section-number">10</span> SQL scenarios</a>
+<ul>
+<li><a href="#check-head-of-table"><span class="toc-section-number">10.1</span> Check head of table</a></li>
+<li><a href="#dropping-a-column"><span class="toc-section-number">10.2</span> Dropping a column</a></li>
+<li><a href="#transform-into-hypertable"><span class="toc-section-number">10.3</span> Transform into Hypertable</a></li>
+</ul></li>
 </ul></div>
+<p><a href="https://jepsen.io/consistency">on CAP</a> <a href="https://www.the-paper-trail.org/page/cap-faq/">on CAP 2</a></p>
 <div class="sourceCode" id="cb1" data-filename="buildtable.sql"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> bleh (<span class="kw">id</span> <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, name TEXT, age <span class="dt">INTEGER</span>);</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> bleh (name,age) <span class="kw">VALUES</span> (<span class="st">'bob'</span>,<span class="dv">30</span>);</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> bleh (name,age) <span class="kw">VALUES</span> (<span class="st">'rex'</span>,<span class="dv">2</span>);</span>
@@ -339,6 +350,92 @@ Collapse the dependency into a new table.</p>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Entity11::user_id</span> }<span class="kw">|</span><span class="ex">--</span><span class="kw">||</span> <span class="ex">Entity12::post_id</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ex">@enduml</span></span></code></pre></div>
+</section>
+<section id="timescale" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Timescale</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">--name</span> timescaledb <span class="at">-p</span> 5432:5432 <span class="at">-e</span> POSTGRES_PASSWORD=password timescale/timescaledb:latest-pg14</span></code></pre></div>
+<p>login with username “postgres”</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-U</span> postgres <span class="at">-h</span> localhost</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">tsdb</span><span class="op">=&gt;</span> CREATE <span class="ex">database</span> example<span class="kw">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># connect to db named &quot;example&quot;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">tsdb</span><span class="op">=&gt;</span> <span class="dt">\c</span> <span class="ex">example</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list tables</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="va">tsdb</span><span class="op">=&gt;</span> <span class="dt">\d</span>t</span></code></pre></div>
+</section>
+<section id="db-driver" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Db Driver</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> psycopg2</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>username <span class="op">=</span> <span class="st">&quot;postgres&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>password <span class="op">=</span> <span class="st">&quot;password&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>host <span class="op">=</span> <span class="st">&quot;localhost&quot;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>port <span class="op">=</span> <span class="dv">5432</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>dbname <span class="op">=</span> <span class="st">&quot;example&quot;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>CONNECTION <span class="op">=</span> <span class="ss">f&quot;postgresql://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>password<span class="sc">}</span><span class="ss">@</span><span class="sc">{</span>host<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>port<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>dbname<span class="sc">}</span><span class="ss">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> psycopg2.<span class="ex">connect</span>(CONNECTION) <span class="im">as</span> conn:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    SQLquery <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">    DROP TABLE IF EXISTS &quot;btc_prices&quot;;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">    CREATE TABLE &quot;btc_prices&quot;(</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">   time            TIMESTAMP WITH TIME ZONE NOT NULL,</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">   open   DOUBLE PRECISION,</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">   high   DOUBLE PRECISION,</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">   low    DOUBLE PRECISION,</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="st">   close   DOUBLE PRECISION,</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="st">   volume      DOUBLE PRECISION</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="st">    );</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT create_hypertable('btc_prices','time');</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;&quot;&quot;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    cursor.execute(SQLquery)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    conn.commit</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    cursor.close()</span></code></pre></div>
+</section>
+<section id="orm" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> ORM</h1>
+<p>Assuming <code>stocks</code> is a pandas DataFrame.<br />
+Below will create a table named <code>temp</code> in SQL and fill it with <code>stocks</code> DataFrame.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>username <span class="op">=</span> <span class="st">&quot;postgres&quot;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>password <span class="op">=</span> <span class="st">&quot;password&quot;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>host <span class="op">=</span> <span class="st">&quot;localhost&quot;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>port <span class="op">=</span> <span class="dv">5432</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>dbname <span class="op">=</span> <span class="st">&quot;example&quot;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>CONNECTION <span class="op">=</span> <span class="ss">f&quot;postgresql://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>password<span class="sc">}</span><span class="ss">@</span><span class="sc">{</span>host<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>port<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>dbname<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>engine <span class="op">=</span> create_engine(CONNECTION, echo<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>stocks.to_sql(<span class="st">&quot;temp&quot;</span>, con<span class="op">=</span>engine, if_exists<span class="op">=</span><span class="st">&quot;replace&quot;</span>)</span></code></pre></div>
+</section>
+<section id="psql-commands" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> psql commands</h1>
+<ul>
+<li><code>\c someDBname</code> : connect to DB</li>
+<li><code>\l+</code> : check db storage mem used</li>
+<li><code>\d+</code> : check existing tables</li>
+<li><code>\d+ someTable</code> : describe table schema of “someTable”q</li>
+</ul>
+</section>
+<section id="sql-scenarios" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> SQL scenarios</h1>
+<ul>
+<li>In SQL double quote is not same as single quote <code>" != '</code>
+<ul>
+<li>use <code>'</code> single quotes</li>
+</ul></li>
+</ul>
+<section id="check-head-of-table" class="level2" data-number="10.1">
+<h2 data-number="10.1"><span class="header-section-number">10.1</span> Check head of table</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> temp <span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div>
+</section>
+<section id="dropping-a-column" class="level2" data-number="10.2">
+<h2 data-number="10.2"><span class="header-section-number">10.2</span> Dropping a column</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> temp <span class="kw">DROP</span> <span class="kw">COLUMN</span> somejunk;</span></code></pre></div>
+</section>
+<section id="transform-into-hypertable" class="level2" data-number="10.3">
+<h2 data-number="10.3"><span class="header-section-number">10.3</span> Transform into Hypertable</h2>
+<p>Note that this automatically turns the datetime column into an btree Index.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> create_hypertable(<span class="st">'temp'</span>, <span class="st">'datetime'</span>,migrate_data <span class="op">=&gt;</span> <span class="kw">TRUE</span>);</span></code></pre></div>
+</section>
 </section>
 
         </div>

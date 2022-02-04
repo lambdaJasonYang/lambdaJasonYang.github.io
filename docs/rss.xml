@@ -7,8 +7,61 @@
         <description><![CDATA[Programming language theory, haskell, induction, combinatorics, Energy based models, time series analysis, differential equations, stochastic calculus, trading]]></description>
         <atom:link href="https://userjy.github.io/rss.xml" rel="self"
                    type="application/rss+xml" />
-        <lastBuildDate>Wed, 10 Nov 2021 00:00:00 UT</lastBuildDate>
+        <lastBuildDate>Mon, 15 Nov 2021 00:00:00 UT</lastBuildDate>
         <item>
+    <title>Understanding Google Analytics</title>
+    <link>https://userjy.github.io/posts/2021-11-15-GoogleAnalytics.html</link>
+    <description><![CDATA[<div class="info">
+    Posted on November 15, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#key-terms"><span class="toc-section-number">1</span> Key terms</a></li>
+</ul></div>
+<section id="key-terms" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Key terms</h1>
+<p>3 steps:</p>
+<ul>
+<li>Acquisition</li>
+<li>Behavior</li>
+<li>Conversion</li>
+</ul>
+</section>
+]]></description>
+    <pubDate>Mon, 15 Nov 2021 00:00:00 UT</pubDate>
+    <guid>https://userjy.github.io/posts/2021-11-15-GoogleAnalytics.html</guid>
+    <dc:creator>Jason Yang</dc:creator>
+</item>
+<item>
+    <title>Visx</title>
+    <link>https://userjy.github.io/posts/2021-11-11-Visx.html</link>
+    <description><![CDATA[<div class="info">
+    Posted on November 11, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"></div>
+<ul>
+<li>Scale = Domain range</li>
+</ul>
+<p>Scale is a function that converts data to pixels.</p>
+<p>Domain = Data’s bounds Range = Pixel’s bounds</p>
+<p>Visx components map the Data(Domain) to Pixels(Range).</p>
+]]></description>
+    <pubDate>Thu, 11 Nov 2021 00:00:00 UT</pubDate>
+    <guid>https://userjy.github.io/posts/2021-11-11-Visx.html</guid>
+    <dc:creator>Jason Yang</dc:creator>
+</item>
+<item>
     <title>Code-Server</title>
     <link>https://userjy.github.io/posts/2021-11-10-CodeServer.html</link>
     <description><![CDATA[<div class="info">
@@ -49,6 +102,58 @@ extensions that show “previews” won’t work like Lean</p>
 ]]></description>
     <pubDate>Wed, 10 Nov 2021 00:00:00 UT</pubDate>
     <guid>https://userjy.github.io/posts/2021-11-10-CodeServer.html</guid>
+    <dc:creator>Jason Yang</dc:creator>
+</item>
+<item>
+    <title>Authentication OAuth2 SAML</title>
+    <link>https://userjy.github.io/posts/2021-11-10-Authentication.html</link>
+    <description><![CDATA[<div class="info">
+    Posted on November 10, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#oauth2"><span class="toc-section-number">1</span> Oauth2</a></li>
+<li><a href="#openid-connect"><span class="toc-section-number">2</span> OpenID connect</a></li>
+</ul></div>
+<p>AWS Cognito uses OAuth2</p>
+<p>OAuth2 is a protocol that typically uses JWT</p>
+<section id="oauth2" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Oauth2</h1>
+<p>4 parties: User(Resource Owner) on Browser,<br />
+Leetcode(Client),<br />
+github-auth(Authorization Server),<br />
+github profile db(Resource Server)</p>
+<ol type="1">
+<li>User(Resource Owner) goes to leetcode(Client) website</li>
+<li>User has an account on github-Auth(Authorization Server) and has an github profile data there(Resource Server)</li>
+<li>User(Resource Owner) wants to allow leetcode(Client) to read github profile(Resource Server)</li>
+<li>User(Resource Owner) clicks linkage form on leetcode(Client) then redirects User to login form on github-Auth(Authorization Server) with a packet of data containing{Client_ID, Callback_URI, Scopes/Permissions}.</li>
+<li>User(Resource Owner) logins on github-Auth(Authorization Server)</li>
+<li>User(Resource Owner) is presented with a list of permissions(Scopes presented in step 4) it will allow leetcode(Client) to have access to in the github profile(Resource Server)</li>
+<li>github-Auth(Authorization Server) redirects the User(Resource Owner) back to leetcode webpage(Client) using the Callback_URI(presented in step 4) along with a temporary {Authorization_Code}</li>
+<li>Leetcode(Client) contacts github-Auth(Authorization Server) directly w/o needing the User’s browser. Leetcode(Client) sends {Client_ID,Client_Secret, Authorization_Code} to github-Auth.</li>
+<li>github-Auth(Authorization Server) verifies the data and responds to Leetcode(Client) with an {Access Token}.</li>
+<li>Leetcode(Client) can now access the User(Resource Owner) specific data on their github profile(Resource Server) using the {Access Token}</li>
+</ol>
+</section>
+<section id="openid-connect" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> OpenID connect</h1>
+<p>OIDC sits ontop of OAuth2<br />
+OIDC gives a more typical behavior of a login session. OIDC allows a Client(Leetcode) to establish a login session and identity for the User(Resource-Owner).<br />
+When github-auth(Authorization Server) allows OIDC, it is called an <strong>identity provider</strong> since it provide identity information about the User(Resource-Owner) back to the Client(Leetcode).</p>
+<p>OIDC allows one login to github-auth(Authorization Server) to be used for multiple Client/Apps.<br />
+Eg. Using gmail to sign into multiple apps. This single login is called <strong>SSO</strong> Single-Sign-On</p>
+<p>OIDC process is same as OAuth except at step 9, it returns {JWT ID token, Access Token}.</p>
+<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a736b696e706172616d20736861646f77696e672066616c73650a42726f77736572202d3e2057656273697465203a20476574206578616d706c652e636f6d0a57656273697465202d2d3e2042726f777365723a206f6b2c2068657265206973206d792053534c2063657274205c6e636f6e7461696e696e67206d79207075626c69636b65795c6e7369676e6564206279204c657473456e63727970740a6e6f7465206f7665722042726f777365720a557365207072652d696e7374616c6c6564204c657473456e63727970740a5075626c69634b657920696e2042726f7773657220746f0a766572696679207468652053534c2063657274207369676e6564207573696e670a4c657473456e6372797074277320507269766174654b65790a656e646e6f74650a42726f77736572202d3e20576562736974653a2049207472757374204c657473456e63727970745c6e5468657265666f7265204920747275737420796f757220636572742e5c6e49206d6164652061205365637265744b6579205c6e656e6372797074656420697420772f20796f7572205075626c69634b65790a6e6f7465206f76657220576562736974650a576562736974652063616e2072657665616c200a746865205365637265744b6579200a62792064656372797074696e6720746865206d657373616765200a772f2057656273697465277320507269766174654b6579200a656e646e6f74650a57656273697465203c2d3e2042726f777365723a20436f6d6d756e69636174696f6e20772f205365637265744b65790a40656e64756d6c'></figure>
+</section>
+]]></description>
+    <pubDate>Wed, 10 Nov 2021 00:00:00 UT</pubDate>
+    <guid>https://userjy.github.io/posts/2021-11-10-Authentication.html</guid>
     <dc:creator>Jason Yang</dc:creator>
 </item>
 <item>
@@ -153,28 +258,79 @@ but ERROR: port 8000 being used</p>
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#cef---closed-ended-funds"><span class="toc-section-number">0.0.1</span> CEF - Closed Ended funds</a></li>
+<li><a href="#gdp"><span class="toc-section-number">1</span> GDP</a></li>
+<li><a href="#economic-indictators"><span class="toc-section-number">2</span> Economic Indictators</a>
+<ul>
+<li><a href="#inflation-and-bonds"><span class="toc-section-number">2.1</span> Inflation and Bonds</a></li>
+<li><a href="#unemployment"><span class="toc-section-number">2.2</span> Unemployment</a></li>
+<li><a href="#big-corp-confidence-pmi"><span class="toc-section-number">2.3</span> Big Corp Confidence = PMI</a></li>
+<li><a href="#housing"><span class="toc-section-number">2.4</span> Housing</a></li>
+</ul></li>
+<li><a href="#most-important-for-investors"><span class="toc-section-number">3</span> Most important for Investors</a>
+<ul>
+<li><a href="#cef---closed-ended-funds"><span class="toc-section-number">3.0.1</span> CEF - Closed Ended funds</a></li>
+</ul></li>
 </ul></div>
 <p><a href="https://fred.stlouisfed.org/series/NYGDPMKTPCDWLD">World GDP</a></p>
 <ul>
-<li><p>CPI - Consumer Price Index</p></li>
-<li><p>GDP: Market-value of Final Goods Produced</p>
+<li>CPI - Consumer Price Index</li>
+</ul>
+<section id="gdp" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> GDP</h1>
+<ul>
+<li>GDP: Market-value of Final Goods Produced
 <ul>
 <li>GDP = PersonalConsumption + PrivateInvestment + GovtConsumption + (Exports - Imports)</li>
 </ul></li>
-<li><p>Inflation</p></li>
-<li><p>Unemployment</p></li>
-<li><p>Business confidence</p></li>
-<li><p>Housing</p></li>
+<li>Inflation</li>
+<li>Unemployment</li>
+<li>Business confidence</li>
+<li>Housing</li>
 </ul>
 <p>https://fred.stlouisfed.org/series/GDP</p>
 <p>Personal Consumption Expenditures Gross private domestic investment Net Exports Government Consumption Expenditures</p>
 <p>https://fred.stlouisfed.org/series/PCE https://fred.stlouisfed.org/series/GPDI https://fred.stlouisfed.org/series/FGEXPND https://fred.stlouisfed.org/series/NETEXP</p>
-<p>GDP</p>
-<p>nominal gdp does control for inflation</p>
+<p>real GDP = inflation_normalized(nominal_GDP)</p>
+<p>Recession = 2 consecutive quarters of negative real GDP</p>
+<ul>
+<li>3.2% Q3 2017 <strong>yoy</strong> means “3.2% returns relative to Q3 2017”<br />
+</li>
+<li>3.2% Q3 2017 <strong>qoq</strong> means “3.2% returns relative to Q2 2017”</li>
+</ul>
+</section>
+<section id="economic-indictators" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Economic Indictators</h1>
+<section id="inflation-and-bonds" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Inflation and Bonds</h2>
+<p>Fixed-income investors aka Bond traders REALLY WATCH Inflation</p>
+<p><a href="https://www.bea.gov/data/prices-inflation/gdp-price-deflator">GDP price deflator from BEA to check inflation</a></p>
+<p><a href="https://www.bls.gov/cpi/home.htm">CPI</a> In the US, food only makes up 15% CPI, and Housing makes 40% CPI</p>
+</section>
+<section id="unemployment" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Unemployment</h2>
+<p>non-farm payrolls (this disregards seasonal farm workers) and is the most useful measure of unemployment https://fred.stlouisfed.org/series/PAYEMS It correlates with GDP (recessions)</p>
+</section>
+<section id="big-corp-confidence-pmi" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> Big Corp Confidence = PMI</h2>
+<p><strong>PMI IS THE BEST ECONOMIC INDICATOR SINCE IT PREDICTS GDP</strong></p>
+<ul>
+<li>Market moves depending on Actual vs Expected</li>
+</ul>
+<p><a href="https://www.ismworld.org/supply-management-news-and-reports/reports/ism-report-on-business/">Institute of supply management PMI</a> <a href="https://tradingeconomics.com/united-states/business-confidence">trading economics</a></p>
+<p>50 is neutral, gt 50 is optimism vis-a-vis https://www.ismworld.org/supply-management-news-and-reports/reports/ism-report-on-business/services/november/ institute of supply management</p>
+<p>Typically we can find an actual and expected PMI. Like earnings if expected &gt; actual, it’s a good surprise.</p>
+</section>
+<section id="housing" class="level2" data-number="2.4">
+<h2 data-number="2.4"><span class="header-section-number">2.4</span> Housing</h2>
+<p>Remember housing makes up 40% CPI</p>
+</section>
+</section>
+<section id="most-important-for-investors" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Most important for Investors</h1>
+<p>PMI</p>
 <hr />
-<section id="cef---closed-ended-funds" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> CEF - Closed Ended funds</h3>
+<section id="cef---closed-ended-funds" class="level3" data-number="3.0.1">
+<h3 data-number="3.0.1"><span class="header-section-number">3.0.1</span> CEF - Closed Ended funds</h3>
 <ul>
 <li>NAV of CEF are sensitive to good/bad investment decisions by the owner<br />
 </li>
@@ -187,9 +343,49 @@ but ERROR: port 8000 being used</p>
 <p>Terms<br />
 :NAV = similar to book value [what the fund really has] :Positive Discount = Premium to NAV [fund is doing well] :Negative DIscount = Discount to NAV [fund is doing badly] :Distribution rate = Dividend yield [calculated annually ]</p>
 </section>
+</section>
 ]]></description>
     <pubDate>Mon, 01 Nov 2021 00:00:00 UT</pubDate>
     <guid>https://userjy.github.io/posts/2021-11-01-MarketConcepts.html</guid>
+    <dc:creator>Jason Yang</dc:creator>
+</item>
+<item>
+    <title>Import, load, FRED, TDtrade in python, R</title>
+    <link>https://userjy.github.io/posts/2021-10-10-LoadStockFRED.html</link>
+    <description><![CDATA[<div class="info">
+    Posted on October 10, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;python&#39;." href="/tags/python.html">python</a>, <a title="All pages tagged &#39;R&#39;." href="/tags/R.html">R</a>, <a title="All pages tagged &#39;stats&#39;." href="/tags/stats.html">stats</a>, <a title="All pages tagged &#39;AI&#39;." href="/tags/AI.html">AI</a>, <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<section id="import-csv-data" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> import CSV data</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mycsv <span class="op">=</span> Path(<span class="st">&quot;/home/kali/pytorch-Deep-Learning/ISLR/dataset/Advertising.csv&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>outDF<span class="op">=</span>pd.read_csv(mycsv)</span></code></pre></div>
+</section>
+<section id="import-tdtrade" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> import tdtrade</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>apikey <span class="op">=</span> <span class="st">&quot;XXXXXXXXXXX&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ticker <span class="op">=</span> <span class="st">&quot;AAPL&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>period <span class="op">=</span> <span class="st">&quot;day&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>myurl <span class="op">=</span> <span class="ss">f&quot;https://api.tdameritrade.com/v1/marketdata/</span><span class="sc">{</span>ticker<span class="sc">}</span><span class="ss">/pricehistory?apikey=</span><span class="sc">{</span>apikey<span class="sc">}</span><span class="ss">&amp;periodType=</span><span class="sc">{</span>period<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>stkdata <span class="op">=</span> pd.read_json(myurl)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Series of json eg. [{open: ,close: ...}, {open: , close: ..}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>stocks <span class="op">=</span> stkdata[<span class="st">&quot;candles&quot;</span>].<span class="bu">apply</span>(pd.Series)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert Series of json to Dataframe</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>stocks[<span class="st">&quot;datetime&quot;</span>] <span class="op">=</span>  pd.to_datetime(stocks[<span class="st">&quot;datetime&quot;</span>],origin<span class="op">=</span><span class="st">&quot;unix&quot;</span>, unit<span class="op">=</span><span class="st">&quot;ms&quot;</span>)</span></code></pre></div>
+</section>
+]]></description>
+    <pubDate>Sun, 10 Oct 2021 00:00:00 UT</pubDate>
+    <guid>https://userjy.github.io/posts/2021-10-10-LoadStockFRED.html</guid>
     <dc:creator>Jason Yang</dc:creator>
 </item>
 <item>
@@ -453,543 +649,6 @@ The bash version is .bashrc</p>
 ]]></description>
     <pubDate>Tue, 21 Sep 2021 00:00:00 UT</pubDate>
     <guid>https://userjy.github.io/posts/2021-09-21-dotfile.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
-    <title>Panasonic SD-MDX102-K Breadmaker Translated</title>
-    <link>https://userjy.github.io/posts/2021-09-21-Bread.html</link>
-    <description><![CDATA[<div class="info">
-    Posted on September 21, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;musings&#39;." href="/tags/musings.html">musings</a>
-    
-</div>
-<p>RCCD = Raisins/Coarse-Mix/Crust/Delay</p>
-<table>
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 20%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Menu Num</th>
-<th>Bread Type</th>
-<th>RCCD</th>
-<th>Time</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Pain de mie</td>
-<td>YYYY</td>
-<td>4hr50m</td>
-<td>250g bread flour<br> 20g butter<br> 21.5g sugar<br> 15g salt<br> 190ml water<br> 1.4g yeast</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Plain Bread</td>
-<td>YYYY</td>
-<td>4hr</td>
-<td>250g bread flour<br> 10g butter<br> 17g sugar(large 2)<br> 6g skim milk(large 1)<br> 5g salt (small 1)<br> 180ml water <br> 2.8g yeast (small 1)</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Soft Bread</td>
-<td>YYYY</td>
-<td>4hr20m</td>
-<td>250g bread flour<br> 15g butter<br> 17g sugar(large 2)<br> 6g skim milk(large 1)<br> 5g salt (small 1)<br> 180ml water <br> 2.8g yeast (small 1)</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Sandwich Bread</td>
-<td>YNNY</td>
-<td>3hr</td>
-<td>250g bread flour<br> 10g butter<br> 17g sugar(large 2)<br> 6g skim milk(large 1)<br> 5g salt (small 1)<br> 170ml water <br> 2.8g yeast (small 1)</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Fast-baked Bread</td>
-<td>YYYN</td>
-<td>1hr55m</td>
-<td>280g bread flour<br> 10g butter<br> 17g sugar(large 2)<br> 6g skim milk(large 1)<br> 5g salt (small 1)<br> 200ml Cold water <br> 4.2g yeast (small 1+1/2)</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Sweet Bread</td>
-<td>NNYN</td>
-<td>2hr20m</td>
-<td>285g bread flour<br> 15g butter<br> 21.5g sugar(large 2+1/2)<br> 10g Honey<br> 5g salt (small 1)<br> 140ml Cold water <br> 50ml cream <br> 3.5g yeast (small 1+1/4)</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>60 minute bread</td>
-<td>NNNN</td>
-<td>1hr</td>
-<td>30 ml warm water + 4.2g yeast (small 1+1/2) <br>280g bread flour<br> 25g butter<br> 25.5g sugar(large 3)<br> 12g skim milk(large 2)<br>25g egg<br> 5g salt (small 1)<br> 140ml warm water</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td>Rice bread</td>
-<td>YYYY</td>
-<td>4hr</td>
-<td>210g bread flour<br> 100~200g cooked rice<br> 10g butter <br> 17g sugar(large 2)<br> 6g skim milk(large 1)<br>5g salt (small 1)<br> 130ml water <br> 2.1g yeast (small 3/4)</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>Rice French bread</td>
-<td>YYNY</td>
-<td>4hr40m</td>
-<td>210g bread flour<br> 80~130g rice<br> 6g sugar(small 2)<br> 5g salt (small 1)<br> 140ml Cold water <br> 2.1g yeast (small 3/4)</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>French bread</td>
-<td>YYNY</td>
-<td>5hr</td>
-<td>225g bread flour<br> 25g cake flour <br> 5g salt (small 1)<br> 190ml Cold water <br> 1.4g yeast (small 1/2)</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td>Rye bread</td>
-<td>YNNY</td>
-<td>5hr</td>
-<td>125g bread flour<br> 125g rye flour <br> 5g butter<br> 17g sugar(large 2)<br>5g salt(small 1)<br> 85g sugarless plain yogert<br> 80ml Cold water <br> 1.4g yeast (small 1/2)</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td>whole grain bread</td>
-<td>YYNY</td>
-<td>5hr</td>
-<td>125g whole grain flour<br> 125g bread flour <br> 10g butter<br> 17g sugar(large 2)<br> 16g skim milk(large 1)<br>5g salt(small 1)<br> 200ml Cold water <br> 2.8g yeast (small 1)</td>
-</tr>
-<tr class="odd">
-<td>13</td>
-<td>Brioche</td>
-<td>YYYN</td>
-<td>3hr15m</td>
-<td>170g bread flour <br> 30g cake flour <br> 30g butter<br> 25.5g sugar(large 3)<br> 6g skim milk(large 1)<br>3.8g salt(small 3/4)<br>140g 1 egg+yolk+coldwater <br> 2.1g yeast (small 3/4)<br> + There will be a pause beep =&gt; add 40g diced unsalted butter then hit start<br></td>
-</tr>
-<tr class="even">
-<td>14</td>
-<td>Marble bread</td>
-<td>NNNN</td>
-<td>4hr</td>
-<td>250g bread flour <br> 10g butter<br> 21.5g sugar(large 2+1/2)<br> 6g skim milk(large 1)<br>5g salt(small 1)<br>180g water <br> 2.8g yeast (small 1)<br> + There will be a pause beep =&gt; add 3g instant coffee then hit start<br></td>
-</tr>
-<tr class="odd">
-<td>15</td>
-<td>Melon bread</td>
-<td>YNNN</td>
-<td>2hr15m</td>
-<td>150g bread flour <br> 15g butter<br> 17g sugar(large 2)<br> 6g skim milk(large 1)<br>2.5g salt(small 1/2)<br>90g cold water <br> 2.1g yeast (small 3/4)<br> + There will be a pause beep =&gt; takeout bread, place Cookie dough skin,put back bread inside skin<br></td>
-</tr>
-<tr class="even">
-<td>15cont</td>
-<td>Melon bread(Cookie Dough Skin)</td>
-<td>—</td>
-<td>Manual</td>
-<td>50g butter <br> 40g sugar <br> 25g egg <br> 100g cake flour <br> 3g baking powder <br> teaspoon vanilla Extract <br> mix ingredients, sit for 20 min<br> stretch to flat skin</td>
-</tr>
-<tr class="odd">
-<td>16</td>
-<td>White style bread</td>
-<td>NNNY</td>
-<td>3hr50m</td>
-<td>180g bread flour <br> 15g butter<br> 3g sugar(small 1)<br> 6g skim milk(large 1)<br>2.5g salt(small 1/2)<br>130g water <br> 20g syrup <br> 2.1g yeast (small 3/4)</td>
-</tr>
-<tr class="even">
-<td>17</td>
-<td>Half bread</td>
-<td>NNNY</td>
-<td>3hr35m</td>
-<td>180g bread flour <br> 10g butter<br> 12.5g sugar(large 1+1/2)<br> 6g skim milk(large 1)<br>2.5g salt(small 1/2)<br>130g water <br> 2.1g yeast (small 3/4)</td>
-</tr>
-<tr class="odd">
-<td>18</td>
-<td>Rice flour bread</td>
-<td>YNYY</td>
-<td>2hr30m</td>
-<td>250g rice flour <br> 20g butter<br> 17g sugar(large 2)<br> 6g skim milk(large 1)<br>5g salt(small 1)<br>190g water <br> 4.2g yeast (small 1+1/2)</td>
-</tr>
-<tr class="even">
-<td>19</td>
-<td>Rice flour bread w/o wheat</td>
-<td>YNNY</td>
-<td>1hr15m</td>
-<td>270g Mochi flour and starch syrup <br> 300g rice flour <br> 18g olive oil(2 teaspoon)<br> 8.5g sugar(large 1)<br> 6g skim milk(large 1)<br>5g salt(small 1) <br> 4.2g yeast (small 1+1/2)</td>
-</tr>
-<tr class="odd">
-<td>19cont</td>
-<td>Mochi flour and starch syrup</td>
-<td>—-</td>
-<td>—-</td>
-<td>1/2 teaspoon Mochi flour <br> 45g syrup <br> 220mL water<br> dissolve mochi flour in 1 teaspoon water, put in microwave for 30-40s, stir 1 min, add 45g starch syrup, add 220mL water</td>
-</tr>
-<tr class="even">
-<td>20</td>
-<td>Dry natural yeast bread</td>
-<td>YYYY</td>
-<td>4hr10m</td>
-<td>250g bread flour <br> 5g butter<br> 17g sugar(large 2)<br>5g salt(small 1)<br>190g water <br> 5g yeast (small 1+1/2)</td>
-</tr>
-<tr class="odd">
-<td>21</td>
-<td>Dry natural yeast bread(Ingredient)</td>
-<td>NNNN</td>
-<td>24m</td>
-<td>30g yeast leavener(large 3) <br> 60mL warm water</td>
-</tr>
-<tr class="even">
-<td>22</td>
-<td>Dry natural yeast bread</td>
-<td>YYYY</td>
-<td>7m</td>
-<td>25g Dry natural yeast bread(Ingredient)(large 2) <br> 300g bread flour <br> 17g sugar(large 2) <br> 5g salt(small 1)<br>180ml water</td>
-</tr>
-<tr class="odd">
-<td>23</td>
-<td>Quick bread</td>
-<td>NNYN</td>
-<td>54m</td>
-<td>80g 1egg+milk mixture <br> 50g unsweet yogurt <br> 120g cake flour <br> 60 bread flour<br> 5g baking powder <br> 35g diced butter<br>25.5g sugar(large 3) <br> 2.5g salt(small 1/2) <br> AutoPause to shape bread</td>
-</tr>
-<tr class="even">
-<td>24</td>
-<td>Soycorn bread</td>
-<td>NNYN</td>
-<td>58m</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>25</td>
-<td>rice flour cake</td>
-<td>NNNN</td>
-<td>1hr40m</td>
-<td>100g vegetable oil <br> 100g or 2eggs<br> 80g milk <br> 120g sugar <br> 140g rice flour <br> 50g almond powder<br> 5g baking powder <br> 15g black tea or 4g earl tea <br> beeps =&gt; push back powder continue</td>
-</tr>
-<tr class="even">
-<td>26</td>
-<td>butter cake</td>
-<td>NNYN</td>
-<td>1hr30m</td>
-<td>110g unsalted butter<br> 100g sugar<br> 15g milk(1 tablespoon)<br> 100g or 2eggs<br> 180g cake flour<br> 7g baking powder <br> 15g cocoa or 50g chocolate chip or 4g blacktea or 40g walnut <br> beeps =&gt; push back powder continue</td>
-</tr>
-<tr class="odd">
-<td>27</td>
-<td>Veggie bread</td>
-<td>NNNN</td>
-<td>55m</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>28</td>
-<td>milk choco Brownie</td>
-<td>NNNN</td>
-<td>17m</td>
-<td>165~174g chocolate(3 bars)<br> 70mL Cream(35% fat)<br>10g honey</td>
-</tr>
-<tr class="odd">
-<td>28</td>
-<td>white choco Brownie</td>
-<td>NNNN</td>
-<td>17m</td>
-<td>165~174g chocolate(3 bars)<br> 60mL Cream(35% fat)<br>10g honey</td>
-</tr>
-<tr class="even">
-<td>28</td>
-<td>dark choco Brownie</td>
-<td>NNNN</td>
-<td>17m</td>
-<td>165~174g chocolate(3 bars)<br> 90mL Cream(35% fat)<br>10g honey</td>
-</tr>
-<tr class="odd">
-<td>29</td>
-<td>condensed milk</td>
-<td>NNNN</td>
-<td>1~2hr10m</td>
-<td>80g sugar<br> 200mL Cream(35% fat)<br>60mL milk</td>
-</tr>
-<tr class="even">
-<td>30</td>
-<td>strawberry jam</td>
-<td>NNNN</td>
-<td>1~2hr30m</td>
-<td>400g strawberry<br> 140g sugar<br>38g lemon juice(2+1/2 tablespoon)</td>
-</tr>
-<tr class="odd">
-<td>31</td>
-<td>apple compote</td>
-<td>NNNN</td>
-<td>1~2hr</td>
-<td>200g or cut 1 apple into 4<br> 250mL water <br> 60g sugar<br>10g lemon juice(2 teaspoon)</td>
-</tr>
-<tr class="even">
-<td>32</td>
-<td>Veggie bread</td>
-<td>NNNN</td>
-<td>6~10m</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>33</td>
-<td>Read bean</td>
-<td>NNNN</td>
-<td>1hr</td>
-<td>1hr boiled 150g azuki beans<br> 450-600ml water<br> 200g sugar</td>
-</tr>
-<tr class="even">
-<td>34</td>
-<td>Rice cake</td>
-<td>NNNN</td>
-<td>1hr</td>
-<td>1hr boiled 150g azuki beans<br> 450-600ml water<br> 200g sugar</td>
-</tr>
-</tbody>
-</table>
-]]></description>
-    <pubDate>Tue, 21 Sep 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-09-21-Bread.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
-    <title>Bookmarks</title>
-    <link>https://userjy.github.io/posts/2021-09-21-Bookmarks.html</link>
-    <description><![CDATA[<div class="info">
-    Posted on September 21, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;mathcs&#39;." href="/tags/mathcs.html">mathcs</a>, <a title="All pages tagged &#39;puremath&#39;." href="/tags/puremath.html">puremath</a>, <a title="All pages tagged &#39;recursion&#39;." href="/tags/recursion.html">recursion</a>
-    
-</div>
-<p>https://www.cl.cam.ac.uk/teaching/1617/L28/materials.html</p>
-<p>https://faculty.math.illinois.edu/~r-ash/</p>
-<p>https://book.hacktricks.xyz/brute-force</p>
-<p>https://quuxplusone.github.io/blog/2020/01/24/openssl-part-1/</p>
-<p>http://book.mixu.net/distsys/</p>
-<p>https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/</p>
-<p>https://pdos.csail.mit.edu/6.828/2021/schedule.html</p>
-<p>https://github.com/brendandburns/designing-distributed-systems-labs</p>
-<p>https://www.andrew.cmu.edu/user/achoulde/94842/homework/regression_diagnostics.html</p>
-]]></description>
-    <pubDate>Tue, 21 Sep 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-09-21-Bookmarks.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
-    <title>HTTP requests - Design proper headers in python</title>
-    <link>https://userjy.github.io/posts/2021-08-25-RequestHeader.html</link>
-    <description><![CDATA[<div class="info">
-    Posted on August 25, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;mathcs&#39;." href="/tags/mathcs.html">mathcs</a>, <a title="All pages tagged &#39;musings&#39;." href="/tags/musings.html">musings</a>, <a title="All pages tagged &#39;python&#39;." href="/tags/python.html">python</a>
-    
-</div>
-<p>In python, headers are key-value pairs in dicts.</p>
-<p>Some api’s require that headers must satisfy certain requirements: * “User-Agent”: “Mozilla/5.0 (Windows NT 10.0)” * messing with User-Agent; even using a valid one like “Mozilla/5.0 (X11; U; Linux i686)” can make your request hang or timeout. * “sec-fetch-mode”: “cors”</p>
-<p>adding “accept-encoding”: “gzip, deflate, br”, will print out hex so leave it out of your header if you can</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&quot;https://api.example.com/api/endpoint&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>GOODheader <span class="op">=</span> {</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Content-Type&quot;</span>: <span class="st">&quot;application/json&quot;</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;Accept&#39;</span>: <span class="st">&#39;application/json, text/plain, */*&#39;</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;DNT&#39;</span>: <span class="st">&quot;1&quot;</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;Origin&#39;</span>: <span class="st">&#39;https://www.example.com/&#39;</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;Sec-Fetch-Mode&#39;</span>: <span class="st">&#39;cors&#39;</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;User-Agent&#39;</span>: <span class="st">&#39;Mozilla/5.0 (Windows NT 10.0)&#39;</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>req <span class="op">=</span> urllib.request.Request(url,headers<span class="op">=</span>GOODheader,method<span class="op">=</span><span class="st">&quot;GET&quot;</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>page <span class="op">=</span> urllib.request.urlopen(req,timeout<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(page.read(<span class="dv">300</span>))</span></code></pre></div>
-<p>Here is another sample request header</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>SAMPLEheaderWithEncoding <span class="op">=</span> {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Accept&quot;</span>: <span class="st">&quot;text/html,application/xhtml+xml, text/plain,application/xml;q=0.9,*/*;q=0.8&quot;</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;scheme&quot;</span>:<span class="st">&quot;https&quot;</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Referrer Policy&quot;</span>: <span class="st">&quot;strict-origin-when-cross-origin&quot;</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;accept&quot;</span>: <span class="st">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&quot;</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;accept-encoding&quot;</span>: <span class="st">&quot;gzip, deflate, br&quot;</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;accept-language&quot;</span>: <span class="st">&quot;en-US,en;q=0.9&quot;</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;cache-control&quot;</span>: <span class="st">&quot;max-age=0&quot;</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;DNT&quot;</span>: <span class="st">&quot;1&quot;</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;sec-ch-ua&quot;</span>: <span class="st">&quot;&#39; Not A;Brand&#39;;v=&#39;99&#39;, &#39;Chromium&#39;;v=&#39;92&#39;&quot;</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;sec-ch-ua-mobile&quot;</span>: <span class="st">&quot;?0&quot;</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;sec-fetch-dest&quot;</span>: <span class="st">&quot;document&quot;</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;sec-fetch-mode&quot;</span>: <span class="st">&quot;cors&quot;</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;sec-fetch-site&quot;</span>: <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;sec-fetch-user&quot;</span>: <span class="st">&quot;?1&quot;</span>,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;upgrade-insecure-requests&quot;</span>: <span class="st">&quot;1&quot;</span>,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Content-Type&quot;</span>: <span class="st">&quot;application/json&quot;</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;Origin&#39;</span>: <span class="st">&#39;https://www.example.com/&#39;</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;user-agent&quot;</span>: <span class="st">&quot;Mozilla/5.0 (Windows NT 10.0)&quot;</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            }</span></code></pre></div>
-]]></description>
-    <pubDate>Wed, 25 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-25-RequestHeader.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
-    <title>PlantUML diagram list</title>
-    <link>https://userjy.github.io/posts/2021-08-25-PlantUMLkey.html</link>
-    <description><![CDATA[<div class="info">
-    Posted on August 25, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;musings&#39;." href="/tags/musings.html">musings</a>, <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
-    
-</div>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h6469677261706820677b0a202020206772617068205b0a72616e6b646972203d20224c52220a5d3b0a226e6f64653122205b0a6c6162656c203d20223c66303e20537472696e677c203c66313e204c697374207c203c66323e205365747c203c66333e20536f7274656420536574207c203c66343e2048617368220a7368617065203d20227265636f7264220a5d3b0a0a7d'></figure>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">digraph</span> g{</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">graph</span> [</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">rankdir</span> = <span class="st">&quot;LR&quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">]</span><span class="kw">;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;node1&quot;</span> [</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">label</span> = <span class="st">&quot;&lt;f0&gt; String| &lt;f1&gt; List | &lt;f2&gt; Set| &lt;f3&gt; Sorted Set | &lt;f4&gt; Hash&quot;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">shape</span> = <span class="st">&quot;record&quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">]</span><span class="kw">;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
-<p>State Diagram only have 1 type of arrow. Activity Diagram has less control than state diagram.</p>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6162737472616374202020202020202061627374726163740a616273747261637420636c617373202022616273747261637420636c617373220a616e6e6f746174696f6e202020202020616e6e6f746174696f6e0a28292020202020202020202020202020636972636c650a636c6173732020202020202020202020636c6173730a3c3e20202020202020202020202020206469616d6f6e640a656e7469747920202020202020202020656e746974790a656e756d202020202020202020202020656e756d0a696e7465726661636520202020202020696e746572666163650a40656e64756d6c'></figure>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a0a7469746c652053696d706c65204f626a656374204469616772616d0a696e74657266616365206d616d6d616c207b0a20202d566f6964204272656174680a7d0a636c61737320506572736f6e207b0a20202e2e6c6966657374796c652e2e0a20202b496e74204167650a20202b766f69642054616c6b0a20202e2e766974616c732e2e0a20202b496e7420426c6f6f6470726573737572650a7d0a6d616d6d616c202d2d6f20506572736f6e0a40656e64756d6c'></figure>
-<hr />
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a0a31202d2d2032203a20736f6c69640a31202e2e2033203a206461736865640a31202d5b68696464656e5d2d2034203a2068696464656e0a31207e7e2035203a20646f747465640a31203d3d2036203a20626f6c640a0a37202d2d20380a40656e64756d6c'></figure>
-<hr />
-<section id="sequence-diagram" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Sequence diagram</h3>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a7061727469636970616e7420557365720a0a55736572202d3e20413a20446f576f726b0a616374697661746520410a0a41202d3e20413a202043616c6c2053656c660a0a41202d3e20423a203c3c2063726561746552657175657374203e3e0a616374697661746520420a0a42202d3e20433a20446f576f726b0a616374697661746520430a43202d2d3e20423a20576f726b446f6e650a64657374726f7920430a0a42202d2d3e20413a2052657175657374437265617465640a6465616374697661746520420a0a41202d3e20557365723a20446f6e650a6465616374697661746520410a0a40656e64756d6c'></figure>
-<ul>
-<li>Step into function call
-<ul>
-<li><code class="code">-&gt;</code></li>
-</ul></li>
-<li>Step out/return from call
-<ul>
-<li><code class="code">--&gt;</code></li>
-</ul></li>
-</ul>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a0a42202d3e20423a0a616374697661746520420a42202d3e20423a0a616374697661746520420a42202d3e20423a0a616374697661746520420a42202d2d3e20423a0a6465616374697661746520420a42202d2d3e20423a0a6465616374697661746520420a42202d2d3e20423a0a6465616374697661746520420a40656e64756d6c'></figure>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">@startuml</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">B</span> <span class="at">-</span><span class="op">&gt;</span> B:</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">activate</span> B</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">B</span> <span class="at">-</span><span class="op">&gt;</span> B:</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">activate</span> B</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">B</span> <span class="at">-</span><span class="op">&gt;</span> B:</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">activate</span> B</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">B</span> <span class="at">--</span><span class="op">&gt;</span> B:</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span> B</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">B</span> <span class="at">--</span><span class="op">&gt;</span> B:</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span> B</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">B</span> <span class="at">--</span><span class="op">&gt;</span> B:</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span> B</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">@enduml</span></span></code></pre></div>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6175746f6163746976617465206f6e0a42202d3e20423a0a0a0a42202d3e20423a0a42202d3e20423a0a0a72657475726e0a72657475726e0a72657475726e0a0a40656e64756d6c'></figure>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">@startuml</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">autoactivate</span> on</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">B</span> <span class="at">-</span><span class="op">&gt;</span> B:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">B</span> <span class="at">-</span><span class="op">&gt;</span> B:</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">B</span> <span class="at">-</span><span class="op">&gt;</span> B:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">@enduml</span></span></code></pre></div>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c696365202d3e20426f623a2041757468656e7469636174696f6e20526571756573740a616c74207375636365737366756c20636173650a426f62202d3e20416c6963653a2041757468656e7469636174696f6e2041636365707465640a656c736520736f6d65206b696e64206f66206661696c7572650a426f62202d3e20416c6963653a2041757468656e7469636174696f6e204661696c7572650a67726f7570204d79206f776e206c6162656c0a416c696365202d3e204c6f67203a204c6f672061747461636b2073746172740a6c6f6f7020313030302074696d65730a416c696365202d3e20426f623a20444e532041747461636b0a656e640a416c696365202d3e204c6f67203a204c6f672061747461636b20656e640a656e640a656c736520416e6f746865722074797065206f66206661696c7572650a426f62202d3e20416c6963653a20506c65617365207265706561740a656e640a40656e64756d6c'></figure>
-<hr />
-</section>
-<section id="graphviz" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> graphviz</h3>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a73697a653d22372c37223b0a097b72616e6b3d73616d653b203120323b7d0a097b72616e6b3d73616d653b203320343b7d0a097b72616e6b3d73616d653b203520363b7d0a097b72616e6b3d73616d653b203720383b7d0a31202d3e207b20322033207d205b636f6c6f723d626c75655d0a32202d3e207b2034207d205b636f6c6f723d726564206469723d626f74685d0a34202d3e207b203520367d205b636f6c6f723d677265656e206469723d6e6f6e6520636f6d6d656e743d68656c6c6f5d0a35202d3e207b20367d205b636f6c6f723d677265656e206c6162656c3d2268656c6c6f22207374796c653d646f747465645d0a7d0a40656e64756d6c'></figure>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">@startuml</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">digraph</span> world {</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">size</span><span class="op">=</span><span class="st">&quot;7,7&quot;</span><span class="kw">;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>	<span class="ex">{rank=same</span><span class="kw">;</span> <span class="ex">1</span> 2<span class="kw">;</span><span class="er">}</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>	<span class="ex">{rank=same</span><span class="kw">;</span> <span class="ex">3</span> 4<span class="kw">;</span><span class="er">}</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>	<span class="ex">{rank=same</span><span class="kw">;</span> <span class="ex">5</span> 6<span class="kw">;</span><span class="er">}</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>	<span class="ex">{rank=same</span><span class="kw">;</span> <span class="ex">7</span> 8<span class="kw">;</span><span class="er">}</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> <span class="at">-</span><span class="op">&gt;</span> 2 </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> <span class="at">-</span><span class="op">&gt;</span> 3 [color=blue]</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ex">@enduml</span></span></code></pre></div>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a0a6e6f6465205b73686170653d7265636f72645d3b0a73747275637431205b6c6162656c3d223c66303e206c6566747c3c66313e206d6964646c657c3c66323e207269676874225d3b0a73747275637432205b6c6162656c3d223c66303e206f6e657c203c66313e2074776f225d3b0a0a737472756374313a6630202d3e20737472756374323a66313b0a7d0a0a40656e64756d6c'></figure>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">@startuml</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">digraph</span> world {</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> [shape=record]<span class="kw">;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">struct1</span> [label=<span class="st">&quot;&lt;f0&gt; left|&lt;f1&gt; middle|&lt;f2&gt; right&quot;</span>]<span class="kw">;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">struct2</span> [label=<span class="st">&quot;&lt;f0&gt; one| &lt;f1&gt; two&quot;</span>]<span class="kw">;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">struct1:f0</span> <span class="at">-</span><span class="op">&gt;</span> struct2:f1<span class="kw">;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">@enduml</span></span></code></pre></div>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a72616e6b6469723d4c520a6e6f646533205b73686170653d4d7265636f72642c206c6162656c3d227b2061207c2062207c2063207d225d0a7d0a40656e64756d6c'></figure>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">@startuml</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">digraph</span> world {</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">rankdir</span><span class="op">=</span>LR</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">node3</span> [shape=Mrecord, label=<span class="st">&quot;{ a | b | c }&quot;</span>]</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">@enduml</span></span></code></pre></div>
-<p>rankdir will turn the whole tree left, to right as well as “a b c”</p>
-<hr />
-</section>
-<section id="mindmap" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Mindmap</h3>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h4073746172746d696e646d61700a0a2a20536f6c76696e67205c6e20476c6f62616c205c6e205761726d696e670a202a20456174696e6720646966666572656e746c790a20202a20566567616e0a20202a205665676574617269616e0a20202a204c6573732070726f63657373656420666f6f64730a20202a20427579206c6f63616c20666f6f640a202a2054726176656c0a20202a2042696b65206d6f72650a20202a20526964652062757365730a20202a2042757920616e20656c656374726963206361720a0a6c65667420736964650a202a20486f6d65200a20202a5f20456e657267792061756469740a20202a5f20557365206120636c6f746873206c696e650a20202a5f2041646420696e73756c6174696f6e0a20202a5f2047657420736f6c61722070616e656c730a202a204265206120726f6c65206d6f64656c0a20202a5f20566f74650a20202a5f20456e636f7572616765206f74686572730a20202a5f20546561636820796f7572206b6964730a0a40656e646d696e646d6170'></figure>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">@startmindmap</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> Solving <span class="dt">\n</span> Global <span class="dt">\n</span> Warming</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">*</span> Eating differently</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*</span> Vegan</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*</span> Vegetarian</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*</span> Less processed foods</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*</span> Buy local food</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">*</span> Travel</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*</span> Bike more</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*</span> Ride buses</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*</span> Buy an electric car</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ex">left</span> side</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">*</span> Home</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*_</span> Energy audit</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*_</span> Use a cloths line</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*_</span> Add insulation</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*_</span> Get solar panels</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a> <span class="ex">*</span> Be a role model</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*_</span> Vote</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*_</span> Encourage others</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*_</span> Teach your kids</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="ex">@endmindmap</span></span></code></pre></div>
-<hr />
-</section>
-<section id="activity-diagram" class="level3" data-number="0.0.4">
-<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> Activity diagram</h3>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a73746172740a69662028636f6e646974696f6e204129207468656e2028796573290a20203a5465787420313b0a656c736569662028636f6e646974696f6e204229207468656e2028796573290a20203a5465787420323b0a202073746f700a656c736569662028636f6e646974696f6e204329207468656e2028796573290a20203a5465787420333b0a656c736569662028636f6e646974696f6e204429207468656e2028796573290a20203a5465787420343b0a656c736520286e6f7468696e67290a20203a5465787420656c73653b0a656e6469660a73746f700a40656e64756d6c'></figure>
-<hr />
-</section>
-<section id="arrow-list" class="level3" data-number="0.0.5">
-<h3 data-number="0.0.5"><span class="header-section-number">0.0.5</span> Arrow list</h3>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6c65667420746f20726967687420646972656374696f6e0a736b696e706172616d206e6f646573657020350a6433207e7e207633203a2022227e7e22225c6e2f2f646f747465642f2f0a6432202e2e207632203a2022222e2e22225c6e2f2f6461736865642f2f0a6431203d3d207631203a2022223d3d22225c6e2f2f626f6c642f2f0a6430202d2d207630203a2022222d2d22225c6e2f2f706c61696e2f2f0a0a0a663133202d2d3020623133203a2022222d2d3022220a663132202d2d4020623132203a2022222d2d4022220a663131202d2d3a7c3e20623131203a2022222d2d3a7c3e22220a663130202d2d7c7c3e20623130203a2022222d2d7c7c3e22220a6639202d2d7c3e206239203a2022222d2d7c3e22220a6638202d2d5e206238203a2022222d2d5e2022220a6637202d2d5c5c206237203a2022222d2d5c5c5c5c22220a6636202d2d23206236203a2022222d2d232022220a6635202d2d2b206235203a2022222d2d2b2022220a6634202d2d6f206234203a2022222d2d6f2022220a6633202d2d2a206233203a2022222d2d2a2022220a6632202d2d3e3e206232203a2022222d2d3e3e22220a6631202d2d3e206231203a2022222d2d3e2022220a6630202d2d206230203a2022222d2d2022220a0a0a67313020302d2d3020723130203a20222220302d2d302022220a673920292d2d28207239203a20222220292d2d2822220a67382030292d2d2830207238203a2022222030292d2d283022220a67372030292d2d207237203a2022222030292d2d2022220a6736202d30292d207236203a202222202d30292d5c6e2022220a6735202d2830292d207235203a202222202d2830292d5c6e22220a6734202d28302d207234203a202222202d28302d5c6e2022220a6733202d2d2830207233203a202222202d2d28302022220a6732202d2d28207232203a202222202d2d282022220a6731202d2d30207231203a202222202d2d302022220a0a0a40656e64756d6c0a'></figure>
-</section>
-]]></description>
-    <pubDate>Wed, 25 Aug 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-08-25-PlantUMLkey.html</guid>
     <dc:creator>Jason Yang</dc:creator>
 </item>
 
