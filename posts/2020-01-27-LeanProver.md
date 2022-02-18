@@ -327,3 +327,26 @@ end Combinators
 
 #reduce (λx, x + 2)5
 ```
+
+# Understanding Coq
+
+What below means is that `pairn :: nat -> nat -> natprod` aka `pairn (n1 n2) :: natprod`
+```hs
+(* correct version *)
+Inductive natprod : Type :=
+  | pairn (n1 n2 : nat).
+```
+What below means is that `pairn :: Π(na : nat) -> Πi(nb : nat) -> nat -> nat -> natprod na nb`  
+```hs
+Inductive natprod (na nb : nat): Type :=
+  | pairn (n1 n2 : nat).
+```
+
+
+* Inductive is not Definition
+
+```hs
+Inductive bleh (one : Type a) : Type := ...
+
+Definition bleh (one: Type a) : Type := ...
+```

@@ -1,5 +1,5 @@
 ---
-title: Probability Distributions
+title: Probability Distributions graphs in Python
 tags: mathcs, appliedmath, physics
 toc: y
 ---

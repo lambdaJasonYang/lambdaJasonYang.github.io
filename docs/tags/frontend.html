@@ -253,11 +253,19 @@
         </li>
     
         <li>
+            <a href="../posts/2021-03-20-QuickRedux.html">Quick Redux</a> - March 20, 2021
+        </li>
+    
+        <li>
             <a href="../posts/2021-03-20-QuickNext.html">Quick Next</a> - March 20, 2021
         </li>
     
         <li>
             <a href="../posts/2018-06-23-VanillaJS.html">VanillaJS mini scripts</a> - June 23, 2018
+        </li>
+    
+        <li>
+            <a href="../posts/2018-06-23-ClosureJS.html">Closures in JS</a> - June 23, 2018
         </li>
     
 </ul>
@@ -277,7 +285,67 @@
         
     </body>
     <footer>
+        <script>
+            //Structure:
+            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
+            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+
+            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
+            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
+            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
+
+            const getCodeBlocks = (grouplabel) => {
+                //return list of codeblocks associated to a single group label
+                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            }
+
+            const showSingleCode = (codeblock,subgrp) => { 
+                //make single codeblock visible
+                codeblock.style.display="block";
+                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
+                nonChosen.map((e)=>(e.style.display="none"));
+            }
+
+            const makeBtn = (codeblock,subgrp) => {
+                //make button for a single codeblock
+                const newbutton = document.createElement("button");
+                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.addEventListener('click', ()=>{
+                    showSingleCode(codeblock,subgrp);
+                });
+                return newbutton;
+            }
+
+            const showAll = (subgrp) => {
+                //make all codeblocks visible
+            subgrp.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (subgrp) => {
+                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+
+                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
+                btngrp.map((e)=>{
+                    leader.insertAdjacentElement('beforebegin',e);
+                    });
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+            
+            //below code is performing actual behavior, the above code are just functions
+            grouplabels.map((grouplabel) => {
+                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+                buildCodeTab(groupOfCodeblocks);
+                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+            })
+        </script>
         <!-- MATH JAX START -------------------------------------- -->
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
         </script>

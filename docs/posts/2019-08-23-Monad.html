@@ -243,6 +243,15 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'functional'." href="../tags/functional.html">functional</a>, <a title="All pages tagged 'categorytheory'." href="../tags/categorytheory.html">categorytheory</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>
     
 </div>
+<p><span class="math display">\[ \mu :: M \circ M \rightarrow  M \]</span> <span class="math display">\[\begin{align}
+X \overset{f}{\longrightarrow} MY \qquad \qquad &amp; \\
+\underline{\qquad \qquad \qquad \qquad Y \overset{g}{\longrightarrow} MZ}&amp; \\
+X \overset{f}{\longrightarrow} MY \overset{Mg}{\longrightarrow} MMZ \overset{\mu_Z}{\longrightarrow} MZ &amp;
+\end{align}\]</span> <span class="math inline">\(\mu\)</span> is join in haskell</p>
+<p>I is the identity functor.<br />
+M is the monad functor.<br />
+<span class="math display">\[ \eta :: I -&gt; M \]</span> Since <span class="math inline">\(\eta\)</span> is a natural transformation we can expand this to.<br />
+<span class="math display">\[ \eta :: \forall a. Ia -&gt; Ma \]</span> Eta is <code>return :: a -&gt; m a</code></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="dt">Monad</span> m <span class="kw">where</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">  (&gt;&gt;=) ::</span> m a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> m b) <span class="ot">-&gt;</span> m b</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -318,7 +327,67 @@
         
     </body>
     <footer>
+        <script>
+            //Structure:
+            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
+            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+
+            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
+            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
+            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
+
+            const getCodeBlocks = (grouplabel) => {
+                //return list of codeblocks associated to a single group label
+                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            }
+
+            const showSingleCode = (codeblock,subgrp) => { 
+                //make single codeblock visible
+                codeblock.style.display="block";
+                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
+                nonChosen.map((e)=>(e.style.display="none"));
+            }
+
+            const makeBtn = (codeblock,subgrp) => {
+                //make button for a single codeblock
+                const newbutton = document.createElement("button");
+                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.addEventListener('click', ()=>{
+                    showSingleCode(codeblock,subgrp);
+                });
+                return newbutton;
+            }
+
+            const showAll = (subgrp) => {
+                //make all codeblocks visible
+            subgrp.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (subgrp) => {
+                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+
+                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
+                btngrp.map((e)=>{
+                    leader.insertAdjacentElement('beforebegin',e);
+                    });
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+            
+            //below code is performing actual behavior, the above code are just functions
+            grouplabels.map((grouplabel) => {
+                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+                buildCodeTab(groupOfCodeblocks);
+                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+            })
+        </script>
         <!-- MATH JAX START -------------------------------------- -->
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
         </script>

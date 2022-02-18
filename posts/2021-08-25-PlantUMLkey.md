@@ -17,6 +17,56 @@ shape = "record"
 }
 ```
 
+```plantuml
+@startuml
+digraph G {
+  compound=true
+rankdir="LR"
+subgraph clusterb{
+label = "Functor M";
+subgraph clustera{
+label = "Functor M";
+ B [label="Int"]
+};
+}
+
+
+subgraph cluster{
+  label = "Functor M";
+A [label="Int"]
+}
+B->A [label="join" ltail=clusterb lhead=cluster]
+
+
+}
+@enduml
+```
+```bash
+@startuml
+digraph G {
+  compound=true
+rankdir="LR"
+subgraph clusterb{
+label = "Functor M";
+subgraph clustera{
+label = "Functor M";
+ B [label="Int"]
+};
+}
+
+
+subgraph cluster{
+  label = "Functor M";
+A [label="Int"]
+}
+B->A [label="join" ltail=clusterb lhead=cluster]
+
+
+}
+@enduml
+```
+
+
 ```bash
 digraph g{
     graph [

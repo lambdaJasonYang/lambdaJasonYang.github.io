@@ -33,6 +33,17 @@ div.sourceCode::before {
 }
 /* Adding filename to codeblock END */
 
+button {
+  border: none;
+  font: inherit;
+
+}
+button:active {     
+  background-color:#b8b8b8;    
+}
+button:focus {     
+  background-color:#b8b8b8;    
+}
 /* Link decoration  START*/
 
   /* a.nav-link:hover{
@@ -422,6 +433,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 /* BEGIN SMALL SCREEN CSS MOBILE PHONE--------------------------------------------------- */
 @media only screen and (max-width: 800px) {
+      body
+      {
+        margin-left: auto;
+      }
       .sidenav {
           display: none;
       }

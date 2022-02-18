@@ -45,6 +45,15 @@ D1 -> D2;
 
 ```
 
+# Problem statement heuristics
+
+## DP
+
+* Count the number of ways
+  * Count number of ways to reach n-th step, taking {1,2} steps. (Fibonacci)
+  * Count number of ways to get sum n, selecting {1,2,3,4,5,6} any number of times.
+
+
 # Recursion vs Tail-recursion
 
 We will not refer to tail-recursion as recursion.  
@@ -236,6 +245,75 @@ Insertsort([1,8,3,5],0,0)
 #where is the problem?
 ```
 
+# Reverse Linked List
+
+```py
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = None
+a = ListNode(val=2)
+a.next = ListNode(val=5)
+a.next.next = ListNode(val=9)
+
+def f(x):
+    if x == None:
+        return x
+    if x.next == None:
+        return (x,x)
+    else:
+        IH_h,IH_l = f(x.next)
+        IH_l.next = x
+        x.next = None
+        return (IH_h,x)
+print(a.next.val)
+print(f(a)[0].next.next.val)
+```
+
+Explanation
+
+We want to reverse the ordering of a linkedlist.
+access is always left to right.
+
+
+INPUT  
+[x] ------>  access  
+-------->  ordering  
+
+GOAL  
+------->[x]  access   
+<-------    ordering
+
+Arrow only symbolizes ordering NOT connection.  
+naive IH: simply returns head of the reversed linkedlist.  
+
+Naive Sol:  
+[x]   
+  [IH]------>  access  
+  <---------  ordering  
+  
+
+What do we do with x?  
+We need to put x to the end of this reversedlist. 
+
+[IH]------>[x] access
+
+We could recursively "next" down IH to the end and it would work. How about a faster sol.  
+
+Better Sol:
+
+BetterIH: return (head,tail) of the reversed linkedlist.  
+[x]  
+  [IH_h]------>[IH_l]  access  
+  <-----------  ordering
+  
+What do we do with [x]?   
+
+[IH_h]------>[IH_l]->[x] access
+
+Clearly we just set the `IH_l.next = x` 
+  
+  
 
 ## Hashtable and Hash function Ch 11
 

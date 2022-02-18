@@ -4,11 +4,31 @@ tags: prog, QuickCode
 toc: y
 ---
 
+| Concept | Python | Mathematica |
+| --- | ----- | ----- |  
+| list |`[1,2,3]` | `{1,2,3}`| 
+| index | `a[0]` | `a[[0]]` |
+| slice | `a[2:5]` | `a[[2;5]]` |
+| list-notation | `[x**2 for x in range(10)]` |`Table[x^2, {x, 10}]` | 
+
 # Common functions
-* `D[expr,x]` Derivative
-* `Integrate[expr,x]` 
-* `DSolve[x]` Analytically Solve diffyq
-* `NDSolve[x]` Numerically Solve diffyq
+| Concept | Mathematica |
+| --- | ----- | 
+| Solve for x | `Solve[x+2y==5,x]`|
+| Numerical Approx Solve | `NSolve[x^5 - 2 x + 3 == 0, x]` |
+| Derivative | `D[x^2+2==0,x]` |
+| Integrate | `Integrate[E^2x,x]` |
+
+# Differential Equation
+
+| Concept | Mathematica |
+| --- | ----- | 
+| Analytical Solve | `DSolve[x]` |
+| Numerical Solve | `NDSolve[x]` |
+
+
+# Numbers
+
 * `N` Reduce expr to numeric value
 * `FixedPoint[x,7]` Find closest fixed point from x = 7 
 
@@ -22,16 +42,18 @@ toc: y
 
 | Function | Detail |
 | --- | --- |
-| `/@` | Map |
+| `f /@ {1,2,3}` | Map |
 | `NestList[,,]` | Fold | 
 
+# Plot
 
-```mathematica
-mapf := f /@ {1,2,3}
-(* {1,4,9} *)
-```
+| Concept | python | Mathematica |
+| - | ---- |  ---- |
+|plot y=x^2 | `x = np.linspace(0,30,999)`</br>`f = lambda x: x**2`</br>` plt.plot(x,f(x))` | `Plot[x^2,{x,0,30}]`|
+|Contour plot | `x1 = np.linspace(-np.pi,np.pi,999)` </br> `x2 = np.linspace(-np.pi,np.pi,999)` </br>`f = lambda x1,x2: 1/(1+np.exp(-(x1+x2)))` </br>`X1,X2 = np.meshgrid(x1,x2)` </br>`plt.contourf(X1,X2,f(X1,X2))` | `ContourPlot[1/(1+Exp[-(x1+x2)]),{x1,-Pi,Pi},{x2,-Pi,Pi}]` |
+|plot3d | `f=lambda x1,x2: 1/(1+np.exp(-(x1+x2)))`</br>`x1 = np.linspace(-10, 10, 99)`</br>`x2 = np.linspace(-10, 10, 99)`</br>`X1,X2 = np.meshgrid(x1, x2)`</br>`fig = plt.figure(figsize=(10, 6))`</br>`ax = fig.add_subplot(111, projection='3d')`</br>`ax.plot_surface(X1,X2,f(X1, X2),rstride=2, cstride=2,cmap=cm.jet,alpha=0.7,linewidth=0.25)`</br>`plt.show()`</br> </br> we can `ax.contour3D` `ax.plot_wireframe` instead of `ax.plot_surface` | `Plot3D[1/(1+Exp[-(x1+x2)]),{x1,-10,10},{x2,-10,10}]` |
 
-`NestList[function,initial-value, number-of-function-app]`
+
 
 ```mathematica
 NestList[f, x, 4]
@@ -40,17 +62,21 @@ NestList[f, x, 4]
 
 NestGraph[{f[#1], g[#1]} &, x, 3, VertexLabels -> All]
 ```
+# Module 
 
-## Table
-
-Table is basically a map.
-
-```mathematica
-Table[f,{x,0,10}]
-(* {f[0],f[1],...*)
+```bash
+bleh = Module[
+  {a = 1,
+  b = 4},  
+  a + b + 8]
 ```
 
-
+```py
+def blah():
+  a = 1
+  b = 4
+  return a + b + 8
+```
 
 # Lambda
 

@@ -355,6 +355,24 @@
 <p>A functor that takes a dual morphism to set category.</p>
 <p><span class="math display">\[f^{OP} \Rightarrow Set\]</span></p>
 </section>
+<section id="natural" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Natural</h1>
+<ul>
+<li>All functors are endofunctors <code>functor :: Type* =&gt; Type*</code> wrt to coding
+<ul>
+<li><code>List :: Type* =&gt; Type*</code></li>
+<li><code>Maybe :: Type* =&gt; Type*</code></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ot">g ::</span> ∀a b<span class="op">.</span> a <span class="ot">-&gt;</span> b </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">naturaltransformation ::</span> ∀ a<span class="op">.</span> <span class="dt">List</span> a <span class="ot">-&gt;</span> <span class="dt">Maybe</span> a</span></code></pre></div>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820666f6f207b0a202072616e6b646972203d204c520a202061205b6c6162656c203d2022666f72616c6c20613a3a547970652a225d0a20200a20200a2020737562677261706820636c7573746572617b0a20202062205b6c6162656c3d224c6973742061225d0a20202063205b6c6162656c3d224d617962652061225d0a20202062202d3e2063205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a202061202d3e2062205b636f6c6f723d677265656e206c6162656c3d2266756e63746f72225d0a202061202d3e2063205b636f6c6f723d677265656e206c6162656c3d2266756e63746f7222205d0a7d0a40656e64756d6c"></figure>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820666f6f207b0a72616e6b6469723d4c520a0a202061205b6c6162656c203d2022666f72616c6c20613a3a547970652a225d0a206131205b6c6162656c203d2022666f72616c6c20623a3a547970652a225d0a612d3e6131205b6c6162656c3d2267225d0a20200a20200a2020737562677261706820636c7573746572617b0a20202062205b6c6162656c3d224c6973742061225d0a20202063205b6c6162656c3d224d617962652061225d0a20202062202d3e2063205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a2020737562677261706820636c7573746572627b0a2020206231205b6c6162656c3d224c6973742062225d0a2020206331205b6c6162656c3d224d617962652062225d0a2020206231202d3e206331205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a202061202d3e2062205b636f6c6f723d677265656e206c6162656c3d224c69737446225d0a202061202d3e2063205b636f6c6f723d677265656e206c6162656c3d224d617962654622205d0a0a20206131202d3e206231205b636f6c6f723d677265656e206c6162656c3d224c69737446225d0a20206131202d3e206331205b636f6c6f723d677265656e206c6162656c3d224d617962654622205d0a202062202d3e206231205b6c6162656c3d224c69737446286729225d0a202063202d3e206331205b6c6162656c3d224d6179626546286729225d0a7d0a40656e64756d6c"></figure>
+<section id="naturality-square" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Naturality square</h2>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820666f6f207b0a0a72616e6b6469723d4c520a20200a20200a2020737562677261706820636c7573746572617b0a20202062205b6c6162656c3d224c6973742061225d0a20202063205b6c6162656c3d224d617962652061225d0a20202062202d3e2063205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a2020737562677261706820636c7573746572627b0a2020206231205b6c6162656c3d224c6973742062225d0a2020206331205b6c6162656c3d224d617962652062225d0a2020206231202d3e206331205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a0a202062202d3e206231205b6c6162656c3d224c69737446286729225d0a202063202d3e206331205b6c6162656c3d224d6179626546286729225d0a7d0a40656e64756d6c"></figure>
+</section>
+</section>
 
         </div>
         <div id="footer">
@@ -371,7 +389,67 @@
         
     </body>
     <footer>
+        <script>
+            //Structure:
+            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
+            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+
+            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
+            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
+            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
+
+            const getCodeBlocks = (grouplabel) => {
+                //return list of codeblocks associated to a single group label
+                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            }
+
+            const showSingleCode = (codeblock,subgrp) => { 
+                //make single codeblock visible
+                codeblock.style.display="block";
+                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
+                nonChosen.map((e)=>(e.style.display="none"));
+            }
+
+            const makeBtn = (codeblock,subgrp) => {
+                //make button for a single codeblock
+                const newbutton = document.createElement("button");
+                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.addEventListener('click', ()=>{
+                    showSingleCode(codeblock,subgrp);
+                });
+                return newbutton;
+            }
+
+            const showAll = (subgrp) => {
+                //make all codeblocks visible
+            subgrp.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (subgrp) => {
+                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+
+                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
+                btngrp.map((e)=>{
+                    leader.insertAdjacentElement('beforebegin',e);
+                    });
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+            
+            //below code is performing actual behavior, the above code are just functions
+            grouplabels.map((grouplabel) => {
+                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+                buildCodeTab(groupOfCodeblocks);
+                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+            })
+        </script>
         <!-- MATH JAX START -------------------------------------- -->
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
         </script>

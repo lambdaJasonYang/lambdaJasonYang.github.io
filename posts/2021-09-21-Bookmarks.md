@@ -3,21 +3,43 @@ title: Bookmarks
 tags: mathcs, puremath, recursion
 ---
 
+[sorting correctness](https://www.twanvl.nl/blog/agda/sorting)
+
+[hott game](https://thehottgameguide.readthedocs.io/en/latest/getting-started/about-hott-game.html)
+
+[RL](https://colah.github.io/)
+
+[btc](https://ezzeriesa.notion.site/Rewriting-my-toy-blockchain-in-Rust-9a130f225666488491ba497004821fbb)
+
+[Dexter Notes](http://dec41.user.srcf.net/h/IA_M/groups/1_2)
+
+[nice cheatsheet](https://stanford.edu/~shervine/teaching/)
+
+[Synthetic Topology](https://www.cs.bham.ac.uk/~mhe/papers/entcs87.pdf)
+
+[Open conferences](https://openreview.net/)
+
+# Control engineering
+
+[Control Systems](https://engineeringmedia.com/videos)
+
 # News
 
-https://spidr.today/
+[https://spidr.today/](https://spidr.today/)
 
-https://weboas.is/
+[https://weboas.is/](https://weboas.is/)
+
+[better search engine](https://search.marginalia.nu/search?query=category+theory&profile=yolo&js=default)
 
 # Gameify
 
-https://nandgame.com/
+[NANDGAME](https://nandgame.com/)
 
-https://deadlockempire.github.io/#T1-Interface
+[DeadLock Empire](https://deadlockempire.github.io/#T1-Interface)
 
-https://github.com/cobusve/TLAPLUS_DeadlockEmpire
+[TLA DeadlockEmpire](https://github.com/cobusve/TLAPLUS_DeadlockEmpire)
 
-https://hdlbits.01xz.net/wiki/Wire
+[Verilog Game](https://hdlbits.01xz.net/wiki/Wire)
 
 https://janismac.github.io/ControlChallenges/
 
@@ -25,7 +47,7 @@ http://www.quantumplayground.net/#/playground/5643440998055936
 
 # CS
 
-https://www.cl.cam.ac.uk/teaching/1617/L28/materials.html
+[Cambridge function prog](https://www.cl.cam.ac.uk/teaching/1617/L28/materials.html)
 
 https://faculty.math.illinois.edu/~r-ash/
 
@@ -63,6 +85,8 @@ https://osblog.stephenmarz.com/ch1.html
 https://50linesofco.de/post/2018-02-28-writing-an-x86-hello-world-bootloader-with-assembly
 
 # Datasets
+
+[zenodo](https://zenodo.org/record/6080910)
 
 IPUMS CPS
 
@@ -106,9 +130,6 @@ https://www.fao.org/worldfoodsituation/foodpricesindex/en/
 
 https://forum.numer.ai/t/era-boosted-models/189/6
 
-# Cheatsheet
-
-https://stanford.edu/~shervine/teaching/
 
 
 # Autobios
@@ -142,3 +163,8 @@ https://openproxy.space/list/AH5YWExFjr
 https://15.ai/
 
 https://lecoupa.github.io/awesome-cheatsheets/
+
+
+# Shaders 
+
+thebookofshaders.com
