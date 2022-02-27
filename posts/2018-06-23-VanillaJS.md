@@ -137,3 +137,11 @@ newdogtalk() //output undefined since there is no 'sound' in global
 let newnewdogtalk = (dog.talk).bind(dog) //bind forces 'this' to point to dog context
 newnewdogtalk() //output wolf
 ```
+
+## Arrow vs function()
+
+* Arrows binds this to the lexical scope, meaning you can just look at the code and see what encloses the arrow function to understand what `this` points to.
+  * static binding
+* function() binds dynamically, meaning `this` depends on how the function is called at run time.
+  * dynamic binding
+

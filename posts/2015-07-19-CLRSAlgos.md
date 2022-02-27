@@ -8,44 +8,6 @@ tags: mathcs, algorithms
 
 ![](/images/leetheuris.png)
 
-```plantuml
-digraph G {
-
-node [ranksep=0.2];
-
-{rank="same"; A1 ; B1; D1; }
-{rank="same"; A2 ; A3; D2;}
-
-P1 [label = "problem"]
-
-B1 [label = "Iterative"]
-B2 [label = "Sublist\nLoop Invariant IH:[0..i]\n{[0..i],j..n}"]
-
-A1 [label = "Recursive"]
-C1 [label = "Strengthen problem"]
-D1 [label = "Generative"]
-D2 [label = "Tail-Rec State tree"]
-
-A2 [label = "Split\nIH(fstHalf::list)\nIH(sndHalf::list)"]
-
-A3 [label = "Atomic\nhead::element\nIH(tail::list) "]
-
-
-P1 -> A1 [label="Determines\nIH"];
-P1 -> B1;
-A1 -> A2;
-A1 -> A3;
-A1 -> C1;
-C1 -> P1 [label="Strengthen\nIH" constraint=false];
-B1 -> B2;
-
-P1 -> D1;
-D1 -> D2;
-}
-
-```
-
-# Problem statement heuristics
 
 ## DP
 

@@ -231,8 +231,8 @@ It will also cache the workspace so the next build will a fraction of the time o
 <span id="cb1-94"><a href="#cb1-94"></a>           git config user.name github-actions</span>
 <span id="cb1-95"><a href="#cb1-95"></a>           git config user.email github-actions@github.com</span>
 <span id="cb1-96"><a href="#cb1-96"></a>           git add .</span>
-<span id="cb1-97"><a href="#cb1-97"></a>           git commit -am &quot;Autobuild Hakyll site github action commit&quot;</span>
-<span id="cb1-98"><a href="#cb1-98"></a>           git push</span></code></pre></div>
+<span id="cb1-97"><a href="#cb1-97"></a>           git diff --exit-code || git commit -am &quot;Autobuild Hakyll site github action commit&quot;</span>
+<span id="cb1-98"><a href="#cb1-98"></a>           </span></code></pre></div>
 <p>Now you can update your blog anywhere, just<br />
 1. pull your hakyll repo from github<br />
 2. add your new markdown file to your posts folder<br />
@@ -248,7 +248,7 @@ It will also cache the workspace so the next build will a fraction of the time o
             <a href="http://jaspervdj.be/hakyll">Hakyll</a>
                 </div>
    
-            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Blog</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
   
             </div>
         </div>

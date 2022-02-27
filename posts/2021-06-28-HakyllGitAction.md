@@ -125,8 +125,8 @@ jobs:
            git config user.name github-actions
            git config user.email github-actions@github.com
            git add .
-           git commit -am "Autobuild Hakyll site github action commit"
-           git push
+           git diff --exit-code || git commit -am "Autobuild Hakyll site github action commit"
+           
 
 ```
 

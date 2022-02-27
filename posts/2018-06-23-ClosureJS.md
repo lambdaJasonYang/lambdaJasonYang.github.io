@@ -1,7 +1,9 @@
 ---
-title: Closures in JS
+title: Closures in JS, Python
 tags: prog, cloud, frontend
 ---
+
+* Closures are not related to , this, bind, or arrow functions.
 
 # Closures = Class
 
@@ -49,3 +51,46 @@ class makeCounter{
 }
 
 ```
+
+# Closure in python vs JS
+
+* closure in python requires use of `nonlocal` keyword
+
+```py
+def f():
+    a=0
+    def g():
+        a+=1 #ERRor
+        print(a)
+    return g
+g=f()
+g()
+```
+
+```py
+def f():
+    a=0
+    def g():
+        nonlocal a
+        a+=1 
+        print(a)
+    return g
+g=f()
+g()
+```
+
+```js
+let f=()=>{
+    let a=0
+    let g=()=>{
+        a+=1
+        console.log(a)
+        
+    }
+    return g
+    
+}
+let g=f()
+g()
+```
+

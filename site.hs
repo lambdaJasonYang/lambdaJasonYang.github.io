@@ -132,8 +132,8 @@ config = defaultConfiguration
 
 myFeedConfiguration :: FeedConfiguration
 myFeedConfiguration = FeedConfiguration
-    { feedTitle       = "Jason Yang: Math and Computer Science Blog"
-    , feedDescription = "Programming language theory, haskell, induction, combinatorics, Energy based models, time series analysis, differential equations, stochastic calculus, trading"
+    { feedTitle       = "Jason Yang: Math and Computer Science Notes"
+    , feedDescription = "Programming language theory, haskell, induction, combinatorics, Energy based models, time series analysis, differential equations, stochastic calculus"
     , feedAuthorName  = "Jason Yang"
     , feedAuthorEmail = "jasonyang299@gmail.com"
     , feedRoot        = "https://userjy.github.io"
@@ -209,8 +209,8 @@ main = hakyllWith config $ do
 -------------------------------------------------FOLDER POST IMG BEGIN
 
     match "posts/*/*.png" $ do
-        -- route $ (gsubRoute "posts/" (\x -> "images")) --this means replace 'posts/' with 'images' so 'posts/1-1-2001-fae/something.png' => 'images/1-1-2001-fae/something.png'
-        route $ (gsubRoute "posts/.*/" (\x -> "images/")) --this puts the image directly into the image folder
+        route $ (gsubRoute "posts/" (\x -> "images/")) --this means replace 'posts/' with 'images' so 'posts/1-1-2001-fae/something.png' => 'images/1-1-2001-fae/something.png'
+        -- route $ (gsubRoute "posts/.*/" (\x -> "images/")) --this puts the image directly into the image folder
         compile copyFileCompiler
 
     match "posts/*/*.md" $ do

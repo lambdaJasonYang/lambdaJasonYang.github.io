@@ -3,6 +3,14 @@ title: Bookmarks
 tags: mathcs, puremath, recursion
 ---
 
+https://swish.swi-prolog.org/example/render_svgtree.swinb
+
+https://www.cip.ifi.lmu.de/~grinberg/algebra/algebra.html
+
+[postgres](https://habr.com/en/company/postgrespro/blog/649499/)
+
+[graph NN](https://wandb.ai/syllogismos/machine-learning-with-graphs/reports/1-Introduction-Structure-of-Graphs---VmlldzozNzU1NDU)
+
 [sorting correctness](https://www.twanvl.nl/blog/agda/sorting)
 
 [hott game](https://thehottgameguide.readthedocs.io/en/latest/getting-started/about-hott-game.html)

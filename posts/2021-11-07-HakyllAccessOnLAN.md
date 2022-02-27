@@ -38,6 +38,20 @@ sudo iptables -t nat -I PREROUTING -p tcp -d 192.168.1.0/24 --dport 8000 -j DNAT
 
 # iptables netstat diagnosis
 
+
+
+```bash
+ sudo iptables --append INPUT --source 1.2.3.4 --jump DROP
+
+sudo iptables --list
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+DROP       all  --  1.2.3.4              anywhere
+ ```
+ 
+ * says append a rule to the INPUT chain and if a packet matches source 1.2.3.4 then DROP it
+   * INPUT chain means all packets coming to the server is affected by this rule
+
 ## netstat
 
 ```bash
@@ -60,6 +74,18 @@ sudo iptables -L INPUT --line-numbers
 ### delete rule 2
 sudo iptables -D INPUT 2
 ```
+
+## Rate limiting
+
+* Rate limiting is not possible with vanilla iptables because it ratelimiting requires stateful connections
+  * A hashmap maps "ConnectionSrc-ConnectionDst" to {"NEW","ESTABLISHED",...}
+
+![](https://docs.google.com/drawings/d/e/2PACX-1vTu9nsWsRUn_a9IBpaKgBjGNGR14-AknVFs70pix7PFL2eQcqY1BagQztrH_duZDUleZ97Iq5vBnnPc/pub?w=1238&h=676)
+
+* Using Connection state to rate limit
+
+![](https://docs.google.com/drawings/d/e/2PACX-1vQgl3VdRoyti8ryMF-_NwUSgiDpdF88qGAKm3XTfAOLdV1_SOqeoJllLFtsLXSp5is9lxNHH7rlxd9H/pub?w=1297&h=554)
+
 
 # Occupied port scenario
 

@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"
     xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Jason Yang: Math and Computer Science Blog</title>
+        <title>Jason Yang: Math and Computer Science Notes</title>
         <link>https://userjy.github.io</link>
-        <description><![CDATA[Programming language theory, haskell, induction, combinatorics, Energy based models, time series analysis, differential equations, stochastic calculus, trading]]></description>
+        <description><![CDATA[Programming language theory, haskell, induction, combinatorics, Energy based models, time series analysis, differential equations, stochastic calculus]]></description>
         <atom:link href="https://userjy.github.io/rss.xml" rel="self"
                    type="application/rss+xml" />
         <lastBuildDate>Mon, 15 Nov 2021 00:00:00 UT</lastBuildDate>
@@ -240,6 +240,12 @@ extensions that show “previews” won’t work like Lean</p>
 <div id="TOC"><ul>
 <li><a href="#oauth2"><span class="toc-section-number">1</span> Oauth2</a></li>
 <li><a href="#openid-connect"><span class="toc-section-number">2</span> OpenID connect</a></li>
+<li><a href="#authentication-flow-with-jwt-and-bcrypt"><span class="toc-section-number">3</span> Authentication flow with JWT and Bcrypt</a>
+<ul>
+<li><a href="#bcrypt"><span class="toc-section-number">3.1</span> bcrypt</a></li>
+<li><a href="#jwt"><span class="toc-section-number">3.2</span> JWT</a></li>
+<li><a href="#persist-authentication-methods"><span class="toc-section-number">3.3</span> persist authentication methods</a></li>
+</ul></li>
 </ul></div>
 <p>AWS Cognito uses OAuth2</p>
 <p>OAuth2 is a protocol that typically uses JWT</p>
@@ -271,6 +277,48 @@ When github-auth(Authorization Server) allows OIDC, it is called an <strong>iden
 Eg. Using gmail to sign into multiple apps. This single login is called <strong>SSO</strong> Single-Sign-On</p>
 <p>OIDC process is same as OAuth except at step 9, it returns {JWT ID token, Access Token}.</p>
 <figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a736b696e706172616d20736861646f77696e672066616c73650a42726f77736572202d3e2057656273697465203a20476574206578616d706c652e636f6d0a57656273697465202d2d3e2042726f777365723a206f6b2c2068657265206973206d792053534c2063657274205c6e636f6e7461696e696e67206d79207075626c69636b65795c6e7369676e6564206279204c657473456e63727970740a6e6f7465206f7665722042726f777365720a557365207072652d696e7374616c6c6564204c657473456e63727970740a5075626c69634b657920696e2042726f7773657220746f0a766572696679207468652053534c2063657274207369676e6564207573696e670a4c657473456e6372797074277320507269766174654b65790a656e646e6f74650a42726f77736572202d3e20576562736974653a2049207472757374204c657473456e63727970745c6e5468657265666f7265204920747275737420796f757220636572742e5c6e49206d6164652061205365637265744b6579205c6e656e6372797074656420697420772f20796f7572205075626c69634b65790a6e6f7465206f76657220576562736974650a576562736974652063616e2072657665616c200a746865205365637265744b6579200a62792064656372797074696e6720746865206d657373616765200a772f2057656273697465277320507269766174654b6579200a656e646e6f74650a57656273697465203c2d3e2042726f777365723a20436f6d6d756e69636174696f6e20772f205365637265744b65790a40656e64756d6c'></figure>
+</section>
+<section id="authentication-flow-with-jwt-and-bcrypt" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Authentication flow with JWT and Bcrypt</h1>
+<ul>
+<li>Sign up flow</li>
+<li>client –{user,pass}–&gt; –bcrypt(pass)–&gt; Save bcrypt(pass)+user to DB</li>
+<li>client &lt;–{JWT}– Server</li>
+</ul>
+<!--  -->
+<ul>
+<li>Login flow</li>
+<li>client input pass —-&gt; compare bcrypt(pass)+user with DB</li>
+<li>Server &lt;–{JWT}– Server <!--  --></li>
+</ul>
+<section id="bcrypt" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> bcrypt</h2>
+<ul>
+<li>hash password using bcrypt</li>
+<li>bcrypt can increase hash rounds (salt-rounds), slowing time, which resists brute force hash collision attack</li>
+</ul>
+</section>
+<section id="jwt" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> JWT</h2>
+<ul>
+<li>Header - base64</li>
+<li>Payload</li>
+<li>Signature</li>
+</ul>
+</section>
+<section id="persist-authentication-methods" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> persist authentication methods</h2>
+<ul>
+<li>Browser storage
+<ul>
+<li>local storage</li>
+</ul></li>
+<li>Cookie
+<ul>
+<li>Add “secure”, “httpOnly” “SameSite”</li>
+</ul></li>
+</ul>
+</section>
 </section>
 ]]></description>
     <pubDate>Wed, 10 Nov 2021 00:00:00 UT</pubDate>
@@ -436,6 +484,7 @@ Eg. Using gmail to sign into multiple apps. This single login is called <strong>
 <ul>
 <li><a href="#netstat"><span class="toc-section-number">4.1</span> netstat</a></li>
 <li><a href="#iptables"><span class="toc-section-number">4.2</span> iptables</a></li>
+<li><a href="#rate-limiting"><span class="toc-section-number">4.3</span> Rate limiting</a></li>
 </ul></li>
 <li><a href="#occupied-port-scenario"><span class="toc-section-number">5</span> Occupied port scenario</a></li>
 </ul></div>
@@ -472,21 +521,47 @@ Client goes to http://192.168.1.245:8000 but sees ERROR<br />
 </section>
 <section id="iptables-netstat-diagnosis" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> iptables netstat diagnosis</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">sudo</span> iptables <span class="at">--append</span> INPUT <span class="at">--source</span> 1.2.3.4 <span class="at">--jump</span> DROP</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">--list</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Chain</span> INPUT <span class="er">(</span><span class="ex">policy</span> ACCEPT<span class="kw">)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">target</span>     prot opt source               destination</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">DROP</span>       all  <span class="at">--</span>  1.2.3.4              anywhere</span></code></pre></div>
+<ul>
+<li>says append a rule to the INPUT chain and if a packet matches source 1.2.3.4 then DROP it
+<ul>
+<li>INPUT chain means all packets coming to the server is affected by this rule</li>
+</ul></li>
+</ul>
 <section id="netstat" class="level2" data-number="4.1">
 <h2 data-number="4.1"><span class="header-section-number">4.1</span> netstat</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-lnp</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 0.0.0.0:8787            0.0.0.0:*               LISTEN      734/rserver </span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN      149480/myblog </span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-lnp</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 0.0.0.0:8787            0.0.0.0:*               LISTEN      734/rserver </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN      149480/myblog </span></span></code></pre></div>
 </section>
 <section id="iptables" class="level2" data-number="4.2">
 <h2 data-number="4.2"><span class="header-section-number">4.2</span> iptables</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">### list INPUT rules</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span> INPUT <span class="at">--line-numbers</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">### delete rule 2</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-D</span> INPUT 2</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">### list INPUT rules</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span> INPUT <span class="at">--line-numbers</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">### delete rule 2</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-D</span> INPUT 2</span></code></pre></div>
+</section>
+<section id="rate-limiting" class="level2" data-number="4.3">
+<h2 data-number="4.3"><span class="header-section-number">4.3</span> Rate limiting</h2>
+<ul>
+<li>Rate limiting is not possible with vanilla iptables because it ratelimiting requires stateful connections
+<ul>
+<li>A hashmap maps “ConnectionSrc-ConnectionDst” to {“NEW”,“ESTABLISHED”,…}</li>
+</ul></li>
+</ul>
+<p><img src="https://docs.google.com/drawings/d/e/2PACX-1vTu9nsWsRUn_a9IBpaKgBjGNGR14-AknVFs70pix7PFL2eQcqY1BagQztrH_duZDUleZ97Iq5vBnnPc/pub?w=1238&amp;h=676" /></p>
+<ul>
+<li>Using Connection state to rate limit</li>
+</ul>
+<p><img src="https://docs.google.com/drawings/d/e/2PACX-1vQgl3VdRoyti8ryMF-_NwUSgiDpdF88qGAKm3XTfAOLdV1_SOqeoJllLFtsLXSp5is9lxNHH7rlxd9H/pub?w=1297&amp;h=554" /></p>
 </section>
 </section>
 <section id="occupied-port-scenario" class="level1" data-number="5">
@@ -494,11 +569,11 @@ Client goes to http://192.168.1.245:8000 but sees ERROR<br />
 <p>Say you launch a server to listen on port 8000<br />
 but ERROR: port 8000 being used</p>
 <p>first check what process is running on port 8000</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-lnp</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-lnp</span></span></code></pre></div>
 <p>next check what the parent process is</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-aef</span> <span class="at">--forest</span> <span class="co">#outputs PID ParentPID tree</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-aef</span> <span class="at">--forest</span> <span class="co">#outputs PID ParentPID tree</span></span></code></pre></div>
 <p>terminate the process or it’s parent</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-9</span> <span class="op">&lt;</span>PID<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-9</span> <span class="op">&lt;</span>PID<span class="op">&gt;</span></span></code></pre></div>
 </section>
 ]]></description>
     <pubDate>Sun, 07 Nov 2021 00:00:00 UT</pubDate>
@@ -607,6 +682,271 @@ but ERROR: port 8000 being used</p>
 ]]></description>
     <pubDate>Mon, 01 Nov 2021 00:00:00 UT</pubDate>
     <guid>https://userjy.github.io/posts/2021-11-01-MarketConcepts.html</guid>
+    <dc:creator>Jason Yang</dc:creator>
+</item>
+<item>
+    <title>3d plots and Contour plot</title>
+    <link>https://userjy.github.io/posts/2021-10-15-3dplots.html</link>
+    <description><![CDATA[<div class="info">
+    Posted on October 15, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;mathcs&#39;." href="/tags/mathcs.html">mathcs</a>, <a title="All pages tagged &#39;mathbasics&#39;." href="/tags/mathbasics.html">mathbasics</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#simple-contour-plots"><span class="toc-section-number">1</span> Simple Contour plots</a></li>
+<li><a href="#d-plot"><span class="toc-section-number">2</span> 3d Plot</a>
+<ul>
+<li><a href="#plot-random"><span class="toc-section-number">2.1</span> Plot random</a></li>
+<li><a href="#manual-tuning-neural-net"><span class="toc-section-number">2.2</span> Manual Tuning Neural Net</a></li>
+</ul></li>
+</ul></div>
+<ul>
+<li><code>ax.contour3D</code> specifically requires the <code>ax</code> setup.</li>
+<li><code>plt.contour</code> <code>plt.contourf</code> allows immediately plotting</li>
+<li><code>np.meshgrid(x,y) = X,Y</code> where X,Y are broadcasts of x and y to the same dimension
+<ul>
+<li>input x.shape is (2,1)</li>
+<li>input y shape is (3,1)</li>
+<li>rows of X are broadcasted copies of x
+<ul>
+<li>X.shape is (2,3)</li>
+</ul></li>
+<li>cols of Y are broadcasted copies of y
+<ul>
+<li>Y.shape is (2,3)<br />
+</li>
+</ul></li>
+<li>Notice that elementwise product of X and Y is the product space of x and y.<br />
+In other words, it is all combinations of x and y.</li>
+</ul></li>
+</ul>
+<p><code>X,Y = meshgrid(x=[1,2],y=[3,4,5])</code></p>
+<p><span class="math display">\[ x=\begin{bmatrix}
+{\color{red}1} &amp; {\color{red}2} \end{bmatrix} \qquad
+y=\begin{bmatrix}
+{\color{blue}3} &amp; {\color{blue}4} &amp;{\color{blue}5} \end{bmatrix} \qquad
+X = \begin{bmatrix}
+{\color{red}1} &amp; {\color{red}2} \\
+1 &amp; 2 \\
+1 &amp; 2 
+\end{bmatrix} \qquad Y = \begin{bmatrix}
+{\color{blue}3} &amp; 3 \\
+{\color{blue}4} &amp; 4 \\
+{\color{blue}5} &amp; 5 
+\end{bmatrix}\]</span></p>
+<p><span class="math display">\[X \otimes Y = \begin{bmatrix}
+(1,3) &amp; (2,3) \\
+(1,4) &amp; (2,4) \\
+(1,5) &amp; (2,5) 
+\end{bmatrix}\]</span></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits <span class="im">import</span> mplot3d</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;wireframe&quot;</span>):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> plt.axes(projection<span class="op">=</span><span class="st">&#39;3d&#39;</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> plottype <span class="op">==</span> <span class="st">&quot;contour3D&quot;</span>:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        ax.contour3D(X,Y,Z, <span class="dv">50</span>, cmap<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> plottype <span class="op">==</span> <span class="st">&quot;surface&quot;</span>:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        ax.plot_surface(X, Y, Z, cmap<span class="op">=</span><span class="st">&quot;coolwarm&quot;</span>, linewidth<span class="op">=</span><span class="dv">0</span>, antialiased<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> plottype <span class="op">==</span> <span class="st">&quot;wireframe&quot;</span>:</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        ax.plot_wireframe(X, Y, Z, rstride<span class="op">=</span><span class="dv">5</span>, cstride<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">&#39;x&#39;</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">&#39;y&#39;</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    ax.set_zlabel(<span class="st">&#39;z&#39;</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ax.set_title(&#39;3D contour&#39;)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (plt,ax)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x, y):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(x <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> y <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(X, Y)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape,Y.shape)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;contour3D&quot;</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;surface&quot;</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;wireframe&quot;</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div>
+<pre><code>(30,)
+(30, 30) (30, 30)</code></pre>
+<figure>
+<img src="/images/2021-10-15-3dplots/output_2_1.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<figure>
+<img src="/images/2021-10-15-3dplots/output_2_2.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<figure>
+<img src="/images/2021-10-15-3dplots/output_2_3.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<section id="simple-contour-plots" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Simple Contour plots</h1>
+<ul>
+<li>In 2d contour plots, color is the z-axis.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.contourf(X,Y,Z)</span></code></pre></div>
+<pre><code>&lt;matplotlib.contour.QuadContourSet at 0x7fc419419910&gt;</code></pre>
+<figure>
+<img src="/images/2021-10-15-3dplots/output_5_1.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.contour(X,Y,Z)</span></code></pre></div>
+<pre><code>&lt;matplotlib.contour.QuadContourSet at 0x7fc4192cc670&gt;</code></pre>
+<figure>
+<img src="/images/2021-10-15-3dplots/output_6_1.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+</section>
+<section id="d-plot" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 3d Plot</h1>
+<section id="plot-random" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Plot random</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x, y):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.random.poisson(size<span class="op">=</span>x.shape)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(X, Y)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;surface&quot;</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div>
+<figure>
+<img src="/images/2021-10-15-3dplots/output_9_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x, y):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.random.rand(<span class="op">*</span>x.shape)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(X, Y)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;contour3D&quot;</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div>
+<figure>
+<img src="/images/2021-10-15-3dplots/output_10_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x, y):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(X, Y)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>cont3d(X,Y,Z)[<span class="dv">0</span>].show() </span></code></pre></div>
+<figure>
+<img src="/images/2021-10-15-3dplots/output_11_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+</section>
+<section id="manual-tuning-neural-net" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Manual Tuning Neural Net</h2>
+<table>
+<thead>
+<tr class="header">
+<th>x1</th>
+<th>x2</th>
+<th>LinearFunc</th>
+<th>Sigmoid</th>
+<th>Actual x1 OR x2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>(0)(10)+(0)(10)+(-5)= -5</td>
+<td>σ(-5)=0.00669≅0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1</td>
+<td>(0)(10)+(1)(10)+(-5)= 5</td>
+<td>σ(5)=0.99330≅1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+<td>(1)(10)+(0)(10)+(-5)= 5</td>
+<td>σ(5)=0.99330≅1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1</td>
+<td>(1)(10)+(1)(10)+(-5)= 15</td>
+<td>σ(15)=0.99999≅1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defina a collection of inputs to test OR and AND</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>my_x_collection <span class="op">=</span> np.array([</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>],</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>])</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> LinearFunction(x1,x2,w1,w2,b):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x1<span class="op">*</span>w1 <span class="op">+</span> x2<span class="op">*</span>w2) <span class="op">+</span> b</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> Sigmoid_2d(x1, x2, w1, w2, b):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>LinearFunction(x1,x2,w1,w2,b)))</span></code></pre></div>
+<ul>
+<li><strong>These are the weights we discovered, w1=10,w2=10,b=-5</strong></li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>w1 <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>w2 <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Input</span><span class="ch">\t</span><span class="st">Linear</span><span class="ch">\t</span><span class="st">Sigmoid&quot;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> my_x_collection:</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    x1 <span class="op">=</span> x[<span class="dv">0</span>]</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    x2 <span class="op">=</span> x[<span class="dv">1</span>]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    LinearOutput <span class="op">=</span> LinearFunction(x1,x2,w1,w2,b)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    SigmoidOutput <span class="op">=</span> Sigmoid_2d(x1,x2,w1,w2,b)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{x}</span><span class="ch">\t</span><span class="sc">{</span>LinearOutput<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>SigmoidOutput<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Input	Linear	Sigmoid
+[0 0]	-5	0.0066928509242848554
+[0 1]	5	0.9933071490757153
+[1 0]	5	0.9933071490757153
+[1 1]	15	0.999999694097773</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">30</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">30</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> Sigmoid_2d(X, Y, w1, w2, b)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>ax.scatter(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>ax.scatter(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>ax.scatter(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>ax.scatter(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div>
+<figure>
+<img src="/images/2021-10-15-3dplots/output_20_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</section>
+</section>
+]]></description>
+    <pubDate>Fri, 15 Oct 2021 00:00:00 UT</pubDate>
+    <guid>https://userjy.github.io/posts/2021-10-15-3dplots.html</guid>
     <dc:creator>Jason Yang</dc:creator>
 </item>
 <item>
@@ -744,126 +1084,6 @@ but ERROR: port 8000 being used</p>
 ]]></description>
     <pubDate>Fri, 01 Oct 2021 00:00:00 UT</pubDate>
     <guid>https://userjy.github.io/posts/2021-10-01-TableOfContent.html</guid>
-    <dc:creator>Jason Yang</dc:creator>
-</item>
-<item>
-    <title>Add Railroad Syntax to Hakyll</title>
-    <link>https://userjy.github.io/posts/2021-10-01-RailroadSyntax.html</link>
-    <description><![CDATA[<div class="info">
-    Posted on October  1, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;tech&#39;." href="/tags/tech.html">tech</a>, <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>, <a title="All pages tagged &#39;HakyllSetupSeries&#39;." href="/tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
-    
-</div>
-<p><strong>Hakyll Setup Series</strong></p>
-<ol type="1">
-<li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
-<li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
-<li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
-<li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
-<li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
-<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
-<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
-</ol>
-<section id="setup" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Setup</h1>
-<p>add the script to your templates/default.html</p>
-<div class="sourceCode" id="cb1" data-filename="templates\default.html"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co">&lt;!-- RAILROAD START </span><span class="er">--------------------------------------</span><span class="co"> --&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;module&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>            <span class="im">import</span> rr<span class="op">,*</span> <span class="im">as</span> rrClass <span class="im">from</span> <span class="st">&quot;/lib/railroad/railroad.js&quot;</span><span class="op">;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            <span class="bu">Object</span><span class="op">.</span><span class="fu">assign</span>(<span class="bu">window</span><span class="op">,</span>rr)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="bu">window</span><span class="op">.</span><span class="at">rrOptions</span> <span class="op">=</span> rrClass<span class="op">.</span><span class="at">Options</span><span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="bu">document</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;DOMContentLoaded&#39;</span><span class="op">,</span>()<span class="kw">=&gt;</span>{<span class="fu">ReplaceDivWithSvg</span>()}<span class="op">,</span><span class="kw">false</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="kw">const</span> ReplaceDivWithSvg <span class="op">=</span> () <span class="kw">=&gt;</span>  {</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> (<span class="kw">const</span> railroadelem <span class="kw">of</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementsByClassName</span>(<span class="st">&quot;rroad&quot;</span>) ){</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                railroadelem<span class="op">.</span><span class="at">innerHTML</span> <span class="op">=</span> <span class="pp">eval</span>(railroadelem<span class="op">.</span><span class="at">innerText</span><span class="op">.</span><span class="fu">trim</span>()<span class="op">+</span><span class="st">&quot;.toString()&quot;</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                }</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            }</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/script&gt;</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">&quot;stylesheet&quot;</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;/lib/railroad/railroad-diagrams.css&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- RAILROAD </span><span class="re">END</span><span class="co"> </span><span class="er">-----------------------------------------</span><span class="co"> --&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb2" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
-<span id="cb2-2"><a href="#cb2-2"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>        <span class="op">...</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a>        match <span class="st">&quot;lib/**&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>            route   idRoute</span>
-<span id="cb2-8"><a href="#cb2-8"></a>            compile copyFileCompiler</span></code></pre></div>
-<p>Create a lib directory and create a railroad directory within the newly created lib directory.</p>
-<p>Create a file “railroad.js” inside you /lib/railroad directory and copy the contents from <a href="https://raw.githubusercontent.com/tabatkins/railroad-diagrams/gh-pages/railroad.js">this link</a></p>
-<p>Create a file “railroad-diagrams.css” /lib/railroad directory and copy the contents from <a href="https://raw.githubusercontent.com/tabatkins/railroad-diagrams/gh-pages/railroad-diagrams.css">this link</a></p>
-<p><strong>If you followed my <a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML(Updated)</a></strong></p>
-<p>Line <strong>3, 4, 20</strong> is what we added to our previous plantuml-hakyll integration code.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">------------------------------------------------RAILROAD START</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="ot">railroad ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">Data.Text.Text</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>railroad y <span class="ot">=</span> Data.Text.pack(<span class="st">&quot;&lt;div class=&#39;rroad&#39;&gt;&quot;</span><span class="op">&lt;&gt;</span> Data.Text.unpack y <span class="op">&lt;&gt;</span> <span class="st">&quot;&lt;/div&gt;&quot;</span>)</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">------------------------------------------------RAILROAD </span><span class="re">END</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="ot">mhexCode ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">String</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>mhexCode y <span class="ot">=</span> <span class="fu">tail</span> <span class="op">$</span> <span class="fu">init</span> ( <span class="fu">show</span> ( Data.ByteString.Base16.encode <span class="op">$</span> Data.ByteString.Char8.pack <span class="op">$</span> Data.Text.unpack y ))</span>
-<span id="cb3-10"><a href="#cb3-10"></a></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="ot">planthtml ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">Data.Text.Text</span> </span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">--planthtml y = T.pack (&quot;&lt;figure&gt;&lt;img src=&#39;http://www.plantuml.com/plantuml/svg/~h&quot; &lt;&gt; (T.unpack $ hexCode y) &lt;&gt;&quot;&#39;&gt;&lt;/figure&gt;&quot;) </span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>planthtml y <span class="ot">=</span> Data.Text.pack (<span class="st">&quot;&lt;figure&gt;&lt;img src=&#39;http://www.plantuml.com/plantuml/svg/~h&quot;</span> <span class="op">&lt;&gt;</span> (mhexCode <span class="op">$</span> y) <span class="op">&lt;&gt;</span><span class="st">&quot;&#39;&gt;&lt;/figure&gt;&quot;</span>) </span>
-<span id="cb3-14"><a href="#cb3-14"></a></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">--Pandoc filtering, </span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
-<span id="cb3-17"><a href="#cb3-17"></a>addToCodeBlock  <span class="ot">=</span> walk ftranslate </span>
-<span id="cb3-18"><a href="#cb3-18"></a>  <span class="kw">where</span><span class="ot"> ftranslate ::</span> <span class="dt">Block</span> <span class="ot">-&gt;</span> <span class="dt">Block</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a>        ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[]) txt ) <span class="ot">=</span> <span class="dt">RawBlock</span> (<span class="dt">Format</span> <span class="st">&quot;html&quot;</span>) (planthtml txt)</span>
-<span id="cb3-20"><a href="#cb3-20"></a>        ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;railroad&quot;</span>],[]) txt ) <span class="ot">=</span> <span class="dt">RawBlock</span> (<span class="dt">Format</span> <span class="st">&quot;html&quot;</span>) (railroad txt)</span>
-<span id="cb3-21"><a href="#cb3-21"></a>        ftranslate x <span class="ot">=</span> x </span></code></pre></div>
-<p>Now it should work when you input codeblocks your pandoc markdown with “rroad” tag as shown below (use backticks instead of single quotes in your pandoc markdown).</p>
-<pre><code>&#39;&#39;&#39;rroad
-Diagram(&quot;foo&quot;)
-&#39;&#39;&#39;</code></pre>
-<pre class="rroad"><code>Diagram(&quot;foo&quot;)</code></pre>
-<hr />
-<p><strong>If you did NOT follow my <a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML(Updated)</a></strong></p>
-<p>Add the codeblock below to your site.hs</p>
-<div class="sourceCode" id="cb6" data-filename="site.hs"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">------------------------------------------------RAILROAD START</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ot">railroad ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">Data.Text.Text</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>railroad y <span class="ot">=</span> Data.Text.pack(<span class="st">&quot;&lt;div class=&#39;rroad&#39;&gt;&quot;</span><span class="op">&lt;&gt;</span> Data.Text.unpack y <span class="op">&lt;&gt;</span> <span class="st">&quot;&lt;/div&gt;&quot;</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">------------------------------------------------RAILROAD </span><span class="re">END</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">--Pandoc filtering, </span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>addToCodeBlock  <span class="ot">=</span> walk ftranslate </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;railroad&quot;</span>],[]) txt ) <span class="ot">=</span> <span class="dt">RawBlock</span> (<span class="dt">Format</span> <span class="st">&quot;html&quot;</span>) (railroad txt)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        ftranslate x <span class="ot">=</span> x </span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">--New document compiler</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="ot">modAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>modAddedCompiler <span class="ot">=</span> pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock</span></code></pre></div>
-<p>In your site.hs find the <code class="sourceCode haskell">match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></code> and ONLY change the compiler in line 7 to <code class="sourceCode haskell">modAddedCompiler</code></p>
-<div class="sourceCode" id="cb7" data-filename="site.hs"><pre class="sourceCode numberSource hs numberLines"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
-<span id="cb7-2"><a href="#cb7-2"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>    hakyllWith config <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>    <span class="op">...</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>      match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>                route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>                compile <span class="op">$</span> modAddedCompiler <span class="co">--ONLY THIS</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>                    <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
-<span id="cb7-9"><a href="#cb7-9"></a>                    <span class="op">...</span></span></code></pre></div>
-<p>Now it should work when you input codeblocks your pandoc markdown with “rroad” tag as shown below (use backticks instead of single quotes in your pandoc markdown).</p>
-<pre><code>&#39;&#39;&#39;rroad
-Diagram(&quot;foo&quot;)
-&#39;&#39;&#39;</code></pre>
-<pre class="rroad"><code>Diagram(&quot;foo&quot;)</code></pre>
-</section>
-]]></description>
-    <pubDate>Fri, 01 Oct 2021 00:00:00 UT</pubDate>
-    <guid>https://userjy.github.io/posts/2021-10-01-RailroadSyntax.html</guid>
     <dc:creator>Jason Yang</dc:creator>
 </item>
 

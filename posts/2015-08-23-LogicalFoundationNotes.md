@@ -14,22 +14,7 @@ toc: y
 variables P Q : Prop
 ```
 
-## Inductive types
 
-* `Inductive` keyword indicates Type formation and Term introduction
-  *  allows recursive computation on the type
-
-```hs
-inductive nat : Type --type formation
-| zero : nat --term introduction
-| succ : nat → nat --term introduction
-```
-
-```hs
-constant nat : Type --type formation
-constant nat.zero : nat --term introduction
-constant nat.succ : nat → nat --term introduction
-```
 ## Inductive dependent types
 
 * `inductive nat: Type` is a plain inductive type

@@ -1,5 +1,5 @@
 ---
-title: Probability Distributions graphs in Python
+title: Generate Random Samples and Probability Distribution
 tags: mathcs, appliedmath, physics
 toc: y
 ---
@@ -16,13 +16,11 @@ $\sigma^2$ sigma squared is variance
 
 # Probability density function (pdf)
 
-$$pdf(x;\mu , \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}}$$
+$$pdf(x;\mu , \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}}exp({-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}})$$
 
-```python
+```{.py group="g1" glabel="scipy"}
 import matplotlib.pyplot as plt
 import numpy as np
-
-#METHOD 1 using scipy library
 import scipy.stats as stats
 
 mu = 0
@@ -34,8 +32,7 @@ plt.plot(x,y )
 plt.show()
 ```
 
-```python
-#METHOD 2 manual calculation
+```{.py group="g1" glabel="manual"}
 
 mu = 0 #mean
 sigma = 1 #sigma-squared is variance

@@ -118,12 +118,8 @@
 <section id="problem-solving-heuristic" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Problem Solving Heuristic</h1>
 <p><img src="../images/leetheuris.png" /></p>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a0a6e6f6465205b72616e6b7365703d302e325d3b0a0a7b72616e6b3d2273616d65223b204131203b2042313b2044313b207d0a7b72616e6b3d2273616d65223b204132203b2041333b2044323b7d0a0a5031205b6c6162656c203d202270726f626c656d225d0a0a4231205b6c6162656c203d2022497465726174697665225d0a4232205b6c6162656c203d20225375626c6973745c6e4c6f6f7020496e76617269616e742049483a5b302e2e695d5c6e7b5b302e2e695d2c6a2e2e6e7d225d0a0a4131205b6c6162656c203d2022526563757273697665225d0a4331205b6c6162656c203d2022537472656e677468656e2070726f626c656d225d0a4431205b6c6162656c203d202247656e65726174697665225d0a4432205b6c6162656c203d20225461696c2d5265632053746174652074726565225d0a0a4132205b6c6162656c203d202253706c69745c6e49482866737448616c663a3a6c697374295c6e494828736e6448616c663a3a6c69737429225d0a0a4133205b6c6162656c203d202241746f6d69635c6e686561643a3a656c656d656e745c6e4948287461696c3a3a6c6973742920225d0a0a0a5031202d3e204131205b6c6162656c3d2244657465726d696e65735c6e4948225d3b0a5031202d3e2042313b0a4131202d3e2041323b0a4131202d3e2041333b0a4131202d3e2043313b0a4331202d3e205031205b6c6162656c3d22537472656e677468656e5c6e49482220636f6e73747261696e743d66616c73655d3b0a4231202d3e2042323b0a0a5031202d3e2044313b0a4431202d3e2044323b0a7d0a"></figure>
-</section>
-<section id="problem-statement-heuristics" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Problem statement heuristics</h1>
-<section id="dp" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> DP</h2>
+<section id="dp" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> DP</h2>
 <ul>
 <li>Count the number of ways
 <ul>
@@ -133,19 +129,19 @@
 </ul>
 </section>
 </section>
-<section id="recursion-vs-tail-recursion" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Recursion vs Tail-recursion</h1>
+<section id="recursion-vs-tail-recursion" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Recursion vs Tail-recursion</h1>
 <p>We will not refer to tail-recursion as recursion.<br />
 tail-recursion can store state and is isomorphic to iterative solutions.</p>
 </section>
-<section id="recursion-vs-dp" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Recursion vs DP</h1>
+<section id="recursion-vs-dp" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Recursion vs DP</h1>
 <p>Although we can always go from recursion TO DP, they are not the same.</p>
 <p>Problems that require us to FIRST store local optimas work well with DP but not recursion.<br />
 Recursion has no memory.</p>
 </section>
-<section id="generative" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Generative</h1>
+<section id="generative" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Generative</h1>
 <ul>
 <li>Typically problems that ask to find all possible combinations that fulfils some constraint or target</li>
 <li>We create a generative tree of states using a tail recursive function</li>
@@ -159,8 +155,8 @@ Recursion has no memory.</p>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="co">#backtrack</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> mylist:</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        func(target<span class="op">-</span>i,buildsol<span class="op">+</span>[i],mylist...)</span></code></pre></div>
-<section id="examples" class="level3" data-number="5.0.1">
-<h3 data-number="5.0.1"><span class="header-section-number">5.0.1</span> Examples</h3>
+<section id="examples" class="level3" data-number="4.0.1">
+<h3 data-number="4.0.1"><span class="header-section-number">4.0.1</span> Examples</h3>
 <ul>
 <li>problem: Sorting =&gt; IH: Sorted
 <ul>
@@ -242,8 +238,8 @@ Recursion has no memory.</p>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>printLCS(b,X,<span class="bu">len</span>(X),<span class="bu">len</span>(Y))</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; BCBA</span></span></code></pre></div>
-<section id="insertion-sort" class="level5" data-number="5.0.1.0.1">
-<h5 data-number="5.0.1.0.1"><span class="header-section-number">5.0.1.0.1</span> Insertion Sort</h5>
+<section id="insertion-sort" class="level5" data-number="4.0.1.0.1">
+<h5 data-number="4.0.1.0.1"><span class="header-section-number">4.0.1.0.1</span> Insertion Sort</h5>
 <ul>
 <li>Sublist [{0..i,j}…]</li>
 <li>IH : [0..i] is Sorted sublist
@@ -311,8 +307,8 @@ Recursion has no memory.</p>
 </section>
 </section>
 </section>
-<section id="reverse-linked-list" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Reverse Linked List</h1>
+<section id="reverse-linked-list" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Reverse Linked List</h1>
 <div class="sourceCode" id="cb7"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ListNode(<span class="bu">object</span>):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, val<span class="op">=</span><span class="dv">0</span>, <span class="bu">next</span><span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.val <span class="op">=</span> val</span>
@@ -359,8 +355,8 @@ We need to put x to the end of this reversedlist.</p>
 <p>What do we do with [x]?</p>
 <p>[IH_h]——&gt;[IH_l]-&gt;[x] access</p>
 <p>Clearly we just set the <code>IH_l.next = x</code></p>
-<section id="hashtable-and-hash-function-ch-11" class="level2" data-number="6.1">
-<h2 data-number="6.1"><span class="header-section-number">6.1</span> Hashtable and Hash function Ch 11</h2>
+<section id="hashtable-and-hash-function-ch-11" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Hashtable and Hash function Ch 11</h2>
 <p>Hash function exploits the fast look time of an array</p>
 <p><span class="math display">\[ \{k_1,k_2,k_3...\} \overset{hash}{\rightarrow} h(k) \rightarrow Val \]</span></p>
 <ul>
@@ -392,7 +388,7 @@ We need to put x to the end of this reversedlist.</p>
             <a href="http://jaspervdj.be/hakyll">Hakyll</a>
                 </div>
    
-            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Blog</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
   
             </div>
         </div>

@@ -64,3 +64,34 @@ endnote
 Website <-> Browser: Communication w/ SecretKey
 @enduml
 ```
+
+
+# Authentication flow with JWT and Bcrypt
+
+* Sign up flow
+ * client --{user,pass}--> --bcrypt(pass)--> Save bcrypt(pass)+user to DB
+ * client <--{JWT}-- Server
+
+<!--  -->
+ * Login flow
+  * client input pass ----> compare bcrypt(pass)+user with DB
+  * Server <--{JWT}-- Server
+<!--  -->
+
+## bcrypt
+
+* hash password using bcrypt 
+ * bcrypt can increase hash rounds (salt-rounds), slowing time, which resists brute force hash collision attack 
+
+## JWT
+
+* Header - base64 
+* Payload
+* Signature
+
+## persist authentication methods
+
+* Browser storage
+  * local storage
+* Cookie 
+  * Add "secure", "httpOnly" "SameSite"

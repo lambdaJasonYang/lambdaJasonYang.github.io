@@ -3,6 +3,22 @@ title: Energy Based Models
 tags: mathcs, AI
 ---
 
+# Manifold 
+
+* Manifold is a topological space that locally resembles a euclidean space
+  * topological manifold
+  * differentiable manifold
+  * riemannian manifold
+
+## Embedding
+
+* Injective function from one manifold to another that preserves structure
+
+## Example
+
+* We have a dataset of 3d faces
+  *
+
 ### Energy Based Model vs Probablistic Model
 Probablistic Model are based on a distribution derived from the possible solution set.   
 What if the solution set is intractable or infinite?  

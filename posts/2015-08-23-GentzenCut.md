@@ -23,10 +23,13 @@ Prove propositional calculus correct using
 
 ## Completeness
 
+| Sequent | Logic | 
+| --- | --- |
+| $a\vDash b$ | $\forall x \in a, x \in b$ | 
+| $a \vDash \lnot b$ | $\forall x \in a, x \notin b$| 
+| $\lnot a \vDash b$ | $\forall x \notin a, x \in b$ |
+| $a \nvDash b$  | $\lnot (\forall x \in a, x \in b)$ |
 
-$$a \vDash b$$  
-$$\{x | a(x)\} \subset \{x | b(x)\}$$ 
-a satisfies b  
 
 $x :: U$  
 $a, b :: U \rightarrow Bool$  
@@ -35,9 +38,9 @@ Subset = Predicate = Function Universe U to Bool
 
 
 
-$\Gamma :: \{Prop\}$  
-$\Delta :: \{Prop\}$  
-$\Gamma \Delta$ are the set of propositions in this universe.
+$\Gamma :: \{U \rightarrow Bool\}$  
+$\Delta :: \{U \rightarrow Bool  \}$  
+$\Gamma, \Delta$ are the set of propositions in this universe.
 
 ```haskell
 type Predicate u = u -> Bool
@@ -90,24 +93,40 @@ type Set = Predicate Universe
 Gentzen Cut is simply a syntatic trick
 
 $$
-\frac{a \vDash b \ \ \ \ b \vDash c}{a \vDash c}
+\frac{a \vDash b \ \ \ \ b \vDash c}{a \vDash c}\tag{transitive implication}
 $$
 
 $$
-\frac{ {\color{blue}\Gamma , a} \vDash b , {\color{red}\Delta} \ \ \ \ {\color{blue}\Gamma} , b \vDash{\color{red} c , \Delta}}{{\color{blue}\Gamma , a} \vDash  {\color{red}c , \Delta}}
-$$
+\frac{ \Gamma , a \vDash b , \Delta \ \ \ \ \Gamma , b \vDash c , \Delta}{\Gamma , a \vDash  c , \Delta}
+\tag{append gamma and delta to both sides}$$
 
-We expand 
 
 $$
 \frac{ {\color{blue}\Gamma , a} \vDash b , {\color{red}c , \Delta} \ \ \ \ {\color{blue}\Gamma, a} , b \vDash{\color{red} c , \Delta}}{{\color{blue}\Gamma , a} \vDash  {\color{red}c , \Delta}}
+\tag{Append a with Gamma, c with delta} $$
+
 $$
-Absorbing a into Gamma  
-Absorbing c into Delta  
-$$
-\frac{\Gamma' \vDash b , \Delta' \ \ \ \ \Gamma' , b \vDash \Delta'}{\Gamma' \vDash  \Delta'}
+\frac{\Gamma' \vDash b , \Delta' \ \ \ \ \Gamma' , b \vDash \Delta'}{\Gamma' \vDash  \Delta'}\tag{absorb a with Gamma, c with delta}
 $$
 
-Why?
-Remember 
-$AND \vdash OR$
+
+## Explanation
+
+*  The Append step is the most confusing because we ask why is this legal in ${\color{blue}\Gamma , a} \vDash b , {\color{red}c , \Delta}$?  
+    * Why can we arbitrarily convert $..\vDash b , \Delta$  to $..\vDash b , {\color{red}c , \Delta}$
+    * (Cloudy days) implies (rain **OR anything else**)
+
+$$ \frac{x_1 \vDash y_1}{x_1 \vDash y_1,y_2,y_3,...}$$
+
+* The same could be asked about ${\color{blue}\Gamma, a} , b \vDash{\color{red} c , \Delta}$
+    * Why can we arbitrarily convert $\Gamma,b \vDash ..$ to ${\color{blue}\Gamma, a} , b \vDash ..$
+    * (Cloudy days **AND anything else**) implies (rain)
+
+$$ \frac{x_1 \vDash y_1}{x_1,x_2,x_3,.. \vDash y_1}$$
+
+* Summary: Remember that a sequent $x_1,x_2 \vDash y_1,y_2$ is logically equivalent to $x_1 \land x_2 \rightarrow y_1 \lor y_2$
+  * We can keep ANDing more "vacuous evidence" on the left side of the implication 
+  * We can keep ORing more "vacuous proofs" on the right side of the implication
+
+
+Remember $AND \vDash OR$

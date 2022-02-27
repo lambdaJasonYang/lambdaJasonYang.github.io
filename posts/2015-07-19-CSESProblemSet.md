@@ -4,6 +4,45 @@ title: Algorithm Problem Sets
 tags: mathcs, algorithms
 ---
 
+```plantuml
+digraph G {
+
+node [ranksep=0.2];
+
+{rank="same"; A1 ; B1; D1; }
+{rank="same"; A2 ; A3; D2;}
+
+P1 [label = "problem"]
+
+B1 [label = "Iterative"]
+B2 [label = "Sublist\nLoop Invariant IH:[0..i]\n{[0..i],j..n}"]
+
+A1 [label = "Recursive"]
+C1 [label = "Strengthen problem"]
+D1 [label = "Generative"]
+D2 [label = "Tail-Rec State tree"]
+
+A2 [label = "Split\nIH(fstHalf::list)\nIH(sndHalf::list)"]
+
+A3 [label = "Atomic\nhead::element\nIH(tail::list) "]
+
+
+P1 -> A1 [label="Determines\nIH"];
+P1 -> B1;
+A1 -> A2;
+A1 -> A3;
+A1 -> C1;
+C1 -> P1 [label="Strengthen\nIH" constraint=false];
+B1 -> B2;
+
+P1 -> D1;
+D1 -> D2;
+}
+
+```
+
+
+
 # Documenting some random algorithmic problems:
 
 ---
@@ -86,7 +125,7 @@ check k::Value#1stpartialSum in hmap
 ```
 
 
-```{.python .numberLines} 
+```{.python .numberLines group="2sum" glabel="py"} 
 class Solution(object):
     def twoSum(self, nums, target):
         hmap = {}
@@ -103,10 +142,8 @@ class Solution(object):
 
 ```
 
-the target is composed  of values from two partial sums  (Value#1stpartialSum + Value#2ndpartialSum)
 
-
-```go
+```{.go group="2sum" glabel="go"}
 func twoSum(nums []int, target int) []int {
 	hmap := make(map[int]int)
 	for Index1stPartial, Value1stPartial := range nums {
