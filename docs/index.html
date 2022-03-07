@@ -176,6 +176,10 @@
         </li>
     
         <li>
+            <a href="./posts/2021-11-10-BigDataPlots.html" data-tags="prog">Excursions with plotting big data</a> 
+        </li>
+    
+        <li>
             <a href="./posts/2021-11-10-Authentication.html" data-tags="prog">Authentication OAuth2 SAML</a> 
         </li>
     
@@ -292,10 +296,6 @@
         </li>
     
         <li>
-            <a href="./posts/2021-08-10-DomTree.html" data-tags="prog, cloud, frontend">Dom Tree and rendering</a> 
-        </li>
-    
-        <li>
             <a href="./posts/2021-08-10-Callcc.html" data-tags="prog, cloud, frontend">Callcc</a> 
         </li>
     
@@ -357,6 +357,14 @@
     
         <li>
             <a href="./posts/2021-03-23-example.html" data-tags="musings">example page</a> 
+        </li>
+    
+        <li>
+            <a href="./posts/2021-03-23-ReactDomTree.html" data-tags="prog, cloud, frontend">Dom Tree rendering in VanillaJS and React</a> 
+        </li>
+    
+        <li>
+            <a href="./posts/2021-03-23-QuickReactclass.html" data-tags="prog, QuickCode, cloud, frontend">Quick React class</a> 
         </li>
     
         <li>
@@ -433,6 +441,10 @@
     
         <li>
             <a href="./posts/2021-02-20-QuickMathematica.html" data-tags="prog, QuickCode">Quick Mathematica</a> 
+        </li>
+    
+        <li>
+            <a href="./posts/2021-02-20-QuickJavaSpring.html" data-tags="prog, QuickCode">Quick Springboot</a> 
         </li>
     
         <li>
@@ -548,6 +560,10 @@
         </li>
     
         <li>
+            <a href="./posts/2019-06-12-ShallowAndDeepCopy.html" data-tags="prog, QuickCode">Shallow vs Deep copy</a> 
+        </li>
+    
+        <li>
             <a href="./posts/2019-06-12-CodeIdiosyncrasy.html" data-tags="prog, QuickCode">Programming Lang Idiosyncrasies and Similarities</a> 
         </li>
     
@@ -580,7 +596,7 @@
         </li>
     
         <li>
-            <a href="./posts/2019-03-07-CatHask.html" data-tags="mathcs, puremath, categorytheory">Haskell and Category theory</a> 
+            <a href="./posts/2019-03-07-CatHask.html" data-tags="mathcs, puremath, categorytheory">Category theory for programmer notes</a> 
         </li>
     
         <li>
@@ -888,7 +904,7 @@
         </li>
     
         <li>
-            <a href="./posts/2015-07-14-ProbStatsTerms.html" data-tags="mathcs, appliedmath, physics">Probability and Stats Terminology</a> 
+            <a href="./posts/2015-07-14-ProbStatsTerms.html" data-tags="mathcs, appliedmath, physics">Measure theory and probability</a> 
         </li>
     
         <li>
@@ -941,6 +957,10 @@
     
         <li>
             <a href="./posts/2015-04-27-InductionNotes.html" data-tags="mathcs, puremath, recursion">List of Induction problems</a> 
+        </li>
+    
+        <li>
+            <a href="./posts/2015-04-26-Combinatorics.html" data-tags="mathcs, puremath, recursion">Combinatorics</a> 
         </li>
     
         <li>
@@ -1017,7 +1037,7 @@
             //Structure:
             // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
-            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
 
             const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
@@ -1077,7 +1097,7 @@
         <!-- CODE TAB END ---->
 
         <!-- MATH JAX START -------------------------------------- -->
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
 

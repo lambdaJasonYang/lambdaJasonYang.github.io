@@ -3,6 +3,12 @@ title: Bookmarks
 tags: mathcs, puremath, recursion
 ---
 
+zerobin.net
+
+https://cs.pomona.edu/~michael/
+
+http://statistics.zone/
+
 https://swish.swi-prolog.org/example/render_svgtree.swinb
 
 https://www.cip.ifi.lmu.de/~grinberg/algebra/algebra.html
@@ -176,3 +182,5 @@ https://lecoupa.github.io/awesome-cheatsheets/
 # Shaders 
 
 thebookofshaders.com
+
+http://www.courses.physics.helsinki.fi/fys/nucphys/

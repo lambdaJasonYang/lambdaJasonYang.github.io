@@ -231,8 +231,11 @@ It will also cache the workspace so the next build will a fraction of the time o
 <span id="cb1-94"><a href="#cb1-94"></a>           git config user.name github-actions</span>
 <span id="cb1-95"><a href="#cb1-95"></a>           git config user.email github-actions@github.com</span>
 <span id="cb1-96"><a href="#cb1-96"></a>           git add .</span>
-<span id="cb1-97"><a href="#cb1-97"></a>           git diff --exit-code || git commit -am &quot;Autobuild Hakyll site github action commit&quot;</span>
-<span id="cb1-98"><a href="#cb1-98"></a>           </span></code></pre></div>
+<span id="cb1-97"><a href="#cb1-97"></a>           if ! git diff-index --quiet HEAD --; then</span>
+<span id="cb1-98"><a href="#cb1-98"></a>              git commit -m &quot;Autobuild Hakyll site github action commit&quot;</span>
+<span id="cb1-99"><a href="#cb1-99"></a>              git push</span>
+<span id="cb1-100"><a href="#cb1-100"></a>              echo &quot;pushing changes&quot;</span>
+<span id="cb1-101"><a href="#cb1-101"></a>           fi</span></code></pre></div>
 <p>Now you can update your blog anywhere, just<br />
 1. pull your hakyll repo from github<br />
 2. add your new markdown file to your posts folder<br />
@@ -260,7 +263,7 @@ It will also cache the workspace so the next build will a fraction of the time o
             //Structure:
             // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
-            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
 
             const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
@@ -320,7 +323,7 @@ It will also cache the workspace so the next build will a fraction of the time o
         <!-- CODE TAB END ---->
 
         <!-- MATH JAX START -------------------------------------- -->
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
 

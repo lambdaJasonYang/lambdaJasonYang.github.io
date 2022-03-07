@@ -109,6 +109,10 @@
             <ul style="list-style-type:'\1F344'; column-count: 3;">
     
         <li>
+            <a href="../posts/2021-03-23-QuickReactclass.html">Quick React class</a> 
+        </li>
+    
+        <li>
             <a href="../posts/2021-03-23-QuickReact3.html">Quick React Part 2</a> 
         </li>
     
@@ -161,6 +165,10 @@
         </li>
     
         <li>
+            <a href="../posts/2021-02-20-QuickJavaSpring.html">Quick Springboot</a> 
+        </li>
+    
+        <li>
             <a href="../posts/2021-02-20-QuickGoPre.html">Quick Go mod</a> 
         </li>
     
@@ -178,6 +186,10 @@
     
         <li>
             <a href="../posts/2021-02-20-GoSnips.html">Go Snippets</a> 
+        </li>
+    
+        <li>
+            <a href="../posts/2019-06-12-ShallowAndDeepCopy.html">Shallow vs Deep copy</a> 
         </li>
     
         <li>
@@ -226,7 +238,7 @@
             //Structure:
             // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
-            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
 
             const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
@@ -286,7 +298,7 @@
         <!-- CODE TAB END ---->
 
         <!-- MATH JAX START -------------------------------------- -->
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
 

@@ -206,15 +206,17 @@
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fac(fac,<span class="dv">5</span>)</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 120</span></span></code></pre></div>
 </section>
-<section id="analogy" class="level3" data-number="0.0.5">
-<h3 data-number="0.0.5"><span class="header-section-number">0.0.5</span> Analogy</h3>
-<section id="taylor-series" class="level5" data-number="0.0.5.0.1">
-<h5 data-number="0.0.5.0.1"><span class="header-section-number">0.0.5.0.1</span> Taylor Series</h5>
-<p>Similar to the taylor series, as we add more terms to the series, the series becomes a closer approximate to the function.</p>
+<section id="analogy" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Analogy</h1>
+<section id="taylor-series" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Taylor Series</h2>
+<ul>
+<li>as we add more higher level derivative terms to the series, the series becomes a closer approximate to the function.</li>
+<li>as we add more partial functions, the resulting function becomes a closer awpproximate of the total recursive function.</li>
+</ul>
 </section>
-<section id="transitive-relation" class="level5" data-number="0.0.5.0.2">
-<h5 data-number="0.0.5.0.2"><span class="header-section-number">0.0.5.0.2</span> Transitive relation</h5>
-<p>mini background:</p>
+<section id="transitive-relation" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Transitive relation</h2>
 <ul>
 <li>Let <span class="math inline">\(R\)</span> be a relation from a set to itself,<br />
 </li>
@@ -226,7 +228,7 @@
 </ul></li>
 </ul>
 <p><span class="math inline">\(R \cup R^2 \cup R^3\)</span> would be analogous to our partial function <code class="sourceCode python">p(p(p(s)))</code></p>
-<p><span class="math inline">\(\bigcup R^{n\in \mathbb{N}}\)</span> would be the total recursive function.</p>
+<p><span class="math inline">\(\bigcup\limits_{n\in \mathbb{N}} R^{n}\)</span> would be the total recursive function.</p>
 </section>
 </section>
 
@@ -250,7 +252,7 @@
             //Structure:
             // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
-            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
 
             const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
@@ -310,7 +312,7 @@
         <!-- CODE TAB END ---->
 
         <!-- MATH JAX START -------------------------------------- -->
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
 

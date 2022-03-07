@@ -121,18 +121,15 @@
 </colgroup>
 <tbody>
 <tr class="odd">
-<td>### Opening files</td>
+<td># Insertion sort</td>
 </tr>
 <tr class="even">
-<td>```python #python</td>
+<td><code>m insertionSort[a_List] := Module[ {A = a}, For[i = 2, i &lt;= Length[A], i++, value = A[[i]]; j = i - 1; While[j &gt;= 1 &amp;&amp; A[[j]] &gt; value, A[[j + 1]] = A[[j]]; j--;]; A[[j + 1]] = value;]; A ] insertionSort@{ 2, 1, 3, 5}</code></td>
 </tr>
 <tr class="odd">
-<td>```</td>
+<td>```C++</td>
 </tr>
 <tr class="even">
-<td>```C</td>
-</tr>
-<tr class="odd">
 <td>```</td>
 </tr>
 </tbody>
@@ -158,7 +155,7 @@
             //Structure:
             // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
-            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
 
             const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
@@ -218,7 +215,7 @@
         <!-- CODE TAB END ---->
 
         <!-- MATH JAX START -------------------------------------- -->
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
 

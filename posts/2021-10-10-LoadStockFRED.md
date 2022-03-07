@@ -28,3 +28,13 @@ stocks = stkdata["candles"].apply(pd.Series)
 
 stocks["datetime"] =  pd.to_datetime(stocks["datetime"],origin="unix", unit="ms")
 ```
+
+```js
+const bleh = async () => {
+    const rawdata = await fetch("https://api.td...").then(response => response.text())
+    const inter = window.atob(rawdata)
+    const jsondata = JSON.parse(inter)["candles"]
+    const tfdataframe = tf.data.array(jsondata)
+
+}
+```

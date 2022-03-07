@@ -43,15 +43,9 @@ $$- \hbar^2 \, \dfrac{ \text{d}^2 \Psi}{ \text{d}x^2}= p^2 \, \Psi$$
 $$E= E_k+E_p= \frac{p^2}{2m}+E_p $$ 
 $$E \Psi= \frac{p^2}{2m} \Psi+E_p \Psi=\frac{p^2 \Psi}{2m}+E_p \Psi=\dfrac{- \hbar^2}{2m} \, \dfrac{ \text{d}^2 \Psi}{ \text{d}x^2}+E_p \Psi \\$$
 
-```rroad
-Diagram(
-  Optional('+', 'skip'),
-  Choice(0,
-    NonTerminal('name-start char'),
-    NonTerminal('escape')),
-  ZeroOrMore(
-    Choice(0,
-      NonTerminal('name char'),
-      NonTerminal('escape'))))
-```
 
+# Categorical chemistry?
+
+* Objects are chemicals wrt protons
+  * Isotopes are functors wrt neutrons
+  * Ions are functors wrt electrons

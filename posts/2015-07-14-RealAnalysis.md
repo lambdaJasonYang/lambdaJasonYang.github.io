@@ -11,6 +11,22 @@ tags: mathcs, puremath
   * This allows to use the min function
 * $\mathbb{Q}$ : $\frac{p}{q}$ where p,q are Integers
 
+# Fields 
+
+Reals is a set with multiplication and addition satisfying the below:
+
+* $(\mathbb{R}, +, 0)$ is an abelian group
+* $(\mathbb{R}/\{0\}, \cdot, 1)$ is an abelian group
+* Distributive law
+* $\leq$ is  total order compatible with $+, \cdot$
+* Every cauchy sequence is a convergent sequence
+
+## Absolute value
+
+$$ \lvert x \cdot y \rvert = \lvert x \rvert \cdot \lvert y \rvert $$
+$$ \lvert x + y \rvert \leq \lvert x \rvert + \lvert y \rvert $$
+
+
 # Dedekind cuts
 
 * `Dedekind_cuts := (A,B) :: (Partition(Q),Partition(Q))`{.haskell}
@@ -45,9 +61,9 @@ All inner products define a norm but not all norms are inner products.
 
 ---
 
-## Topology
+# Topology
 
-##### Metric Space
+## Metric Space
 
 `Metric_Space := (M,dist) :: (Set,binary_operation)`{.haskell}
 
@@ -67,7 +83,7 @@ Mapping metric spaces of knowledge AKA analogies
 
     
 
-##### Limit aka Limit point
+## Limit aka Limit point
 
 * Given Metric Space $(M,d)$
 * $S \subseteq M$

@@ -116,26 +116,29 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#example"><span class="toc-section-number">0.1</span> Example</a></li>
-<li><a href="#types"><span class="toc-section-number">1</span> Types</a></li>
-<li><a href="#numbers"><span class="toc-section-number">2</span> Numbers</a></li>
-<li><a href="#inductive-type"><span class="toc-section-number">3</span> Inductive type</a></li>
-<li><a href="#definitional-equality-and-reduction"><span class="toc-section-number">4</span> Definitional Equality and Reduction</a></li>
-<li><a href="#dependent-type"><span class="toc-section-number">5</span> Dependent type</a>
+<li><a href="#rw"><span class="toc-section-number">1</span> rw</a>
 <ul>
-<li><a href="#inspiring-the-dependent-type"><span class="toc-section-number">5.1</span> Inspiring the dependent type</a>
+<li><a href="#example"><span class="toc-section-number">1.1</span> Example</a></li>
+</ul></li>
+<li><a href="#types"><span class="toc-section-number">2</span> Types</a></li>
+<li><a href="#numbers"><span class="toc-section-number">3</span> Numbers</a></li>
+<li><a href="#inductive-type"><span class="toc-section-number">4</span> Inductive type</a></li>
+<li><a href="#definitional-equality-and-reduction"><span class="toc-section-number">5</span> Definitional Equality and Reduction</a></li>
+<li><a href="#dependent-type"><span class="toc-section-number">6</span> Dependent type</a>
 <ul>
-<li><a href="#function-type-is-just-a-pi-type"><span class="toc-section-number">5.1.1</span> function type is just a Pi-type</a></li>
-</ul></li>
-<li><a href="#sigma-type"><span class="toc-section-number">5.2</span> Sigma Type</a></li>
-</ul></li>
-<li><a href="#notation"><span class="toc-section-number">6</span> Notation</a>
+<li><a href="#inspiring-the-dependent-type"><span class="toc-section-number">6.1</span> Inspiring the dependent type</a>
 <ul>
-<li><a href="#curly-vs-smooth-parenthesis"><span class="toc-section-number">6.1</span> Curly vs Smooth Parenthesis</a></li>
-<li><a href="#pi-type-forall-parenthesis"><span class="toc-section-number">6.2</span> Pi-type, forall, parenthesis</a></li>
+<li><a href="#function-type-is-just-a-pi-type"><span class="toc-section-number">6.1.1</span> function type is just a Pi-type</a></li>
 </ul></li>
-<li><a href="#simple-interpreter"><span class="toc-section-number">7</span> Simple interpreter</a></li>
-<li><a href="#understanding-coq"><span class="toc-section-number">8</span> Understanding Coq</a></li>
+<li><a href="#sigma-type"><span class="toc-section-number">6.2</span> Sigma Type</a></li>
+</ul></li>
+<li><a href="#notation"><span class="toc-section-number">7</span> Notation</a>
+<ul>
+<li><a href="#curly-vs-smooth-parenthesis"><span class="toc-section-number">7.1</span> Curly vs Smooth Parenthesis</a></li>
+<li><a href="#pi-type-forall-parenthesis"><span class="toc-section-number">7.2</span> Pi-type, forall, parenthesis</a></li>
+</ul></li>
+<li><a href="#simple-interpreter"><span class="toc-section-number">8</span> Simple interpreter</a></li>
+<li><a href="#understanding-coq"><span class="toc-section-number">9</span> Understanding Coq</a></li>
 </ul></div>
 <table>
 <thead>
@@ -196,8 +199,22 @@
 <p>Classical logic <code class="sourceCode bash"><span class="ex">open_locale</span> classical</code> use <code class="sourceCode bash"><span class="ex">by_contradiction</span></code> tactic</p>
 <p>Most of the time, implication and universal quantifier are treated the same.</p>
 <p><img src="../images/Notes_220119_214554.jpg" style="width:50.0%" /></p>
-<section id="example" class="level2" data-number="0.1">
-<h2 data-number="0.1"><span class="header-section-number">0.1</span> Example</h2>
+<section id="rw" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> rw</h1>
+<ul>
+<li>given <code>h: a*b=b*a</code><br />
+</li>
+<li><code>rw h</code> means attempt to transform consequent using<code>a*b-&gt;b*a</code>
+<ul>
+<li><code>⊢a*b+c</code> turns into <code>⊢b*a+c</code></li>
+</ul></li>
+<li><code>rw &lt;- h</code> means <code>b*a-&gt;a*b</code>
+<ul>
+<li><code>⊢b*a+c</code> turns into <code>⊢a*b+c</code></li>
+</ul></li>
+</ul>
+<section id="example" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Example</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">expected</span> type:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">abcd:</span> ℝ</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">h₁:</span> a ≤ b</span>
@@ -210,8 +227,9 @@
 <p>Type</p>
 <p>For any type α that has a pre order.</p>
 </section>
-<section id="types" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Types</h1>
+</section>
+<section id="types" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Types</h1>
 <p>if <code class="sourceCode haskell">p <span class="op">:</span> <span class="dt">Prop</span></code> then <code class="sourceCode haskell">x<span class="op">:</span>p</code> is a proof of proposition <code class="sourceCode haskell">p <span class="op">:</span> <span class="dt">Prop</span></code>. if <code class="sourceCode haskell">y<span class="op">:</span>p</code> is also a proof then <strong>proof irrelevance</strong> means <code class="sourceCode haskell">x<span class="op">:</span>p</code> and <code class="sourceCode haskell">y<span class="op">:</span>p</code> are indistinguishable.</p>
 <ul>
 <li>Props, terms
@@ -226,19 +244,19 @@
 </ul></li>
 </ul>
 </section>
-<section id="numbers" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Numbers</h1>
+<section id="numbers" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Numbers</h1>
 <p>Proofs of numbers typically use type coercion.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">norm_num</span></span></code></pre></div>
 </section>
-<section id="inductive-type" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Inductive type</h1>
+<section id="inductive-type" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Inductive type</h1>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">inductive</span> mynat</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">zero</span> : mynat</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">succ</span> <span class="er">(</span><span class="ex">n</span> : mynat<span class="kw">)</span> <span class="bu">:</span> mynat</span></code></pre></div>
 </section>
-<section id="definitional-equality-and-reduction" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Definitional Equality and Reduction</h1>
+<section id="definitional-equality-and-reduction" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Definitional Equality and Reduction</h1>
 <dl>
 <dt>Given</dt>
 <dd><span class="math inline">\(A \overset{reduces}{\rightarrow} X\)</span>
@@ -271,10 +289,10 @@
 </tbody>
 </table>
 </section>
-<section id="dependent-type" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Dependent type</h1>
-<section id="inspiring-the-dependent-type" class="level2" data-number="5.1">
-<h2 data-number="5.1"><span class="header-section-number">5.1</span> Inspiring the dependent type</h2>
+<section id="dependent-type" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Dependent type</h1>
+<section id="inspiring-the-dependent-type" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> Inspiring the dependent type</h2>
 <p><code class="sourceCode haskell">cons <span class="dv">2</span> [<span class="dv">3</span>,<span class="dv">4</span>] <span class="op">:</span> <span class="dt">List</span> <span class="dt">Nat</span></code><br />
 <code class="sourceCode haskell">cons <span class="op">:</span> <span class="dt">Nat</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">Nat</span> <span class="ot">-&gt;</span> <span class="dt">List</span> <span class="dt">Nat</span></code></p>
 <p>What if we wanted a polymorphic <code class="sourceCode haskell">cons</code>?<br />
@@ -332,8 +350,8 @@ We apply <code class="sourceCode haskell">(Π x <span class="op">:</span> α, β
 <p>Example of a list is <code class="sourceCode haskell">cons int <span class="dv">3</span> (nil int)</code></p>
 <p>Since <code class="sourceCode haskell">cons</code> and <code class="sourceCode haskell">nil</code> are dependent types, they must take an extra parameter [in this case] <code class="sourceCode haskell">int</code></p>
 <p><code class="sourceCode haskell"><span class="ot">f ::</span> Π x <span class="op">:</span> α, β</code> = <code class="sourceCode haskell">f<span class="ot"> x ::</span> β[x]</code> where <code class="sourceCode haskell"><span class="ot">x ::</span> α</code></p>
-<section id="function-type-is-just-a-pi-type" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1"><span class="header-section-number">5.1.1</span> function type is just a Pi-type</h3>
+<section id="function-type-is-just-a-pi-type" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1"><span class="header-section-number">6.1.1</span> function type is just a Pi-type</h3>
 <blockquote>
 <p>when <code class="sourceCode haskell">β</code> expanded expression does not include<br />
 bound variable <code class="sourceCode haskell">Π x <span class="op">:</span> α</code> then<br />
@@ -349,8 +367,8 @@ Notice <code>bool</code> is an expression that does not include any bound variab
 </ul>
 </section>
 </section>
-<section id="sigma-type" class="level2" data-number="5.2">
-<h2 data-number="5.2"><span class="header-section-number">5.2</span> Sigma Type</h2>
+<section id="sigma-type" class="level2" data-number="6.2">
+<h2 data-number="6.2"><span class="header-section-number">6.2</span> Sigma Type</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>def f (α <span class="op">:</span> <span class="dt">Type</span>) (β <span class="op">:</span> α → <span class="dt">Type</span>) (a <span class="op">:</span> α) (b <span class="op">:</span> β a) <span class="op">:</span> (a <span class="op">:</span> α) × β a <span class="op">:=</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  ⟨a, b⟩</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>def h1 (x <span class="op">:</span> <span class="dt">Nat</span>) <span class="op">:</span> <span class="dt">Nat</span> <span class="op">:=</span></span>
@@ -364,10 +382,10 @@ Notice <code>bool</code> is an expression that does not include any bound variab
 <code class="sourceCode haskell"><span class="dt">Type</span> <span class="ot">-&gt;</span> (α → <span class="dt">Type</span>) <span class="ot">-&gt;</span> α <span class="ot">-&gt;</span> β a <span class="ot">-&gt;</span> ((a <span class="op">:</span> α) × β a)</code></p>
 </section>
 </section>
-<section id="notation" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Notation</h1>
-<section id="curly-vs-smooth-parenthesis" class="level2" data-number="6.1">
-<h2 data-number="6.1"><span class="header-section-number">6.1</span> Curly vs Smooth Parenthesis</h2>
+<section id="notation" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Notation</h1>
+<section id="curly-vs-smooth-parenthesis" class="level2" data-number="7.1">
+<h2 data-number="7.1"><span class="header-section-number">7.1</span> Curly vs Smooth Parenthesis</h2>
 <ul>
 <li>Curly <code>{a: Type u}</code> stands for notational shortcuts aka implicit arguments that do not need to be written</li>
 <li>Smooth <code>(a: Type u)</code> stands for explicit aka we need to write out the type as an argument</li>
@@ -409,8 +427,8 @@ Notice <code>bool</code> is an expression that does not include any bound variab
 <span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="pp">#check consExplicit nat 4 (nilExplicit nat) --ok</span></span></code></pre></div>
 </section>
-<section id="pi-type-forall-parenthesis" class="level2" data-number="6.2">
-<h2 data-number="6.2"><span class="header-section-number">6.2</span> Pi-type, forall, parenthesis</h2>
+<section id="pi-type-forall-parenthesis" class="level2" data-number="7.2">
+<h2 data-number="7.2"><span class="header-section-number">7.2</span> Pi-type, forall, parenthesis</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- notice that we Pi-type == forall or we can push the quantifier into a parenthesis. </span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- three cons below are the same.</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>constant consA <span class="op">:</span>  Πa  <span class="op">:</span> <span class="dt">Type</span> u , a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a</span>
@@ -420,8 +438,8 @@ Notice <code>bool</code> is an expression that does not include any bound variab
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>constant consE (a <span class="op">:</span> <span class="dt">Type</span> u) <span class="op">:</span> a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a</span></code></pre></div>
 </section>
 </section>
-<section id="simple-interpreter" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Simple interpreter</h1>
+<section id="simple-interpreter" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Simple interpreter</h1>
 <div class="sourceCode" id="cb8"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>section basiclang</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>inductive <span class="dt">Term</span> <span class="op">:</span> <span class="dt">Type</span> </span>
@@ -494,8 +512,8 @@ Notice <code>bool</code> is an expression that does not include any bound variab
 <span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="pp">#reduce (λx, x + 2)5</span></span></code></pre></div>
 </section>
-<section id="understanding-coq" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Understanding Coq</h1>
+<section id="understanding-coq" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Understanding Coq</h1>
 <p>What below means is that <code>pairn :: nat -&gt; nat -&gt; natprod</code> aka <code>pairn (n1 n2) :: natprod</code></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(<span class="op">*</span> correct version <span class="op">*</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Inductive</span> natprod <span class="op">:</span> <span class="dt">Type</span> <span class="op">:=</span></span>
@@ -531,7 +549,7 @@ Notice <code>bool</code> is an expression that does not include any bound variab
             //Structure:
             // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
-            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
 
             const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
@@ -591,7 +609,7 @@ Notice <code>bool</code> is an expression that does not include any bound variab
         <!-- CODE TAB END ---->
 
         <!-- MATH JAX START -------------------------------------- -->
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
 

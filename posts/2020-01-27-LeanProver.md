@@ -22,6 +22,14 @@ Most of the time, implication and universal quantifier are treated the same.
 
 ![](/images/Notes_220119_214554.jpg){ width=50% }
 
+# rw
+
+* given `h: a*b=b*a`  
+* `rw h` means attempt to transform consequent using`a*b->b*a`  
+  * `⊢a*b+c` turns into `⊢b*a+c`
+* `rw <- h` means `b*a->a*b`
+  * `⊢b*a+c` turns into `⊢a*b+c`
+   
 ## Example
 
 ```bash

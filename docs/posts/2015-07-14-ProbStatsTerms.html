@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Probability and Stats Terminology</title>
+        <title>Jason Yang - Measure theory and probability</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,7 +103,7 @@
         </div>
 
         <div id="content">
-            <h1>Probability and Stats Terminology</h1>
+            <h1>Measure theory and probability</h1>
             
 
             <div class="info">
@@ -116,16 +116,83 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#terms"><span class="toc-section-number">1</span> Terms</a>
+<li><a href="#intro"><span class="toc-section-number">1</span> Intro</a>
 <ul>
-<li><a href="#z-test-t-test-anova"><span class="toc-section-number">1.1</span> Z-test T-test ANOVA</a></li>
+<li><a href="#borel-sigma-algebra-and-closure"><span class="toc-section-number">1.1</span> Borel-Sigma algebra and closure</a></li>
 </ul></li>
-<li><a href="#clt"><span class="toc-section-number">2</span> CLT</a></li>
-<li><a href="#distributions"><span class="toc-section-number">3</span> Distributions</a></li>
+<li><a href="#what-is-a-measure"><span class="toc-section-number">2</span> What is a measure</a></li>
+<li><a href="#terms"><span class="toc-section-number">3</span> Terms</a>
+<ul>
+<li><a href="#z-test-t-test-anova"><span class="toc-section-number">3.1</span> Z-test T-test ANOVA</a></li>
+</ul></li>
+<li><a href="#clt"><span class="toc-section-number">4</span> CLT</a></li>
+<li><a href="#distributions"><span class="toc-section-number">5</span> Distributions</a></li>
 </ul></div>
 <p><a href="http://www.acsu.buffalo.edu/~adamcunn/probability/probability.html">Probability playground</a></p>
-<section id="terms" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Terms</h1>
+<section id="intro" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Intro</h1>
+<ul>
+<li>σ-algebra of some set <span class="math inline">\(X\)</span> are the set of measurable subsets of <span class="math inline">\(X\)</span>
+<ul>
+<li>We called these measurable subsets of <span class="math inline">\(X\)</span> intervals or measurable sets.</li>
+</ul></li>
+<li>We can have different perspectives aka different σ-algebras for the same set <span class="math inline">\(X\)</span></li>
+</ul>
+<p><span class="math display">\[ X = \{a,b\} \qquad \mathcal{A} \subseteq P(X) \]</span> <span class="math display">\[ X = \mathbb{N} = \{1,2,3,4,5..\} \qquad P(X) = \{\emptyset,\{1,2\},\{1,3\},..\}\tag{example}\]</span> <span class="math display">\[\mathcal{A}= \{\emptyset , \{1\},\{1,3,5\},\{1,3,5,7\}..\}\]</span></p>
+<ul>
+<li>Instead of having a measure for the entire powerset of natural numbers <span class="math inline">\(P(X)\)</span>,<br />
+we choose the set containing measurable sets of odd numbers <span class="math inline">\(\mathcal{A}\)</span></li>
+</ul>
+<p>A trivial smallest σ-algebra is <span class="math inline">\(\mathcal{A} = \{\emptyset , X\}\)</span><br />
+A trivial largest σ-algebra is <span class="math inline">\(\mathcal{A} = P(X)\)</span></p>
+<p><span class="math inline">\(\mathcal{A}\)</span> is a σ-algebra aka <code>A :: σ-algebra(X)</code></p>
+<ul>
+<li>each elements in a σ-algebra,<span class="math inline">\(\mathcal{A}\)</span> is a subset of <span class="math inline">\(X\)</span>
+<ul>
+<li>each of these subsets of <span class="math inline">\(X\)</span> are called <strong>measurable sets</strong>
+<ul>
+<li>ex. <span class="math inline">\(\emptyset\)</span> is a measurable set, <span class="math inline">\(X\)</span> is a measurable set, <span class="math inline">\(\{1\}\)</span> is a measurable set, <span class="math inline">\(\{1,3,5\}\)</span> is a measurable set</li>
+<li>A σ-algebra is some set <span class="math inline">\(\mathcal{A}\)</span> containing the listed measurable sets above</li>
+</ul></li>
+</ul></li>
+<li>Rules of σ-algebra
+<ol type="1">
+<li><span class="math inline">\(\{\emptyset,X\} \in \mathcal{A}\)</span>
+<ul>
+<li>All σ-algebras must contain the empty set and the base set</li>
+</ul></li>
+<li><span class="math inline">\(L \in \mathcal{A} \rightarrow X/L \in \mathcal{A}\)</span>
+<ul>
+<li>Each measurable set <span class="math inline">\(L\)</span> has a complement measurable set
+<ul>
+<li>if <span class="math inline">\(X=\{1,2,3\}, L=\{2\}\)</span> then <span class="math inline">\(X/L=\{1,3\}\)</span> must also be in the σ-algebra</li>
+<li>to build a a σ-algebra, we can just break <span class="math inline">\(X\)</span> into two subsets then add these measurable sets to <span class="math inline">\(\mathcal{A}\)</span></li>
+</ul></li>
+</ul></li>
+<li><span class="math inline">\(for\ L_i \in \mathcal{A}, \bigcup\limits_{i \in \mathbb{N}}^{\infty} L_i \in \mathcal{A}\)</span>
+<ul>
+<li>Obviously, If we merged all the measurable sets <span class="math inline">\(L_i\)</span> inside a σ-algebra together, the output measurable set would still be in the same σ-algebra.</li>
+</ul></li>
+</ol></li>
+</ul>
+<p>For a given set we may have multiple perspectives of what can be measured aka we can have multiple σ-algebras <span class="math inline">\(\mathcal{A}\)</span> on <span class="math inline">\(X\)</span>.</p>
+<section id="borel-sigma-algebra-and-closure" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Borel-Sigma algebra and closure</h2>
+<p><span class="math display">\[X=\{1,2,3\} \qquad \mathcal{M}=\{\{2\}\}\]</span> <span class="math display">\[ \mathcal{M} \cup \{\emptyset, X\} \tag{add empty and base set}\]</span> <span class="math display">\[ X/\{2\} = \{1,2\} \quad \sigma (\mathcal{M}) = \mathcal{M}\cup \{\emptyset, X\} \cup \{\{1,2\}\} \tag{add complement of measurable sets}\]</span> Given a subset of <span class="math inline">\(P(X), \mathcal{M}\)</span> which is not a σ-algebra, what is the minimal measurable sets we need to add to turn it into a σ-algebra? <span class="math inline">\(\sigma (\mathcal{M})\)</span> is the result and is called the Borel-Sigma algebra.</p>
+<ul>
+<li>Let <span class="math inline">\((X,\mathcal{M})\)</span> be a topological space or a metric space (more importantly <span class="math inline">\(\mathcal{T}\)</span> has open sets)
+<ul>
+<li>then <span class="math inline">\(B(X) := \sigma (\mathcal{M})\)</span> is the Borel-Sigma algebra generated by open sets</li>
+<li><span class="math inline">\(\sigma (\mathcal{M})\)</span> is the σ-algebra closure of <span class="math inline">\(\mathcal{M}\)</span></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="what-is-a-measure" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> What is a measure</h1>
+</section>
+<section id="terms" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Terms</h1>
 <ul>
 <li>Probability space is <span class="math inline">\((\Omega , \mathcal{F} , P)\)</span></li>
 <li><span class="math inline">\(X: \Omega \rightarrow \mathbb{R}^n\)</span></li>
@@ -172,11 +239,11 @@
 <ul>
 <li><span class="math inline">\(\mu\)</span> mu is the mean<br />
 </li>
-<li><span class="math inline">\(\sigma\)</span> sigma is std (z-score = sigma)</li>
+<li>σ sigma is std (z-score = sigma)</li>
 <li><span class="math inline">\(\sigma^2\)</span> sigma squared is variance</li>
 </ul>
-<section id="z-test-t-test-anova" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> Z-test T-test ANOVA</h2>
+<section id="z-test-t-test-anova" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Z-test T-test ANOVA</h2>
 <ul>
 <li>z-test is closest to normal dist.<br />
 </li>
@@ -201,15 +268,15 @@
 Note these Subsets can come from the same or different populations.</p>
 </section>
 </section>
-<section id="clt" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> CLT</h1>
+<section id="clt" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> CLT</h1>
 <ul>
 <li>no matter what type of distribution the population distribution is, if we sample enough times, the sample distribution AKA the means of all our samplings form a normal distribution.</li>
 <li>The sum of multiple independent random variable converges to a normal dist as the # of variables increases.</li>
 </ul>
 </section>
-<section id="distributions" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Distributions</h1>
+<section id="distributions" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Distributions</h1>
 <ul>
 <li>Bernoulli = LEM in probability
 <ul>
@@ -270,7 +337,7 @@ Note these Subsets can come from the same or different populations.</p>
             //Structure:
             // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
-            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
 
             const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
@@ -330,7 +397,7 @@ Note these Subsets can come from the same or different populations.</p>
         <!-- CODE TAB END ---->
 
         <!-- MATH JAX START -------------------------------------- -->
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
 

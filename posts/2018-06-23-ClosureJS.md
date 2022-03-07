@@ -5,7 +5,7 @@ tags: prog, cloud, frontend
 
 * Closures are not related to , this, bind, or arrow functions.
 
-# Closures = Class
+# Closures is Class
 
 * local env of function is the private scope
 * the return content is the public scope
@@ -94,3 +94,17 @@ let g=f()
 g()
 ```
 
+# Closure and Scope
+
+```rkt
+(define myenv
+  ((λ (x)
+     (λ (y) (+ x y)) )
+   2))
+```
+* `let x = 2 in (λ (y) (+ x y))`  
+  * `let x = ... in` is the closure. 
+  * The lexical environment of the inner lambda`(λ (y) (+ x y))` is the immediate outer lambda which is the closure setting x to 2.
+    * This is also called the **static scope** since we can deduce the environment before running the code just by looking at the immediate outer environment.
+    * In pure languages, a closure is just the inner function of a curried partial applied function.
+      * `outer :: a -> (b -> c)` then `(outer (2::a)) :: b -> c` is the closure

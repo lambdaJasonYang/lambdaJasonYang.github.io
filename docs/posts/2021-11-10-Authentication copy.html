@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=100, initial-scale=0.5">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Authentication OAuth2 SAML</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Authentication OAuth2 SAML</h1>
+            
+
+            <div class="info">
+    Posted on November 10, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#oauth2"><span class="toc-section-number">1</span> Oauth2</a></li>
+<li><a href="#openid-connect"><span class="toc-section-number">2</span> OpenID connect</a></li>
+<li><a href="#authentication-flow-with-jwt-and-bcrypt"><span class="toc-section-number">3</span> Authentication flow with JWT and Bcrypt</a>
+<ul>
+<li><a href="#bcrypt"><span class="toc-section-number">3.1</span> bcrypt</a></li>
+<li><a href="#jwt"><span class="toc-section-number">3.2</span> JWT</a></li>
+<li><a href="#persist-authentication-methods"><span class="toc-section-number">3.3</span> persist authentication methods</a></li>
+</ul></li>
+</ul></div>
+<p>AWS Cognito uses OAuth2</p>
+<p>OAuth2 is a protocol that typically uses JWT</p>
+<section id="oauth2" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Oauth2</h1>
+<p>4 parties: User(Resource Owner) on Browser,<br />
+Leetcode(Client),<br />
+github-auth(Authorization Server),<br />
+github profile db(Resource Server)</p>
+<ol type="1">
+<li>User(Resource Owner) goes to leetcode(Client) website</li>
+<li>User has an account on github-Auth(Authorization Server) and has an github profile data there(Resource Server)</li>
+<li>User(Resource Owner) wants to allow leetcode(Client) to read github profile(Resource Server)</li>
+<li>User(Resource Owner) clicks linkage form on leetcode(Client) then redirects User to login form on github-Auth(Authorization Server) with a packet of data containing{Client_ID, Callback_URI, Scopes/Permissions}.</li>
+<li>User(Resource Owner) logins on github-Auth(Authorization Server)</li>
+<li>User(Resource Owner) is presented with a list of permissions(Scopes presented in step 4) it will allow leetcode(Client) to have access to in the github profile(Resource Server)</li>
+<li>github-Auth(Authorization Server) redirects the User(Resource Owner) back to leetcode webpage(Client) using the Callback_URI(presented in step 4) along with a temporary {Authorization_Code}</li>
+<li>Leetcode(Client) contacts github-Auth(Authorization Server) directly w/o needing the User’s browser. Leetcode(Client) sends {Client_ID,Client_Secret, Authorization_Code} to github-Auth.</li>
+<li>github-Auth(Authorization Server) verifies the data and responds to Leetcode(Client) with an {Access Token}.</li>
+<li>Leetcode(Client) can now access the User(Resource Owner) specific data on their github profile(Resource Server) using the {Access Token}</li>
+</ol>
+</section>
+<section id="openid-connect" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> OpenID connect</h1>
+<p>OIDC sits ontop of OAuth2<br />
+OIDC gives a more typical behavior of a login session. OIDC allows a Client(Leetcode) to establish a login session and identity for the User(Resource-Owner).<br />
+When github-auth(Authorization Server) allows OIDC, it is called an <strong>identity provider</strong> since it provide identity information about the User(Resource-Owner) back to the Client(Leetcode).</p>
+<p>OIDC allows one login to github-auth(Authorization Server) to be used for multiple Client/Apps.<br />
+Eg. Using gmail to sign into multiple apps. This single login is called <strong>SSO</strong> Single-Sign-On</p>
+<p>OIDC process is same as OAuth except at step 9, it returns {JWT ID token, Access Token}.</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a736b696e706172616d20736861646f77696e672066616c73650a42726f77736572202d3e2057656273697465203a20476574206578616d706c652e636f6d0a57656273697465202d2d3e2042726f777365723a206f6b2c2068657265206973206d792053534c2063657274205c6e636f6e7461696e696e67206d79207075626c69636b65795c6e7369676e6564206279204c657473456e63727970740a6e6f7465206f7665722042726f777365720a557365207072652d696e7374616c6c6564204c657473456e63727970740a5075626c69634b657920696e2042726f7773657220746f0a766572696679207468652053534c2063657274207369676e6564207573696e670a4c657473456e6372797074277320507269766174654b65790a656e646e6f74650a42726f77736572202d3e20576562736974653a2049207472757374204c657473456e63727970745c6e5468657265666f7265204920747275737420796f757220636572742e5c6e49206d6164652061205365637265744b6579205c6e656e6372797074656420697420772f20796f7572205075626c69634b65790a6e6f7465206f76657220576562736974650a576562736974652063616e2072657665616c200a746865205365637265744b6579200a62792064656372797074696e6720746865206d657373616765200a772f2057656273697465277320507269766174654b6579200a656e646e6f74650a57656273697465203c2d3e2042726f777365723a20436f6d6d756e69636174696f6e20772f205365637265744b65790a40656e64756d6c"></figure>
+</section>
+<section id="authentication-flow-with-jwt-and-bcrypt" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Authentication flow with JWT and Bcrypt</h1>
+<ul>
+<li>Sign up flow</li>
+<li>client –{user,pass}–&gt; –bcrypt(pass)–&gt; Save bcrypt(pass)+user to DB</li>
+<li>client &lt;–{JWT}– Server</li>
+</ul>
+<!--  -->
+<ul>
+<li>Login flow</li>
+<li>client input pass —-&gt; compare bcrypt(pass)+user with DB</li>
+<li>Server &lt;–{JWT}– Server <!--  --></li>
+</ul>
+<section id="bcrypt" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> bcrypt</h2>
+<ul>
+<li>hash password using bcrypt</li>
+<li>bcrypt can increase hash rounds (salt-rounds), slowing time, which resists brute force hash collision attack</li>
+</ul>
+</section>
+<section id="jwt" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> JWT</h2>
+<ul>
+<li>Header - base64</li>
+<li>Payload</li>
+<li>Signature</li>
+</ul>
+</section>
+<section id="persist-authentication-methods" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> persist authentication methods</h2>
+<ul>
+<li>Browser storage
+<ul>
+<li>local storage</li>
+</ul></li>
+<li>Cookie
+<ul>
+<li>Add “secure”, “httpOnly” “SameSite”</li>
+</ul></li>
+</ul>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+            //Structure:
+            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+
+            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+
+            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
+            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
+            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
+
+            const getCodeBlocks = (grouplabel) => {
+                //return list of codeblocks associated to a single group label
+                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            }
+
+            const showSingleCode = (codeblock,subgrp) => { 
+                //make single codeblock visible
+                codeblock.style.display="block";
+                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
+                nonChosen.map((e)=>(e.style.display="none"));
+            }
+
+            const makeBtn = (codeblock,subgrp) => {
+                //make button for a single codeblock
+                const newbutton = document.createElement("button");
+                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.addEventListener('click', ()=>{
+                    showSingleCode(codeblock,subgrp);
+                });
+                return newbutton;
+            }
+
+            const showAll = (subgrp) => {
+                //make all codeblocks visible
+            subgrp.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (subgrp) => {
+                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+
+                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
+                btngrp.map((e)=>{
+                    leader.insertAdjacentElement('beforebegin',e);
+                    });
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+            
+            //below code is performing actual behavior, the above code are just functions
+            grouplabels.map((grouplabel) => {
+                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+                buildCodeTab(groupOfCodeblocks);
+                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

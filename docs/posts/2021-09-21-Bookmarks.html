@@ -115,6 +115,9 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>
     
 </div>
+<p>zerobin.net</p>
+<p>https://cs.pomona.edu/~michael/</p>
+<p>http://statistics.zone/</p>
 <p>https://swish.swi-prolog.org/example/render_svgtree.swinb</p>
 <p>https://www.cip.ifi.lmu.de/~grinberg/algebra/algebra.html</p>
 <p><a href="https://habr.com/en/company/postgrespro/blog/649499/">postgres</a></p>
@@ -232,6 +235,7 @@
 <section id="shaders" class="level1" data-number="16">
 <h1 data-number="16"><span class="header-section-number">16</span> Shaders</h1>
 <p>thebookofshaders.com</p>
+<p>http://www.courses.physics.helsinki.fi/fys/nucphys/</p>
 </section>
 
         </div>
@@ -254,7 +258,7 @@
             //Structure:
             // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
-            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
 
             const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
@@ -314,7 +318,7 @@
         <!-- CODE TAB END ---->
 
         <!-- MATH JAX START -------------------------------------- -->
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
 

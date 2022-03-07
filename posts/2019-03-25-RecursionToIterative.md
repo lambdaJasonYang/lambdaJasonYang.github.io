@@ -61,8 +61,9 @@ def fac4(n):
     r = facInc(r,x)
     x = x-1
   return r
+```
 
-####
+```py
 
 def foo(x):
   if x > 1:
@@ -95,7 +96,9 @@ def foo1(x):
     xa = xa + 7
     r = fooinc(x,r)
   return r
-#####################
+```
+
+```py
 
 def sqrlist(x):
   if x == []:
@@ -122,4 +125,19 @@ def sqrlist0(x):
     stack = stack[1:]
     r = [xa[0]*xa[0]]+r
   return r
+```
+
+```py
+stack = []
+
+stack.append(5)
+base = 1
+while stack != []:
+    arg = stack.pop()
+    if arg == 1:
+        break
+    base = arg*base
+    IH = arg - 1
+    stack.append(IH)
+print(base)
 ```

@@ -121,15 +121,19 @@
         </li>
     
         <li>
-            <a href="../posts/2021-08-10-DomTree.html">Dom Tree and rendering</a> 
-        </li>
-    
-        <li>
             <a href="../posts/2021-08-10-Callcc.html">Callcc</a> 
         </li>
     
         <li>
             <a href="../posts/2021-08-10-CSS.html">CSS</a> 
+        </li>
+    
+        <li>
+            <a href="../posts/2021-03-23-ReactDomTree.html">Dom Tree rendering in VanillaJS and React</a> 
+        </li>
+    
+        <li>
+            <a href="../posts/2021-03-23-QuickReactclass.html">Quick React class</a> 
         </li>
     
         <li>
@@ -182,7 +186,7 @@
             //Structure:
             // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
-            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
 
             const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
@@ -242,7 +246,7 @@
         <!-- CODE TAB END ---->
 
         <!-- MATH JAX START -------------------------------------- -->
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
 

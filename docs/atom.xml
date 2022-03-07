@@ -227,6 +227,138 @@ extensions that show “previews” won’t work like Lean</p>
 ]]></summary>
 </entry>
 <entry>
+    <title>Excursions with plotting big data</title>
+    <link href="https://userjy.github.io/posts/2021-11-10-BigDataPlots.html" />
+    <id>https://userjy.github.io/posts/2021-11-10-BigDataPlots.html</id>
+    <published>2021-11-10T00:00:00Z</published>
+    <updated>2021-11-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on November 10, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#tensorfail-extraction"><span class="toc-section-number">1</span> Tensorfail extraction</a></li>
+<li><a href="#plotting-competitors"><span class="toc-section-number">2</span> Plotting Competitors</a>
+<ul>
+<li><a href="#simple-line-graph"><span class="toc-section-number">2.1</span> Simple line graph</a></li>
+</ul></li>
+</ul></div>
+<section id="tensorfail-extraction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Tensorfail extraction</h1>
+<ul>
+<li>Is tf.js a viable numerical library for extract and cleaning data on browser side?
+<ul>
+<li>Big no, everything turns into floating points and promise objects.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> range <span class="op">=</span> n <span class="kw">=&gt;</span> [<span class="op">...</span><span class="bu">Array</span>(n)<span class="op">.</span><span class="fu">keys</span>()]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> main <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> rawdata <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">&quot;https://www.bigdata....&quot;</span>)<span class="op">.</span><span class="fu">then</span>(response <span class="kw">=&gt;</span> response<span class="op">.</span><span class="fu">text</span>())</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> inter <span class="op">=</span> <span class="bu">window</span><span class="op">.</span><span class="fu">atob</span>(rawdata)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> jsondata <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(inter)[<span class="st">&quot;candles&quot;</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>          <span class="co">//const yaxis = jsondata.map(x =&gt; x[&quot;close&quot;])</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>          <span class="co">//const xaxis = range(yaxis.length)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>          <span class="co">//tensorfail attempt at extract x and y data</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> tfDF <span class="op">=</span> tf<span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="fu">array</span>(jsondata)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>          <span class="co">//Even logging the output requires a promise</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>          <span class="cf">await</span> tfDF<span class="op">.</span><span class="fu">take</span>(<span class="dv">1</span>)<span class="op">.</span><span class="fu">forEachAsync</span>(e <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(e))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>          <span class="co">//failed to even extract closing price</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> closing <span class="op">=</span> <span class="cf">await</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            tfDF<span class="op">.</span><span class="fu">mapAsync</span>(x <span class="kw">=&gt;</span> <span class="kw">new</span> <span class="bu">Promise</span>(<span class="kw">function</span>(resolve){</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>              <span class="pp">setTimeout</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                <span class="fu">resolve</span>(x[<span class="st">&quot;close&quot;</span>])<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>              }<span class="op">,</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">random</span>()<span class="op">*</span><span class="dv">1000</span> <span class="op">+</span> <span class="dv">500</span>)<span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            }))<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>          <span class="co">//adds small floating point error</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> tf_xaxis <span class="op">=</span> <span class="cf">await</span> tf<span class="op">.</span><span class="fu">linspace</span>(<span class="dv">0</span><span class="op">,</span>closing<span class="op">.</span><span class="at">size</span><span class="op">,</span>closing<span class="op">.</span><span class="at">size</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> xaxis <span class="op">=</span> <span class="cf">await</span> tf_xaxis<span class="op">.</span><span class="fu">array</span>() <span class="co">//conversion to array is a promise</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    </span></code></pre></div>
+</section>
+<section id="plotting-competitors" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Plotting Competitors</h1>
+<ul>
+<li>Echarts</li>
+<li>Chartjs</li>
+<li>uplot</li>
+</ul>
+<section id="simple-line-graph" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Simple line graph</h2>
+<ul>
+<li>Echarts - pass</li>
+<li>Chartjs - failed</li>
+<li>uplot - pass</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> range <span class="op">=</span> n <span class="kw">=&gt;</span> [<span class="op">...</span><span class="bu">Array</span>(n)<span class="op">.</span><span class="fu">keys</span>()]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> main <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> rawdata <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">&quot;https://raw.githubusercontent.com/userJY/stuff/main/example&quot;</span>)<span class="op">.</span><span class="fu">then</span>(response <span class="kw">=&gt;</span> response<span class="op">.</span><span class="fu">text</span>())</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> inter <span class="op">=</span> <span class="bu">window</span><span class="op">.</span><span class="fu">atob</span>(rawdata)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> jsondata <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(inter)[<span class="st">&quot;candles&quot;</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> ydata <span class="op">=</span> jsondata<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> x[<span class="st">&quot;close&quot;</span>])</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>          <span class="kw">const</span> xdata <span class="op">=</span> <span class="fu">range</span>(ydata<span class="op">.</span><span class="at">length</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>          <span class="kw">let</span> chartDom <span class="op">=</span>  <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&#39;main&#39;</span>)<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>          <span class="kw">let</span> myChart <span class="op">=</span>  echarts<span class="op">.</span><span class="fu">init</span>(chartDom)<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>          <span class="kw">let</span> option<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>          option <span class="op">=</span>  {</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            <span class="dt">xAxis</span><span class="op">:</span> {</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>              <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;category&#39;</span><span class="op">,</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>              <span class="dt">data</span><span class="op">:</span> xdata</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            }<span class="op">,</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            <span class="dt">yAxis</span><span class="op">:</span> {</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>              <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;value&#39;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            }<span class="op">,</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="dt">series</span><span class="op">:</span> [</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>              {</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                <span class="dt">data</span><span class="op">:</span> ydata<span class="op">,</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;line&#39;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>              }</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            ]<span class="op">,</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            <span class="dt">tooltip</span><span class="op">:</span> {</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>              <span class="dt">trigger</span><span class="op">:</span> <span class="st">&#39;axis&#39;</span><span class="op">,</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>              <span class="dt">triggerOn</span><span class="op">:</span> <span class="st">&#39;mousemove|click&#39;</span><span class="op">,</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>              <span class="dt">axisPointer</span><span class="op">:</span> {</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;cross&#39;</span><span class="op">,</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                <span class="dt">animation</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                <span class="dt">label</span><span class="op">:</span> {</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">backgroundColor</span><span class="op">:</span> <span class="st">&#39;#ccc&#39;</span><span class="op">,</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">borderColor</span><span class="op">:</span> <span class="st">&#39;#aaa&#39;</span><span class="op">,</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">borderWidth</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">shadowBlur</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">shadowOffsetX</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">shadowOffsetY</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">color</span><span class="op">:</span> <span class="st">&#39;#222&#39;</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>                }</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>              }<span class="op">,</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>              <span class="dt">formatter</span><span class="op">:</span> <span class="kw">function</span> (params) {</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>                <span class="co">//console.log(params)</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> (</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>                  params[<span class="dv">0</span>]<span class="op">.</span><span class="at">name</span> <span class="op">+</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&#39;&lt;br /&gt;&#39;</span> <span class="op">+</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>                  params[<span class="dv">0</span>]<span class="op">.</span><span class="at">value</span> <span class="op">+</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&#39;%&#39;</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>                )<span class="op">;</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>              }</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>            }<span class="op">,</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>          }<span class="op">;</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a> option <span class="op">&amp;&amp;</span>  myChart<span class="op">.</span><span class="fu">setOption</span>(option)<span class="op">;</span></span></code></pre></div>
+<p>```js</p>
+</section>
+</section>
+]]></summary>
+</entry>
+<entry>
     <title>Authentication OAuth2 SAML</title>
     <link href="https://userjy.github.io/posts/2021-11-10-Authentication.html" />
     <id>https://userjy.github.io/posts/2021-11-10-Authentication.html</id>
@@ -986,104 +1118,13 @@ X = \begin{bmatrix}
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert Series of json to Dataframe</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>stocks[<span class="st">&quot;datetime&quot;</span>] <span class="op">=</span>  pd.to_datetime(stocks[<span class="st">&quot;datetime&quot;</span>],origin<span class="op">=</span><span class="st">&quot;unix&quot;</span>, unit<span class="op">=</span><span class="st">&quot;ms&quot;</span>)</span></code></pre></div>
-</section>
-]]></summary>
-</entry>
-<entry>
-    <title>Table Of Content in Hakyll</title>
-    <link href="https://userjy.github.io/posts/2021-10-01-TableOfContent.html" />
-    <id>https://userjy.github.io/posts/2021-10-01-TableOfContent.html</id>
-    <published>2021-10-01T00:00:00Z</published>
-    <updated>2021-10-01T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on October  1, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;tech&#39;." href="/tags/tech.html">tech</a>, <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>, <a title="All pages tagged &#39;HakyllSetupSeries&#39;." href="/tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
-    
-</div>
-<div id="TOC"><ul>
-<li><a href="#showcase"><span class="toc-section-number">1</span> Showcase</a></li>
-<li><a href="#setup"><span class="toc-section-number">2</span> Setup</a></li>
-</ul></div>
-<p><strong>Hakyll Setup Series</strong></p>
-<ol type="1">
-<li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
-<li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
-<li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
-<li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
-<li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
-<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
-<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
-</ol>
-<section id="showcase" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Showcase</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> TableOfContent</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">tags:</span><span class="co"> tech, prog, HakyllSetupSeries</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> y</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>...content body...</span></code></pre></div>
-<p>Any value (in our case <code class="sourceCode markdown">y</code>) given to <code class="sourceCode markdown">toc</code> metafield activates the table of content.</p>
-</section>
-<section id="setup" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Setup</h1>
-<div class="sourceCode" id="cb2" data-filename="site.hs"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">--Step 3: Setup WriterOptions</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ot">writeMathjaxOptions ::</span> <span class="dt">WriterOptions</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">--writeMathjaxOptions = defaultHakyllWriterOptions</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>writeMathjaxOptions <span class="ot">=</span> defaultHakyllWriterOptions </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                {          </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                    writerSectionDivs <span class="ot">=</span> <span class="dt">True</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                    ,writerNumberSections  <span class="ot">=</span> <span class="dt">True</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                    ,writerColumns <span class="ot">=</span> <span class="dv">130</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                    , writerTableOfContents <span class="ot">=</span> <span class="dt">True</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                   , writerTOCDepth        <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                   , writerHTMLMathMethod <span class="ot">=</span> <span class="dt">MathJax</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                }</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">---------------------------------------------------TOC</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ot">tocTemplate ::</span> <span class="dt">Text.Pandoc.Template</span> <span class="dt">Data.Text.Text</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>tocTemplate <span class="ot">=</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">either</span> <span class="fu">error</span> <span class="fu">id</span> <span class="op">$</span> <span class="fu">either</span> (<span class="fu">error</span> <span class="op">.</span> <span class="fu">show</span>) <span class="fu">id</span> <span class="op">$</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    runPure <span class="op">$</span> runWithDefaultPartials <span class="op">$</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    compileTemplate <span class="st">&quot;&quot;</span> <span class="st">&quot;&lt;div id=\&quot;TOC\&quot;&gt;$toc$&lt;/div&gt;\n$body$&quot;</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ot">writeTOCMathjaxOptions ::</span> <span class="dt">WriterOptions</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>writeTOCMathjaxOptions <span class="ot">=</span> writeMathjaxOptions{</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                   </span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                    writerTemplate        <span class="ot">=</span> <span class="dt">Just</span> tocTemplate</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">---------------------------------------------------</span><span class="re">END</span><span class="co"> TOC</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co">--Step 4: Build the compiler using the ReaderOption and Writer Option from Step 2, 3.</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="ot">mathJaxAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>mathJaxAddedCompiler <span class="ot">=</span> pandocCompilerWithTransform readMathjaxOptions writeTOCMathjaxOptions addToCodeBlock</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co">--Step 5: Replace the line &quot;compile $ pandocCompiler&quot; under &quot;match &quot;posts/*&quot; $ do&quot; with </span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co">--&quot;compiler $ mathJaxAddedCompiler&quot;</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">--exclude Table of Content</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ot">mathJaxAddedCompilerExTOC ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>mathJaxAddedCompilerExTOC <span class="ot">=</span> pandocCompilerWithTransform readMathjaxOptions writeMathjaxOptions addToCodeBlock</span></code></pre></div>
-<div class="sourceCode" id="cb3" data-filename="site.hs"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    match <span class="st">&quot;posts/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        compile <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="co">--Check TOC metadata field filled START</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            ident <span class="ot">&lt;-</span> getUnderlying                                 </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            toc   <span class="ot">&lt;-</span> getMetadataField ident <span class="st">&quot;toc&quot;</span>             </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="kw">let</span> chosenCompiler <span class="ot">=</span> <span class="kw">case</span> toc <span class="kw">of</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                    <span class="dt">Nothing</span> <span class="ot">-&gt;</span> mathJaxAddedCompilerExTOC</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                    <span class="dt">Just</span> _ <span class="ot">-&gt;</span> mathJaxAddedCompiler                        </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            <span class="co">--Check TOC metadata field filled </span><span class="re">END</span><span class="co"> </span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            chosenCompiler</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    (postCtxWithTags tags)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;content&quot;</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> (postCtxWithTags tags)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> relativizeUrls</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bleh <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> rawdata <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">&quot;https://api.td...&quot;</span>)<span class="op">.</span><span class="fu">then</span>(response <span class="kw">=&gt;</span> response<span class="op">.</span><span class="fu">text</span>())</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> inter <span class="op">=</span> <span class="bu">window</span><span class="op">.</span><span class="fu">atob</span>(rawdata)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> jsondata <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(inter)[<span class="st">&quot;candles&quot;</span>]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> tfdataframe <span class="op">=</span> tf<span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="fu">array</span>(jsondata)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 ]]></summary>
 </entry>

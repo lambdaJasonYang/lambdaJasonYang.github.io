@@ -43,3 +43,28 @@ If data.body is a readable stream, you first have to convert it to
 Know that .json() returns a promise so you have to pass it again
 
 const res = fetch(`https://bleh.com/examples/data/asset/data/tempdata.json`,{mode: "no-cors"}).then((re)=>{return re.json()}).then(response => {console.log(response)})
+
+# Python arrays and references
+
+```py
+a = [5]
+b = a
+b = [3]
+print(a) #[3]
+```
+
+```py
+a = [5]
+b = a
+b = b + [3]
+print(a) #[3]
+```
+
+```py
+a = [5]
+b = a
+b = b.append(3)
+print(a) #[5,3]
+```
+
+Why is the last case different?

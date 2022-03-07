@@ -118,8 +118,8 @@
 <ul>
 <li>Closures are not related to , this, bind, or arrow functions.</li>
 </ul>
-<section id="closures-class" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Closures = Class</h1>
+<section id="closures-is-class" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Closures is Class</h1>
 <ul>
 <li>local env of function is the private scope</li>
 <li>the return content is the public scope</li>
@@ -195,6 +195,27 @@
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> g<span class="op">=</span><span class="fu">f</span>()</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">g</span>()</span></code></pre></div>
 </section>
+<section id="closure-and-scope" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Closure and Scope</h1>
+<pre class="rkt"><code>(define myenv
+  ((λ (x)
+     (λ (y) (+ x y)) )
+   2))</code></pre>
+<ul>
+<li><code>let x = 2 in (λ (y) (+ x y))</code>
+<ul>
+<li><code>let x = ... in</code> is the closure.</li>
+<li>The lexical environment of the inner lambda<code>(λ (y) (+ x y))</code> is the immediate outer lambda which is the closure setting x to 2.
+<ul>
+<li>This is also called the <strong>static scope</strong> since we can deduce the environment before running the code just by looking at the immediate outer environment.</li>
+<li>In pure languages, a closure is just the inner function of a curried partial applied function.
+<ul>
+<li><code>outer :: a -&gt; (b -&gt; c)</code> then <code>(outer (2::a)) :: b -&gt; c</code> is the closure</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
 
         </div>
         <div id="footer">
@@ -216,7 +237,7 @@
             //Structure:
             // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
 
-            const AllBlocksPre = document.getElementsByClassName("sourceCode");
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
 
             const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
@@ -276,7 +297,7 @@
         <!-- CODE TAB END ---->
 
         <!-- MATH JAX START -------------------------------------- -->
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
 

@@ -327,7 +327,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     background-color: var(--bg-primary); /* Black */
     left: 0;
-    transition: width 600ms ease;
+    transition: width 100ms ease;
   }
   
   /* The navigation menu links */
@@ -386,7 +386,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   
   .logo svg {
     transform: rotate(0deg);
-    transition: 600ms;
+    transition: 100ms;
   }
   
   .logo-text
@@ -394,7 +394,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     display: inline;
     position: absolute;
     left: -999px;
-    transition: 600ms;
+    transition: 100ms;
   }
 
   
@@ -410,7 +410,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     color: #a40000;
     text-decoration: none;
     filter: grayscale(100%) opacity(0.7);
-    transition: 600ms;
+    transition: 100ms;
   }
   .nav-link:hover {
     filter: grayscale(0%) opacity(1);

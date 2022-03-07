@@ -94,5 +94,8 @@ jobs:
            git config user.name github-actions
            git config user.email github-actions@github.com
            git add .
-           git diff --exit-code || git commit -am "Autobuild Hakyll site github action commit"
-           
+           if ! git diff-index --quiet HEAD --; then
+              git commit -m "Autobuild Hakyll site github action commit"
+              git push
+              echo "pushing changes"
+           fi           
