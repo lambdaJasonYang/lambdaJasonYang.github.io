@@ -121,66 +121,83 @@
 <li><a href="#layers-of-types"><span class="toc-section-number">3</span> Layers of types</a></li>
 <li><a href="#section"><span class="toc-section-number">4</span> </a></li>
 </ul></div>
+<p>inductive CrazyType : blah -&gt; helo -&gt; <strong>ResultantType</strong></p>
+<ul>
+<li><strong>Resultant type</strong> must be a <code>Prop</code> or <code>Type</code>.
+<ul>
+<li>lean prover gives Prop and Type and alias of <code>Sort</code></li>
+<li>All chains of inductive types must eventually terminate at a Prop or Type as the Resultant type.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>inductive blehType <span class="op">:</span> <span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span> <span class="ot">-&gt;</span> <span class="dt">C</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#C is the Resultant type of blehType.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>inductive <span class="dt">C</span> <span class="op">:</span> </span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#check Sort </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">OUTPUT</span><span class="op">&gt;</span> <span class="dt">Prop</span><span class="ot"> ::</span> <span class="dt">Type</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#check Sort 0  </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">OUTPUT</span><span class="op">&gt;</span> <span class="dt">Prop</span><span class="ot"> ::</span> <span class="dt">Type</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#check Sort 1</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">OUTPUT</span><span class="op">&gt;</span> <span class="dt">Type</span><span class="ot"> ::</span> <span class="dt">Type</span> <span class="dv">1</span></span></code></pre></div>
 <section id="syntax-sugar" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Syntax sugar</h1>
 <p>Below is how to construct type <code>and a b</code></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp"># sugared but will error</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">and</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> a → b → <span class="fu">and</span> a b</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp"># unsugared but notice we omit `a b` in `and a b`</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">and</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> a → b → <span class="fu">and</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp"># sugared but will error</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">and</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> a → b → <span class="fu">and</span> a b</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp"># unsugared but notice we omit `a b` in `and a b`</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">and</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> a → b → <span class="fu">and</span></span></code></pre></div>
 </section>
 <section id="logical-system" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> logical system</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>namespace logical_symbols</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">and</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> a → b → <span class="fu">and</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">--sugar for, a -&gt; b -&gt; and a b</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">--says if you have a proof of 'a' and a proof of 'b' then</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">--you can build a proof of 'and a b'</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">or</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro_left  <span class="op">:</span> a → <span class="fu">or</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro_right <span class="op">:</span> b → <span class="fu">or</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>inductive imply ( a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span> </span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro<span class="op">:</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> imply</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>inductive iff (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> (a → b) → (b → a) → iff</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>inductive <span class="dt">Exists</span> {α <span class="op">:</span> <span class="dt">Type</span>} (p <span class="op">:</span> α → <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> ∀a <span class="op">:</span> α, p a → <span class="dt">Exists</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>inductive true <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> true</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>inductive false <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>inductive eq {α <span class="op">:</span> <span class="dt">Type</span>} <span class="op">:</span> α → α → <span class="dt">Prop</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> refl <span class="op">:</span> ∀a <span class="op">:</span> α, eq a a</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>constants <span class="dt">P</span> <span class="dt">Q</span> <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>constant x <span class="op">:</span> <span class="dt">P</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>constant y <span class="op">:</span> <span class="dt">Q</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#check and.intro x y :: and P Q</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#check and P Q :: Prop</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#check P -&gt; P :: Prop</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#check imply P P :: Prop</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">--original lean version</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>example <span class="op">:</span> <span class="dt">P</span> <span class="ot">-&gt;</span> <span class="dt">P</span> <span class="op">:=</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>λ (x<span class="op">:</span><span class="dt">P</span>), x</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">--our custom designed version</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>example <span class="op">:</span> imply <span class="dt">P</span> <span class="dt">P</span> <span class="op">:=</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>imply<span class="op">.</span>intro (λ (x<span class="op">:</span><span class="dt">P</span>), x)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>namespace logical_symbols</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">and</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> a → b → <span class="fu">and</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">--sugar for, a -&gt; b -&gt; and a b</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">--says if you have a proof of 'a' and a proof of 'b' then</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">--you can build a proof of 'and a b'</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">or</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro_left  <span class="op">:</span> a → <span class="fu">or</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro_right <span class="op">:</span> b → <span class="fu">or</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>inductive imply ( a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span> </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro<span class="op">:</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> imply</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>inductive iff (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> (a → b) → (b → a) → iff</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>inductive <span class="dt">Exists</span> {α <span class="op">:</span> <span class="dt">Type</span>} (p <span class="op">:</span> α → <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> ∀a <span class="op">:</span> α, p a → <span class="dt">Exists</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>inductive true <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> true</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>inductive false <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>inductive eq {α <span class="op">:</span> <span class="dt">Type</span>} <span class="op">:</span> α → α → <span class="dt">Prop</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> refl <span class="op">:</span> ∀a <span class="op">:</span> α, eq a a</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>constants <span class="dt">P</span> <span class="dt">Q</span> <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>constant x <span class="op">:</span> <span class="dt">P</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>constant y <span class="op">:</span> <span class="dt">Q</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#check and.intro x y :: and P Q</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#check and P Q :: Prop</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#check P -&gt; P :: Prop</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#check imply P P :: Prop</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">--original lean version</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>example <span class="op">:</span> <span class="dt">P</span> <span class="ot">-&gt;</span> <span class="dt">P</span> <span class="op">:=</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>λ (x<span class="op">:</span><span class="dt">P</span>), x</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">--our custom designed version</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>example <span class="op">:</span> imply <span class="dt">P</span> <span class="dt">P</span> <span class="op">:=</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>imply<span class="op">.</span>intro (λ (x<span class="op">:</span><span class="dt">P</span>), x)</span></code></pre></div>
 <p>Notice we just designed the lean proof system. The constructor <code>imply.intro</code> builds the term aka proof for it’s associated inductive type below</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>inductive imply ( a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro<span class="op">:</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> imply</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>inductive imply ( a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro<span class="op">:</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> imply</span></code></pre></div>
 </section>
 <section id="layers-of-types" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Layers of types</h1>
@@ -204,78 +221,80 @@
 <p><strong>There are 2 layers for Props</strong><br />
 The 1st layer is designing well-formed Proposition.<br />
 The 2nd layer is designing proofs of those Propositions.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>layer 1</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>-------------------------</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    true :: Prop</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>layer 2</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>-------------------------</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>   true.intro :: True</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>layer 1</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>-------------------------</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    true :: Prop</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>layer 2</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>-------------------------</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>   true.intro :: True</span></code></pre></div>
 <p>In layer 1 we build a tree of well-formed propositions which may or may not be provable through the inductive type definitions .</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">and</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">or</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>inductive imply ( a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span> </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>inductive iff (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>inductive <span class="dt">Exists</span> {α <span class="op">:</span> <span class="dt">Type</span>} (p <span class="op">:</span> α → <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>inductive true <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>inductive false <span class="op">:</span> <span class="dt">Prop</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a> P    P    True</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  \  /     /</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>   and   /</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>     \  /</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>     imply</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>imply (and P P) True :: Prop</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">and</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>inductive <span class="fu">or</span> (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>inductive imply ( a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>inductive iff (a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>inductive <span class="dt">Exists</span> {α <span class="op">:</span> <span class="dt">Type</span>} (p <span class="op">:</span> α → <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>inductive true <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="op">..</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>inductive false <span class="op">:</span> <span class="dt">Prop</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a> P    P    True</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  \  /     /</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>   and   /</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>     \  /</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>     imply</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>imply (and P P) True :: Prop</span></code></pre></div>
 <p>In layer 2 we build a tree of proof of the proposition using the term constructors of the inductive types.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp"># Desugared term constructor `imply` to `imply a b`</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>inductive imply ( a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span> </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro<span class="op">:</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> imply a b</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>inductive true <span class="op">:</span> <span class="dt">Prop</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> true</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="dt">Goal</span> is to build a term for <span class="ot">`imply (and P P) true`</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>example <span class="op">:</span> imply (<span class="fu">and</span> <span class="dt">P</span> <span class="dt">P</span>) <span class="op">:=</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>imply<span class="op">.</span>intro (λ(x<span class="op">:</span><span class="fu">and</span> <span class="dt">P</span> <span class="dt">P</span>), true<span class="op">.</span>intro)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      λ (x<span class="op">:</span><span class="fu">and</span> <span class="dt">P</span> <span class="dt">P</span>), true<span class="op">.</span><span class="ot">intro ::</span> (a <span class="ot">-&gt;</span> b)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>   <span class="co">----------------------------------------</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>          imply<span class="op">.</span><span class="ot">intro ::</span> imply a b</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp"># Desugared term constructor `imply` to `imply a b`</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>inductive imply ( a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro<span class="op">:</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> imply a b</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>inductive true <span class="op">:</span> <span class="dt">Prop</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro <span class="op">:</span> true</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="dt">Goal</span> is to build a term for <span class="ot">`imply (and P P) true`</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>example <span class="op">:</span> imply (<span class="fu">and</span> <span class="dt">P</span> <span class="dt">P</span>) <span class="op">:=</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>imply<span class="op">.</span>intro (λ(x<span class="op">:</span><span class="fu">and</span> <span class="dt">P</span> <span class="dt">P</span>), true<span class="op">.</span>intro)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      λ (x<span class="op">:</span><span class="fu">and</span> <span class="dt">P</span> <span class="dt">P</span>), true<span class="op">.</span><span class="ot">intro ::</span> (a <span class="ot">-&gt;</span> b)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>   <span class="co">----------------------------------------</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>          imply<span class="op">.</span><span class="ot">intro ::</span> imply a b</span></code></pre></div>
 <p><span class="math display">\[\cfrac{\cfrac{\square::\mathbb{N} \qquad \square::\mathbb{N}}{\square::Score} \qquad\cfrac{\square::\mathbb{N} \qquad \square::\mathbb{N}}{\square::Score} }{step \square \square :: Prop}\]</span></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>big::ADJ   guy::N  </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a> -------------           </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>   \     /        </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>subj big guy::S   hunts::V</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        \            /</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  -------------------------</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    big guy hunts::SENTENCE</span></code></pre></div>
+<p>But also notice we have to check each type to make sure the chain of types terminate eg.</p>
+<p><span class="math display">\[Score :: ... :: Type\]</span></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>big::ADJ   guy::N  </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a> -------------           </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>   \     /        </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>subj big guy::S   hunts::V</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        \            /</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  -------------------------</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    big guy hunts::SENTENCE</span></code></pre></div>
 </section>
 <section id="section" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> </h1>
-<div class="sourceCode" id="cb12"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Tree is Type formation aka designing a wellformed proposition</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Imp (And P Q) (And P P) :: Prop </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>     Imp</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    /  \</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  And  And</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a> /  \   /  \</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>P   Q   P   P</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>Below is term introduction aka creating a proof. The lambda term below has type </span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>Imp (And P Q) (And P P)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>λ (x:And P Q), And.intro (x.right:P) (x.right:P)  </span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Tree is Type formation aka designing a wellformed proposition</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Imp (And P Q) (And P P) :: Prop </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>     Imp</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    /  \</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  And  And</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> /  \   /  \</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>P   Q   P   P</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>Below is term introduction aka creating a proof. The lambda term below has type </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>Imp (And P Q) (And P P)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>λ (x:And P Q), And.intro (x.right:P) (x.right:P)  </span></code></pre></div>
 <p><span class="math display">\[\cfrac{\cfrac{[P \land Q]^x}{P^{x.right}} \qquad \cfrac{[P \land Q]^x}{P^{x.right}}}{P \land P^{And.intro}}\]</span></p>
 </section>
 
