@@ -120,3 +120,15 @@ Proof: Dim Range + Dim Null
 
 Notice how the 2 cars collapse into the 1 purple truck in the range  
 is given back through the 1 "red mix anti-yellow car" in the null space
+
+
+# Spectral Theorem
+
+* Hermitian operator 
+  * For Real vector space its symmetric matrix
+  * For Complex vector space its symmetric complex conjugate matrix
+  * For Infinite dim vector space its Complex self adjoint 
+* Symmetric matrix means it looks the same when transposed
+* Typically a random matrix has complex and real eigenvalues regardless of elements are only real
+* **Spectral Thm: A Hermitian(symmetric) matrix that can have complex or real elements will always have real eigenvalues**
+  * Eigenvectors are orthogonal

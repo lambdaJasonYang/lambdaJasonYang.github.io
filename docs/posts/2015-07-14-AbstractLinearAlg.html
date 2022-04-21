@@ -123,6 +123,7 @@
 </ul></li>
 <li><a href="#linear-map"><span class="toc-section-number">1</span> Linear Map</a></li>
 <li><a href="#storytime"><span class="toc-section-number">2</span> StoryTime</a></li>
+<li><a href="#spectral-theorem"><span class="toc-section-number">3</span> Spectral Theorem</a></li>
 </ul></div>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6672616d6520224162656c69616e2047726f7570227b0a202020206672616d652047726f75707b0a20202020202020206672616d65204d6f6e6f6964207b0a2020202020202020202020206672616d652053656d6967726f7570207b0a2020202020202020202020206f626a6563742022536574204d22206173205365740a2020202020202020202020206f626a656374202242696e617279204f7065726174696f6e222061732042696e0a2020202020202020202020207d0a2020202020202020202020206f626a65637420226964656e7469747920656c656d656e7422206173204f6e650a2020202020202020202020204f6e65202d2d3e205365740a20202020202020207d0a20202020202020206f626a6563742022696e766572736520656c656d656e74732220617320496e760a2020202020202020496e76202d2d3e205365740a202020207d0a202020206f626a6563742022436f6d6d756e617469746976652220617320436f6d6d0a20202020436f6d6d202d2d3e2042696e0a7d0a0a40656e64756d6c6d6c"></figure>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print vector_space</span></span>
@@ -209,6 +210,23 @@ We can exchange our painted cars for painted trucks.</p>
 <p>Notice how the 2 cars collapse into the 1 purple truck in the range<br />
 is given back through the 1 “red mix anti-yellow car” in the null space</p>
 </section>
+<section id="spectral-theorem" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Spectral Theorem</h1>
+<ul>
+<li>Hermitian operator
+<ul>
+<li>For Real vector space its symmetric matrix</li>
+<li>For Complex vector space its symmetric complex conjugate matrix</li>
+<li>For Infinite dim vector space its Complex self adjoint</li>
+</ul></li>
+<li>Symmetric matrix means it looks the same when transposed</li>
+<li>Typically a random matrix has complex and real eigenvalues regardless of elements are only real</li>
+<li><strong>Spectral Thm: A Hermitian(symmetric) matrix that can have complex or real elements will always have real eigenvalues</strong>
+<ul>
+<li>Eigenvectors are orthogonal</li>
+</ul></li>
+</ul>
+</section>
 
         </div>
         <div id="footer">
@@ -227,64 +245,67 @@ is given back through the 1 “red mix anti-yellow car” in the null space</p>
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

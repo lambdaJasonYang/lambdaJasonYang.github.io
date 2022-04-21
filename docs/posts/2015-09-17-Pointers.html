@@ -116,15 +116,20 @@
     
 </div>
 <p><span class="math display">\[ Address \rightarrow Value \]</span> <span class="math display">\[ Pointer \rightarrow Address \rightarrow Value \]</span></p>
+<p><span class="math display">\[ p = &amp;x \equiv *p = x \]</span> <span class="math display">\[ arr + i = &amp;arr[i] \]</span></p>
 <ul>
-<li>pass-by-pointer vs pass-by-ref
+<li><p>*(arr + i) = arr[i]</p></li>
+<li><p>*arr = arr[0]</p></li>
+<li><p>**arr = arr[0][0]</p></li>
+<li><p>pass-by-pointer vs pass-by-ref</p>
 <ul>
 <li>pass-by-pointer when you need a NULL placeholder.</li>
 </ul></li>
-<li>the way to use pass-by-ref is similar to pass-by-value<br />
-</li>
-<li>pass-by-pointer requires passing an address</li>
+<li><p>the way to use pass-by-ref is similar to pass-by-value<br />
+</p></li>
+<li><p>pass-by-pointer requires passing an address</p></li>
 </ul>
+<p>All variables are pointers All languages do implicit dereference of variables. C allows the option to make it explicit with pointers.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">//pass-by-pointer</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">&amp;</span>x <span class="op">=</span> <span class="op">...;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> func<span class="op">(*</span>p<span class="op">){</span></span>
@@ -136,6 +141,31 @@
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> func<span class="op">(&amp;</span>p<span class="op">){</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  p <span class="op">=</span> x<span class="op">;</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<section id="any-type" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> ‘any’ Type</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Address</span><span class="ot"> ::</span> <span class="dt">Type</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Any</span><span class="ot"> ::</span> <span class="dt">Type</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>(<span class="dt">T</span> <span class="ot">-&gt;</span> <span class="dt">Any</span>) <span class="op">==</span> <span class="dt">Address</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ot">ptr ::</span> (<span class="dt">T</span> <span class="ot">-&gt;</span> <span class="dt">Any</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">--in haskell</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="dt">Linkedlist</span> <span class="dt">Int</span> <span class="ot">=</span> <span class="dt">Int</span> <span class="op">+</span> (<span class="dt">LinkedList</span> <span class="dt">Int</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">--in C++</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="dt">Linkedlist</span> <span class="dt">Int</span> <span class="ot">=</span> <span class="dt">Int</span> <span class="op">+</span> (<span class="dt">T</span> <span class="ot">-&gt;</span> <span class="dt">Any</span>)</span></code></pre></div>
+<p><span class="math display">\[(T \rightarrow Any) = Any^T = Any\]</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">--Type of a dereferenced pointer</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">--initialize a pointer</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ot">ptr ::</span> (<span class="dt">T</span> <span class="ot">-&gt;</span> <span class="dt">Any</span>) <span class="co">--haskell</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>int<span class="op">*</span> ptr; <span class="co">--C++</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">--dereference</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="op">*</span><span class="ot">ptr ::</span> <span class="dt">Any</span> <span class="co">--haskell</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>ptr; <span class="co">--C++</span></span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">
@@ -154,64 +184,67 @@
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

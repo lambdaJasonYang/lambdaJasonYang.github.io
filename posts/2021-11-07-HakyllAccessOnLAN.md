@@ -31,10 +31,29 @@ sudo sysctl -w net.ipv4.conf.all.route_localnet=1
 sudo iptables -t nat -I PREROUTING -p tcp -d 192.168.1.0/24 --dport 8000 -j DNAT --to-destination 127.0.0.1:8000
 ```
 
+```bash
+#list nat table rules
+sudo iptables -t nat -L --line-numbers
+```
+
+```bash
+#get nat table, select PREROUTING chain, delete number 2 
+sudo iptables -t nat -D PREROUTING 2
+```
+
+* `-j DNAT` means rewriting Destination Network Address Translation aka IP rewriting.
+* if any site is trying to connect to "192.168.1.245:8000"(`-p tcp -d 192.168.1.0/24 --dport 8000`),  
+it will translate that address to "127.0.0.1:8000"(`-j DNAT --to-destination 127.0.0.1:8000`)  
+
+
 # Theory
 
 ![](https://www.karlrupp.net/en/computer/computer/graphics/nat-chains.gif)
 
+* `iptables -t filter ..` is default table w/ INPUT, FORWARD, OUTPUT    
+  *  FORWARD chain is typically useless, it's when packets isnt directed towards you but passes through you like most router packets.
+* `iptables -t nat ..` w/ PREROUTING, OUTPUT, POSTROUTING
+  
 
 # iptables netstat diagnosis
 

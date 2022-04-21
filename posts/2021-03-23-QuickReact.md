@@ -3,14 +3,24 @@ title: Quick React
 tags: prog, QuickCode, cloud, frontend
 ---
 
+```js
+import React, { useState, useEffect } from 'react';
+```
+
 Good links
 [Implement the constructor behavior componentWillMount() into functional components as hooks](https://dev.to/bytebodger/constructors-in-functional-components-with-hooks-280m)
 
-![](images/reactLifeCycle.png)
+![](/images/reactLifeCycle.png)
+
 
 * React components have 2 parts 
   * localenv: local environment's variable,hooks,functions 
   * JSX: the JSX or virtual DOM it returns.   
+
+**Essence of React: 1 way data flow, localenv ----> JSX**
+
+useRef allows 2 way dataflow which is why it is advised against.  
+
 
 The moment we enter a new state, 0.1 and 0.2 is what happens first.
 

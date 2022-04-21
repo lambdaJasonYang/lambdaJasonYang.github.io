@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=100, initial-scale=0.5">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - PySpark RDD</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>PySpark RDD</h1>
+            
+
+            <div class="info">
+    Posted on March 23, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'python'." href="../tags/python.html">python</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>
+    
+</div>
+<hr />
+<p>Jupyter notebook:</p>
+<p><img src="jupyter.png" /></p>
+<section id="rdd" class="level2" data-number="0.1">
+<h2 data-number="0.1"><span class="header-section-number">0.1</span> RDD</h2>
+<p>multiple small methods that process and analyze country, city and location data.</p>
+<p>Sample data of “allCountries.txt” data from http://download.geonames.org/export/dump/allCountries.zip. You can test your functions in the cell below them. The variable <code>testFile</code> contains the data.</p>
+<p>Read https://spark.apache.org/docs/latest/rdd-programming-guide.html for a guide</p>
+<section id="data-schema" class="level3" data-number="0.1.1">
+<h3 data-number="0.1.1"><span class="header-section-number">0.1.1</span> Data schema</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>geonameid</td>
+<td style="text-align: left;">integer id of record in geonames database</td>
+</tr>
+<tr class="even">
+<td>name</td>
+<td style="text-align: left;">name of geographical point (utf8) varchar(200)</td>
+</tr>
+<tr class="odd">
+<td>asciiname</td>
+<td style="text-align: left;">name of geographical point in plain ascii characters, varchar(200)</td>
+</tr>
+<tr class="even">
+<td>alternatenames</td>
+<td style="text-align: left;">alternatenames, comma separated, ascii names automatically transliterated, convenience attribute from alternatename table, varchar(10000)</td>
+</tr>
+<tr class="odd">
+<td>latitude</td>
+<td style="text-align: left;">latitude in decimal degrees (wgs84)</td>
+</tr>
+<tr class="even">
+<td>longitude</td>
+<td style="text-align: left;">longitude in decimal degrees (wgs84)</td>
+</tr>
+<tr class="odd">
+<td>feature class</td>
+<td style="text-align: left;">see http://www.geonames.org/export/codes.html, char(1)</td>
+</tr>
+<tr class="even">
+<td>feature code</td>
+<td style="text-align: left;">see http://www.geonames.org/export/codes.html, varchar(10)</td>
+</tr>
+<tr class="odd">
+<td>country code</td>
+<td style="text-align: left;">ISO-3166 2-letter country code, 2 characters</td>
+</tr>
+<tr class="even">
+<td>cc2</td>
+<td style="text-align: left;">alternate country codes, comma separated, ISO-3166 2-letter country code, 200 characters</td>
+</tr>
+<tr class="odd">
+<td>admin1 code</td>
+<td style="text-align: left;">fipscode (subject to change to iso code), see exceptions below, see file admin1Codes.txt for display names of this code; varchar(20)</td>
+</tr>
+<tr class="even">
+<td>admin2 code</td>
+<td style="text-align: left;">code for the second administrative division, a county in the US, see file admin2Codes.txt; varchar(80)</td>
+</tr>
+<tr class="odd">
+<td>admin3 code</td>
+<td style="text-align: left;">code for third level administrative division, varchar(20)</td>
+</tr>
+<tr class="even">
+<td>admin4 code</td>
+<td style="text-align: left;">code for fourth level administrative division, varchar(20)</td>
+</tr>
+<tr class="odd">
+<td>population</td>
+<td style="text-align: left;">bigint (8 byte int)</td>
+</tr>
+<tr class="even">
+<td>elevation</td>
+<td style="text-align: left;">in meters, integer</td>
+</tr>
+<tr class="odd">
+<td>dem</td>
+<td style="text-align: left;">digital elevation model, srtm3 or gtopo30, average elevation of 3’‘x3’’ (ca 90mx90m) or 30’‘x30’’ (ca 900mx900m) area in meters, integer. srtm processed by cgiar/ciat.</td>
+</tr>
+<tr class="even">
+<td>timezone</td>
+<td style="text-align: left;">the iana timezone id (see file timeZone.txt) varchar(40)</td>
+</tr>
+<tr class="odd">
+<td>modification date</td>
+<td style="text-align: left;">date of last modification in yyyy-MM-dd format</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark <span class="im">import</span> SparkContext, SparkConf</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> SparkContext(<span class="st">&quot;local&quot;</span>,<span class="st">&quot;GeoProcessor&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>testFile <span class="op">=</span> sc.textFile(<span class="st">&quot;allCountries_sample.txt&quot;</span>)</span></code></pre></div>
+</section>
+</section>
+<section id="extract-data" class="level2" data-number="0.2">
+<h2 data-number="0.2"><span class="header-section-number">0.2</span> Extract Data</h2>
+<p><code>extractData</code> removes unnecessary fields and splits the data so that the RDD looks like RDD(Array(“name”,“countryCode”,“dem”),…)).</p>
+<p>Fields to include:<br />
+* name<br />
+* counryCode<br />
+* dem (digital elevation model)</p>
+<p>param <code>data</code>: data set loaded into spark as RDD[String]</p>
+<p><code>return</code>: RDD containing filtered location data. There should be an Array for each location.</p>
+<p>Hint: you can first split each line into an array. Columns are separated by tab (“) character. Finally you should take the appropriate fields. The fields will be numbered by the location they are ordered in the original data scheme. Despite the method’s name, you might only need the <code>map</code> function.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> extractData(data):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    spitline <span class="op">=</span> data.<span class="bu">map</span>(<span class="kw">lambda</span> x: x.split(<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    select <span class="op">=</span> spitline.<span class="bu">map</span>(<span class="kw">lambda</span> x: [x[<span class="dv">1</span>],x[<span class="dv">8</span>],x[<span class="dv">16</span>]])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> select</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#raise NotImplementedError()</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Example print</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>extractData(testFile).take(<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>[['Tosa de la Llosada', 'AD', '2475'],
+ ['Riu de la Llosada', 'AD', '1900'],
+ ['Obaga de la Llosada', 'AD', '2300'],
+ ['Emprius de la Llosada', 'AD', '2299'],
+ ['Basers de la Llosada', 'AD', '2321']]</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''extractData tests'''</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>filtered <span class="op">=</span> extractData(testFile)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>testObject <span class="op">=</span> filtered.collect()[<span class="dv">1</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> testObject[<span class="dv">0</span>] <span class="op">==</span> <span class="st">&quot;Riu de la Llosada&quot;</span>, <span class="st">&quot;the name value of the object was expected to be 'Riu de la Llosada' but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> testObject[<span class="dv">0</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> testObject[<span class="dv">1</span>] <span class="op">==</span> <span class="st">&quot;AD&quot;</span>, <span class="st">&quot;the country code value of the object was expected to be 'AD' but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> testObject[<span class="dv">1</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> testObject[<span class="dv">2</span>] <span class="op">==</span> <span class="st">&quot;1900&quot;</span>, <span class="st">&quot;the dem value of the object was expected to be 1900 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> testObject[<span class="dv">2</span>]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(testObject) <span class="op">==</span> <span class="dv">3</span>, <span class="st">&quot;the length of the array was expected to be 3 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">len</span>(testObject)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">type</span>(testObject) <span class="kw">is</span> <span class="bu">list</span>, <span class="st">&quot;the type of the RDD element was expected to be list but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">type</span>(testObject)</span></code></pre></div>
+</section>
+<section id="filter-elevation" class="level2" data-number="0.3">
+<h2 data-number="0.3"><span class="header-section-number">0.3</span> Filter Elevation</h2>
+<p><code>filterElevation</code> is used to filter to given countryCode and return RDD containing only dem information. You will have to convert the dem information to <code>int</code> values.</p>
+<p>param <code>countryCode</code>: country code e.g “AD”<br />
+param <code>data</code>: an RDD containing multiple Array[“name”, “countryCode”, “dem”] (as in it was returned by the <code>extractData</code> function)</p>
+<p><code>return</code>: RDD[int] containing only dem information</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> filterElevation(countryCode, data):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    filt <span class="op">=</span> data.<span class="bu">filter</span>(<span class="kw">lambda</span> x: x[<span class="dv">1</span>]<span class="op">==</span>countryCode)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    convert <span class="op">=</span> filt.<span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="bu">int</span>(x[<span class="dv">2</span>]))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> convert</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#raise NotImplementedError()</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Example print</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>filterElevation(<span class="st">&quot;AD&quot;</span>, extractData(testFile)).take(<span class="dv">5</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#filterElevation(&quot;AD&quot;, extractData(testFile)).take(5)</span></span></code></pre></div>
+<pre><code>[2475, 1900, 2300, 2299, 2321]</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''filterElevation tests'''</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>filtered <span class="op">=</span> extractData(testFile)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>first <span class="op">=</span> filterElevation(<span class="st">&quot;SE&quot;</span>, filtered).first()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">type</span>(first) <span class="kw">is</span> <span class="bu">int</span>, <span class="st">&quot;the type of the RDD element was expected to be int but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">type</span>(first)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> first <span class="op">==</span> <span class="dv">56</span>, <span class="st">&quot;the value of the RDD element was expected to be 56 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> first</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">object</span> <span class="op">=</span> filterElevation(<span class="st">&quot;AD&quot;</span>, filtered).collect()[<span class="dv">4</span>]</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">object</span> <span class="op">==</span> <span class="dv">2321</span>, <span class="st">&quot;the value of the RDD element was expected to be 2321 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">object</span></span></code></pre></div>
+</section>
+<section id="elevation-average" class="level2" data-number="0.4">
+<h2 data-number="0.4"><span class="header-section-number">0.4</span> Elevation Average</h2>
+<p><code>elevationAverage</code> calculates the dem average to specific dataset.</p>
+<p>param <code>data</code>: RDD[int] containing only dem information</p>
+<p><code>return</code>: The average elevation</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> elevationAverage(data):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    summ <span class="op">=</span> data.<span class="bu">reduce</span>(<span class="kw">lambda</span> a,b: a <span class="op">+</span> b)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    countr <span class="op">=</span> data.count()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    avg <span class="op">=</span> summ<span class="op">/</span>countr</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> avg</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#raise NotImplementedError()</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Example print</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>elevationAverage(sc.parallelize(filterElevation(<span class="st">&quot;AD&quot;</span>, extractData(testFile)).take(<span class="dv">5</span>)))</span></code></pre></div>
+<pre><code>2259.0</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''elevationAverage tests'''</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>avg <span class="op">=</span> elevationAverage(sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span> ,<span class="dv">4</span>])) </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> avg <span class="op">==</span> <span class="fl">2.5</span>, <span class="st">&quot;the average was expected to be 2.5 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> avg</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>filtered <span class="op">=</span> extractData(testFile)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>elevations <span class="op">=</span> filterElevation(<span class="st">&quot;AD&quot;</span>, filtered)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>avg2 <span class="op">=</span> elevationAverage(elevations)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> avg2 <span class="op">==</span> <span class="fl">1792.25</span>, <span class="st">&quot;the average was expected to be 1792.25 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> avg2</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">type</span>(avg2) <span class="kw">is</span> <span class="bu">float</span>, <span class="st">&quot;the type of the RDD element was expected to be float but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">type</span>(avg2)</span></code></pre></div>
+</section>
+<section id="most-common-words" class="level2" data-number="0.5">
+<h2 data-number="0.5"><span class="header-section-number">0.5</span> Most Common Words</h2>
+<p><code>mostCommonWords</code> calculates what is the most common word in place names and returns an RDD[(String,Int)]. You can assume that words are separated by a single space ’ ’.</p>
+<p>param <code>data</code>: an RDD containing multiple Array[“name”, “countryCode”, “dem”].</p>
+<p><code>return</code>: RDD[(String,Int)] where string is the word and Int number of occurances. RDD should be in descending order (sorted by number of occurances). e.g (“hotel”, 234), (“airport”, 120), (“new”, 12).</p>
+<p>Example:<br />
+Assume that the place name is “Andorra la Vella Heliport”. We split the name so that we have 4 seperate words “Andorra”, “la”, “Vella” and “Heliport”.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mostCommonWords(data):</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    wordlist <span class="op">=</span> data.<span class="bu">map</span>(<span class="kw">lambda</span> x:x[<span class="dv">0</span>].split(<span class="st">&quot; &quot;</span>))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#countwrd = wordlist.reduce(lambda acc, n: )</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    pairlist <span class="op">=</span> wordlist.<span class="bu">map</span>(<span class="kw">lambda</span> x: [(i,<span class="dv">1</span>) <span class="cf">for</span> i <span class="kw">in</span> x] )</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    summ <span class="op">=</span> pairlist.<span class="bu">reduce</span>(<span class="kw">lambda</span> a,b: a <span class="op">+</span> b)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    inter <span class="op">=</span> sc.parallelize(summ)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    tot <span class="op">=</span> inter.reduceByKey(<span class="kw">lambda</span> a,b: a <span class="op">+</span> b)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    rev <span class="op">=</span> tot.<span class="bu">map</span>(<span class="kw">lambda</span> x: (x[<span class="dv">1</span>],x[<span class="dv">0</span>]))</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    final <span class="op">=</span> rev.sortByKey(<span class="va">False</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    rev2 <span class="op">=</span> final.<span class="bu">map</span>(<span class="kw">lambda</span> x: (x[<span class="dv">1</span>],x[<span class="dv">0</span>]))</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rev2</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Example print</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>mostCommonWords(extractData(testFile)).take(<span class="dv">5</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#mostCommonWords(extractData(testFile))[:10]</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#mostCommonWords(extractData(testFile))</span></span></code></pre></div>
+<pre><code>[('Hotel', 22), ('de', 15), ('la', 12), ('Hotell', 7), ('dels', 6)]</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''mostCommonWords tests'''</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>filtered <span class="op">=</span> extractData(testFile)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> mostCommonWords(filtered).collect()</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>first <span class="op">=</span> words[<span class="dv">0</span>]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>second <span class="op">=</span> words[<span class="dv">1</span>]</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>third <span class="op">=</span> words[<span class="dv">2</span>]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">type</span>(first[<span class="dv">0</span>]) <span class="kw">is</span> <span class="bu">str</span>, <span class="st">&quot;the type of the first value in array was expected to be str but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">type</span>(first[<span class="dv">0</span>])</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">type</span>(first[<span class="dv">1</span>]) <span class="kw">is</span> <span class="bu">int</span>, <span class="st">&quot;the type of the second value in array was expected to be int but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">type</span>(first[<span class="dv">1</span>])</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> first[<span class="dv">1</span>] <span class="op">&gt;=</span> second[<span class="dv">1</span>], <span class="st">&quot;the first element in RDD was expected to have more occurances than the second&quot;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> first[<span class="dv">0</span>] <span class="op">==</span> <span class="st">&quot;Hotel&quot;</span>, <span class="st">&quot;the first element was expected to be named Hotel but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> first[<span class="dv">0</span>]</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> first[<span class="dv">1</span>] <span class="op">==</span> <span class="dv">22</span>, <span class="st">&quot;the count of the first element was expected to be 22 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> first[<span class="dv">1</span>]</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> third[<span class="dv">0</span>] <span class="op">==</span> <span class="st">&quot;la&quot;</span>, <span class="st">&quot;the third element was expected to be named 'la' but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> third[<span class="dv">0</span>]</span></code></pre></div>
+</section>
+<section id="most-common-country" class="level2" data-number="0.6">
+<h2 data-number="0.6"><span class="header-section-number">0.6</span> Most Common Country</h2>
+<p><code>mostCommonCountry</code> tells which country has the most entries in geolocation data. The correct name for specific countrycode can be found from countrycodes.csv. The columns in countrycodes.csv are seperated by “,”. More specifially, the file is structured like this:</p>
+<p>Fiji,FJ<br />
+Finland,FI<br />
+France,FR</p>
+<p>param <code>data</code>: an RDD containing multiple Array[“name”, “countryCode”, “dem”].<br />
+param <code>codeData</code>: data from countrycodes.csv file</p>
+<p><code>return</code>: most common country as String e.g Finland or empty string “” if countrycodes.csv doesn’t have that entry.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>countryCodes <span class="op">=</span> sc.textFile(<span class="st">&quot;countrycodes.csv&quot;</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mostCommonCountry(data, codeData):</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    cunt <span class="op">=</span> data.<span class="bu">map</span>(<span class="kw">lambda</span> x: (x[<span class="dv">1</span>],<span class="dv">1</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    summ <span class="op">=</span> cunt.reduceByKey(<span class="kw">lambda</span> a,b: a <span class="op">+</span> b)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    iterm <span class="op">=</span> codeData.<span class="bu">map</span>(<span class="kw">lambda</span> x: x.split(<span class="st">&quot;,&quot;</span>))</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    revind <span class="op">=</span> iterm.<span class="bu">map</span>(<span class="kw">lambda</span> x: (x[<span class="dv">1</span>],x[<span class="dv">0</span>]))</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> revind.join(summ).collect()</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    a1 <span class="op">=</span> sc.parallelize(out)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    a2 <span class="op">=</span> a1.<span class="bu">map</span>(<span class="kw">lambda</span> x: (x[<span class="dv">1</span>][<span class="dv">1</span>],x[<span class="dv">1</span>][<span class="dv">0</span>]))</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> a2.isEmpty():</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    a3 <span class="op">=</span> a2.sortByKey(<span class="va">False</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a3.first()[<span class="dv">1</span>]</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">#raise NotImplementedError()</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Example print</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mostCommonCountry(extractData(testFile), countryCodes)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#mostCommonCountry(extractData(testFile), countryCodes)[:5]</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#mostCommonCountry(extractData(testFile), countryCodes)[0].take(5)</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#mostCommonCountry(extractData(testFile), countryCodes)[1].take(5)</span></span></code></pre></div>
+<pre><code>'Sweden'</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''mostCommonCountry tests'''</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>filtered <span class="op">=</span> extractData(testFile)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>mostCommon <span class="op">=</span> mostCommonCountry(filtered, countryCodes)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">type</span>(mostCommon) <span class="kw">is</span> <span class="bu">str</span>, <span class="st">&quot;the type of the returned object was expected to be str but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">type</span>(mostCommon)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> mostCommon <span class="op">==</span> <span class="st">&quot;Sweden&quot;</span>, <span class="st">&quot;the most common was expected to be Sweden but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> mostCommon</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>mostCommon2 <span class="op">=</span> mostCommonCountry(sc.parallelize(filtered.take(<span class="dv">40</span>)), countryCodes)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> mostCommon2 <span class="op">==</span> <span class="st">&quot;Andorra&quot;</span>, <span class="st">&quot;the most common was expected to be Andorra but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> mostCommon2</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>false <span class="op">=</span> sc.parallelize([[<span class="st">&quot;a&quot;</span>, <span class="st">&quot;AA&quot;</span>, <span class="dv">123</span>], [<span class="st">&quot;b&quot;</span>, <span class="st">&quot;AA&quot;</span>, <span class="dv">1234</span>]])</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> mostCommonCountry(false, countryCodes) <span class="op">==</span> <span class="st">&quot;&quot;</span>, <span class="st">&quot;The method was expected to return empty when called with false data&quot;</span></span></code></pre></div>
+</section>
+<section id="hotels-in-area" class="level2" data-number="0.7">
+<h2 data-number="0.7"><span class="header-section-number">0.7</span> Hotels In Area</h2>
+<p><code>hotelsInArea</code> determines how many hotels there are within 10 km (&lt;=10000.0) from given latitude and longitude. Use Haversine formula ( https://en.wikipedia.org/wiki/Haversine_formula ). Earth radius is 6371000 meters.</p>
+<p>Don’t use the feature code field. You should start by reading the data and getting the correct fields (name, latitude, longitude) similarly to the <code>extractData</code> function. After that you should use the Haversine formula to filter the places in 10 Km radius from the latitude and longitude. You will probably want to use a helper function, Python lets you create functions inside functions. Finally, you will want to filter the places that contain the word “hotel”. Location is a hotel if the name contains the word “hotel” (can be “Hotel” or “hOtel” for instance). There can exist multiple hotels in the same location.</p>
+<p>Note that both latitude and longitude in the data are in decimal degree so you have to change them to radians ( https://en.wikipedia.org/wiki/Decimal_degrees ). They should also be converted to double values. E.g <code>math.radians(float(x))</code></p>
+<p>param <code>lat</code>: latitude as Double<br />
+param <code>long</code>: longitude as Double<br />
+param <code>data</code>: the original data set loaded into spark as RDD[String].</p>
+<p><code>return</code>: number of hotels in area</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>testFile <span class="op">=</span> sc.textFile(<span class="st">&quot;testdata.txt&quot;</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hotelsInArea(lat, <span class="bu">long</span>, data):</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> haversine(lat1,lon1,lat2,lon2):</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        rlat1 <span class="op">=</span> math.radians(<span class="bu">float</span>(lat1))</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        rlat2 <span class="op">=</span> math.radians(<span class="bu">float</span>(lat2))</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        rlon1 <span class="op">=</span> math.radians(<span class="bu">float</span>(lon1))</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        rlon2 <span class="op">=</span> math.radians(<span class="bu">float</span>(lon2))</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        radius <span class="op">=</span> <span class="dv">6371000</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        vara1 <span class="op">=</span> (rlat2 <span class="op">-</span> rlat1)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>        varb1 <span class="op">=</span> (rlon2 <span class="op">-</span> rlon1)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        varc1 <span class="op">=</span> math.cos(rlat1) <span class="co">#</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        vard1 <span class="op">=</span> math.cos(rlat2) <span class="co">#</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        vara2 <span class="op">=</span> math.sin(vara1)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        vara3 <span class="op">=</span> vara2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        varb2 <span class="op">=</span> math.sin(varb1)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        varb3 <span class="op">=</span> varb2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        pre1 <span class="op">=</span> (vara3 <span class="op">+</span> (varc1<span class="op">*</span>vard1<span class="op">*</span>varb3))<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        pre2 <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> radius <span class="op">*</span>math.asin(pre1)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pre2</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    boundary <span class="op">=</span> <span class="dv">10000</span>  </span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    distfun <span class="op">=</span> <span class="kw">lambda</span> a,b: haversine(lat,<span class="bu">long</span>,a,b)</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    formatt <span class="op">=</span> data.<span class="bu">map</span>(<span class="kw">lambda</span> x: x.split(<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>))</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    formatt2 <span class="op">=</span> formatt.<span class="bu">map</span>(<span class="kw">lambda</span> x: [x[<span class="dv">2</span>],<span class="bu">float</span>(x[<span class="dv">4</span>]),<span class="bu">float</span>(x[<span class="dv">5</span>])])</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    f3 <span class="op">=</span> formatt2.<span class="bu">filter</span>(<span class="kw">lambda</span> x: distfun(x[<span class="dv">1</span>],x[<span class="dv">2</span>]) <span class="op">&lt;=</span> boundary <span class="kw">and</span> <span class="st">&quot;hotel&quot;</span> <span class="kw">in</span> x[<span class="dv">0</span>].lower())</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    f4 <span class="op">=</span> f3.<span class="bu">map</span>(<span class="kw">lambda</span> x: ((x[<span class="dv">1</span>],x[<span class="dv">2</span>]),<span class="dv">1</span>))</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    f5 <span class="op">=</span> f4.reduceByKey(<span class="kw">lambda</span> a,b: a <span class="op">+</span> b) </span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> f5.count()</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">#data.map(lambda x: x.split())</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">#raise NotImplementedError()</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#hotelsInArea(59.334591, 18.063240,testFile).take(40)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Example print</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>hotelsInArea(<span class="dv">48</span>, <span class="fl">18.063240</span>, testFile)</span></code></pre></div>
+<pre><code>0</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''hotelsInArea tests'''</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>a1 <span class="op">=</span> hotelsInArea(<span class="fl">42.5423</span>, <span class="fl">1.5977</span>, testFile)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>a2 <span class="op">=</span> hotelsInArea(<span class="fl">59.334591</span>, <span class="fl">18.063240</span>, testFile)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>a3 <span class="op">=</span> hotelsInArea(<span class="fl">63.8532</span>, <span class="fl">15.5652</span>, testFile)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a1 <span class="op">==</span> <span class="dv">0</span>, <span class="st">&quot;the number of hotels was expected to be 0 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> a1</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a2 <span class="op">==</span> <span class="dv">3</span>, <span class="st">&quot;the number of hotels was expected to be 3 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> a2</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a3 <span class="op">==</span> <span class="dv">1</span>, <span class="st">&quot;the number of hotels was expected to be 1 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> a3</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>sc.stop()</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

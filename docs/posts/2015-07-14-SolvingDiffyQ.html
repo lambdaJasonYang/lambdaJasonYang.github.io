@@ -187,8 +187,9 @@ Solve for set of equations that satisfy Differential equation:</p>
 <p><span class="math display">\[y(0)=k\]</span></p>
 <hr />
 </section>
-<section id="newtons-second-law" class="level5" data-number="0.0.2.0.2">
-<h5 data-number="0.0.2.0.2"><span class="header-section-number">0.0.2.0.2</span> Newton’s Second Law</h5>
+</section>
+<section id="newtons-second-law" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Newton’s Second Law</h1>
 <p>Solving the differential equation F=ma<br />
 Solving for 1) distance function and 2) velocity function, each wrt time</p>
 <ol type="1">
@@ -204,9 +205,8 @@ Solving for 1) distance function and 2) velocity function, each wrt time</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DSolve</span><span class="op">[</span><span class="fu">m</span><span class="sc">*</span>v'<span class="op">[</span><span class="fu">t</span><span class="op">]</span> <span class="ex">==</span> <span class="fu">f</span><span class="op">,</span> <span class="fu">v</span><span class="op">[</span><span class="fu">t</span><span class="op">],</span> <span class="fu">t</span><span class="op">]</span> <span class="sc">//</span> <span class="fu">TeXForm</span></span></code></pre></div>
 <p><span class="math display">\[\left\{\left\{v(t)\to \frac{f t}{m}+c_1\right\}\right\}\]</span> looks familiar <span class="math inline">\(v_n=at+v_0\)</span></p>
 <hr />
-</section>
-<section id="uniqueness-and-existence-problems" class="level5" data-number="0.0.2.0.3">
-<h5 data-number="0.0.2.0.3"><span class="header-section-number">0.0.2.0.3</span> Uniqueness and Existence Problems</h5>
+<section id="uniqueness-and-existence-problems" class="level5" data-number="1.0.0.0.1">
+<h5 data-number="1.0.0.0.1"><span class="header-section-number">1.0.0.0.1</span> Uniqueness and Existence Problems</h5>
 <p>Theorem:<br />
 Given f(x,y) continous</p>
 </section>
@@ -229,64 +229,67 @@ Given f(x,y) continous</p>
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

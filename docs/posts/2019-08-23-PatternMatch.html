@@ -115,12 +115,78 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'functional'." href="../tags/functional.html">functional</a>, <a title="All pages tagged 'categorytheory'." href="../tags/categorytheory.html">categorytheory</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>
     
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>f x <span class="ot">=</span> </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">case</span> x <span class="kw">of</span> <span class="dt">True</span>  <span class="ot">-&gt;</span> <span class="dt">False</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>          <span class="dt">False</span> <span class="ot">-&gt;</span> <span class="dt">True</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> f <span class="dt">True</span>  <span class="ot">=</span> <span class="dt">False</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    f <span class="dt">False</span> <span class="ot">=</span> <span class="dt">True</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">in</span> f x</span></code></pre></div>
+<p><span class="math display">\[ \cfrac{String}{(Maybe\ String)} \qquad \cfrac{a \quad Tree\ a \quad Tree\ a}{(Node\ a\ (Tree\ a)\ (Tree\ a))}\]</span></p>
+<p>Pattern matching gives us free deconstructive functions that breaks down inductive datatypes.<br />
+Our goal is to make the implicit pattern-matching explicit.</p>
+<p>Notation @ for forward composition</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ot">login::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">String</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">password ::</span> <span class="dt">String</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>login<span class="ot"> password ::</span> <span class="dt">String</span> <span class="op">@</span> (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">String</span> )</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>login<span class="ot"> password ::</span> <span class="dt">Maybe</span> <span class="dt">String</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- @ represents forward function composition</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- x@f@g means g(f(x)) </span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">case</span> (<span class="dt">Just</span><span class="ot"> x ::</span> <span class="dt">Maybe</span> <span class="dt">String</span>) <span class="kw">of</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="dt">Just</span> <span class="st">&quot;0&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Just</span> x <span class="ot">-&gt;</span> <span class="dt">Just</span> (<span class="st">&quot;3&quot;</span> <span class="op">++</span> x)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">--lets deconstruct the type of &quot;case&quot;, it takes in a &quot;Just x&quot; meaning our first type is a &quot;Maybe String&quot; and outputs either Just '0' or Just x++'3' meaning it's output type is also &quot;Maybe String&quot;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">case</span><span class="ot"> ::</span> <span class="dt">Maybe</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Int</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>         <span class="dt">Nothing</span>     <span class="ot">-&gt;</span>  <span class="dt">Just</span> <span class="dv">0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>         <span class="dt">Just</span> x      <span class="ot">-&gt;</span>  <span class="dt">Just</span> (<span class="dv">1</span><span class="op">+</span><span class="dt">Int</span> x)  <span class="co">--(this is represented as the chain of compositions shown below)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>         (patternMatch (<span class="dt">Just</span> x)) <span class="op">@</span> (<span class="dt">Int</span> _) <span class="op">@</span> (<span class="dv">1</span><span class="op">+</span> _ ) <span class="op">@</span> (<span class="dt">Just</span> _) <span class="co">--reduces to</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                              x  <span class="op">@</span> (<span class="dt">Int</span> _) <span class="op">@</span> (<span class="dv">1</span><span class="op">+</span> _ ) <span class="op">@</span> (<span class="dt">Just</span> _)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                                   (<span class="dt">Int</span> x) <span class="op">@</span> (<span class="dv">1</span><span class="op">+</span> _ ) <span class="op">@</span> (<span class="dt">Just</span> _)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                                            (<span class="dv">1</span><span class="op">+</span><span class="dt">Int</span> x)<span class="op">@</span> (<span class="dt">Just</span> _)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                                                       (<span class="dt">Just</span> <span class="dv">1</span><span class="op">+</span><span class="dt">Int</span> x) </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">--however what allows us to pull out that &quot;x&quot; and rebuild it into (&quot;3&quot; ++ x)?</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">--This is the trivial pattern match function we get when we use a case </span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ot">patternMatch ::</span> <span class="dt">Maybe</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>patternMatch (<span class="dt">Just</span> x) <span class="ot">=</span> x</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>     patternMatch      <span class="op">@</span>  <span class="dt">Int_Convert</span>  <span class="op">@</span>   <span class="dt">AddOne</span>   <span class="op">@</span>   <span class="dt">MaybeConstructor</span><span class="ot"> ::</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Maybe</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span> <span class="op">@</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="op">@</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="op">@</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">String</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">--see how we can represent are case function as a chain of compositions</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">case</span> <span class="op">==</span> patternMatch <span class="op">@</span> <span class="dt">Int_Convert</span> <span class="op">@</span> <span class="dt">AddOne</span> <span class="op">@</span> <span class="dt">MaybeConstructor</span></span></code></pre></div>
+<p>Takeaway</p>
+<ul>
+<li>Whenever we use <code>case :: X -&gt; _</code>
+<ul>
+<li>we get a free <code>patternMatch :: X -&gt; Deconstructed X</code></li>
+</ul></li>
+<li>Our example we had <code>case :: Maybe String -&gt; _</code> so we get a free <code>patternMatch :: Maybe String -&gt; String</code></li>
+</ul>
+<section id="trees" class="level2" data-number="0.1">
+<h2 data-number="0.1"><span class="header-section-number">0.1</span> Trees</h2>
+<p>Lets continue with the pattern match functions for free paradigm.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Tree</span> a <span class="ot">=</span> <span class="dt">Leaf</span> <span class="op">|</span> <span class="dt">Node</span> a (<span class="dt">Tree</span> a) (<span class="dt">Tree</span> a)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ot">patternmatch1 ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> a</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ot">patternmatch2 ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ot">patternmatch3 ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ot">mapTree ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> b</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>mapTree f <span class="dt">Leaf</span> <span class="ot">=</span> <span class="dt">Leaf</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>mapTree f (<span class="dt">Node</span> val left right) <span class="ot">=</span> <span class="dt">Node</span> (f val) (mapTree f left) (mapTree f right)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">--converted from implicit pattern matching to explicit pattern matching</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ot">mapTree ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> b</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>mapTree f <span class="dt">Leaf</span> <span class="ot">=</span> <span class="dt">Leaf</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>mapTree f (<span class="dt">Node</span> val left right) <span class="ot">=</span> <span class="dt">Node</span> (f patternmatch1 (<span class="dt">Node</span> val left right)) (mapTree f patternmatch2 (<span class="dt">Node</span> val left right)) (mapTree f patternmatch3 (<span class="dt">Node</span> val left right))</span></code></pre></div>
+<p><code>Node a (Tree a) (Tree a)</code> is a product type.</p>
+<pre class="text"><code>a    Tree a     Tree a
+\     |        /  
+ |    |      /   
+  |   |    /    
+  | ProductType
+   |  |  /        
+    \ | /          
+      *</code></pre>
+<p>Pattern matching is powerful and it gives us free canonical projections of product types.</p>
+<p>Pattern matching lets us deal with Sum types similar to Logical OR-elim * By dealing with each Case/Constructor of the Disjunction/Sum type with multiple Implications/Functions by case-analysis/pattern-matching</p>
+</section>
 
         </div>
         <div id="footer">
@@ -139,64 +205,67 @@
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

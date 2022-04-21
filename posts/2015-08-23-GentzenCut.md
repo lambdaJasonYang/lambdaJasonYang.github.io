@@ -7,21 +7,36 @@ toc: y
 # Terms
 
 * Syntatic consequence: $p \vdash q$: sentence q is provable from the set of assumptions p.
-* Semantic Consequence: $p \vDash q$: sentence q is true in all models of p.
+* Semantic Consequence: $p \vDash q$: sentence q is true in all models of p.  
+Truth table is called entailment
+
+Below is a table showing entailment $p \land q \vDash p$. 
+
+| $p$ | $q$ | $p \land q$ | $p$ |
+| -- | -- | -- | -- |
+| T | T | T | T |
+| T | F | F | T |
+| F | T | F | F |
+| F | F | F | F |
 
 In propositional logic, 
 
 * Syntatic consequence : $p \vdash q$ = Propositional Calculus
-* Semantic consequence : $p \vDash q$ = Truth tables
+* Semantic consequence : $p \vDash q$ = Truth table showing p q and we can see if p is true then q must be true
 
 
 ## Soundness
 
 $$ p \vdash q \Rightarrow p \vDash q $$ 
 
-Prove propositional calculus correct using 
+If we can create a proof tree deriving q from p then we can create a truthtable representing models where if p is true then q must be true.
+
+* We can show elim/intro rules are locally sound using truth tables
+* If we deleted elim/intro rules, the overall system would still be sound
 
 ## Completeness
+
+$$ p \vDash q \Rightarrow p \vdash q $$ 
 
 | Sequent | Logic | 
 | --- | --- |

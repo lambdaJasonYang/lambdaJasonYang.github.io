@@ -172,7 +172,14 @@ Modules will
 * styles
  * theme.tsx
 
- 
+# How do you select SSG, PWA, SSR
+
+* Using react hooks means it "may" rerender thus behaving like a PWA
+* Using getStaticProp() and never using hooks gives you a static site
+
+Notice how the lines are actually blurred. You can mix and match so the site behaves like an PWA or a static site. 
+
+
 # Capturing the [carID] and [modelID] as variables
 
 ```javascript
@@ -210,6 +217,7 @@ This means if more than one update in db we have to rebuild the ENTIRE site.
 
 * Solution ISR which basically means the specific static page ONLY will be rebuilt, 
 * If your clientside code auto refreshes every 10 sec, the data will be relatively current. 
+
 
 
 

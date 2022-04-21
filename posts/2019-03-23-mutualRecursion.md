@@ -16,10 +16,14 @@ def odd(n):
   else:
     return even(n-1)
 ```
-Proving this is simply strengthing the IH so instead of:
- $even(n) \overset{proves}\Rightarrow even(n+1)$  
-we have   
- $even(n) \land odd(n) \overset{proves}\Rightarrow even(n+1) \land odd(n+1)$  
+* $even(n-1) \overset{proves}\Rightarrow odd(n)$ 
+* $odd(n-1) \overset{proves}\Rightarrow even(n)$
+
+Proving this is simply unfolding the proof and inlining one into the other.
+we have
+
+* $even(n-1) \overset{proves}\Rightarrow odd((n-1)+1) \overset{proves}\Rightarrow even(n+1)$
+
 
 Any mutual recursive function can be inlined to the other
 

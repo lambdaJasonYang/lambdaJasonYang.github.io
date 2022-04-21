@@ -116,33 +116,192 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#combinations"><span class="toc-section-number">1</span> Combinations</a></li>
+<li><a href="#non-injective"><span class="toc-section-number">1</span> Non-Injective</a></li>
+<li><a href="#combinations"><span class="toc-section-number">2</span> Combinations</a></li>
+<li><a href="#examples"><span class="toc-section-number">3</span> Examples</a></li>
 </ul></div>
-<p><span class="math display">\[ \{A,B,C\} \mapsto \{T,F\} \qquad \{T,F\}^{\{A,B,C\}}=2^3 \text{ functions}\]</span> <span class="math display">\[ | P(\{A,B,C\}) | = |\{\emptyset,\{A\},\{B\},\{C\},\{A,B\},\{A,C\},\{B,C\},\{A,B,C\}\}| = 2^3\]</span></p>
+<p>Combinatorics is all about counting injective functions.</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Term</th>
+<th>Term</th>
+<th>Calc</th>
+<th>Term</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3 pick 3: <span class="math inline">\(3P3\)</span></td>
+<td>Bijection aka (Injection w/ Domain == Range)</td>
+<td>3-&gt;3</td>
+<td>3!</td>
+<td>Factorial</td>
+</tr>
+<tr class="even">
+<td>5 pick 3: <span class="math inline">\(5P3\)</span></td>
+<td>Injection w/ Domain &lt; Range</td>
+<td>3-&gt;5</td>
+<td>5!/2!</td>
+<td>Restrictive counting w/ no repeats</td>
+</tr>
+<tr class="odd">
+<td>5 choose 3: <span class="math inline">\(5C3\)</span></td>
+<td>Combination aka Injection up to permutative isomorphism</td>
+<td>3-&gt;5</td>
+<td>5!/2!3!</td>
+<td>Restrictive counting w/ no repeats + normalize permutative isomorphisms</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li>If we give each of 5 objects 3 different states, how much configurations are possible?
-<ul>
-<li>This is just counting the number of functions from 5 objects to 3 states.</li>
-</ul></li>
+<li>Combinations we use *’s to represent elements of domain because the identity of the domain doesn’t really matter</li>
+<li>Permutations the identity of the domain does matter.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="ex">T,F</span>    Depth</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">/\ </span>     A</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">/\/\ </span>    B</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/\/\/\ </span>   C</span></code></pre></div>
+<section id="non-injective" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Non-Injective</h1>
+<pre class="text"><code>                             +--------------+
+                             |    States    |
+   Objects                   |              |
+                             |              |
+       -----------------------------|       |
+       |                     |      |       |
++------|----+                |      |       |
+|      |    |                |      |       |
+|      |    |                |      v       |
+|  PropA    |           ----------&gt;True     |
+|           |         --|    |              |
+|           |         |      |              |
+|       --------------|      |              |
+|  PropB    |                |              |
+|           |                |  -&gt; False    |
+|           |                |  |           |
+|           |                |  |           |
+|  PropC -----------------------|           |
+|           |                |              |
+|           |                |              |
++-----------+                +--------------+</code></pre>
+<p><span class="math display">\[ \{A,B,C\} \mapsto \{T,F\} \qquad \{T,F\}^{\{A,B,C\}}=2^3 \text{ functions}\]</span> <span class="math display">\[ | P(\{A,B,C\}) | = |\{\emptyset,\{A\},\{B\},\{C\},\{A,B\},\{A,C\},\{B,C\},\{A,B,C\}\}| = 2^3\]</span> <span class="math display">\[\text{True represents included in set, False represents not included in set}\]</span></p>
+<ul>
+<li>Counting the possible of functions from Object to State is counting the number of possible configurations.</li>
+<li>Propositions can be either in the True state or False state.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Map</span> <span class="dt">{T</span><span class="op">,</span><span class="dt">F}</span> <span class="op">&lt;</span>- <span class="dt">{A</span><span class="op">,</span><span class="dt">B</span><span class="op">,</span><span class="dt">C}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">T,F</span>    Depth</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">/\ </span>     A</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">/\/\ </span>    B</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">/\/\/\ </span>   C</span></code></pre></div>
 <p>In our tree, we decide branching represent T,F and Depth represent the A,B,C.<br />
 A path from root to leaf represents 1 function.<br />
 Example the far left path is (A True-Right branch, B True-Right branch, C True-Right branch)</p>
-<section id="combinations" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Combinations</h1>
+</section>
+<section id="combinations" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Combinations</h1>
+<pre class="text"><code>                         +--------------+              +--------------+    
++------------+           |              |              |              |    
+|            |           | +---------+  |              | +---------+  |    
+|+-----+     |           | |  Red    |  |     How many | |  Red    |  |    
+|| *   |     | 3 elem    | |+---------+ |     3 elem   | |+---------+ |    
+||     |  ------Inject--&gt;| || Blue   || |     subsets  | || Blue   || |    
+|| *   |     |           | ||        || |     can we   | ||        || |    
+||     |     |           | ||        || |     make?    | ||        || |    
+|| *   |     |           | || Green  || |              | || Green  || |    
+|+-----+     |           | +|--------+| |              | +|--------+| |    
+|            |           |  | Yellow  | |              |  | Yellow  | |    
++------------+           |  +---------+ |              |  +---------+ |    
+                         +--------------+              +--------------+    </code></pre>
+<ul>
+<li>Combination we reverse the Domain and Range.</li>
+<li>3 picks 2 means we count the number of <strong>injective</strong> functions from 2 to 3 <strong>up to mapping isomorphism</strong>
+<ul>
+<li>Up to mapping isomorphism means f = (T-&gt; A,F-&gt;B) is counted as the same as g = (F -&gt; A, T-&gt;B).</li>
+</ul></li>
+</ul>
 <p>Taking only Up and Right moves, how many ways can you go from bottom left to top right?</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">+--+--+</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>  <span class="kw">|</span>  <span class="kw">|</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">+--+--+</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">+--+--+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>  <span class="kw">|</span>  <span class="kw">|</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">+--+--+</span></span></code></pre></div>
 <p>Naive attempt, observe we can’t just go Up 3 times.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">U,D</span>    depth</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">/\ </span>    1 steps</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">/\/?</span>    2 steps</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/??</span>      3 steps</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Map</span> <span class="dt">{Up(U)</span><span class="op">,</span><span class="dt">Right(R)}</span> <span class="op">&lt;</span>- {state 1,state 2, state 3}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">U,R</span>    depth</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">/\ </span>    state 1</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">/\/?</span>    state 2</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">/??</span>      state 3</span></code></pre></div>
+<ul>
+<li>Notice we only need 1 Up(1 U) and 2 Rights(2 R*).</li>
+<li>Two movements cannot occupy the same state, therefore injective</li>
+<li>Movement -&gt; State
+<ul>
+<li>We need to normalize for the 2 Rights(R* )</li>
+</ul></li>
+</ul>
+<p>3 perspectives, 3 equally valid solutions</p>
+<ul>
+<li>Focus on 1 Up: Once we choose which state is Up, the other Rights get locked in.
+<ul>
+<li>3 pick 1</li>
+</ul></li>
+<li>Focus on 2 Right<em>: Once we choose which 2 state is Right</em>, the Up get locked in.
+<ul>
+<li>2 Right* and order doesn’t matter meaning we need to normalize for Right* permutation = 2!</li>
+<li>(3 pick 2)/(2!)</li>
+</ul></li>
+<li>Focus on all 3: We give a state for all 3.
+<ul>
+<li>We have to normalize for the 2 Right* permutation = 2!</li>
+<li>(3 pick 3)/(2!)</li>
+</ul></li>
+</ul>
+</section>
+<section id="examples" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Examples</h1>
+<ul>
+<li>Propositions can either be true or false</li>
+</ul>
+<pre class="text"><code>            Wrong         ┌───────────┐               Wrong      ┌──────────────┐
+                          │           │                          │              │
+     ┌────────────────────┼───────┐   │                          │              │
+     │                    │       │   │                          │              │
+┌────┼────┐               │       │   │       ┌──────────┐    ┌──┼─►  Fst       │
+│    │    │               │       │   │       │          │    │  │              │
+│    │    │               │       ▼   │       │     ┌────┼────┘  │              │
+│ Fst│    │           ┌───┼─────► Up  │       │     │    │       │              │
+│         │         ┌─┘   │           │       │     │    │       │              │
+│         │         │     │           │       │   Up│    │       │    Snd       │
+│     ────┼─────────┘     │           │       │          │       │              │
+│ Snd     │               │           │       │          │       │              │
+│         │               │   ┌► Right│       │          │       │              │
+│         │               │   │       │       │          │       │              │
+│         │               │   │       │       │   Right ─┼───────┼──► Thrd      │
+│ Thrd ───┼───────────────┼───┘       │       │          │       │              │
+│         │               │           │       │          │       │              │
+│         │               │           │       │          │       │              │
+└─────────┘               └───────────┘       └──────────┘       └──────────────┘</code></pre>
+<pre class="text"><code>                                                                                       
+                   +-------------------Combination-----------------+                   
+                   |                                               |                   
+                   |                                               |                   
+                   |     +--------------+                          |   +--------------+
++------------+           |              |     +------------+           |              |
+| +----------------------------------+  |     | +----------------------------------+  |
+| |          |    ------------Red    |  |     | |          |           | ---Red    |  |
+| |* ------------/       |           |  |     | |*---\     |        ----/          |  |
+| |          |   ------------ Blue   |  |     | |     -----\   ----/   |    Blue   |  |
+| |*------------/        |           |  |     | |*---------------------------      |  |
+| |          |           |           |  |     | |    ----/ |      -----\           |  |
+| |*--------------------------Green  |  |     | |*--/      |           |----Green  |  |
+| +----------------------------------+  |     | +----------------------------------+  |
+|            |           |    Yellow    |     |            |           |    Yellow    |
++------------+           |              |     +------------+           |              |
+                         +--------------+                              +--------------+</code></pre>
 </section>
 
         </div>
@@ -162,64 +321,67 @@ Example the far left path is (A True-Right branch, B True-Right branch, C True-R
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

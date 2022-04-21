@@ -115,159 +115,316 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'python'." href="../tags/python.html">python</a>
     
 </div>
-<section id="diagrams" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Diagrams</h1>
-<section id="chaina-a" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> Chain(A) = [A]</h2>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a200a72616e6b6469723d22524c220a636f6d706f756e643d747275650a0a0a737562677261706820636c7573746572417b0a2020202044617461410a7d0a0a7d200a40656e64756d6c"></figure>
-<hr />
-</section>
-<section id="chainb-a-b" class="level2" data-number="1.2">
-<h2 data-number="1.2"><span class="header-section-number">1.2</span> Chain(B) = [[A]] + [B]</h2>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a200a72616e6b6469723d22524c220a636f6d706f756e643d747275650a0a737562677261706820636c757374657268417b0a737562677261706820636c7573746572417b0a2020202044617461410a7d0a7d0a737562677261706820636c7573746572427b0a44617461420a7d0a0a0a44617461422d3e4461746141205b6c6162656c3d22646570656e6422206c7461696c3d636c757374657242206c686561643d636c757374657268415d0a7d200a40656e64756d6c"></figure>
-<hr />
-</section>
-<section id="chainc-a-b-c" class="level2" data-number="1.3">
-<h2 data-number="1.3"><span class="header-section-number">1.3</span> Chain(C) = [[[A]] + [B]] + [C]</h2>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a72616e6b6469723d22524c220a636f6d706f756e643d747275650a737562677261706820636c757374657268427b0a737562677261706820636c757374657268417b0a737562677261706820636c7573746572417b0a2020202044617461410a7d0a7d0a0a737562677261706820636c7573746572427b0a44617461420a7d0a7d0a0a44617461422d3e4461746141205b6c6162656c3d22646570656e6422206c7461696c3d636c757374657242206c686561643d636c757374657268415d0a737562677261706820636c7573746572437b0a44617461430a7d0a44617461432d3e4461746142205b6c6162656c3d22646570656e6422206c7461696c3d636c757374657243206c686561643d636c757374657268425d0a7d200a40656e64756d6c"></figure>
-<hr />
-</section>
-</section>
-<section id="analysis" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Analysis</h1>
-<p>_ + A = (_,A)</p>
+<p>The main component of the blockchain is the <strong>prevhash</strong> which holds the <strong>history of the chain</strong>.</p>
+<ol type="1">
+<li><strong>to build the present you must know your history</strong></li>
+<li><strong>you can only choose one of many possible futures</strong></li>
+</ol>
+<p>A block chain is just a linked list of blocks which each block holding a history or prevhash.</p>
+<p><code>[blockA, blockB, blockC,...]</code> with blockA as the most recently added aka HEAD.</p>
+<p>We ignore that each block also has hash of itself h(dataA + prevAhash); conceptually not the main point of block chain.</p>
+<pre class="text"><code>      +-----------+             +-----------+           +------------+
+      |prevAhash= |&lt;--+         |prevBhash= |&lt;-+        |prevChash=  |
+      |h(blockB)  |   |         |h(blockC)  |  |        |h(blockD)   |
+      +--+--------+   |         +--+--------+  |        +--+---------+
+dataA    |            |   dataB    |           |    dataC  |
+  |      |            |     |      |           |      |    |
+  |      |         hash     |      |        hash      |    |
+  |      |            |     |      |           |      |    |
++-v------v-----+      |  +--v------v---+       |  +---v----v---+
+|              |      |  |             |       |  |            |
+|  blockA      |      +--+   blockB    |       +--+   blockC   |
+|              |         |             |          |            |
++--------------+         +-------------+          +------------+
+                 -next--&gt;               --next---&gt;</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>blockA = dataA + prevAhash</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>prevAhash = h(blockB) = h(dataB + prevBhash)</span></code></pre></div>
+<div class="sourceCode" id="cb3" data-filename="singleblock"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>     +                  </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    / \      =======  blockA</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dataA  h(blockB)     </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    +</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>   / \</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>dataA h   ----------------+</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      |                   |</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      +                   |</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>     / \                  | ====== prevAhash = h(blockB)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>dataB   h                 | </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        |                 .</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        +                 .</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>       / \                .</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  dataC   ..              .</span></code></pre></div>
 <ul>
-<li>Chain(A) =</li>
-<li>Chain(B) =</li>
-<li>Chain(C) =</li>
+<li>When the head of the tree is a <code>+</code> it is a block</li>
+<li>When the head of the tree is a <code>h</code> it is a prevhash</li>
 </ul>
-<section id="general-form" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> General Form</h2>
-<p><span class="math display">\[ Chain(N) = [Chain(N-1)] + [N] \]</span></p>
+<p>Above was a representation of a single block, here we show a blockchain aka a list of the tree above.</p>
+<div class="sourceCode" id="cb4" data-filename="blockchain"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>           ---next-&gt;            ----next-&gt;</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    +</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>   / \</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>dataA h    </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      |                   </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      +                  +                          </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>     / \                / \  </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>dataB   h          dataB   h       </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        |                  |</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        +                  +                    +</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>       / \                / \                  / \</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  dataC   ..         dataC   ..           dataC   ..</span></code></pre></div>
+<hr />
+<section id="general-form" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> General Form</h1>
 <p>Analogous to <a href="../posts/2018-08-23-BuildNatSets.html">Set theoretical natural numbers</a><br />
-<span class="math display">\[ N = \{N-1\} \cup Pred(N) \]</span> $$ N = Set(Pred(N)) + Pred(N)</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Set</span><span class="er">(</span><span class="ex">Expand</span><span class="er">(</span><span class="ex">A</span><span class="kw">))</span> <span class="ex">=</span> Expand<span class="er">(</span><span class="ex">Set</span><span class="er">(</span><span class="ex">A</span><span class="kw">))</span> <span class="ex">=</span> A</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">A</span> Union B = Set<span class="er">(</span><span class="ex">Expand</span><span class="er">(</span><span class="ex">A</span><span class="kw">)</span> <span class="ex">+</span> Expand<span class="er">(</span><span class="ex">B</span><span class="kw">))</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Expand</span><span class="er">(</span><span class="ex">{{2}}</span><span class="kw">)</span> <span class="ex">=</span> {2}</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">N</span> = Set<span class="er">(</span><span class="ex">n-1</span><span class="kw">)</span> <span class="ex">Union</span> <span class="er">(</span><span class="ex">n-1</span><span class="kw">)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">N</span> = Set<span class="er">(</span> <span class="ex">Expand</span><span class="er">(</span><span class="ex">Set</span><span class="er">(</span><span class="ex">n-1</span><span class="kw">))</span> <span class="ex">+</span> Expand<span class="er">(</span><span class="ex">n-1</span><span class="kw">)</span> <span class="kw">)</span> <span class="ex">=</span> Set<span class="er">(</span><span class="kw">(</span><span class="ex">n-1</span><span class="kw">)</span> <span class="ex">+</span> Expand<span class="er">(</span><span class="ex">n-1</span><span class="kw">))</span></span></code></pre></div>
-</section>
-<section id="example-node" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> Example node</h2>
-<p>Example data of the nth node of the chain:</p>
+<span class="math display">\[Set: N =  Pred(N) \cup \{N-1\} \]</span> <span class="math display">\[Block: N = d(N) + h(N-1) \]</span></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n = blockA</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>d(n) = dataA</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>h(n-1) = prevAhash</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>n = d(n) + h(n-1)</span></code></pre></div>
+<section id="example-node" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Example node</h2>
+<p>Example BlockA:</p>
 <ul>
-<li>n-text</li>
-<li>n-timestamp</li>
-<li>n-index</li>
-<li>HASH of:
+<li>dataA
 <ul>
-<li>n-text</li>
-<li>n-timestamp</li>
-<li>n-index</li>
-<li>HASH(PREVIOUS-CHAIN)</li>
+<li>A-text</li>
+<li>A-timestamp</li>
+<li>A-index</li>
+<li><strong>A-nonce</strong></li>
+</ul></li>
+<li>prevAhash:
+<ul>
+<li>HASH(dataB)
+<ul>
+<li>HASH(B-text)</li>
+<li>HASH(B-timestamp)</li>
+<li>HASH(B-index)</li>
+<li>HASH(B-nonce)</li>
+</ul></li>
+<li>HASH(prevBhash)</li>
 </ul></li>
 </ul>
-<p>PERSONAL-DATA = {n-text,n-timestamp,n-index}<br />
-CURRENT-NODE = PERSONAL-DATA + HASH(PERSONAL-DATA,HASH(PREVIOUS-CHAIN))<br />
-F = lambda x: x + HASH(x,y)<br />
-P(N) + F(Pred(N))</p>
-<p>Adversary tampers with the the PERSONAL-DATA of the CURRENT-NODE with EVIL-PERSONAL-DATA.</p>
+</section>
+<section id="mining" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> mining</h2>
+<ul>
+<li><strong>mining</strong> = keep changing the <strong>nonce</strong> until get a good looking hash (There is nothing special or mathematically useful about this constraint or what good looking hash means)
+<ul>
+<li>Ex: We want to add a new block, blockA to the chain</li>
+<li>Continually regenerate blockA with different nonces that gets rejected until we find just the right nonce that gives us a nice looking hash.</li>
+<li>Even though we need to hash blockA to check if the nonce is nice looking, <strong>we dont add the hash of blockA itself to the chain</strong>. (We add the unhashed blockA to the chain)
+<ul>
+<li>When adding new blocks to the chain, hashing the new block is just a temporary artifical method for mining.</li>
+</ul></li>
+</ul></li>
+<li><strong>Confirmation</strong> is when random nodes take the nice nonce and confirm that it is actually nice. Once enough nodes have confirmed the nice nonce, the block will be added to the chain.</li>
+</ul>
 <p><img src="https://ars.els-cdn.com/content/image/1-s2.0-S240595951930164X-gr1.jpg" /></p>
+<p>The above mechanism is called Proof-of-Work which stops spamming of artifically generated bad blocks.</p>
 </section>
 </section>
-<section id="adversarial-attack" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Adversarial Attack</h1>
-<section id="making-fake-transactions" class="level2" data-number="3.1">
-<h2 data-number="3.1"><span class="header-section-number">3.1</span> Making fake transactions</h2>
-<p>The adversary(receiver) is to forge a fake transaction.<br />
-Won’t work because the private-key is linked to the identity of the (sender).<br />
-Imagine if the adversary(receiver) did fake a transaction from the victim(sender), anyone could tell it was fake by taking the victim(sender) public key to verify the signature.</p>
-<p><img src="https://www.cryptocompare.com/media/1284/digital_signature.png" /></p>
+<section id="adversarial-attack" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Adversarial Attack</h1>
+<section id="making-fake-transactions" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Making fake transactions</h2>
+<p>Lets say evil wants to forge a fake transaction.</p>
+<ul>
+<li>Evil makes a transaction with a fake forged signature that pretends to be you.<br />
+</li>
+<li>Everyone can just look at your wallet public key and check if the signature is valid.</li>
+</ul>
+<p>Only a transaction that is signed with your wallet’s private key is valid.</p>
 </section>
-<section id="doubling-transaction" class="level2" data-number="3.2">
-<h2 data-number="3.2"><span class="header-section-number">3.2</span> Doubling transaction</h2>
-<p>Example. Say we have a chain [Block Genesis…Block P, Block Q]<br />
-An adversary wants to modify Block Q BUT to do so he must</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MinimalBlock():</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, index, timestamp, data, previous_hash):</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.index <span class="op">=</span> index</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.timestamp <span class="op">=</span> timestamp</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.previous_hash <span class="op">=</span> previous_hash</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">hash</span> <span class="op">=</span> <span class="va">self</span>.hashing()</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> hashing(<span class="va">self</span>):</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        key <span class="op">=</span> hashlib.sha256()</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        encodeUTF8 <span class="op">=</span> <span class="kw">lambda</span> x: <span class="bu">str</span>(x).encode(<span class="st">&quot;utf-8&quot;</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> encodeUTF8(<span class="va">self</span>.index <span class="op">+</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                          <span class="va">self</span>.timestamp <span class="op">+</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                          <span class="va">self</span>.data <span class="op">+</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                          <span class="va">self</span>.previous_hash)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.index).encode(<span class="st">'utf-8'</span>))</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.timestamp).encode(<span class="st">'utf-8'</span>))</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.data).encode(<span class="st">'utf-8'</span>))</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        key.update(<span class="bu">str</span>(<span class="va">self</span>.previous_hash).encode(<span class="st">'utf-8'</span>))</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> key.hexdigest()</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MinimalChain():</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>): <span class="co"># initialize when creating a chain</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.blocks <span class="op">=</span> [<span class="va">self</span>.get_genesis_block()]</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_genesis_block(<span class="va">self</span>): </span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> MinimalBlock(<span class="dv">0</span>, </span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                            datetime.datetime.utcnow(), </span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Genesis'</span>, </span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'arbitrary'</span>)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add_block(<span class="va">self</span>, data):</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.blocks.append(MinimalBlock(<span class="bu">len</span>(<span class="va">self</span>.blocks), </span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>                                        datetime.datetime.utcnow(), </span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>                                        data, </span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                                        <span class="va">self</span>.blocks[<span class="bu">len</span>(<span class="va">self</span>.blocks)<span class="op">-</span><span class="dv">1</span>].<span class="bu">hash</span>))</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_chain_size(<span class="va">self</span>): <span class="co"># exclude genesis block</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.blocks)<span class="op">-</span><span class="dv">1</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> verify(<span class="va">self</span>, verbose<span class="op">=</span><span class="va">True</span>): </span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        flag <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="bu">len</span>(<span class="va">self</span>.blocks)):</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i].index <span class="op">!=</span> i:</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Wrong block index at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i<span class="op">-</span><span class="dv">1</span>].<span class="bu">hash</span> <span class="op">!=</span> <span class="va">self</span>.blocks[i].previous_hash:</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Wrong previous hash at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i].<span class="bu">hash</span> <span class="op">!=</span> <span class="va">self</span>.blocks[i].hashing():</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Wrong hash at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i<span class="op">-</span><span class="dv">1</span>].timestamp <span class="op">&gt;=</span> <span class="va">self</span>.blocks[i].timestamp:</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> verbose:</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'Backdating at block </span><span class="sc">{i}</span><span class="ss">.'</span>)</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> flag</span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fork(<span class="va">self</span>, head<span class="op">=</span><span class="st">'latest'</span>):</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> head <span class="kw">in</span> [<span class="st">'latest'</span>, <span class="st">'whole'</span>, <span class="st">'all'</span>]:</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> copy.deepcopy(<span class="va">self</span>) <span class="co"># deepcopy since they are mutable</span></span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>            c <span class="op">=</span> copy.deepcopy(<span class="va">self</span>)</span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>            c.blocks <span class="op">=</span> c.blocks[<span class="dv">0</span>:head<span class="op">+</span><span class="dv">1</span>]</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> c</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_root(<span class="va">self</span>, chain_2):</span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        min_chain_size <span class="op">=</span> <span class="bu">min</span>(<span class="va">self</span>.get_chain_size(), chain_2.get_chain_size())</span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,min_chain_size<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.blocks[i] <span class="op">!=</span> chain_2.blocks[i]:</span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">self</span>.fork(i<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.fork(min_chain_size)</span></code></pre></div>
+<section id="doubling-transaction-and-prevhash" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Doubling transaction and prevhash</h2>
+<blockquote>
+<p><strong>you can only choose one of many possible futures</strong></p>
+</blockquote>
+<ul>
+<li>Evil submits 2 transactions at the same time
+<ol type="1">
+<li>newblockX + prevhash: Accepted</li>
+<li>newblockY + prevhash: Rejected due to bad prevhash
+<ul>
+<li>the newblockY needs <strong>newprevhash</strong> = hash(newblockX+prevhash)</li>
+</ul></li>
+</ol>
+<ul>
+<li><strong>Impossible for both transactions to be added</strong>
+<ul>
+<li>if you add newblockX first, and tried to add newblockY, it would require a new prevhash that accounts for the added newblockX. (same argument if you add newblockY first)</li>
+</ul></li>
+</ul></li>
+<li>We cant add both but we can still have 2 different chains with the same history floating around.
+<ul>
+<li>The “true” chain will be the one that has the most confirmations.</li>
+</ul></li>
+</ul>
+<p>This means that you may not know which transaction will pass and which will be rejected if you somehow spend at the same time.</p>
+<p>summary:<br />
+<strong>prevhash is a mutating constraint which emulates a lock.</strong><br />
+<strong>To add a block to the chain, one must fulfil the constraint but once the constraint is fulfilled, it obsoletes all other block additions since a new constraint(newprevhash) must be fulfilled.</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> stringify(<span class="op">*</span>args):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    toStr <span class="op">=</span> <span class="kw">lambda</span> x: <span class="st">''</span>.join(<span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">str</span>,x)))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    strData <span class="op">=</span> toStr(<span class="bu">list</span>(args))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> strData</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hashing(stringdata):</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> hashlib.sha256()</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    key.update(stringdata.encode(<span class="st">&quot;utf-8&quot;</span>))</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> key.hexdigest()</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Block():</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, index, timestamp, data, prevBlockhash, selfhash):</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.index <span class="op">=</span> index</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.timestamp <span class="op">=</span> timestamp</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.prevBlockhash <span class="op">=</span> prevBlockhash</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.selfhash <span class="op">=</span> selfhash</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> stringify(<span class="va">self</span>.index,<span class="va">self</span>.timestamp,<span class="va">self</span>.data,<span class="va">self</span>.prevBlockhash)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> verify(chain):</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    ChainLength <span class="op">=</span> <span class="bu">len</span>(chain)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>ChainLength<span class="sc">}</span><span class="ss"> is length of blockchain</span><span class="ch">\n</span><span class="ss">&quot;</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> validatePrevBlockhash(k):</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        CurrBlockPresentation <span class="op">=</span> chain[k].prevBlockhash</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        manualHashPrev <span class="op">=</span> hashing(<span class="bu">str</span>(chain[k<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> manualHashPrev <span class="op">!=</span> CurrBlockPresentation:</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f&quot;&quot;&quot;</span><span class="sc">{k}</span><span class="ss">:current-block presents PREVIOUS block hash as: </span><span class="sc">{</span>CurrBlockPresentation<span class="sc">}</span><span class="ss"> </span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="ss">manual hashing of the previous block in chain: </span><span class="sc">{</span>manualHashPrev<span class="sc">}</span><span class="ss"> </span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="ss">Current-block is malicious and tampered with chain history thus altering the previous block hash</span><span class="ch">\n</span><span class="ss">&quot;&quot;&quot;</span>)</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> validateCurrBlockData(k):</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>        CurrBlockPresentation <span class="op">=</span> chain[k].selfhash</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>        manualHashCurr <span class="op">=</span> hashing(<span class="bu">str</span>(chain[k]))</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> manualHashCurr <span class="op">!=</span> CurrBlockPresentation:</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f&quot;&quot;&quot;</span><span class="sc">{k}</span><span class="ss">:current-block presents a hash of: </span><span class="sc">{</span>CurrBlockPresentation<span class="sc">}</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="ss">Manual hashing of current blocks data shows a hash of: </span><span class="sc">{</span>manualHashCurr<span class="sc">}</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="ss">Malicious Current-block is not presenting a valid hash for it's data</span><span class="ch">\n</span><span class="ss">&quot;&quot;&quot;</span>)</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>                  </span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> validateIndexOrdering(k):</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>        CurrBlockPresentation <span class="op">=</span> chain[k].index</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>        manualChainIndex <span class="op">=</span> k</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> manualChainIndex <span class="op">!=</span> CurrBlockPresentation:</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f&quot;&quot;&quot;</span><span class="sc">{k}</span><span class="ss">:current-block presents index of </span><span class="sc">{</span>CurrBlockPresentation<span class="sc">}</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="ss">Iterating the chain shows an index of </span><span class="sc">{k}</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="ss">Current-block may have been too slow to add to chain, or a malicious actor is trying to reorder chain</span><span class="ch">\n</span><span class="ss">&quot;&quot;&quot;</span>)</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>                  </span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> validateTimeStampOrdering(k):</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> chain[k<span class="op">-</span><span class="dv">1</span>].timestamp <span class="op">&gt;=</span> chain[k].timestamp:</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f&quot;&quot;&quot;</span><span class="sc">{k}</span><span class="ss">:current-block presents date as </span><span class="sc">{</span>chain[k]<span class="sc">.</span>timestamp<span class="sc">}</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="ss">previous block was dated </span><span class="sc">{</span>chain[k<span class="op">-</span><span class="dv">1</span>]<span class="sc">.</span>timestamp<span class="sc">}</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="ss">Currentblock may have been too slow to add to chain, or a malicious actor is trying to reorder chain</span><span class="ch">\n</span><span class="ss">&quot;&quot;&quot;</span>)</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(ChainLength):</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>        validateCurrBlockData(i)</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>        validateIndexOrdering(i)</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>            validatePrevBlockhash(i)</span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>            validateTimeStampOrdering(i)</span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="co"># dummyblockhash = hashing(str(&quot;blah&quot;))</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>mychain <span class="op">=</span> []</span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>FirstBlockData <span class="op">=</span> (<span class="dv">0</span>,datetime.datetime.utcnow(),<span class="st">&quot;Genesis&quot;</span>,<span class="st">&quot;NoPrevBlockHash&quot;</span>)</span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>selfhash1st <span class="op">=</span> hashing(stringify(<span class="op">*</span>FirstBlockData))</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>FirstBlock <span class="op">=</span> Block(<span class="op">*</span>FirstBlockData,selfhash1st)</span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>mychain <span class="op">=</span> [FirstBlock]</span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>SecondBlockData <span class="op">=</span> (<span class="dv">1</span>,datetime.datetime.utcnow(),<span class="st">&quot;afsaw&quot;</span>,selfhash1st)</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>selfhash2nd <span class="op">=</span> hashing(stringify(<span class="op">*</span>SecondBlockData))</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>SecondBlock <span class="op">=</span> Block(<span class="op">*</span>SecondBlockData,selfhash2nd)</span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>mychain <span class="op">=</span> mychain <span class="op">+</span> [SecondBlock]</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>ThirdBlockData <span class="op">=</span> (<span class="dv">2</span>,datetime.datetime.utcnow(),<span class="st">&quot;esfr&quot;</span>,selfhash2nd)</span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>selfhash3rd <span class="op">=</span> hashing(stringify(<span class="op">*</span>ThirdBlockData))</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>ThirdBlock <span class="op">=</span> Block(<span class="op">*</span>ThirdBlockData,selfhash3rd)</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>mychain <span class="op">=</span> mychain <span class="op">+</span> [ThirdBlock]</span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>BadBlockData <span class="op">=</span> (<span class="dv">1</span>,datetime.datetime.utcnow()<span class="op">-</span>datetime.timedelta(seconds<span class="op">=</span><span class="dv">2</span>),<span class="st">&quot;awefaw&quot;</span>,selfhash1st)</span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>selfhashBad <span class="op">=</span> hashing(stringify(<span class="op">*</span>BadBlockData))</span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>BadBlock <span class="op">=</span> Block(<span class="op">*</span>BadBlockData,selfhashBad)</span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>mychain <span class="op">=</span> mychain <span class="op">+</span> [BadBlock]</span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>verify(mychain)</span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 is length of blockchain</span></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="co"># `3:` refers the the 4th block aka BadBlock</span></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a><span class="co"># 3:current-block presents index of 1</span></span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterating the chain shows an index of 3</span></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Current-block may have been too slow to add to chain, or a malicious actor is trying to reorder chain</span></span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="co"># 3:current-block presents PREVIOUS block hash as: 4feac5456f60ae87430efc3aa70be96ad7285a897e5c2fc36240bb391ebe04bd </span></span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a><span class="co"># manual hashing of the previous block in chain: 2ff87d74f8f4ee982a034b916d1246364a95b6078817bcc41aa2a43f4f2b8943 </span></span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Current-block is malicious and tampered with chain history thus altering the previous block hash</span></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="co"># 3:current-block presents date as 2022-04-21 05:13:07.327116</span></span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="co"># previous block was dated 2022-04-21 05:13:09.326804</span></span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="co"># Currentblock may have been too slow to add to chain, or a malicious actor is trying to reorder chain</span></span></code></pre></div>
 </section>
+</section>
+<section id="aside" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Aside</h1>
+<p>Hashing data just means:</p>
+<ol type="1">
+<li>convert data to string</li>
+<li>append string together</li>
+<li>hash this new string</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>TESTindex <span class="op">=</span> <span class="dv">0</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>TESTtimestamp <span class="op">=</span> datetime.datetime.utcnow()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>TESTdata <span class="op">=</span> <span class="st">'Genesis'</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>TESTprevious_hash <span class="op">=</span> <span class="st">'arbitrary'</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>TESTkeyA <span class="op">=</span> hashlib.sha256()</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>TESTkeyB <span class="op">=</span> hashlib.sha256()</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>encodeUTF8 <span class="op">=</span> <span class="kw">lambda</span> x: <span class="bu">str</span>(x).encode(<span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>toStr <span class="op">=</span> <span class="kw">lambda</span> x: <span class="st">''</span>.join(<span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">str</span>,x)))</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>prehashA <span class="op">=</span> toStr([TESTindex,TESTtimestamp,TESTdata,TESTprevious_hash])</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>TESTkeyA.update(prehashA)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>TESTkeyB.update(encodeUTF8(TESTindex))</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>TESTkeyB.update(encodeUTF8(TESTtimestamp))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>TESTkeyB.update(encodeUTF8(TESTdata))</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>TESTkeyB.update(encodeUTF8(TESTprevious_hash))</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> TESTkeyA.hexdigest() <span class="op">==</span> TESTkeyB.hexdigest()</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prehashA)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#'02022-04-21 03:22:57.863939Genesisarbitrary'</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(TESTkeyA)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(TESTkeyB)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co">#'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'</span></span></code></pre></div>
 </section>
 
         </div>
@@ -287,64 +444,67 @@ An adversary wants to modify Block Q BUT to do so he must</p>
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

@@ -3,8 +3,19 @@ title: Kubernetes
 tags: tech,mathcs,AI,musings
 ---
 
-# Sunmmary
+# Setup
 
+* Install minikube which will install kubectl inside
+* kubectl is our main function we use 
+
+```bash
+minikube kubectl -- verion -- client
+#note that MUST be space between -- and flags
+```
+
+# Summary
+
+* Container :: Pod :: Node
 * $\{Pod...\} \in Node$
 * $\{Container...\} \in Pod$
 * A Node controls labeled sets of containers called pods.

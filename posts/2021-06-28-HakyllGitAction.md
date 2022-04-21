@@ -13,6 +13,12 @@ tags: tech, prog, HakyllSetupSeries, DevOps
 6. [Table Of Content in Hakyll](2021-10-01-TableOfContent.html)
 7. [Hakyll Access on LAN server](2021-11-07-HakyllAccessOnLAN.html)
 
+# python scripting
+
+`python -c “print ('\xef' * 20)”` to run python in bash without needing to save a file  
+
+`echo 6 | python -c "a=input(); print(a)"` cool way to pipe output to python
+
 # Autogenerate static site on git push to github
 
 Building a Hakyll site from source takes an hour the first time you do it.  

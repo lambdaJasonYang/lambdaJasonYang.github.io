@@ -113,4 +113,27 @@ toc: y
 
 ```
 
+
+### Draw a line
+
 ```js
+graphic: [{
+      elements: [{
+        id: 'small_circle',
+        type: 'line',
+        z: 100,
+        shape:{
+          x1:0,
+          y1:0,
+          x2:50,
+          y2:50
+        
+        },
+        style: {
+          fill: 'rgba(0, 140, 250, 0.5)',
+          stroke: 'rgba(0, 50, 150, 0.5)',
+          lineWidth: 2,
+        }
+      }]
+    }]
+```

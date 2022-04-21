@@ -116,17 +116,51 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#chapter-2"><span class="toc-section-number">1</span> Chapter 2</a>
+<li><a href="#loading-big-data"><span class="toc-section-number">1</span> Loading big data</a>
 <ul>
-<li><a href="#sql-relational-drawback"><span class="toc-section-number">1.1</span> SQL relational drawback</a></li>
-<li><a href="#nosql-json-trees"><span class="toc-section-number">1.2</span> noSQL JSON Trees</a></li>
-<li><a href="#sql-vs-nosql"><span class="toc-section-number">1.3</span> SQL vs NoSQL</a></li>
+<li><a href="#pandas"><span class="toc-section-number">1.1</span> Pandas</a></li>
+</ul></li>
+<li><a href="#chapter-2"><span class="toc-section-number">2</span> Chapter 2</a>
+<ul>
+<li><a href="#sql-relational-drawback"><span class="toc-section-number">2.1</span> SQL relational drawback</a></li>
+<li><a href="#nosql-json-trees"><span class="toc-section-number">2.2</span> noSQL JSON Trees</a></li>
+<li><a href="#sql-vs-nosql"><span class="toc-section-number">2.3</span> SQL vs NoSQL</a></li>
 </ul></li>
 </ul></div>
-<section id="chapter-2" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Chapter 2</h1>
-<section id="sql-relational-drawback" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> SQL relational drawback</h2>
+<section id="loading-big-data" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Loading big data</h1>
+<section id="pandas" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Pandas</h2>
+<ul>
+<li><code>series.astype("Sparse[str]")</code> Sparse series for tables with lots of missing data</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tot <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> pd.read_csv(<span class="st">&quot;test.csv&quot;</span>,chunksize<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  tot <span class="op">+=</span> i[<span class="st">&quot;price&quot;</span>].<span class="bu">sum</span>()</span></code></pre></div>
+<p>Server is sqlalchemy, Client is pandas. We want to get Server side cursors (streaming) to lazy fetch when the client pandas needs it.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_sql_using_pandas():</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    engine <span class="op">=</span> create_engine(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;postgresql://postgres:pass@localhost/example&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    conn <span class="op">=</span> engine.<span class="ex">connect</span>().execution_options(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        stream_results<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> chunk_dataframe <span class="kw">in</span> pd.read_sql(</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;SELECT * FROM users&quot;</span>, conn, chunksize<span class="op">=</span><span class="dv">1000</span>):</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;Got dataframe w/</span><span class="sc">{</span><span class="bu">len</span>(chunk_dataframe)<span class="sc">}</span><span class="ss"> rows&quot;</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ... do something with dataframe ...</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    process_sql_using_pandas()</span></code></pre></div>
+</section>
+</section>
+<section id="chapter-2" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Chapter 2</h1>
+<section id="sql-relational-drawback" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> SQL relational drawback</h2>
 <ul>
 <li>Requires a translational layer between your application code and database data
 <ul>
@@ -134,11 +168,11 @@
 </ul></li>
 </ul>
 </section>
-<section id="nosql-json-trees" class="level2" data-number="1.2">
-<h2 data-number="1.2"><span class="header-section-number">1.2</span> noSQL JSON Trees</h2>
+<section id="nosql-json-trees" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> noSQL JSON Trees</h2>
 </section>
-<section id="sql-vs-nosql" class="level2" data-number="1.3">
-<h2 data-number="1.3"><span class="header-section-number">1.3</span> SQL vs NoSQL</h2>
+<section id="sql-vs-nosql" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> SQL vs NoSQL</h2>
 <ul>
 <li>SQL better support for joins, many-one relation, many-many relation</li>
 <li>NoSQL schema flexibility, better performance due to locality, tree-like structure like JSON</li>
@@ -163,64 +197,67 @@
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

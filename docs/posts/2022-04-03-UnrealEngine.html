@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=100, initial-scale=0.5">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Unreal Engine and Android Setup</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Unreal Engine and Android Setup</h1>
+            
+
+            <div class="info">
+    Posted on April  3, 2022
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
+    
+</div>
+<p>For Windows, we will fix 3 errors</p>
+<p>1st Error</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Unable</span> to locate local Android SDK location. Did you run Android Studio after installing<span class="pp">?</span></span></code></pre></div>
+<p>2st Error</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Android</span> Studio Path: D:<span class="dt">\P</span>rogram Files<span class="dt">\A</span>ndroid<span class="dt">\A</span>ndroid Studio</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Android</span> Studio SDK Path: C:<span class="dt">\U</span>sers<span class="dt">\M</span>yPC<span class="dt">\A</span>ppData<span class="dt">\L</span>ocal<span class="dt">\A</span>ndroid<span class="dt">\S</span>dk</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">\Nmap</span> ...</span></code></pre></div>
+<p>3nd Error</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Exception</span> in thread <span class="st">&quot;main&quot;</span> java.lang.NoClassDefFoundError: javax/xml/bind/annotation/XmlSchema</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> com.android.repository.api.SchemaModule<span class="va">$SchemaModuleVersion</span>.<span class="op">&lt;</span>init<span class="op">&gt;(</span><span class="ex">SchemaModule.java:156</span><span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> com.android.repository.api.SchemaModule.<span class="op">&lt;</span>init<span class="op">&gt;(</span><span class="ex">SchemaModule.java:75</span><span class="op">)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> com.android.sdklib.repository.AndroidSdkHandler.<span class="op">&lt;</span>clinit<span class="op">&gt;(</span><span class="ex">AndroidSdkHandler.java:81</span><span class="op">)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> com.android.sdklib.tool.sdkmanager.SdkManagerCli.main<span class="er">(</span><span class="ex">SdkManagerCli.java:73</span><span class="kw">)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> com.android.sdklib.tool.sdkmanager.SdkManagerCli.main<span class="er">(</span><span class="ex">SdkManagerCli.java:48</span><span class="kw">)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Caused</span> by: java.lang.ClassNotFoundException: javax.xml.bind.annotation.XmlSchema</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> java.base/jdk.internal.loader.BuiltinClassLoader.loadClass<span class="er">(</span><span class="ex">BuiltinClassLoader.java:581</span><span class="kw">)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> java.base/jdk.internal.loader.ClassLoaders<span class="va">$AppClassLoader</span>.loadClass<span class="er">(</span><span class="ex">ClassLoaders.java:178</span><span class="kw">)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> java.base/java.lang.ClassLoader.loadClass<span class="er">(</span><span class="ex">ClassLoader.java:522</span><span class="kw">)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="ex">...</span> 5 more</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Update</span> failed. Please check the Android Studio install.</span></code></pre></div>
+<section id="fix" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Fix</h1>
+<section id="fix-1" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Fix 1</h2>
+<pre class="bat"><code>set ANDROID_LOCAL=%LOCALAPPDATA%\Android\Sdk
+set ANDROID_LOCAL=D:\AppData\Local\Android\Sdk</code></pre>
+</section>
+<section id="fix-2" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Fix 2</h2>
+<p>In the <code>SetupAndroid.bat</code> file add usebackq, to the</p>
+<pre class="bat"><code>FOR /F &quot;tokens=2* usebackq&quot; %%A IN ('REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;') DO (set USERPATH=%%B)</code></pre>
+</section>
+<section id="fix-3" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> Fix 3</h2>
+<p>Remove JAVA_HOME from environmental variables path.</p>
+<pre class="bat"><code>set SDKMANAGER=%STUDIO_SDK_PATH%\tools\bin\sdkmanager.bat
+set SDKMANAGER=%STUDIO_SDK_PATH%\cmdline-tools\latest\bin\sdkmanager.bat</code></pre>
+<pre class="bat"><code>@echo off
+setlocal ENABLEEXTENSIONS
+setlocal ENABLEDELAYEDEXPANSION
+set KEY_NAME=HKLM\SOFTWARE\Android Studio
+set VALUE_NAME=Path
+set STUDIO_PATH=
+
+IF &quot;%5&quot; == &quot;-noninteractive&quot; (
+	set PAUSE=
+) ELSE (
+	set PAUSE=pause
+)
+
+SET PLATFORMS_VERSION=%1
+SET BUILDTOOLS_VERSION=%2
+SET CMAKE_VERSION=%3
+SET NDK_VERSION=%4
+
+rem hardcoded versions for compatibility with non-Turnkey manual running
+if &quot;%PLATFORMS_VERSION%&quot; == &quot;&quot; SET PLATFORMS_VERSION=android-30
+if &quot;%BUILDTOOLS_VERSION%&quot; == &quot;&quot; SET BUILDTOOLS_VERSION=30.0.3
+if &quot;%CMAKE_VERSION%&quot; == &quot;&quot; SET CMAKE_VERSION=3.10.2.4988404
+if &quot;%NDK_VERSION%&quot; == &quot;&quot; SET NDK_VERSION=21.4.7075529
+
+
+FOR /F &quot;tokens=2*&quot; %%A IN ('REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;') DO (set STUDIO_PATH=%%B)
+
+IF EXIST &quot;%STUDIO_PATH%&quot; (
+	echo.
+	) ELSE (
+	echo Android Studio not installed, please download Android Studio 3.5.3 from https://developer.android.com/studio
+	%PAUSE%
+	exit /b 1
+)
+echo Android Studio Path: %STUDIO_PATH%
+
+set VALUE_NAME=SdkPath
+set STUDIO_SDK_PATH=
+FOR /F &quot;tokens=2*&quot; %%A IN ('REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;') DO (set STUDIO_SDK_PATH=%%B)
+
+set ANDROID_LOCAL=%LOCALAPPDATA%\Android\Sdk
+set ANDROID_LOCAL=D:\AppData\Local\Android\Sdk
+
+if &quot;%STUDIO_SDK_PATH%&quot; == &quot;&quot; (
+	IF EXIST &quot;%ANDROID_LOCAL%&quot; (
+		set STUDIO_SDK_PATH=%ANDROID_LOCAL%
+	) ELSE (
+		IF EXIST &quot;%ANDROID_HOME%&quot; (
+			set STUDIO_SDK_PATH=%ANDROID_HOME%
+		) ELSE (
+			echo Unable to locate local Android SDK location. Did you run Android Studio after installing?
+			%PAUSE%
+			exit /b 2
+		)
+	)
+)
+echo Android Studio SDK Path: %STUDIO_SDK_PATH%
+
+if DEFINED ANDROID_HOME (set a=1) ELSE (
+	set ANDROID_HOME=%STUDIO_SDK_PATH%
+	setx ANDROID_HOME &quot;%STUDIO_SDK_PATH%&quot;
+)
+if DEFINED JAVA_HOME (set a=1) ELSE (
+	set JAVA_HOME=%STUDIO_PATH%\jre
+	setx JAVA_HOME &quot;%STUDIO_PATH%\jre&quot;
+)
+set NDKINSTALLPATH=%STUDIO_SDK_PATH%\ndk\%NDK_VERSION%
+set PLATFORMTOOLS=%STUDIO_SDK_PATH%\platform-tools;%STUDIO_SDK_PATH%\tools
+
+set KEY_NAME=HKCU\Environment
+set VALUE_NAME=Path
+set USERPATH=
+
+FOR /F &quot;tokens=2* usebackq&quot; %%A IN ('REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;') DO (set USERPATH=%%B)
+
+where.exe /Q adb.exe
+
+echo &quot;%ERRORLEVEL%&quot;
+IF /I &quot;%ERRORLEVEL%&quot; NEQ &quot;0&quot; (
+	echo Current user path: %USERPATH%
+	setx PATH &quot;%USERPATH%;%PLATFORMTOOLS%&quot;
+	echo Added %PLATFORMTOOLS% to path
+
+)
+echo %STUDIO_SDK_PATH%
+echo %PLATFORMTOOLS%
+set SDKMANAGER=%STUDIO_SDK_PATH%\tools\bin\sdkmanager.bat
+set SDKMANAGER=%STUDIO_SDK_PATH%\cmdline-tools\latest\bin\sdkmanager.bat
+IF EXIST &quot;%SDKMANAGER%&quot; (
+	echo Using sdkmanager: %SDKMANAGER%
+) ELSE (
+	set SDKMANAGER=%STUDIO_SDK_PATH%\cmdline-tools\latest\bin\sdkmanager.bat
+	IF EXIST &quot;!SDKMANAGER!&quot; (
+		echo Using sdkmanager: !SDKMANAGER!
+	) ELSE (
+		echo Unable to locate sdkmanager.bat. Did you run Android Studio and install cmdline-tools after installing?
+		%PAUSE%
+		exit /b 3
+	)
+)
+
+call &quot;%SDKMANAGER%&quot; &quot;platform-tools&quot; &quot;platforms;%PLATFORMS_VERSION%&quot; &quot;build-tools;%BUILDTOOLS_VERSION%&quot; &quot;cmake;%CMAKE_VERSION%&quot; &quot;ndk;%NDK_VERSION%&quot;
+
+IF /I &quot;%ERRORLEVEL%&quot; NEQ &quot;0&quot; (
+	echo Update failed. Please check the Android Studio install.
+	%PAUSE%
+	exit /b 4
+)
+
+if EXIST &quot;%NDKINSTALLPATH%&quot; (
+	echo Success!
+	setx NDKROOT &quot;%NDKINSTALLPATH%&quot;
+	setx NDK_ROOT &quot;%NDKINSTALLPATH%&quot;
+) ELSE (
+	echo Update failed. Did you accept the license agreement?
+	%PAUSE%
+	exit /b 5
+)
+
+%PAUSE%
+exit /b 0
+</code></pre>
+</section>
+</section>
+<section id="unreal-engine-settings" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Unreal engine settings</h1>
+<p>Go to Edit &gt;&gt; Project Settings &gt;&gt; Platforms &gt;&gt; Android SDK</p>
+<p>Location of Android SDK: D:/AppData/Local/Android/Sdk<br />
+Location of Android NDK: D:/AppData/Local/Android/Sdk/ndk/21.4.7075529<br />
+Location of JAVA: D:/Program Files/Android/Android Studio/jre</p>
+<p>WARNING - Location of Android NDK cannot be just the ndk folder, it must be the specific subfolder 21.4.7075529 which represents the version of NDK that unreal engine uses.</p>
+</section>
+<section id="exporting-apk" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> exporting apk</h1>
+<ol type="1">
+<li>Generate Signing</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">D:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> D:<span class="dt">\P</span>rogram Files<span class="dt">\A</span>ndroid<span class="dt">\A</span>ndroid Studio<span class="dt">\j</span>re<span class="dt">\b</span>in</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">keytool</span> <span class="at">-genkey</span> <span class="at">-v</span> <span class="at">-keystore</span> key.keystore <span class="at">-alias</span> Mykey <span class="at">-keyalg</span> RSA <span class="at">-keysize</span> 2048 <span class="at">-validity</span> 10000 </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#this will generate a key.keystore file</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#copy this key.keystore file to your unreal project build android folder</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#C:\Users\MyPC\Documents\Unreal Projects\Bleh\Build\Android</span></span></code></pre></div>
+<p>Remember:<br />
+alias: Mykey<br />
+password: *****</p>
+<p>Modify Unreal engine settings to include the keystore</p>
+<p>Go to Settings<br />
+Build Configuration: Shipping<br />
+Full Rebuild: Checked<br />
+For Distribution: Checked</p>
+<p>Go to Platform &gt;&gt; Android &gt;&gt; Use Project Setting(Shipping) Checked</p>
+<section id="for-playstore" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> For playstore</h2>
+<p>In Project Settings &gt;&gt; Android:</p>
+<ul>
+<li><strong>YOU MUST UNCHECK “Package game data inside .apk”</strong> or else the size will be 6 times bigger which will be rejected by play store.<br />
+</li>
+<li>Target SDK verion : 30 , as of 2022 or else play store rejects<br />
+</li>
+<li>Check “Disable verify OBB on first start/update”</li>
+<li>Remember to increase “Store Version” if updating app</li>
+</ul>
+</section>
+<section id="build" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Build</h2>
+<p>Platform &gt;&gt; Android &gt;&gt; Click Package Project<br />
+Make a new folder for the output files</p>
+</section>
+</section>
+<section id="aside" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Aside</h1>
+<p>double-check if your keystore pass</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">keytool</span> <span class="at">-list</span> <span class="at">-keystore</span> <span class="op">&lt;</span>keystorefile<span class="op">&gt;</span> -storepass <span class="op">&lt;</span>passwordtocheck<span class="op">&gt;</span></span></code></pre></div>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

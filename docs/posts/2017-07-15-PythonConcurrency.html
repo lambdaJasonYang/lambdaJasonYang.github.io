@@ -121,6 +121,9 @@
 <li>Use Async</li>
 <li>example: web client requests/downloads(IO)</li>
 </ul></li>
+</ul>
+<!--  -->
+<ul>
 <li>Content from Server IO-bound , Fast IO , Limited Connections
 <ul>
 <li>Use Multi-thread</li>
@@ -130,8 +133,9 @@
 <li>Use Multi-processing</li>
 </ul></li>
 </ul>
-<section id="threading" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Threading</h4>
+<p><del>hello</del></p>
+<section id="threading" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Threading</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> threading</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fstThread(): <span class="co">#parent thread</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    sndThread <span class="op">=</span> threading.Thread(target<span class="op">=</span>someFunction,args<span class="op">=</span>(<span class="dv">2</span>,))</span>
@@ -145,8 +149,8 @@
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;2 from Thread-6</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;1 from MainThread</span></span></code></pre></div>
 </section>
-<section id="multiprocessing" class="level4" data-number="0.0.0.2">
-<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Multiprocessing</h4>
+<section id="multiprocessing" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Multiprocessing</h1>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> multiprocessing</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fstProcess():</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    sndProcess <span class="op">=</span> multiprocessing.Process(target<span class="op">=</span>someFunctionA,args<span class="op">=</span>(<span class="dv">2</span>,))</span>
@@ -158,9 +162,8 @@
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>fstProcess()</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">##Note using IDLE or Jupyter, the Child process shows no output </span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">##Using python script the output would look similar to the threading output, 2 prints</span></span></code></pre></div>
-</section>
-<section id="race-condition" class="level4" data-number="0.0.0.3">
-<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> Race condition</h4>
+<section id="race-condition" class="level4" data-number="2.0.0.1">
+<h4 data-number="2.0.0.1"><span class="header-section-number">2.0.0.1</span> Race condition</h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> threading</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> sleep</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -176,8 +179,8 @@
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>inc()</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;count is </span><span class="sc">{</span>count[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">&quot;</span>) <span class="co">#output is sometimes 2, sometimes 1</span></span></code></pre></div>
 </section>
-<section id="producer-consumer-non-synchronized" class="level4" data-number="0.0.0.4">
-<h4 data-number="0.0.0.4"><span class="header-section-number">0.0.0.4</span> Producer Consumer non-synchronized</h4>
+<section id="producer-consumer-non-synchronized" class="level4" data-number="2.0.0.2">
+<h4 data-number="2.0.0.2"><span class="header-section-number">2.0.0.2</span> Producer Consumer non-synchronized</h4>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> threading</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> sleep</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -197,8 +200,8 @@
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    Commands.append(<span class="st">&quot;go&quot;</span>)</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>produce()</span></code></pre></div>
 </section>
-<section id="producer-consumer-synchronized" class="level4" data-number="0.0.0.5">
-<h4 data-number="0.0.0.5"><span class="header-section-number">0.0.0.5</span> Producer Consumer synchronized</h4>
+<section id="producer-consumer-synchronized" class="level4" data-number="2.0.0.3">
+<h4 data-number="2.0.0.3"><span class="header-section-number">2.0.0.3</span> Producer Consumer synchronized</h4>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> queue <span class="im">import</span> Queue</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>queue <span class="op">=</span> Queue()</span>
@@ -218,8 +221,8 @@
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>synchronized_produce()</span></code></pre></div>
 </section>
-<section id="lock" class="level4" data-number="0.0.0.6">
-<h4 data-number="0.0.0.6"><span class="header-section-number">0.0.0.6</span> Lock</h4>
+<section id="lock" class="level4" data-number="2.0.0.4">
+<h4 data-number="2.0.0.4"><span class="header-section-number">2.0.0.4</span> Lock</h4>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>seen <span class="op">=</span> <span class="bu">set</span>()  <span class="co">##The set that we will sychronize with a lock</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>seen_lock <span class="op">=</span> threading.Lock()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -230,8 +233,8 @@
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span></code></pre></div>
 </section>
-<section id="barrier" class="level4" data-number="0.0.0.7">
-<h4 data-number="0.0.0.7"><span class="header-section-number">0.0.0.7</span> Barrier</h4>
+<section id="barrier" class="level4" data-number="2.0.0.5">
+<h4 data-number="2.0.0.5"><span class="header-section-number">2.0.0.5</span> Barrier</h4>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>counters <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>barrier <span class="op">=</span> threading.Barrier(<span class="dv">2</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -250,8 +253,8 @@
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>threaded_count(<span class="dv">10</span>)</span></code></pre></div>
 </section>
-<section id="message-passing" class="level4" data-number="0.0.0.8">
-<h4 data-number="0.0.0.8"><span class="header-section-number">0.0.0.8</span> Message passing</h4>
+<section id="message-passing" class="level4" data-number="2.0.0.6">
+<h4 data-number="2.0.0.6"><span class="header-section-number">2.0.0.6</span> Message passing</h4>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_consume(in_pipe):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        item <span class="op">=</span> in_pipe.recv()</span>
@@ -268,6 +271,7 @@
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    pipe[<span class="dv">1</span>].send(<span class="va">None</span>) <span class="co"># done signal</span></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>process_produce()</span></code></pre></div>
+</section>
 </section>
 
         </div>
@@ -287,64 +291,67 @@
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

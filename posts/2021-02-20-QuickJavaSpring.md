@@ -62,9 +62,13 @@ public class Alien {
     }
 ```
 
-# Bean
+# IOC
 
 Bean is just a java class with private variable, getters and setters
 
 * `ConfigurableApplicationContext context` is the IOC container. 
   * `context.getBean(Alien.class);` indicates that context can build the Alien bean meaning context is a bean factory.
+
+# Proxy pattern
+
+* A proxy wraps around all objects\

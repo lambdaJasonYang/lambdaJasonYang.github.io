@@ -3,10 +3,7 @@ title: Stochastic calculus and brownian motion
 tags: prog, python, mathcs, appliedmath
 ---
 
----
-title: Stochastic calculus
-tags: tech
----
+
 
 ![](/images/Stkoptions/Stockoptions.svg)
 Black Scholes

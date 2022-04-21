@@ -8,8 +8,469 @@
         <name>Jason Yang</name>
         <email>jasonyang299@gmail.com</email>
     </author>
-    <updated>2021-11-15T00:00:00Z</updated>
+    <updated>2022-04-09T00:00:00Z</updated>
     <entry>
+    <title>Setup Frigate NVR</title>
+    <link href="https://userjy.github.io/posts/2022-04-09-FrigateNVR.html" />
+    <id>https://userjy.github.io/posts/2022-04-09-FrigateNVR.html</id>
+    <published>2022-04-09T00:00:00Z</published>
+    <updated>2022-04-09T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on April  9, 2022
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<p>Goal:</p>
+<ul>
+<li>create frigate config file
+<ul>
+<li>tells where MQTT server is</li>
+<li>tells where RTSP of camera is</li>
+</ul></li>
+<li>create frigate Video folder
+<ul>
+<li>Where to store recording</li>
+</ul></li>
+<li>create a MQTT config file</li>
+<li>create a docker compose for both frigate and MQTT</li>
+</ul>
+<section id="frigate-config-file" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Frigate Config file</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> .config <span class="co">#if not exists, mkdir .config</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> frigate</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> frigate</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> frigate.yml </span></code></pre></div>
+<div class="sourceCode" id="cb2" data-filename="~/.config/frigate/frigate.yml"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mqtt</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">host</span><span class="kw">:</span><span class="at"> server.opnroot.com</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">1883</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cameras</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">camera_1</span><span class="kw">:</span><span class="co"> # &lt;------ Name the camera</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ffmpeg</span><span class="kw">:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> rtsp://admin:admin@192.168.1.132/11/h264major</span><span class="co"> # &lt;----- Update for your camera</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">roles</span><span class="kw">:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> detect</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> rtmp</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">rtmp</span><span class="kw">:</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">False</span><span class="co"> # &lt;-- RTMP should be disabled if your stream is not H264</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">detect</span><span class="kw">:</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">width</span><span class="kw">:</span><span class="at"> </span><span class="dv">1920</span><span class="co"> # &lt;---- update for your camera&#39;s resolution</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">height</span><span class="kw">:</span><span class="at"> </span><span class="dv">1080</span><span class="co"> # &lt;---- update for your camera&#39;s resolution</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">record</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">True</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">snapshots</span><span class="kw">:</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">True</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#-------------------------------------------------</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">camera_2</span><span class="kw">:</span><span class="co"> # &lt;------ Name the camera</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ffmpeg</span><span class="kw">:</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> rtsp://admin:admin@192.168.1.126:554/live/ch0</span><span class="co"> # &lt;----- Update for your camera</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">roles</span><span class="kw">:</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> detect</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> rtmp</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">rtmp</span><span class="kw">:</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">False</span><span class="co"> # &lt;-- RTMP should be disabled if your stream is not H264</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">detect</span><span class="kw">:</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">width</span><span class="kw">:</span><span class="at"> </span><span class="dv">1920</span><span class="co"> # &lt;---- update for your camera&#39;s resolution</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">height</span><span class="kw">:</span><span class="at"> </span><span class="dv">1080</span><span class="co"> # &lt;---- update for your camera&#39;s resolution</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">record</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">True</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">snapshots</span><span class="kw">:</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">True</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co">#-------------------------------------------------</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">camera_3</span><span class="kw">:</span><span class="co"> # &lt;------ Name the camera</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ffmpeg</span><span class="kw">:</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> rtsp://admin:admin@192.168.1.127:554/live/ch0</span><span class="co"> # &lt;----- Update for your camera</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">roles</span><span class="kw">:</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> detect</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> rtmp</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">rtmp</span><span class="kw">:</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">False</span><span class="co"> # &lt;-- RTMP should be disabled if your stream is not H264</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">detect</span><span class="kw">:</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">width</span><span class="kw">:</span><span class="at"> </span><span class="dv">1920</span><span class="co"> # &lt;---- update for your camera&#39;s resolution</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">height</span><span class="kw">:</span><span class="at"> </span><span class="dv">1080</span><span class="co"> # &lt;---- update for your camera&#39;s resolution</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">record</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">True</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">snapshots</span><span class="kw">:</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">True</span></span></code></pre></div>
+</section>
+<section id="create-frigate-video-folder" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Create frigate Video folder</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Videos</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> frigateMedia</span></code></pre></div>
+</section>
+<section id="create-a-mqtt-config-file" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> create a MQTT config file</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> .config</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> mosquitto</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> mosquitto</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> config</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> mosquitto.conf</span></code></pre></div>
+<div class="sourceCode" id="cb5" data-filename=".config/mosquitto/config/mosquitto.conf"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">persistence false</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">log_dest stdout</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">allow_anonymous true</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">connection_messages true</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">listener 1883 0.0.0.0</span></span></code></pre></div>
+</section>
+<section id="docker-compose" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> docker-compose</h1>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> frigate</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> frigate</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> docker-compose.yml</span></code></pre></div>
+<div class="sourceCode" id="cb7" data-filename="~/frigate/docker-compose.yml"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;3.9&quot;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">MQTT</span><span class="kw">:</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">container_name</span><span class="kw">:</span><span class="at"> eclipse-mosquitto</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">privileged</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> eclipse-mosquitto</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> $HOME/.config/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> 1883:1883</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> 9001:9001</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">frigate</span><span class="kw">:</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">container_name</span><span class="kw">:</span><span class="at"> frigate</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">privileged</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # this may not be necessary for all setups</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> blakeblackshear/frigate:stable-amd64</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">shm_size</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;64mb&quot;</span><span class="co"> # update for your cameras based on calculation above</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> /etc/localtime:/etc/localtime:ro</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> /home/kali/.config/frigate/config.yml:/config/config.yml:ro</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> /home/kali/Videos/frigateMedia:/media/frigate</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> tmpfs</span><span class="co"> # Optional: 1GB of memory, reduces SSD/SD Card wear</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">target</span><span class="kw">:</span><span class="at"> /tmp/cache</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">tmpfs</span><span class="kw">:</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">size</span><span class="kw">:</span><span class="at"> </span><span class="dv">1000000000</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;5000:5000&quot;</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">depends_on</span><span class="kw">:</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;MQTT&quot;</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">FRIGATE_RTSP_PASSWORD</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;password&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> build </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div>
+</section>
+<section id="misc" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Misc</h1>
+<div class="sourceCode" id="cb9"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ONVIF url</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>http://192.168.1.132:8080</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>1920x1080</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>rtsp://admin:admin@192.168.1.132:554/11</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>640x352</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>rtsp://admin:admin@192.168.1.132:554/12</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>http://192.168.1.127:8899</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>http://192.168.1.126:8899</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>rtsp://admin:admin@192.168.1.126:554/live/ch0</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>rtsp://admin:admin@192.168.1.126:554/live/ch1</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>http://192.168.1.127:8899</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>rtsp://admin:admin@192.168.1.127:554/live/ch0</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>rtsp://admin:admin@192.168.1.127:554/live/ch1</span></code></pre></div>
+</section>
+]]></summary>
+</entry>
+<entry>
+    <title>Unreal Engine and Android Setup</title>
+    <link href="https://userjy.github.io/posts/2022-04-03-UnrealEngine.html" />
+    <id>https://userjy.github.io/posts/2022-04-03-UnrealEngine.html</id>
+    <published>2022-04-03T00:00:00Z</published>
+    <updated>2022-04-03T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on April  3, 2022
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<p>For Windows, we will fix 3 errors</p>
+<p>1st Error</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Unable</span> to locate local Android SDK location. Did you run Android Studio after installing<span class="pp">?</span></span></code></pre></div>
+<p>2st Error</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Android</span> Studio Path: D:<span class="dt">\P</span>rogram Files<span class="dt">\A</span>ndroid<span class="dt">\A</span>ndroid Studio</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Android</span> Studio SDK Path: C:<span class="dt">\U</span>sers<span class="dt">\M</span>yPC<span class="dt">\A</span>ppData<span class="dt">\L</span>ocal<span class="dt">\A</span>ndroid<span class="dt">\S</span>dk</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">\Nmap</span> ...</span></code></pre></div>
+<p>3nd Error</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Exception</span> in thread <span class="st">&quot;main&quot;</span> java.lang.NoClassDefFoundError: javax/xml/bind/annotation/XmlSchema</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> com.android.repository.api.SchemaModule<span class="va">$SchemaModuleVersion</span>.<span class="op">&lt;</span>init<span class="op">&gt;(</span><span class="ex">SchemaModule.java:156</span><span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> com.android.repository.api.SchemaModule.<span class="op">&lt;</span>init<span class="op">&gt;(</span><span class="ex">SchemaModule.java:75</span><span class="op">)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> com.android.sdklib.repository.AndroidSdkHandler.<span class="op">&lt;</span>clinit<span class="op">&gt;(</span><span class="ex">AndroidSdkHandler.java:81</span><span class="op">)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> com.android.sdklib.tool.sdkmanager.SdkManagerCli.main<span class="er">(</span><span class="ex">SdkManagerCli.java:73</span><span class="kw">)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> com.android.sdklib.tool.sdkmanager.SdkManagerCli.main<span class="er">(</span><span class="ex">SdkManagerCli.java:48</span><span class="kw">)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Caused</span> by: java.lang.ClassNotFoundException: javax.xml.bind.annotation.XmlSchema</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> java.base/jdk.internal.loader.BuiltinClassLoader.loadClass<span class="er">(</span><span class="ex">BuiltinClassLoader.java:581</span><span class="kw">)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> java.base/jdk.internal.loader.ClassLoaders<span class="va">$AppClassLoader</span>.loadClass<span class="er">(</span><span class="ex">ClassLoaders.java:178</span><span class="kw">)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">at</span> java.base/java.lang.ClassLoader.loadClass<span class="er">(</span><span class="ex">ClassLoader.java:522</span><span class="kw">)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="ex">...</span> 5 more</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Update</span> failed. Please check the Android Studio install.</span></code></pre></div>
+<section id="fix" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Fix</h1>
+<section id="fix-1" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Fix 1</h2>
+<pre class="bat"><code>set ANDROID_LOCAL=%LOCALAPPDATA%\Android\Sdk
+set ANDROID_LOCAL=D:\AppData\Local\Android\Sdk</code></pre>
+</section>
+<section id="fix-2" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Fix 2</h2>
+<p>In the <code>SetupAndroid.bat</code> file add usebackq, to the</p>
+<pre class="bat"><code>FOR /F &quot;tokens=2* usebackq&quot; %%A IN (&#39;REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;&#39;) DO (set USERPATH=%%B)</code></pre>
+</section>
+<section id="fix-3" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> Fix 3</h2>
+<p>Remove JAVA_HOME from environmental variables path.</p>
+<pre class="bat"><code>set SDKMANAGER=%STUDIO_SDK_PATH%\tools\bin\sdkmanager.bat
+set SDKMANAGER=%STUDIO_SDK_PATH%\cmdline-tools\latest\bin\sdkmanager.bat</code></pre>
+<pre class="bat"><code>@echo off
+setlocal ENABLEEXTENSIONS
+setlocal ENABLEDELAYEDEXPANSION
+set KEY_NAME=HKLM\SOFTWARE\Android Studio
+set VALUE_NAME=Path
+set STUDIO_PATH=
+
+IF &quot;%5&quot; == &quot;-noninteractive&quot; (
+	set PAUSE=
+) ELSE (
+	set PAUSE=pause
+)
+
+SET PLATFORMS_VERSION=%1
+SET BUILDTOOLS_VERSION=%2
+SET CMAKE_VERSION=%3
+SET NDK_VERSION=%4
+
+rem hardcoded versions for compatibility with non-Turnkey manual running
+if &quot;%PLATFORMS_VERSION%&quot; == &quot;&quot; SET PLATFORMS_VERSION=android-30
+if &quot;%BUILDTOOLS_VERSION%&quot; == &quot;&quot; SET BUILDTOOLS_VERSION=30.0.3
+if &quot;%CMAKE_VERSION%&quot; == &quot;&quot; SET CMAKE_VERSION=3.10.2.4988404
+if &quot;%NDK_VERSION%&quot; == &quot;&quot; SET NDK_VERSION=21.4.7075529
+
+
+FOR /F &quot;tokens=2*&quot; %%A IN (&#39;REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;&#39;) DO (set STUDIO_PATH=%%B)
+
+IF EXIST &quot;%STUDIO_PATH%&quot; (
+	echo.
+	) ELSE (
+	echo Android Studio not installed, please download Android Studio 3.5.3 from https://developer.android.com/studio
+	%PAUSE%
+	exit /b 1
+)
+echo Android Studio Path: %STUDIO_PATH%
+
+set VALUE_NAME=SdkPath
+set STUDIO_SDK_PATH=
+FOR /F &quot;tokens=2*&quot; %%A IN (&#39;REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;&#39;) DO (set STUDIO_SDK_PATH=%%B)
+
+set ANDROID_LOCAL=%LOCALAPPDATA%\Android\Sdk
+set ANDROID_LOCAL=D:\AppData\Local\Android\Sdk
+
+if &quot;%STUDIO_SDK_PATH%&quot; == &quot;&quot; (
+	IF EXIST &quot;%ANDROID_LOCAL%&quot; (
+		set STUDIO_SDK_PATH=%ANDROID_LOCAL%
+	) ELSE (
+		IF EXIST &quot;%ANDROID_HOME%&quot; (
+			set STUDIO_SDK_PATH=%ANDROID_HOME%
+		) ELSE (
+			echo Unable to locate local Android SDK location. Did you run Android Studio after installing?
+			%PAUSE%
+			exit /b 2
+		)
+	)
+)
+echo Android Studio SDK Path: %STUDIO_SDK_PATH%
+
+if DEFINED ANDROID_HOME (set a=1) ELSE (
+	set ANDROID_HOME=%STUDIO_SDK_PATH%
+	setx ANDROID_HOME &quot;%STUDIO_SDK_PATH%&quot;
+)
+if DEFINED JAVA_HOME (set a=1) ELSE (
+	set JAVA_HOME=%STUDIO_PATH%\jre
+	setx JAVA_HOME &quot;%STUDIO_PATH%\jre&quot;
+)
+set NDKINSTALLPATH=%STUDIO_SDK_PATH%\ndk\%NDK_VERSION%
+set PLATFORMTOOLS=%STUDIO_SDK_PATH%\platform-tools;%STUDIO_SDK_PATH%\tools
+
+set KEY_NAME=HKCU\Environment
+set VALUE_NAME=Path
+set USERPATH=
+
+FOR /F &quot;tokens=2* usebackq&quot; %%A IN (&#39;REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;&#39;) DO (set USERPATH=%%B)
+
+where.exe /Q adb.exe
+
+echo &quot;%ERRORLEVEL%&quot;
+IF /I &quot;%ERRORLEVEL%&quot; NEQ &quot;0&quot; (
+	echo Current user path: %USERPATH%
+	setx PATH &quot;%USERPATH%;%PLATFORMTOOLS%&quot;
+	echo Added %PLATFORMTOOLS% to path
+
+)
+echo %STUDIO_SDK_PATH%
+echo %PLATFORMTOOLS%
+set SDKMANAGER=%STUDIO_SDK_PATH%\tools\bin\sdkmanager.bat
+set SDKMANAGER=%STUDIO_SDK_PATH%\cmdline-tools\latest\bin\sdkmanager.bat
+IF EXIST &quot;%SDKMANAGER%&quot; (
+	echo Using sdkmanager: %SDKMANAGER%
+) ELSE (
+	set SDKMANAGER=%STUDIO_SDK_PATH%\cmdline-tools\latest\bin\sdkmanager.bat
+	IF EXIST &quot;!SDKMANAGER!&quot; (
+		echo Using sdkmanager: !SDKMANAGER!
+	) ELSE (
+		echo Unable to locate sdkmanager.bat. Did you run Android Studio and install cmdline-tools after installing?
+		%PAUSE%
+		exit /b 3
+	)
+)
+
+call &quot;%SDKMANAGER%&quot; &quot;platform-tools&quot; &quot;platforms;%PLATFORMS_VERSION%&quot; &quot;build-tools;%BUILDTOOLS_VERSION%&quot; &quot;cmake;%CMAKE_VERSION%&quot; &quot;ndk;%NDK_VERSION%&quot;
+
+IF /I &quot;%ERRORLEVEL%&quot; NEQ &quot;0&quot; (
+	echo Update failed. Please check the Android Studio install.
+	%PAUSE%
+	exit /b 4
+)
+
+if EXIST &quot;%NDKINSTALLPATH%&quot; (
+	echo Success!
+	setx NDKROOT &quot;%NDKINSTALLPATH%&quot;
+	setx NDK_ROOT &quot;%NDKINSTALLPATH%&quot;
+) ELSE (
+	echo Update failed. Did you accept the license agreement?
+	%PAUSE%
+	exit /b 5
+)
+
+%PAUSE%
+exit /b 0
+</code></pre>
+</section>
+</section>
+<section id="unreal-engine-settings" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Unreal engine settings</h1>
+<p>Go to Edit &gt;&gt; Project Settings &gt;&gt; Platforms &gt;&gt; Android SDK</p>
+<p>Location of Android SDK: D:/AppData/Local/Android/Sdk<br />
+Location of Android NDK: D:/AppData/Local/Android/Sdk/ndk/21.4.7075529<br />
+Location of JAVA: D:/Program Files/Android/Android Studio/jre</p>
+<p>WARNING - Location of Android NDK cannot be just the ndk folder, it must be the specific subfolder 21.4.7075529 which represents the version of NDK that unreal engine uses.</p>
+</section>
+<section id="exporting-apk" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> exporting apk</h1>
+<ol type="1">
+<li>Generate Signing</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">D:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> D:<span class="dt">\P</span>rogram Files<span class="dt">\A</span>ndroid<span class="dt">\A</span>ndroid Studio<span class="dt">\j</span>re<span class="dt">\b</span>in</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">keytool</span> <span class="at">-genkey</span> <span class="at">-v</span> <span class="at">-keystore</span> key.keystore <span class="at">-alias</span> Mykey <span class="at">-keyalg</span> RSA <span class="at">-keysize</span> 2048 <span class="at">-validity</span> 10000 </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#this will generate a key.keystore file</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#copy this key.keystore file to your unreal project build android folder</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#C:\Users\MyPC\Documents\Unreal Projects\Bleh\Build\Android</span></span></code></pre></div>
+<p>Remember:<br />
+alias: Mykey<br />
+password: *****</p>
+<p>Modify Unreal engine settings to include the keystore</p>
+<p>Go to Settings<br />
+Build Configuration: Shipping<br />
+Full Rebuild: Checked<br />
+For Distribution: Checked</p>
+<p>Go to Platform &gt;&gt; Android &gt;&gt; Use Project Setting(Shipping) Checked</p>
+<section id="for-playstore" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> For playstore</h2>
+<p>In Project Settings &gt;&gt; Android:</p>
+<ul>
+<li><strong>YOU MUST UNCHECK “Package game data inside .apk”</strong> or else the size will be 6 times bigger which will be rejected by play store.<br />
+</li>
+<li>Target SDK verion : 30 , as of 2022 or else play store rejects<br />
+</li>
+<li>Check “Disable verify OBB on first start/update”</li>
+<li>Remember to increase “Store Version” if updating app</li>
+</ul>
+</section>
+<section id="build" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Build</h2>
+<p>Platform &gt;&gt; Android &gt;&gt; Click Package Project<br />
+Make a new folder for the output files</p>
+</section>
+</section>
+<section id="aside" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Aside</h1>
+<p>double-check if your keystore pass</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">keytool</span> <span class="at">-list</span> <span class="at">-keystore</span> <span class="op">&lt;</span>keystorefile<span class="op">&gt;</span> -storepass <span class="op">&lt;</span>passwordtocheck<span class="op">&gt;</span></span></code></pre></div>
+</section>
+]]></summary>
+</entry>
+<entry>
+    <title>Markdown Styling</title>
+    <link href="https://userjy.github.io/posts/2021-11-15-MarkdownStyles.html" />
+    <id>https://userjy.github.io/posts/2021-11-15-MarkdownStyles.html</id>
+    <published>2021-11-15T00:00:00Z</published>
+    <updated>2021-11-15T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on November 15, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<p>2<sup>3</sup> <code>2^3^</code><br />
+log<sub>n</sub>k <code>log~n~k</code><br />
+<del>strikethrough</del> <code>~~strikethrough~~</code><br />
+<a href="#link-here">go to heading</a> <code>[go to heading](#link-here)</code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>text</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>: definition 1</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>: definition 2</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>hello</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Keep 1 empty line below</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>               </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--  --&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Keep 1 empty line above</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>bleh</span></code></pre></div>
+<dl>
+<dt>text</dt>
+<dd>definition 1
+</dd>
+<dd>definition 2
+</dd>
+<dt>bleh</dt>
+<dd>no
+</dd>
+</dl>
+<p>Separating bullet points properly:</p>
+<ul>
+<li>hello
+<ul>
+<li>Keep 1 empty line below</li>
+</ul></li>
+</ul>
+<!--  -->
+<ul>
+<li>Keep 1 empty line above
+<ul>
+<li>bleh</li>
+</ul></li>
+</ul>
+<section id="link-here" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> link here</h1>
+</section>
+]]></summary>
+</entry>
+<entry>
     <title>Understanding Google Analytics</title>
     <link href="https://userjy.github.io/posts/2021-11-15-GoogleAnalytics.html" />
     <id>https://userjy.github.io/posts/2021-11-15-GoogleAnalytics.html</id>
@@ -184,6 +645,227 @@
 ]]></summary>
 </entry>
 <entry>
+    <title>Very Long Lean</title>
+    <link href="https://userjy.github.io/posts/2021-11-11-VeryLongLean.html" />
+    <id>https://userjy.github.io/posts/2021-11-11-VeryLongLean.html</id>
+    <published>2021-11-11T00:00:00Z</published>
+    <updated>2021-11-11T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on November 11, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>variables (<span class="dt">P</span> <span class="dt">Q</span> <span class="dt">R</span> <span class="op">:</span> <span class="dt">Prop</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Here is a proof which does not use tactics at all, but uses lambda calculus.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- It is called a &quot;term mode&quot; proof. We will not be discussing term mode</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- much in this course. It is a cool way to do basic logic proofs, but</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- it does not scale well in practice.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>example <span class="op">:</span> <span class="dt">P</span> → ¬ (¬ <span class="dt">P</span>) <span class="op">:=</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>λ hP hnP, hnP hP</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- This one cannot be proved using constructive mathematics!</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- You _have_ to use a tactic like `by_contra` (or, if you&#39;re happy</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- to cheat, the full &quot;truth table&quot; tactic `tauto!`.</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">-- Try it without using these, and you&#39;ll get stuck!</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>theorem double_negation_elimination <span class="op">:</span> ¬ (¬ <span class="dt">P</span>) → <span class="dt">P</span> <span class="op">:=</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>begin</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  sorry,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>end</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>def <span class="dt">C</span> <span class="op">:</span> (<span class="dt">A</span> → β → <span class="dt">C</span>) → β → <span class="dt">A</span> → <span class="dt">C</span> <span class="op">:=</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>λg b a, g a b</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">/-!</span> <span class="dt">Let</span> <span class="ot">`D`</span> <span class="op">:=</span> <span class="ot">`g : A → β → C, b : β, a : A`</span><span class="op">.</span> <span class="dt">We</span> have</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------ Var    ---------- Var</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>         <span class="dt">D</span> ⊢ a <span class="op">:</span> <span class="dt">A</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------------------------ App    ---------- Var</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g a <span class="op">:</span> β → <span class="dt">C</span>                             <span class="dt">D</span> ⊢ b <span class="op">:</span> β</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------------------------------------------ App</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g a b <span class="op">:</span> <span class="dt">C</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">---------------------------------------------- Lam</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>, b <span class="op">:</span> β ⊢ (λa <span class="op">:</span> <span class="dt">A</span>, g a b) <span class="op">:</span> <span class="dt">A</span> → <span class="dt">C</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">----------------------------------------------------- Lam</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span> ⊢ (λ(b <span class="op">:</span> β) (a <span class="op">:</span> <span class="dt">A</span>), g a b) <span class="op">:</span> β → <span class="dt">A</span> → <span class="dt">C</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">--------------------------------------------------------------------- Lam</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    ⊢ (λ(g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>) (b <span class="op">:</span> β) (a <span class="op">:</span> <span class="dt">A</span>), g a b) <span class="op">:</span> (<span class="dt">A</span> → β → <span class="dt">C</span>) → β → <span class="dt">A</span> → <span class="dt">C</span> <span class="op">-/</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>def more_nonsense <span class="op">:</span> ((<span class="dt">A</span> → <span class="dt">B</span>) → <span class="dt">C</span> → <span class="dt">D</span>) → <span class="dt">C</span> → <span class="dt">B</span> → <span class="dt">D</span> <span class="op">:=</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>λ f c b, (f (λ (ha<span class="op">:</span><span class="dt">A</span> ),b) ) c</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    λ f c b</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="op">@</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>   <span class="op">/</span>  <span class="op">|</span>     \     </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  f (λha<span class="op">.</span>b)   c</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>λ f c b ⊢ f (λha<span class="op">.</span>b) c </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">--notice how we don&#39;t have (A-&gt;B) so we must build it by abstracting a lambda from B.</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">--proof theoretically, if we have a proof of B we can create a proof of A implies B.</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="dt">B</span> <span class="op">-|</span> (<span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>λb <span class="op">-|</span> λ(ha<span class="op">:</span><span class="dt">A</span> ),b</span></code></pre></div>
+<p><span class="math display">\[\cfrac{\vdash b}{ha \vdash b}\]</span></p>
+<div class="hobbies" data-group="hi" data-glabel="do">
+<p>hafe</p>
+</div>
+<div class="hobbies" data-group="hi" data-glabel="do">
+<p>hafe</p>
+</div>
+<div class="hobbies" data-group="hi" data-glabel="do">
+<p>hafe</p>
+</div>
+<div class="hobbies" data-group="hi2" data-glabel="do2">
+<p>hafe</p>
+</div>
+<div class="hobbies" data-group="hi2" data-glabel="do2">
+<p>hafe</p>
+</div>
+<div class="hobbies" data-group="hi2" data-glabel="do2">
+<p>hafe</p>
+</div>
+]]></summary>
+</entry>
+<entry>
+    <title>Lambdas abstractions Types, Term building</title>
+    <link href="https://userjy.github.io/posts/2021-11-11-Lambdas.html" />
+    <id>https://userjy.github.io/posts/2021-11-11-Lambdas.html</id>
+    <published>2021-11-11T00:00:00Z</published>
+    <updated>2021-11-11T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on November 11, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#rules-to-building-lambda-terms"><span class="toc-section-number">1</span> Rules to building lambda terms</a></li>
+<li><a href="#weak-peirce-problem"><span class="toc-section-number">2</span> Weak Peirce problem</a></li>
+<li><a href="#canonical-patterns"><span class="toc-section-number">3</span> Canonical patterns</a></li>
+<li><a href="#lesson-learned"><span class="toc-section-number">4</span> Lesson learned</a></li>
+</ul></div>
+<p>In programming types we are restricted to function or in logic implication.<br />
+Therefore it would be beneficial to learn about the different arrangements of function types and how to build terms for them.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="dt">A1</span> <span class="ot">-&gt;</span> (<span class="dt">A2</span> <span class="ot">-&gt;</span> (<span class="dt">A3</span> <span class="ot">-&gt;</span> <span class="dt">B</span>)))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">A1</span> ∧ <span class="dt">A2</span> ∧ <span class="dt">A3</span> <span class="ot">-&gt;</span> <span class="dt">B</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>λa1 a2 a3, b</span></code></pre></div>
+<p>The above is trivial to understand</p>
+<p><code>((A1 -&gt; A2) -&gt; A3) -&gt; B</code> is far more difficult to understand</p>
+<p>For the rest of this notebook we assume type parenthesis are binded to the left <code>(A -&gt; B) -&gt; C</code></p>
+<section id="rules-to-building-lambda-terms" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Rules to building lambda terms</h1>
+<p>2 rules to building terms</p>
+<ul>
+<li><code>f _</code> Lambda application</li>
+<li><code>λx. _</code> Lambda abstraction , <code>λx</code> can have <strong>ANY</strong> Type</li>
+</ul>
+</section>
+<section id="weak-peirce-problem" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Weak Peirce problem</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>def weak_peirce <span class="op">:</span> ((((<span class="dt">A</span> → <span class="dt">B</span>) → <span class="dt">A</span>) → <span class="dt">A</span>) → <span class="dt">B</span>) → <span class="dt">B</span> <span class="op">:=</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>λ<span class="dt">X</span>, <span class="dt">X</span> (λ <span class="dt">Y</span>, <span class="dt">Y</span> (λ a, (<span class="dt">X</span> (λ z, a)) ))</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">goal ::</span> ((((<span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span>) <span class="ot">-&gt;</span> <span class="dt">A</span>) <span class="ot">-&gt;</span> <span class="dt">A</span>) <span class="ot">-&gt;</span> <span class="dt">B</span>) <span class="ot">-&gt;</span> <span class="dt">B</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">X</span><span class="ot"> ::</span> (<span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span> <span class="ot">-&gt;</span> <span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">A</span>) <span class="ot">-&gt;</span> <span class="dt">B</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Y</span><span class="ot"> ::</span> <span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span> <span class="ot">-&gt;</span> <span class="dt">A</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ot">a ::</span> <span class="dt">A</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ot">z ::</span> <span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span> <span class="ot">-&gt;</span> <span class="dt">A</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>(λ z, a)<span class="ot"> ::</span> (<span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span> <span class="ot">-&gt;</span> <span class="dt">A</span>) <span class="ot">-&gt;</span> <span class="dt">A</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>(<span class="dt">X</span> (λ z, a))<span class="ot"> ::</span> <span class="dt">B</span> <span class="co">--apply X to (λ z, a)</span></span></code></pre></div>
+</section>
+<section id="canonical-patterns" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Canonical patterns</h1>
+<p><code>(A1 -&gt; (A2 -&gt; (A3 -&gt; B)))</code> has its own pattern <code>λ a1 a2 a3. b</code> pushing everything as evidence in lambda abstraction<br />
+<code>((A1 -&gt; A2) -&gt; B) -&gt; B</code> also has its own pattern</p>
+<p>When all we have is <code>((A1 -&gt; A2) -&gt; B) -&gt; B</code> all we can do is extract function <code>λf::((A1 -&gt; A2) -&gt; B)</code><br />
+and apply it to a placeholder <code>λf::((A1 -&gt; A2) -&gt; B). (f _ )</code> meaning <code>(f _ ) :: B</code></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>λf<span class="op">.</span> (f _)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>(<span class="op">...-&gt;</span><span class="dt">B</span>) <span class="ot">-&gt;</span> <span class="dt">B</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>notice the canonical patterns </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>λ<span class="dt">X</span><span class="op">.</span>(<span class="dt">X</span> _)<span class="ot"> ::</span> (<span class="op">...-&gt;</span><span class="dt">B</span>)<span class="ot">-&gt;</span><span class="dt">B</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>λ<span class="dt">Y</span><span class="op">.</span>(<span class="dt">Y</span> _)<span class="ot"> ::</span> (<span class="op">...-&gt;</span><span class="dt">A</span>)<span class="ot">-&gt;</span><span class="dt">A</span></span></code></pre></div>
+<p><span class="math display">\[\overbrace{\overbrace{\lambda X}^{(...) → B}. \overbrace{(X \square)}^{B}}^{((...) → B)→B)} \qquad \qquad \overbrace{\overbrace{\lambda Y}^{(A→ B) → A}. \overbrace{(Y \square)}^{A}}^{((A→ B) → A)→A)} \tag{canonical pattern}\]</span></p>
+<hr />
+<p><span class="math display">\[\begin{align}
+\lambda X. \overbrace{(X \square)}^{B} \qquad \qquad &amp; \tag{X::(A → B → A → A) → B}\\
+\lambda Y. \overbrace{(Y \square)}^{A} \qquad &amp; \tag{Y::(A → B) → A}\\
+\lambda a. \overbrace{({\color{red}\square})}^{B} &amp; \tag{a::A}\\
+\end{align}\]</span></p>
+<p>Notice we plug in the placeholder for the equation below except for the last equation; the intermediate result is</p>
+<p><span class="math display">\[\lambda X. (X (\lambda Y. \lambda a. {\color{red}\square}))\]</span></p>
+<p>We need to fill in the placeholder with type B</p>
+<ul>
+<li>First attempt, I had thought this looked like some recursion
+<ul>
+<li><span class="math inline">\(\delta = (X (\lambda Y. \lambda a. {\color{red}\square})) :: B\)</span></li>
+<li><span class="math inline">\({\color{red}\square} = \delta\)</span></li>
+<li><span class="math inline">\(\delta = (X (\lambda Y. \lambda a. \delta))\)</span> clearly wouldnt work but looks interesting maybe another Y combinator.<br />
+The subterm of <span class="math inline">\(\delta\)</span> depends on <span class="math inline">\({\color{red}\square}\)</span>.<br />
+The subterm of <span class="math inline">\({\color{red}\square}\)</span> depends on <span class="math inline">\(\delta\)</span>.</li>
+</ul></li>
+</ul>
+<hr />
+<p><strong>Scoping</strong> nested lambdas means we have access to binded lambda terms in the outer scope.</p>
+<ul>
+<li>Solution, focus on <span class="math inline">\(\overbrace{(X \square)}^{B}\)</span> to build a term for <span class="math inline">\({\color{red}\square}\)</span>
+<ul>
+<li><code class="sourceCode haskell"><span class="dt">X</span><span class="ot"> ::</span> (<span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span> <span class="ot">-&gt;</span> <span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">A</span>) <span class="ot">-&gt;</span> <span class="dt">B</span></code></li>
+<li>So we need to build <code class="sourceCode haskell">(<span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span> <span class="ot">-&gt;</span> <span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">A</span>)</code>
+<ul>
+<li>Red herring: looks like <code>Y</code> but pointless since <code>Y</code> is already bounded</li>
+</ul></li>
+<li>All we have to do is focus on the last type <code class="sourceCode haskell"><span class="dt">A</span></code> of <code class="sourceCode haskell">(<span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span> <span class="ot">-&gt;</span> <span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">A</span>)</code></li>
+<li>We just need the superpower of <strong>lambda abstraction</strong> <code class="sourceCode haskell">(λ z, a)<span class="ot">::</span> (<span class="op">...</span>)<span class="ot">-&gt;</span><span class="dt">A</span></code></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[{\color{red}\square} = (\overset{((..)\rightarrow A) \rightarrow B}{X}(\underbrace{\lambda z. a}_{(..)\rightarrow A}))\]</span></p>
+</section>
+<section id="lesson-learned" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Lesson learned</h1>
+<ul>
+<li><strong>Canonical pattern</strong> <code class="sourceCode haskell">λ<span class="dt">X</span><span class="op">.</span>(<span class="dt">X</span> _)<span class="ot"> ::</span> (<span class="op">...-&gt;</span><span class="dt">B</span>)<span class="ot">-&gt;</span><span class="dt">B</span></code></li>
+<li><strong>Scoping</strong> nested lambdas means we have access to more power.</li>
+<li><strong>lambda abstraction</strong> if we already have a type <span class="math inline">\(a::A\)</span> in scope then we can build a type of <span class="math inline">\(\lambda z. a :: ANYTHING \rightarrow A\)</span></li>
+</ul>
+</section>
+]]></summary>
+</entry>
+<entry>
+    <title>Lessons from Haskell</title>
+    <link href="https://userjy.github.io/posts/2021-11-11-HaskellTips.html" />
+    <id>https://userjy.github.io/posts/2021-11-11-HaskellTips.html</id>
+    <published>2021-11-11T00:00:00Z</published>
+    <updated>2021-11-11T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on November 11, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#designing-data-types"><span class="toc-section-number">1</span> Designing Data types</a></li>
+</ul></div>
+<section id="designing-data-types" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Designing Data types</h1>
+<p>Design a tic tac toe board</p>
+<ol type="1">
+<li>Naive data structure, 9 spots = 9 constructor product type = struct or record type</li>
+<li>Observe that <span class="math inline">\(3^2=9\)</span> and a algebraic exponential type is a function type <code>2 -&gt; 3</code> aka <code>(X-axis, Y-axis) -&gt; (1st,2nd,3rd)</code></li>
+</ol>
+</section>
+]]></summary>
+</entry>
+<entry>
     <title>Code-Server</title>
     <link href="https://userjy.github.io/posts/2021-11-10-CodeServer.html" />
     <id>https://userjy.github.io/posts/2021-11-10-CodeServer.html</id>
@@ -198,31 +880,83 @@
     Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
     
 </div>
+<p>Without HTTPS, SSL Cert, things like Coq, Lean, wont work. Extensions wont show details, etc. Codeserver 3.8.0 is the last version that works without SSL.</p>
 <p>Config location: ~/.config/code-server/config.yaml</p>
-<section id="unsecure-http-setup" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> unsecure HTTP setup</h1>
-<p>Warning!! unsecure HTTP disables web view<br />
-extensions that show “previews” won’t work like Lean</p>
-<div class="sourceCode" id="cb1" data-filename="~/.config/code-server/config.yaml"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind-addr</span><span class="kw">:</span><span class="at"> 0.0.0.0:443</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auth</span><span class="kw">:</span><span class="at"> password</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> root</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<section id="https-setup-on-opnsense-or-pfsense" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> HTTPS setup on Opnsense or Pfsense</h1>
+<p>In the cert and cert-key fields, remember to use ABSOLUTE PATHS or systemctl wont work.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Allows code-server to listen on port 443.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setcap cap_net_bind_service=+ep /usr/lib/code-server/lib/node</span></code></pre></div>
+<div class="sourceCode" id="cb2" data-filename="~/.config/code-server/config.yaml"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind-addr</span><span class="kw">:</span><span class="at"> 0.0.0.0:443</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auth</span><span class="kw">:</span><span class="at"> password</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> root</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> /home/kali/.local/share/code-server/VsCodeOpn.crt</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cert-key</span><span class="kw">:</span><span class="at"> /home/kali/.local/share/code-server/VsCodeOpn.key</span></span></code></pre></div>
+<ol type="1">
+<li>Next you have to generate your Certificate Root Authority. (This is what your browser downloads)</li>
+</ol>
+<p>Trust &gt;&gt; Authorities &gt;&gt; Add</p>
+<ul>
+<li>Name: Web SSL Cert</li>
+<li>Method: Create an internal Certificate Authority</li>
+<li>Leave the Cipher and Hash default or else it wont work if key is too weak.</li>
+<li>Use valid city and state data</li>
+</ul>
+<ol start="2" type="1">
+<li>Next you have to generate your Server Certificate. (This is what you put in your remote “~/.local/share/code-server/” directory)</li>
+</ol>
+<p>Trust &gt;&gt; Certificates &gt;&gt; Add</p>
+<ul>
+<li>Name: VsCodeOpn</li>
+<li>Method: Create an internal Certificate</li>
+<li>Certificate Authority: Web SSL Cert</li>
+<li>Type: Server Certificate</li>
+<li>Alternative Names:
+<ul>
+<li>DNS: server.opnroot.com</li>
+<li>IP: 192.168.1.245</li>
+</ul></li>
+</ul>
+<p>Download the VsCodeOpn.crt and VsCodeOpn.key<br />
+SSH into PC hosting your code-server, Move them to some directory like :<br />
+~/.local/share/code-server/VsCodeOpn.crt<br />
+~/.local/share/code-server/VsCodeOpn.key</p>
+<ol start="3" type="1">
+<li>Go to Browser</li>
+</ol>
+<p>Trust &gt;&gt; Authorities</p>
+<p>Download the Web-SSL-Cert.crt, which is the Root Cert Authority. Go to Chrome settings , Manage Certificates &gt;&gt; Authorities, and install the *.crt.<br />
+Note we DO NOT need to install VsCodeOpn.crt on our browser.</p>
 </section>
-<section id="https-setup" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> HTTPS setup</h1>
-<p>Self signing CA</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Allows code-server to listen on port 443.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setcap cap_net_bind_service=+ep /usr/lib/code-server/lib/node</span></code></pre></div>
-<div class="sourceCode" id="cb3" data-filename="~/.config/code-server/config.yaml"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind-addr</span><span class="kw">:</span><span class="at"> 0.0.0.0:443</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auth</span><span class="kw">:</span><span class="at"> password</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> root</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
-</section>
-<section id="extensions" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Extensions</h1>
+<section id="extensions" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Extensions</h1>
 <p>go to <a href="https://open-vsx.org/">open-vsx.org</a></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://open-vsx.org/api/something/vscode-bleh/1.2.0/file/something.vscode-bleh-1.2.0.vsix</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code-server</span> <span class="at">--install-extension</span> something.vscode-bleh-1.2.0.vsix</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://open-vsx.org/api/something/vscode-bleh/1.2.0/file/something.vscode-bleh-1.2.0.vsix</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code-server</span> <span class="at">--install-extension</span> something.vscode-bleh-1.2.0.vsix</span></code></pre></div>
+</section>
+<section id="ssh" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> ssh</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install ssh</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/ssh/sshd_config</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;PermitRootLogin prohibit-password&quot; =&gt; &quot;PermitRootLogin yes&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable ssh</span></code></pre></div>
+</section>
+<section id="lean-and-multi-root-workspaces" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Lean and Multi-root workspaces</h1>
+<ul>
+<li>To use multi-root vscode workspaces with lean, the *.workplace file must be placed inside a lean project folder.</li>
+</ul>
+</section>
+<section id="jupyter" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Jupyter</h1>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env</span> GO111MODULE=on go install github.com/gopherdata/gophernotes@latest</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">go</span> env GOPATH<span class="va">)</span><span class="st">&quot;</span>/src/github.com/gopherdata/gophernotes</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">env</span> GO111MODULE=on go install</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/.local/share/jupyter/kernels/gophernotes</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> kernel/<span class="pp">*</span> ~/.local/share/jupyter/kernels/gophernotes</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/.local/share/jupyter/kernels/gophernotes</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +w ./kernel.json</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s|gophernotes|</span><span class="va">$(</span><span class="ex">go</span> env GOPATH<span class="va">)</span><span class="st">/bin/gophernotes|&quot;</span> <span class="op">&lt;</span> kernel.json.in <span class="op">&gt;</span> kernel.json</span></code></pre></div>
 </section>
 ]]></summary>
 </entry>
@@ -245,7 +979,10 @@ extensions that show “previews” won’t work like Lean</p>
 <li><a href="#tensorfail-extraction"><span class="toc-section-number">1</span> Tensorfail extraction</a></li>
 <li><a href="#plotting-competitors"><span class="toc-section-number">2</span> Plotting Competitors</a>
 <ul>
-<li><a href="#simple-line-graph"><span class="toc-section-number">2.1</span> Simple line graph</a></li>
+<li><a href="#simple-line-graph"><span class="toc-section-number">2.1</span> Simple line graph</a>
+<ul>
+<li><a href="#draw-a-line"><span class="toc-section-number">2.1.1</span> Draw a line</a></li>
+</ul></li>
 </ul></li>
 </ul></div>
 <section id="tensorfail-extraction" class="level1" data-number="1">
@@ -353,778 +1090,29 @@ extensions that show “previews” won’t work like Lean</p>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>          }<span class="op">;</span></span>
 <span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a> option <span class="op">&amp;&amp;</span>  myChart<span class="op">.</span><span class="fu">setOption</span>(option)<span class="op">;</span></span></code></pre></div>
-<p>```js</p>
+<section id="draw-a-line" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1"><span class="header-section-number">2.1.1</span> Draw a line</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>graphic<span class="op">:</span> [{</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>      <span class="dt">elements</span><span class="op">:</span> [{</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">id</span><span class="op">:</span> <span class="st">&#39;small_circle&#39;</span><span class="op">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;line&#39;</span><span class="op">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">z</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">shape</span><span class="op">:</span>{</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>          <span class="dt">x1</span><span class="op">:</span><span class="dv">0</span><span class="op">,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>          <span class="dt">y1</span><span class="op">:</span><span class="dv">0</span><span class="op">,</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>          <span class="dt">x2</span><span class="op">:</span><span class="dv">50</span><span class="op">,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>          <span class="dt">y2</span><span class="op">:</span><span class="dv">50</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        }<span class="op">,</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="dt">style</span><span class="op">:</span> {</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>          <span class="dt">fill</span><span class="op">:</span> <span class="st">&#39;rgba(0, 140, 250, 0.5)&#39;</span><span class="op">,</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>          <span class="dt">stroke</span><span class="op">:</span> <span class="st">&#39;rgba(0, 50, 150, 0.5)&#39;</span><span class="op">,</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>          <span class="dt">lineWidth</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>      }]</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    }]</span></code></pre></div>
 </section>
 </section>
-]]></summary>
-</entry>
-<entry>
-    <title>Authentication OAuth2 SAML</title>
-    <link href="https://userjy.github.io/posts/2021-11-10-Authentication.html" />
-    <id>https://userjy.github.io/posts/2021-11-10-Authentication.html</id>
-    <published>2021-11-10T00:00:00Z</published>
-    <updated>2021-11-10T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on November 10, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
-    
-</div>
-<div id="TOC"><ul>
-<li><a href="#oauth2"><span class="toc-section-number">1</span> Oauth2</a></li>
-<li><a href="#openid-connect"><span class="toc-section-number">2</span> OpenID connect</a></li>
-<li><a href="#authentication-flow-with-jwt-and-bcrypt"><span class="toc-section-number">3</span> Authentication flow with JWT and Bcrypt</a>
-<ul>
-<li><a href="#bcrypt"><span class="toc-section-number">3.1</span> bcrypt</a></li>
-<li><a href="#jwt"><span class="toc-section-number">3.2</span> JWT</a></li>
-<li><a href="#persist-authentication-methods"><span class="toc-section-number">3.3</span> persist authentication methods</a></li>
-</ul></li>
-</ul></div>
-<p>AWS Cognito uses OAuth2</p>
-<p>OAuth2 is a protocol that typically uses JWT</p>
-<section id="oauth2" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Oauth2</h1>
-<p>4 parties: User(Resource Owner) on Browser,<br />
-Leetcode(Client),<br />
-github-auth(Authorization Server),<br />
-github profile db(Resource Server)</p>
-<ol type="1">
-<li>User(Resource Owner) goes to leetcode(Client) website</li>
-<li>User has an account on github-Auth(Authorization Server) and has an github profile data there(Resource Server)</li>
-<li>User(Resource Owner) wants to allow leetcode(Client) to read github profile(Resource Server)</li>
-<li>User(Resource Owner) clicks linkage form on leetcode(Client) then redirects User to login form on github-Auth(Authorization Server) with a packet of data containing{Client_ID, Callback_URI, Scopes/Permissions}.</li>
-<li>User(Resource Owner) logins on github-Auth(Authorization Server)</li>
-<li>User(Resource Owner) is presented with a list of permissions(Scopes presented in step 4) it will allow leetcode(Client) to have access to in the github profile(Resource Server)</li>
-<li>github-Auth(Authorization Server) redirects the User(Resource Owner) back to leetcode webpage(Client) using the Callback_URI(presented in step 4) along with a temporary {Authorization_Code}</li>
-<li>Leetcode(Client) contacts github-Auth(Authorization Server) directly w/o needing the User’s browser. Leetcode(Client) sends {Client_ID,Client_Secret, Authorization_Code} to github-Auth.</li>
-<li>github-Auth(Authorization Server) verifies the data and responds to Leetcode(Client) with an {Access Token}.</li>
-<li>Leetcode(Client) can now access the User(Resource Owner) specific data on their github profile(Resource Server) using the {Access Token}</li>
-</ol>
-</section>
-<section id="openid-connect" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> OpenID connect</h1>
-<p>OIDC sits ontop of OAuth2<br />
-OIDC gives a more typical behavior of a login session. OIDC allows a Client(Leetcode) to establish a login session and identity for the User(Resource-Owner).<br />
-When github-auth(Authorization Server) allows OIDC, it is called an <strong>identity provider</strong> since it provide identity information about the User(Resource-Owner) back to the Client(Leetcode).</p>
-<p>OIDC allows one login to github-auth(Authorization Server) to be used for multiple Client/Apps.<br />
-Eg. Using gmail to sign into multiple apps. This single login is called <strong>SSO</strong> Single-Sign-On</p>
-<p>OIDC process is same as OAuth except at step 9, it returns {JWT ID token, Access Token}.</p>
-<figure><img src='http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a736b696e706172616d20736861646f77696e672066616c73650a42726f77736572202d3e2057656273697465203a20476574206578616d706c652e636f6d0a57656273697465202d2d3e2042726f777365723a206f6b2c2068657265206973206d792053534c2063657274205c6e636f6e7461696e696e67206d79207075626c69636b65795c6e7369676e6564206279204c657473456e63727970740a6e6f7465206f7665722042726f777365720a557365207072652d696e7374616c6c6564204c657473456e63727970740a5075626c69634b657920696e2042726f7773657220746f0a766572696679207468652053534c2063657274207369676e6564207573696e670a4c657473456e6372797074277320507269766174654b65790a656e646e6f74650a42726f77736572202d3e20576562736974653a2049207472757374204c657473456e63727970745c6e5468657265666f7265204920747275737420796f757220636572742e5c6e49206d6164652061205365637265744b6579205c6e656e6372797074656420697420772f20796f7572205075626c69634b65790a6e6f7465206f76657220576562736974650a576562736974652063616e2072657665616c200a746865205365637265744b6579200a62792064656372797074696e6720746865206d657373616765200a772f2057656273697465277320507269766174654b6579200a656e646e6f74650a57656273697465203c2d3e2042726f777365723a20436f6d6d756e69636174696f6e20772f205365637265744b65790a40656e64756d6c'></figure>
-</section>
-<section id="authentication-flow-with-jwt-and-bcrypt" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Authentication flow with JWT and Bcrypt</h1>
-<ul>
-<li>Sign up flow</li>
-<li>client –{user,pass}–&gt; –bcrypt(pass)–&gt; Save bcrypt(pass)+user to DB</li>
-<li>client &lt;–{JWT}– Server</li>
-</ul>
-<!--  -->
-<ul>
-<li>Login flow</li>
-<li>client input pass —-&gt; compare bcrypt(pass)+user with DB</li>
-<li>Server &lt;–{JWT}– Server <!--  --></li>
-</ul>
-<section id="bcrypt" class="level2" data-number="3.1">
-<h2 data-number="3.1"><span class="header-section-number">3.1</span> bcrypt</h2>
-<ul>
-<li>hash password using bcrypt</li>
-<li>bcrypt can increase hash rounds (salt-rounds), slowing time, which resists brute force hash collision attack</li>
-</ul>
-</section>
-<section id="jwt" class="level2" data-number="3.2">
-<h2 data-number="3.2"><span class="header-section-number">3.2</span> JWT</h2>
-<ul>
-<li>Header - base64</li>
-<li>Payload</li>
-<li>Signature</li>
-</ul>
-</section>
-<section id="persist-authentication-methods" class="level2" data-number="3.3">
-<h2 data-number="3.3"><span class="header-section-number">3.3</span> persist authentication methods</h2>
-<ul>
-<li>Browser storage
-<ul>
-<li>local storage</li>
-</ul></li>
-<li>Cookie
-<ul>
-<li>Add “secure”, “httpOnly” “SameSite”</li>
-</ul></li>
-</ul>
-</section>
-</section>
-]]></summary>
-</entry>
-<entry>
-    <title>Tabbed Code blocks in Hakyll</title>
-    <link href="https://userjy.github.io/posts/2021-11-07-HakyllCodeTabs.html" />
-    <id>https://userjy.github.io/posts/2021-11-07-HakyllCodeTabs.html</id>
-    <published>2021-11-07T00:00:00Z</published>
-    <updated>2021-11-07T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on November  7, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
-    
-</div>
-<div id="TOC"><ul>
-<li><a href="#showcase"><span class="toc-section-number">1</span> Showcase</a></li>
-<li><a href="#instruction"><span class="toc-section-number">2</span> Instruction</a></li>
-</ul></div>
-<p><strong>Hakyll Setup Series</strong></p>
-<ol type="1">
-<li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
-<li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
-<li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
-<li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
-<li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
-<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
-<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
-</ol>
-<section id="showcase" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Showcase</h1>
-<div class="sourceCode" id="cb1" data-group="bleha" data-glabel="C++"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;bleh&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb2" data-group="bleha" data-glabel="py"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;bleh&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb3" data-group="bleha" data-glabel="bash"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;bleh&quot;</span></span></code></pre></div>
-</section>
-<section id="instruction" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Instruction</h1>
-<p>Add the below javascript to your one of your templates like <code>default.html</code></p>
-<ul>
-<li>Structure
-<ul>
-<li>Codeblock &lt; subgrp &lt; Grouplabels &lt; Allblocks</li>
-<li><code>AllBlocks</code>: All blocks of code regardless if they are tabbed or not
-<ul>
-<li><code>grouplabels</code> is the set of all unique group names in the document
-<ul>
-<li><code>subgrp</code> is the set of codeblocks associated with a SINGLE grouplabel
-<ul>
-<li><code>codeblock</code> is one of the codeblock within a <code>subgrp</code></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> AllBlocksPre <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementsByClassName</span>(<span class="st">&quot;sourceCode&quot;</span>)<span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> AllBlocks <span class="op">=</span> [<span class="op">...</span>AllBlocksPre]<span class="op">;</span> <span class="co">//gets all codeblocks w/ and w/o group label</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> rawgrouplabels <span class="op">=</span> AllBlocks<span class="op">.</span><span class="fu">map</span>((e)<span class="kw">=&gt;</span>(e<span class="op">.</span><span class="fu">getAttribute</span>(<span class="st">&quot;data-group&quot;</span>)))<span class="op">;</span> <span class="co">//group label w/ repeats</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> grouplabelsPre <span class="op">=</span> [<span class="op">...</span><span class="kw">new</span> <span class="bu">Set</span>(rawgrouplabels)]<span class="op">;</span> <span class="co">//get set of unique group labels</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> grouplabels <span class="op">=</span> grouplabelsPre<span class="op">.</span><span class="fu">filter</span>((a)<span class="kw">=&gt;</span>a)<span class="op">;</span> <span class="co">//remove nulls</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> getCodeBlocks <span class="op">=</span> (grouplabel) <span class="kw">=&gt;</span> {</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">//return list of codeblocks associated to a single group label</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> AllBlocks<span class="op">.</span><span class="fu">filter</span>((codeblock)<span class="kw">=&gt;</span>(codeblock<span class="op">.</span><span class="fu">getAttribute</span>(<span class="st">&quot;data-group&quot;</span>) <span class="op">===</span> grouplabel))<span class="op">;</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> showSingleCode <span class="op">=</span> (codeblock<span class="op">,</span>subgrp) <span class="kw">=&gt;</span> { </span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">//make single codeblock visible</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    codeblock<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">display</span><span class="op">=</span><span class="st">&quot;block&quot;</span><span class="op">;</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> nonChosen <span class="op">=</span> subgrp<span class="op">.</span><span class="fu">filter</span>((e)<span class="kw">=&gt;</span>(e<span class="op">!=</span>codeblock))<span class="op">;</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    nonChosen<span class="op">.</span><span class="fu">map</span>((e)<span class="kw">=&gt;</span>(e<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">display</span><span class="op">=</span><span class="st">&quot;none&quot;</span>))<span class="op">;</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> makeBtn <span class="op">=</span> (codeblock<span class="op">,</span>subgrp) <span class="kw">=&gt;</span> {</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">//make button for a single codeblock</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> newbutton <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">&quot;button&quot;</span>)<span class="op">;</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    newbutton<span class="op">.</span><span class="at">textContent</span><span class="op">=</span>codeblock<span class="op">.</span><span class="fu">getAttribute</span>(<span class="st">&quot;data-glabel&quot;</span>)<span class="op">;</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    newbutton<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> ()<span class="kw">=&gt;</span>{</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">showSingleCode</span>(codeblock<span class="op">,</span>subgrp)<span class="op">;</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> newbutton<span class="op">;</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> showAll <span class="op">=</span> (subgrp) <span class="kw">=&gt;</span> {</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">//make all codeblocks visible</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>subgrp<span class="op">.</span><span class="fu">map</span>((e)<span class="kw">=&gt;</span>(e<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">display</span><span class="op">=</span><span class="st">&quot;block&quot;</span>))<span class="op">;</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> buildCodeTab <span class="op">=</span> (subgrp) <span class="kw">=&gt;</span> {</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> leader <span class="op">=</span> subgrp[<span class="dv">0</span>]<span class="op">;</span> <span class="co">//get the leader codeblock of a group of codeblock</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> btngrp <span class="op">=</span>subgrp<span class="op">.</span><span class="fu">map</span>((e)<span class="kw">=&gt;</span>(<span class="fu">makeBtn</span>(e<span class="op">,</span>subgrp)))<span class="op">;</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    btngrp<span class="op">.</span><span class="fu">map</span>((e)<span class="kw">=&gt;</span>{</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        leader<span class="op">.</span><span class="fu">insertAdjacentElement</span>(<span class="st">&#39;beforebegin&#39;</span><span class="op">,</span>e)<span class="op">;</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        })<span class="op">;</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">//make showAll button START</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> btnShowAll <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">&quot;button&quot;</span>)<span class="op">;</span></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    btnShowAll<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> <span class="st">&quot;All&quot;</span><span class="op">;</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    btnShowAll<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span>(e)<span class="kw">=&gt;</span>(<span class="fu">showAll</span>(subgrp)))<span class="op">;</span></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    leader<span class="op">.</span><span class="fu">insertAdjacentElement</span>(<span class="st">&#39;beforebegin&#39;</span><span class="op">,</span> btnShowAll)<span class="op">;</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">//make showAllbutton </span><span class="re">END</span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co">//below code is performing actual behavior, the above code are just functions</span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>grouplabels<span class="op">.</span><span class="fu">map</span>((grouplabel) <span class="kw">=&gt;</span> {</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> groupOfCodeblocks <span class="op">=</span> <span class="fu">getCodeBlocks</span>(grouplabel)<span class="op">;</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">buildCodeTab</span>(groupOfCodeblocks)<span class="op">;</span></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">showSingleCode</span>(groupOfCodeblocks[<span class="dv">0</span>]<span class="op">,</span>groupOfCodeblocks) <span class="co">//default select the first block</span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>      </span></code></pre></div>
-<ul>
-<li>To create a tabbed codeblock add a <code>group</code> parameter and <code>glabel</code> parameter.
-<ul>
-<li><code>group</code> parameter aggregates the codeblocks to be grouped
-<ul>
-<li>if you have multiple tabbed groups of codeblocks then the <code>group</code> parameter must be unique for each.</li>
-</ul></li>
-<li><code>glabel</code> is the text shown on the tab</li>
-</ul></li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- fenced codeblocks should use triple backticks ``` </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">instead of single quotes &#39;&#39;&#39; which is used here for presentation purposes --&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>&#39;&#39;&#39;{.c group=&quot;bleh&quot; glabel=&quot;C++&quot;}</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>cout &lt;&lt; &quot;bleh&quot;</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>&#39;&#39;&#39;</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>&#39;&#39;&#39;{.py group=&quot;bleh&quot; glabel=&quot;py&quot;}</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>print(&quot;bleh&quot;)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>&#39;&#39;&#39;</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>&#39;&#39;&#39;{.bash group=&quot;bleh&quot; glabel=&quot;bash&quot;}</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>echo &quot;bleh&quot;</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>&#39;&#39;&#39;</span></code></pre></div>
-<div class="sourceCode" id="cb6" data-group="bleh" data-glabel="C++"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;bleh&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb7" data-group="bleh" data-glabel="py"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;bleh&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb8" data-group="bleh" data-glabel="bash"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;bleh&quot;</span></span></code></pre></div>
-</section>
-]]></summary>
-</entry>
-<entry>
-    <title>Access Hakyll website on LAN and iptables</title>
-    <link href="https://userjy.github.io/posts/2021-11-07-HakyllAccessOnLAN.html" />
-    <id>https://userjy.github.io/posts/2021-11-07-HakyllAccessOnLAN.html</id>
-    <published>2021-11-07T00:00:00Z</published>
-    <updated>2021-11-07T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on November  7, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
-    
-</div>
-<div id="TOC"><ul>
-<li><a href="#scenario"><span class="toc-section-number">1</span> Scenario</a></li>
-<li><a href="#solution"><span class="toc-section-number">2</span> Solution</a></li>
-<li><a href="#theory"><span class="toc-section-number">3</span> Theory</a></li>
-<li><a href="#iptables-netstat-diagnosis"><span class="toc-section-number">4</span> iptables netstat diagnosis</a>
-<ul>
-<li><a href="#netstat"><span class="toc-section-number">4.1</span> netstat</a></li>
-<li><a href="#iptables"><span class="toc-section-number">4.2</span> iptables</a></li>
-<li><a href="#rate-limiting"><span class="toc-section-number">4.3</span> Rate limiting</a></li>
-</ul></li>
-<li><a href="#occupied-port-scenario"><span class="toc-section-number">5</span> Occupied port scenario</a></li>
-</ul></div>
-<p><strong>Hakyll Setup Series</strong></p>
-<ol type="1">
-<li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
-<li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
-<li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
-<li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
-<li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
-<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
-<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
-</ol>
-<section id="scenario" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Scenario</h1>
-<ol type="1">
-<li>Hakyll server: <code class="sourceCode bash"><span class="ex">listening</span> on 127.0.0.1 port 8000...</code><br />
-</li>
-<li>Client in LAN: must hit 192.168.1.245 port 8000 to see the website<br />
-Client goes to http://192.168.1.245:8000 but sees ERROR<br />
-</li>
-<li>Hakyll server: 127.0.0.1 in port 8000 cant be seen in LAN</li>
-</ol>
-<p><strong>GOAL</strong> Hakyll server: must open 127.0.0.1 port 8000 for LAN</p>
-</section>
-<section id="solution" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Solution</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sysctl <span class="at">-w</span> net.ipv4.conf.all.route_localnet=1</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-t</span> nat <span class="at">-I</span> PREROUTING <span class="at">-p</span> tcp <span class="at">-d</span> 192.168.1.0/24 <span class="at">--dport</span> 8000 <span class="at">-j</span> DNAT <span class="at">--to-destination</span> 127.0.0.1:8000</span></code></pre></div>
-</section>
-<section id="theory" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Theory</h1>
-<p><img src="https://www.karlrupp.net/en/computer/computer/graphics/nat-chains.gif" /></p>
-</section>
-<section id="iptables-netstat-diagnosis" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> iptables netstat diagnosis</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">sudo</span> iptables <span class="at">--append</span> INPUT <span class="at">--source</span> 1.2.3.4 <span class="at">--jump</span> DROP</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">--list</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Chain</span> INPUT <span class="er">(</span><span class="ex">policy</span> ACCEPT<span class="kw">)</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">target</span>     prot opt source               destination</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">DROP</span>       all  <span class="at">--</span>  1.2.3.4              anywhere</span></code></pre></div>
-<ul>
-<li>says append a rule to the INPUT chain and if a packet matches source 1.2.3.4 then DROP it
-<ul>
-<li>INPUT chain means all packets coming to the server is affected by this rule</li>
-</ul></li>
-</ul>
-<section id="netstat" class="level2" data-number="4.1">
-<h2 data-number="4.1"><span class="header-section-number">4.1</span> netstat</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-lnp</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 0.0.0.0:8787            0.0.0.0:*               LISTEN      734/rserver </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN      149480/myblog </span></span></code></pre></div>
-</section>
-<section id="iptables" class="level2" data-number="4.2">
-<h2 data-number="4.2"><span class="header-section-number">4.2</span> iptables</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">### list INPUT rules</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span> INPUT <span class="at">--line-numbers</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">### delete rule 2</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-D</span> INPUT 2</span></code></pre></div>
-</section>
-<section id="rate-limiting" class="level2" data-number="4.3">
-<h2 data-number="4.3"><span class="header-section-number">4.3</span> Rate limiting</h2>
-<ul>
-<li>Rate limiting is not possible with vanilla iptables because it ratelimiting requires stateful connections
-<ul>
-<li>A hashmap maps “ConnectionSrc-ConnectionDst” to {“NEW”,“ESTABLISHED”,…}</li>
-</ul></li>
-</ul>
-<p><img src="https://docs.google.com/drawings/d/e/2PACX-1vTu9nsWsRUn_a9IBpaKgBjGNGR14-AknVFs70pix7PFL2eQcqY1BagQztrH_duZDUleZ97Iq5vBnnPc/pub?w=1238&amp;h=676" /></p>
-<ul>
-<li>Using Connection state to rate limit</li>
-</ul>
-<p><img src="https://docs.google.com/drawings/d/e/2PACX-1vQgl3VdRoyti8ryMF-_NwUSgiDpdF88qGAKm3XTfAOLdV1_SOqeoJllLFtsLXSp5is9lxNHH7rlxd9H/pub?w=1297&amp;h=554" /></p>
-</section>
-</section>
-<section id="occupied-port-scenario" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Occupied port scenario</h1>
-<p>Say you launch a server to listen on port 8000<br />
-but ERROR: port 8000 being used</p>
-<p>first check what process is running on port 8000</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-lnp</span></span></code></pre></div>
-<p>next check what the parent process is</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-aef</span> <span class="at">--forest</span> <span class="co">#outputs PID ParentPID tree</span></span></code></pre></div>
-<p>terminate the process or it’s parent</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-9</span> <span class="op">&lt;</span>PID<span class="op">&gt;</span></span></code></pre></div>
-</section>
-]]></summary>
-</entry>
-<entry>
-    <title>Market Concepts</title>
-    <link href="https://userjy.github.io/posts/2021-11-01-MarketConcepts.html" />
-    <id>https://userjy.github.io/posts/2021-11-01-MarketConcepts.html</id>
-    <published>2021-11-01T00:00:00Z</published>
-    <updated>2021-11-01T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on November  1, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;musings&#39;." href="/tags/musings.html">musings</a>, <a title="All pages tagged &#39;misc&#39;." href="/tags/misc.html">misc</a>
-    
-</div>
-<div id="TOC"><ul>
-<li><a href="#gdp"><span class="toc-section-number">1</span> GDP</a></li>
-<li><a href="#economic-indictators"><span class="toc-section-number">2</span> Economic Indictators</a>
-<ul>
-<li><a href="#inflation-and-bonds"><span class="toc-section-number">2.1</span> Inflation and Bonds</a></li>
-<li><a href="#unemployment"><span class="toc-section-number">2.2</span> Unemployment</a></li>
-<li><a href="#big-corp-confidence-pmi"><span class="toc-section-number">2.3</span> Big Corp Confidence = PMI</a></li>
-<li><a href="#housing"><span class="toc-section-number">2.4</span> Housing</a></li>
-</ul></li>
-<li><a href="#most-important-for-investors"><span class="toc-section-number">3</span> Most important for Investors</a>
-<ul>
-<li><a href="#cef---closed-ended-funds"><span class="toc-section-number">3.0.1</span> CEF - Closed Ended funds</a></li>
-</ul></li>
-</ul></div>
-<p><a href="https://fred.stlouisfed.org/series/NYGDPMKTPCDWLD">World GDP</a></p>
-<ul>
-<li>CPI - Consumer Price Index</li>
-</ul>
-<section id="gdp" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> GDP</h1>
-<ul>
-<li>GDP: Market-value of Final Goods Produced
-<ul>
-<li>GDP = PersonalConsumption + PrivateInvestment + GovtConsumption + (Exports - Imports)</li>
-</ul></li>
-<li>Inflation</li>
-<li>Unemployment</li>
-<li>Business confidence</li>
-<li>Housing</li>
-</ul>
-<p>https://fred.stlouisfed.org/series/GDP</p>
-<p>Personal Consumption Expenditures Gross private domestic investment Net Exports Government Consumption Expenditures</p>
-<p>https://fred.stlouisfed.org/series/PCE https://fred.stlouisfed.org/series/GPDI https://fred.stlouisfed.org/series/FGEXPND https://fred.stlouisfed.org/series/NETEXP</p>
-<p>real GDP = inflation_normalized(nominal_GDP)</p>
-<p>Recession = 2 consecutive quarters of negative real GDP</p>
-<ul>
-<li>3.2% Q3 2017 <strong>yoy</strong> means “3.2% returns relative to Q3 2017”<br />
-</li>
-<li>3.2% Q3 2017 <strong>qoq</strong> means “3.2% returns relative to Q2 2017”</li>
-</ul>
-</section>
-<section id="economic-indictators" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Economic Indictators</h1>
-<section id="inflation-and-bonds" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> Inflation and Bonds</h2>
-<p>Fixed-income investors aka Bond traders REALLY WATCH Inflation</p>
-<p><a href="https://www.bea.gov/data/prices-inflation/gdp-price-deflator">GDP price deflator from BEA to check inflation</a></p>
-<p><a href="https://www.bls.gov/cpi/home.htm">CPI</a> In the US, food only makes up 15% CPI, and Housing makes 40% CPI</p>
-</section>
-<section id="unemployment" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> Unemployment</h2>
-<p>non-farm payrolls (this disregards seasonal farm workers) and is the most useful measure of unemployment https://fred.stlouisfed.org/series/PAYEMS It correlates with GDP (recessions)</p>
-</section>
-<section id="big-corp-confidence-pmi" class="level2" data-number="2.3">
-<h2 data-number="2.3"><span class="header-section-number">2.3</span> Big Corp Confidence = PMI</h2>
-<p><strong>PMI IS THE BEST ECONOMIC INDICATOR SINCE IT PREDICTS GDP</strong></p>
-<ul>
-<li>Market moves depending on Actual vs Expected</li>
-</ul>
-<p><a href="https://www.ismworld.org/supply-management-news-and-reports/reports/ism-report-on-business/">Institute of supply management PMI</a> <a href="https://tradingeconomics.com/united-states/business-confidence">trading economics</a></p>
-<p>50 is neutral, gt 50 is optimism vis-a-vis https://www.ismworld.org/supply-management-news-and-reports/reports/ism-report-on-business/services/november/ institute of supply management</p>
-<p>Typically we can find an actual and expected PMI. Like earnings if expected &gt; actual, it’s a good surprise.</p>
-</section>
-<section id="housing" class="level2" data-number="2.4">
-<h2 data-number="2.4"><span class="header-section-number">2.4</span> Housing</h2>
-<p>Remember housing makes up 40% CPI</p>
-</section>
-</section>
-<section id="most-important-for-investors" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Most important for Investors</h1>
-<p>PMI</p>
-<hr />
-<section id="cef---closed-ended-funds" class="level3" data-number="3.0.1">
-<h3 data-number="3.0.1"><span class="header-section-number">3.0.1</span> CEF - Closed Ended funds</h3>
-<ul>
-<li>NAV of CEF are sensitive to good/bad investment decisions by the owner<br />
-</li>
-<li>CEF have cheap interest rate on debt</li>
-<li>Federal requirements mandate a limit on debt relative to NAV
-<ul>
-<li>Market downturn –&gt; NAV decrease –&gt; Forced sell-off to stay below debt limit</li>
-</ul></li>
-</ul>
-<p>Terms<br />
-:NAV = similar to book value [what the fund really has] :Positive Discount = Premium to NAV [fund is doing well] :Negative DIscount = Discount to NAV [fund is doing badly] :Distribution rate = Dividend yield [calculated annually ]</p>
-</section>
-</section>
-]]></summary>
-</entry>
-<entry>
-    <title>3d plots and Contour plot</title>
-    <link href="https://userjy.github.io/posts/2021-10-15-3dplots.html" />
-    <id>https://userjy.github.io/posts/2021-10-15-3dplots.html</id>
-    <published>2021-10-15T00:00:00Z</published>
-    <updated>2021-10-15T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on October 15, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;mathcs&#39;." href="/tags/mathcs.html">mathcs</a>, <a title="All pages tagged &#39;mathbasics&#39;." href="/tags/mathbasics.html">mathbasics</a>
-    
-</div>
-<div id="TOC"><ul>
-<li><a href="#simple-contour-plots"><span class="toc-section-number">1</span> Simple Contour plots</a></li>
-<li><a href="#d-plot"><span class="toc-section-number">2</span> 3d Plot</a>
-<ul>
-<li><a href="#plot-random"><span class="toc-section-number">2.1</span> Plot random</a></li>
-<li><a href="#manual-tuning-neural-net"><span class="toc-section-number">2.2</span> Manual Tuning Neural Net</a></li>
-</ul></li>
-</ul></div>
-<ul>
-<li><code>ax.contour3D</code> specifically requires the <code>ax</code> setup.</li>
-<li><code>plt.contour</code> <code>plt.contourf</code> allows immediately plotting</li>
-<li><code>np.meshgrid(x,y) = X,Y</code> where X,Y are broadcasts of x and y to the same dimension
-<ul>
-<li>input x.shape is (2,1)</li>
-<li>input y shape is (3,1)</li>
-<li>rows of X are broadcasted copies of x
-<ul>
-<li>X.shape is (2,3)</li>
-</ul></li>
-<li>cols of Y are broadcasted copies of y
-<ul>
-<li>Y.shape is (2,3)<br />
-</li>
-</ul></li>
-<li>Notice that elementwise product of X and Y is the product space of x and y.<br />
-In other words, it is all combinations of x and y.</li>
-</ul></li>
-</ul>
-<p><code>X,Y = meshgrid(x=[1,2],y=[3,4,5])</code></p>
-<p><span class="math display">\[ x=\begin{bmatrix}
-{\color{red}1} &amp; {\color{red}2} \end{bmatrix} \qquad
-y=\begin{bmatrix}
-{\color{blue}3} &amp; {\color{blue}4} &amp;{\color{blue}5} \end{bmatrix} \qquad
-X = \begin{bmatrix}
-{\color{red}1} &amp; {\color{red}2} \\
-1 &amp; 2 \\
-1 &amp; 2 
-\end{bmatrix} \qquad Y = \begin{bmatrix}
-{\color{blue}3} &amp; 3 \\
-{\color{blue}4} &amp; 4 \\
-{\color{blue}5} &amp; 5 
-\end{bmatrix}\]</span></p>
-<p><span class="math display">\[X \otimes Y = \begin{bmatrix}
-(1,3) &amp; (2,3) \\
-(1,4) &amp; (2,4) \\
-(1,5) &amp; (2,5) 
-\end{bmatrix}\]</span></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits <span class="im">import</span> mplot3d</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;wireframe&quot;</span>):</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure()</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> plt.axes(projection<span class="op">=</span><span class="st">&#39;3d&#39;</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> plottype <span class="op">==</span> <span class="st">&quot;contour3D&quot;</span>:</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        ax.contour3D(X,Y,Z, <span class="dv">50</span>, cmap<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> plottype <span class="op">==</span> <span class="st">&quot;surface&quot;</span>:</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        ax.plot_surface(X, Y, Z, cmap<span class="op">=</span><span class="st">&quot;coolwarm&quot;</span>, linewidth<span class="op">=</span><span class="dv">0</span>, antialiased<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> plottype <span class="op">==</span> <span class="st">&quot;wireframe&quot;</span>:</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        ax.plot_wireframe(X, Y, Z, rstride<span class="op">=</span><span class="dv">5</span>, cstride<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">&#39;x&#39;</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">&#39;y&#39;</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    ax.set_zlabel(<span class="st">&#39;z&#39;</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ax.set_title(&#39;3D contour&#39;)</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (plt,ax)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x, y):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(x <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> y <span class="op">**</span> <span class="dv">2</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(X, Y)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape,Y.shape)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;contour3D&quot;</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;surface&quot;</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;wireframe&quot;</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div>
-<pre><code>(30,)
-(30, 30) (30, 30)</code></pre>
-<figure>
-<img src="/images/2021-10-15-3dplots/output_2_1.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
-</figure>
-<figure>
-<img src="/images/2021-10-15-3dplots/output_2_2.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
-</figure>
-<figure>
-<img src="/images/2021-10-15-3dplots/output_2_3.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
-</figure>
-<section id="simple-contour-plots" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Simple Contour plots</h1>
-<ul>
-<li>In 2d contour plots, color is the z-axis.</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.contourf(X,Y,Z)</span></code></pre></div>
-<pre><code>&lt;matplotlib.contour.QuadContourSet at 0x7fc419419910&gt;</code></pre>
-<figure>
-<img src="/images/2021-10-15-3dplots/output_5_1.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
-</figure>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.contour(X,Y,Z)</span></code></pre></div>
-<pre><code>&lt;matplotlib.contour.QuadContourSet at 0x7fc4192cc670&gt;</code></pre>
-<figure>
-<img src="/images/2021-10-15-3dplots/output_6_1.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
-</figure>
-</section>
-<section id="d-plot" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> 3d Plot</h1>
-<section id="plot-random" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> Plot random</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x, y):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.random.poisson(size<span class="op">=</span>x.shape)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(X, Y)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;surface&quot;</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div>
-<figure>
-<img src="/images/2021-10-15-3dplots/output_9_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
-</figure>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x, y):</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.random.rand(<span class="op">*</span>x.shape)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(X, Y)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z,plottype<span class="op">=</span><span class="st">&quot;contour3D&quot;</span>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div>
-<figure>
-<img src="/images/2021-10-15-3dplots/output_10_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
-</figure>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x, y):</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">30</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(X, Y)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>cont3d(X,Y,Z)[<span class="dv">0</span>].show() </span></code></pre></div>
-<figure>
-<img src="/images/2021-10-15-3dplots/output_11_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
-</figure>
-</section>
-<section id="manual-tuning-neural-net" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> Manual Tuning Neural Net</h2>
-<table>
-<thead>
-<tr class="header">
-<th>x1</th>
-<th>x2</th>
-<th>LinearFunc</th>
-<th>Sigmoid</th>
-<th>Actual x1 OR x2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0</td>
-<td>0</td>
-<td>(0)(10)+(0)(10)+(-5)= -5</td>
-<td>σ(-5)=0.00669≅0</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>0</td>
-<td>1</td>
-<td>(0)(10)+(1)(10)+(-5)= 5</td>
-<td>σ(5)=0.99330≅1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>1</td>
-<td>0</td>
-<td>(1)(10)+(0)(10)+(-5)= 5</td>
-<td>σ(5)=0.99330≅1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>1</td>
-<td>(1)(10)+(1)(10)+(-5)= 15</td>
-<td>σ(15)=0.99999≅1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defina a collection of inputs to test OR and AND</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>my_x_collection <span class="op">=</span> np.array([</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>],</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>],</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>],</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">1</span>],</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>])</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> LinearFunction(x1,x2,w1,w2,b):</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x1<span class="op">*</span>w1 <span class="op">+</span> x2<span class="op">*</span>w2) <span class="op">+</span> b</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> Sigmoid_2d(x1, x2, w1, w2, b):</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>LinearFunction(x1,x2,w1,w2,b)))</span></code></pre></div>
-<ul>
-<li><strong>These are the weights we discovered, w1=10,w2=10,b=-5</strong></li>
-</ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>w1 <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>w2 <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Input</span><span class="ch">\t</span><span class="st">Linear</span><span class="ch">\t</span><span class="st">Sigmoid&quot;</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> my_x_collection:</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    x1 <span class="op">=</span> x[<span class="dv">0</span>]</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    x2 <span class="op">=</span> x[<span class="dv">1</span>]</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    LinearOutput <span class="op">=</span> LinearFunction(x1,x2,w1,w2,b)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    SigmoidOutput <span class="op">=</span> Sigmoid_2d(x1,x2,w1,w2,b)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{x}</span><span class="ch">\t</span><span class="sc">{</span>LinearOutput<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>SigmoidOutput<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
-<pre><code>Input	Linear	Sigmoid
-[0 0]	-5	0.0066928509242848554
-[0 1]	5	0.9933071490757153
-[1 0]	5	0.9933071490757153
-[1 1]	15	0.999999694097773</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">30</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">30</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> Sigmoid_2d(X, Y, w1, w2, b)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> cont3d(X,Y,Z)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>ax.scatter(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>ax.scatter(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>ax.scatter(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>ax.scatter(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div>
-<figure>
-<img src="/images/2021-10-15-3dplots/output_20_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
-</figure>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
-</section>
-</section>
-]]></summary>
-</entry>
-<entry>
-    <title>Import, load, FRED, TDtrade in python, R</title>
-    <link href="https://userjy.github.io/posts/2021-10-10-LoadStockFRED.html" />
-    <id>https://userjy.github.io/posts/2021-10-10-LoadStockFRED.html</id>
-    <published>2021-10-10T00:00:00Z</published>
-    <updated>2021-10-10T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on October 10, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;python&#39;." href="/tags/python.html">python</a>, <a title="All pages tagged &#39;R&#39;." href="/tags/R.html">R</a>, <a title="All pages tagged &#39;stats&#39;." href="/tags/stats.html">stats</a>, <a title="All pages tagged &#39;AI&#39;." href="/tags/AI.html">AI</a>, <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
-    
-</div>
-<section id="import-csv-data" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> import CSV data</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mycsv <span class="op">=</span> Path(<span class="st">&quot;/home/kali/pytorch-Deep-Learning/ISLR/dataset/Advertising.csv&quot;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>outDF<span class="op">=</span>pd.read_csv(mycsv)</span></code></pre></div>
-</section>
-<section id="import-tdtrade" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> import tdtrade</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>apikey <span class="op">=</span> <span class="st">&quot;XXXXXXXXXXX&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ticker <span class="op">=</span> <span class="st">&quot;AAPL&quot;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>period <span class="op">=</span> <span class="st">&quot;day&quot;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>myurl <span class="op">=</span> <span class="ss">f&quot;https://api.tdameritrade.com/v1/marketdata/</span><span class="sc">{</span>ticker<span class="sc">}</span><span class="ss">/pricehistory?apikey=</span><span class="sc">{</span>apikey<span class="sc">}</span><span class="ss">&amp;periodType=</span><span class="sc">{</span>period<span class="sc">}</span><span class="ss">&quot;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>stkdata <span class="op">=</span> pd.read_json(myurl)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Series of json eg. [{open: ,close: ...}, {open: , close: ..}</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>stocks <span class="op">=</span> stkdata[<span class="st">&quot;candles&quot;</span>].<span class="bu">apply</span>(pd.Series)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert Series of json to Dataframe</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>stocks[<span class="st">&quot;datetime&quot;</span>] <span class="op">=</span>  pd.to_datetime(stocks[<span class="st">&quot;datetime&quot;</span>],origin<span class="op">=</span><span class="st">&quot;unix&quot;</span>, unit<span class="op">=</span><span class="st">&quot;ms&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bleh <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> rawdata <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">&quot;https://api.td...&quot;</span>)<span class="op">.</span><span class="fu">then</span>(response <span class="kw">=&gt;</span> response<span class="op">.</span><span class="fu">text</span>())</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> inter <span class="op">=</span> <span class="bu">window</span><span class="op">.</span><span class="fu">atob</span>(rawdata)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> jsondata <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(inter)[<span class="st">&quot;candles&quot;</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> tfdataframe <span class="op">=</span> tf<span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="fu">array</span>(jsondata)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 ]]></summary>
 </entry>

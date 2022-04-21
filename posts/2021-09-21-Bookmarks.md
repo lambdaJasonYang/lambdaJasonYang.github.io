@@ -3,6 +3,20 @@ title: Bookmarks
 tags: mathcs, puremath, recursion
 ---
 
+https://caiorss.github.io/C-Cpp-Notes/cpp-design-patterns.html
+
+https://www.llvm.org/docs/tutorial/MyFirstLanguageFrontend/index.html
+
+http://spinroot.com/spin/whatispin.html
+
+https://patterns.eecs.berkeley.edu/
+
+https://linkedin.github.io/school-of-sre
+
+https://researchseminars.org/
+
+https://www.katacoda.com/
+
 zerobin.net
 
 https://cs.pomona.edu/~michael/
@@ -32,6 +46,8 @@ https://www.cip.ifi.lmu.de/~grinberg/algebra/algebra.html
 [Synthetic Topology](https://www.cs.bham.ac.uk/~mhe/papers/entcs87.pdf)
 
 [Open conferences](https://openreview.net/)
+
+http://www.willamette.edu/~fruehr/haskell/evolution.html
 
 # Control engineering
 
@@ -184,3 +200,15 @@ https://lecoupa.github.io/awesome-cheatsheets/
 thebookofshaders.com
 
 http://www.courses.physics.helsinki.fi/fys/nucphys/
+
+http://www.findstat.org/
+
+
+# Chips
+
+https://en.wikichip.org/wiki/WikiChip
+
+# Bidding
+
+https://npsolutions.hibid.com/
+

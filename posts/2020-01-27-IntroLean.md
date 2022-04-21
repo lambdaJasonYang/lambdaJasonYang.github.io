@@ -123,6 +123,10 @@ def powerB (m : ℕ) : ℕ → ℕ
 #eval powerB 2 5 
 ```
 
+## Structures
+
+**Structures are non-recursive inductive data types**  
+In other langs, they are called records   
 
 # Implicit vs Explicit parameters
 

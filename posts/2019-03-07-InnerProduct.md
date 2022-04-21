@@ -5,6 +5,14 @@ toc: y
 ---
 # Inner Product is a Metric
 
+* Dot product is an inner product that measure similarity.
+* Dot product is Cos of angle between 2 vectors. 
+* Dot product measures how well 2 vectors align. 
+* Dot product of recentered vectors is the correlation coefficient r.
+* Gram Matrix is all permutations of dot product between 2 pairs of vectors in a set of vectors.
+  * Gram matrix gives us pairwise similarity for all vectors.
+
+
  $$\langle x,y \rangle = d(x,y) = x^T y$$  
  Inner Product is a Metric function
 

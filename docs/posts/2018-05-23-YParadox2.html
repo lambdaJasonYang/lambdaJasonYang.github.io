@@ -119,8 +119,8 @@
 <p>A total recursive function is an illusion.</p>
 </blockquote>
 <p>A total recursive function simply a partial function that approximates the recursive function by nesting within itself an infinite number of times.</p>
-<section id="partial-recursive-factorial" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Partial recursive factorial</h3>
+<section id="partial-recursive-factorial" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Partial recursive factorial</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fact0(n):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span></span>
@@ -143,8 +143,8 @@
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">*</span> fact2(n<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
 </section>
-<section id="a-more-general-example" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> A more general example</h3>
+<section id="a-more-general-example" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> A more general example</h1>
 <p>The partial recursive function takes itself as the parameter which it will use for the IH or recursive case.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>partialrecursivefunction <span class="op">=</span> <span class="kw">lambda</span> f: (<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="cf">if</span> x <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> x <span class="op">*</span> (f(x<span class="op">-</span><span class="dv">1</span>)))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sentinel <span class="op">=</span> <span class="kw">lambda</span> x: <span class="st">&quot;error&quot;</span></span>
@@ -168,8 +168,8 @@
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 'errorerror'</span></span></code></pre></div>
 <p>Observe that the input domain is limited by how nested the partial recursive function is.</p>
 </section>
-<section id="y-combinator" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Y-combinator</h3>
+<section id="y-combinator" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Y-combinator</h1>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> <span class="kw">lambda</span> f: (<span class="kw">lambda</span> x: x(x))(<span class="kw">lambda</span> x: f(<span class="kw">lambda</span> <span class="op">*</span>args: x(x)(<span class="op">*</span>args)))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Y(p)(<span class="dv">5</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 120</span></span></code></pre></div>
@@ -195,8 +195,8 @@
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>Y4(p)(<span class="dv">5</span>)</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 120</span></span></code></pre></div>
 </section>
-<section id="a-total-recursive-factorial" class="level3" data-number="0.0.4">
-<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> A total recursive factorial</h3>
+<section id="a-total-recursive-factorial" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> A total recursive factorial</h1>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fac(s,n):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span></span>
@@ -206,17 +206,17 @@
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fac(fac,<span class="dv">5</span>)</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 120</span></span></code></pre></div>
 </section>
-<section id="analogy" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Analogy</h1>
-<section id="taylor-series" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> Taylor Series</h2>
+<section id="analogy" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Analogy</h1>
+<section id="taylor-series" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Taylor Series</h2>
 <ul>
 <li>as we add more higher level derivative terms to the series, the series becomes a closer approximate to the function.</li>
 <li>as we add more partial functions, the resulting function becomes a closer awpproximate of the total recursive function.</li>
 </ul>
 </section>
-<section id="transitive-relation" class="level2" data-number="1.2">
-<h2 data-number="1.2"><span class="header-section-number">1.2</span> Transitive relation</h2>
+<section id="transitive-relation" class="level2" data-number="5.2">
+<h2 data-number="5.2"><span class="header-section-number">5.2</span> Transitive relation</h2>
 <ul>
 <li>Let <span class="math inline">\(R\)</span> be a relation from a set to itself,<br />
 </li>
@@ -249,64 +249,67 @@
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

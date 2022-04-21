@@ -227,8 +227,11 @@
 <p>A functor that takes a dual morphism to set category.</p>
 <p><span class="math display">\[f^{OP} \Rightarrow Set\]</span></p>
 </section>
-<section id="natural" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Natural</h1>
+<section id="applicative" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Applicative</h1>
+</section>
+<section id="natural" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Natural</h1>
 <ul>
 <li>All functors are endofunctors <code>functor :: Type* =&gt; Type*</code> wrt to coding
 <ul>
@@ -236,14 +239,29 @@
 <li><code>Maybe :: Type* =&gt; Type*</code></li>
 </ul></li>
 </ul>
+<p>Below is a natural transformation wrt Object a on functors List and Maybe<br />
+Natural Transformation can be considered a family of morphisms between functors wrt an object or morphism.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ot">g ::</span> ∀a b<span class="op">.</span> a <span class="ot">-&gt;</span> b </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">naturaltransformation ::</span> ∀ a<span class="op">.</span> <span class="dt">List</span> a <span class="ot">-&gt;</span> <span class="dt">Maybe</span> a</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">naturaltransformation_a ::</span> ∀ a<span class="op">.</span> <span class="dt">List</span> a <span class="ot">-&gt;</span> <span class="dt">Maybe</span> a</span></code></pre></div>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820666f6f207b0a202072616e6b646972203d204c520a202061205b6c6162656c203d2022666f72616c6c20613a3a547970652a225d0a20200a20200a2020737562677261706820636c7573746572617b0a20202062205b6c6162656c3d224c6973742061225d0a20202063205b6c6162656c3d224d617962652061225d0a20202062202d3e2063205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a202061202d3e2062205b636f6c6f723d677265656e206c6162656c3d2266756e63746f72225d0a202061202d3e2063205b636f6c6f723d677265656e206c6162656c3d2266756e63746f7222205d0a7d0a40656e64756d6c"></figure>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820666f6f207b0a72616e6b6469723d4c520a0a202061205b6c6162656c203d2022666f72616c6c20613a3a547970652a225d0a206131205b6c6162656c203d2022666f72616c6c20623a3a547970652a225d0a612d3e6131205b6c6162656c3d2267225d0a20200a20200a2020737562677261706820636c7573746572617b0a20202062205b6c6162656c3d224c6973742061225d0a20202063205b6c6162656c3d224d617962652061225d0a20202062202d3e2063205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a2020737562677261706820636c7573746572627b0a2020206231205b6c6162656c3d224c6973742062225d0a2020206331205b6c6162656c3d224d617962652062225d0a2020206231202d3e206331205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a202061202d3e2062205b636f6c6f723d677265656e206c6162656c3d224c69737446225d0a202061202d3e2063205b636f6c6f723d677265656e206c6162656c3d224d617962654622205d0a0a20206131202d3e206231205b636f6c6f723d677265656e206c6162656c3d224c69737446225d0a20206131202d3e206331205b636f6c6f723d677265656e206c6162656c3d224d617962654622205d0a202062202d3e206231205b6c6162656c3d224c69737446286729225d0a202063202d3e206331205b6c6162656c3d224d6179626546286729225d0a7d0a40656e64756d6c"></figure>
-<section id="naturality-square" class="level2" data-number="5.1">
-<h2 data-number="5.1"><span class="header-section-number">5.1</span> Naturality square</h2>
+<section id="naturality-square" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> Naturality square</h2>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820666f6f207b0a0a72616e6b6469723d4c520a20200a20200a2020737562677261706820636c7573746572617b0a20202062205b6c6162656c3d224c6973742061225d0a20202063205b6c6162656c3d224d617962652061225d0a20202062202d3e2063205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a2020737562677261706820636c7573746572627b0a2020206231205b6c6162656c3d224c6973742062225d0a2020206331205b6c6162656c3d224d617962652062225d0a2020206231202d3e206331205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a0a202062202d3e206231205b6c6162656c3d224c69737446286729225d0a202063202d3e206331205b6c6162656c3d224d6179626546286729225d0a7d0a40656e64756d6c"></figure>
 </section>
+</section>
+<section id="algebras" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Algebras</h1>
+<p>3 equivalent ways to define an algebra</p>
+<p><span class="math display">\[(\mathbb{N},0::\top \rightarrow \mathbb{N},(+)::\mathbb{N}\times\mathbb{N} \rightarrow \mathbb{N})\]</span> <span class="math display">\[(\mathbb{N},in::\top + \mathbb{N}\times\mathbb{N} \rightarrow \mathbb{N}) \tag{fuse + and 0}\]</span> <span class="math display">\[let\ F X = \top + X \times X \qquad (\mathbb{N}, in::F\ \mathbb{N} \rightarrow \mathbb{N})\tag{package into functor}\]</span></p>
+<p>Other examples of an algebra</p>
+<ul>
+<li><span class="math inline">\((\mathbb{B},true::\top \rightarrow \mathbb{B},(\equiv)::\mathbb{B}\times\mathbb{B}\rightarrow\mathbb{B})\)</span></li>
+<li><span class="math inline">\((\mathbb{B},false::\top \rightarrow \mathbb{B},(\lor)::\mathbb{B}\times\mathbb{B}\rightarrow\mathbb{B})\)</span></li>
+</ul>
+<p>F Algebras are just a set with operations that return values in that set</p>
+<p>Inductive datatypes correspond to initial algebras.<br />
+The homomorphisms are catamorphisms or folds.</p>
 </section>
 
         </div>
@@ -263,64 +281,67 @@
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

@@ -6,12 +6,18 @@ tags: python, prog
 * IO-bound , Slow IO, Many Connections  
   * Use Async
   * example: web client requests/downloads(IO) 
+
+<!--  -->
+
 * Content from Server IO-bound , Fast IO , Limited Connections    
   * Use Multi-thread 
 * Non IO-bound, CPU calculations 
   * Use Multi-processing
 
-#### Threading
+
+~~hello~~
+
+# Threading
 
 ``` python
 import threading
@@ -28,7 +34,7 @@ fstThread()
 #>1 from MainThread
 ```
 
-#### Multiprocessing
+# Multiprocessing
 
 ```python
 import multiprocessing

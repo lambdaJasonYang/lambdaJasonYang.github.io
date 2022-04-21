@@ -95,7 +95,7 @@ $$y(0)=k$$
 
 ---
 
-##### Newton's Second Law 
+# Newton's Second Law 
 
 Solving the differential equation F=ma  
 Solving for 1) distance function and 2) velocity function, each wrt time

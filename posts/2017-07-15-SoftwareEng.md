@@ -85,3 +85,15 @@ Just use Interfaces.
 ## Terms
 
 * API, IOT, IaaS SaaS PaaS DaaS MSaaS MBaaS DCaaS iPaaS ITMaaS , CRM, MIS, ERP, HRM, CM,GIS, DBMS, CAD
+
+### Project manager terms
+
+* WBS - Work Breakdown Structure
+* Milestones - Significant point in project
+* Baselines - Approved plan and Schedule
+  * This defines failed and successful project
+* Triple Constraint - Balance {Time, Cost, Scope}
+* Project life cycle - 
+* Gantt Chart - Dates, Durations and forecasts
+* CCB - Change Control Board : Stakeholders that approve or deny project and scheduling changes
+* 

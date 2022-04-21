@@ -115,20 +115,24 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'C'." href="../tags/C.html">C</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'OS'." href="../tags/OS.html">OS</a>
     
 </div>
-<p>Remember pointers always hold an address so if you’re reading some spec, replace pointer with address if it gets confusing. parameter that takes a pointer == parameter that takes an address</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-o</span> bleh main.c</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./bleh</span></span></code></pre></div>
+<p>Remember pointers always hold an address so if you’re reading some spec,<br />
+replace pointer with address if it gets confusing.</p>
+<blockquote>
+<p>function bleh that takes a pointer can be read as this function is directly accessing or modifying the object</p>
+</blockquote>
+<section id="basics" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Basics</h1>
 <p>standard library is nested in angled brackets like &lt;iostream&gt; &lt;stdio.h&gt;</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>a <span class="op">=</span> <span class="op">&amp;</span>b<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;address of pointee b aka value of a is %p  </span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> a<span class="op">);</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;value of pointee is b  </span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*(</span><span class="dt">int</span><span class="op">*)(</span>a<span class="op">));</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">//address of pointee b aka value of a is 0xbefe3588</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">//value of pointee b is 5 </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;An int is %d, A long is %ld, a float is %f, a double is %lf, a char is %c, a string is %s, a pointer is %p&quot;</span><span class="op">,</span><span class="dv">12</span><span class="op">,</span><span class="dv">25555555</span><span class="op">,</span><span class="fl">23.1</span><span class="op">,</span><span class="fl">23.01</span><span class="op">,</span><span class="ch">'c'</span><span class="op">,</span><span class="st">&quot;asd&quot;</span><span class="op">,</span>a<span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>a <span class="op">=</span> <span class="op">&amp;</span>b<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;address of pointee b aka value of a is %p  </span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> a<span class="op">);</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;value of pointee is b  </span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*(</span><span class="dt">int</span><span class="op">*)(</span>a<span class="op">));</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">//address of pointee b aka value of a is 0xbefe3588</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">//value of pointee b is 5 </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;An int is %d, A long is %ld, a float is %f, a double is %lf, a char is %c, a string is %s, a pointer is %p&quot;</span><span class="op">,</span><span class="dv">12</span><span class="op">,</span><span class="dv">25555555</span><span class="op">,</span><span class="fl">23.1</span><span class="op">,</span><span class="fl">23.01</span><span class="op">,</span><span class="ch">'c'</span><span class="op">,</span><span class="st">&quot;asd&quot;</span><span class="op">,</span>a<span class="op">)</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -171,50 +175,53 @@
 </tr>
 </tbody>
 </table>
-<p>preprocessor, similar to prototypes.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef two</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define two 2</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> two<span class="op">;</span></span></code></pre></div>
+</section>
+<section id="macros" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> MACROS</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef two</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define two 2</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> two<span class="op">;</span></span></code></pre></div>
 <p>ifndef tells us if not defined then define it else skip it.</p>
 <p><code class="sourceCode c"><span class="pp">#define MAX(a,b) a &gt; b ? a : b</span></code></p>
 <hr />
-<section id="example-linking-multiple-object-files" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Example linking multiple object files</h3>
-<div class="sourceCode" id="cb4" data-filename="main.c"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;helper.h&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef two</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define two 2</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> two<span class="op">;</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;hey %d &quot;</span><span class="op">,</span> plus<span class="op">(</span>a<span class="op">,</span><span class="dv">3</span><span class="op">));</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb5" data-filename="helper.h"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef avoidRepeatImport</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define avoidRepeatImport</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> plus<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">);</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
-<div class="sourceCode" id="cb6" data-filename="helper.c"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;helper.h&quot;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> plus<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">){</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Below, the “-c” flag tells us to convert helper.c to helper.o</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-c</span> helper.c <span class="co">#outputs helper.o</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-c</span> main.c <span class="co">#outputs main.o</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> main.o helper.o <span class="at">-o</span> myexecutable</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./myexecutable</span></span></code></pre></div>
-<p>Alternatively we can just do</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> main.c helper.c <span class="at">-o</span> myexecutable <span class="at">-Wall</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./myexecutable</span>    </span></code></pre></div>
 </section>
-<section id="makefile" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> makefile</h3>
+<section id="example-linking-multiple-object-files" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Example linking multiple object files</h1>
+<div class="sourceCode" id="cb3" data-filename="main.c"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;helper.h&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef two</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define two 2</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> two<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;hey %d &quot;</span><span class="op">,</span> plus<span class="op">(</span>a<span class="op">,</span><span class="dv">3</span><span class="op">));</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4" data-filename="helper.h"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef avoidRepeatImport</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define avoidRepeatImport</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> plus<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">);</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
+<div class="sourceCode" id="cb5" data-filename="helper.c"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;helper.h&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> plus<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">){</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Below, the “-c” flag tells us to convert helper.c to helper.o</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-c</span> helper.c <span class="co">#outputs helper.o</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-c</span> main.c <span class="co">#outputs main.o</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> main.o helper.o <span class="at">-o</span> myexecutable</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./myexecutable</span></span></code></pre></div>
+<p>Alternatively we can just do</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> main.c helper.c <span class="at">-o</span> myexecutable <span class="at">-Wall</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./myexecutable</span>    </span></code></pre></div>
+</section>
+<section id="makefile" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> makefile</h1>
 <ul>
 <li>“make” is analogous to “npm build”<br />
 </li>
@@ -222,8 +229,15 @@
 </ul>
 <p>On Vscode bottom right click on Spaces and turn to tab.<br />
 make requires tab before gcc command.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-e</span> <span class="at">-t</span> <span class="at">-v</span> makefile <span class="co">#Use to check for tabs ^I</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> <span class="co">#this will build the makefile</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-e</span> <span class="at">-t</span> <span class="at">-v</span> makefile <span class="co">#Use to check for tabs ^I</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> <span class="co">#this will build the makefile</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">all:</span> run</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>	<span class="fu">gcc</span> main.o </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>	<span class="ex">./a.out</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">run:</span> main.c</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>	<span class="fu">gcc</span> <span class="at">-c</span> main.c</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">clean:</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>	<span class="fu">rm</span> a.out main.o</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">all:</span> main.o helper.o</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>	<span class="fu">gcc</span> main.o helper.o <span class="at">-o</span> myexecutable</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -243,10 +257,36 @@ make requires tab before gcc command.</p>
 main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 </ul></li>
 </ul>
-<hr />
 </section>
-<section id="strings" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3"><span class="header-section-number">0.0.3</span> Strings</h3>
+<section id="null-pointers-structs" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> null pointers, structs</h1>
+<ul>
+<li>uninitialized base variables and pointer are both <code>NULL</code> when read</li>
+<li>uninitalized struct are also <code>NULL</code> when read</li>
+<li>but <strong>members of uninitalized struct variables have random value</strong> and addresses(if the member is a pointer)</li>
+<li><strong>but members of uninitalized struct pointers always give seg fault</strong></li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> ll <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> var<span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span><span class="op">*</span> ll next<span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> ll newlist<span class="op">;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,</span>newlist<span class="op">);</span> <span class="co">// 0</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%p&quot;</span><span class="op">,</span>newlistptr<span class="op">);</span> <span class="co">// (nil)</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,</span>newlist<span class="op">.</span>next<span class="op">);</span> <span class="co">// 1824314</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%p&quot;</span><span class="op">,</span>newlistptr<span class="op">.</span>next<span class="op">);</span> <span class="co">// 0x294452u205</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> ll<span class="op">*</span> newlistptr<span class="op">;</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,</span>newlistptr<span class="op">);</span> <span class="co">// 0</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%p&quot;</span><span class="op">,</span>newlistptr<span class="op">);</span> <span class="co">// (nil)</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,(*</span>newlistptr<span class="op">).</span>next<span class="op">);</span> <span class="co">// segfault</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%p&quot;</span><span class="op">,(*</span>newlistptr<span class="op">).</span>next<span class="op">);</span> <span class="co">// segfault</span></span></code></pre></div>
+</section>
+<section id="strings" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Strings</h1>
 <ul>
 <li>Strings are really just arrays of chars
 <ul>
@@ -255,48 +295,47 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 </ul></li>
 <li>last entry of string is either 0 or ‘\0’</li>
 </ul>
-<section id="string-literals-are-immutable-in-memory" class="level4" data-number="0.0.3.1">
-<h4 data-number="0.0.3.1"><span class="header-section-number">0.0.3.1</span> String literals are immutable in memory</h4>
+<section id="string-literals-are-immutable-in-memory" class="level4" data-number="6.0.0.1">
+<h4 data-number="6.0.0.1"><span class="header-section-number">6.0.0.1</span> String literals are immutable in memory</h4>
 <ul>
 <li>Typing a string like “hello” in your code editor means your progam will allocate a permanent address and memory for “hello” that all other “hello” in your code will refer to.</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%s&quot;</span><span class="op">,</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">//init string literal &quot;hello&quot; at SOME address </span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">//0xfffeee -&gt; &quot;hello&quot;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%s&quot;</span><span class="op">,</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> </span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">//REUSE same string literal at SAME address</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">//0xfffeee -&gt; &quot;hello&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%s&quot;</span><span class="op">,</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">//init string literal &quot;hello&quot; at SOME address </span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">//0xfffeee -&gt; &quot;hello&quot;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%s&quot;</span><span class="op">,</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">//REUSE same string literal at SAME address</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">//0xfffeee -&gt; &quot;hello&quot;</span></span></code></pre></div>
 </section>
-<section id="different-ways-to-init-string" class="level4" data-number="0.0.3.2">
-<h4 data-number="0.0.3.2"><span class="header-section-number">0.0.3.2</span> Different ways to init String</h4>
-<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[</span><span class="dv">256</span><span class="op">];</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">//MUTABLE array of 256 initialized.</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[</span><span class="dv">256</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>s<span class="op">[</span><span class="dv">1</span><span class="op">]=</span><span class="ch">'Y'</span><span class="op">;</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: MUTABLE array s of 256 initialized.</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">//Copies string( and Auto appends a terminating \0) </span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">//RESULT: &quot;hello\0&quot; MUTABLE</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>s<span class="op">[</span><span class="dv">1</span><span class="op">]=</span><span class="ch">'Y'</span><span class="op">;</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: automatically initialized 8 bytes MUTABLE array s.</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">//Copies string(and Auto append a terminating \0) </span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">//RESULT: &quot;hello\0&quot; MUTABLE</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>s <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="op">*(</span>s<span class="op">+</span><span class="dv">1</span><span class="op">)=</span><span class="ch">'Y'</span><span class="op">;</span> <span class="co">//Crash trying to change 'e' =&gt; 'Y'</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: s POINTS to IMMUTABLE string</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">//We Crash for trying to modify an immutable string literal</span></span></code></pre></div>
+<section id="different-ways-to-init-string" class="level4" data-number="6.0.0.2">
+<h4 data-number="6.0.0.2"><span class="header-section-number">6.0.0.2</span> Different ways to init String</h4>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[</span><span class="dv">256</span><span class="op">];</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">//MUTABLE array of 256 initialized.</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[</span><span class="dv">256</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>s<span class="op">[</span><span class="dv">1</span><span class="op">]=</span><span class="ch">'Y'</span><span class="op">;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: MUTABLE array s of 256 initialized.</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">//Copies string( and Auto appends a terminating \0) </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">//RESULT: &quot;hello\0&quot; MUTABLE</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>s<span class="op">[</span><span class="dv">1</span><span class="op">]=</span><span class="ch">'Y'</span><span class="op">;</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: automatically initialized 8 bytes MUTABLE array s.</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">//Copies string(and Auto append a terminating \0) </span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">//RESULT: &quot;hello\0&quot; MUTABLE</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>s <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="op">*(</span>s<span class="op">+</span><span class="dv">1</span><span class="op">)=</span><span class="ch">'Y'</span><span class="op">;</span> <span class="co">//Crash trying to change 'e' =&gt; 'Y'</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: s POINTS to IMMUTABLE string</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">//We Crash for trying to modify an immutable string literal</span></span></code></pre></div>
 <hr />
 </section>
-</section>
-<section id="dynamic-mem-allocation" class="level3" data-number="0.0.4">
-<h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> Dynamic mem allocation</h3>
+<section id="dynamic-mem-allocation" class="level3" data-number="6.0.1">
+<h3 data-number="6.0.1"><span class="header-section-number">6.0.1</span> Dynamic mem allocation</h3>
 <p>malloc(size_t x) allocates x bytes of heap memory return address for x return a void pointer, void <em> int </em>a; a = malloc(5 * sizeof(int));</p>
 <p>free(void * p) release dynamically allocated memory input: pointer[aka address] to the beginning of a dynamically allocated block of memory</p>
 <p>calloc(size_t n, size_t x) basically just malloc with n*x bytes of memory</p>
@@ -341,16 +380,16 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 <li>Detach the segment from a variable (once per process) - shmdt</li>
 <li>Remove the segment (happens once) - shmctl</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>data<span class="op">;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> shmd<span class="op">;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>shmd <span class="op">=</span> shmget<span class="op">(</span>KEY<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">),</span> IPC_CREAT <span class="op">|</span> <span class="bn">0640</span><span class="op">);</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;shmd: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> shmd<span class="op">);</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> shmat<span class="op">(</span>shmd<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;data: %p</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> data<span class="op">);</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>data<span class="op">);</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>data <span class="op">=</span> <span class="op">*</span> data <span class="op">+</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>data<span class="op">);</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>shmdt<span class="op">(</span>data<span class="op">);</span> </span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>data<span class="op">;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> shmd<span class="op">;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>shmd <span class="op">=</span> shmget<span class="op">(</span>KEY<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">),</span> IPC_CREAT <span class="op">|</span> <span class="bn">0640</span><span class="op">);</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;shmd: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> shmd<span class="op">);</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> shmat<span class="op">(</span>shmd<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;data: %p</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> data<span class="op">);</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>data<span class="op">);</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>data <span class="op">=</span> <span class="op">*</span> data <span class="op">+</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>data<span class="op">);</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>shmdt<span class="op">(</span>data<span class="op">);</span> </span></code></pre></div>
 <p>Server Design * Handshake - ensure a connection between 2 programs</p>
 <ul>
 <li>3-way-handshake - verify both client and server can BOTH SEND AND RECIEVE DATA</li>
@@ -384,6 +423,7 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 <li>Server recreates the WKP waits for another client.</li>
 </ul>
 </section>
+</section>
 
         </div>
         <div id="footer">
@@ -402,64 +442,67 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

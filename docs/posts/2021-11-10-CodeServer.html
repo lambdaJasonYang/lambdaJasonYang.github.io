@@ -115,31 +115,83 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
+<p>Without HTTPS, SSL Cert, things like Coq, Lean, wont work. Extensions wont show details, etc. Codeserver 3.8.0 is the last version that works without SSL.</p>
 <p>Config location: ~/.config/code-server/config.yaml</p>
-<section id="unsecure-http-setup" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> unsecure HTTP setup</h1>
-<p>Warning!! unsecure HTTP disables web view<br />
-extensions that show “previews” won’t work like Lean</p>
-<div class="sourceCode" id="cb1" data-filename="~/.config/code-server/config.yaml"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind-addr</span><span class="kw">:</span><span class="at"> 0.0.0.0:443</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auth</span><span class="kw">:</span><span class="at"> password</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> root</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<section id="https-setup-on-opnsense-or-pfsense" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> HTTPS setup on Opnsense or Pfsense</h1>
+<p>In the cert and cert-key fields, remember to use ABSOLUTE PATHS or systemctl wont work.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Allows code-server to listen on port 443.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setcap cap_net_bind_service=+ep /usr/lib/code-server/lib/node</span></code></pre></div>
+<div class="sourceCode" id="cb2" data-filename="~/.config/code-server/config.yaml"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind-addr</span><span class="kw">:</span><span class="at"> 0.0.0.0:443</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auth</span><span class="kw">:</span><span class="at"> password</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> root</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> /home/kali/.local/share/code-server/VsCodeOpn.crt</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cert-key</span><span class="kw">:</span><span class="at"> /home/kali/.local/share/code-server/VsCodeOpn.key</span></span></code></pre></div>
+<ol type="1">
+<li>Next you have to generate your Certificate Root Authority. (This is what your browser downloads)</li>
+</ol>
+<p>Trust &gt;&gt; Authorities &gt;&gt; Add</p>
+<ul>
+<li>Name: Web SSL Cert</li>
+<li>Method: Create an internal Certificate Authority</li>
+<li>Leave the Cipher and Hash default or else it wont work if key is too weak.</li>
+<li>Use valid city and state data</li>
+</ul>
+<ol start="2" type="1">
+<li>Next you have to generate your Server Certificate. (This is what you put in your remote “~/.local/share/code-server/” directory)</li>
+</ol>
+<p>Trust &gt;&gt; Certificates &gt;&gt; Add</p>
+<ul>
+<li>Name: VsCodeOpn</li>
+<li>Method: Create an internal Certificate</li>
+<li>Certificate Authority: Web SSL Cert</li>
+<li>Type: Server Certificate</li>
+<li>Alternative Names:
+<ul>
+<li>DNS: server.opnroot.com</li>
+<li>IP: 192.168.1.245</li>
+</ul></li>
+</ul>
+<p>Download the VsCodeOpn.crt and VsCodeOpn.key<br />
+SSH into PC hosting your code-server, Move them to some directory like :<br />
+~/.local/share/code-server/VsCodeOpn.crt<br />
+~/.local/share/code-server/VsCodeOpn.key</p>
+<ol start="3" type="1">
+<li>Go to Browser</li>
+</ol>
+<p>Trust &gt;&gt; Authorities</p>
+<p>Download the Web-SSL-Cert.crt, which is the Root Cert Authority. Go to Chrome settings , Manage Certificates &gt;&gt; Authorities, and install the *.crt.<br />
+Note we DO NOT need to install VsCodeOpn.crt on our browser.</p>
 </section>
-<section id="https-setup" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> HTTPS setup</h1>
-<p>Self signing CA</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Allows code-server to listen on port 443.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setcap cap_net_bind_service=+ep /usr/lib/code-server/lib/node</span></code></pre></div>
-<div class="sourceCode" id="cb3" data-filename="~/.config/code-server/config.yaml"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind-addr</span><span class="kw">:</span><span class="at"> 0.0.0.0:443</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auth</span><span class="kw">:</span><span class="at"> password</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> root</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
-</section>
-<section id="extensions" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Extensions</h1>
+<section id="extensions" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Extensions</h1>
 <p>go to <a href="https://open-vsx.org/">open-vsx.org</a></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://open-vsx.org/api/something/vscode-bleh/1.2.0/file/something.vscode-bleh-1.2.0.vsix</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code-server</span> <span class="at">--install-extension</span> something.vscode-bleh-1.2.0.vsix</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://open-vsx.org/api/something/vscode-bleh/1.2.0/file/something.vscode-bleh-1.2.0.vsix</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code-server</span> <span class="at">--install-extension</span> something.vscode-bleh-1.2.0.vsix</span></code></pre></div>
+</section>
+<section id="ssh" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> ssh</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install ssh</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/ssh/sshd_config</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;PermitRootLogin prohibit-password&quot; =&gt; &quot;PermitRootLogin yes&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable ssh</span></code></pre></div>
+</section>
+<section id="lean-and-multi-root-workspaces" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Lean and Multi-root workspaces</h1>
+<ul>
+<li>To use multi-root vscode workspaces with lean, the *.workplace file must be placed inside a lean project folder.</li>
+</ul>
+</section>
+<section id="jupyter" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Jupyter</h1>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env</span> GO111MODULE=on go install github.com/gopherdata/gophernotes@latest</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">go</span> env GOPATH<span class="va">)</span><span class="st">&quot;</span>/src/github.com/gopherdata/gophernotes</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">env</span> GO111MODULE=on go install</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/.local/share/jupyter/kernels/gophernotes</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> kernel/<span class="pp">*</span> ~/.local/share/jupyter/kernels/gophernotes</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/.local/share/jupyter/kernels/gophernotes</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +w ./kernel.json</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s|gophernotes|</span><span class="va">$(</span><span class="ex">go</span> env GOPATH<span class="va">)</span><span class="st">/bin/gophernotes|&quot;</span> <span class="op">&lt;</span> kernel.json.in <span class="op">&gt;</span> kernel.json</span></code></pre></div>
 </section>
 
         </div>
@@ -159,64 +211,67 @@ extensions that show “previews” won’t work like Lean</p>
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

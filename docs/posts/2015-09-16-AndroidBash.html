@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=100, initial-scale=0.5">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Android and Bash</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Android and Bash</h1>
+            
+
+            <div class="info">
+    Posted on September 16, 2015
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>
+    
+</div>
+<p>Note if within phone you omit <code>adb shell</code> to all bash commands</p>
+<section id="adb-shell" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> adb shell</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> shell am start <span class="at">-a</span> android.intent.action.CALL <span class="at">-d</span> tel:<span class="va">$1</span><span class="kw">;</span> <span class="co">#calling from android</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> shell am force-stop com.google.android.dialer<span class="kw">;</span> <span class="co">#force stop</span></span></code></pre></div>
+</section>
+<section id="sqlite" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> SQLite</h1>
+<p>first you must manually get a sqlite3 binary</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">AMsqloutput</span><span class="op">=</span><span class="va">$(</span><span class="st">&quot;/data/media/0/scripts/sqlite3&quot;</span> <span class="st">&quot;/data/data/com.android.providers.contacts/databases/calllog.db&quot;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;SELECT number,duration,date,strftime('%H', datetime( ROUND(DATE/1000),'unixepoch')) as hour, </span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">        strftime('%d', datetime( ROUND(DATE/1000),'unixepoch')) as daynum, </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">        strftime('%m', datetime( ROUND(DATE/1000),'unixepoch')) as monthnum FROM calls </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE ...&quot;</span><span class="va">)</span><span class="kw">;</span></span></code></pre></div>
+</section>
+<section id="tapping-screen" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> tapping screen</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> shell input tap 600 700<span class="kw">;</span> <span class="co">#taps screen at position (600,700)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> shell input swipe 366 700 366 700 250<span class="kw">;</span> <span class="co">#swipes screen from (366,700) to (366,700) for duration 250ms</span></span></code></pre></div>
+</section>
+<section id="android-and-termux" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Android and Termux</h1>
+<ul>
+<li>home directory of non-root user is <code>/data/data/com.termux/files/home</code></li>
+</ul>
+<p>su doesnt give the root-user access to the non-root termux binaries/libraries so we need to add them manually</p>
+<ol type="1">
+<li>first <code>su</code> then <code>cd /bin/</code></li>
+<li>touch <code>termuxbash</code></li>
+<li>copy the script from below into <code>termuxbash</code></li>
+<li><code>chmod 777 termuxbash</code></li>
+<li><code>cd /data/data/com.termux/files/home</code></li>
+<li><code>touch .bashrc</code></li>
+<li><code>alias sudo='su -c termuxbash'</code> add to <code>.bashrc</code> (this makes it so right after non-root switches to su, the fake “termuxbash” script it called to get access to the non-root termux libs)</li>
+</ol>
+<div class="sourceCode" id="cb4" data-filename="termuxbash"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/system/bin/sh</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">HOME</span><span class="op">=</span>/</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:/data/data/com.termux/files/usr/bin</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">LD_LIBRARY_PATH</span><span class="op">=</span>/data/data/com.termux/files/usr/lib <span class="bu">exec</span> /data/data/com.termux/files/usr/bin/bash <span class="at">--init-file</span> /.bashrc</span></code></pre></div>
+<p>To get root with termux libraries call <code>sudo</code> instead of <code>su</code></p>
+</section>
+<section id="getting-name-for-ssh" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Getting name for ssh</h1>
+<ul>
+<li>How do we ssh if we dont know the android user name?</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nmap</span> <span class="at">-p</span> 22 192.168.1.182</span></code></pre></div>
+</section>
+<section id="keypads" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> keypads</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> shell input keyevent <span class="at">--longpress</span> 8 <span class="co">#press keypad 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_UNKNOWN&quot;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_MENU&quot;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_SOFT_RIGHT&quot;</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_HOME&quot;</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_BACK&quot;</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">5</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_CALL&quot;</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">6</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_ENDCALL&quot;</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">7</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_0&quot;</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">8</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_1&quot;</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">9</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_2&quot;</span> </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">10</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_3&quot;</span> </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ex">11</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_4&quot;</span> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">12</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_5&quot;</span> </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">13</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_6&quot;</span> </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ex">14</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_7&quot;</span> </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">15</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_8&quot;</span> </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ex">16</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_9&quot;</span> </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ex">17</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_STAR&quot;</span> </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ex">18</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_POUND&quot;</span> </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ex">19</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_DPAD_UP&quot;</span> </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="ex">20</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_DPAD_DOWN&quot;</span> </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="ex">21</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_DPAD_LEFT&quot;</span> </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="ex">22</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_DPAD_RIGHT&quot;</span> </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="ex">23</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_DPAD_CENTER&quot;</span> </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="ex">24</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_VOLUME_UP&quot;</span> </span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="ex">25</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_VOLUME_DOWN&quot;</span> </span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="ex">26</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_POWER&quot;</span> </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="ex">27</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_CAMERA&quot;</span> </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="ex">28</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_CLEAR&quot;</span> </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="ex">29</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_A&quot;</span> </span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="ex">30</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_B&quot;</span> </span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="ex">31</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_C&quot;</span> </span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="ex">32</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_D&quot;</span> </span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="ex">33</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_E&quot;</span> </span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="ex">34</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_F&quot;</span> </span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="ex">35</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_G&quot;</span> </span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="ex">36</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_H&quot;</span> </span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="ex">37</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_I&quot;</span> </span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="ex">38</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_J&quot;</span> </span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="ex">39</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_K&quot;</span> </span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="ex">40</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_L&quot;</span> </span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="ex">41</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_M&quot;</span> </span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="ex">42</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_N&quot;</span> </span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="ex">43</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_O&quot;</span> </span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="ex">44</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_P&quot;</span> </span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="ex">45</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_Q&quot;</span> </span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="ex">46</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_R&quot;</span> </span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="ex">47</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_S&quot;</span> </span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="ex">48</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_T&quot;</span> </span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="ex">49</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_U&quot;</span> </span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="ex">50</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_V&quot;</span> </span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="ex">51</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_W&quot;</span> </span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="ex">52</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_X&quot;</span> </span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="ex">53</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_Y&quot;</span> </span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="ex">54</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_Z&quot;</span> </span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="ex">55</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_COMMA&quot;</span> </span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="ex">56</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_PERIOD&quot;</span> </span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="ex">57</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_ALT_LEFT&quot;</span> </span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="ex">58</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_ALT_RIGHT&quot;</span> </span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="ex">59</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_SHIFT_LEFT&quot;</span> </span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="ex">60</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_SHIFT_RIGHT&quot;</span> </span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="ex">61</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_TAB&quot;</span> </span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="ex">62</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_SPACE&quot;</span> </span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="ex">63</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_SYM&quot;</span> </span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="ex">64</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_EXPLORER&quot;</span> </span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="ex">65</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_ENVELOPE&quot;</span> </span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="ex">66</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_ENTER&quot;</span> </span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="ex">67</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_DEL&quot;</span> </span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="ex">68</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_GRAVE&quot;</span> </span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="ex">69</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_MINUS&quot;</span> </span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="ex">70</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_EQUALS&quot;</span> </span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="ex">71</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_LEFT_BRACKET&quot;</span> </span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="ex">72</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_RIGHT_BRACKET&quot;</span> </span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="ex">73</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_BACKSLASH&quot;</span> </span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="ex">74</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_SEMICOLON&quot;</span> </span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="ex">75</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_APOSTROPHE&quot;</span> </span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="ex">76</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_SLASH&quot;</span> </span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a><span class="ex">77</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_AT&quot;</span> </span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="ex">78</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_NUM&quot;</span> </span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="ex">79</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_HEADSETHOOK&quot;</span> </span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="ex">80</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_FOCUS&quot;</span> </span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="ex">81</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_PLUS&quot;</span> </span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="ex">82</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_MENU&quot;</span> </span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="ex">83</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_NOTIFICATION&quot;</span> </span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a><span class="ex">84</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_SEARCH&quot;</span> </span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="ex">85</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;TAG_LAST_KEYCODE&quot;</span></span></code></pre></div>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

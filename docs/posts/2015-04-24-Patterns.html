@@ -120,17 +120,27 @@
 <li><a href="#functions-and-differentials"><span class="toc-section-number">2</span> Functions and differentials</a></li>
 <li><a href="#division-as-mapping"><span class="toc-section-number">3</span> Division as mapping</a></li>
 <li><a href="#division-as-normalization"><span class="toc-section-number">4</span> Division as normalization</a></li>
-<li><a href="#logic-and-negated-quantifier"><span class="toc-section-number">5</span> logic and Negated quantifier</a>
+<li><a href="#essence-vs-is"><span class="toc-section-number">5</span> Essence vs Is</a></li>
+<li><a href="#logic-and-negated-quantifier"><span class="toc-section-number">6</span> logic and Negated quantifier</a>
 <ul>
-<li><a href="#sets"><span class="toc-section-number">5.1</span> Sets</a></li>
+<li><a href="#sets"><span class="toc-section-number">6.1</span> Sets</a></li>
+<li><a href="#kinds"><span class="toc-section-number">6.2</span> Kinds</a></li>
 </ul></li>
-<li><a href="#fixpoint"><span class="toc-section-number">6</span> Fixpoint</a></li>
-<li><a href="#geometric-series"><span class="toc-section-number">7</span> Geometric series</a></li>
-<li><a href="#cs-bridge-math"><span class="toc-section-number">8</span> CS bridge math</a></li>
+<li><a href="#fixpoint"><span class="toc-section-number">7</span> Fixpoint</a></li>
+<li><a href="#geometric-series"><span class="toc-section-number">8</span> Geometric series</a></li>
+<li><a href="#plots-and-equations"><span class="toc-section-number">9</span> Plots and equations</a>
+<ul>
+<li><a href="#axis-and-vectors"><span class="toc-section-number">9.1</span> Axis and vectors</a></li>
+</ul></li>
+<li><a href="#cs-bridge-math"><span class="toc-section-number">10</span> CS bridge math</a></li>
 </ul></div>
 <section id="linear-or-cauchy-pattern" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Linear or Cauchy pattern</h1>
-<figure><img src="http://www.plantuml.com/plantuml/svg/~h0a407374617274756d6c0a646967726170682047207b0a7b72616e6b3d73616d653b20783b20793b613b627d0a7b72616e6b3d73616d653b20663b677d0a7b72616e6b3d73616d653b2070703b74743b65657d0a2020202061205b6c6162656c203d202278225d0a2020202062205b6c6162656c203d202279225d0a2020202067205b6c6162656c3d222a225d0a202020207070205b6c6162656c3d2266225d0a202020206565205b6c6162656c3d2266225d0a2020202067202d3e2070703b0a2020202067202d3e2065653b0a202020207070202d3e20613b0a202020206565202d3e20623b0a202020207474205b6c6162656c3d222a225d0a2020202066202d3e2074740a202020207474202d3e20780a202020207474202d3e20790a202020200a7d0a0a40656e64756d6c"></figure>
+<div class="sourceCode" id="cb1"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  f          *</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  |         / \</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  *    ==  f   f</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> / \       |   |</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x   y      x   y</span></code></pre></div>
 </section>
 <section id="functions-and-differentials" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Functions and differentials</h1>
@@ -156,8 +166,57 @@
 </ul></li>
 </ul>
 </section>
-<section id="logic-and-negated-quantifier" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> logic and Negated quantifier</h1>
+<section id="essence-vs-is" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Essence vs Is</h1>
+<p><strong>IS</strong> is a subset relation</p>
+<p><span class="math display">\[Squares \subseteq Rectangles\]</span> <span class="math display">\[\forall x (x \in Squares \rightarrow x \in Rectangles) \qquad x\in Square = \text{x is a square object}\]</span></p>
+<p>The above says for all objects, if that object is a square then it is also a rectangle.</p>
+<p><span class="math display">\[Essence(Squares) = \bigcap\limit_{i \in Squares} Properties(i)\]</span> <span class="math display">\[Essence(Rectangles) \subseteq Essence(Squares) \qquad x \in Essence(Squares) = \text{x is in a point in the space of squareness properties }\]</span></p>
+<p>The above says the essence of a rectangle is contained in the essence of a square.<br />
+The Essence of a square is the core concept of squareness which is shared by all squares.</p>
+<p><strong>In programming the essence relation is how we code compositional interfaces/classes</strong></p>
+<p>Example 2</p>
+<ul>
+<li>The present singleton set of only me IS a subset of the set of all possible me’s of different realities</li>
+<li>The family intersection of the set of all possible me’s is the soul of me</li>
+<li>The soul that distinguishes me is contained in the present me.</li>
+</ul>
+<p><strong>Applications to Classes and Interface</strong></p>
+<ul>
+<li>The tesla object is a subset of the Car object. (All teslas are cars)</li>
+<li>The properties and methods of the Car interface is a component of the properties and methods of the tesla interface.</li>
+</ul>
+<p>Pattern</p>
+<ul>
+<li>Tesla is more specific than a Car. There are less Tesla objects than Car objects. Subset implies less than implies Injection.</li>
+<li><strong>High Specificity Object is a type of Low Specificity Object</strong></li>
+<li><strong>Code of Low Specificity Object is a piece of the Code of the High Specificity Object</strong></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> details <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    genre       <span class="dt">string</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    genreRating <span class="dt">string</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    reviews     <span class="dt">string</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> game <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    name  <span class="dt">string</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    price <span class="dt">string</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    details</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<ul>
+<li>Every game Object is a detail Object</li>
+<li>The essence of details are always a subset of the essence of games</li>
+</ul>
+<p>When designing interfaces the hardest part is knowing what is the “essence” of a interface. This requires wisdom from encountering multiple objects and finding the essence intersection of them.</p>
+<ul>
+<li>Essence that is too specific will only fit a few objects but these interfaces are powerful since they have alot of functionality.</li>
+<li>Essence that is too generic will fit many objects but these interfaces are too weak since they have little functionality.</li>
+</ul>
+<p>This paradox of power vs contraint which is also shown in sets intersection.</p>
+</section>
+<section id="logic-and-negated-quantifier" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> logic and Negated quantifier</h1>
 <ul>
 <li>Expanding quantifiers
 <ul>
@@ -174,8 +233,8 @@
 <li><span class="math inline">\(\exists x \in A, x \notin B\)</span></li>
 </ul></li>
 </ul>
-<section id="sets" class="level2" data-number="5.1">
-<h2 data-number="5.1"><span class="header-section-number">5.1</span> Sets</h2>
+<section id="sets" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> Sets</h2>
 <ul>
 <li>Sets to logic notation
 <ul>
@@ -184,9 +243,38 @@
 </ul></li>
 </ul>
 </section>
+<section id="kinds" class="level2" data-number="6.2">
+<h2 data-number="6.2"><span class="header-section-number">6.2</span> Kinds</h2>
+<blockquote>
+<p>A set containing different humanTypes(species) are of one humanKind</p>
+</blockquote>
+<p><span class="math display">\[ humanTypes: humanKind \iff humanTypes \in humanKind \]</span></p>
+<ul>
+<li>we literally have a physical pig for every species of pig?
+<ul>
+<li>for all PigsType : PigsKind ( Exist v TypeOfPig)</li>
+<li>PigsKind holds the set of different PigsTypes. v is an actual pig selected from each species of Pigs aka each PigsType.</li>
+</ul></li>
+<li>A set of genes is sufficient for certain mechanism?
+<ul>
+<li>(forall Genes : (RelevantGeneSet )( Exist v Gene)) -&gt; Exist z Mechanism</li>
+<li>Exist v Gene means the “Gene is expressed”
+<ul>
+<li>v is really evidence of expression. Exist v Gene, tells exist evidence of expression of Gene.</li>
+</ul></li>
+<li>Academic biological sufficiency really means if some Gene is in RelevantGeneSet</li>
+</ul></li>
+<li>Alternative formulation</li>
+<li>Think of each gene as a space. The intersection of multiple gene spaces is required for functionality of a mechanism.</li>
+<li>forall x (RelevantGeneSpace ), Exist z Mechanism</li>
+</ul>
+<p>(forall bags in bagkind, there exist a ball in each bag) -&gt; (some ball in the mechanism bag)<br />
+sufficency can have vacuous conditions.</p>
+<p>x is sufficient for mechanism AND(x,y,z ) -&gt; mechanism</p>
 </section>
-<section id="fixpoint" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Fixpoint</h1>
+</section>
+<section id="fixpoint" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Fixpoint</h1>
 <ul>
 <li><span class="math inline">\(x=2x+5\)</span> the sol is <span class="math inline">\(x=-5\)</span></li>
 <li>Since this is equality, we should be able to replace x with itself</li>
@@ -195,8 +283,8 @@
 <li>Surprise, the sol is <span class="math inline">\(x=-5\)</span> for all equations.</li>
 </ul>
 </section>
-<section id="geometric-series" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Geometric series</h1>
+<section id="geometric-series" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Geometric series</h1>
 <ul>
 <li><span class="math inline">\(0.\overline{27} = 0.27 + 0.0027 + 0.000027 + ...\)</span></li>
 <li><span class="math inline">\(= \frac{27}{100} + \frac{27}{100^2} + \frac{27}{100^3} + ...\)</span></li>
@@ -204,8 +292,36 @@
 <li><span class="math inline">\(Sum = \frac{a_1}{1-r}\)</span></li>
 </ul>
 </section>
-<section id="cs-bridge-math" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> CS bridge math</h1>
+<section id="plots-and-equations" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Plots and equations</h1>
+<ul>
+<li>2x + 3 = x^2 + 4 can be reduced to f(x) = g(x) and the intersection of functions is the solution</li>
+<li>The diagonal y = x is the fixed point.</li>
+</ul>
+<section id="axis-and-vectors" class="level2" data-number="9.1">
+<h2 data-number="9.1"><span class="header-section-number">9.1</span> Axis and vectors</h2>
+<blockquote>
+<p>We are so used to having each vector represent an observation and each axis aka column represents a different property aka measurement but we should know to reverse this mindset as well</p>
+</blockquote>
+<p>Use Axis to represent samples (clearly limited to 2 or 3 objects/observations/samples aka 2d or 3d axis)<br />
+Each vector represents a different property of a sample.<br />
+e.g</p>
+<ul>
+<li>Bob is x-axis, Alice is y-axis
+<ul>
+<li>Height is vector [5, 6]</li>
+<li>Weight is vector [50, 70]</li>
+<li>Looks is vector [2, 6]</li>
+</ul></li>
+<li>A convex combination of vectors means we can build an overall profile based on these vectors. Of course this also means we can bias this combination towards Bob or Alice by putting a larger coefficient or weight on a certain vector.
+<ul>
+<li>Alice has better looks so we can give Height 0.1 , Weight 0.1, Looks 0.8 to bias it towards Alice.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="cs-bridge-math" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> CS bridge math</h1>
 <ul>
 <li>Quantum mechanics is functional analysis which uses infinite-dimensional linear algebra and real analysis</li>
 <li>Quantum circuits are described by unitary operators on a Hilbert space
@@ -239,64 +355,67 @@
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

@@ -1,35 +1,60 @@
 ---
-title: Overcomplicating Memory Model and Pointers
+title: C Pointers
 tags: prog, OS
 ---
 
-### The Problem
-Online forums and tutorials tend to introduce C pointers and memory model as some complex behemoth.
-Professors introduce the memory model with a bucketload of terms like stacks, heaps, address space, registers.
+# Confusion
 
-### Solution
-To understand pointers we must understand memory.
-Here is a simple way to describe memory which makes me surprised why no one has taught it or introduced it this way.
-Let's just do alway with all the OS terminology.
+Big confusion, Initialization syntax and dereference syntax look really similar  
 
-We will design an very simplified model that I will name the EZ model . For a non-low level programmer. 
+```C
+int* a; //Initialization syntax
+*a; //Dereference syntax
+```
+Have the `*` hug the type `int` to indicate Initialization `int*`
+
+# Notation
+
+* Pointers should be thought of as a singleton array.
+* Dereference is just getting the element of this singleton.
+
+```C
+int * a; how about [$]
+print *a; how about print [$][0]
+```
+
+But this is confuses us with array so instead lets use  
+`int* a := <int>`  
+`   *a := !<int> = int`
+
+! for dereference  
+<> for pointer  
+
+## Reading pointers
+
+```C
+//pointer to array of pointers
+int* (* a)[5]
+
+<[..,<int>]>
+```
+
+string is just a pointer to a char.
+
+```C
+<char>
+```
+
+# Memory model
 
 >Computer memory is just an array.
 
-Let's call this array MEM.
-
-In our EZ model, we start with one array, MEM.
+We call the computer one long array MEM.  
 
 The memory addresses are indexes of the array.  
 The values that memory addresses point to are the elements of the array.  
 
-Clearly we know how to read the value at memory address.
-Translated: Clearly we know how to read the element at each array index.
-
-A computer isn't a storage device, it works by being dynamic which includes changing memory values.
-Translated: So how can we change values of this array?  
-
-Pointers! 
+To emulate the dynamic state of a computer we use pointers to change the values of the array.
 
 See everything is just part of the array even pointers.
 BUT pointers are given a unique function we call "dereference".
@@ -62,17 +87,12 @@ Let's say "3" is a pointer.
 then dereference(3) will return 1
 For the intents of this section of understanding pointers, let's just assume we can magically determine which indexes of MEM are pointers.
 
-### EZ2 Model
-In our EZ model, we magically decided which indexes are pointers which is not correct.
-Pointers are a implementation in assembly that uses registers.
-The functionality of pointers to a C programmer is analogous to the functionality of registers to a assembly programmer.
+# Registers
 
-The real pointers in computers aren't those "int* x" that programmers code up but computer registers like eax, ebx...
+
 Just think of these registers as powerful as pointers.
 someaddr = 3
 
-Let's clear things up, we call the assembly model and the EZ Model.
 
-the assembly notation [EAX] notationally equivalent to our EZ MEM[EAX] 
+the assembly notation `mov [eax],3` is equal to MEM[EAX] set to 3 
 
-How pointers behave to C programmers is analogous to how registers work to assembly programmers.

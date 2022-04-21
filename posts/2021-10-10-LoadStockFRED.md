@@ -38,3 +38,41 @@ const bleh = async () => {
 
 }
 ```
+
+# R
+
+```R
+library("fpp3")
+library("fredr")
+FREDAPI="XXXXXXXXXXXXXXXX"
+fredr_set_key(FREDAPI)
+
+retail <- fredr(
+  series_id = "CEU4200000001",
+  observation_start = as.Date("2010-01-01"),
+  observation_end = as.Date("2021-12-01")
+) %>%
+    as_tsibble(index=date)
+
+```
+
+```R
+retail %>% 
+    head
+```
+
+```R
+retail %>%
+    mutate(natorder = row_number())%>% 
+    update_tsibble(index = natorder, regular = TRUE) %>%
+    ACF(value) %>%
+    autoplot()
+    
+```
+
+```R
+retail %>%
+    mutate(natorder = row_number())%>% 
+    update_tsibble(index = natorder, regular = TRUE) %>%
+    gg_lag(value, geom = "point")
+```

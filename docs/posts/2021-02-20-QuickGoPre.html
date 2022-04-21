@@ -130,40 +130,44 @@
 <li><a href="#running"><span class="toc-section-number">4</span> Running</a></li>
 </ul></div>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h40737461727473616c740a0a7b0a202020207b540a20202020202b2066696c6520202020202020202020207c2064657461696c0a20202020202b20706c6179474f20207c206469720a20202020202b2b20676f2e6d6f640a20202020202b2b20676f2e73756d0a20202020202b2b206d61696e2e676f202020202020207c207061636b61676520226d61696e220a20202020202b2b20636f6d706f6e656e7420202020207c206469720a20202020202b2b2b20626c65682e676f2020202020207c207061636b616765202264756872220a0a202020207d0a7d0a0a40656e6473616c74"></figure>
+<table>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Go</th>
+<th>JS</th>
+<th>Java</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dependencies</td>
+<td>go.mod</td>
+<td>package.json</td>
+<td>pom.xml</td>
+</tr>
+<tr class="even">
+<td>Autogen dependency</td>
+<td>go.sum</td>
+<td>package-lock.json</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <section id="quick-summary" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Quick Summary</h1>
+<p>{go package 1, go package 2} <span class="math inline">\(\in\)</span> Go module<br />
+<strong>go packages</strong> are <em>.go files<br />
+<strong>go module</strong> is the directory holding the </em>.go files</p>
 <ul>
-<li>A Go module is just the root directory containing go packages
+<li>The reference name of go packages are declared inside the go file but typically we use the same reference name as the file name.</li>
+<li>Go packages do not import other Go packages, <strong>Go packages CAN ONLY IMPORT DIRECTORIES containing Go packages</strong>
 <ul>
-<li><code class="sourceCode markdown">go.mod</code> <code class="sourceCode markdown">go.sum</code> similar to <code class="sourceCode markdown">package.json</code> <code class="sourceCode markdown">package-lock.json</code></li>
-<li><strong>go package are declared INSIDE CODE</strong> of <code class="sourceCode markdown">*.go</code> file. eg: <code class="sourceCode go"><span class="kw">package</span> duhr</code>
-<ul>
-<li>package name are determined in golang code, not thru filename of <code class="sourceCode markdown">*.go</code></li>
-<li>go filename need not be the same as package name (but typically are)
-<ul>
-<li><code class="sourceCode markdown">bleh.go</code> different filename from <code class="sourceCode go"><span class="kw">package</span> duhr</code></li>
-<li>Typically we use same filename and treat<br />
-<strong>.go files synonymously with go packages</strong></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><strong>Go packages CAN ONLY IMPORT DIRECTORIES</strong>
-<ul>
-<li><code class="sourceCode go"><span class="kw">import</span><span class="op">(</span> <span class="st">&quot;~/playGO/component&quot;</span> <span class="op">)</span></code> will import the Directory <code class="sourceCode markdown">component</code></li>
-<li>Go will auto-detect the package(s) <code class="sourceCode go"><span class="kw">package</span> duhr</code> from <code class="sourceCode markdown">bleh.go</code> inside the <code class="sourceCode markdown">component</code> directory.</li>
-</ul></li>
-<li>Calling functions from other packages.<br />
-Eg: <code class="sourceCode go"><span class="kw">package</span> main</code> in <code class="sourceCode markdown">main.go</code> calling functions from <code class="sourceCode go"><span class="kw">package</span> duhr</code> in <code class="sourceCode markdown">bleh.go</code>
-<ul>
-<li><strong>Lowercase function name is package-public</strong></li>
-<li><strong>Uppercase function name is package-private</strong></li>
-<li>Call exported function thru package name <code class="sourceCode go">duhr<span class="op">.</span>Somefunc<span class="op">()</span></code>
-<ul>
-<li>Notice <code class="sourceCode go">Somefunc<span class="op">()</span></code> must be capitalized to be exported package-public</li>
-<li><code class="sourceCode go">duhr<span class="op">.</span>somefunc<span class="op">()</span></code> WILL FAIL</li>
-</ul></li>
+<li><code class="sourceCode go"><span class="kw">import</span><span class="op">(</span> <span class="st">&quot;~/playGO/component&quot;</span> <span class="op">)</span></code> will import the Directory component and All the *.go packages inside the component directory</li>
 </ul></li>
 </ul>
+<p>When calling functions from imported go packages remember: <strong>Lowercase function name is package-public</strong><br />
+<strong>Uppercase function name is package-private</strong></p>
 </section>
 <section id="go-module" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Go module</h1>
@@ -262,64 +266,67 @@ This allows main.go to use Somefunc()<br />
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

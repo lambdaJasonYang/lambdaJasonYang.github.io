@@ -177,14 +177,14 @@ main = hakyllWith config $ do
     create ["atom.xml"] $ do
         route idRoute
         compile $ do
-            let feedCtx = postCtx `mappend` bodyField "description"
+            let feedCtx = postCtx <> bodyField "description"
             posts <- fmap (take 10) . recentFirst =<<
                 loadAllSnapshots ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown")  "content"
             renderAtom myFeedConfiguration feedCtx posts
     create ["rss.xml"] $ do
         route idRoute
         compile $ do
-            let feedCtx = postCtx `mappend` bodyField "description"
+            let feedCtx = postCtx <> bodyField "description"
             posts <- fmap (take 10) . recentFirst =<<
                 loadAllSnapshots ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown")  "content"
             renderRss myFeedConfiguration feedCtx posts
@@ -192,13 +192,13 @@ main = hakyllWith config $ do
 ---------------------- TAGS START
     tags <- buildTags ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown")  (fromCapture "tags/*.html")
     tagsRules tags $ \tag tagpattern -> do
-        let title = tag ++ " category"-- "Posts tagged \"" ++ tag ++ "\""
+        let title = tag ++ " tag"-- "Posts tagged \"" ++ tag ++ "\""
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll tagpattern
-            let ctx = constField "title" title
-                    `mappend` listField "posts" (postCtxWithTags tags) (return posts)
-                    `mappend` defaultContext
+            let ctx = constField "title" title <>
+                    listField "posts" (postCtxWithTags tags) (return posts) <>
+                    defaultContext
 
             makeItem ""
                 >>= loadAndApplyTemplate "templates/tag.html" ctx
@@ -252,9 +252,9 @@ main = hakyllWith config $ do
             posts <- recentFirst =<< loadAll ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown") 
             taglist <- renderTagCloud 90 130 tags
             let archiveCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Archives"            `mappend`
-                    constField "taglist" taglist             `mappend`
+                    listField "posts" postCtx (return posts) <>
+                    constField "title" "Archives"            <>
+                    constField "taglist" taglist             <>
                     defaultContext
 
             makeItem ""
@@ -268,8 +268,8 @@ main = hakyllWith config $ do
         compile $ do
             posts <- recentFirst =<< loadAll ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown") 
             let indexCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Home"                `mappend`
+                    listField "posts" postCtx (return posts) <>
+                    constField "title" "Home"                <>
                     defaultContext
 
             getResourceBody
@@ -300,8 +300,8 @@ root = "https://userjy.github.io"
 
 postCtx :: Context String
 postCtx =
-    constField "root" root `mappend` --modified for sitemap
-    dateField "date" "%B %e, %Y" `mappend`
+    constField "root" root <> --modified for sitemap
+    dateField "date" "%B %e, %Y" <>
     defaultContext
 
 --for atom
@@ -310,4 +310,4 @@ feedCtx = postCtx <> bodyField "description"
 
 --for tags
 postCtxWithTags :: Tags -> Context String
-postCtxWithTags tags = tagsField "tags" tags `mappend` postCtx
+postCtxWithTags tags = tagsField "tags" tags <> postCtx

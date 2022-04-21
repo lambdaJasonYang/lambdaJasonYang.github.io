@@ -1,5 +1,5 @@
 ---
-title: Class Composition, Diamond Problem
+title: Interfaces, Class Composition, Diamond Problem
 tags: OOP, prog
 toc: y
 ---
@@ -61,6 +61,9 @@ digraph G {
 }
 @enduml
 ```
+
+
+
 
 ```go
 type ReadJSON interface {

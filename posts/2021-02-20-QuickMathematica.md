@@ -44,7 +44,7 @@ OUTPUT: 5-2y
 * `N` Reduce expr to numeric value
 * `FixedPoint[x,7]` Find closest fixed point from x = 7 
 
-## Map Fold
+## Map Fold Zip
 
 | Concept | Function | 
 | --- | --- | 
@@ -57,6 +57,7 @@ OUTPUT: 5-2y
 | --- | --- |
 | Map | `f /@ {1,2,3}` | 
 | Fold | `NestList[,,]` | 
+| Zip | `Thread[{lista,listb}]` |
 
 # Plot
 
@@ -106,10 +107,16 @@ plt.show()
 ## vector + plots
 
 ```{.m filename="annotated arrow"}
-AArrow[{p_, q_}, label_:""] := {{Arrow[{p,q}], Inset[label,Midpoint[{p,q}]]}};
+AArrow[{p_, q_}, label_:""] := {{Inset[Style[label,Purple],Midpoint[{p,q}]], Arrow[{p,q}]}};
+vec2[q_,label_:""] := Graphics@AArrow[{{0,0},q},label];
 vec2[p_,q_,label_:""] := Graphics@AArrow[{p,q},label];
+vec3[q_,label_:""] := Graphics3D@AArrow[{{0,0,0},q},label];
 vec3[p_,q_,label_:""] := Graphics3D@AArrow[{p,q},label];
-pnt[x_] := Graphics3D@Point[x]; 
+vec[q_,label_:""] := If[Length[q] == 2,vec2[q,label],vec3[q,label]];
+vec[p_,q_,label_:""] := If[Length[q] == 2,vec2[p,q,label],vec3[p,q,label]];
+
+
+pnt[x_] := Graphics3D@Point[x];
 ```
 
 * Combining vector arrow plots with equation plots
@@ -117,10 +124,9 @@ pnt[x_] := Graphics3D@Point[x];
 ```{.m group="vp1" glabel="2d"}
 v1 = {1,2};
 v2 = {2,3};
-oo = {0,0};
-Show[vec2[oo,v1,"a"],
-    vec2[oo,v2,"b"],
-    vec2[v1,v2,"b-a"],
+Show[vec[v1,"a"],
+    vec[v2,"b"],
+    vec[v1,v2,"b-a"],
     Plot[x^2,{x,0,2}],
     
     ImageSize->Small,
@@ -131,9 +137,8 @@ Show[vec2[oo,v1,"a"],
 ```{.m group="vp1" glabel="3d"}
 vv1 = {1,1,5};
 vv2 = {4,5,5};
-ooo = {0,0,0};
-Show[vec3[ooo,vv1,"v1"],
-    vec3[ooo,vv2,"v2"],
+Show[vec[vv1,"v1"],
+    vec[vv2,"v2"],
     Plot3D[2*x1*x2,{x1,-1,1},{x2,-1,1}, PlotStyle->Opacity[0.3]],
     
     ImageSize->Small,
@@ -302,4 +307,40 @@ docCrawler[startSymbol_, depth_] :=
        startSymbol}, depth]]];
 edges = docCrawler["ProbabilityDistribution", 3];
 Graph[edges, VertexLabels -> "Name", ImageSize -> 1200]
+```
+
+## Visualizing injectivity surjectivity
+
+```m
+AArrow[{p_, q_}, label_:""] := {{Arrow[{p,q}], Inset[label,Midpoint[{p,q}]]}};
+vec2[p_,q_,label_:""] := Graphics@AArrow[{p,q},label];
+vec3[p_,q_,label_:""] := Graphics3D@AArrow[{p,q},label];
+pnt[x_] := Graphics3D@Point[x]; 
+ydst[y_] := {0,#1}& /@ y 
+xsrc[x_] := {#1,0}& /@ x
+
+
+
+dset = Range[-5,5,1]
+
+
+xpnt = xsrc[dset];
+
+yset2[f_] = f /@ dset
+yset = yset2[#^2&];
+
+ypnt = ydst[yset];
+
+srcdstlst = Thread[{xpnt,ypnt}] ;
+arrowlst := vec2[#[[1]],#[[2]]]& /@ srcdstlst
+
+Show[
+arrowlst,
+Plot[x^2,{x,-5,5}],
+
+
+    Axes->True
+]
+
+
 ```

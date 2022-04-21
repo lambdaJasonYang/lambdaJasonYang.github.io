@@ -119,17 +119,18 @@
 <li><a href="#document"><span class="toc-section-number">1</span> _document</a></li>
 <li><a href="#app"><span class="toc-section-number">2</span> _app</a></li>
 <li><a href="#file-structure-determines-routing"><span class="toc-section-number">3</span> File structure determines routing</a></li>
-<li><a href="#capturing-the-carid-and-modelid-as-variables"><span class="toc-section-number">4</span> Capturing the [carID] and [modelID] as variables</a></li>
-<li><a href="#serverside-render"><span class="toc-section-number">5</span> ServerSide Render</a>
+<li><a href="#how-do-you-select-ssg-pwa-ssr"><span class="toc-section-number">4</span> How do you select SSG, PWA, SSR</a></li>
+<li><a href="#capturing-the-carid-and-modelid-as-variables"><span class="toc-section-number">5</span> Capturing the [carID] and [modelID] as variables</a></li>
+<li><a href="#serverside-render"><span class="toc-section-number">6</span> ServerSide Render</a>
 <ul>
-<li><a href="#getstaticprops---ssg"><span class="toc-section-number">5.1</span> getStaticProps - SSG</a>
+<li><a href="#getstaticprops---ssg"><span class="toc-section-number">6.1</span> getStaticProps - SSG</a>
 <ul>
-<li><a href="#types-of-ssg"><span class="toc-section-number">5.1.1</span> 2 types of SSG</a></li>
-<li><a href="#why-ssg-can-be-bad"><span class="toc-section-number">5.1.2</span> Why SSG can be bad?</a></li>
+<li><a href="#types-of-ssg"><span class="toc-section-number">6.1.1</span> 2 types of SSG</a></li>
+<li><a href="#why-ssg-can-be-bad"><span class="toc-section-number">6.1.2</span> Why SSG can be bad?</a></li>
 </ul></li>
-<li><a href="#solution-to-stale-ssg---isr"><span class="toc-section-number">5.2</span> Solution to Stale SSG - ISR</a></li>
+<li><a href="#solution-to-stale-ssg---isr"><span class="toc-section-number">6.2</span> Solution to Stale SSG - ISR</a></li>
 </ul></li>
-<li><a href="#self-is-not-defined"><span class="toc-section-number">6</span> Self is Not Defined</a></li>
+<li><a href="#self-is-not-defined"><span class="toc-section-number">7</span> Self is Not Defined</a></li>
 </ul></div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">npx</span> create-next-app@latest <span class="at">--ts</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
@@ -255,23 +256,31 @@ React Component filename in nextjs must be Uppercase like “MyCustomButton”.<
 <li>theme.tsx</li>
 </ul>
 </section>
-<section id="capturing-the-carid-and-modelid-as-variables" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Capturing the [carID] and [modelID] as variables</h1>
+<section id="how-do-you-select-ssg-pwa-ssr" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> How do you select SSG, PWA, SSR</h1>
+<ul>
+<li>Using react hooks means it “may” rerender thus behaving like a PWA</li>
+<li>Using getStaticProp() and never using hooks gives you a static site</li>
+</ul>
+<p>Notice how the lines are actually blurred. You can mix and match so the site behaves like an PWA or a static site.</p>
+</section>
+<section id="capturing-the-carid-and-modelid-as-variables" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Capturing the [carID] and [modelID] as variables</h1>
 <div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> {carID<span class="op">,</span> modelID} <span class="op">=</span> router<span class="op">.</span><span class="fu">query</span>()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`the car is {carID} and model {modelID}`</span>)</span></code></pre></div>
 </section>
-<section id="serverside-render" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> ServerSide Render</h1>
-<section id="getstaticprops---ssg" class="level2" data-number="5.1">
-<h2 data-number="5.1"><span class="header-section-number">5.1</span> getStaticProps - SSG</h2>
+<section id="serverside-render" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> ServerSide Render</h1>
+<section id="getstaticprops---ssg" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> getStaticProps - SSG</h2>
 <ul>
 <li>getStaticProps only runs serverside even though you may have written it on a clientside file like index.js</li>
 <li>getStaticProps is only allowed in a page file, NOT in a component file.</li>
 <li>getStaticProps only runs on build time, in dev mode we see it being rebuilt every request which may cause confusion.</li>
 </ul>
-<section id="types-of-ssg" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1"><span class="header-section-number">5.1.1</span> 2 types of SSG</h3>
+<section id="types-of-ssg" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1"><span class="header-section-number">6.1.1</span> 2 types of SSG</h3>
 <table>
 <thead>
 <tr class="header">
@@ -287,8 +296,8 @@ React Component filename in nextjs must be Uppercase like “MyCustomButton”.<
 </tbody>
 </table>
 </section>
-<section id="why-ssg-can-be-bad" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2"><span class="header-section-number">5.1.2</span> Why SSG can be bad?</h3>
+<section id="why-ssg-can-be-bad" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2"><span class="header-section-number">6.1.2</span> Why SSG can be bad?</h3>
 <p>SSG at build time and SSG at first request both are affected by stale data.</p>
 <ul>
 <li>If db changes once, SSG at build time is already stale</li>
@@ -297,16 +306,16 @@ React Component filename in nextjs must be Uppercase like “MyCustomButton”.<
 <hr />
 </section>
 </section>
-<section id="solution-to-stale-ssg---isr" class="level2" data-number="5.2">
-<h2 data-number="5.2"><span class="header-section-number">5.2</span> Solution to Stale SSG - ISR</h2>
+<section id="solution-to-stale-ssg---isr" class="level2" data-number="6.2">
+<h2 data-number="6.2"><span class="header-section-number">6.2</span> Solution to Stale SSG - ISR</h2>
 <ul>
 <li>Solution ISR which basically means the specific static page ONLY will be rebuilt,</li>
 <li>If your clientside code auto refreshes every 10 sec, the data will be relatively current.</li>
 </ul>
 </section>
 </section>
-<section id="self-is-not-defined" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Self is Not Defined</h1>
+<section id="self-is-not-defined" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Self is Not Defined</h1>
 <ul>
 <li>When importing react Pixi</li>
 </ul>
@@ -335,64 +344,67 @@ React Component filename in nextjs must be Uppercase like “MyCustomButton”.<
     <footer>
         <!-- CODE TAB START -->
         <script>
-            //Structure:
-            // Codeblock < Group/Grouplabel/subgrp < grouplabels < allblocks
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
 
             const AllBlocksPre = document.querySelectorAll("[data-group]");
             const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
 
-            const rawgrouplabels = AllBlocks.map((e)=>(e.getAttribute("data-group"))); //group label w/ repeats
-            const grouplabelsPre = [...new Set(rawgrouplabels)]; //get set of unique group labels
-            const grouplabels = grouplabelsPre.filter((a)=>a); //remove nulls
-
-            const getCodeBlocks = (grouplabel) => {
-                //return list of codeblocks associated to a single group label
-                return AllBlocks.filter((codeblock)=>(codeblock.getAttribute("data-group") === grouplabel));
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
             }
 
-            const showSingleCode = (codeblock,subgrp) => { 
-                //make single codeblock visible
-                codeblock.style.display="block";
-                const nonChosen = subgrp.filter((e)=>(e!=codeblock));
-                nonChosen.map((e)=>(e.style.display="none"));
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
-
-            const makeBtn = (codeblock,subgrp) => {
-                //make button for a single codeblock
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
                 const newbutton = document.createElement("button");
-                newbutton.textContent=codeblock.getAttribute("data-glabel");
+                newbutton.textContent = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
-                    showSingleCode(codeblock,subgrp);
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
             }
-
-            const showAll = (subgrp) => {
+            const showAll = (datagroup) => {
                 //make all codeblocks visible
-            subgrp.map((e)=>(e.style.display="block"));
+            datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (subgrp) => {
-                const leader = subgrp[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
 
-                const btngrp =subgrp.map((e)=>(makeBtn(e,subgrp)));
-                btngrp.map((e)=>{
-                    leader.insertAdjacentElement('beforebegin',e);
-                    });
+                })
                 
                 //make showAll button START
                 const btnShowAll = document.createElement("button");
                 btnShowAll.textContent = "All";
-                btnShowAll.addEventListener('click',(e)=>(showAll(subgrp)));
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
                 leader.insertAdjacentElement('beforebegin', btnShowAll);
                 //make showAllbutton END
             }
-            
+
             //below code is performing actual behavior, the above code are just functions
-            grouplabels.map((grouplabel) => {
-                const groupOfCodeblocks = getCodeBlocks(grouplabel);
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
                 buildCodeTab(groupOfCodeblocks);
-                showSingleCode(groupOfCodeblocks[0],groupOfCodeblocks) //default select the first block
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
             })
         </script>
         <!-- CODE TAB END ---->

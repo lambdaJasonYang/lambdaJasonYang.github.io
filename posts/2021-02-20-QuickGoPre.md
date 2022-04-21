@@ -23,29 +23,24 @@ toc: y
 @endsalt
 ```
 
+| Concept | Go | JS | Java |
+| --- |---| --- | --- |
+| Dependencies | go.mod | package.json | pom.xml |
+| Autogen dependency| go.sum | package-lock.json | |
+
 # Quick Summary
 
-* A Go module is just the root directory containing go packages
-  * `go.mod`{.md} `go.sum`{.md} similar to `package.json`{.md} `package-lock.json`{.md}
-  * **go package are declared INSIDE CODE** of `*.go`{.md} file. eg: `package duhr`{.go}  
-    * package name are determined in golang code, not thru filename of `*.go`{.md}
-    * go filename need not be the same as package name (but typically are)
-      *  `bleh.go`{.md} different filename from `package duhr`{.go}
-      * Typically we use same filename and treat  
-      **.go files synonymously with go packages**
-  
-* **Go packages CAN ONLY IMPORT DIRECTORIES**
-  * `import( "~/playGO/component" )`{.go} will import the Directory `component`{.md} 
-  * Go will auto-detect the package(s) `package duhr`{.go} from `bleh.go`{.md} inside the `component`{.md} directory.
+{go package 1, go package 2} $\in$ Go module   
+**go packages** are *.go files  
+**go module** is the directory holding the *.go files  
 
-* Calling functions from other packages.  
-Eg: `package main`{.go} in `main.go`{.md} calling functions from `package duhr`{.go} in `bleh.go`{.md}
-  * **Lowercase function name is package-public**
-  * **Uppercase function name is package-private** 
-  * Call exported function thru package name `duhr.Somefunc()`{.go}
-    * Notice `Somefunc()`{.go} must be capitalized to be exported package-public
-    * `duhr.somefunc()`{.go} WILL FAIL
-  
+* The reference name of go packages are declared inside the go file but typically we use the same reference name as the file name.
+* Go packages do not import other Go packages, **Go packages CAN ONLY IMPORT DIRECTORIES containing Go packages**
+  * `import( "~/playGO/component" )`{.go} will import the Directory component and All the *.go packages inside the component directory 
+
+When calling functions from imported go packages remember:
+**Lowercase function name is package-public**  
+**Uppercase function name is package-private**   
 
 
 
