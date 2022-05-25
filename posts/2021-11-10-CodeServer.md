@@ -99,3 +99,8 @@ cd ~/.local/share/jupyter/kernels/gophernotes
 chmod +w ./kernel.json
 sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < kernel.json.in > kernel.json
 ```
+
+
+```bash
+./stork-ubuntu-20-04 build --input "./docs/searchindex.toml" --output "./docs/storksearch.st"  
+```

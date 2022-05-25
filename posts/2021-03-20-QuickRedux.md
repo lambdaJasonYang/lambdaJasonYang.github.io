@@ -7,9 +7,11 @@ toc: y
 $$ Click \overset{dispatch(action)}{\rightarrow} Slice \overset{reduce\ store}{\rightarrow} store'$$
 $$ \{reducerA, reducerB ...\} \in Slice $$
 
-# Abstract
+# Use-case:
 
-## Practical
+* Redux force rerenders when the store changes
+
+# Practical
 
 3 files:  
 

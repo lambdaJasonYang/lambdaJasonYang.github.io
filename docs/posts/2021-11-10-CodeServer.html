@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" />
-        <meta name="viewport" content="width=100, initial-scale=0.5">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
@@ -192,6 +192,7 @@ Note we DO NOT need to install VsCodeOpn.crt on our browser.</p>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/.local/share/jupyter/kernels/gophernotes</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +w ./kernel.json</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s|gophernotes|</span><span class="va">$(</span><span class="ex">go</span> env GOPATH<span class="va">)</span><span class="st">/bin/gophernotes|&quot;</span> <span class="op">&lt;</span> kernel.json.in <span class="op">&gt;</span> kernel.json</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./stork-ubuntu-20-04</span> build <span class="at">--input</span> <span class="st">&quot;./docs/searchindex.toml&quot;</span> <span class="at">--output</span> <span class="st">&quot;./docs/storksearch.st&quot;</span>  </span></code></pre></div>
 </section>
 
         </div>

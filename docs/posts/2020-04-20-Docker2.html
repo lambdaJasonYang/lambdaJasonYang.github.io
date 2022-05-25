@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" />
-        <meta name="viewport" content="width=100, initial-scale=0.5">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
@@ -121,6 +121,7 @@
 <li><a href="#st-time"><span class="toc-section-number">1.1</span> 1st time</a></li>
 <li><a href="#etc"><span class="toc-section-number">1.2</span> etc</a></li>
 </ul></li>
+<li><a href="#agentdvr-docker"><span class="toc-section-number">2</span> AgentDVR docker</a></li>
 </ul></div>
 <section id="persist-a-db" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Persist a db</h1>
@@ -148,6 +149,17 @@
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume rm <span class="op">&lt;</span>volume name<span class="op">&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume prune</span></code></pre></div>
 </section>
+</section>
+<section id="agentdvr-docker" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> AgentDVR docker</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 8090:8090 <span class="at">-p</span> 3478:3478/udp <span class="at">-p</span> 50000-50010:50000-50010/udp <span class="dt">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>--memory=<span class="st">&quot;2.5g&quot;</span> <span class="dt">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>-v /appdata/ispyagentdvr/config/:/agent/Media/XML/ <span class="dt">\</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>-v /appdata/ispyagentdvr/media/:/agent/Media/WebServerRoot/Media/ <span class="dt">\</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>-v /appdata/ispyagentdvr/commands:/agent/Commands/ <span class="dt">\</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>--restart on-failure <span class="dt">\</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>--name ispyagentdvr doitandbedone/ispyagentdvr:latest</span></code></pre></div>
 </section>
 
         </div>

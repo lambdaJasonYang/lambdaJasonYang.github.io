@@ -135,8 +135,22 @@ Backtrack Meta:
 
 Reverse operation fill in  $\framebox{}$ in $(1)$ to get our $new IH$
 \frac{A}{n-1}
+
+$$x_n = \frac{A}{n-1}$$
+
 $$(x_1 x_2 .. x_{n-1}\frac{A}{n-1}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \frac{A}{n-1}}{n})^{n} \tag{new IH}$$
 
 # Step 3 Combining results from Upwards and Downward induction
 
 QED Combining Upward and Downward induction constitutes a full proof the inequality is true for all naturals.
+
+# Aside
+
+* Why are we allowed to just set $x_n$ as $\frac{A}{n-1}$ ?
+  * Doesn't this break the arbitrary-ness of $x_n$ ?
+<!--  -->
+* We are not doing $\forall n \in \mathbb{N} ( P(n) \rightarrow P(n-1)$  
+* We are doing $\forall n \in \mathbb{N} ( \forall x \in \{x_1..x_n\} P(x) \rightarrow \forall x \in \{x_1..x_{n-1}\} P(x))
+  * Intuitively, if AMGM prop is true for ANY n-arguments, then AMGM prop is true for ANY (n-1)-arguments.
+<!--  -->
+* This means we get the free IH $\forall x \in \{x_1..x_n\} P(x)$ which allows us to set $x_n$ as anything we want

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" />
-        <meta name="viewport" content="width=100, initial-scale=0.5">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
@@ -116,23 +116,25 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#abstract"><span class="toc-section-number">1</span> Abstract</a>
+<li><a href="#use-case"><span class="toc-section-number">1</span> Use-case:</a></li>
+<li><a href="#practical"><span class="toc-section-number">2</span> Practical</a></li>
+<li><a href="#store"><span class="toc-section-number">3</span> store</a>
 <ul>
-<li><a href="#practical"><span class="toc-section-number">1.1</span> Practical</a></li>
+<li><a href="#read-to-store"><span class="toc-section-number">3.1</span> READ TO STORE</a></li>
+<li><a href="#write-to-store"><span class="toc-section-number">3.2</span> WRITE TO STORE</a></li>
 </ul></li>
-<li><a href="#store"><span class="toc-section-number">2</span> store</a>
-<ul>
-<li><a href="#read-to-store"><span class="toc-section-number">2.1</span> READ TO STORE</a></li>
-<li><a href="#write-to-store"><span class="toc-section-number">2.2</span> WRITE TO STORE</a></li>
-</ul></li>
-<li><a href="#createslice"><span class="toc-section-number">3</span> createSlice</a></li>
-<li><a href="#nextjs-ssr-redux"><span class="toc-section-number">4</span> nextjs SSR redux</a></li>
+<li><a href="#createslice"><span class="toc-section-number">4</span> createSlice</a></li>
+<li><a href="#nextjs-ssr-redux"><span class="toc-section-number">5</span> nextjs SSR redux</a></li>
 </ul></div>
 <p><span class="math display">\[ Click \overset{dispatch(action)}{\rightarrow} Slice \overset{reduce\ store}{\rightarrow} store'\]</span> <span class="math display">\[ \{reducerA, reducerB ...\} \in Slice \]</span></p>
-<section id="abstract" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Abstract</h1>
-<section id="practical" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> Practical</h2>
+<section id="use-case" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Use-case:</h1>
+<ul>
+<li>Redux force rerenders when the store changes</li>
+</ul>
+</section>
+<section id="practical" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Practical</h1>
 <p>3 files:</p>
 <ul>
 <li><code>store.ts</code> generic preprocessor file where you define types and the universal store object</li>
@@ -144,9 +146,8 @@
 <p>aside: Thunks = async actions</p>
 <!--  -->
 </section>
-</section>
-<section id="store" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> store</h1>
+<section id="store" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> store</h1>
 <div class="sourceCode" id="cb1" data-filename="/app/store.tsx"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { configureStore } <span class="im">from</span> <span class="st">'@reduxjs/toolkit'</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> counterReducer <span class="im">from</span> <span class="st">'../app/counterSlice'</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -171,8 +172,8 @@
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<section id="read-to-store" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> READ TO STORE</h2>
+<section id="read-to-store" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> READ TO STORE</h2>
 <ul>
 <li><code>useSelector</code> hook allows us to READ the things in the store
 <ul>
@@ -183,8 +184,8 @@
 </ul></li>
 </ul>
 </section>
-<section id="write-to-store" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> WRITE TO STORE</h2>
+<section id="write-to-store" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> WRITE TO STORE</h2>
 <ul>
 <li><code>useDispatch</code> hook gives us a function <code>dispatch(somAction)</code>
 <ul>
@@ -193,8 +194,8 @@
 </ul>
 </section>
 </section>
-<section id="createslice" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> createSlice</h1>
+<section id="createslice" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> createSlice</h1>
 <ul>
 <li>How do we build/define actions? using `createSlice({name: …})
 <ul>
@@ -291,8 +292,8 @@
 <li>A “slice” is a collection of Redux reducer logic and actions for a single feature in your app, typically defined together in a single file. The name comes from splitting up the root Redux state object into multiple “slices” of state.</li>
 </ul>
 </section>
-<section id="nextjs-ssr-redux" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> nextjs SSR redux</h1>
+<section id="nextjs-ssr-redux" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> nextjs SSR redux</h1>
 <ol type="1">
 <li>SSR getServerSideProps() fetches stuff from backend and fills the store</li>
 <li>SSR sends the store to the clientside as props</li>

@@ -1,6 +1,6 @@
 ---
 title: Intro Lean
-tags: mathcs, puremath ,categorytheory
+tags: lean, mathcs, puremath ,categorytheory
 toc: y
 ---
 

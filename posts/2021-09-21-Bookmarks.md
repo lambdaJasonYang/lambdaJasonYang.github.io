@@ -3,6 +3,14 @@ title: Bookmarks
 tags: mathcs, puremath, recursion
 ---
 
+https://www.sciencedirect.com/book/9781785481734/fundamentals-of-advanced-mathematics
+
+[laplace visual graph](https://lpsa.swarthmore.edu/E12Syll.html)
+
+[software construction](https://ocw.mit.edu/ans7870/6/6.005/s16/classes/13-abstraction-functions-rep-invariants/)
+
+https://websites.math.leidenuniv.nl/algebra/linalg2.pdf
+
 https://caiorss.github.io/C-Cpp-Notes/cpp-design-patterns.html
 
 https://www.llvm.org/docs/tutorial/MyFirstLanguageFrontend/index.html
@@ -47,7 +55,9 @@ https://www.cip.ifi.lmu.de/~grinberg/algebra/algebra.html
 
 [Open conferences](https://openreview.net/)
 
-http://www.willamette.edu/~fruehr/haskell/evolution.html
+[haskell](http://www.willamette.edu/~fruehr/haskell/evolution.html)
+
+[developer cheatsheet](https://docs.dennisokeeffe.com/data-structures/go)
 
 # Control engineering
 

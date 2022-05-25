@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" />
-        <meta name="viewport" content="width=100, initial-scale=0.5">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
@@ -208,6 +208,42 @@ M is the monad functor.<br />
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>          <span class="kw">|</span><span class="ex">functor</span>   <span class="kw">|</span>        <span class="kw">|</span> <span class="ex">Int</span>      <span class="kw">|</span>     <span class="kw">|</span>    <span class="kw">|</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>          <span class="kw">|</span><span class="ex">Maybe</span>     <span class="kw">|</span>        <span class="kw">|</span>    <span class="op">&lt;</span>-----+-----+    <span class="kw">|</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">+----------+----------+</span>        +----------<span class="kw">|</span><span class="ex">-----+----+</span></span></code></pre></div>
+</section>
+<section id="simply-function-application" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Simply function application</h1>
+<ul>
+<li>piping is just the reverse of typical function application</li>
+<li>piping is the theory behind monads</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (<span class="kw">lambda</span> x: (<span class="kw">lambda</span> y: ( <span class="kw">lambda</span> z: x <span class="op">+</span> y <span class="op">+</span> z )(<span class="dv">7</span>))(<span class="dv">5</span>))(<span class="dv">4</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#pipe is just a function application but w/ reversed parameter order</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> <span class="kw">lambda</span> x: (<span class="kw">lambda</span> f: f(x))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> pipe(<span class="dv">4</span>)(<span class="kw">lambda</span> x: pipe(<span class="dv">5</span>)(<span class="kw">lambda</span> y: pipe(<span class="dv">7</span>)(<span class="kw">lambda</span> z: x<span class="op">+</span> y<span class="op">+</span> z)))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#f2 is a nested pipe</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(f)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(f2)</span></code></pre></div>
+<ul>
+<li>4 is piped into x which outputs a nested lambda that pipes 5 into y</li>
+<li>5 is piped into y which outputs a lambda that pipes 7 into z</li>
+<li>7 is piped into z</li>
+</ul>
+</section>
+<section id="cps" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> CPS</h1>
+<div class="sourceCode" id="cb8"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>def add(x,y,c)<span class="op">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    c(x<span class="op">+</span>y)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>def mul(x,y,c)<span class="op">:</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    c(x<span class="op">*</span>y)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>def baz(x,y,c)<span class="op">:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        mul(<span class="dv">2</span>,x,lambda v,y<span class="ot">=</span>y,c<span class="ot">=</span>c<span class="op">:</span> add(v,y,c))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- expands to (lambda v,y=y,c=c: add(v,y,c)) Applied to (2*x)</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- reduces to lambda y=y,c=c: add(2*x,y,c)</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>baz(<span class="dv">2</span>,<span class="dv">5</span>,<span class="fu">print</span>)</span></code></pre></div>
 </section>
 
         </div>

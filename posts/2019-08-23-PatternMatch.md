@@ -3,6 +3,42 @@ title: What is Pattern matching?
 tags: mathcs, functional, categorytheory, puremath
 ---
 
+# Summary
+
+```hs
+def somefunc : ... :=
+match (FOCUS_ON_RESULTANT_TYPE) with
+| (Term-Intro_RESULTANT_TYPE_1) = > Anything
+| (Term-Intro_RESULTANT_TYPE_2) = > Anything
+| (Term-Intro_RESULTANT_TYPE_3) = > Anything
+...
+
+```
+
+* `List.get? xs 1` is our focus
+* RESULTANT_TYPE of `List.get? x 1` is `Option Nat`
+* Term introduction rules of the RESULTANT_TYPE
+  * Term-Intro 1 for `Option Nat` is constructor function Option.none
+  * Term-Intro 2 for `Option Nat` is constructor function Option.some n
+
+```hs
+#check @List.get? -- (List × Nat) -> Option Nat 
+
+def stringify (xs : List Nat ) : Option String :=
+match List.get? xs 1 with 
+| (Option.none    : Option Nat) => ...
+| (Option.some n : Option Nat) => ...
+```
+
+
+1. Look at the match `match List.get? xs 1 with`
+    * we only care about the resultant type of the match function `List.get?` which is `Option Nat`
+    * `Option Nat` is deconstructed from it's inductive term introduction
+2. 
+
+
+# Extra
+
 $$ \cfrac{String}{(Maybe\ String)} \qquad \cfrac{a \quad Tree\ a \quad Tree\ a}{(Node\ a\ (Tree\ a)\ (Tree\ a))}$$
 
 
@@ -59,7 +95,7 @@ Takeaway
 
 ## Trees
 
-Lets continue with the pattern match functions for free paradigm.
+Lets continue with the pattern match functions for tree paradigm.
 
 ```hs
 data Tree a = Leaf | Node a (Tree a) (Tree a)

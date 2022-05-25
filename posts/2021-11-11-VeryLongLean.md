@@ -1,6 +1,6 @@
 ---
 title: Very Long Lean
-tags: prog
+tags: lean, mathcs, puremath ,categorytheory
 toc: y
 ---
 

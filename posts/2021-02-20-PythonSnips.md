@@ -1,5 +1,5 @@
 ---
-title: To be Deleted
+title: Python Snippets
 tags: prog, QuickCode
 toc: y
 ---

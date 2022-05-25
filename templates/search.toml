@@ -1,0 +1,7 @@
+[input]
+url_prefix = "$root$/"
+files = [
+$for(posts)$
+{path = "$path$", url = "$url$", title = "$title$"},
+$endfor$
+]

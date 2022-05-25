@@ -7,13 +7,15 @@ tags: prog
 
 Goal:  
 
-* create frigate config file
-  * tells where MQTT server is
-  * tells where RTSP of camera is
-* create frigate Video folder
+* create frigate config file `~/.config/frigate/frigate.yml`
+  * configure where MQTT server is
+  * configure RTSP of camera is
+  * most configuration for frigate done here
+* create frigate Video folder 
   * Where to store recording
 * create a MQTT config file
 * create a docker compose for both frigate and MQTT
+  * cd to this folder to startup frigate
 
 # Frigate Config file
 
@@ -29,11 +31,22 @@ touch frigate.yml
 mqtt:
   host: server.opnroot.com
   port: 1883
+timestamp_style:
+  position: "tl"
+  format: "%m/%d/%Y %H:%M:%S"
+  thickness: 3
+ffmpeg:
+  output_args:
+    record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac
+birdseye:
+  # Optional: Enable birdseye view (default: shown below)
+  enabled: False
 cameras:
   camera_1: # <------ Name the camera
     ffmpeg:
       inputs:
-        - path: rtsp://admin:admin@192.168.1.132/11/h264major # <----- Update for your camera
+        #- path: rtsp://admin:admin@192.168.1.132:554/11 # <----- Update for your camera
+        - path: rtsp://admin:admin@192.168.1.132/11/h264major
           roles:
             - detect
             - rtmp
@@ -42,10 +55,13 @@ cameras:
     detect:
       width: 1920 # <---- update for your camera's resolution
       height: 1080 # <---- update for your camera's resolution
+      fps: 8
     record: 
       enabled: True
     snapshots:
       enabled: True
+    mqtt:
+      timestamp: True
 #-------------------------------------------------
   camera_2: # <------ Name the camera
     ffmpeg:
@@ -59,10 +75,13 @@ cameras:
     detect:
       width: 1920 # <---- update for your camera's resolution
       height: 1080 # <---- update for your camera's resolution
+      fps: 8
     record: 
       enabled: True
     snapshots:
       enabled: True
+    mqtt:
+      timestamp: True
 #-------------------------------------------------
   camera_3: # <------ Name the camera
     ffmpeg:
@@ -76,10 +95,13 @@ cameras:
     detect:
       width: 1920 # <---- update for your camera's resolution
       height: 1080 # <---- update for your camera's resolution
+      fps: 8
     record: 
       enabled: True
     snapshots:
       enabled: True
+    mqtt:
+      timestamp: True
 ```
 
 # Create frigate Video folder

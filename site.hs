@@ -285,13 +285,25 @@ main = hakyllWith config $ do
         compile $ do
             posts <- recentFirst =<< loadAll ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown")
             singlePages <- loadAll (fromList ["about.rst", "contact.markdown"])
-            let pages = posts <> singlePages
-                sitemapCtx =
-                    constField "root" root <> -- here
-                    listField "pages" postCtx (return pages)
+            let pages      = posts <> singlePages
+                sitemapCtx = constField "root" root <> 
+                             listField "pages" postCtx (return pages)
             makeItem ""
                 >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
 --------Building sitemap END
+
+    create ["searchindex.toml"] $ do
+        route idRoute
+        compile $ do
+            posts <- recentFirst =<< loadAll ("posts/*" .||. "posts/*/*.md" .||. "posts/*/*.markdown") 
+            let indexCtx =
+                    listField "posts" postCtx (return posts) <>
+                    constField "title" "Home"                <>
+                    constField "root" root                   <>
+                    defaultContext
+
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/search.toml" indexCtx
 --------------------------------------------------------------------------------
 --root is for sitemap
 root :: String

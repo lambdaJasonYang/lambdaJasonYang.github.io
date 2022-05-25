@@ -26,6 +26,14 @@ Client goes to http://192.168.1.245:8000 but sees ERROR
 
 # Solution
 
+Solution 1:
+
+```bash
+stack exec -- site watch --host "0.0.0.0"
+```
+
+Solution 2:
+
 ```bash
 sudo sysctl -w net.ipv4.conf.all.route_localnet=1
 sudo iptables -t nat -I PREROUTING -p tcp -d 192.168.1.0/24 --dport 8000 -j DNAT --to-destination 127.0.0.1:8000

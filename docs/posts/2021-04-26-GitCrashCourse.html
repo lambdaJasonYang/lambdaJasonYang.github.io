@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" />
-        <meta name="viewport" content="width=100, initial-scale=0.5">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
@@ -414,12 +414,9 @@ You can even push this new pre-merge state commit to remote github. But clearly 
 </section>
 <section id="undo-last-commit-abort-changes" class="level3" data-number="2.0.3">
 <h3 data-number="2.0.3"><span class="header-section-number">2.0.3</span> Undo last commit Abort Changes</h3>
-<p>Undo last commit but keep content changes</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--soft</span> HEAD~1</span></code></pre></div>
-<p>Undo last commit, do not keep content change</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--hard</span> HEAD~1</span></code></pre></div>
-<p>If you have unstaged changes you want to remove</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--hard</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--hard</span></span></code></pre></div>
+<p>ONLY CALL THIS AFTER MAKING A COMMIT !<br />
+DO NOT DO THIS SIMPLY AFTER A <code>git add .</code> or else it removes your files.</p>
 <hr />
 </section>
 <section id="merging-two-unrelated-histories" class="level3" data-number="2.0.4">
@@ -429,11 +426,11 @@ You made a github repo with a license.<br />
 Then you made a local repo with some web server and used git init.<br />
 Now you want to push your local repo on that “empty” remote repo.</p>
 <p>Not so simple, we first have to merge it but it will give us an error on a naive merge since your local and remote repo have no common ancestor</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main <span class="at">--allow-unrelated-histories</span> </span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main <span class="at">--allow-unrelated-histories</span> </span></code></pre></div>
 </section>
 <section id="removing-untracked-changes" class="level3" data-number="2.0.5">
 <h3 data-number="2.0.5"><span class="header-section-number">2.0.5</span> Removing untracked changes</h3>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clean <span class="at">-f</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clean <span class="at">-f</span></span></code></pre></div>
 <p>You might use this when you did a merge but Ctrl-C or exited out in the middle so now you’re left with temp MERGE files.</p>
 </section>
 </section>

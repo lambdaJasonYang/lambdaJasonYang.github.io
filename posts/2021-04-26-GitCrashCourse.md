@@ -359,20 +359,12 @@ esc-[-c to move to prev conflict
 
 ### Undo last commit Abort Changes
 
-Undo last commit but keep content changes
-```bash
-git reset --soft HEAD~1
-```
 
-Undo last commit, do not keep content change
-```bash
-git reset --hard HEAD~1
-```
-
-If you have unstaged changes you want to remove
 ```bash
 git reset --hard
 ```
+ONLY CALL THIS AFTER MAKING A COMMIT !  
+DO NOT DO THIS SIMPLY AFTER A `git add .` or else it removes your files.  
 
 ---
 

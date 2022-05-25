@@ -82,3 +82,23 @@ $v_n=at+v_0$
 
 # Volume 3
 
+
+
+# Circuits
+
+* Voltage has no meaning without a reference point <- reason for grounding circuits
+* Voltage only has meaning when you say the voltage **across a resistor**  
+This means the potential difference before passing and after passing the resistor is the Voltage.  
+
+## Series
+
+* Voltage varies, Total voltage is sum of Voltage across all resistors
+* Resistance varies, Total resistance is sum
+* Current is same everywhere
+
+
+## Parallel
+
+* Voltage is same when passing each resistor in parallel
+* Inverse(total resistance) = Inverse(sum resistors)
+* Current is sum

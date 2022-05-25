@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" />
-        <meta name="viewport" content="width=100, initial-scale=0.5">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
@@ -238,12 +238,22 @@
 <span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="rvalue-lvalue" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Rvalue Lvalue</h1>
+<section id="smart-pointers" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Smart Pointers</h1>
+<p>In general, a function should take:</p>
+<ul>
+<li>A copy of a shared_ptr, if the function takes part in the ownership of the managed object</li>
+<li>A reference to a shared_ptr if the function plans to modify the shared_ptr itself by calling reset or swap</li>
+<li>A reference to a const shared_ptr, if the function might take part in the ownership by copying the reference to another shared_ptr on at least one of its paths</li>
+<li>A raw pointer/reference to the object, if the function is only interested in the current value of the managed object</li>
+</ul>
+</section>
+<section id="rvalue-lvalue" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Rvalue Lvalue</h1>
 <p><img src="https://docs.microsoft.com/en-us/cpp/cpp/media/value_categories.png?view=msvc-170" /></p>
 </section>
-<section id="virtual-functions" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Virtual functions</h1>
+<section id="virtual-functions" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Virtual functions</h1>
 <ul>
 <li>problem: classes that extend base classes will call base class method on compile time.
 <ul>
