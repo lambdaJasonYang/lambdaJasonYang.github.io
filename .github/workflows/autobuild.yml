@@ -83,8 +83,13 @@ jobs:
       - name: Building hakyll static pages
         run: stack exec -- $autotarget build
 
+      - name: detect Distro for stork
+        run: |
+             if cat /etc/*-release | grep "redhat\|centos"; then echo "STORK=$(echo 'stork-amazon-linux')" >> $GITHUB_ENV; fi;
+             if cat /etc/*-release | grep "ubuntu\|debian"; then echo "STORK=$(echo 'stork-ubuntu-20-04')" >> $GITHUB_ENV; fi;
+
       - name: Build stork search index
-        run: ./stork-ubuntu-20-04 build --input "./docs/searchindex.toml" --output "./docs/storksearch.st"
+        run: ./$STORK build --input "./docs/searchindex.toml" --output "./docs/storksearch.st"
 
       - name: step 5
         run: |

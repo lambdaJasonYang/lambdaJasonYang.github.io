@@ -1,7 +1,11 @@
 [input]
-url_prefix = "$root$/"
+
 files = [
 $for(posts)$
 {path = "$path$", url = "$url$", title = "$title$"},
 $endfor$
 ]
+
+[output]
+
+displayed_results_count=20
