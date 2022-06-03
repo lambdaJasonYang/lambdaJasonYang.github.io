@@ -83,6 +83,9 @@ jobs:
       - name: Building hakyll static pages
         run: stack exec -- $autotarget build
 
+      - name: Build stork search index
+        run: ./stork-ubuntu-20-04 build --input "./docs/searchindex.toml" --output "./docs/storksearch.st"
+
       - name: step 5
         run: |
              pwd
