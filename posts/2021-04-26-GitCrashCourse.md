@@ -366,6 +366,19 @@ git reset --hard
 ONLY CALL THIS AFTER MAKING A COMMIT !  
 DO NOT DO THIS SIMPLY AFTER A `git add .` or else it removes your files.  
 
+
+In case you did do `git reset --hard` after ONLY doing  `git add .` you can recover files as blobs without file names.
+```bash
+git fsck --lost-found
+```
+
+```bash
+cd ./.git/lost-found/other
+for FILE in *; do git show $FILE | grep "Hills of error" ; echo $FILE; done
+git show a73ff6d1c2bbc01fc2c182ed0c07961969f27c82 > recovered.ipynb
+cp recovered.ipnyb ~/recoveredfolder
+```
+
 ---
 
 ### Merging two unrelated histories

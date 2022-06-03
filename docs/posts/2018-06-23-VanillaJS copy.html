@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - VanillaJS mini scripts</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>VanillaJS mini scripts</h1>
+            
+
+            <div class="info">
+    Posted on June 23, 2018
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#send-html-request-with-js"><span class="toc-section-number">1</span> Send HTML request with js</a></li>
+<li><a href="#select-element-by-class-or-id"><span class="toc-section-number">2</span> Select element by class or id</a></li>
+<li><a href="#more-complex-selector"><span class="toc-section-number">3</span> More Complex selector</a></li>
+<li><a href="#building-html-element-through-vanilla-js"><span class="toc-section-number">4</span> Building HTML element through vanilla JS</a></li>
+<li><a href="#promises-async-timeout"><span class="toc-section-number">5</span> Promises, Async, Timeout</a></li>
+<li><a href="#location.hash"><span class="toc-section-number">6</span> location.hash</a></li>
+<li><a href="#js-for-react"><span class="toc-section-number">7</span> JS for React</a></li>
+<li><a href="#web-apis"><span class="toc-section-number">8</span> Web apis</a></li>
+<li><a href="#this-and-bind"><span class="toc-section-number">9</span> this and bind</a>
+<ul>
+<li><a href="#arrow-vs-function"><span class="toc-section-number">9.1</span> Arrow vs function()</a></li>
+</ul></li>
+</ul></div>
+<section id="send-html-request-with-js" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Send HTML request with js</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> xmlHttp <span class="op">=</span> <span class="kw">new</span> <span class="bu">XMLHttpRequest</span>()<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>xmlHttp<span class="op">.</span><span class="at">onreadystatechange</span> <span class="op">=</span> <span class="kw">function</span>() {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (xmlHttp<span class="op">.</span><span class="at">readyState</span> <span class="op">==</span> <span class="dv">4</span> <span class="op">&amp;&amp;</span> xmlHttp<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="dv">200</span>) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> response <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(xmlHttp<span class="op">.</span><span class="at">responseText</span>)<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;div&quot;</span>)<span class="op">.</span><span class="at">innerHTML</span> <span class="op">=</span> response<span class="op">.</span><span class="at">value</span><span class="op">.</span><span class="at">joke</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>xmlHttp<span class="op">.</span><span class="fu">open</span>(<span class="st">&quot;GET&quot;</span><span class="op">,</span> <span class="st">&quot;https://api.icndb.com/jokes/random/&quot;</span><span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>xmlHttp<span class="op">.</span><span class="fu">send</span>(<span class="kw">null</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> responseText <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">&quot;https://api.icndb.com/jokes/random/&quot;</span>)</span></code></pre></div>
+<p>It’s nearly impossible to set a promise respone to a variable but much easier with <code>await</code></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> somePromise <span class="op">=</span> <span class="fu">fetch</span>(<span class="st">&quot;https://api.icndb.com/jokes/random/&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// We still cant do anything with this</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> anotherPromise <span class="op">=</span> responseTextPromise<span class="op">.</span><span class="fu">then</span>(response <span class="kw">=&gt;</span> response<span class="op">.</span><span class="fu">text</span>())</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">// nope this just returns another promise</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> anotheranotherPromise <span class="op">=</span> anotherPromise<span class="op">.</span><span class="fu">then</span>(x <span class="kw">=&gt;</span> x)</span></code></pre></div>
+<p>Notice when we use promises, this is no way to send the response to set a variable,<br />
+all we can do is infinitely chaining with more <code>.then(..)</code> which just returns yet another promise</p>
+</section>
+<section id="select-element-by-class-or-id" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Select element by class or id</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;#content&quot;</span>)<span class="op">.</span><span class="at">value</span> <span class="op">=</span> <span class="st">&quot;new value&quot;</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">//this will select by id </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;.myclass&quot;</span>)<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">//this will select by class </span></span></code></pre></div>
+</section>
+<section id="more-complex-selector" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> More Complex selector</h1>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> el <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;div.user-panel.main input[name='login']&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;user-panel main&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;input</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;login&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+</section>
+<section id="building-html-element-through-vanilla-js" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Building HTML element through vanilla JS</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> paragraph <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">&quot;p&quot;</span>)<span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> textContent <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createTextNode</span>(<span class="st">&quot;content&quot;</span>)<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>paragraph<span class="op">.</span><span class="fu">appendChild</span>(textContent)<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;#messages&quot;</span>)<span class="op">.</span><span class="fu">appendChild</span>(paragraph)<span class="op">;</span></span></code></pre></div>
+<hr />
+</section>
+<section id="promises-async-timeout" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Promises, Async, Timeout</h1>
+<p>sdfs</p>
+<hr />
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">navigator</span><span class="op">.</span><span class="at">geolocation</span><span class="op">.</span><span class="fu">getCurrentPosition</span>((loc)<span class="kw">=&gt;</span>{</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="vs">`</span><span class="sc">${</span>loc<span class="op">.</span><span class="at">coords</span><span class="op">.</span><span class="at">latitude</span><span class="sc">}</span><span class="vs"> and </span><span class="sc">${</span>loc<span class="op">.</span><span class="at">coords</span><span class="op">.</span><span class="at">longitude</span><span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     })</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">//Local storage data is perm</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>localStorage<span class="op">.</span><span class="fu">setItem</span>(<span class="st">&quot;key&quot;</span><span class="op">,</span> <span class="st">&quot;someVal&quot;</span>)<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>localStorage<span class="op">.</span><span class="fu">getItem</span>(<span class="st">&quot;key&quot;</span>)<span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">//Session storage data gets deletd on browser close</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>sessionStorage<span class="op">.</span><span class="fu">setItem</span>(<span class="st">&quot;key&quot;</span><span class="op">,</span> <span class="st">&quot;someVal&quot;</span>)<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>sessionStorage<span class="op">.</span><span class="fu">getItem</span>(<span class="st">&quot;key&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<hr />
+</section>
+<section id="location.hash" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> location.hash</h1>
+<p>Not the hash function! Given a url: <code class="sourceCode javascript">https<span class="op">:</span><span class="co">//example.com/stuff#blah%20ads%20bah</span></code></p>
+<p><code class="sourceCode javascript">location<span class="op">.</span><span class="at">hash</span></code> –&gt; <code class="sourceCode javascript">#blah<span class="op">%</span>20ads<span class="op">%</span>20bah</code></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">decodeURIComponent</span>(location<span class="op">.</span><span class="at">hash</span><span class="op">.</span><span class="fu">substr</span>(<span class="dv">1</span>))</span></code></pre></div>
+<hr />
+</section>
+<section id="js-for-react" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> JS for React</h1>
+<ul>
+<li>event object
+<ul>
+<li>React uses event as arguments to callbacks a lot</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> callback <span class="op">=</span> (e) <span class="kw">=&gt;</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> domTarget <span class="op">=</span> e<span class="op">.</span><span class="at">target</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(e<span class="op">.</span><span class="at">type</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event#interfaces_based_on_event">List of event types</a></p>
+</section>
+<section id="web-apis" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Web apis</h1>
+<ul>
+<li>WebUSB Api - connect USB devices</li>
+<li>WebGL - render interactive 3d graphics</li>
+<li>Webassembly - native performance</li>
+<li>Bluetooth Api - Connect to wireless device</li>
+<li>Notification Api - Display system notification</li>
+<li>Service Worker - Caching for offline usage</li>
+<li>Web Workers - Multithread</li>
+</ul>
+</section>
+<section id="this-and-bind" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> this and bind</h1>
+<ul>
+<li><code>this</code> is an OO construct that allows vision of the outer closure similar to <code>self</code> in python.
+<ul>
+<li><code>this</code> varys depending on where it is instantiated, assigned or called</li>
+<li>On assignment to variable the <code>context</code> changes
+<ul>
+<li><code>let a = b</code> means <code>context</code> of <code>b</code> depends on where this assignment happened.</li>
+</ul></li>
+<li><code>.bind()</code> allows us change the <code>context</code> <!--  --></li>
+</ul></li>
+<li>idiosyncrasy:<code>const f = ()=&gt;{}</code> keeps the <code>this</code> or <code>context</code> where the function was declared but <code>function(){}</code> does not.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">//global context</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> dog <span class="op">=</span> {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">//dog context</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sound</span> <span class="op">:</span> <span class="st">&quot;wolf&quot;</span><span class="op">,</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">talk</span> <span class="op">:</span> <span class="kw">function</span>(){ <span class="co">//note we didnt use arrow notation ()=&gt;{}</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="kw">this</span><span class="op">.</span><span class="at">sound</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">//'this' -&gt; dog context</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>dog<span class="op">.</span><span class="fu">talk</span>() <span class="co">// prints wolf</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> newdogtalk <span class="op">=</span> dog<span class="op">.</span><span class="at">talk</span> <span class="co">//we basically copied the talk function so </span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">//'this' now points to place of assignment which is global context</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">newdogtalk</span>() <span class="co">//output undefined since there is no 'sound' in global</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> newnewdogtalk <span class="op">=</span> (dog<span class="op">.</span><span class="at">talk</span>)<span class="op">.</span><span class="fu">bind</span>(dog) <span class="co">//bind forces 'this' to point to dog context</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="fu">newnewdogtalk</span>() <span class="co">//output wolf</span></span></code></pre></div>
+<section id="arrow-vs-function" class="level2" data-number="9.1">
+<h2 data-number="9.1"><span class="header-section-number">9.1</span> Arrow vs function()</h2>
+<ul>
+<li>Arrows binds this to the lexical scope, meaning you can just look at the code and see what encloses the arrow function to understand what <code>this</code> points to.
+<ul>
+<li>static binding</li>
+</ul></li>
+<li>function() binds dynamically, meaning <code>this</code> depends on how the function is called at run time.
+<ul>
+<li>dynamic binding</li>
+</ul></li>
+</ul>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

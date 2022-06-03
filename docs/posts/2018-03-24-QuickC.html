@@ -288,50 +288,53 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 <section id="strings" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Strings</h1>
 <ul>
-<li>Strings are really just arrays of chars
+<li>String is just a pointer to a character</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>str<span class="op">;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>str <span class="op">=</span> <span class="st">&quot;name&quot;</span></span></code></pre></div>
 <ul>
-<li>array of chars are pointers</li>
-<li>Strings are pointers</li>
+<li><code>"name"</code> is actually the address of the beginning of the array <code>['n','a','m','e','\0']</code>
+<ul>
+<li>this means <code>str</code> points to the first character in <code>'n'</code> in the array</li>
 </ul></li>
-<li>last entry of string is either 0 or ‘\0’</li>
 </ul>
 <section id="string-literals-are-immutable-in-memory" class="level4" data-number="6.0.0.1">
 <h4 data-number="6.0.0.1"><span class="header-section-number">6.0.0.1</span> String literals are immutable in memory</h4>
 <ul>
 <li>Typing a string like “hello” in your code editor means your progam will allocate a permanent address and memory for “hello” that all other “hello” in your code will refer to.</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%s&quot;</span><span class="op">,</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">//init string literal &quot;hello&quot; at SOME address </span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">//0xfffeee -&gt; &quot;hello&quot;</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%s&quot;</span><span class="op">,</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">//REUSE same string literal at SAME address</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">//0xfffeee -&gt; &quot;hello&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%s&quot;</span><span class="op">,</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">//init string literal &quot;hello&quot; at SOME address </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">//0xfffeee -&gt; &quot;hello&quot;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%s&quot;</span><span class="op">,</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">//REUSE same string literal at SAME address</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">//0xfffeee -&gt; &quot;hello&quot;</span></span></code></pre></div>
 </section>
 <section id="different-ways-to-init-string" class="level4" data-number="6.0.0.2">
 <h4 data-number="6.0.0.2"><span class="header-section-number">6.0.0.2</span> Different ways to init String</h4>
-<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[</span><span class="dv">256</span><span class="op">];</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">//MUTABLE array of 256 initialized.</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[</span><span class="dv">256</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>s<span class="op">[</span><span class="dv">1</span><span class="op">]=</span><span class="ch">'Y'</span><span class="op">;</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: MUTABLE array s of 256 initialized.</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">//Copies string( and Auto appends a terminating \0) </span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">//RESULT: &quot;hello\0&quot; MUTABLE</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>s<span class="op">[</span><span class="dv">1</span><span class="op">]=</span><span class="ch">'Y'</span><span class="op">;</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: automatically initialized 8 bytes MUTABLE array s.</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">//Copies string(and Auto append a terminating \0) </span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">//RESULT: &quot;hello\0&quot; MUTABLE</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>s <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="op">*(</span>s<span class="op">+</span><span class="dv">1</span><span class="op">)=</span><span class="ch">'Y'</span><span class="op">;</span> <span class="co">//Crash trying to change 'e' =&gt; 'Y'</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: s POINTS to IMMUTABLE string</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">//We Crash for trying to modify an immutable string literal</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[</span><span class="dv">256</span><span class="op">];</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">//MUTABLE array of 256 initialized.</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[</span><span class="dv">256</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>s<span class="op">[</span><span class="dv">1</span><span class="op">]=</span><span class="ch">'Y'</span><span class="op">;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: MUTABLE array s of 256 initialized.</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">//Copies string( and Auto appends a terminating \0) </span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">//RESULT: &quot;hello\0&quot; MUTABLE</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>s<span class="op">[</span><span class="dv">1</span><span class="op">]=</span><span class="ch">'Y'</span><span class="op">;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: automatically initialized 8 bytes MUTABLE array s.</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">//Copies string(and Auto append a terminating \0) </span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">//RESULT: &quot;hello\0&quot; MUTABLE</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>s <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="op">*(</span>s<span class="op">+</span><span class="dv">1</span><span class="op">)=</span><span class="ch">'Y'</span><span class="op">;</span> <span class="co">//Crash trying to change 'e' =&gt; 'Y'</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: s POINTS to IMMUTABLE string</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="co">//We Crash for trying to modify an immutable string literal</span></span></code></pre></div>
 <hr />
 </section>
 <section id="dynamic-mem-allocation" class="level3" data-number="6.0.1">
@@ -380,16 +383,16 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 <li>Detach the segment from a variable (once per process) - shmdt</li>
 <li>Remove the segment (happens once) - shmctl</li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>data<span class="op">;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> shmd<span class="op">;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>shmd <span class="op">=</span> shmget<span class="op">(</span>KEY<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">),</span> IPC_CREAT <span class="op">|</span> <span class="bn">0640</span><span class="op">);</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;shmd: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> shmd<span class="op">);</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> shmat<span class="op">(</span>shmd<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;data: %p</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> data<span class="op">);</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>data<span class="op">);</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>data <span class="op">=</span> <span class="op">*</span> data <span class="op">+</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>data<span class="op">);</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>shmdt<span class="op">(</span>data<span class="op">);</span> </span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>data<span class="op">;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> shmd<span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>shmd <span class="op">=</span> shmget<span class="op">(</span>KEY<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">),</span> IPC_CREAT <span class="op">|</span> <span class="bn">0640</span><span class="op">);</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;shmd: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> shmd<span class="op">);</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> shmat<span class="op">(</span>shmd<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;data: %p</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> data<span class="op">);</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>data<span class="op">);</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>data <span class="op">=</span> <span class="op">*</span> data <span class="op">+</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>data<span class="op">);</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>shmdt<span class="op">(</span>data<span class="op">);</span> </span></code></pre></div>
 <p>Server Design * Handshake - ensure a connection between 2 programs</p>
 <ul>
 <li>3-way-handshake - verify both client and server can BOTH SEND AND RECIEVE DATA</li>

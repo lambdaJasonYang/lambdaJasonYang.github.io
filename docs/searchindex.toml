@@ -1,5 +1,5 @@
 [input]
-url_prefix = "https://userjy.github.io/"
+
 files = [
 
 {path = "posts/2022-04-09-WebGL.md", url = "/posts/2022-04-09-WebGL.html", title = "WebGL"},
@@ -33,6 +33,8 @@ files = [
 {path = "posts/2021-11-10-Authentication.md", url = "/posts/2021-11-10-Authentication.html", title = "Authentication OAuth2 SAML"},
 
 {path = "posts/2021-11-07-RedHatEnv.md", url = "/posts/2021-11-07-RedHatEnv.html", title = "Setting up Dev Env in Red-hat linux"},
+
+{path = "posts/2021-11-07-HakyllStorkSearch.md", url = "/posts/2021-11-07-HakyllStorkSearch.html", title = "Hakyll stork search"},
 
 {path = "posts/2021-11-07-HakyllCodeTabs.md", url = "/posts/2021-11-07-HakyllCodeTabs.html", title = "Tabbed Code blocks in Hakyll"},
 
@@ -121,6 +123,8 @@ files = [
 {path = "posts/2021-04-22-GithubAction.md", url = "/posts/2021-04-22-GithubAction.html", title = "CI/CD in GithubAction"},
 
 {path = "posts/2021-04-20-Rosetta.md", url = "/posts/2021-04-20-Rosetta.html", title = "Beginner's Rosetta Stone of lang"},
+
+{path = "posts/2021-03-24-JSGraphLibs.md", url = "/posts/2021-03-24-JSGraphLibs.html", title = "Graph libraries in JS"},
 
 {path = "posts/2021-03-23-example.md", url = "/posts/2021-03-23-example.html", title = "example page"},
 
@@ -310,6 +314,8 @@ files = [
 
 {path = "posts/2018-06-23-VanillaJS.md", url = "/posts/2018-06-23-VanillaJS.html", title = "VanillaJS mini scripts"},
 
+{path = "posts/2018-06-23-TypeScript.md", url = "/posts/2018-06-23-TypeScript.html", title = "Typescript"},
+
 {path = "posts/2018-06-23-Scoping.md", url = "/posts/2018-06-23-Scoping.html", title = "Closures in JS, Python"},
 
 {path = "posts/2018-06-23-JSUtils.md", url = "/posts/2018-06-23-JSUtils.html", title = "JS Utils"},
@@ -334,6 +340,8 @@ files = [
 
 {path = "posts/2018-03-24-makefile.md", url = "/posts/2018-03-24-makefile.html", title = "makefile"},
 
+{path = "posts/2018-03-24-leanmakefile.md", url = "/posts/2018-03-24-leanmakefile.html", title = "lean makefile"},
+
 {path = "posts/2018-03-24-Stochastic.md", url = "/posts/2018-03-24-Stochastic.html", title = "Stochastic calculus and brownian motion"},
 
 {path = "posts/2018-03-24-QuickSetup.md", url = "/posts/2018-03-24-QuickSetup.html", title = "Quick Setup"},
@@ -345,6 +353,8 @@ files = [
 {path = "posts/2018-01-05-RandTips.md", url = "/posts/2018-01-05-RandTips.html", title = "Random Shortcuts"},
 
 {path = "posts/2018-01-05-MarkovChain.md", url = "/posts/2018-01-05-MarkovChain.html", title = "Markov Chain and State machines"},
+
+{path = "posts/OO/2017-07-15-ClassComposition.md", url = "/posts/2017-07-15-ClassComposition.html", title = "Interfaces, Class Composition, Diamond Problem"},
 
 {path = "posts/2017-07-15-thinkScript.md", url = "/posts/2017-07-15-thinkScript.html", title = "Thinkscript"},
 
@@ -362,8 +372,6 @@ files = [
 
 {path = "posts/2017-07-15-Debug.md", url = "/posts/2017-07-15-Debug.html", title = "Debug"},
 
-{path = "posts/2017-07-15-ClassComposition/2017-07-15-ClassComposition.md", url = "/posts/2017-07-15-ClassComposition.html", title = "Interfaces, Class Composition, Diamond Problem"},
-
 {path = "posts/2016-07-07-LinReg/2016-07-07-LinReg.md", url = "/posts/2016-07-07-LinReg.html", title = "Linear Regression and Matrices"},
 
 {path = "posts/2016-03-25-UpdateHakyllPost.md", url = "/posts/2016-03-25-UpdateHakyllPost.html", title = "Updating Hakyll posts"},
@@ -374,9 +382,15 @@ files = [
 
 {path = "posts/2015-11-01-ProofTechniques.md", url = "/posts/2015-11-01-ProofTechniques.html", title = "Proof techniques"},
 
+{path = "posts/2015-09-17-xv6.md", url = "/posts/2015-09-17-xv6.html", title = "xv6"},
+
+{path = "posts/2015-09-17-Vi.md", url = "/posts/2015-09-17-Vi.html", title = "Vi"},
+
 {path = "posts/2015-09-17-SystemDesign.md", url = "/posts/2015-09-17-SystemDesign.html", title = "System Design"},
 
 {path = "posts/2015-09-17-Pointers.md", url = "/posts/2015-09-17-Pointers.html", title = "C Pointers"},
+
+{path = "posts/2015-09-17-PenTest3.md", url = "/posts/2015-09-17-PenTest3.html", title = "Pen Testing 3 SQL, Burp"},
 
 {path = "posts/2015-09-17-PenTest2.md", url = "/posts/2015-09-17-PenTest2.html", title = "Pen Testing 2"},
 

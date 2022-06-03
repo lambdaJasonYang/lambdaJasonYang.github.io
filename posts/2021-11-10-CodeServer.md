@@ -55,7 +55,8 @@ SSH into PC hosting your code-server, Move them to some directory like :
 
 Trust >> Authorities
 
-Download the Web-SSL-Cert.crt, which is the Root Cert Authority. Go to Chrome settings , Manage Certificates >> Authorities, and install the *.crt.  
+Download the Web-SSL-Cert.crt, which is the Root Cert Authority. Go to Chrome settings , 
+Manage Certificates >> **Trusted Root Certificate Authorities** tab >> Import .. , and install the *.crt.  
 Note we DO NOT need to install VsCodeOpn.crt on our browser.  
 
 

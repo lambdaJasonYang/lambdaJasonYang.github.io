@@ -102,3 +102,28 @@ This means the potential difference before passing and after passing the resisto
 * Voltage is same when passing each resistor in parallel
 * Inverse(total resistance) = Inverse(sum resistors)
 * Current is sum
+
+# Ohm's law and Reality
+
+>  It isn't Volt that kills, it's current  
+>  Standing on the cliff doesn't kill, it's the fall  
+
+The above quote is an abuse of language, since Current is basically Voltage-in-action.    
+
+How does Ohm's law play in reality?  
+
+* In reality, electronics has a pre-determined static resistance.  
+* Voltage is supplied by a power adapter which is semi-static since we get to choose the power adapter.  
+* Voltage and current are linked.  
+  * high voltage power supply, you get a high current.  
+  * low voltage power supply, you get a low current.
+<!--  -->
+* A power adapter shows : 
+  * INPUT: 100-120V
+  * OUTPUT: 5V , 1.2A  
+* This means the house power socket, (typically 120 Volts) is input into the power adapter and reduces the voltage.  
+* The  1.2A just means the adapter maximum internals can only take 1.2 Amps 
+  * This means if we use the power adapter on a very low resistance electronic device, the power adapter may break.
+  * This DOES NOT mean the adapter *provides* current.  
+
+ power adapter will provide different current to different electronic devices but it will always provide the same voltage.
