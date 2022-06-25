@@ -3,6 +3,8 @@ title: Bookmarks
 tags: mathcs, puremath, recursion
 ---
 
+https://jupyter.brynmawr.edu/services/public/dblank
+
 https://www.sciencedirect.com/book/9781785481734/fundamentals-of-advanced-mathematics
 
 [laplace visual graph](https://lpsa.swarthmore.edu/E12Syll.html)
@@ -222,3 +224,14 @@ https://en.wikichip.org/wiki/WikiChip
 
 https://npsolutions.hibid.com/
 
+
+
+# Misc
+
+https://joinpeertube.org/instances#instances-list  
+
+https://makelinux.github.io/kernel/diagram/  
+
+https://bootlin.com/training/kernel/  
+
+https://makelinux.github.io/kernel/diagram/  

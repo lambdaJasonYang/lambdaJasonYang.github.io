@@ -115,8 +115,71 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
     
 </div>
-<section id="investigating-callcc" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Investigating callcc</h1>
+<section id="visualize-continuations" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> visualize continuations</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>   <span class="ex">plusk</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="ex">/</span> <span class="dt">\ </span>  <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  2   5   k</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">+----+</span>   <span class="kw">|</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>   <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">plus</span><span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span> <span class="kw">|</span> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>   <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>   <span class="ex">o------o</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">plus</span><span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span> <span class="ex">is</span> piped into k</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">def</span> plusk<span class="er">(</span><span class="ex">a,b,k</span><span class="kw">)</span><span class="bu">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">k</span><span class="er">(</span><span class="ex">a+b</span><span class="kw">)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">def</span> mulk<span class="er">(</span><span class="ex">a,b,k</span><span class="kw">)</span><span class="bu">:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">k</span><span class="er">(</span><span class="ex">a*b</span><span class="kw">)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">plusk</span><span class="er">(</span><span class="ex">2,5,</span> λK.mulk<span class="er">(</span><span class="ex">a,7,print</span><span class="kw">))</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>      <span class="ex">plusk</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="ex">/</span> <span class="dt">\ </span>  <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    2   5   λK.mulk</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>   <span class="ex">+--</span><span class="kw">&amp;</span><span class="ex">--+</span>   /  <span class="dt">\ </span>  <span class="dt">\</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="kw">|</span>     <span class="ex">K</span>    7  print</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="kw">|</span>     <span class="kw">|</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">plus</span><span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span>   <span class="kw">|</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">|</span>     <span class="kw">|</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="ex">o--#--o</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span>       <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span>       <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">K:=plus</span><span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span>   <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>         <span class="ex">+----</span><span class="kw">&amp;</span><span class="ex">--+</span>      <span class="kw">|</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>              <span class="kw">|</span>         <span class="kw">|</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="ex">mul</span><span class="er">(</span><span class="ex">plus</span><span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span><span class="ex">,7</span><span class="kw">)</span>  <span class="kw">|</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>              <span class="kw">|</span>         <span class="kw">|</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>              <span class="ex">o----#----o</span>   </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ex">+--</span><span class="kw">&amp;</span><span class="ex">--+</span> stands for unwrap, ex: unwrap plusk to plus</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ex">o--#--o</span> stands for pipe, ex: pipe plus<span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span> <span class="ex">into</span> λK</span></code></pre></div>
+<ol type="1">
+<li>plusk is unwrapped to plus and @ to (2,5) RESULT: plus(2,5)</li>
+<li>continuation of plusk, λK.mulk(a,7,print) is @ to plus(2,5) RESULT: mulk(7,7,print)</li>
+<li>mulk is unwrapped to mul and @ to (7,7) RESULT: mul(7,7)</li>
+<li>continuation of mulk, print is @ to mul(7,7)</li>
+</ol>
+<p>The continuation k is applied @ to (2,5)</p>
+<section id="example-2" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Example 2</h2>
+<ul>
+<li>Notice all the <em>action</em> is being done in the argument of the function.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">def</span> Negk<span class="er">(</span><span class="ex">a,k</span><span class="kw">)</span><span class="bu">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">k</span><span class="er">(</span><span class="ex">-a</span><span class="kw">)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Negk</span><span class="er">(</span><span class="ex">3,λa.Negk</span><span class="er">(</span><span class="ex">a,λb.Negk</span><span class="er">(</span><span class="ex">b,return</span><span class="kw">)))</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#same as above but formatted differently</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Negk</span><span class="er">(</span><span class="ex">3,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="ex">λa.Negk</span><span class="er">(</span><span class="ex">a,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                <span class="ex">λb.Negk</span><span class="er">(</span><span class="ex">b,return</span><span class="kw">)</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>              <span class="kw">)</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span></code></pre></div>
+</section>
+</section>
+<section id="investigating-callcc" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Investigating callcc</h1>
 <ul>
 <li><code>((a -&gt;b) -&gt; a*) -&gt; a</code></li>
 <li><code>cont :: (a -&gt;b)</code> the power of having the continuation as a function or as the bound lambda variable is that we don’t actually have to use the continuation.
@@ -125,17 +188,17 @@
 </ul></li>
 <li><code>a*</code> can be considered the hole to be filled. in <code>2 + callcc...</code>, the hole of the <code>2 + []</code> is an Int.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>   <span class="ex">+</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">/</span> <span class="dt">\</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> 2   @</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">/</span>  <span class="dt">\</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>callcc  lambda cont.</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>         <span class="ex">@</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">/</span> <span class="dt">\</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      cont 3</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">+2</span> <span class="er">(</span><span class="ex">callcc</span> <span class="er">(</span><span class="ex">lambda</span> <span class="er">(</span><span class="ex">cont</span><span class="kw">)</span> <span class="ex">3</span> <span class="kw">)))</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 5</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>   <span class="ex">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">/</span> <span class="dt">\</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a> 2   @</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">/</span>  <span class="dt">\</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>callcc  lambda cont.</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>         <span class="ex">@</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">/</span> <span class="dt">\</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>      cont 3</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">+2</span> <span class="er">(</span><span class="ex">callcc</span> <span class="er">(</span><span class="ex">lambda</span> <span class="er">(</span><span class="ex">cont</span><span class="kw">)</span> <span class="ex">3</span> <span class="kw">)))</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 5</span></code></pre></div>
 <ul>
 <li>in the above case we never used the continuation</li>
 <li><code>(lambda (cont) 3 ) :: ? -&gt; ?</code></li>
@@ -154,8 +217,8 @@
 <li><code>lambda cont (cont 3) :: (Int -&gt; b) -&gt; Int</code></li>
 </ul>
 </section>
-<section id="continuation-return-beta" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Continuation return beta</h1>
+<section id="continuation-return-beta" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Continuation return beta</h1>
 <ul>
 <li><code>cont x :: b</code>
 <ul>
@@ -163,8 +226,8 @@
 </ul></li>
 </ul>
 </section>
-<section id="the-only-type-that-really-matters-it-the-first-a" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> The only type that really matters it the first a</h1>
+<section id="the-only-type-that-really-matters-it-the-first-a" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> The only type that really matters it the first a</h1>
 <ul>
 <li><code>callcc :: ((a ...</code>
 <ul>

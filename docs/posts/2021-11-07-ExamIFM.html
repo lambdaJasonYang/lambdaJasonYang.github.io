@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - JS Utils</title>
+        <title>Jason Yang - Exam IFM</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,22 +103,51 @@
         </div>
 
         <div id="content">
-            <h1>JS Utils</h1>
+            <h1>Exam IFM</h1>
             
 
             <div class="info">
-    Posted on June 23, 2018
+    Posted on November  7, 2021
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>
     
 </div>
-<div id="TOC"></div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> partition <span class="op">=</span> (arr) <span class="kw">=&gt;</span> {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  temp <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>(arr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<section id="risk-free-interest-rate" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Risk-free interest rate</h1>
+<ul>
+<li>Use interest rate to Translate “Strike Price -&gt; Present Value”
+<ul>
+<li>You get offered a contract to get $100 in a year aka Strike Price BUT<br />
+what is that $100 Really worth Now(Present Value) ?
+<ul>
+<li>Assuming 5% risk-free interest rate compounded monthly:<br />
+<span class="math inline">\(100 \times (1+(0.05)\frac{1}{12})^{12}\)</span></li>
+<li>Another common phrase is 5% risk-free interest rate <strong>compounded continuously</strong>:<br />
+<span class="math inline">\(100 \times e^{1+0.05}\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="put-call-parity-is-a-forward-contract" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Put-Call Parity is a Forward contract</h1>
+<p><span class="math display">\[CallPrice + (\frac{OptionStrike}{riskFreeRate}) \stackrel{?}{=} PutPrice + StockPrice\]</span></p>
+<ul>
+<li>Holding Put and Call Options of the same (strike price, Expiration date) is Equal to<br />
+Holding Forward Contract with the same Expiration date
+<ul>
+<li>Forward Price of Contract is same as Option strike price</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>Given: price to buy long stock is 500<br />
+Given: Risk-Free Interest Rate<br />
+Given: Option call w/ strike price K , Expiration: 1 yr, Cost: 66.59<br />
+Given: Option put w/ strike price K, Expiration: 1 yr, Cost: 18.64</p>
+</blockquote>
+</section>
 
         </div>
         <div id="footer">

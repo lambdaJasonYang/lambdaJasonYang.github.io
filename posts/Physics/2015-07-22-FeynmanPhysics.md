@@ -105,10 +105,7 @@ This means the potential difference before passing and after passing the resisto
 
 # Ohm's law and Reality
 
->  It isn't Volt that kills, it's current  
->  Standing on the cliff doesn't kill, it's the fall  
-
-The above quote is an abuse of language, since Current is basically Voltage-in-action.    
+## Real life power sources
 
 How does Ohm's law play in reality?  
 
@@ -127,3 +124,21 @@ How does Ohm's law play in reality?
   * This DOES NOT mean the adapter *provides* current.  
 
  power adapter will provide different current to different electronic devices but it will always provide the same voltage.
+
+ ## Battery doesnt follow ohm's law
+
+ * Ohm's law only apply to resistors in a circuit
+ * Battery is classified as a **Voltage Source** - a fixed voltage in a circuit
+   * To find this fixed voltage : $E = E_Cathode - E_Anode$ where $E=Voltage$
+   * Cathode: area of reduction reaction 
+   * Anode: area of oxidation reaction
+
+Chemical chart maps oxidation and reduction reaction to voltages.  
+Use this to calculate total volts of a battery.  
+
+ ## Does current or voltage kill
+
+>  It isn't Volt that kills, it's current  
+>  Standing on the cliff doesn't kill, it's the fall  
+
+The above quote is an abuse of language, since Current is basically Voltage-in-action.    

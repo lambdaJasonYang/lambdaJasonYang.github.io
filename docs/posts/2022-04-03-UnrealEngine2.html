@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Linux and C libraries in systems</title>
+        <title>Jason Yang - Unreal Engine and C++</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,74 +103,34 @@
         </div>
 
         <div id="content">
-            <h1>Linux and C libraries in systems</h1>
+            <h1>Unreal Engine and C++</h1>
             
 
             <div class="info">
-    Posted on September 17, 2015
+    Posted on April  3, 2022
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'DevOps'." href="../tags/DevOps.html">DevOps</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<section id="find" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> find</h1>
-<p>Finding where the C headers are located and how to use them</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;sys/socket.h&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> socket</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> /usr/include <span class="at">-name</span> socket.h</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#sometimes need to search in /usr/</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> /usr/ <span class="at">-name</span> socket.h</span></code></pre></div>
-<p>within sys/socket.h we see some related libraries</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;bits/socket.h&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;bits/types/struct_osockaddr.h&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include &lt;bits/socka</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>```ddr<span class="op">.</span>h<span class="op">&gt;</span></span></code></pre></div>
-<p>lets enter bits/socket.h</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Structure describing a generic socket address.  */</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> sockaddr</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    __SOCKADDR_COMMON <span class="op">(</span>sa_<span class="op">);</span>    <span class="co">/* Common data: address family and length.  */</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> sa_data<span class="op">[</span><span class="dv">14</span><span class="op">];</span>           <span class="co">/* Address data.  */</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span></code></pre></div>
-</section>
-<section id="grep--rs" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> grep -rs</h1>
-<p>What is <code>__SOCKADDR_COMMON</code> ?</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-rs</span> <span class="st">&quot;__SOCKADDR_COMMON&quot;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#output&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#socket.h:    __SOCKADDR_COMMON (sa_);   /* Common data: address family and length.  */</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#socket.h:  (_SS_SIZE - __SOCKADDR_COMMON_SIZE - sizeof (__ss_aligntype))</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#socket.h:    __SOCKADDR_COMMON (ss_);   /* Address family, etc.  */</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">--</span><span class="op">&gt;</span>#sockaddr.h:#define      __SOCKADDR_COMMON<span class="er">(</span><span class="ex">sa_prefix</span><span class="kw">)</span> <span class="dt">\</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#sockaddr.h:#define __SOCKADDR_COMMON_SIZE       (sizeof (unsigned short int))</span></span></code></pre></div>
-<p>lets check sockaddr.h</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">unsigned</span> <span class="dt">short</span> <span class="dt">int</span> sa_family_t<span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define __SOCKADDR_COMMON(sa_prefix) \</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="pp">  sa_family_t sa_prefix##family</span></span></code></pre></div>
-<p>The backslash <code>\</code> just means multiline.<br />
-__SOCKADDR_COMMON takes an argument <code>sa_prefix</code><br />
-double <code>##</code> means concat</p>
-<p>If you give it <code>SA_</code> as input, you get<br />
-<code>typedef unsigned short int sa_family_t SA_family</code> as the output</p>
-<hr />
-<p>struct sockaddr_in is what we want which is in /usr/include/netinet/in.h</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> sockaddr_in</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  __SOCKADDR_COMMON <span class="op">(</span>sin_<span class="op">);</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  in_port_t sin_port<span class="op">;</span>           <span class="co">/* Port number.  */</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">struct</span> in_addr sin_addr<span class="op">;</span>      <span class="co">/* Internet address.  */</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* Pad to size of `struct sockaddr'.  */</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">char</span> sin_zero<span class="op">[</span><span class="kw">sizeof</span> <span class="op">(</span><span class="kw">struct</span> sockaddr<span class="op">)</span> <span class="op">-</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>             __SOCKADDR_COMMON_SIZE <span class="op">-</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>             <span class="kw">sizeof</span> <span class="op">(</span>in_port_t<span class="op">)</span> <span class="op">-</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>             <span class="kw">sizeof</span> <span class="op">(</span><span class="kw">struct</span> in_addr<span class="op">)];</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<section id="c-classes" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> C++ classes</h1>
+<ul>
+<li>Parent C++ class
+<ul>
+<li>Pawn - Base class of ALL Actors</li>
+<li>Character - Pawn with mesh/collision/movement</li>
+<li>Actor - object that can be placed</li>
+<li>Actor Component - Component that can be added to Actor</li>
+<li>Scene Component - Component that can be composed with other Scene Components</li>
+<li>Player Camera Manager - Manage camera for a player</li>
+<li>Player Controller - Actor responsible for controlling Pawn used by Player</li>
+<li>Game Mode Base - Define game being played, rules, scoring</li>
+<li>World Settings - Actor containing all script accessible world properties</li>
+</ul></li>
+</ul>
 </section>
 
         </div>
