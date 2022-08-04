@@ -4,6 +4,87 @@ tags: prog, cloud, frontend
 toc: y
 ---
 
+* Any project using node_modules requires webpack !
+
+# Example
+
+* installing node_modules in a normal file directory and running a live-server will not work.
+  * You need webpack to build and link the node_modules.
+  * you will notice something like `import Graph from 'graphology'` and IDE will say it cant find graphology.  
+<!--  -->
+
+Webpack will build the `/myproject/src` folder into static files in the `/myproject/out` folder. BUT we must first make the `index.html` manually first.
+
+
+* myproject/
+  * package.json
+  * node_modules/
+  * dist/
+    * index.html
+  * src/ 
+    * index.js
+
+
+```bash
+mkdir myproject
+mkdir src
+mkdir dist
+touch /myproject/dist/index.html
+
+cd myproject
+npm init
+
+npm install --save-dev typescript
+npm install --save-dev webpack webpack-cli
+npm install sigma graphology
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>hi</title>
+
+</head>
+<body>
+    <script type="module" defer src="main.js"></script>
+    <div id="sigma-container" style="height: 50vh;width: 70vw;"></div>
+<h1>hi</h1>
+</body>
+</html>
+```
+
+```{.json filename = tsconfig.json}
+{
+    "compilerOptions": {
+      "target": "ES2015",
+      "module": "es2022",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "moduleResolution": "node",
+      "forceConsistentCasingInFileNames": true,
+      "strictPropertyInitialization": false
+    },
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Recommended"
+  }
+```
+
+
+```{.json filename=package.json}
+...
+    "tsc": "tsc",
+    "build": "webpack --mode production",
+```
+
+```bash
+npm run tsc
+npm run build
+```
+
+# Node modules
+
 
 
 ```bash
@@ -23,10 +104,11 @@ create `tsconfig.json`
 {
   "compilerOptions": {
     "target": "ES2015",
-    "module": "commonjs",
+    "module": "es2022",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true
   },
   "$schema": "https://json.schemastore.org/tsconfig",

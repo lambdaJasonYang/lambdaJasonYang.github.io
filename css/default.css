@@ -52,6 +52,18 @@
   outline: none;
 }
 
+.stork-wrapper .stork-progress {
+  position: absolute;
+  display: block;
+  content: "";
+  bottom: 1px;
+  background-color: var(--stork-blue-5);
+  box-shadow: 0 0 8px var(--stork-blue-4);
+  height: 1px;
+  transition: width 0.25s ease, opacity 0.4s ease 0.4s;
+  margin-left: var(--stork-input-border-radius);
+  max-width: calc(100% - 2 * var(--stork-input-border-radius));
+}
 
 .stork-wrapper .stork-output {
   position: absolute;
