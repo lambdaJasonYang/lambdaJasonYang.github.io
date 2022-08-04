@@ -89,3 +89,12 @@ Mapping metric spaces of knowledge AKA analogies
 * $S \subseteq M$
 * p is a limit of S iff $\exists p_n :: sequence$ s.t. $p_n converges to p$
     
+
+
+# brightside
+
+## 3
+
+* A sequence is **bounded** if exist some number that bounds the sequence
+* Convergent sequences implies bounded sequences but not otherway around
+  * A bounded sequence can rapidly oscillate meaning it is nonconvergent

@@ -65,10 +65,16 @@ Given a subset of $P(X), \mathcal{M}$  which is not a σ-algebra, what is the mi
 Stats
 
 * Population is reality
-* Sample is a subset of population
+* Sample is a subset of some population, 
+
+**Statistical Test** is all about asking do these 2 samples come from the same population?
+
 * Statistics always use sample to estimate or model population. 
   * Aka use Subset of Population to estimate population.
-* $X~N(0,1)$ means random variable $X$ has the normal distribution of mean 0 and variance of 1
+
+## Notation
+
+* X~N(0,1) means random variable $X$ has the normal distribution of mean 0 and variance of 1
   * $X$ is a random variable means we choose a subset aka sample $X$ from a population. 
     * This subset can take on many different RANDOM VARying combinations of values aka "random variable".
   * Wiki: Random Variable is any function that maps from the Sample Space to a Real number.
@@ -113,6 +119,74 @@ Multiple Regression vs Multivariate regression
 
 **independent random variable = Subset**  
 Note these Subsets can come from the same or different populations.
+
+# P-value
+
+## Example p-value of fair coin
+
+p-value for 2 heads: Probability of Event + Probability of Equally rare Event + Probability of More Rarer Events = Prob(HH) + Prob(TT) + 0 = 0.5  
+
+Notice even though Probability of 2 heads is only Prob(HH)=0.25, the p-value is 0.5  
+
+p-value is almost like inverse Shannon entropy. High p-value means not surprising something is "fair" or Equal(Null hypothesis). 
+
+
+
+# z-score
+
+z-score is used when you can normalize your dataset to a 0 mean and 1 std  
+
+
+::: {group=p1 glabel="two tailed"}
+
+```{.txt }
+     ____
+   /      \ 
+ /+|      |+\
+/++|      |++\
+  -1  0   1     z-score  
+```
+
+$$P(X \lt -1)+P (X \gt 1) = \text{zscore of 1}$$
+
+p-value = 0.3173 aka 31.73% probability or area under the z-distribution curve  
+
+Notice how the inverse 1-0.3173 = 0.6827 is around 68% which aligns with the 68-95-99.7 rule  
+
+:::
+
+::: {group=p1 glabel="one tailed(-1) "}
+
+```{.txt }
+     ____
+   /      \ 
+ /+|        \
+/++|         \
+  -1  0   1     z-score
+```
+
+$$P(X \lt -1) = \text{zscore of -1 one-tailed}$$
+
+
+p-value = 0.1586 aka 15.86% probability or area under the z-distribution curve
+
+:::
+
+::: {group=p1 glabel="one tailed(1)"}
+
+```{.txt }
+     ____
+   /++++++\ 
+ /++++++++| \
+/+++++++++|  \
+  -1  0   1     z-score
+```
+
+$$P(X \gt 1) = \text{zscore of 1 one-tailed}$$
+
+p-value = 0.8413 which is 84.13% probability or 84.13% under the z-distribution curve
+
+:::
 
 # CLT
 

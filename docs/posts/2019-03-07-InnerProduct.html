@@ -117,7 +117,10 @@
 </div>
 <div id="TOC"><ul>
 <li><a href="#inner-product-is-a-metric"><span class="toc-section-number">1</span> Inner Product is a Metric</a></li>
-<li><a href="#euclidean-norm2-norm"><span class="toc-section-number">2</span> Euclidean Norm(2-Norm)</a></li>
+<li><a href="#euclidean-norm2-norm"><span class="toc-section-number">2</span> Euclidean Norm(2-Norm)</a>
+<ul>
+<li><a href="#intuition-of-dot-product"><span class="toc-section-number">2.1</span> Intuition of dot product</a></li>
+</ul></li>
 <li><a href="#inner-product-space"><span class="toc-section-number">3</span> Inner Product Space</a></li>
 <li><a href="#adjoint"><span class="toc-section-number">4</span> Adjoint</a></li>
 </ul></div>
@@ -146,6 +149,20 @@ Inner Product is a Metric function</p>
 <h1 data-number="2"><span class="header-section-number">2</span> Euclidean Norm(2-Norm)</h1>
 <p><span class="math display">\[\cdot \text{ is Norm Operation}\]</span></p>
 <p><span class="math display">\[X \cdot Y = X^T Y\]</span></p>
+<section id="intuition-of-dot-product" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Intuition of dot product</h2>
+<ul>
+<li>let’s say given that:
+<ul>
+<li><span class="math inline">\(A = A_{x} + A_{y}\)</span><br />
+</li>
+<li><span class="math inline">\(B= B_{y}\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[A \cdot B = (A_{x} + A_{y}) \cdot B_{y} = {\color{red}A_{x} \cdot B_{y}} + A_{y} \cdot B_{y} = {\color{red}0} + A_{y} \cdot B\]</span></p>
+<p>Notice how only the y-component of <span class="math inline">\(A\)</span> matters since <span class="math inline">\(A_{x} \perp B\)</span> making the dot product of A’s x-component 0.</p>
+<p><span class="math display">\[ \prod\limits_{vectors}(\text{x-components of each vector}) + \prod\limits_{vectors}(\text{y-components of each vector}) = \text{dot product of vectors}\]</span></p>
+</section>
 </section>
 <section id="inner-product-space" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Inner Product Space</h1>

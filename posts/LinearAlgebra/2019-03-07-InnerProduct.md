@@ -30,6 +30,21 @@ $$\cdot \text{ is Norm Operation}$$
 
 $$X \cdot Y = X^T Y$$
 
+## Intuition of dot product
+
+* let's say given that: 
+  * $A = A_{x} + A_{y}$  
+  * $B= B_{y}$
+
+$$A \cdot B = (A_{x} + A_{y}) \cdot B_{y} = {\color{red}A_{x} \cdot B_{y}} + A_{y} \cdot B_{y} = {\color{red}0} + A_{y} \cdot B$$
+
+Notice how only the y-component of $A$ matters since $A_{x} \perp B$ making the dot product  of A's x-component 0. 
+
+
+$$ \prod\limits_{vectors}(\text{x-components of each vector}) + \prod\limits_{vectors}(\text{y-components of each vector}) = \text{dot product of vectors}$$
+
+
+
 # Inner Product Space
 
 Inner Product Space = Vector Space  

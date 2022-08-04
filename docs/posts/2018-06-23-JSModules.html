@@ -152,9 +152,40 @@
 <li>Go to <code>producerLib</code> and run <code>npm init</code><br />
 The entry point in package.json is <code>index.js</code> therefore we MUST name our file <code>index.js</code></li>
 </ol>
+<div data-group="1" data-glabel="requireJS">
 <div class="sourceCode" id="cb4" data-filename="/producerLib/index.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> (x) <span class="kw">=&gt;</span> {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="vs">`hi </span><span class="sc">${</span>x<span class="sc">}</span><span class="vs">`</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5" data-filename="/producerLib/package.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;producerLib&quot;</span><span class="fu">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.0&quot;</span><span class="fu">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;bleh&quot;</span><span class="fu">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;main&quot;</span><span class="fu">:</span> <span class="st">&quot;index.js&quot;</span><span class="fu">,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;echo </span><span class="ch">\&quot;</span><span class="st">Error: no test specified</span><span class="ch">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;em&quot;</span><span class="fu">,</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;license&quot;</span><span class="fu">:</span> <span class="st">&quot;ISC&quot;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+</div>
+<div data-group="2" data-glabel="ESModule">
+<div class="sourceCode" id="cb6" data-filename="/producerLib/index.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> somefun <span class="op">=</span> (x) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="vs">`hi </span><span class="sc">${</span>x<span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> somefun</span></code></pre></div>
+<div class="sourceCode" id="cb7" data-filename="/producerLib/package.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;producerLib&quot;</span><span class="fu">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;module&quot;</span><span class="fu">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.0&quot;</span><span class="fu">,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;bleh&quot;</span><span class="fu">,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;main&quot;</span><span class="fu">:</span> <span class="st">&quot;index.js&quot;</span><span class="fu">,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;echo </span><span class="ch">\&quot;</span><span class="st">Error: no test specified</span><span class="ch">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;em&quot;</span><span class="fu">,</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;license&quot;</span><span class="fu">:</span> <span class="st">&quot;ISC&quot;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+</div>
 </section>
 <section id="client-consumer" class="level2" data-number="2.2">
 <h2 data-number="2.2"><span class="header-section-number">2.2</span> Client consumer</h2>
@@ -165,42 +196,43 @@ The entry point in package.json is <code>index.js</code> therefore we MUST name 
 Since this is NOT a package or library but an application we can name our file anything like <code>app.js</code><br />
 despite the package.json telling us the entry point is <code>index.js</code></li>
 </ol>
-<div data-group="1" data-glabel="requireJS">
-<div class="sourceCode" id="cb5" data-filename="/consumer/app.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">//import greeter from &quot;producerLib&quot;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> greeter <span class="op">=</span> <span class="pp">require</span>(<span class="st">&quot;producerLib&quot;</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="fu">greeter</span>(<span class="st">&quot;he&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb6" data-filename="/consumer/package.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;consumer&quot;</span><span class="fu">,</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.0&quot;</span><span class="fu">,</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;main&quot;</span><span class="fu">:</span> <span class="st">&quot;index.js&quot;</span><span class="fu">,</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;echo </span><span class="ch">\&quot;</span><span class="st">Error: no test specified</span><span class="ch">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;license&quot;</span><span class="fu">:</span> <span class="st">&quot;ISC&quot;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div data-group="2" data-glabel="requireJS">
+<div class="sourceCode" id="cb8" data-filename="/consumer/app.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">//import greeter from &quot;producerLib&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> greeter <span class="op">=</span> <span class="pp">require</span>(<span class="st">&quot;producerLib&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="fu">greeter</span>(<span class="st">&quot;he&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb9" data-filename="/consumer/package.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;consumer&quot;</span><span class="fu">,</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.0&quot;</span><span class="fu">,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;main&quot;</span><span class="fu">:</span> <span class="st">&quot;index.js&quot;</span><span class="fu">,</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;echo </span><span class="ch">\&quot;</span><span class="st">Error: no test specified</span><span class="ch">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;license&quot;</span><span class="fu">:</span> <span class="st">&quot;ISC&quot;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 </div>
-<div data-group="1" data-glabel="ESModule">
-<div class="sourceCode" id="cb7" data-filename="/consumer/app.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> greeter <span class="im">from</span> <span class="st">&quot;producerLib&quot;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">// const greeter = require(&quot;producerLib&quot;)</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="fu">greeter</span>(<span class="st">&quot;he&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb8" data-filename="/consumer/package.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;consumer&quot;</span><span class="fu">,</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;module&quot;</span><span class="fu">,</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.0&quot;</span><span class="fu">,</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;main&quot;</span><span class="fu">:</span> <span class="st">&quot;index.js&quot;</span><span class="fu">,</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;echo </span><span class="ch">\&quot;</span><span class="st">Error: no test specified</span><span class="ch">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;license&quot;</span><span class="fu">:</span> <span class="st">&quot;ISC&quot;</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div data-group="2" data-glabel="ESModule">
+<div class="sourceCode" id="cb10" data-filename="/consumer/app.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> greeter <span class="im">from</span> <span class="st">&quot;producerLib&quot;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">// const greeter = require(&quot;producerLib&quot;)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="fu">greeter</span>(<span class="st">&quot;he&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb11" data-filename="/consumer/package.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;consumer&quot;</span><span class="fu">,</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;module&quot;</span><span class="fu">,</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.0&quot;</span><span class="fu">,</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;main&quot;</span><span class="fu">:</span> <span class="st">&quot;index.js&quot;</span><span class="fu">,</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;echo </span><span class="ch">\&quot;</span><span class="st">Error: no test specified</span><span class="ch">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;license&quot;</span><span class="fu">:</span> <span class="st">&quot;ISC&quot;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 </div>
-<p>Notice that clients using ESmodule imports requires <code>package.json</code> to include <code>"type": "module"</code><br />
+<p>Notice that using ESmodule <code>export default ..</code> and <code>import .. from ..</code> syntax requires<br />
+<code>package.json</code> to include <code>"type": "module"</code><br />
 which is not required for clients using requireJS imports.</p>
 <ul>
 <li>Go to directory producerLib and run <code>npm link</code></li>

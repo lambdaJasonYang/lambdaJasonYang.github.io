@@ -120,8 +120,9 @@
 <section id="https-setup-on-opnsense-or-pfsense" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> HTTPS setup on Opnsense or Pfsense</h1>
 <p>In the cert and cert-key fields, remember to use ABSOLUTE PATHS or systemctl wont work.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Allows code-server to listen on port 443.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setcap cap_net_bind_service=+ep /usr/lib/code-server/lib/node</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non-root node server cant bind to ports lower than 1024</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Allows code-server to listen on ports lower than 1024, including 443.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setcap cap_net_bind_service=+ep /usr/lib/code-server/lib/node</span></code></pre></div>
 <div class="sourceCode" id="cb2" data-filename="~/.config/code-server/config.yaml"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind-addr</span><span class="kw">:</span><span class="at"> 0.0.0.0:443</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auth</span><span class="kw">:</span><span class="at"> password</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> root</span></span>
@@ -193,6 +194,28 @@ Note we DO NOT need to install VsCodeOpn.crt on our browser.</p>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +w ./kernel.json</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s|gophernotes|</span><span class="va">$(</span><span class="ex">go</span> env GOPATH<span class="va">)</span><span class="st">/bin/gophernotes|&quot;</span> <span class="op">&lt;</span> kernel.json.in <span class="op">&gt;</span> kernel.json</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./stork-ubuntu-20-04</span> build <span class="at">--input</span> <span class="st">&quot;./docs/searchindex.toml&quot;</span> <span class="at">--output</span> <span class="st">&quot;./docs/storksearch.st&quot;</span>  </span></code></pre></div>
+</section>
+<section id="plumbing" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Plumbing</h1>
+<ul>
+<li>Problem: VSCode command palette may cache old and non-existent paths. (Opening a folder or Workspace default autofills a bad path)
+<ul>
+<li>Solution: Ctrl+Shift+P &gt; File: Clear Recently Opened</li>
+</ul>
+<h1 id="extensions-1">Extensions</h1>
+<ul>
+<li>gitignore - Ctrl Shift P , <code>Add gitignore</code></li>
+<li>git graph</li>
+</ul>
+<h1 id="cern-root-c-interpreter">Cern ROOT C++ interpreter</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--env</span> <span class="at">--add</span> channels conda-forge</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install root</span></code></pre></div>
+<h1 id="spring-boot">Spring boot</h1>
+<ul>
+<li>Java Extension Pack - microsoft vscjava</li>
+<li>Spring boot Extension Pack</li>
+</ul></li>
+</ul>
 </section>
 
         </div>

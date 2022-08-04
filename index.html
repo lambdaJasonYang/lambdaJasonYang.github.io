@@ -36,7 +36,12 @@ $partial("templates/post-list-index.html")$
 <script async defer>
   const searchbox = document.querySelector("input.stork-input");
   searchbox.addEventListener("click",()=>{
-    stork.register("foo", window.location.origin + "/storksearch.st");
+    searchbox.disabled=true;
+    searchbox.placeholder="Loading Search Index...";
+    stork.register("foo", window.location.origin + "/storksearch.st").then(()=>{
+      searchbox.disabled=false;
+      searchbox.placeholder="Search Index Loaded, Type Here";
+      });
     
   },{once: true})
 

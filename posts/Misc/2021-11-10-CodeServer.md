@@ -13,7 +13,8 @@ Config location: ~/.config/code-server/config.yaml
 In the cert and cert-key fields, remember to use ABSOLUTE PATHS or systemctl wont work.
 
 ```bash
-# Allows code-server to listen on port 443.
+# non-root node server cant bind to ports lower than 1024
+# Allows code-server to listen on ports lower than 1024, including 443.
 sudo setcap cap_net_bind_service=+ep /usr/lib/code-server/lib/node
 ```
 
@@ -24,6 +25,8 @@ password: root
 cert: /home/kali/.local/share/code-server/VsCodeOpn.crt
 cert-key: /home/kali/.local/share/code-server/VsCodeOpn.key
 ```
+
+
 
 1. Next you have to generate your Certificate Root Authority. (This is what your browser downloads)
 
@@ -105,3 +108,28 @@ sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < kernel.json.in > kernel.
 ```bash
 ./stork-ubuntu-20-04 build --input "./docs/searchindex.toml" --output "./docs/storksearch.st"  
 ```
+
+# Plumbing
+
+* Problem: VSCode command palette may cache old and non-existent paths. (Opening a folder or Workspace default autofills a bad path)
+  * Solution: Ctrl+Shift+P > File: Clear Recently Opened
+
+
+  # Extensions
+
+  * gitignore - Ctrl Shift P , `Add gitignore`
+  * git graph
+
+
+  # Cern ROOT C++ interpreter
+
+  ```bash
+  conda config --env --add channels conda-forge
+  conda install root
+  ```
+
+
+  # Spring boot
+
+  * Java Extension Pack - microsoft vscjava
+  * Spring boot Extension Pack

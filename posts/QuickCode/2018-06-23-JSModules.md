@@ -40,12 +40,49 @@ How do we make our own npm package and run it locally?
 2. Go to `producerLib` and run `npm init`  
 The entry point in package.json is `index.js` therefore we MUST name our file `index.js`  
 
+:::{group=1 glabel=requireJS}
 ```{.js filename=/producerLib/index.js}
 module.exports = (x) => {
     return `hi ${x}`
 }
 ```
+```{.json filename=/producerLib/package.json}
+{
+  "name": "producerLib",
+  "version": "1.0.0",
+  "description": "bleh",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "em",
+  "license": "ISC"
+}
+```
+:::
 
+:::{group=2 glabel=ESModule}
+```{.js filename=/producerLib/index.js}
+const somefun = (x) => {
+    return `hi ${x}`
+}
+export default somefun
+```
+```{.json filename=/producerLib/package.json}
+{
+  "name": "producerLib",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "bleh",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "em",
+  "license": "ISC"
+}
+```
+:::
 ## Client consumer
 
 1. Make directory `consumer`  
@@ -53,7 +90,7 @@ module.exports = (x) => {
 Since this is NOT a package or library but an application we can name our file anything like `app.js`  
 despite the package.json telling us the entry point is `index.js`
 
-:::{group=1 glabel=requireJS}
+:::{group=2 glabel=requireJS}
 
 ```{.js filename=/consumer/app.js}
 //import greeter from "producerLib"
@@ -76,7 +113,7 @@ console.log(greeter("he"))
 ```
 :::
 
-:::{group=1 glabel=ESModule}
+:::{group=2 glabel=ESModule}
 
 ```{.js filename=/consumer/app.js}
 import greeter from "producerLib"
@@ -100,7 +137,8 @@ console.log(greeter("he"))
 ```
 :::
 
-Notice that clients using ESmodule imports requires `package.json` to include `"type": "module"`  
+Notice that using ESmodule `export default ..` and `import .. from ..`  syntax requires  
+`package.json` to include `"type": "module"`  
 which is not required for clients using requireJS imports.
 
 

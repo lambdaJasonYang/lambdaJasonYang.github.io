@@ -92,6 +92,8 @@ files = [
 
 {path = "posts/QuickCode/2021-08-10-Callcc.md", url = "/posts/2021-08-10-Callcc.html", title = "Callcc"},
 
+{path = "posts/QuickCode/2021-08-10-CSSFlexbox.md", url = "/posts/2021-08-10-CSSFlexbox.html", title = "CSS Flexbox Grid"},
+
 {path = "posts/QuickCode/2021-08-10-CSS.md", url = "/posts/2021-08-10-CSS.html", title = "CSS"},
 
 {path = "posts/Misc/2021-08-10-WhyHakyll.md", url = "/posts/2021-08-10-WhyHakyll.html", title = "Why Hakyll"},
@@ -108,7 +110,7 @@ files = [
 
 {path = "posts/Misc/2021-06-28-HakyllGitAction.md", url = "/posts/2021-06-28-HakyllGitAction.html", title = "Autobuild Hakyll"},
 
-{path = "posts/TypeTheory/2021-05-25-TypeTheoryInterpreter.md", url = "/posts/2021-05-25-TypeTheoryInterpreter.html", title = "Interpreter"},
+{path = "posts/TypeTheory/2021-05-25-TypeTheoryInterpreter.md", url = "/posts/2021-05-25-TypeTheoryInterpreter.html", title = "Haskell prog lang"},
 
 {path = "posts/Scripting/2021-05-24-SFTPtransfer.md", url = "/posts/2021-05-24-SFTPtransfer.html", title = "Transfer files SFTP"},
 
@@ -182,7 +184,7 @@ files = [
 
 {path = "posts/QuickCode/2021-03-20-QuickRedux.md", url = "/posts/2021-03-20-QuickRedux.html", title = "Quick Redux"},
 
-{path = "posts/QuickCode/2021-03-20-QuickNext.md", url = "/posts/2021-03-20-QuickNext.html", title = "Quick Next"},
+{path = "posts/QuickCode/2021-03-20-QuickNext.md", url = "/posts/2021-03-20-QuickNext.html", title = "Quick Nextjs"},
 
 {path = "posts/QuickCode/2021-02-21-QuickR.md", url = "/posts/2021-02-21-QuickR.html", title = "Quick R"},
 
@@ -191,6 +193,8 @@ files = [
 {path = "posts/QuickCode/2021-02-20-QuickSQL2.md", url = "/posts/2021-02-20-QuickSQL2.html", title = "Quick SQL 2"},
 
 {path = "posts/QuickCode/2021-02-20-QuickSQL1.md", url = "/posts/2021-02-20-QuickSQL1.html", title = "Quick SQL 1"},
+
+{path = "posts/QuickCode/2021-02-20-QuickRust.md", url = "/posts/2021-02-20-QuickRust.html", title = "Quick Rust"},
 
 {path = "posts/QuickCode/2021-02-20-QuickRedis.md", url = "/posts/2021-02-20-QuickRedis.html", title = "Quick Redis"},
 
@@ -302,6 +306,8 @@ files = [
 
 {path = "posts/TypeTheory/2019-03-07-CatHask.md", url = "/posts/2019-03-07-CatHask.html", title = "Category theory for programmer notes"},
 
+{path = "posts/LinearAlgebra/2019-03-07-Math51.md", url = "/posts/2019-03-07-Math51.html", title = "Math51 notes"},
+
 {path = "posts/LinearAlgebra/2019-03-07-InnerProduct.md", url = "/posts/2019-03-07-InnerProduct.html", title = "Inner Product and Norms"},
 
 {path = "posts/Economics/2018-08-25-StockOptionsNotes.md", url = "/posts/2018-08-25-StockOptionsNotes.html", title = "Options Derivatives Notes"},
@@ -314,13 +320,15 @@ files = [
 
 {path = "posts/Algorithms/2018-07-16-GreedyAlgo.md", url = "/posts/2018-07-16-GreedyAlgo.html", title = "Proof - Greedy Algo"},
 
-{path = "posts/QuickCode/2018-07-15-QuickTerraForm.md", url = "/posts/2018-07-15-QuickTerraForm.html", title = "Quick TerraForm"},
-
-{path = "posts/QuickCode/2018-07-15-QuickAWS2.md", url = "/posts/2018-07-15-QuickAWS2.html", title = "Quick AWS 2 - S3"},
-
-{path = "posts/QuickCode/2018-07-15-QuickAWS.md", url = "/posts/2018-07-15-QuickAWS.html", title = "Quick AWS"},
-
 {path = "posts/OtherMath/2018-07-15-TeachingSets.md", url = "/posts/2018-07-15-TeachingSets.html", title = "Language, Teaching and Set theory"},
+
+{path = "posts/AWS/2018-07-15-SQS.md", url = "/posts/2018-07-15-SQS.html", title = "Quick AWS SQS"},
+
+{path = "posts/AWS/2018-07-15-QuickTerraForm.md", url = "/posts/2018-07-15-QuickTerraForm.html", title = "Quick TerraForm"},
+
+{path = "posts/AWS/2018-07-15-QuickAWS2.md", url = "/posts/2018-07-15-QuickAWS2.html", title = "Quick AWS 2 - S3"},
+
+{path = "posts/AWS/2018-07-15-QuickAWS.md", url = "/posts/2018-07-15-QuickAWS.html", title = "Quick AWS"},
 
 {path = "posts/Softdev/2018-06-23-DependencyInjection.md", url = "/posts/2018-06-23-DependencyInjection.html", title = "Dependency Injection, Design Patterns, OO vs FP"},
 
@@ -361,6 +369,8 @@ files = [
 {path = "posts/Economics/2018-03-24-Stochastic.md", url = "/posts/2018-03-24-Stochastic.html", title = "Stochastic calculus and brownian motion"},
 
 {path = "posts/Misc/2018-01-05-RandTips.md", url = "/posts/2018-01-05-RandTips.html", title = "Random Shortcuts"},
+
+{path = "posts/Misc/2018-01-05-Politics.md", url = "/posts/2018-01-05-Politics.html", title = "Economic Report"},
 
 {path = "posts/AppliedTechniques/2018-01-05-MarkovChain.md", url = "/posts/2018-01-05-MarkovChain.html", title = "Markov Chain and State machines"},
 
@@ -444,7 +454,13 @@ files = [
 
 {path = "posts/Softdev/2015-07-22-Agile.md", url = "/posts/2015-07-22-Agile.html", title = "Agile"},
 
+{path = "posts/Physics/2015-07-22-PenrosePhysics.md", url = "/posts/2015-07-22-PenrosePhysics.html", title = "Penrose Physics notes"},
+
+{path = "posts/Physics/2015-07-22-LawsMotion.md", url = "/posts/2015-07-22-LawsMotion.html", title = "Derive kinematics + motion w/ calculus"},
+
 {path = "posts/Physics/2015-07-22-FeynmanPhysics.md", url = "/posts/2015-07-22-FeynmanPhysics.html", title = "Feynman Physics notes"},
+
+{path = "posts/Physics/2015-07-22-Circuits.md", url = "/posts/2015-07-22-Circuits.html", title = "Circuits"},
 
 {path = "posts/Physics/2015-07-22-Chemistry.md", url = "/posts/2015-07-22-Chemistry.html", title = "Chemistry"},
 
@@ -481,6 +497,8 @@ files = [
 {path = "posts/LinearAlgebra/2015-07-15-Eigenvector.md", url = "/posts/2015-07-15-Eigenvector.html", title = "Eigenvectors"},
 
 {path = "posts/Induction/2015-07-15-RecursionImagine.md", url = "/posts/2015-07-15-RecursionImagine.html", title = "Recursion Scenarios"},
+
+{path = "posts/AppliedTechniques/2015-07-15-Z3.md", url = "/posts/2015-07-15-Z3.html", title = "Z3"},
 
 {path = "posts/AppliedTechniques/2015-07-15-SVD.md", url = "/posts/2015-07-15-SVD.html", title = "SVD"},
 

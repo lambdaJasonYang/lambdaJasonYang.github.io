@@ -95,34 +95,6 @@ $$y(0)=k$$
 
 ---
 
-# Newton's Second Law 
-
-Solving the differential equation F=ma  
-Solving for 1) distance function and 2) velocity function, each wrt time
-
-1. 
-
-$$m \frac{ds^2}{d^2t} = f$$
-
-```mathematica
-DSolve[m*s''[t] == f, s[t], t] // TeXForm
-```
-$$\left\{\left\{s(t)\to \frac{f}{m}\frac{1}{2}t^2+c_2 t+c_1\right\}\right\}$$
-looks familiar
-$s = \frac{1}{2} at^2 + v_0t$
-
-2. 
-
-$$m \frac{dv}{dt} = f$$
-
-```mathematica
-DSolve[m*v'[t] == f, v[t], t] // TeXForm
-```
-
-$$\left\{\left\{v(t)\to \frac{f t}{m}+c_1\right\}\right\}$$
-looks familiar
-$v_n=at+v_0$
-
 
 ---
 

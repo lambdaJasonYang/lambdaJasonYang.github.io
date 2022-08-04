@@ -290,6 +290,133 @@
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>basePtr<span class="op">-&gt;</span>Method1 <span class="op">();</span>  <span class="co">//  Prints &quot;Base::Method1&quot;</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>basePtr<span class="op">-&gt;</span>Method2 <span class="op">();</span>  <span class="co">//  Prints &quot;Derived::Method2&quot;</span></span></code></pre></div>
 </section>
+<section id="etc" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Etc</h1>
+<ul>
+<li><code>int pp()</code>: Even though we return g, all we really get is a copy of VALUE of g.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> pp<span class="op">(){</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> g <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    log<span class="op">(&amp;</span>g<span class="op">);</span> <span class="co">//0x7ffeaa2e6d64</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> g<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> v<span class="op">;</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    log<span class="op">(&amp;</span>v<span class="op">);</span> <span class="co">//0x7ffeaa2e6d8c</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    v<span class="op">=</span> pp<span class="op">();</span>    </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    log<span class="op">(&amp;</span>v<span class="op">);</span> <span class="co">//0x7ffeaa2e6d8c</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div>
+<ul>
+<li><code>int* pp()</code>: we get a copy of the ADDR of g. YET the VALUE of g is destroyed.</li>
+<li>LESSON: the only thing that <em>persists</em> from <code>int* pp(){..}</code> is the return type <code>int*</code>
+<ul>
+<li><strong>Just focus on return variable of the function</strong></li>
+<li>Even if you return a pointer, like <code>int*</code>, if it points to a destroyed local var from the function stack, it’s basically worthless.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">*</span> pp<span class="op">(){</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> g <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> <span class="op">&amp;</span>g<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    log<span class="op">(</span><span class="st">&quot;addr of g&quot;</span><span class="op">,</span>p<span class="op">);</span> <span class="co">// 0x7ffcebeead24</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>p <span class="op">==</span> <span class="op">&amp;</span>g<span class="op">);</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    log<span class="op">(</span><span class="st">&quot;value of g&quot;</span><span class="op">,</span> g<span class="op">);</span> <span class="co">// 5</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span><span class="op">*</span> v<span class="op">;</span> </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    v<span class="op">=</span> pp<span class="op">();</span>    </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    log<span class="op">(</span><span class="st">&quot;addr of g:&quot;</span><span class="op">,</span>v<span class="op">);</span> <span class="co">//0x7ffcebeead24</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    log<span class="op">(</span><span class="st">&quot;value of g&quot;</span><span class="op">,</span> <span class="op">*</span>v<span class="op">);</span> <span class="co">// 0</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">//notice has the value of g is destroyed when assigning it to v.</span></span></code></pre></div>
+<ul>
+<li>manual allocation allows stuff to exist even after function stack gets destroyed.</li>
+<li>LESSON: function stack gets destroyed but HEAP manual allocation like <code>new</code> <code>malloc</code> persists</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">*</span> pp<span class="op">(){</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="kw">new</span> <span class="dt">int</span><span class="op">();</span> <span class="co">//this lives outside the function on the HEAP until manually deleted</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>p <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    log<span class="op">(</span><span class="st">&quot;addr of g&quot;</span><span class="op">,</span>p<span class="op">);</span> <span class="co">// 0x2079eb0</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    log<span class="op">(</span><span class="st">&quot;value of g&quot;</span><span class="op">,</span> <span class="op">*</span>p<span class="op">);</span> <span class="co">// 5</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span><span class="op">*</span> v<span class="op">;</span> </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    v<span class="op">=</span> pp<span class="op">();</span>    </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    log<span class="op">(</span><span class="st">&quot;addr of g:&quot;</span><span class="op">,</span>v<span class="op">);</span> <span class="co">//0x2079eb0</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    log<span class="op">(</span><span class="st">&quot;value of g&quot;</span><span class="op">,</span> <span class="op">*</span>v<span class="op">);</span> <span class="co">// 5</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">delete</span> v<span class="op">;</span> <span class="co">//this is where we delete the allocated *p</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div>
+<ul>
+<li>pointers allow us to dynamically allocate an array based on user input.
+<ul>
+<li>Without pointers we are forced to hard-code size of array.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span><span class="op">*</span> v<span class="op">;</span> <span class="co">//with a pointer we can dynamically allocate an array</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> cnt <span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> cnt<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> <span class="kw">new</span> <span class="dt">int</span><span class="op">[</span>cnt<span class="op">];</span> <span class="co">//like this</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> cnt<span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> cnt<span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        log<span class="op">(</span>i<span class="op">,</span>v<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">delete</span> v<span class="op">;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div>
+<section id="arrays" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> arrays</h2>
+<ul>
+<li>2d arrays cannot be built like this <code>int v[2][2] = new int[2][2]</code></li>
+<li>2d arrays cannot be passed as arguments like <code>void func(int stuff[][])</code> because the size is not specified</li>
+</ul>
+</section>
+<section id="array-as-pointers" class="level2" data-number="5.2">
+<h2 data-number="5.2"><span class="header-section-number">5.2</span> array as pointers</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ptr ptr --*--&gt; ptr --*--&gt; val </span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">//init START</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">**</span>v<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> row<span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> row<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> <span class="kw">new</span> <span class="dt">int</span><span class="op">*[</span>row<span class="op">];</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> col<span class="op">;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> col<span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> col<span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">int</span><span class="op">[</span>col<span class="op">];</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">// init </span><span class="re">END</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> row<span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j<span class="op">&lt;</span> col<span class="op">;</span> j<span class="op">++){</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>            v<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> i<span class="op">*</span>j<span class="op">;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> row<span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> col<span class="op">;</span> j<span class="op">++){</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>            log<span class="op">(</span>v<span class="op">[</span>i<span class="op">][</span>j<span class="op">]);</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">delete</span> v<span class="op">;</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div>
+<ul>
+<li><code>Deref a = a[0]</code></li>
+<li>A pointer is more powerful than an array</li>
+<li>Anytime we have an array we can replace it with a pointer</li>
+</ul>
+</section>
+</section>
 
         </div>
         <div id="footer">

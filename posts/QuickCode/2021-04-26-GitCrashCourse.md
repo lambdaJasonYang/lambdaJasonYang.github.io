@@ -27,23 +27,26 @@ git push -u origin main:main
 By pushing to remote repo you will be asked to enter username and password( password is really the auth token you have to generate in github settings).   
 The above command makes it so the setting is saved.  
 
-### Your .gitconfig data
+## Your .gitconfig data
 ```bash
 git config --list
 ```
 delete .gitconfig to reset your config
 
-### Removing Credentials
+## Remote Error
 
-``` bash
-git config --global credential.usehttppath true
+```bash
+remote: Permission to somebdy/bleh.git denied to someGuy.
+fatal: unable to access 'https://github.com/somebdy/bleh.git/': The requested URL returned error: 403
 ```
 
+This happens when 
 
 
 ---
+# Remote
 
-### Preconfig Remote Github repo variable
+## Preconfig Remote Github repo variable
 configure remote variable we name "origin"  
 or remove to reuse variable
 ``` bash
@@ -52,7 +55,7 @@ git remote add origin https://github.com/UserJY/bleh.git
 ```
 the -u flag adds the remote commit to your local git tree.
 
-### Create a new repo locally and push create github repo
+## Create a new repo locally and push create github repo
 
 ```bash
 git init
@@ -79,7 +82,7 @@ updating to remote repo like github
 git push origin main
 ```
 
-### Pushing updates to Team repo
+## Pushing updates to Team repo
 ``` bash
 git checkout -b Fixedbugbranch
 git add .
@@ -90,7 +93,7 @@ You see a push but on the team's side, they see a pull request(PR).
 PR is ran through github actions(CI system) that runs tests.  
 If accepted, they merge your PR branch with the main branch.  
 
-### More depth, Concept
+## More depth, Concept
 Three layers to know: commit-references(ref), branch-alias(alias), HEAD   
 
 * layer 1 - ref : static nodes of the commit tree.
@@ -115,7 +118,7 @@ HEAD(layer 1) points to branch alias(layer 2) which points to
 commit ref(layer 3).  
 Aliases(layer 2) always points to the local head(layer 1).  
 
-#### Creating new Aliases = Creating new branches
+### Creating new Aliases = Creating new branches
 
 Old commits(layer 1) aka non-local-head commits do not have aliases(layer 2) pointing to them but if you do make an alias, they will become a local-head(layer 1) by branching.
 
@@ -170,7 +173,7 @@ git checkout -b behaves the same as git branch BUT moves HEAD to new branch
 git restore .
 ```
 
-### Extras
+# Extras
 
 tags are just renaming refs, they are NOT at the same level as aliases.
 Meaning if you point HEAD to a tag, you are in a detached head state.
@@ -183,23 +186,11 @@ blue untagged node(meaning it is not the local head of a branch)git
 
 --- 
 
-### Merging
-
-##### Git Pull
-
-git pull is how we merge
-
-default setting for gitpull is rebase=false
-
-```bash
-git pull --rebase #default merge
-git pull --no-rebase
-git pull --ff-only #fast-forward-only
-```
+# Merging
 
 
 
-##### Example
+## Example
 
 Example:
 clone git project first commit 
@@ -305,7 +296,7 @@ git merge --abort
 ```
 
 
-##### To fix up the MERGE conflicts
+## To fix up the MERGE conflicts
 
 Go back to MERGE mode
 ```bash
@@ -313,7 +304,7 @@ git pull #back to merge mode
 git mergetool #will ask to start default vimdiff
 ```
 
-##### Non-conflict automerge
+## Non-conflict automerge
 image if local was
 ```bash
 hello
@@ -341,7 +332,95 @@ Merge made by the 'recursive' strategy.
 
 ```
 
-#### Vim micro tut
+
+
+## Undo add
+
+* this is before committing
+
+```bash
+git reset --hard
+```
+
+* `--hard` means remove modified uncommitted files
+* `--soft` means keep modified uncommitted files
+
+WARNING: Calling `git reset --hard` AFTER `git add .` but BEFORE `git commit ...` will DELETE YOUR WORK.
+
+### In case of Accidental Deleted Work
+
+In case you did do `git reset --hard` AFTER  `git add .` but BEFORE `git commit ...` you can recover files as blobs without file names.
+
+```bash
+git fsck --lost-found
+```
+
+```bash
+#script that recovers files and filters file by content like `bayesian net`
+cd ./.git/lost-found/other
+for FILE in *; do git show $FILE | grep "bayesian net" ; echo $FILE; done
+git show a73ff6d1c2bbc01fc2c182ed0c07961969f27c82 > recovered.ipynb
+cp recovered.ipnyb ~/recoveredfolder
+```
+
+
+## Merging two unrelated histories
+
+Example.  
+You made a github repo with a license.  
+Then you made a local repo with some web server and used git init.   
+Now you want to push your local repo on that "empty" remote repo.  
+
+Not so simple, we first have to merge it but it will give us an error on a naive merge since your local and remote repo have no common ancestor
+
+
+```bash
+git pull origin main --allow-unrelated-histories 
+```
+
+## Removing untracked changes
+
+```bash
+git clean -f
+```
+
+You might use this when you did a merge but Ctrl-C or exited out in the middle so now you're left with temp MERGE files.
+
+
+# Git Scenarios
+
+## Creating your git project
+
+> Say we spent time building a project locally called A.  
+We turn it into a git repo after it is finished.  
+How do we push it onto github?  
+First we need to create an empty github repo.  
+But now we have 2 repos with separate histories.  
+
+```bash
+{local}                     {github}
+mkdir A                     create github repo B
+git init A              
+git remote add origin B
+
+3 types of pulls:
+1) git pull origin --no-rebase main
+  [Nothing happens]fatal: refusing to merge unrelated histories 
+2) git pull origin --rebase main
+  [Success]This puts your remote commit B as first then local commit as recent.
+  B --> A
+2) git pull origin --ff-only main
+  [Nothing happens]fatal: refusing to merge unrelated histories
+   
+```
+
+the default pull uses no-rebase.   
+
+## Rebasing
+
+rebasing just means we can reorder our commit history
+
+# Vim micro tut
 ctrl-w-w to switch screen on 3 way commit
 
 esc-u to undo
@@ -356,49 +435,3 @@ esc-dd to delete line
 
 esc-]-c to move to next conflict
 esc-[-c to move to prev conflict
-
-### Undo last commit Abort Changes
-
-
-```bash
-git reset --hard
-```
-ONLY CALL THIS AFTER MAKING A COMMIT !  
-DO NOT DO THIS SIMPLY AFTER A `git add .` or else it removes your files.  
-
-
-In case you did do `git reset --hard` after ONLY doing  `git add .` you can recover files as blobs without file names.
-```bash
-git fsck --lost-found
-```
-
-```bash
-cd ./.git/lost-found/other
-for FILE in *; do git show $FILE | grep "Hills of error" ; echo $FILE; done
-git show a73ff6d1c2bbc01fc2c182ed0c07961969f27c82 > recovered.ipynb
-cp recovered.ipnyb ~/recoveredfolder
-```
-
----
-
-### Merging two unrelated histories
-
-Example.  
-You made a github repo with a license.  
-Then you made a local repo with some web server and used git init.   
-Now you want to push your local repo on that "empty" remote repo.  
-
-Not so simple, we first have to merge it but it will give us an error on a naive merge since your local and remote repo have no common ancestor
-
-
-```bash
-git pull origin main --allow-unrelated-histories 
-```
-
-### Removing untracked changes
-
-```bash
-git clean -f
-```
-
-You might use this when you did a merge but Ctrl-C or exited out in the middle so now you're left with temp MERGE files.

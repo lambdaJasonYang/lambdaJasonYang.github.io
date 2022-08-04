@@ -235,3 +235,17 @@ https://makelinux.github.io/kernel/diagram/
 https://bootlin.com/training/kernel/  
 
 https://makelinux.github.io/kernel/diagram/  
+
+https://www.lmfdb.org/
+
+https://www.federalregister.gov/api/v1/agencies
+
+
+https://opennet.net/research/regions/united-states-and-canada
+
+buyvm.net
+
+http://people.uncw.edu/hermanr/mat361/Simulink/ODE_Simulink2021.pdf  
+
+
+http://snap.stanford.edu/pgnn/

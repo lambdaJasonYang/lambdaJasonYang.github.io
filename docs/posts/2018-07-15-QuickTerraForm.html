@@ -116,6 +116,27 @@
     
 </div>
 <p>TerraForm is declarative, apply is idempotent</p>
+<pre class="text"><code>terraform {
+    required_providers {
+        aws = {
+            source = &quot;hashicorp/aws&quot;
+            version = &quot;~&gt; 3.0&quot;
+        }
+    }
+}
+
+provider &quot;aws&quot; {
+    region = &quot;us-east-1&quot;
+}
+
+resource &quot;aws_instance&quot; &quot;example&quot; {
+    ami = &quot;ami-01189924&quot;
+    instance_type = &quot;t2.micro&quot;
+}</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">terraform</span> init <span class="co">#downloads the terraform modules</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">terraform</span> plan <span class="co">#query aws API and see what will be deployed and its settings</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">terraform</span> apply <span class="co">#starts the instance in aws</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">terraform</span> destroy</span></code></pre></div>
 
         </div>
         <div id="footer">

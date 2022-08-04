@@ -17,12 +17,35 @@ vec[p_,q_] := Which[ Length[p] == 2, vec2[p,q],
                      Length[p] == 3, vec2[p,q] /. Graphics -> Graphics3D ];
 vec[p_,q_,label_] := Which[  Length[p] == 2,vec2[p,q,label],
                              Length[q] == 3,vec2[p,q,label] /. Graphics -> Graphics3D];
-sty[c_:Red] := (# /. Arrow[x__] -> {c, Arrow[x]})&
-(*  sty[Red,Dashed]@vec[{3,5}]*)
+sty[c__:Red] := (# /. Arrow[x__] -> {c, Arrow[x]})&
+(*  sty[Red]@vec[{3,5}]*)
 
 matrix[expr_] := expr /. List[p__]-> MatrixForm[List[p]]
-cout[x__] := TeXForm[Row[{x}]];
+cout[stmt__] := TeXForm[Row[{stmt}]];
 pnt[x_] := Graphics3D@Point[x];
+
+(* polynomial *)
+(* helper functions *)
+ vars[n_, m_] := Flatten@Transpose[Outer[Symbol@StringJoin[##] &, CharacterRange["A", "Z"][[;; m]], ToString /@ Range[n]]]
+ polyvar[v_] :=  Flatten[{1,vars[v-1,1]}]; 
+
+(* Give a list of coefficents and it will generate a polynomial with variables *)
+poly[coef_] := Transpose[coef].polyvar[Length@coef];
+poly@Thread[{{1,2,3}}];
+
+T := Transpose;
+Dim = Dimensions;
+Ones[n_] := ConstantArray[1,n]
+addCol[x_] := MapThread[Append, {#, x}] &
+(*  addCol[ConstantArray[1,2]]@{{1,3},{3,4}} // matrix*)
+addRow[x_] := Append[#,x]&
+
+unwrap := #[[1]][[1]]&
+(* unwrap[{{x+1}}] = x+1 *)
+
+(* 3d gradient color *)
+opt3d[opacity_:1] := {PlotStyle->Opacity[opacity],ColorFunction -> Function[{x, y, z}, Hue[z]]};
+(* Plot3D[f,{x1,0,1},{x2,0,1},Evaluate@optcolor3d] *)
 ```
 
 ```m

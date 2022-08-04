@@ -1,5 +1,5 @@
 ---
-title: Quick Next
+title: Quick Nextjs
 tags: prog, QuickCode, cloud, frontend
 toc: y
 ---
@@ -183,26 +183,33 @@ Notice how the lines are actually blurred. You can mix and match so the site beh
 # Capturing the [carID] and [modelID] as variables
 
 ```javascript
-const router = useRouter()
-const {carID, modelID} = router.query()
-console.log(`the car is {carID} and model {modelID}`)
+import { useRouter } from 'next/router'
+
+export default function Home() {
+    const router = useRouter();
+    const {myrouteINPUT} = router.query;
+    return(<div>
+        <h1>hi the text in the url parameter is {myrouteINPUT}
+        </h1>
+    </div>)
+}
 ```
 
 # ServerSide Render
 
-## getStaticProps - SSG
+1. getStaticPath prerenders dynamic routes, basically you tell [car].js to use `{toyota, hyundai}` then we prebuild `toyota.html hyundai.html`
+2. getStaticProps fetches data **on build** when `next build` is called. It only runs on server-side.  
+The client or window will never see any network call.  
+This is NOT like `window.addEventlistener('onload',..)` that fetches data on each client request.  
 
-* getStaticProps only runs serverside even though you may have written it on a clientside file like index.js
-* getStaticProps is only allowed in a page file, NOT in a component file.
-* getStaticProps only runs on build time, in dev mode we see it being rebuilt every request which may cause confusion.
 
-### 2 types of SSG
+## 2 types of SSG
 
 | getStaticProps() | getStaticPaths() |
 | --- | --- |
 | calls on build | calls on first request |
 
-### Why SSG can be bad?
+## Why SSG can be bad?
 
 
 SSG at build time and SSG at first request both are affected by stale data.
@@ -232,3 +239,89 @@ Fix:
 1. Use  `import dynamic from 'next/dynamic';`
 
 2. Use useEffect because it only runs on client side
+
+
+# Exporting as static site
+
+modify package.json for `"export": "next export"`
+
+```bash
+npm run build
+npm run export
+```
+
+build will create an `.next` file that is only useful for servers  
+export will create an `out` file containing static files like `index.html`  
+All we need are the `out` files  
+
+Errors:  
+
+1. imageOptimisation only works with a server which we dont have. Fis with the experimental turn off image optimization option.
+2. Paths are by default **relative**. Nextjs believes `http://server.opnroot.com:5500/` is our root.  We need to modify our paths with assetPrefix and basePath so it points to `http://server.opnroot.com:5500/test1/out` as root. 
+    * apparently assetPrefix is js files and css files while basePath is for images and route links
+
+```{.js filename=next.config.js}
+/** @type {import('next').NextConfig} */
+const isProd = false
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  assetPrefix: isProd ? 'https://cdn.productionsite.com' : '/test1/out',
+  basePath: isProd ? 'https://cdn.productionsite.com' : '/test1/out',
+  experimental: {
+    images: {
+      unoptimized: true,
+    },
+  },  
+}
+
+module.exports = nextConfig
+```
+
+* Cool thing about nextjs is that it generates html when possible unlike react where html is just the entry-point for js.  
+* Dynamic routes don't really work. 
+  * We require `getStaticPaths()` to pregenerate the route.
+
+
+```{.js filename=pages/[car].js}
+import Head from 'next/head'
+import { useRouter } from 'next/router' 
+
+
+export default function Home(props) {
+    const {BLEHdata} = props // This is data loaded from getStaticProps
+    console.log(BLEHdata)
+
+
+    const router = useRouter();
+    const {myrouteINPUT} = router.query; 
+    //NOTICE `myrouteINPUT` is undefined, 
+    //since exported static site cant capture dynamic routes
+    return(<div>
+        <h1>hi
+         {myrouteINPUT}
+        </h1>
+    </div>)
+}
+
+//this pregenerates the "dynamic route" for [car].js
+//REQUIRED FOR ANY DYNAMIC ROUTE that gets exported as static site.
+//clearly this isnt really that dynamic since we have to hardcode this.
+export async function getStaticPaths(){
+    return{
+        paths: [{ params : {car: "1"}}],
+        fallback: true,
+    }
+}
+
+//This is NOT like just calling window.addEventlistener("onload",...)
+//This runs on build time, meaning the browser will NEVER see the GET request to the json server.
+export async function getStaticProps(){
+    const response =await fetch("http://jsonplaceholder.typicode.com/users")
+    const BLEHdata = await response.json()
+    console.log(BLEHdata) //this will not output on browser but in terminal
+    return{
+        props: {BLEHdata}
+    }
+}
+```

@@ -314,7 +314,11 @@
         </li>
     
         <li>
-            <a href="./posts/2021-08-10-CSS.html" data-tags="prog, cloud, frontend">CSS</a> 
+            <a href="./posts/2021-08-10-CSSFlexbox.html" data-tags="prog, cloud, frontend, js">CSS Flexbox Grid</a> 
+        </li>
+    
+        <li>
+            <a href="./posts/2021-08-10-CSS.html" data-tags="prog, cloud, frontend, js">CSS</a> 
         </li>
     
         <li>
@@ -346,7 +350,7 @@
         </li>
     
         <li>
-            <a href="./posts/2021-05-25-TypeTheoryInterpreter.html" data-tags="musings">Interpreter</a> 
+            <a href="./posts/2021-05-25-TypeTheoryInterpreter.html" data-tags="musings">Haskell prog lang</a> 
         </li>
     
         <li>
@@ -494,7 +498,7 @@
         </li>
     
         <li>
-            <a href="./posts/2021-03-20-QuickNext.html" data-tags="prog, QuickCode, cloud, frontend">Quick Next</a> 
+            <a href="./posts/2021-03-20-QuickNext.html" data-tags="prog, QuickCode, cloud, frontend">Quick Nextjs</a> 
         </li>
     
         <li>
@@ -511,6 +515,10 @@
     
         <li>
             <a href="./posts/2021-02-20-QuickSQL1.html" data-tags="prog, QuickCode">Quick SQL 1</a> 
+        </li>
+    
+        <li>
+            <a href="./posts/2021-02-20-QuickRust.html" data-tags="prog, QuickCode">Quick Rust</a> 
         </li>
     
         <li>
@@ -734,6 +742,10 @@
         </li>
     
         <li>
+            <a href="./posts/2019-03-07-Math51.html" data-tags="mathcs, puremath, categorytheory">Math51 notes</a> 
+        </li>
+    
+        <li>
             <a href="./posts/2019-03-07-InnerProduct.html" data-tags="mathcs, puremath, categorytheory">Inner Product and Norms</a> 
         </li>
     
@@ -758,6 +770,14 @@
         </li>
     
         <li>
+            <a href="./posts/2018-07-15-TeachingSets.html" data-tags="musings, mathcs">Language, Teaching and Set theory</a> 
+        </li>
+    
+        <li>
+            <a href="./posts/2018-07-15-SQS.html" data-tags="QuickCode, cloud">Quick AWS SQS</a> 
+        </li>
+    
+        <li>
             <a href="./posts/2018-07-15-QuickTerraForm.html" data-tags="QuickCode, cloud, DevOps">Quick TerraForm</a> 
         </li>
     
@@ -767,10 +787,6 @@
     
         <li>
             <a href="./posts/2018-07-15-QuickAWS.html" data-tags="QuickCode, cloud">Quick AWS</a> 
-        </li>
-    
-        <li>
-            <a href="./posts/2018-07-15-TeachingSets.html" data-tags="musings, mathcs">Language, Teaching and Set theory</a> 
         </li>
     
         <li>
@@ -851,6 +867,10 @@
     
         <li>
             <a href="./posts/2018-01-05-RandTips.html" data-tags="musings, env">Random Shortcuts</a> 
+        </li>
+    
+        <li>
+            <a href="./posts/2018-01-05-Politics.html" data-tags="musings, env">Economic Report</a> 
         </li>
     
         <li>
@@ -1018,7 +1038,19 @@
         </li>
     
         <li>
+            <a href="./posts/2015-07-22-PenrosePhysics.html" data-tags="mathcs, physics, appliedmath">Penrose Physics notes</a> 
+        </li>
+    
+        <li>
+            <a href="./posts/2015-07-22-LawsMotion.html" data-tags="mathcs, physics, appliedmath">Derive kinematics + motion w/ calculus</a> 
+        </li>
+    
+        <li>
             <a href="./posts/2015-07-22-FeynmanPhysics.html" data-tags="mathcs, physics, appliedmath">Feynman Physics notes</a> 
+        </li>
+    
+        <li>
+            <a href="./posts/2015-07-22-Circuits.html" data-tags="mathcs, physics, appliedmath">Circuits</a> 
         </li>
     
         <li>
@@ -1091,6 +1123,10 @@
     
         <li>
             <a href="./posts/2015-07-15-RecursionImagine.html" data-tags="mathcs, appliedmath, AI, stats">Recursion Scenarios</a> 
+        </li>
+    
+        <li>
+            <a href="./posts/2015-07-15-Z3.html" data-tags="mathcs, appliedmath, AI, stats">Z3</a> 
         </li>
     
         <li>
@@ -1201,7 +1237,12 @@
 <script async defer>
   const searchbox = document.querySelector("input.stork-input");
   searchbox.addEventListener("click",()=>{
-    stork.register("foo", window.location.origin + "/storksearch.st");
+    searchbox.disabled=true;
+    searchbox.placeholder="Loading Search Index...";
+    stork.register("foo", window.location.origin + "/storksearch.st").then(()=>{
+      searchbox.disabled=false;
+      searchbox.placeholder="Search Index Loaded, Type Here";
+      });
     
   },{once: true})
 

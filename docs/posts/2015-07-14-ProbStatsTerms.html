@@ -123,10 +123,16 @@
 <li><a href="#what-is-a-measure"><span class="toc-section-number">2</span> What is a measure</a></li>
 <li><a href="#terms"><span class="toc-section-number">3</span> Terms</a>
 <ul>
-<li><a href="#z-test-t-test-anova"><span class="toc-section-number">3.1</span> Z-test T-test ANOVA</a></li>
+<li><a href="#notation"><span class="toc-section-number">3.1</span> Notation</a></li>
+<li><a href="#z-test-t-test-anova"><span class="toc-section-number">3.2</span> Z-test T-test ANOVA</a></li>
 </ul></li>
-<li><a href="#clt"><span class="toc-section-number">4</span> CLT</a></li>
-<li><a href="#distributions"><span class="toc-section-number">5</span> Distributions</a></li>
+<li><a href="#p-value"><span class="toc-section-number">4</span> P-value</a>
+<ul>
+<li><a href="#example-p-value-of-fair-coin"><span class="toc-section-number">4.1</span> Example p-value of fair coin</a></li>
+</ul></li>
+<li><a href="#z-score"><span class="toc-section-number">5</span> z-score</a></li>
+<li><a href="#clt"><span class="toc-section-number">6</span> CLT</a></li>
+<li><a href="#distributions"><span class="toc-section-number">7</span> Distributions</a></li>
 </ul></div>
 <p><a href="http://www.acsu.buffalo.edu/~adamcunn/probability/probability.html">Probability playground</a></p>
 <section id="intro" class="level1" data-number="1">
@@ -202,12 +208,19 @@ A trivial largest σ-algebra is <span class="math inline">\(\mathcal{A} = P(X)\)
 <p>Stats</p>
 <ul>
 <li>Population is reality</li>
-<li>Sample is a subset of population</li>
+<li>Sample is a subset of some population,</li>
+</ul>
+<p><strong>Statistical Test</strong> is all about asking do these 2 samples come from the same population?</p>
+<ul>
 <li>Statistics always use sample to estimate or model population.
 <ul>
 <li>Aka use Subset of Population to estimate population.</li>
 </ul></li>
-<li><span class="math inline">\(X~N(0,1)\)</span> means random variable <span class="math inline">\(X\)</span> has the normal distribution of mean 0 and variance of 1
+</ul>
+<section id="notation" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Notation</h2>
+<ul>
+<li>X~N(0,1) means random variable <span class="math inline">\(X\)</span> has the normal distribution of mean 0 and variance of 1
 <ul>
 <li><span class="math inline">\(X\)</span> is a random variable means we choose a subset aka sample <span class="math inline">\(X\)</span> from a population.
 <ul>
@@ -242,8 +255,9 @@ A trivial largest σ-algebra is <span class="math inline">\(\mathcal{A} = P(X)\)
 <li>σ sigma is std (z-score = sigma)</li>
 <li><span class="math inline">\(\sigma^2\)</span> sigma squared is variance</li>
 </ul>
-<section id="z-test-t-test-anova" class="level2" data-number="3.1">
-<h2 data-number="3.1"><span class="header-section-number">3.1</span> Z-test T-test ANOVA</h2>
+</section>
+<section id="z-test-t-test-anova" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Z-test T-test ANOVA</h2>
 <ul>
 <li>z-test is closest to normal dist.<br />
 </li>
@@ -268,15 +282,56 @@ A trivial largest σ-algebra is <span class="math inline">\(\mathcal{A} = P(X)\)
 Note these Subsets can come from the same or different populations.</p>
 </section>
 </section>
-<section id="clt" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> CLT</h1>
+<section id="p-value" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> P-value</h1>
+<section id="example-p-value-of-fair-coin" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Example p-value of fair coin</h2>
+<p>p-value for 2 heads: Probability of Event + Probability of Equally rare Event + Probability of More Rarer Events = Prob(HH) + Prob(TT) + 0 = 0.5</p>
+<p>Notice even though Probability of 2 heads is only Prob(HH)=0.25, the p-value is 0.5</p>
+<p>p-value is almost like inverse Shannon entropy. High p-value means not surprising something is “fair” or Equal(Null hypothesis).</p>
+</section>
+</section>
+<section id="z-score" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> z-score</h1>
+<p>z-score is used when you can normalize your dataset to a 0 mean and 1 std</p>
+<div data-group="p1" data-glabel="two tailed">
+<div class="sourceCode" id="cb1"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>     ____</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   /      \ </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> /+|      |+\</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>/++|      |++\</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  -1  0   1     z-score  </span></code></pre></div>
+<p><span class="math display">\[P(X \lt -1)+P (X \gt 1) = \text{zscore of 1}\]</span></p>
+<p>p-value = 0.3173 aka 31.73% probability or area under the z-distribution curve</p>
+<p>Notice how the inverse 1-0.3173 = 0.6827 is around 68% which aligns with the 68-95-99.7 rule</p>
+</div>
+<div data-group="p1" data-glabel="one tailed(-1) ">
+<div class="sourceCode" id="cb2"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>     ____</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>   /      \ </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> /+|        \</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>/++|         \</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  -1  0   1     z-score</span></code></pre></div>
+<p><span class="math display">\[P(X \lt -1) = \text{zscore of -1 one-tailed}\]</span></p>
+<p>p-value = 0.1586 aka 15.86% probability or area under the z-distribution curve</p>
+</div>
+<div data-group="p1" data-glabel="one tailed(1)">
+<div class="sourceCode" id="cb3"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>     ____</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>   /++++++\ </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> /++++++++| \</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>/+++++++++|  \</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  -1  0   1     z-score</span></code></pre></div>
+<p><span class="math display">\[P(X \gt 1) = \text{zscore of 1 one-tailed}\]</span></p>
+<p>p-value = 0.8413 which is 84.13% probability or 84.13% under the z-distribution curve</p>
+</div>
+</section>
+<section id="clt" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> CLT</h1>
 <ul>
 <li>no matter what type of distribution the population distribution is, if we sample enough times, the sample distribution AKA the means of all our samplings form a normal distribution.</li>
 <li>The sum of multiple independent random variable converges to a normal dist as the # of variables increases.</li>
 </ul>
 </section>
-<section id="distributions" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Distributions</h1>
+<section id="distributions" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Distributions</h1>
 <ul>
 <li>Bernoulli = LEM in probability
 <ul>

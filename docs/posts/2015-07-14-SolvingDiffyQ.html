@@ -186,27 +186,10 @@ Solve for set of equations that satisfy Differential equation:</p>
 <p><span class="math display">\[\left\{\left\{y(t)\to c_1 e^{-k t}\right\}\right\}\]</span></p>
 <p><span class="math display">\[y(0)=k\]</span></p>
 <hr />
-</section>
-</section>
-<section id="newtons-second-law" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Newton’s Second Law</h1>
-<p>Solving the differential equation F=ma<br />
-Solving for 1) distance function and 2) velocity function, each wrt time</p>
-<ol type="1">
-<li></li>
-</ol>
-<p><span class="math display">\[m \frac{ds^2}{d^2t} = f\]</span></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DSolve</span><span class="op">[</span><span class="fu">m</span><span class="sc">*</span>s''<span class="op">[</span><span class="fu">t</span><span class="op">]</span> <span class="ex">==</span> <span class="fu">f</span><span class="op">,</span> <span class="fu">s</span><span class="op">[</span><span class="fu">t</span><span class="op">],</span> <span class="fu">t</span><span class="op">]</span> <span class="sc">//</span> <span class="fu">TeXForm</span></span></code></pre></div>
-<p><span class="math display">\[\left\{\left\{s(t)\to \frac{f}{m}\frac{1}{2}t^2+c_2 t+c_1\right\}\right\}\]</span> looks familiar <span class="math inline">\(s = \frac{1}{2} at^2 + v_0t\)</span></p>
-<ol start="2" type="1">
-<li></li>
-</ol>
-<p><span class="math display">\[m \frac{dv}{dt} = f\]</span></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DSolve</span><span class="op">[</span><span class="fu">m</span><span class="sc">*</span>v'<span class="op">[</span><span class="fu">t</span><span class="op">]</span> <span class="ex">==</span> <span class="fu">f</span><span class="op">,</span> <span class="fu">v</span><span class="op">[</span><span class="fu">t</span><span class="op">],</span> <span class="fu">t</span><span class="op">]</span> <span class="sc">//</span> <span class="fu">TeXForm</span></span></code></pre></div>
-<p><span class="math display">\[\left\{\left\{v(t)\to \frac{f t}{m}+c_1\right\}\right\}\]</span> looks familiar <span class="math inline">\(v_n=at+v_0\)</span></p>
 <hr />
-<section id="uniqueness-and-existence-problems" class="level5" data-number="1.0.0.0.1">
-<h5 data-number="1.0.0.0.1"><span class="header-section-number">1.0.0.0.1</span> Uniqueness and Existence Problems</h5>
+</section>
+<section id="uniqueness-and-existence-problems" class="level5" data-number="0.0.2.0.2">
+<h5 data-number="0.0.2.0.2"><span class="header-section-number">0.0.2.0.2</span> Uniqueness and Existence Problems</h5>
 <p>Theorem:<br />
 Given f(x,y) continous</p>
 </section>
