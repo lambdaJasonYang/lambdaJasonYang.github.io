@@ -3,7 +3,9 @@ title: Functional equations and why we need to verify solutions
 tags: mathcs, mathbasics
 ---
 
-# Substitution
+# Basics
+
+## Substitution
 
 * $f(x) = 2x$
 * $f(2) = 4$
@@ -15,7 +17,7 @@ One way to look at it is we really substituted function $g(y)$ for $x$.
 function $g(y)$ maps all numbers to 2. Graphically this is a just a horizontal line on 2.   
 We can tell substitutions aka $g$ function is not injective.  
 
-# Why do we need to verify solutions?
+## Why do we need to verify solutions?
 
 Keypoint: Some equation simplifications are **non-invertible**
 
@@ -29,7 +31,7 @@ Keypoint: Some equation simplifications are **non-invertible**
 
 
 
-# Functional identities
+## Functional identities
 
 Imagine if we had a functional identity
 $$ \forall a: \forall f : f(a) = 1 $$
@@ -63,4 +65,6 @@ Plug back our conclusion back into original functional identity for verification
 Notice $Log(1) = 0$
 
 $f(1) = 0$ is true for any function f that satisfies the identity $f(x \cdot y) = f(x) + f(y)$
+
+# Problem Set
 

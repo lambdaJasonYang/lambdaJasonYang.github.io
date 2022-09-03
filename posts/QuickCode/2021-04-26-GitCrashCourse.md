@@ -19,6 +19,15 @@ git config --global user.email "example@example.com"
 git config --global user.name "example"
 ```
 
+## github remote credential
+
+If you omit the `userJY:PACTOKEN` part you will get an error `remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/userJY/logicalverification2021.git/'`
+
+```bash
+git remote add origin https://userJY:PACTOKEN@github.com/userJY/blehrepo.git
+```
+
 ### Saving remote github Credential on local repo
 ```bash
 git config credential.helper store
@@ -40,38 +49,14 @@ remote: Permission to somebdy/bleh.git denied to someGuy.
 fatal: unable to access 'https://github.com/somebdy/bleh.git/': The requested URL returned error: 403
 ```
 
-This happens when 
 
 
----
-# Remote
-
-## Preconfig Remote Github repo variable
-configure remote variable we name "origin"  
-or remove to reuse variable
-``` bash
-git remote remove origin
-git remote add origin https://github.com/UserJY/bleh.git
-```
-the -u flag adds the remote commit to your local git tree.
-
-## Create a new repo locally and push create github repo
-
-```bash
-git init
-git remote add origin https://github.com/userJY/testrepo.git
-git add .
-git commit -m 'update'
-git push -u origin main:main
-
----
-
-### On git push and pull
+## On git push and pull
 
 `git push -u origin <SrcLocalBranch>:<TargetRemoteBranch>`{.bash}  
 `git pull origin <SrcRemoteBranch>:<TargetLocalBranch>`{.bash}
 
-### The process
+# The process
 
 ``` bash
 git add .
@@ -118,7 +103,7 @@ HEAD(layer 1) points to branch alias(layer 2) which points to
 commit ref(layer 3).  
 Aliases(layer 2) always points to the local head(layer 1).  
 
-### Creating new Aliases = Creating new branches
+## Creating new Aliases = Creating new branches
 
 Old commits(layer 1) aka non-local-head commits do not have aliases(layer 2) pointing to them but if you do make an alias, they will become a local-head(layer 1) by branching.
 

@@ -124,6 +124,10 @@
 <li><a href="#linear-map"><span class="toc-section-number">1</span> Linear Map</a></li>
 <li><a href="#storytime"><span class="toc-section-number">2</span> StoryTime</a></li>
 <li><a href="#spectral-theorem"><span class="toc-section-number">3</span> Spectral Theorem</a></li>
+<li><a href="#by-2-matrix"><span class="toc-section-number">4</span> 2 by 2 matrix</a>
+<ul>
+<li><a href="#positive-definite-matrices"><span class="toc-section-number">4.1</span> Positive definite matrices</a></li>
+</ul></li>
 </ul></div>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6672616d6520224162656c69616e2047726f7570227b0a202020206672616d652047726f75707b0a20202020202020206672616d65204d6f6e6f6964207b0a2020202020202020202020206672616d652053656d6967726f7570207b0a2020202020202020202020206f626a6563742022536574204d22206173205365740a2020202020202020202020206f626a656374202242696e617279204f7065726174696f6e222061732042696e0a2020202020202020202020207d0a2020202020202020202020206f626a65637420226964656e7469747920656c656d656e7422206173204f6e650a2020202020202020202020204f6e65202d2d3e205365740a20202020202020207d0a20202020202020206f626a6563742022696e766572736520656c656d656e74732220617320496e760a2020202020202020496e76202d2d3e205365740a202020207d0a202020206f626a6563742022436f6d6d756e617469746976652220617320436f6d6d0a20202020436f6d6d202d2d3e2042696e0a7d0a0a40656e64756d6c6d6c"></figure>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print vector_space</span></span>
@@ -226,6 +230,20 @@ is given back through the 1 “red mix anti-yellow car” in the null space</p>
 <li>Eigenvectors are orthogonal</li>
 </ul></li>
 </ul>
+</section>
+<section id="by-2-matrix" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 2 by 2 matrix</h1>
+<section id="positive-definite-matrices" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Positive definite matrices</h2>
+<p>Given a symmetric 2 by 2 matrix, four ways to tell if positive definite:</p>
+<ol type="1">
+<li>Eigenvalue test: <span class="math inline">\(\lambda_1 \gt 0, \lambda_2 \gt 0\)</span></li>
+<li>Determinants test: <span class="math inline">\(a \gt 0, ac - b^2 \gt 0\)</span></li>
+<li>Pivot test: <span class="math inline">\(a \gt 0, \frac{ac-b^2}{a} \gt 0\)</span></li>
+<li><span class="math inline">\(x^TAx\)</span> is positive definite except when <span class="math inline">\(x=0\)</span> (the actual definition of positive definite)</li>
+</ol>
+<p>Note that <span class="math inline">\(x^TAx\)</span> results in an eqn like <span class="math inline">\(2x_1^2+12x_1x_2+18x_2^2\)</span> and if this eqn is postive for all real <span class="math inline">\(x_1, x_2\)</span> then the matrix <span class="math inline">\(A\)</span> is postive definite.</p>
+</section>
 </section>
 
         </div>

@@ -1,5 +1,5 @@
 ---
-title: Quick Go mod
+title: Quick Golang 0
 tags: prog, QuickCode
 toc: y
 ---

@@ -5,14 +5,13 @@ tags: prog
 
 
 
-Goal:  
+Summary:  
 
 * create frigate config file `~/.config/frigate/frigate.yml`
-  * configure where MQTT server is
-  * configure RTSP of camera is
-  * most configuration for frigate done here
+  * configure addr of MQTT server
+  * configure addr of RTSP camera
 * create frigate Video folder 
-  * Where to store recording
+  * This is location of recordings
 * create a MQTT config file
 * create a docker compose for both frigate and MQTT
   * cd to this folder to startup frigate

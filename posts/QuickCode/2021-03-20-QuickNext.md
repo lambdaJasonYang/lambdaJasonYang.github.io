@@ -262,25 +262,45 @@ Errors:
 
 ```{.js filename=next.config.js}
 /** @type {import('next').NextConfig} */
-const isProd = false
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  assetPrefix: isProd ? 'https://cdn.productionsite.com' : '/test1/out',
-  basePath: isProd ? 'https://cdn.productionsite.com' : '/test1/out',
-  experimental: {
-    images: {
-      unoptimized: true,
-    },
-  },  
-}
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 
-module.exports = nextConfig
+module.exports = (phase, { defaultConfig }) => {
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    return {
+      /* development only config options here */
+      reactStrictMode: true,
+      assetPrefix: "",
+      basePath: "",
+      experimental: {
+        images: {
+          unoptimized: true,
+        },
+      }
+    }
+  }
+  return {
+    /* config options for all phases except development here */
+    reactStrictMode: true,
+    assetPrefix: "/out", //static assets are in the /out folder
+    basePath: "/out",
+    experimental: {
+      images: {
+        unoptimized: true,
+      },
+    }
+  }
+}
 ```
 
-* Cool thing about nextjs is that it generates html when possible unlike react where html is just the entry-point for js.  
-* Dynamic routes don't really work. 
-  * We require `getStaticPaths()` to pregenerate the route.
+## Images
+
+Also note that referring to images in *.jsx must be `/vercel.svg`, NOT `./vercel.svg` or `vercel.svg`.  
+Example: ` <Image src={"/vercel.svg"} width={50} height={50}></Image>`
+
+## Dynamic Routes DONT work in SSG
+
+* Dynamic routes don't really work but the build still runs 
+  * `getStaticPaths()` is used to pregenerate the routes which defeats the whole purpose of "Dynamic" routes.
 
 
 ```{.js filename=pages/[car].js}

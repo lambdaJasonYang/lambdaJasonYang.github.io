@@ -5,6 +5,8 @@ tags: mathcs, puremath, recursion
 
 https://jupyter.brynmawr.edu/services/public/dblank
 
+[Stanford algorithmic toolbox](https://web.stanford.edu/class/cs168/)
+
 https://www.sciencedirect.com/book/9781785481734/fundamentals-of-advanced-mathematics
 
 [laplace visual graph](https://lpsa.swarthmore.edu/E12Syll.html)

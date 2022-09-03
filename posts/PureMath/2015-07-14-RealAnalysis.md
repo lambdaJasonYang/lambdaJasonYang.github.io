@@ -98,3 +98,38 @@ Mapping metric spaces of knowledge AKA analogies
 * A sequence is **bounded** if exist some number that bounds the sequence
 * Convergent sequences implies bounded sequences but not otherway around
   * A bounded sequence can rapidly oscillate meaning it is nonconvergent
+
+
+
+# Riemann vs Lesbesgue integral
+
+## Riemann
+
+* Area under the curve by summing infinitely small deltas.
+
+Problems:
+
+* Cannot expand to higher dimensions
+* Dependent on continuity
+
+$$lim_{n \to \infty} \int^{b}_{a} f_n(x)dx \overset{?}{=} \int^{b}_{a} lim_{n \to \infty} f_n(x)dx$$
+
+The above equality is contingent on uniform converge of the function f, for Riemann integrals BUT  
+we know empirically that the equality is true for far weaker constraints.  
+
+## Lesbesgue
+
+* Instead of delta on x-axis, we choose deltas on y-axis. 
+  * visually Horizontal slices or rectangles
+* Since we choose delta on y-axis we multiply it by the preImage.
+
+
+```bash
+            Vector Space
+                 |
+           Normed Space
+            /         \
+Inner Product Space   Banach Space
+            \         /               
+          Hilbert Space
+```

@@ -2,6 +2,10 @@
 
 files = [
 
+{path = "posts/Misc/2022-08-15-Ender3Pro.md", url = "/posts/2022-08-15-Ender3Pro.html", title = "Ender 3 Pro 3d printing setup"},
+
+{path = "posts/Misc/2022-04-09-SetupCoq.md", url = "/posts/2022-04-09-SetupCoq.html", title = "Coq Setup"},
+
 {path = "posts/Misc/2022-04-09-FrigateNVR.md", url = "/posts/2022-04-09-FrigateNVR.html", title = "Setup Frigate NVR"},
 
 {path = "posts/2022-04-09-WebGL.md", url = "/posts/2022-04-09-WebGL.html", title = "WebGL"},
@@ -18,13 +22,29 @@ files = [
 
 {path = "posts/Lean/2021-11-12-LeanRepo.md", url = "/posts/2021-11-12-LeanRepo.html", title = "Navigate Lean Repo"},
 
+{path = "posts/Lean/2021-11-12-LeanMathlib.md", url = "/posts/2021-11-12-LeanMathlib.html", title = "Lean Mathlib"},
+
 {path = "posts/TypeTheory/2021-11-11-Lambdas.md", url = "/posts/2021-11-11-Lambdas.html", title = "Lambdas abstractions Types, Term building"},
+
+{path = "posts/Lean/2021-11-11-leanmakefile.md", url = "/posts/2021-11-11-leanmakefile.html", title = "lean makefile"},
 
 {path = "posts/Lean/2021-11-11-VeryLongLean.md", url = "/posts/2021-11-11-VeryLongLean.html", title = "Very Long Lean"},
 
+{path = "posts/Lean/2021-11-11-TAPLUntypedArith.md", url = "/posts/2021-11-11-TAPLUntypedArith.html", title = "TAPL Untyped Arith"},
+
+{path = "posts/Lean/2021-11-11-LogicalFoundationNotes.md", url = "/posts/2021-11-11-LogicalFoundationNotes.html", title = "Logical Foundations notes"},
+
+{path = "posts/Lean/2021-11-11-LeanType.md", url = "/posts/2021-11-11-LeanType.html", title = "Lean Simple Prog Lang implementation"},
+
+{path = "posts/Lean/2021-11-11-LeanProver.md", url = "/posts/2021-11-11-LeanProver.html", title = "Lean"},
+
 {path = "posts/Lean/2021-11-11-LeanAgain.md", url = "/posts/2021-11-11-LeanAgain.html", title = "Very Long Lean - Dependent Type"},
 
-{path = "posts/2021-11-11-Visx.md", url = "/posts/2021-11-11-Visx.html", title = "Visx"},
+{path = "posts/Lean/2021-11-11-IntroLean3.md", url = "/posts/2021-11-11-IntroLean3.html", title = "Intro Lean 3"},
+
+{path = "posts/Lean/2021-11-11-IntroLean2.md", url = "/posts/2021-11-11-IntroLean2.html", title = "Intro Lean 2"},
+
+{path = "posts/Lean/2021-11-11-IntroLean.md", url = "/posts/2021-11-11-IntroLean.html", title = "Intro Lean"},
 
 {path = "posts/2021-11-11-HaskellTips.md", url = "/posts/2021-11-11-HaskellTips.html", title = "Lessons from Haskell"},
 
@@ -80,8 +100,6 @@ files = [
 
 {path = "posts/Statistics/2021-08-10-SampleData.md", url = "/posts/2021-08-10-SampleData.html", title = "Import or Generate Sample Data"},
 
-{path = "posts/Scripting/2021-08-10-RemoteSoundToPhone.md", url = "/posts/2021-08-10-RemoteSoundToPhone.html", title = "Remote Desktop Audio to phone"},
-
 {path = "posts/QuickCode/2021-08-10-ServiceWorker.md", url = "/posts/2021-08-10-ServiceWorker.html", title = "Service Worker and Web Workers"},
 
 {path = "posts/QuickCode/2021-08-10-SVG.md", url = "/posts/2021-08-10-SVG.html", title = "SVG"},
@@ -90,7 +108,7 @@ files = [
 
 {path = "posts/QuickCode/2021-08-10-PromisesGraphQL.md", url = "/posts/2021-08-10-PromisesGraphQL.html", title = "Promises Callback GraphQL and fetch"},
 
-{path = "posts/QuickCode/2021-08-10-Callcc.md", url = "/posts/2021-08-10-Callcc.html", title = "Callcc"},
+{path = "posts/QuickCode/2021-08-10-Callcc.md", url = "/posts/2021-08-10-Callcc.html", title = "Visualize Callcc"},
 
 {path = "posts/QuickCode/2021-08-10-CSSFlexbox.md", url = "/posts/2021-08-10-CSSFlexbox.html", title = "CSS Flexbox Grid"},
 
@@ -99,6 +117,8 @@ files = [
 {path = "posts/Misc/2021-08-10-WhyHakyll.md", url = "/posts/2021-08-10-WhyHakyll.html", title = "Why Hakyll"},
 
 {path = "posts/Economics/2021-08-10-FinTimeData.md", url = "/posts/2021-08-10-FinTimeData.html", title = "Loading and Plotting Financial Data"},
+
+{path = "posts/CyberSec/2021-08-10-RemoteSoundToPhone.md", url = "/posts/2021-08-10-RemoteSoundToPhone.html", title = "Remote Desktop Audio to phone"},
 
 {path = "posts/Algorithms/2021-08-10-IO.md", url = "/posts/2021-08-10-IO.html", title = "Competitive file IO"},
 
@@ -112,7 +132,7 @@ files = [
 
 {path = "posts/TypeTheory/2021-05-25-TypeTheoryInterpreter.md", url = "/posts/2021-05-25-TypeTheoryInterpreter.html", title = "Haskell prog lang"},
 
-{path = "posts/Scripting/2021-05-24-SFTPtransfer.md", url = "/posts/2021-05-24-SFTPtransfer.html", title = "Transfer files SFTP"},
+{path = "posts/CyberSec/2021-05-24-SFTPtransfer.md", url = "/posts/2021-05-24-SFTPtransfer.html", title = "Transfer files SFTP"},
 
 {path = "posts/Misc/2021-05-23-MusicTheory.md", url = "/posts/2021-05-23-MusicTheory.html", title = "Music Theory"},
 
@@ -160,6 +180,8 @@ files = [
 
 {path = "posts/QuickCode/2021-03-23-BlockChain.md", url = "/posts/2021-03-23-BlockChain.html", title = "Blockchain"},
 
+{path = "posts/MachineLearning/2021-03-23-QuickPyTorch1.md", url = "/posts/2021-03-23-QuickPyTorch1.html", title = "Quick Pytorch template 1"},
+
 {path = "posts/MachineLearning/2021-03-23-QuickPyTorch.md", url = "/posts/2021-03-23-QuickPyTorch.html", title = "Quick Pytorch"},
 
 {path = "posts/MachineLearning/2021-03-23-PyTorch.md", url = "/posts/2021-03-23-PyTorch.html", title = "EBM deep learning with Pytorch"},
@@ -180,8 +202,6 @@ files = [
 
 {path = "posts/MachineLearning/2021-03-23-CNN.md", url = "/posts/2021-03-23-CNN.html", title = "CNN"},
 
-{path = "posts/MachineLearning/2021-03-23-AutoGrad.md", url = "/posts/2021-03-23-AutoGrad.html", title = "Autograd Pytorch"},
-
 {path = "posts/QuickCode/2021-03-20-QuickRedux.md", url = "/posts/2021-03-20-QuickRedux.html", title = "Quick Redux"},
 
 {path = "posts/QuickCode/2021-03-20-QuickNext.md", url = "/posts/2021-03-20-QuickNext.html", title = "Quick Nextjs"},
@@ -193,6 +213,8 @@ files = [
 {path = "posts/QuickCode/2021-02-20-QuickSQL2.md", url = "/posts/2021-02-20-QuickSQL2.html", title = "Quick SQL 2"},
 
 {path = "posts/QuickCode/2021-02-20-QuickSQL1.md", url = "/posts/2021-02-20-QuickSQL1.html", title = "Quick SQL 1"},
+
+{path = "posts/QuickCode/2021-02-20-QuickSQL0.md", url = "/posts/2021-02-20-QuickSQL0.html", title = "Quick Postgres SQL Setup"},
 
 {path = "posts/QuickCode/2021-02-20-QuickRust.md", url = "/posts/2021-02-20-QuickRust.html", title = "Quick Rust"},
 
@@ -218,9 +240,9 @@ files = [
 
 {path = "posts/QuickCode/2021-02-20-QuickJavaSpring.md", url = "/posts/2021-02-20-QuickJavaSpring.html", title = "Quick Springboot"},
 
-{path = "posts/QuickCode/2021-02-20-QuickGoPre.md", url = "/posts/2021-02-20-QuickGoPre.html", title = "Quick Go mod"},
+{path = "posts/QuickCode/2021-02-20-QuickGoPre.md", url = "/posts/2021-02-20-QuickGoPre.html", title = "Quick Golang 0"},
 
-{path = "posts/QuickCode/2021-02-20-QuickGo.md", url = "/posts/2021-02-20-QuickGo.html", title = "Quick Go"},
+{path = "posts/QuickCode/2021-02-20-QuickGo.md", url = "/posts/2021-02-20-QuickGo.html", title = "Quick Golang 1"},
 
 {path = "posts/QuickCode/2021-02-20-QuickASP.md", url = "/posts/2021-02-20-QuickASP.html", title = "Quick ASP"},
 
@@ -260,23 +282,11 @@ files = [
 
 {path = "posts/QuickCode/2020-04-05-TLA.md", url = "/posts/2020-04-05-TLA.html", title = "TLA"},
 
-{path = "posts/Lean/2020-04-05-TAPLUntypedArith.md", url = "/posts/2020-04-05-TAPLUntypedArith.html", title = "TAPL Untyped Arith"},
-
 {path = "posts/TypeTheory/2020-01-27-HomSet.md", url = "/posts/2020-01-27-HomSet.html", title = "HomSet"},
 
-{path = "posts/Lean/2020-01-27-LeanType.md", url = "/posts/2020-01-27-LeanType.html", title = "Lean Simple Prog Lang implementation"},
+{path = "posts/CyberSec/2020-01-23-SettingUpHyperV.md", url = "/posts/2020-01-23-SettingUpHyperV.html", title = "HyperV on a home server"},
 
-{path = "posts/Lean/2020-01-27-LeanProver.md", url = "/posts/2020-01-27-LeanProver.html", title = "Lean"},
-
-{path = "posts/Lean/2020-01-27-IntroLean3.md", url = "/posts/2020-01-27-IntroLean3.html", title = "Intro Lean 3"},
-
-{path = "posts/Lean/2020-01-27-IntroLean2.md", url = "/posts/2020-01-27-IntroLean2.html", title = "Intro Lean 2"},
-
-{path = "posts/Lean/2020-01-27-IntroLean.md", url = "/posts/2020-01-27-IntroLean.html", title = "Intro Lean"},
-
-{path = "posts/Scripting/2020-01-23-SettingUpHyperV.md", url = "/posts/2020-01-23-SettingUpHyperV.html", title = "HyperV on a home server"},
-
-{path = "posts/Scripting/2020-01-23-HyperVExpand.md", url = "/posts/2020-01-23-HyperVExpand.html", title = "HyperV Expand win 10 VM virtual hard drive space"},
+{path = "posts/CyberSec/2020-01-23-HyperVExpand.md", url = "/posts/2020-01-23-HyperVExpand.html", title = "HyperV Expand win 10 VM virtual hard drive space"},
 
 {path = "posts/QuickCode/2019-09-01-NQueen.md", url = "/posts/2019-09-01-NQueen.html", title = "NQueen in Haskell"},
 
@@ -344,7 +354,7 @@ files = [
 
 {path = "posts/QuickCode/2018-06-23-JSClosure.md", url = "/posts/2018-06-23-JSClosure.html", title = "Closures in JS, Python"},
 
-{path = "posts/Physics/2018-05-28-DiffyQ.md", url = "/posts/2018-05-28-DiffyQ.html", title = "Quick Summary Differential Equations"},
+{path = "posts/Physics/2018-05-28-DiffyQ.md", url = "/posts/2018-05-28-DiffyQ.html", title = "Calculus"},
 
 {path = "posts/Physics/2018-05-25-DiffyQ1.md", url = "/posts/2018-05-25-DiffyQ1.html", title = "Finding Steady States"},
 
@@ -364,8 +374,6 @@ files = [
 
 {path = "posts/QuickCode/2018-03-24-QuickC.md", url = "/posts/2018-03-24-QuickC.html", title = "Quick C"},
 
-{path = "posts/Lean/2018-03-24-leanmakefile.md", url = "/posts/2018-03-24-leanmakefile.html", title = "lean makefile"},
-
 {path = "posts/Economics/2018-03-24-Stochastic.md", url = "/posts/2018-03-24-Stochastic.html", title = "Stochastic calculus and brownian motion"},
 
 {path = "posts/Misc/2018-01-05-RandTips.md", url = "/posts/2018-01-05-RandTips.html", title = "Random Shortcuts"},
@@ -382,13 +390,13 @@ files = [
 
 {path = "posts/Softdev/2017-07-15-Debug.md", url = "/posts/2017-07-15-Debug.html", title = "Debug"},
 
-{path = "posts/Scripting/2017-07-15-pyFTP.md", url = "/posts/2017-07-15-pyFTP.html", title = "python FTP SMTP POP3 IMAP DNS"},
-
 {path = "posts/QuickCode/2017-07-15-SpringPatterns.md", url = "/posts/2017-07-15-SpringPatterns.html", title = "Design Patterns"},
 
 {path = "posts/QuickCode/2017-07-15-CPython.md", url = "/posts/2017-07-15-CPython.html", title = "Everything is a pointer perspective"},
 
 {path = "posts/Economics/2017-07-15-thinkScript.md", url = "/posts/2017-07-15-thinkScript.html", title = "Thinkscript"},
+
+{path = "posts/CyberSec/2017-07-15-pyFTP.md", url = "/posts/2017-07-15-pyFTP.html", title = "python FTP SMTP POP3 IMAP DNS"},
 
 {path = "posts/Concurrency/2017-07-15-PythonConcurrency.md", url = "/posts/2017-07-15-PythonConcurrency.html", title = "Python Concurrency"},
 
@@ -404,16 +412,6 @@ files = [
 
 {path = "posts/Softdev/2015-09-17-DistributedSystem.md", url = "/posts/2015-09-17-DistributedSystem.html", title = "Distributed Systems, CAP, Raft"},
 
-{path = "posts/Scripting/2015-09-17-Vi.md", url = "/posts/2015-09-17-Vi.html", title = "Vi"},
-
-{path = "posts/Scripting/2015-09-17-PenTest3.md", url = "/posts/2015-09-17-PenTest3.html", title = "Pen Testing 3 SQL, Burp"},
-
-{path = "posts/Scripting/2015-09-17-PenTest2.md", url = "/posts/2015-09-17-PenTest2.html", title = "Pen Testing 2"},
-
-{path = "posts/Scripting/2015-09-17-PenTest.md", url = "/posts/2015-09-17-PenTest.html", title = "Pen Testing"},
-
-{path = "posts/Scripting/2015-09-17-LinuxScripts.md", url = "/posts/2015-09-17-LinuxScripts.html", title = "Linux annoying setup commands"},
-
 {path = "posts/QuickCode/2015-09-17-Pointers.md", url = "/posts/2015-09-17-Pointers.html", title = "C Pointers"},
 
 {path = "posts/OperatingSys/2015-09-17-xv6.md", url = "/posts/2015-09-17-xv6.html", title = "xv6"},
@@ -424,15 +422,25 @@ files = [
 
 {path = "posts/OperatingSys/2015-09-17-CHeaders.md", url = "/posts/2015-09-17-CHeaders.html", title = "Linux and C header location"},
 
-{path = "posts/Scripting/2015-09-16-AndroidBash.md", url = "/posts/2015-09-16-AndroidBash.html", title = "Android and Bash"},
+{path = "posts/CyberSec/2015-09-17-Vi.md", url = "/posts/2015-09-17-Vi.html", title = "Vim"},
+
+{path = "posts/CyberSec/2015-09-17-PenTest3.md", url = "/posts/2015-09-17-PenTest3.html", title = "Pen Testing 3 SQL, Burp"},
+
+{path = "posts/CyberSec/2015-09-17-PenTest2.md", url = "/posts/2015-09-17-PenTest2.html", title = "Pen Testing 2"},
+
+{path = "posts/CyberSec/2015-09-17-PenTest.md", url = "/posts/2015-09-17-PenTest.html", title = "Pen Testing"},
+
+{path = "posts/CyberSec/2015-09-17-LinuxScripts.md", url = "/posts/2015-09-17-LinuxScripts.html", title = "Linux annoying setup commands"},
+
+{path = "posts/CyberSec/2015-09-17-CyberSec.md", url = "/posts/2015-09-17-CyberSec.html", title = "Misc CyberSecurity"},
+
+{path = "posts/CyberSec/2015-09-16-AndroidBash.md", url = "/posts/2015-09-16-AndroidBash.html", title = "Android and Bash"},
 
 {path = "posts/TypeTheory/2015-08-23-NatDed.md", url = "/posts/2015-08-23-NatDed.html", title = "ND"},
 
 {path = "posts/TypeTheory/2015-08-23-LinearLogic.md", url = "/posts/2015-08-23-LinearLogic.html", title = "Linear Logic"},
 
 {path = "posts/TypeTheory/2015-08-23-GentzenCut.md", url = "/posts/2015-08-23-GentzenCut.html", title = "Sequents and Gentzen Cut"},
-
-{path = "posts/Lean/2015-08-23-LogicalFoundationNotes.md", url = "/posts/2015-08-23-LogicalFoundationNotes.html", title = "Logical Foundations notes"},
 
 {path = "posts/Economics/2015-08-23-FinanceTerms.md", url = "/posts/2015-08-23-FinanceTerms.html", title = "Finance terms"},
 
@@ -450,7 +458,7 @@ files = [
 
 {path = "posts/Physics/2015-07-23-RNA.md", url = "/posts/2015-07-23-RNA.html", title = "Genetics and Bio lab techniques"},
 
-{path = "posts/TypeTheory/2015-07-22-REPL.md", url = "/posts/2015-07-22-REPL.html", title = "Read-Eval-Print"},
+{path = "posts/TypeTheory/2015-07-22-REPL.md", url = "/posts/2015-07-22-REPL.html", title = "Compilers and REPL"},
 
 {path = "posts/Softdev/2015-07-22-Agile.md", url = "/posts/2015-07-22-Agile.html", title = "Agile"},
 
@@ -524,6 +532,10 @@ files = [
 
 {path = "posts/LinearAlgebra/2015-07-14-AbstractAlg.md", url = "/posts/2015-07-14-AbstractAlg.html", title = "Abstract Algebra"},
 
+{path = "posts/BioChem/2015-07-14-BioChem.md", url = "/posts/2015-07-14-BioChem.html", title = "BioChem"},
+
+{path = "posts/BioChem/2015-07-14-AppliedBio.md", url = "/posts/2015-07-14-AppliedBio.html", title = "Applied Bio"},
+
 {path = "posts/Algorithms/2015-07-14-GraphTheory.md", url = "/posts/2015-07-14-GraphTheory.html", title = "Graph theory"},
 
 {path = "posts/TypeTheory/2015-07-01-Lattices.md", url = "/posts/2015-07-01-Lattices.html", title = "Lattices"},
@@ -531,6 +543,8 @@ files = [
 {path = "posts/PureMath/2015-07-01-Topology.md", url = "/posts/2015-07-01-Topology.html", title = "Topology"},
 
 {path = "posts/PureMath/2015-07-01-TopTheorems.md", url = "/posts/2015-07-01-TopTheorems.html", title = "Top Theorems"},
+
+{path = "posts/PureMath/2015-07-01-HilbertSpace.md", url = "/posts/2015-07-01-HilbertSpace.html", title = "Hilbert Space"},
 
 {path = "posts/OtherMath/2015-07-01-Primes.md", url = "/posts/2015-07-01-Primes.html", title = "Primes"},
 

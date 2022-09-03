@@ -3,8 +3,56 @@ title: Quick Springboot
 tags: prog, QuickCode
 ---
 
+# VScode commands
 
-# Entrypoint
+* New Class
+  * Ctrl+Shift+P `>Java: New Java Class`
+* Adding spring plugins after creating spring project.
+  * Ctrl+Shift+P `>Spring Initializr: Add Starters...`
+* Adding Class Constructors, getters/setters
+  * Right-Click > "Generate Constructors"
+  * Right-Click > "Generate Getters and Setters"
+
+
+# Vanilla Project
+
+* mvnw
+* pom.xml
+* src/
+  * main /
+    * java/
+      * com.example.demo
+        * DemoApplication.java
+    * resources/
+      * static/
+      * templates/
+      * application.properties
+    * test/
+      * java/
+        * com.example.demo
+          * DemoApplicationTests.java
+
+```{.java filename="DemoApplication.java"}
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
+
+}
+```
+
+
+
+# Demo Project
+
+## Entry Point
 
 * `@Component` annotation tells the class that it is used for DI injection. Note annotation is completely diff from decorator in python.
   * by default the class is a auto-initialized singleton, meaning even if we do not `Alien a = context.getBean(Alien.class);` the Alien class will automatically get constructed and call it's constructor `"Alien constructed"` only ONCE

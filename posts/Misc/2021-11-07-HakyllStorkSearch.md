@@ -15,7 +15,7 @@ toc: y
 7. [Hakyll Access on LAN server](2021-11-07-HakyllAccessOnLAN.html)
 
 
-```{filename="template/search.toml"}
+```{.bash filename="template/search.toml"}
 [input]
 url_prefix = "$root$/"
 files = [
@@ -25,7 +25,7 @@ $endfor$
 ]
 ```
 
-```{filename="site.hs"}
+```{.bash filename="site.hs"}
     create ["searchindex.toml"] $ do
         route idRoute
         compile $ do

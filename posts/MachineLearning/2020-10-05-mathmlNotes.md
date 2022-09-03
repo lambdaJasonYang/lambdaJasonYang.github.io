@@ -108,3 +108,41 @@ Triangular matrix
 
 
 # Linear regression
+
+
+# my old courses
+
+## Lin Reg
+
+* Decision: $\frac{1}{2} || y' - y ||^2$
+
+## 0-1 Loss
+
+* Loss: $\frac{1}{n}\sum_n sigmoid(-f(y))$
+
+$$ log loss
+
+* Decision: 
+
+## Perception
+
+* Outputs : 0 or 1
+* Loss: $-(y'-y)(w^Tx)$
+* Derivative: $-(y'-y)x$
+
+## Logistic Regression
+
+* Outputs: -1 to 1 
+* 
+* Loss: $-log(P(X=y'))$
+  * $-(y'log(y)+(1-y')(log(1-y)))$
+
+## Fixed basis
+
+* Decision: $\phi_i(x) = e^{-(x-r_i)^2}$
+  * $\phi(x)$ is bounded between 0 and 1
+  * inversely proportionaly to $dist(x,r_i)$ meaning the closer $x$ is to the basis, the closer $\phi_i(x)$ is to 1 
+
+$$ \phi(x) = \begin{bmatrix} e^{-x-r_1}^2 \\ e^{-x-r_2}^2 \\ e^{-x-r_3}^2 \\ e^{-x-r_4}^2\end{bmatrix} \tag{4 basis}$$
+
+

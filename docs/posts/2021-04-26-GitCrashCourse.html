@@ -118,39 +118,40 @@
 <div id="TOC"><ul>
 <li><a href="#setup-credentials"><span class="toc-section-number">1</span> Setup Credentials</a>
 <ul>
-<li><a href="#saving-remote-github-credential-on-local-repo"><span class="toc-section-number">1.0.1</span> Saving remote github Credential on local repo</a></li>
-<li><a href="#your-.gitconfig-data"><span class="toc-section-number">1.1</span> Your .gitconfig data</a></li>
-<li><a href="#remote-error"><span class="toc-section-number">1.2</span> Remote Error</a>
+<li><a href="#github-remote-credential"><span class="toc-section-number">1.1</span> github remote credential</a>
 <ul>
-<li><a href="#on-git-push-and-pull"><span class="toc-section-number">1.2.1</span> On git push and pull</a></li>
-<li><a href="#the-process"><span class="toc-section-number">1.2.2</span> The process</a></li>
+<li><a href="#saving-remote-github-credential-on-local-repo"><span class="toc-section-number">1.1.1</span> Saving remote github Credential on local repo</a></li>
 </ul></li>
-<li><a href="#pushing-updates-to-team-repo"><span class="toc-section-number">1.3</span> Pushing updates to Team repo</a></li>
-<li><a href="#more-depth-concept"><span class="toc-section-number">1.4</span> More depth, Concept</a>
+<li><a href="#your-.gitconfig-data"><span class="toc-section-number">1.2</span> Your .gitconfig data</a></li>
+<li><a href="#remote-error"><span class="toc-section-number">1.3</span> Remote Error</a></li>
+<li><a href="#on-git-push-and-pull"><span class="toc-section-number">1.4</span> On git push and pull</a></li>
+</ul></li>
+<li><a href="#the-process"><span class="toc-section-number">2</span> The process</a>
 <ul>
-<li><a href="#creating-new-aliases-creating-new-branches"><span class="toc-section-number">1.4.1</span> Creating new Aliases = Creating new branches</a></li>
+<li><a href="#pushing-updates-to-team-repo"><span class="toc-section-number">2.1</span> Pushing updates to Team repo</a></li>
+<li><a href="#more-depth-concept"><span class="toc-section-number">2.2</span> More depth, Concept</a></li>
+<li><a href="#creating-new-aliases-creating-new-branches"><span class="toc-section-number">2.3</span> Creating new Aliases = Creating new branches</a></li>
 </ul></li>
-</ul></li>
-<li><a href="#remove-unstaged-changes"><span class="toc-section-number">2</span> Remove unstaged changes</a></li>
-<li><a href="#extras"><span class="toc-section-number">3</span> Extras</a></li>
-<li><a href="#merging"><span class="toc-section-number">4</span> Merging</a>
+<li><a href="#remove-unstaged-changes"><span class="toc-section-number">3</span> Remove unstaged changes</a></li>
+<li><a href="#extras"><span class="toc-section-number">4</span> Extras</a></li>
+<li><a href="#merging"><span class="toc-section-number">5</span> Merging</a>
 <ul>
-<li><a href="#example"><span class="toc-section-number">4.1</span> Example</a></li>
-<li><a href="#to-fix-up-the-merge-conflicts"><span class="toc-section-number">4.2</span> To fix up the MERGE conflicts</a></li>
-<li><a href="#non-conflict-automerge"><span class="toc-section-number">4.3</span> Non-conflict automerge</a></li>
-<li><a href="#undo-add"><span class="toc-section-number">4.4</span> Undo add</a>
+<li><a href="#example"><span class="toc-section-number">5.1</span> Example</a></li>
+<li><a href="#to-fix-up-the-merge-conflicts"><span class="toc-section-number">5.2</span> To fix up the MERGE conflicts</a></li>
+<li><a href="#non-conflict-automerge"><span class="toc-section-number">5.3</span> Non-conflict automerge</a></li>
+<li><a href="#undo-add"><span class="toc-section-number">5.4</span> Undo add</a>
 <ul>
-<li><a href="#in-case-of-accidental-deleted-work"><span class="toc-section-number">4.4.1</span> In case of Accidental Deleted Work</a></li>
+<li><a href="#in-case-of-accidental-deleted-work"><span class="toc-section-number">5.4.1</span> In case of Accidental Deleted Work</a></li>
 </ul></li>
-<li><a href="#merging-two-unrelated-histories"><span class="toc-section-number">4.5</span> Merging two unrelated histories</a></li>
-<li><a href="#removing-untracked-changes"><span class="toc-section-number">4.6</span> Removing untracked changes</a></li>
+<li><a href="#merging-two-unrelated-histories"><span class="toc-section-number">5.5</span> Merging two unrelated histories</a></li>
+<li><a href="#removing-untracked-changes"><span class="toc-section-number">5.6</span> Removing untracked changes</a></li>
 </ul></li>
-<li><a href="#git-scenarios"><span class="toc-section-number">5</span> Git Scenarios</a>
+<li><a href="#git-scenarios"><span class="toc-section-number">6</span> Git Scenarios</a>
 <ul>
-<li><a href="#creating-your-git-project"><span class="toc-section-number">5.1</span> Creating your git project</a></li>
-<li><a href="#rebasing"><span class="toc-section-number">5.2</span> Rebasing</a></li>
+<li><a href="#creating-your-git-project"><span class="toc-section-number">6.1</span> Creating your git project</a></li>
+<li><a href="#rebasing"><span class="toc-section-number">6.2</span> Rebasing</a></li>
 </ul></li>
-<li><a href="#vim-micro-tut"><span class="toc-section-number">6</span> Vim micro tut</a></li>
+<li><a href="#vim-micro-tut"><span class="toc-section-number">7</span> Vim micro tut</a></li>
 </ul></div>
 <p><a href="ohshitgit.com">ohshitgit because messing up is too ez</a></p>
 <p>WARNING: The terms I use are nonstandard from most other tutorials.</p>
@@ -162,67 +163,52 @@
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">&quot;example@example.com&quot;</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">&quot;example&quot;</span></span></code></pre></div>
-<section id="saving-remote-github-credential-on-local-repo" class="level3" data-number="1.0.1">
-<h3 data-number="1.0.1"><span class="header-section-number">1.0.1</span> Saving remote github Credential on local repo</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config credential.helper store</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main:main</span></code></pre></div>
+<section id="github-remote-credential" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> github remote credential</h2>
+<p>If you omit the <code>userJY:PACTOKEN</code> part you will get an error <code>remote: Invalid username or password. fatal: Authentication failed for 'https://github.com/userJY/logicalverification2021.git/'</code></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://userJY:PACTOKEN@github.com/userJY/blehrepo.git</span></code></pre></div>
+<section id="saving-remote-github-credential-on-local-repo" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1"><span class="header-section-number">1.1.1</span> Saving remote github Credential on local repo</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config credential.helper store</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main:main</span></code></pre></div>
 <p>By pushing to remote repo you will be asked to enter username and password( password is really the auth token you have to generate in github settings).<br />
 The above command makes it so the setting is saved.</p>
 </section>
-<section id="your-.gitconfig-data" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> Your .gitconfig data</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--list</span></span></code></pre></div>
+</section>
+<section id="your-.gitconfig-data" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Your .gitconfig data</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--list</span></span></code></pre></div>
 <p>delete .gitconfig to reset your config</p>
 </section>
-<section id="remote-error" class="level2" data-number="1.2">
-<h2 data-number="1.2"><span class="header-section-number">1.2</span> Remote Error</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Permission to somebdy/bleh.git denied to someGuy.</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">fatal:</span> unable to access <span class="st">'https://github.com/somebdy/bleh.git/'</span>: The requested URL returned error: 403</span></code></pre></div>
-<p>This happens when</p>
-<table style="width:5%;">
-<colgroup>
-<col style="width: 5%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td># Remote</td>
-</tr>
-<tr class="even">
-<td>## Preconfig Remote Github repo variable configure remote variable we name “origin” or remove to reuse variable</td>
-</tr>
-<tr class="odd">
-<td>## Create a new repo locally and push create github repo</td>
-</tr>
-<tr class="even">
-<td>```bash git init git remote add origin https://github.com/userJY/testrepo.git git add . git commit -m ‘update’ git push -u origin main:main</td>
-</tr>
-</tbody>
-</table>
-<section id="on-git-push-and-pull" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1"><span class="header-section-number">1.2.1</span> On git push and pull</h3>
+<section id="remote-error" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> Remote Error</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Permission to somebdy/bleh.git denied to someGuy.</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">fatal:</span> unable to access <span class="st">'https://github.com/somebdy/bleh.git/'</span>: The requested URL returned error: 403</span></code></pre></div>
+</section>
+<section id="on-git-push-and-pull" class="level2" data-number="1.4">
+<h2 data-number="1.4"><span class="header-section-number">1.4</span> On git push and pull</h2>
 <p><code class="sourceCode bash"><span class="fu">git</span> push <span class="at">-u</span> origin <span class="op">&lt;</span>SrcLocalBranch<span class="op">&gt;</span>:<span class="op">&lt;</span>TargetRemoteBranch<span class="op">&gt;</span></code><br />
 <code class="sourceCode bash"><span class="fu">git</span> pull origin <span class="op">&lt;</span>SrcRemoteBranch<span class="op">&gt;</span>:<span class="op">&lt;</span>TargetLocalBranch<span class="op">&gt;</span></code></p>
 </section>
-<section id="the-process" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2"><span class="header-section-number">1.2.2</span> The process</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;some message&quot;</span></span></code></pre></div>
+</section>
+<section id="the-process" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> The process</h1>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;some message&quot;</span></span></code></pre></div>
 <p>updating to remote repo like github</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div>
-</section>
-</section>
-<section id="pushing-updates-to-team-repo" class="level2" data-number="1.3">
-<h2 data-number="1.3"><span class="header-section-number">1.3</span> Pushing updates to Team repo</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> Fixedbugbranch</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;fixed bugs&quot;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin Fixedbugbranch</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div>
+<section id="pushing-updates-to-team-repo" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Pushing updates to Team repo</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> Fixedbugbranch</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;fixed bugs&quot;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin Fixedbugbranch</span></code></pre></div>
 <p>You see a push but on the team’s side, they see a pull request(PR).<br />
 PR is ran through github actions(CI system) that runs tests.<br />
 If accepted, they merge your PR branch with the main branch.</p>
 </section>
-<section id="more-depth-concept" class="level2" data-number="1.4">
-<h2 data-number="1.4"><span class="header-section-number">1.4</span> More depth, Concept</h2>
+<section id="more-depth-concept" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> More depth, Concept</h2>
 <p>Three layers to know: commit-references(ref), branch-alias(alias), HEAD</p>
 <ul>
 <li>layer 1 - ref : static nodes of the commit tree.</li>
@@ -246,8 +232,9 @@ HEAD</p>
 HEAD(layer 1) points to branch alias(layer 2) which points to<br />
 commit ref(layer 3).<br />
 Aliases(layer 2) always points to the local head(layer 1).</p>
-<section id="creating-new-aliases-creating-new-branches" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1"><span class="header-section-number">1.4.1</span> Creating new Aliases = Creating new branches</h3>
+</section>
+<section id="creating-new-aliases-creating-new-branches" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> Creating new Aliases = Creating new branches</h2>
 <p>Old commits(layer 1) aka non-local-head commits do not have aliases(layer 2) pointing to them but if you do make an alias, they will become a local-head(layer 1) by branching.</p>
 <p>Do not confuse the “HEAD” pointer with the “local head of a branch”.<br />
 The “local head of a branch” refers to the local head of commit-refs at layer 1.<br />
@@ -294,43 +281,42 @@ git branch makes a new alias and branch, BUT HEAD stays on current branch<br />
 git checkout -b behaves the same as git branch BUT moves HEAD to new branch</p>
 </section>
 </section>
+<section id="remove-unstaged-changes" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Remove unstaged changes</h1>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore .</span></code></pre></div>
 </section>
-<section id="remove-unstaged-changes" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Remove unstaged changes</h1>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore .</span></code></pre></div>
-</section>
-<section id="extras" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Extras</h1>
+<section id="extras" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Extras</h1>
 <p>tags are just renaming refs, they are NOT at the same level as aliases. Meaning if you point HEAD to a tag, you are in a detached head state.</p>
 <p>In gitk yellow node HEAD pointer points to blue untagged node(meaning it is not the local head of a branch)git</p>
 <hr />
 </section>
-<section id="merging" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Merging</h1>
-<section id="example" class="level2" data-number="4.1">
-<h2 data-number="4.1"><span class="header-section-number">4.1</span> Example</h2>
+<section id="merging" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Merging</h1>
+<section id="example" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Example</h2>
 <p>Example: clone git project first commit</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> 0382315a65a3fa24595718b3bf141f09a49b6469 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main, origin/main, origin/HEAD<span class="kw">)</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> JY <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Mon Sep 27 16:04:23 2021 <span class="at">-0700</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> commit</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> 0382315a65a3fa24595718b3bf141f09a49b6469 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main, origin/main, origin/HEAD<span class="kw">)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> JY <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Mon Sep 27 16:04:23 2021 <span class="at">-0700</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> commit</span></code></pre></div>
 <p>0382315a65a3fa24595718b3bf141f09a49b6469 is the commit on both server and local repo.</p>
 <ul>
 <li>Modify README.md locally (write “hello” to README.md)</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git log</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> 070f18087be629ba7387a9242af03f85ac656910 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> jy <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Mon Sep 27 16:15:11 2021 <span class="at">-0700</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">update</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> 0382315a65a3fa24595718b3bf141f09a49b6469 <span class="er">(</span><span class="ex">origin/main,</span> origin/HEAD<span class="kw">)</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> jy <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Mon Sep 27 16:04:23 2021 <span class="at">-0700</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> commit</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git log</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> 070f18087be629ba7387a9242af03f85ac656910 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> jy <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Mon Sep 27 16:15:11 2021 <span class="at">-0700</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">update</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> 0382315a65a3fa24595718b3bf141f09a49b6469 <span class="er">(</span><span class="ex">origin/main,</span> origin/HEAD<span class="kw">)</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> jy <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Mon Sep 27 16:04:23 2021 <span class="at">-0700</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> commit</span></code></pre></div>
 <ul>
 <li>Modify README.md on github website. (write “goodbye” to README.md)</li>
 </ul>
@@ -344,117 +330,117 @@ git checkout -b behaves the same as git branch BUT moves HEAD to new branch</p>
 </ul></li>
 </ul>
 <p>Let’s trying pushing local 070f1 changes to remote anyway</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push <span class="at">-u</span> origin main:main</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">To</span> https://github.com/userJY/gittmp.git</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">!</span> [rejected]        main <span class="at">-</span><span class="op">&gt;</span> main <span class="er">(</span><span class="ex">fetch</span> first<span class="kw">)</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">error:</span> failed to push some refs to <span class="st">'https://github.com/userJY/gittmp.git'</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">hint:</span> Updates were rejected because the remote contains work that you do</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="ex">hint:</span> not have locally. This is usually caused by another repository pushing</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="ex">hint:</span> to the same ref. You may want to first integrate the remote changes</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ex">hint:</span> <span class="er">(</span><span class="ex">e.g.,</span> <span class="st">'git pull ...'</span><span class="kw">)</span> <span class="ex">before</span> pushing again.</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ex">hint:</span> See the <span class="st">'Note about fast-forwards'</span> in <span class="st">'git push --help'</span> for details.</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push <span class="at">-u</span> origin main:main</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">To</span> https://github.com/userJY/gittmp.git</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">!</span> [rejected]        main <span class="at">-</span><span class="op">&gt;</span> main <span class="er">(</span><span class="ex">fetch</span> first<span class="kw">)</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">error:</span> failed to push some refs to <span class="st">'https://github.com/userJY/gittmp.git'</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">hint:</span> Updates were rejected because the remote contains work that you do</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ex">hint:</span> not have locally. This is usually caused by another repository pushing</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="ex">hint:</span> to the same ref. You may want to first integrate the remote changes</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ex">hint:</span> <span class="er">(</span><span class="ex">e.g.,</span> <span class="st">'git pull ...'</span><span class="kw">)</span> <span class="ex">before</span> pushing again.</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ex">hint:</span> See the <span class="st">'Note about fast-forwards'</span> in <span class="st">'git push --help'</span> for details.</span></code></pre></div>
 <p>It failed as expected<br />
 Let’s follow instructions and use git pull</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git pull</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Enumerating objects: 5, done.</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Counting objects: 100% <span class="er">(</span><span class="ex">5/5</span><span class="kw">)</span><span class="ex">,</span> done.</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Total 3 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> reused 0 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> pack-reused 0</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Unpacking</span> objects: 100% <span class="er">(</span><span class="ex">3/3</span><span class="kw">)</span><span class="ex">,</span> 641 bytes <span class="kw">|</span> <span class="ex">91.00</span> KiB/s, done.</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ex">From</span> https://github.com/userJY/gittmp</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>   <span class="ex">0382315..3295ca9</span>  main       <span class="at">-</span><span class="op">&gt;</span> origin/main</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Auto-merging</span> README.md</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ex">CONFLICT</span> <span class="er">(</span><span class="ex">content</span><span class="kw">)</span><span class="bu">:</span> Merge conflict in README.md</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Automatic</span> merge failed<span class="kw">;</span> <span class="ex">fix</span> conflicts and then commit the result.</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git pull</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Enumerating objects: 5, done.</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Counting objects: 100% <span class="er">(</span><span class="ex">5/5</span><span class="kw">)</span><span class="ex">,</span> done.</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Total 3 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> reused 0 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> pack-reused 0</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Unpacking</span> objects: 100% <span class="er">(</span><span class="ex">3/3</span><span class="kw">)</span><span class="ex">,</span> 641 bytes <span class="kw">|</span> <span class="ex">91.00</span> KiB/s, done.</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="ex">From</span> https://github.com/userJY/gittmp</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>   <span class="ex">0382315..3295ca9</span>  main       <span class="at">-</span><span class="op">&gt;</span> origin/main</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Auto-merging</span> README.md</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="ex">CONFLICT</span> <span class="er">(</span><span class="ex">content</span><span class="kw">)</span><span class="bu">:</span> Merge conflict in README.md</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Automatic</span> merge failed<span class="kw">;</span> <span class="ex">fix</span> conflicts and then commit the result.</span></code></pre></div>
 <p>The above line shows local..remote conflict.<br />
 <code class="sourceCode bash"><span class="ex">0382315..3295ca9</span>  main       <span class="at">-</span><span class="op">&gt;</span> origin/main</code></p>
 <p>on our console we see we have been automatically put into MERGE mode.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">User@WindowsPC</span> MINGW64 ~/Desktop/gittmp <span class="er">(</span><span class="ex">main</span><span class="kw">|</span><span class="ex">MERGING</span><span class="kw">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">User@WindowsPC</span> MINGW64 ~/Desktop/gittmp <span class="er">(</span><span class="ex">main</span><span class="kw">|</span><span class="ex">MERGING</span><span class="kw">)</span></span></code></pre></div>
 <p>If you enter your README.md you will find the below content while in MERGE mode.</p>
 <p>Pre-Merge state:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">hello</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="ex">=======</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="ex">goodbye</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Goodbye</span> </span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> 3295ca935359bc5fc4e8592c9057d3c3c5cd7a6d</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">hello</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="ex">=======</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="ex">goodbye</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Goodbye</span> </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> 3295ca935359bc5fc4e8592c9057d3c3c5cd7a6d</span></code></pre></div>
 <p>Aside: You can even commit this pre-merge state.<br />
 This will update local README.md to the above content.<br />
 You can even push this new pre-merge state commit to remote github. But clearly you shouldn’t do this as it defeats the entire point of merging!!</p>
 <p>Use abort to leave MERGE mode to return to local repo</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge <span class="at">--abort</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge <span class="at">--abort</span></span></code></pre></div>
 </section>
-<section id="to-fix-up-the-merge-conflicts" class="level2" data-number="4.2">
-<h2 data-number="4.2"><span class="header-section-number">4.2</span> To fix up the MERGE conflicts</h2>
+<section id="to-fix-up-the-merge-conflicts" class="level2" data-number="5.2">
+<h2 data-number="5.2"><span class="header-section-number">5.2</span> To fix up the MERGE conflicts</h2>
 <p>Go back to MERGE mode</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull <span class="co">#back to merge mode</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> mergetool <span class="co">#will ask to start default vimdiff</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull <span class="co">#back to merge mode</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> mergetool <span class="co">#will ask to start default vimdiff</span></span></code></pre></div>
 </section>
-<section id="non-conflict-automerge" class="level2" data-number="4.3">
-<h2 data-number="4.3"><span class="header-section-number">4.3</span> Non-conflict automerge</h2>
+<section id="non-conflict-automerge" class="level2" data-number="5.3">
+<h2 data-number="5.3"><span class="header-section-number">5.3</span> Non-conflict automerge</h2>
 <p>image if local was</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hello</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hello</span></span></code></pre></div>
 <p>and remote was</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">yello</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">yello</span></span></code></pre></div>
 <p>Git pull, would merge by</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git pull</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Enumerating objects: 5, done.</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Counting objects: 100% <span class="er">(</span><span class="ex">5/5</span><span class="kw">)</span><span class="ex">,</span> done.</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Compressing objects: 100% <span class="er">(</span><span class="ex">2/2</span><span class="kw">)</span><span class="ex">,</span> done.</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Total 3 <span class="er">(</span><span class="ex">delta</span> 1<span class="kw">)</span><span class="ex">,</span> reused 0 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> pack-reused 0</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Unpacking</span> objects: 100% <span class="er">(</span><span class="ex">3/3</span><span class="kw">)</span><span class="ex">,</span> 639 bytes <span class="kw">|</span> <span class="ex">91.00</span> KiB/s, done.</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="ex">From</span> https://github.com/userJY/gittmp</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>   <span class="ex">8401a16..d93f27c</span>  main       <span class="at">-</span><span class="op">&gt;</span> origin/main</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Auto-merging</span> README.md</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Merge</span> made by the <span class="st">'recursive'</span> strategy.</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">README.md</span> <span class="kw">|</span> <span class="ex">2</span> +-</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 1 deletion<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git pull</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Enumerating objects: 5, done.</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Counting objects: 100% <span class="er">(</span><span class="ex">5/5</span><span class="kw">)</span><span class="ex">,</span> done.</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Compressing objects: 100% <span class="er">(</span><span class="ex">2/2</span><span class="kw">)</span><span class="ex">,</span> done.</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Total 3 <span class="er">(</span><span class="ex">delta</span> 1<span class="kw">)</span><span class="ex">,</span> reused 0 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> pack-reused 0</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Unpacking</span> objects: 100% <span class="er">(</span><span class="ex">3/3</span><span class="kw">)</span><span class="ex">,</span> 639 bytes <span class="kw">|</span> <span class="ex">91.00</span> KiB/s, done.</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="ex">From</span> https://github.com/userJY/gittmp</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>   <span class="ex">8401a16..d93f27c</span>  main       <span class="at">-</span><span class="op">&gt;</span> origin/main</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Auto-merging</span> README.md</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Merge</span> made by the <span class="st">'recursive'</span> strategy.</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">README.md</span> <span class="kw">|</span> <span class="ex">2</span> +-</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 1 deletion<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span></code></pre></div>
 </section>
-<section id="undo-add" class="level2" data-number="4.4">
-<h2 data-number="4.4"><span class="header-section-number">4.4</span> Undo add</h2>
+<section id="undo-add" class="level2" data-number="5.4">
+<h2 data-number="5.4"><span class="header-section-number">5.4</span> Undo add</h2>
 <ul>
 <li>this is before committing</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--hard</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--hard</span></span></code></pre></div>
 <ul>
 <li><code>--hard</code> means remove modified uncommitted files</li>
 <li><code>--soft</code> means keep modified uncommitted files</li>
 </ul>
 <p>WARNING: Calling <code>git reset --hard</code> AFTER <code>git add .</code> but BEFORE <code>git commit ...</code> will DELETE YOUR WORK.</p>
-<section id="in-case-of-accidental-deleted-work" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1"><span class="header-section-number">4.4.1</span> In case of Accidental Deleted Work</h3>
+<section id="in-case-of-accidental-deleted-work" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1"><span class="header-section-number">5.4.1</span> In case of Accidental Deleted Work</h3>
 <p>In case you did do <code>git reset --hard</code> AFTER <code>git add .</code> but BEFORE <code>git commit ...</code> you can recover files as blobs without file names.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fsck <span class="at">--lost-found</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#script that recovers files and filters file by content like `bayesian net`</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ./.git/lost-found/other</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FILE <span class="kw">in</span> <span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span> <span class="fu">git</span> show <span class="va">$FILE</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;bayesian net&quot;</span> <span class="kw">;</span> <span class="bu">echo</span> <span class="va">$FILE</span><span class="kw">;</span> <span class="cf">done</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> show a73ff6d1c2bbc01fc2c182ed0c07961969f27c82 <span class="op">&gt;</span> recovered.ipynb</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> recovered.ipnyb ~/recoveredfolder</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fsck <span class="at">--lost-found</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#script that recovers files and filters file by content like `bayesian net`</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ./.git/lost-found/other</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FILE <span class="kw">in</span> <span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span> <span class="fu">git</span> show <span class="va">$FILE</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;bayesian net&quot;</span> <span class="kw">;</span> <span class="bu">echo</span> <span class="va">$FILE</span><span class="kw">;</span> <span class="cf">done</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> show a73ff6d1c2bbc01fc2c182ed0c07961969f27c82 <span class="op">&gt;</span> recovered.ipynb</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> recovered.ipnyb ~/recoveredfolder</span></code></pre></div>
 </section>
 </section>
-<section id="merging-two-unrelated-histories" class="level2" data-number="4.5">
-<h2 data-number="4.5"><span class="header-section-number">4.5</span> Merging two unrelated histories</h2>
+<section id="merging-two-unrelated-histories" class="level2" data-number="5.5">
+<h2 data-number="5.5"><span class="header-section-number">5.5</span> Merging two unrelated histories</h2>
 <p>Example.<br />
 You made a github repo with a license.<br />
 Then you made a local repo with some web server and used git init.<br />
 Now you want to push your local repo on that “empty” remote repo.</p>
 <p>Not so simple, we first have to merge it but it will give us an error on a naive merge since your local and remote repo have no common ancestor</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main <span class="at">--allow-unrelated-histories</span> </span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main <span class="at">--allow-unrelated-histories</span> </span></code></pre></div>
 </section>
-<section id="removing-untracked-changes" class="level2" data-number="4.6">
-<h2 data-number="4.6"><span class="header-section-number">4.6</span> Removing untracked changes</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clean <span class="at">-f</span></span></code></pre></div>
+<section id="removing-untracked-changes" class="level2" data-number="5.6">
+<h2 data-number="5.6"><span class="header-section-number">5.6</span> Removing untracked changes</h2>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clean <span class="at">-f</span></span></code></pre></div>
 <p>You might use this when you did a merge but Ctrl-C or exited out in the middle so now you’re left with temp MERGE files.</p>
 </section>
 </section>
-<section id="git-scenarios" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Git Scenarios</h1>
-<section id="creating-your-git-project" class="level2" data-number="5.1">
-<h2 data-number="5.1"><span class="header-section-number">5.1</span> Creating your git project</h2>
+<section id="git-scenarios" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Git Scenarios</h1>
+<section id="creating-your-git-project" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> Creating your git project</h2>
 <blockquote>
 <p>Say we spent time building a project locally called A.<br />
 We turn it into a git repo after it is finished.<br />
@@ -462,29 +448,29 @@ How do we push it onto github?<br />
 First we need to create an empty github repo.<br />
 But now we have 2 repos with separate histories.</p>
 </blockquote>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{local}</span>                     {github}</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> A                     create github repo B</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init A              </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin B</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> types of pulls:</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span><span class="er">)</span> <span class="fu">git</span> pull origin <span class="at">--no-rebase</span> main</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">[Nothing</span> happens]fatal: refusing to merge unrelated histories </span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span><span class="er">)</span> <span class="fu">git</span> pull origin <span class="at">--rebase</span> main</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">[Success]This</span> puts your remote commit B as first then local commit as recent.</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="ex">B</span> <span class="at">--</span><span class="op">&gt;</span> A</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span><span class="er">)</span> <span class="fu">git</span> pull origin <span class="at">--ff-only</span> main</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">[Nothing</span> happens]fatal: refusing to merge unrelated histories</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>   </span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{local}</span>                     {github}</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> A                     create github repo B</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init A              </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin B</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> types of pulls:</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span><span class="er">)</span> <span class="fu">git</span> pull origin <span class="at">--no-rebase</span> main</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">[Nothing</span> happens]fatal: refusing to merge unrelated histories </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span><span class="er">)</span> <span class="fu">git</span> pull origin <span class="at">--rebase</span> main</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">[Success]This</span> puts your remote commit B as first then local commit as recent.</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="ex">B</span> <span class="at">--</span><span class="op">&gt;</span> A</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span><span class="er">)</span> <span class="fu">git</span> pull origin <span class="at">--ff-only</span> main</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">[Nothing</span> happens]fatal: refusing to merge unrelated histories</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>   </span></code></pre></div>
 <p>the default pull uses no-rebase.</p>
 </section>
-<section id="rebasing" class="level2" data-number="5.2">
-<h2 data-number="5.2"><span class="header-section-number">5.2</span> Rebasing</h2>
+<section id="rebasing" class="level2" data-number="6.2">
+<h2 data-number="6.2"><span class="header-section-number">6.2</span> Rebasing</h2>
 <p>rebasing just means we can reorder our commit history</p>
 </section>
 </section>
-<section id="vim-micro-tut" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Vim micro tut</h1>
+<section id="vim-micro-tut" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Vim micro tut</h1>
 <p>ctrl-w-w to switch screen on 3 way commit</p>
 <p>esc-u to undo esc-:diffupdate after undo to rescan difference</p>
 <p>esc-:diffget LO to apply Local, left most window esc-:diffget remote to apply Remote, right most window esc-:diffget BA to apply base, top center window</p>

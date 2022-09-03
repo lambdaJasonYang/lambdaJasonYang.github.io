@@ -41,7 +41,7 @@ Update failed. Please check the Android Studio install.
 
 ## Fix 1
 
-```bat
+```bash
 set ANDROID_LOCAL=%LOCALAPPDATA%\Android\Sdk
 set ANDROID_LOCAL=D:\AppData\Local\Android\Sdk
 ```
@@ -52,7 +52,7 @@ set ANDROID_LOCAL=D:\AppData\Local\Android\Sdk
 
 In the `SetupAndroid.bat` file add usebackq, to the 
 
-```bat
+```bash
 FOR /F "tokens=2* usebackq" %%A IN ('REG.exe query "%KEY_NAME%" /v "%VALUE_NAME%"') DO (set USERPATH=%%B)
 ```
 
@@ -60,13 +60,13 @@ FOR /F "tokens=2* usebackq" %%A IN ('REG.exe query "%KEY_NAME%" /v "%VALUE_NAME%
 
 Remove JAVA_HOME from environmental variables path.
 
-```bat
+```bash
 set SDKMANAGER=%STUDIO_SDK_PATH%\tools\bin\sdkmanager.bat
 set SDKMANAGER=%STUDIO_SDK_PATH%\cmdline-tools\latest\bin\sdkmanager.bat
 ```
 
 
-```bat
+```bash
 @echo off
 setlocal ENABLEEXTENSIONS
 setlocal ENABLEDELAYEDEXPANSION

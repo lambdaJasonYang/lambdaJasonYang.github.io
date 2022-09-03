@@ -139,141 +139,140 @@
 <h1 data-number="1"><span class="header-section-number">1</span> Fix</h1>
 <section id="fix-1" class="level2" data-number="1.1">
 <h2 data-number="1.1"><span class="header-section-number">1.1</span> Fix 1</h2>
-<pre class="bat"><code>set ANDROID_LOCAL=%LOCALAPPDATA%\Android\Sdk
-set ANDROID_LOCAL=D:\AppData\Local\Android\Sdk</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> ANDROID_LOCAL=%LOCALAPPDATA%<span class="dt">\A</span>ndroid<span class="dt">\S</span>dk</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> ANDROID_LOCAL=D:<span class="dt">\A</span>ppData<span class="dt">\L</span>ocal<span class="dt">\A</span>ndroid<span class="dt">\S</span>dk</span></code></pre></div>
 </section>
 <section id="fix-2" class="level2" data-number="1.2">
 <h2 data-number="1.2"><span class="header-section-number">1.2</span> Fix 2</h2>
 <p>In the <code>SetupAndroid.bat</code> file add usebackq, to the</p>
-<pre class="bat"><code>FOR /F &quot;tokens=2* usebackq&quot; %%A IN ('REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;') DO (set USERPATH=%%B)</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">FOR</span> /F <span class="st">&quot;tokens=2* usebackq&quot;</span> %%A IN <span class="er">(</span><span class="st">'REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;'</span><span class="kw">)</span> <span class="ex">DO</span> <span class="er">(</span><span class="bu">set</span> USERPATH=%%B<span class="kw">)</span></span></code></pre></div>
 </section>
 <section id="fix-3" class="level2" data-number="1.3">
 <h2 data-number="1.3"><span class="header-section-number">1.3</span> Fix 3</h2>
 <p>Remove JAVA_HOME from environmental variables path.</p>
-<pre class="bat"><code>set SDKMANAGER=%STUDIO_SDK_PATH%\tools\bin\sdkmanager.bat
-set SDKMANAGER=%STUDIO_SDK_PATH%\cmdline-tools\latest\bin\sdkmanager.bat</code></pre>
-<pre class="bat"><code>@echo off
-setlocal ENABLEEXTENSIONS
-setlocal ENABLEDELAYEDEXPANSION
-set KEY_NAME=HKLM\SOFTWARE\Android Studio
-set VALUE_NAME=Path
-set STUDIO_PATH=
-
-IF &quot;%5&quot; == &quot;-noninteractive&quot; (
-	set PAUSE=
-) ELSE (
-	set PAUSE=pause
-)
-
-SET PLATFORMS_VERSION=%1
-SET BUILDTOOLS_VERSION=%2
-SET CMAKE_VERSION=%3
-SET NDK_VERSION=%4
-
-rem hardcoded versions for compatibility with non-Turnkey manual running
-if &quot;%PLATFORMS_VERSION%&quot; == &quot;&quot; SET PLATFORMS_VERSION=android-30
-if &quot;%BUILDTOOLS_VERSION%&quot; == &quot;&quot; SET BUILDTOOLS_VERSION=30.0.3
-if &quot;%CMAKE_VERSION%&quot; == &quot;&quot; SET CMAKE_VERSION=3.10.2.4988404
-if &quot;%NDK_VERSION%&quot; == &quot;&quot; SET NDK_VERSION=21.4.7075529
-
-
-FOR /F &quot;tokens=2*&quot; %%A IN ('REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;') DO (set STUDIO_PATH=%%B)
-
-IF EXIST &quot;%STUDIO_PATH%&quot; (
-	echo.
-	) ELSE (
-	echo Android Studio not installed, please download Android Studio 3.5.3 from https://developer.android.com/studio
-	%PAUSE%
-	exit /b 1
-)
-echo Android Studio Path: %STUDIO_PATH%
-
-set VALUE_NAME=SdkPath
-set STUDIO_SDK_PATH=
-FOR /F &quot;tokens=2*&quot; %%A IN ('REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;') DO (set STUDIO_SDK_PATH=%%B)
-
-set ANDROID_LOCAL=%LOCALAPPDATA%\Android\Sdk
-set ANDROID_LOCAL=D:\AppData\Local\Android\Sdk
-
-if &quot;%STUDIO_SDK_PATH%&quot; == &quot;&quot; (
-	IF EXIST &quot;%ANDROID_LOCAL%&quot; (
-		set STUDIO_SDK_PATH=%ANDROID_LOCAL%
-	) ELSE (
-		IF EXIST &quot;%ANDROID_HOME%&quot; (
-			set STUDIO_SDK_PATH=%ANDROID_HOME%
-		) ELSE (
-			echo Unable to locate local Android SDK location. Did you run Android Studio after installing?
-			%PAUSE%
-			exit /b 2
-		)
-	)
-)
-echo Android Studio SDK Path: %STUDIO_SDK_PATH%
-
-if DEFINED ANDROID_HOME (set a=1) ELSE (
-	set ANDROID_HOME=%STUDIO_SDK_PATH%
-	setx ANDROID_HOME &quot;%STUDIO_SDK_PATH%&quot;
-)
-if DEFINED JAVA_HOME (set a=1) ELSE (
-	set JAVA_HOME=%STUDIO_PATH%\jre
-	setx JAVA_HOME &quot;%STUDIO_PATH%\jre&quot;
-)
-set NDKINSTALLPATH=%STUDIO_SDK_PATH%\ndk\%NDK_VERSION%
-set PLATFORMTOOLS=%STUDIO_SDK_PATH%\platform-tools;%STUDIO_SDK_PATH%\tools
-
-set KEY_NAME=HKCU\Environment
-set VALUE_NAME=Path
-set USERPATH=
-
-FOR /F &quot;tokens=2* usebackq&quot; %%A IN ('REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;') DO (set USERPATH=%%B)
-
-where.exe /Q adb.exe
-
-echo &quot;%ERRORLEVEL%&quot;
-IF /I &quot;%ERRORLEVEL%&quot; NEQ &quot;0&quot; (
-	echo Current user path: %USERPATH%
-	setx PATH &quot;%USERPATH%;%PLATFORMTOOLS%&quot;
-	echo Added %PLATFORMTOOLS% to path
-
-)
-echo %STUDIO_SDK_PATH%
-echo %PLATFORMTOOLS%
-set SDKMANAGER=%STUDIO_SDK_PATH%\tools\bin\sdkmanager.bat
-set SDKMANAGER=%STUDIO_SDK_PATH%\cmdline-tools\latest\bin\sdkmanager.bat
-IF EXIST &quot;%SDKMANAGER%&quot; (
-	echo Using sdkmanager: %SDKMANAGER%
-) ELSE (
-	set SDKMANAGER=%STUDIO_SDK_PATH%\cmdline-tools\latest\bin\sdkmanager.bat
-	IF EXIST &quot;!SDKMANAGER!&quot; (
-		echo Using sdkmanager: !SDKMANAGER!
-	) ELSE (
-		echo Unable to locate sdkmanager.bat. Did you run Android Studio and install cmdline-tools after installing?
-		%PAUSE%
-		exit /b 3
-	)
-)
-
-call &quot;%SDKMANAGER%&quot; &quot;platform-tools&quot; &quot;platforms;%PLATFORMS_VERSION%&quot; &quot;build-tools;%BUILDTOOLS_VERSION%&quot; &quot;cmake;%CMAKE_VERSION%&quot; &quot;ndk;%NDK_VERSION%&quot;
-
-IF /I &quot;%ERRORLEVEL%&quot; NEQ &quot;0&quot; (
-	echo Update failed. Please check the Android Studio install.
-	%PAUSE%
-	exit /b 4
-)
-
-if EXIST &quot;%NDKINSTALLPATH%&quot; (
-	echo Success!
-	setx NDKROOT &quot;%NDKINSTALLPATH%&quot;
-	setx NDK_ROOT &quot;%NDKINSTALLPATH%&quot;
-) ELSE (
-	echo Update failed. Did you accept the license agreement?
-	%PAUSE%
-	exit /b 5
-)
-
-%PAUSE%
-exit /b 0
-</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> SDKMANAGER=%STUDIO_SDK_PATH%<span class="dt">\t</span>ools<span class="dt">\b</span>in<span class="dt">\s</span>dkmanager.bat</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> SDKMANAGER=%STUDIO_SDK_PATH%<span class="dt">\c</span>mdline-tools<span class="dt">\l</span>atest<span class="dt">\b</span>in<span class="dt">\s</span>dkmanager.bat</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">@echo</span> off</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">setlocal</span> ENABLEEXTENSIONS</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">setlocal</span> ENABLEDELAYEDEXPANSION</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> KEY_NAME=HKLM<span class="dt">\S</span>OFTWARE<span class="dt">\A</span>ndroid Studio</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> VALUE_NAME=Path</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> STUDIO_PATH=</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">IF</span> <span class="st">&quot;%5&quot;</span> == <span class="st">&quot;-noninteractive&quot;</span> <span class="er">(</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>	<span class="bu">set</span> PAUSE=</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span> <span class="ex">ELSE</span> <span class="er">(</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>	<span class="bu">set</span> PAUSE=pause</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ex">SET</span> PLATFORMS_VERSION=%1</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="ex">SET</span> BUILDTOOLS_VERSION=%2</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="ex">SET</span> CMAKE_VERSION=%3</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="ex">SET</span> NDK_VERSION=%4</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="ex">rem</span> hardcoded versions for compatibility with non-Turnkey manual running</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;%PLATFORMS_VERSION%&quot;</span> == <span class="st">&quot;&quot;</span> SET PLATFORMS_VERSION=android-30</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;%BUILDTOOLS_VERSION%&quot;</span> == <span class="st">&quot;&quot;</span> SET BUILDTOOLS_VERSION=30.0.3</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;%CMAKE_VERSION%&quot;</span> == <span class="st">&quot;&quot;</span> SET CMAKE_VERSION=3.10.2.4988404</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;%NDK_VERSION%&quot;</span> == <span class="st">&quot;&quot;</span> SET NDK_VERSION=21.4.7075529</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="ex">FOR</span> /F <span class="st">&quot;tokens=2*&quot;</span> %%A IN <span class="er">(</span><span class="st">'REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;'</span><span class="kw">)</span> <span class="ex">DO</span> <span class="er">(</span><span class="bu">set</span> STUDIO_PATH=%%B<span class="kw">)</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="ex">IF</span> EXIST <span class="st">&quot;%STUDIO_PATH%&quot;</span> <span class="er">(</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>	<span class="ex">echo.</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>	<span class="kw">)</span> <span class="ex">ELSE</span> <span class="er">(</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>	<span class="bu">echo</span> Android Studio not installed, please download Android Studio 3.5.3 from https://developer.android.com/studio</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>	<span class="ex">%PAUSE%</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>	<span class="bu">exit</span> /b 1</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> Android Studio Path: %STUDIO_PATH%</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> VALUE_NAME=SdkPath</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> STUDIO_SDK_PATH=</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="ex">FOR</span> /F <span class="st">&quot;tokens=2*&quot;</span> %%A IN <span class="er">(</span><span class="st">'REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;'</span><span class="kw">)</span> <span class="ex">DO</span> <span class="er">(</span><span class="bu">set</span> STUDIO_SDK_PATH=%%B<span class="kw">)</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> ANDROID_LOCAL=%LOCALAPPDATA%<span class="dt">\A</span>ndroid<span class="dt">\S</span>dk</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> ANDROID_LOCAL=D:<span class="dt">\A</span>ppData<span class="dt">\L</span>ocal<span class="dt">\A</span>ndroid<span class="dt">\S</span>dk</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;%STUDIO_SDK_PATH%&quot;</span> == <span class="st">&quot;&quot;</span> <span class="er">(</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>	<span class="ex">IF</span> EXIST <span class="st">&quot;%ANDROID_LOCAL%&quot;</span> <span class="er">(</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>		<span class="bu">set</span> STUDIO_SDK_PATH=%ANDROID_LOCAL%</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>	<span class="kw">)</span> <span class="ex">ELSE</span> <span class="er">(</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>		<span class="ex">IF</span> EXIST <span class="st">&quot;%ANDROID_HOME%&quot;</span> <span class="er">(</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>			<span class="bu">set</span> STUDIO_SDK_PATH=%ANDROID_HOME%</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>		<span class="kw">)</span> <span class="ex">ELSE</span> <span class="er">(</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>			<span class="bu">echo</span> Unable to locate local Android SDK location. Did you run Android Studio after installing<span class="pp">?</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>			<span class="ex">%PAUSE%</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>			<span class="bu">exit</span> /b 2</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>		<span class="kw">)</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>	<span class="kw">)</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> Android Studio SDK Path: %STUDIO_SDK_PATH%</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="ex">DEFINED</span> ANDROID_HOME <span class="er">(</span><span class="bu">set</span> a=1<span class="kw">)</span> <span class="ex">ELSE</span> <span class="er">(</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>	<span class="bu">set</span> ANDROID_HOME=%STUDIO_SDK_PATH%</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>	<span class="ex">setx</span> ANDROID_HOME <span class="st">&quot;%STUDIO_SDK_PATH%&quot;</span></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="ex">DEFINED</span> JAVA_HOME <span class="er">(</span><span class="bu">set</span> a=1<span class="kw">)</span> <span class="ex">ELSE</span> <span class="er">(</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>	<span class="bu">set</span> JAVA_HOME=%STUDIO_PATH%<span class="dt">\j</span>re</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>	<span class="ex">setx</span> JAVA_HOME <span class="st">&quot;%STUDIO_PATH%\jre&quot;</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> NDKINSTALLPATH=%STUDIO_SDK_PATH%<span class="dt">\n</span>dk<span class="dt">\%</span>NDK_VERSION%</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> PLATFORMTOOLS=%STUDIO_SDK_PATH%<span class="dt">\p</span>latform-tools<span class="kw">;</span><span class="ex">%STUDIO_SDK_PATH%\tools</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> KEY_NAME=HKCU<span class="dt">\E</span>nvironment</span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> VALUE_NAME=Path</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> USERPATH=</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="ex">FOR</span> /F <span class="st">&quot;tokens=2* usebackq&quot;</span> %%A IN <span class="er">(</span><span class="st">'REG.exe query &quot;%KEY_NAME%&quot; /v &quot;%VALUE_NAME%&quot;'</span><span class="kw">)</span> <span class="ex">DO</span> <span class="er">(</span><span class="bu">set</span> USERPATH=%%B<span class="kw">)</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="ex">where.exe</span> /Q adb.exe</span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;%ERRORLEVEL%&quot;</span></span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a><span class="ex">IF</span> /I <span class="st">&quot;%ERRORLEVEL%&quot;</span> NEQ <span class="st">&quot;0&quot;</span> <span class="er">(</span></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>	<span class="bu">echo</span> Current user path: %USERPATH%</span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>	<span class="ex">setx</span> PATH <span class="st">&quot;%USERPATH%;%PLATFORMTOOLS%&quot;</span></span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>	<span class="bu">echo</span> Added %PLATFORMTOOLS% to path</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> %STUDIO_SDK_PATH%</span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> %PLATFORMTOOLS%</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> SDKMANAGER=%STUDIO_SDK_PATH%<span class="dt">\t</span>ools<span class="dt">\b</span>in<span class="dt">\s</span>dkmanager.bat</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> SDKMANAGER=%STUDIO_SDK_PATH%<span class="dt">\c</span>mdline-tools<span class="dt">\l</span>atest<span class="dt">\b</span>in<span class="dt">\s</span>dkmanager.bat</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a><span class="ex">IF</span> EXIST <span class="st">&quot;%SDKMANAGER%&quot;</span> <span class="er">(</span></span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>	<span class="bu">echo</span> Using sdkmanager: %SDKMANAGER%</span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span> <span class="ex">ELSE</span> <span class="er">(</span></span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>	<span class="bu">set</span> SDKMANAGER=%STUDIO_SDK_PATH%<span class="dt">\c</span>mdline-tools<span class="dt">\l</span>atest<span class="dt">\b</span>in<span class="dt">\s</span>dkmanager.bat</span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>	<span class="ex">IF</span> EXIST <span class="st">&quot;!SDKMANAGER!&quot;</span> <span class="er">(</span></span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>		<span class="bu">echo</span> Using sdkmanager: !SDKMANAGER!</span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>	<span class="kw">)</span> <span class="ex">ELSE</span> <span class="er">(</span></span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>		<span class="bu">echo</span> Unable to locate sdkmanager.bat. Did you run Android Studio and install cmdline-tools after installing<span class="pp">?</span></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>		<span class="ex">%PAUSE%</span></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>		<span class="bu">exit</span> /b 3</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>	<span class="kw">)</span></span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a><span class="ex">call</span> <span class="st">&quot;%SDKMANAGER%&quot;</span> <span class="st">&quot;platform-tools&quot;</span> <span class="st">&quot;platforms;%PLATFORMS_VERSION%&quot;</span> <span class="st">&quot;build-tools;%BUILDTOOLS_VERSION%&quot;</span> <span class="st">&quot;cmake;%CMAKE_VERSION%&quot;</span> <span class="st">&quot;ndk;%NDK_VERSION%&quot;</span></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a><span class="ex">IF</span> /I <span class="st">&quot;%ERRORLEVEL%&quot;</span> NEQ <span class="st">&quot;0&quot;</span> <span class="er">(</span></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>	<span class="bu">echo</span> Update failed. Please check the Android Studio install.</span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>	<span class="ex">%PAUSE%</span></span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>	<span class="bu">exit</span> /b 4</span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="ex">EXIST</span> <span class="st">&quot;%NDKINSTALLPATH%&quot;</span> <span class="er">(</span></span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>	<span class="bu">echo</span> Success!</span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>	<span class="ex">setx</span> NDKROOT <span class="st">&quot;%NDKINSTALLPATH%&quot;</span></span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>	<span class="ex">setx</span> NDK_ROOT <span class="st">&quot;%NDKINSTALLPATH%&quot;</span></span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span> <span class="ex">ELSE</span> <span class="er">(</span></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>	<span class="bu">echo</span> Update failed. Did you accept the license agreement<span class="pp">?</span></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>	<span class="ex">%PAUSE%</span></span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>	<span class="bu">exit</span> /b 5</span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a><span class="ex">%PAUSE%</span></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> /b 0</span></code></pre></div>
 </section>
 </section>
 <section id="unreal-engine-settings" class="level1" data-number="2">

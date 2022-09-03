@@ -203,6 +203,55 @@ There can be multiple basis but they will all have the same number of elements.<
 <section id="linear-regression" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Linear regression</h1>
 </section>
+<section id="my-old-courses" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> my old courses</h1>
+<section id="lin-reg" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Lin Reg</h2>
+<ul>
+<li>Decision: <span class="math inline">\(\frac{1}{2} || y' - y ||^2\)</span></li>
+</ul>
+</section>
+<section id="loss" class="level2" data-number="5.2">
+<h2 data-number="5.2"><span class="header-section-number">5.2</span> 0-1 Loss</h2>
+<ul>
+<li>Loss: <span class="math inline">\(\frac{1}{n}\sum_n sigmoid(-f(y))\)</span></li>
+</ul>
+<p>$$ log loss</p>
+<ul>
+<li>Decision:</li>
+</ul>
+</section>
+<section id="perception" class="level2" data-number="5.3">
+<h2 data-number="5.3"><span class="header-section-number">5.3</span> Perception</h2>
+<ul>
+<li>Outputs : 0 or 1</li>
+<li>Loss: <span class="math inline">\(-(y'-y)(w^Tx)\)</span></li>
+<li>Derivative: <span class="math inline">\(-(y'-y)x\)</span></li>
+</ul>
+</section>
+<section id="logistic-regression" class="level2" data-number="5.4">
+<h2 data-number="5.4"><span class="header-section-number">5.4</span> Logistic Regression</h2>
+<ul>
+<li>Outputs: -1 to 1</li>
+<li></li>
+<li>Loss: <span class="math inline">\(-log(P(X=y'))\)</span>
+<ul>
+<li><span class="math inline">\(-(y'log(y)+(1-y')(log(1-y)))\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="fixed-basis" class="level2" data-number="5.5">
+<h2 data-number="5.5"><span class="header-section-number">5.5</span> Fixed basis</h2>
+<ul>
+<li>Decision: <span class="math inline">\(\phi_i(x) = e^{-(x-r_i)^2}\)</span>
+<ul>
+<li><span class="math inline">\(\phi(x)\)</span> is bounded between 0 and 1</li>
+<li>inversely proportionaly to <span class="math inline">\(dist(x,r_i)\)</span> meaning the closer <span class="math inline">\(x\)</span> is to the basis, the closer <span class="math inline">\(\phi_i(x)\)</span> is to 1</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[ \phi(x) = \begin{bmatrix} e^{-x-r_1}^2 \\ e^{-x-r_2}^2 \\ e^{-x-r_3}^2 \\ e^{-x-r_4}^2\end{bmatrix} \tag{4 basis}\]</span></p>
+</section>
+</section>
 
         </div>
         <div id="footer">

@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Quick Summary Differential Equations</title>
+        <title>Jason Yang - Calculus</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,7 +103,7 @@
         </div>
 
         <div id="content">
-            <h1>Quick Summary Differential Equations</h1>
+            <h1>Calculus</h1>
             
 
             <div class="info">
@@ -115,9 +115,22 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
     
 </div>
+<section id="double-integral" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Double integral</h1>
+<p><span class="math display">\[V \approx \sum\limits_{i = 1}^n {\sum\limits_{j = 1}^m {f\left( {x_i^*,y_j^*} \right)\,\Delta {\kern 1pt} A} }\]</span></p>
+<ul>
+<li>Double integral on f(x,y) that is bounded by x in interval [a,b] and y in interval [c,d]
+<ul>
+<li>Trivial example is a constant function f(x,y) = c, meaning the Double Integral is just the volume of a prism of (b-a)<em>(d-c)</em>c</li>
+</ul></li>
+</ul>
+<p>Fubini’s theorem: Obvious just like swapping double summation we can swap double integrals</p>
+<p><span class="math display">\[\iint\limits_{R}{{f\left( {x,y} \right)\,dA}} = \int_{{\,a}}^{{\,b}}{{\int_{{\,c}}^{{\,d}}{{f\left( {x,y} \right)\,dy}}\,dx}} = \int_{{\,c}}^{{\,d}}{{\int_{{\,a}}^{{\,b}}{{f\left( {x,y} \right)\,dx}}\,dy}}\]</span></p>
+<p>If f(x,y) = g(x)h(y) meaning we can decompose the function of x and y to 2 functions g(x) and h(y) where x and y are independent, we can also decompose the double integral into single integrals</p>
+<p><span class="math display">\[\iint\limits_{R}{{f\left( {x,y} \right)\,dA}} = \iint\limits_{R}{{g\left( x \right)h\left( y \right)\,dA}} = \left( {\int_{{\,a}}^{{\,b}}{{g\left( x \right)\,dx}}} \right)\left( {\int_{{\,c}}^{{\,d}}{{h\left( y \right)\,dy}}} \right)\]</span></p>
 <p>A conceptual and non-calculational approach.</p>
-<section id="functions" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Functions</h4>
+<section id="functions" class="level4" data-number="1.0.0.1">
+<h4 data-number="1.0.0.1"><span class="header-section-number">1.0.0.1</span> Functions</h4>
 <p><span class="math display">\[ FoodEaten :: DayOfWeek \rightarrow AmountOfFoodEaten \]</span> <span class="math display">\[FoodEaten(Sunday) = Alot \]</span> <span class="math display">\[FoodEaten(Monday) = morsels \]</span></p>
 <p>Functions are equations in which we can meta-label the input(independent variable) and output(dependent variable) of our variables.</p>
 <p>This means a single equation can result in multiple different functions depending on our meta-labelling.</p>
@@ -128,8 +141,8 @@ but all functions are equations.</p>
 Implicit functions can only be written as an equation.<br />
 Both behave the same; implicit and explicit is a meta-level syntax detail.</p>
 </section>
-<section id="differential-and-derivatives" class="level4" data-number="0.0.0.2">
-<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Differential and derivatives</h4>
+<section id="differential-and-derivatives" class="level4" data-number="1.0.0.2">
+<h4 data-number="1.0.0.2"><span class="header-section-number">1.0.0.2</span> Differential and derivatives</h4>
 <p>Derivatives of a function tells us how the change of an input from some input value affects the change of an output.</p>
 <p>In programming terms, derivatives are wrappers that is also dependent on the inputs of the function it wraps.<br />
 Derivative of a function will output a function with the same input type.</p>
@@ -138,8 +151,8 @@ Derivative of a function will output a function with the same input type.</p>
 <p>Below is the derivative of the FoodEaten function. <span class="math display">\[ D(FoodEaten(Sunday)) = RateOfFoodEaten(Sunday) = faster pace \]</span></p>
 <p><span class="math display">\[ D(FoodEaten(Monday)) = RateOfFoodEaten(Monday) = slower pace \]</span></p>
 </section>
-<section id="typical-non-differential-equations" class="level4" data-number="0.0.0.3">
-<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> Typical (Non-differential) Equations</h4>
+<section id="typical-non-differential-equations" class="level4" data-number="1.0.0.3">
+<h4 data-number="1.0.0.3"><span class="header-section-number">1.0.0.3</span> Typical (Non-differential) Equations</h4>
 <p><span class="math display">\[ Food + Population = t + ConstantK * Weather\]</span> Equations are relations between two or more variables.</p>
 <p><strong>Main Question in solving Equations - What are the points that fit this specification?</strong><br />
 Specification in this context means the Equation.</p>
@@ -148,8 +161,8 @@ Specification in this context means the Equation.</p>
 What are the possible ways we can design points that satisfy these contraints?</p>
 <p>(Typically these points end up looking like some line or a function)</p>
 </section>
-<section id="differential-equations" class="level4" data-number="0.0.0.4">
-<h4 data-number="0.0.0.4"><span class="header-section-number">0.0.0.4</span> Differential Equations</h4>
+<section id="differential-equations" class="level4" data-number="1.0.0.4">
+<h4 data-number="1.0.0.4"><span class="header-section-number">1.0.0.4</span> Differential Equations</h4>
 <p><span class="math display">\[ D(Population(t)) = ConstantA * (1 - \frac{Population(t)}{FoodEaten(t)}) * D(FoodEaten(t))\]</span></p>
 <p><strong>Main Question in solving Differential Equations - What are the functions that fit these specifications?</strong></p>
 <p>However, specification in the context of Differential equations means equations that also includes derivatives or rates.</p>
@@ -157,23 +170,23 @@ What are the possible ways we can design points that satisfy these contraints?</
 What are the possible ways we can design a function that satisfies these contraints?</p>
 <hr />
 </section>
-<section id="executive-summary" class="level2" data-number="0.1">
-<h2 data-number="0.1"><span class="header-section-number">0.1</span> Executive Summary</h2>
-<section id="notice-similarity" class="level4" data-number="0.1.0.1">
-<h4 data-number="0.1.0.1"><span class="header-section-number">0.1.0.1</span> Notice Similarity</h4>
+<section id="executive-summary" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Executive Summary</h2>
+<section id="notice-similarity" class="level4" data-number="1.1.0.1">
+<h4 data-number="1.1.0.1"><span class="header-section-number">1.1.0.1</span> Notice Similarity</h4>
 <ul>
 <li>Solution of Differential Equation Outputs a set of functions.</li>
 <li>Solution of Equations Outputs a set of points.</li>
 </ul>
 </section>
-<section id="implications" class="level4" data-number="0.1.0.2">
-<h4 data-number="0.1.0.2"><span class="header-section-number">0.1.0.2</span> Implications</h4>
+<section id="implications" class="level4" data-number="1.1.0.2">
+<h4 data-number="1.1.0.2"><span class="header-section-number">1.1.0.2</span> Implications</h4>
 <p>If we have complete understanding of how each component of a system behaves in relation to every other component in said system,<br />
 we can predict, given initial conditions, what the state of the system will be in the future.</p>
 <p>Simply put, Differential equations lets us see the future (assuming differential wrt time).</p>
 </section>
-<section id="ode-vs-pde" class="level4" data-number="0.1.0.3">
-<h4 data-number="0.1.0.3"><span class="header-section-number">0.1.0.3</span> ODE vs PDE</h4>
+<section id="ode-vs-pde" class="level4" data-number="1.1.0.3">
+<h4 data-number="1.1.0.3"><span class="header-section-number">1.1.0.3</span> ODE vs PDE</h4>
 <ul>
 <li>ODE - single variable(time)
 <ul>
@@ -191,11 +204,12 @@ we can predict, given initial conditions, what the state of the system will be i
 </ul>
 <p>ODE’s are really 1 variable PDE’s</p>
 </section>
-<section id="vector-fields" class="level4" data-number="0.1.0.4">
-<h4 data-number="0.1.0.4"><span class="header-section-number">0.1.0.4</span> Vector fields</h4>
+<section id="vector-fields" class="level4" data-number="1.1.0.4">
+<h4 data-number="1.1.0.4"><span class="header-section-number">1.1.0.4</span> Vector fields</h4>
 <p>One can imagine solutions of a differential eq to be multiple functions that fit a vector field.</p>
 <p>It’s easier to imagine if the vector field is static.<br />
 But static vector fields only exist when the system is at a steady state.</p>
+</section>
 </section>
 </section>
 

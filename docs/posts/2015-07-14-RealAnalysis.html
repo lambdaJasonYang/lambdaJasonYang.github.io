@@ -219,6 +219,40 @@ A real number is represented by a partition of <span class="math inline">\(\math
 </ul>
 </section>
 </section>
+<section id="riemann-vs-lesbesgue-integral" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Riemann vs Lesbesgue integral</h1>
+<section id="riemann" class="level2" data-number="8.1">
+<h2 data-number="8.1"><span class="header-section-number">8.1</span> Riemann</h2>
+<ul>
+<li>Area under the curve by summing infinitely small deltas.</li>
+</ul>
+<p>Problems:</p>
+<ul>
+<li>Cannot expand to higher dimensions</li>
+<li>Dependent on continuity</li>
+</ul>
+<p><span class="math display">\[lim_{n \to \infty} \int^{b}_{a} f_n(x)dx \overset{?}{=} \int^{b}_{a} lim_{n \to \infty} f_n(x)dx\]</span></p>
+<p>The above equality is contingent on uniform converge of the function f, for Riemann integrals BUT<br />
+we know empirically that the equality is true for far weaker constraints.</p>
+</section>
+<section id="lesbesgue" class="level2" data-number="8.2">
+<h2 data-number="8.2"><span class="header-section-number">8.2</span> Lesbesgue</h2>
+<ul>
+<li>Instead of delta on x-axis, we choose deltas on y-axis.
+<ul>
+<li>visually Horizontal slices or rectangles</li>
+</ul></li>
+<li>Since we choose delta on y-axis we multiply it by the preImage.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>            <span class="ex">Vector</span> Space</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                 <span class="kw">|</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="ex">Normed</span> Space</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            <span class="ex">/</span>         <span class="dt">\</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Inner Product Space   Banach Space</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="ex">\ </span>        /               </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>          <span class="ex">Hilbert</span> Space</span></code></pre></div>
+</section>
+</section>
 
         </div>
         <div id="footer">

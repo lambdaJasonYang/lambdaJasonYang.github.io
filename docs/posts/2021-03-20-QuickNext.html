@@ -128,7 +128,11 @@
 <li><a href="#solution-to-stale-ssg---isr"><span class="toc-section-number">6.3</span> Solution to Stale SSG - ISR</a></li>
 </ul></li>
 <li><a href="#self-is-not-defined"><span class="toc-section-number">7</span> Self is Not Defined</a></li>
-<li><a href="#exporting-as-static-site"><span class="toc-section-number">8</span> Exporting as static site</a></li>
+<li><a href="#exporting-as-static-site"><span class="toc-section-number">8</span> Exporting as static site</a>
+<ul>
+<li><a href="#images"><span class="toc-section-number">8.1</span> Images</a></li>
+<li><a href="#dynamic-routes-dont-work-in-ssg"><span class="toc-section-number">8.2</span> Dynamic Routes DONT work in SSG</a></li>
+</ul></li>
 </ul></div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">npx</span> create-next-app@latest <span class="at">--ts</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
@@ -346,26 +350,45 @@ All we need are the <code>out</code> files</p>
 </ul></li>
 </ol>
 <div class="sourceCode" id="cb8" data-filename="next.config.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import('next').NextConfig} */</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> isProd <span class="op">=</span> <span class="kw">false</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> nextConfig <span class="op">=</span> {</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">reactStrictMode</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">swcMinify</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">assetPrefix</span><span class="op">:</span> isProd <span class="op">?</span> <span class="st">'https://cdn.productionsite.com'</span> <span class="op">:</span> <span class="st">'/test1/out'</span><span class="op">,</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">basePath</span><span class="op">:</span> isProd <span class="op">?</span> <span class="st">'https://cdn.productionsite.com'</span> <span class="op">:</span> <span class="st">'/test1/out'</span><span class="op">,</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">experimental</span><span class="op">:</span> {</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">images</span><span class="op">:</span> {</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">unoptimized</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span>  </span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> nextConfig</span></code></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PHASE_DEVELOPMENT_SERVER } <span class="op">=</span> <span class="pp">require</span>(<span class="st">'next/constants'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> (phase<span class="op">,</span> { defaultConfig }) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (phase <span class="op">===</span> PHASE_DEVELOPMENT_SERVER) {</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="co">/* development only config options here */</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">reactStrictMode</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">assetPrefix</span><span class="op">:</span> <span class="st">&quot;&quot;</span><span class="op">,</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">basePath</span><span class="op">:</span> <span class="st">&quot;&quot;</span><span class="op">,</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">experimental</span><span class="op">:</span> {</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="dt">images</span><span class="op">:</span> {</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>          <span class="dt">unoptimized</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        }<span class="op">,</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* config options for all phases except development here */</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">reactStrictMode</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">assetPrefix</span><span class="op">:</span> <span class="st">&quot;/out&quot;</span><span class="op">,</span> <span class="co">//static assets are in the /out folder</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">basePath</span><span class="op">:</span> <span class="st">&quot;/out&quot;</span><span class="op">,</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">experimental</span><span class="op">:</span> {</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">images</span><span class="op">:</span> {</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="dt">unoptimized</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<section id="images" class="level2" data-number="8.1">
+<h2 data-number="8.1"><span class="header-section-number">8.1</span> Images</h2>
+<p>Also note that referring to images in *.jsx must be <code>/vercel.svg</code>, NOT <code>./vercel.svg</code> or <code>vercel.svg</code>.<br />
+Example: <code>&lt;Image src={"/vercel.svg"} width={50} height={50}&gt;&lt;/Image&gt;</code></p>
+</section>
+<section id="dynamic-routes-dont-work-in-ssg" class="level2" data-number="8.2">
+<h2 data-number="8.2"><span class="header-section-number">8.2</span> Dynamic Routes DONT work in SSG</h2>
 <ul>
-<li>Cool thing about nextjs is that it generates html when possible unlike react where html is just the entry-point for js.<br />
-</li>
-<li>Dynamic routes don’t really work.
+<li>Dynamic routes don’t really work but the build still runs
 <ul>
-<li>We require <code>getStaticPaths()</code> to pregenerate the route.</li>
+<li><code>getStaticPaths()</code> is used to pregenerate the routes which defeats the whole purpose of “Dynamic” routes.</li>
 </ul></li>
 </ul>
 <div class="sourceCode" id="cb9" data-filename="pages/[car].js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> Head <span class="im">from</span> <span class="st">'next/head'</span></span>
@@ -408,6 +431,7 @@ All we need are the <code>out</code> files</p>
 <span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        <span class="dt">props</span><span class="op">:</span> {BLEHdata}</span>
 <span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
 </section>
 
         </div>

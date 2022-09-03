@@ -132,3 +132,17 @@ is given back through the 1 "red mix anti-yellow car" in the null space
 * Typically a random matrix has complex and real eigenvalues regardless of elements are only real
 * **Spectral Thm: A Hermitian(symmetric) matrix that can have complex or real elements will always have real eigenvalues**
   * Eigenvectors are orthogonal
+
+
+# 2 by 2 matrix  
+
+## Positive definite matrices
+
+Given a symmetric 2 by 2 matrix, four ways to tell if positive definite:  
+
+1. Eigenvalue test: $\lambda_1 \gt 0, \lambda_2 \gt 0$
+2. Determinants test: $a \gt 0, ac - b^2 \gt 0$
+3. Pivot test: $a \gt 0, \frac{ac-b^2}{a} \gt 0$
+4. $x^TAx$ is positive definite except when $x=0$  (the actual definition of positive definite)
+
+Note that $x^TAx$ results in an eqn like $2x_1^2+12x_1x_2+18x_2^2$ and if this eqn is postive for all real $x_1, x_2$ then the matrix $A$ is postive definite.
