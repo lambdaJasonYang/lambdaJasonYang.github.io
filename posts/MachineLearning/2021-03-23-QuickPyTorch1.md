@@ -220,7 +220,7 @@ class MainDataset(data.Dataset):
 ```{.python group=1 glabel="template"}
 # ONLY THE TEMPLATE, DO NOT COPY AND USE THIS
 class templateDataset(data.Dataset):
-    def__init__(self,size):
+    def __init__(self,size):
         super().__init__()
         self.size = size
         self.generateData()
