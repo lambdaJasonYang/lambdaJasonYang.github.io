@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - BioChem</title>
+        <title>Jason Yang - Graph theory</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,7 +103,7 @@
         </div>
 
         <div id="content">
-            <h1>BioChem</h1>
+            <h1>Graph theory</h1>
             
 
             <div class="info">
@@ -115,8 +115,108 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'algorithms'." href="../tags/algorithms.html">algorithms</a>
     
 </div>
-<div id="TOC"></div>
-
+<div id="TOC"><ul>
+<li><a href="#cuts"><span class="toc-section-number">1</span> Cuts</a></li>
+<li><a href="#undirected-graph"><span class="toc-section-number">2</span> Undirected Graph</a></li>
+<li><a href="#directed-graph"><span class="toc-section-number">3</span> Directed Graph</a></li>
+<li><a href="#mst"><span class="toc-section-number">4</span> MST</a>
+<ul>
+<li><a href="#bfs"><span class="toc-section-number">4.1</span> BFS</a>
+<ul>
+<li><a href="#adjacency-list"><span class="toc-section-number">4.1.1</span> Adjacency list</a></li>
+</ul></li>
+</ul></li>
+</ul></div>
+<section id="cuts" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Cuts</h1>
+<p>Analogous to the partitions of set. In fact, when forming possible cuts, only the elements of the set matter.</p>
+<ul>
+<li>Cut : a partition of the NODES of a graph, NOT the edges.</li>
+<li>Cut-Set: The boundary edges that connects these two cuts or partitions.
+<ul>
+<li>Elements of the cut-set are edges that exist in both Cuts bridging one cut to the other cut.</li>
+<li>In directed graph Cut-Set(A,B) only counts edge with tail in A and head in B.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[Cut_A= \{a0,a1,a2,a3\}\]</span> <span class="math display">\[Cut_B=\{b0,b1,b2,b3\}\]</span></p>
+<hr />
+</section>
+<section id="undirected-graph" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Undirected Graph</h1>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020200a202020200a2020737562677261706820636c75737465725f30207b0a202020207374796c653d66696c6c65643b0a20202020636f6c6f723d6c69676874677265793b0a202020206e6f6465205b7374796c653d66696c6c65642c636f6c6f723d77686974655d3b0a202020206130202d3e206131202d3e206132205b6172726f77686561643d6e6f6e655d3b0a202020206133202d3e206132205b6172726f77686561643d6e6f6e655d3b200a202020206c6162656c203d20224375742041223b0a20207d0a0a2020737562677261706820636c75737465725f31207b0a202020206e6f6465205b7374796c653d66696c6c65645d3b0a202020206230202d3e206231202d3e206232202d3e206233205b6172726f77686561643d6e6f6e655d3b0a202020206c6162656c203d20224375742042223b0a20202020636f6c6f723d626c75650a20207d0a20206133202d3e206231205b6172726f77686561643d6e6f6e6520636f6c6f723d7265645d3b0a20206131202d3e206233205b6172726f77686561643d6e6f6e6520636f6c6f723d7265645d3b0a20206232202d3e206131205b6172726f77686561643d6e6f6e6520636f6c6f723d7265645d3b0a20206133202d3e206130205b6172726f77686561643d6e6f6e655d3b0a0a0a7d"></figure>
+<p><span class="math display">\[\text{Cut-Set(A,B) = Cut-Set(B,A)}\]</span></p>
+<p><span class="math display">\[{\color{red}\text{Cut-Set(A,B)}}=\{e \in edges\ |\ e\ is\ {\color{red}RED}\}\]</span></p>
+<hr />
+</section>
+<section id="directed-graph" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Directed Graph</h1>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a2020200a202020200a2020737562677261706820636c75737465725f30207b0a202020207374796c653d66696c6c65643b0a20202020636f6c6f723d6c69676874677265793b0a202020206e6f6465205b7374796c653d66696c6c65642c636f6c6f723d77686974655d3b0a202020206130202d3e206131202d3e206132203b0a202020206133202d3e206132203b200a202020206c6162656c203d20224375742041223b0a20207d0a0a2020737562677261706820636c75737465725f31207b0a202020206e6f6465205b7374796c653d66696c6c65645d3b0a202020206230202d3e206231202d3e206232202d3e206233203b0a202020206c6162656c203d20224375742042223b0a20202020636f6c6f723d626c75650a20207d0a20206133202d3e206231205b636f6c6f723d7265645d3b0a20206131202d3e206233205b636f6c6f723d7265645d3b0a20206232202d3e206131205b636f6c6f723d707572706c655d3b0a20206133202d3e206130203b0a0a0a7d0a40656e64756d6c"></figure>
+<p><span class="math display">\[{\color{red}\text{Cut-Set(A,B)}}=\{e \in edges\ |\ e\ is\ {\color{red}RED}\}\]</span></p>
+<p><span class="math display">\[{\color{purple}\text{Cut-Set(B,A)}}=\{e \in edges\ |\ e\ is\ {\color{purple}PURPLE}\}\]</span></p>
+<hr />
+<ul>
+<li>Cut with n vertices <span class="math inline">\(\Rightarrow 2^n\)</span> cuts
+<ul>
+<li>2 = Either choose a vertex to be in a partition or don’t choose it</li>
+<li>The Powerset of a set of nodes</li>
+</ul></li>
+<li>Minimum Cuts
+<ul>
+<li>Minimize number elements in the Cut-Set</li>
+<li>Most efficient way to divide a network assuming equal weight</li>
+</ul></li>
+</ul>
+</section>
+<section id="mst" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> MST</h1>
+<p>Obviously to Span a tree, one must choose at least 1 edge of a Cut-Set.</p>
+<ul>
+<li>Choosing an edge to a cut-set = Union of 2 partitions</li>
+</ul>
+<p>The minimum element in a Cut-Set is the edge contained in all MST.</p>
+<section id="bfs" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> BFS</h2>
+<section id="adjacency-list" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1"><span class="header-section-number">4.1.1</span> Adjacency list</h3>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a2020200a2020323b0a0a202030202d3e2031202d3e20343b0a202031202d3e20333b0a202030202d3e20333b0a202033202d3e20353b0a202035202d3e20330a0a7d0a40656e64756d6c"></figure>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">3</span>],[<span class="dv">3</span>,<span class="dv">4</span>],[<span class="dv">2</span>],[<span class="dv">5</span>],[],[<span class="dv">3</span>]]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span>  [[<span class="dv">0</span> <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(a))] <span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(a))]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Node:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,data):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.children <span class="op">=</span> []</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> printout(<span class="va">self</span>):</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="va">self</span>.data)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adjToMat(adj,mat):</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row,adjlist <span class="kw">in</span> <span class="bu">enumerate</span>(adj):</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> col <span class="kw">in</span> adjlist:</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>           mat[row][col] <span class="op">=</span> <span class="dv">1</span> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mat</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> adjToMat(a,b)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prettyMat(x):</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    colLabel <span class="op">=</span> <span class="st">&quot;  &quot;</span>.join([<span class="bu">str</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(x))])</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;   </span><span class="sc">{</span>colLabel<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row,i <span class="kw">in</span> <span class="bu">enumerate</span>(x):</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>row<span class="sc">}</span><span class="ss"> </span><span class="sc">{i}</span><span class="ss">&quot;</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>prettyMat(c)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">#    0  1  2  3  4  5</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 [0, 1, 0, 1, 0, 0]</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 [0, 0, 0, 1, 1, 0]</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 [0, 0, 1, 0, 0, 0]</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 [0, 0, 0, 0, 0, 1]</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 [0, 0, 0, 0, 0, 0]</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 [0, 0, 0, 1, 0, 0]</span></span></code></pre></div>
+</section>
+</section>
+</section>
 
         </div>
         <div id="footer">
