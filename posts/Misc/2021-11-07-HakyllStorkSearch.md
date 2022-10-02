@@ -52,3 +52,29 @@ for debian:
 ```bash
 ./stork-ubuntu-20-04 build --input "./docs/searchindex.toml" --output "./docs/storksearch.st"  
 ```
+
+
+# git merge conflict
+
+typically you get a git merge conflict if you update your search index and want to merge to remote github.   
+You want to take the local new stork search so do this.   
+
+Attempt a gitmerge with vscode, then you should see this with `git status`  
+
+```.txt
+On branch main
+Your branch and 'origin/main' have diverged,
+and have 1 and 1 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   docs/storksearch.st
+```
+
+```bash
+git checkout --ours /home/rhel/userjy.github.io/docs/storksearch.st
+git add .
+```
+
+then vscode should allow you to sync
