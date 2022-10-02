@@ -115,7 +115,9 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<div id="TOC"></div>
+<div id="TOC"><ul>
+<li><a href="#git-merge-conflict"><span class="toc-section-number">1</span> git merge conflict</a></li>
+</ul></div>
 <p><strong>Hakyll Setup Series</strong></p>
 <ol type="1">
 <li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
@@ -150,6 +152,23 @@
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./stork-amazon-linux</span> build <span class="at">--input</span> <span class="st">&quot;./docs/searchindex.toml&quot;</span> <span class="at">--output</span> <span class="st">&quot;./docs/storksearch.st&quot;</span></span></code></pre></div>
 <p>for debian:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./stork-ubuntu-20-04</span> build <span class="at">--input</span> <span class="st">&quot;./docs/searchindex.toml&quot;</span> <span class="at">--output</span> <span class="st">&quot;./docs/storksearch.st&quot;</span>  </span></code></pre></div>
+<section id="git-merge-conflict" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> git merge conflict</h1>
+<p>typically you get a git merge conflict if you update your search index and want to merge to remote github.<br />
+You want to take the local new stork search so do this.</p>
+<p>Attempt a gitmerge with vscode, then you should see this with <code>git status</code></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode .txt"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>On branch main</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Your branch and 'origin/main' have diverged,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>and have 1 and 1 different commits each, respectively.</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  (use &quot;git pull&quot; to merge the remote branch into yours)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>Unmerged paths:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  (use &quot;git add &lt;file&gt;...&quot; to mark resolution)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        both modified:   docs/storksearch.st</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">--ours</span> /home/rhel/userjy.github.io/docs/storksearch.st</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span></code></pre></div>
+<p>then vscode should allow you to sync</p>
+</section>
 
         </div>
         <div id="footer">
