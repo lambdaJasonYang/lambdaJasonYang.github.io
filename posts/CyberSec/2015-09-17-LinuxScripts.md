@@ -1,6 +1,6 @@
 ---
 title: Linux annoying setup commands
-tags: tech, DevOps
+tags: tech, DevOps, linux
 ---
 
 ```plantuml

@@ -112,31 +112,60 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'DevOps'." href="../tags/DevOps.html">DevOps</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'Terraform'." href="../tags/Terraform.html">Terraform</a>, <a title="All pages tagged 'DevOps'." href="../tags/DevOps.html">DevOps</a>, <a title="All pages tagged 'aws'." href="../tags/aws.html">aws</a>
     
 </div>
 <p>TerraForm is declarative, apply is idempotent</p>
-<pre class="text"><code>terraform {
-    required_providers {
-        aws = {
-            source = &quot;hashicorp/aws&quot;
-            version = &quot;~&gt; 3.0&quot;
-        }
-    }
-}
-
-provider &quot;aws&quot; {
-    region = &quot;us-east-1&quot;
-}
-
-resource &quot;aws_instance&quot; &quot;example&quot; {
-    ami = &quot;ami-01189924&quot;
-    instance_type = &quot;t2.micro&quot;
-}</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">terraform {</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    required_providers {</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">        aws = {</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">            source = &quot;hashicorp/aws&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">            version = &quot;~&gt; 3.0&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">        }</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">    }</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">provider &quot;aws&quot; {</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">    region = &quot;us-east-1&quot;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">}</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">resource &quot;aws_instance&quot; &quot;example&quot; {</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">    ami = &quot;ami-05fa00d4c63e32376&quot;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">    instance_type = &quot;t2.micro&quot;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="at">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">terraform</span> init <span class="co">#downloads the terraform modules</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">terraform</span> plan <span class="co">#query aws API and see what will be deployed and its settings</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">terraform</span> apply <span class="co">#starts the instance in aws</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">terraform</span> destroy</span></code></pre></div>
+<section id="keywords" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> keywords</h1>
+<ul>
+<li><code>resource "aws_instance" "example"</code> : creates a aws_instance if not exist</li>
+<li><code>data "aws_vpc" "default_vpc"</code> : refers to pre-existing aws_vpc</li>
+</ul>
+</section>
+<section id="theory" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Theory</h1>
+<ul>
+<li>State file : has all the secrets and
+<ul>
+<li>can keep it in s3</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode .txt"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>├── main.tf</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>├── .terraform</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>│   └── providers</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>│       └── registry.terraform.io</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>│           └── hashicorp</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>│               └── aws</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>│                   └── 3.75.2</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>│                       └── linux_amd64</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>│                           └── terraform-provider-aws_v3.75.2_x5</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>├── .terraform.lock.hcl</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>├── terraform.tfstate</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>└── terraform.tfstate.backup</span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">

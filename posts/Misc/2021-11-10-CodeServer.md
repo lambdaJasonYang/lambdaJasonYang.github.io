@@ -1,6 +1,7 @@
 ---
 title: Code-Server
 tags: prog
+toc: y
 ---
 
 Without HTTPS, SSL Cert, things like Coq, Lean, wont work. Extensions wont show details, etc. Codeserver 3.8.0 is the last version that works without SSL.
@@ -64,6 +65,34 @@ Note we DO NOT need to install VsCodeOpn.crt on our browser.
 
 
 
+# Updating Code-server
+
+## RHEL
+
+* Unliked in the offical documents, `sudo rpm -i code-server...` will error about your preinstalled code-server so you need to add a `-U` flag to it.
+
+```bash
+curl -fOL https://github.com/coder/code-server/releases/download/v$VERSION/code-server-$VERSION-amd64.rpm
+sudo rpm -U -i code-server-$VERSION-amd64.rpm #ADD THE '-U' flag here
+sudo systemctl enable --now code-server@$USER
+```
+
+Next your code-server **should fail** to start if running on port 80 or 443 or anything lower than 1024.
+
+```.txt
+12:15 PM [2022-10-02T16:15:06.060Z] error parent:17517 Error: EACCES: permission denied, mkdir '20221002-1215-01-'code-server
+12:15 PM [2022-10-02T16:15:06.060Z] error parent:17517 Uncaught exception: EACCES: permission denied, mkdir '20221002-1215-01-'code-server
+12:15 PM [2022-10-02T16:15:06.058Z] error listen EACCES: permission denied 0.0.0.0:443 code-server
+```
+
+The solution is below:
+
+```bash
+# non-root node server cant bind to ports lower than 1024
+# Allows code-server to listen on ports lower than 1024, including 443.
+sudo setcap cap_net_bind_service=+ep /usr/lib/code-server/lib/node
+```
+
 
 
 # Extensions
@@ -105,31 +134,31 @@ sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < kernel.json.in > kernel.
 ```
 
 
+
+# Fixing auto-complete bug
+
+Problem: VSCode command palette may cache old and non-existent paths. (Opening a folder or Workspace will autofill an old non-existant path)
+
+* Solution: Ctrl+Shift+P > File: Clear Recently Opened
+
+
+# Extensions
+
+* gitignore - Ctrl Shift P , `Add gitignore`
+* git graph
+
+
+# Cern ROOT C++ interpreter
+
 ```bash
-./stork-ubuntu-20-04 build --input "./docs/searchindex.toml" --output "./docs/storksearch.st"  
+conda config --env --add channels conda-forge
+conda install root
 ```
 
-# Plumbing
 
-* Problem: VSCode command palette may cache old and non-existent paths. (Opening a folder or Workspace default autofills a bad path)
-  * Solution: Ctrl+Shift+P > File: Clear Recently Opened
+# Spring boot
 
-
-  # Extensions
-
-  * gitignore - Ctrl Shift P , `Add gitignore`
-  * git graph
+* Java Extension Pack - microsoft vscjava
+* Spring boot Extension Pack
 
 
-  # Cern ROOT C++ interpreter
-
-  ```bash
-  conda config --env --add channels conda-forge
-  conda install root
-  ```
-
-
-  # Spring boot
-
-  * Java Extension Pack - microsoft vscjava
-  * Spring boot Extension Pack

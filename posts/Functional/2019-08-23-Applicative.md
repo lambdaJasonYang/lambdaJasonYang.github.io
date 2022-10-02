@@ -1,6 +1,6 @@
 ---
 title: Applicative
-tags: mathcs, functional, categorytheory, puremath
+tags: mathcs, functional
 ---
 
 ```hs

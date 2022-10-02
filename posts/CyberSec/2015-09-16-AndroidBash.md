@@ -1,6 +1,6 @@
 ---
 title: Android and Bash
-tags: tech
+tags: tech, android
 ---
 
 Note if within phone you omit `adb shell` to all bash commands

@@ -128,10 +128,8 @@
 <li><a href="#firewalld"><span class="toc-section-number">4.2</span> firewalld</a></li>
 </ul></li>
 <li><a href="#bashrc-zshrc"><span class="toc-section-number">5</span> bashrc zshrc</a></li>
-<li><a href="#conda-initialize"><span class="toc-section-number">6</span> &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</a></li>
-<li><a href="#contents-within-this-block-are-managed-by-conda-init"><span class="toc-section-number">7</span> !! Contents within this block are managed by ‘conda init’ !!</a></li>
-<li><a href="#install-docker"><span class="toc-section-number">8</span> Install docker</a></li>
-<li><a href="#wolfram"><span class="toc-section-number">9</span> Wolfram</a></li>
+<li><a href="#install-docker"><span class="toc-section-number">6</span> Install docker</a></li>
+<li><a href="#wolfram"><span class="toc-section-number">7</span> Wolfram</a></li>
 </ul></div>
 <ol type="1">
 <li><p>RHEL makes 2 accounts, the root and your default user which i named rhel.</p></li>
@@ -200,33 +198,42 @@
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.zprofile</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> kubectl=<span class="st">&quot;minikube kubectl --&quot;</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SAM_CLI_TELEMETRY</span><span class="op">=</span>0</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a># !! Contents within this block are managed by 'conda init' !!</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>__conda_setup=&quot;$('/home/kali/miniconda3/bin/conda' 'shell.zsh' 'hook' 2&gt; /dev/null)&quot;</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>if [ $? -eq 0 ]; then</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    eval &quot;$__conda_setup&quot;</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>else</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    if [ -f &quot;/home/kali/miniconda3/etc/profile.d/conda.sh&quot; ]; then</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        . &quot;/home/kali/miniconda3/etc/profile.d/conda.sh&quot;</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    else</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        export PATH=&quot;/home/kali/miniconda3/bin:$PATH&quot;</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    fi</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>fi</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>unset __conda_setup</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>export PATH=&quot;$PATH:/home/kali/.local/bin&quot;</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>export PATH=&quot;$HOME/.elan/bin:$PATH&quot;</span></code></pre></div>
 </section>
-<section id="conda-initialize" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</h1>
+<section id="install-docker" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Install docker</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf config-manager <span class="at">--add-repo</span><span class="op">=</span>https://download.docker.com/linux/centos/docker-ce.repo</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf remove runc</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install docker-ce</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install docker-compose-plugin</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable docker</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd docker</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-aG</span> docker <span class="va">$USER</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 666 /var/run/docker.sock</span></code></pre></div>
 </section>
-<section id="contents-within-this-block-are-managed-by-conda-init" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> !! Contents within this block are managed by ‘conda init’ !!</h1>
-<p>__conda_setup=“$(‘/home/kali/miniconda3/bin/conda’ ‘shell.zsh’ ‘hook’ 2&gt; /dev/null)” if [ $? -eq 0 ]; then eval “<span class="math inline">\(__conda_setup&quot; else  if [ -f &quot;/home/kali/miniconda3/etc/profile.d/conda.sh&quot; ]; then  . &quot;/home/kali/miniconda3/etc/profile.d/conda.sh&quot;  else  export PATH=&quot;/home/kali/miniconda3/bin:\)</span>PATH” fi fi unset __conda_setup # &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</p>
-<p>export PATH=“<span class="math inline">\(PATH:/home/kali/.local/bin&quot; export PATH=&quot;\)</span>HOME/.elan/bin:$PATH”</p>
-</section>
-<section id="install-docker" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Install docker</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf config-manager <span class="at">--add-repo</span><span class="op">=</span>https://download.docker.com/linux/centos/docker-ce.repo</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf remove runc</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install docker-ce</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install docker-compose-plugin</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable docker</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd docker</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-aG</span> docker <span class="va">$USER</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 666 /var/run/docker.sock</span></code></pre></div>
-</section>
-<section id="wolfram" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Wolfram</h1>
+<section id="wolfram" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Wolfram</h1>
 <ul>
 <li>follow the instructions</li>
 <li>also chmod -R 777 the wolfram engine</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install alsa-lib</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install alsa-lib</span></code></pre></div>
 </section>
 
         </div>

@@ -116,12 +116,25 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#bootloader"><span class="toc-section-number">1</span> Bootloader</a></li>
+<li><a href="#section-1"><span class="toc-section-number">1</span> Section 1</a>
+<ul>
+<li><a href="#terms"><span class="toc-section-number">1.1</span> Terms</a></li>
+</ul></li>
 </ul></div>
-<p>following xv6</p>
-<section id="bootloader" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Bootloader</h1>
-<p><code>entry.S</code> is our source code.</p>
+<section id="section-1" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Section 1</h1>
+<section id="terms" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Terms</h2>
+<ul>
+<li><strong>process</strong> - Protected <strong>address space</strong> + 1 or more <strong>threads</strong></li>
+<li><strong>thread</strong> - virtual cores
+<ul>
+<li>Program coutner</li>
+</ul></li>
+<li><strong>unprivileged instruction</strong> - like <code>ADD</code> or <code>MOV</code> which read/write to memory that both the user and kernel level can use.</li>
+<li><strong>privileged instruction</strong> - Kernel mode instructions like enabling/disabling <strong>interrupts</strong>. If a user could disable interrupts, user process could run on hardware thread indefinitely.</li>
+</ul>
+</section>
 </section>
 
         </div>

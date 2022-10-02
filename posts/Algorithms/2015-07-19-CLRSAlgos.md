@@ -11,9 +11,11 @@ tags: mathcs, algorithms
 
 ## DP
 
-* Count the number of ways
-  * Count number of ways to reach n-th step, taking {1,2} steps. (Fibonacci)
-  * Count number of ways to get sum n, selecting {1,2,3,4,5,6} any number of times.
+
+
+* State - Find a Well-founded relation (Tree, List, Etc) 
+* Moves - 
+* Validate - Check if Move fulfils constraint 
 
 
 # Recursion vs Tail-recursion

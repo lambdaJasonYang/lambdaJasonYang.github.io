@@ -1,6 +1,6 @@
 ---
 title: Lean Mathlib
-tags: lean, mathcs, puremath ,categorytheory
+tags: lean, mathcs
 toc: y
 ---
 

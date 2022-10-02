@@ -1,6 +1,6 @@
 ---
 title: Very Long Lean - Dependent Type
-tags: lean, mathcs, puremath ,categorytheory
+tags: lean, mathcs
 toc: y
 ---
 

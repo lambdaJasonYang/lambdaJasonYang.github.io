@@ -1,6 +1,6 @@
 ---
 title: Implementing Stream with lambdas
-tags: prog, mathcs
+tags: prog, mathcs, functional
 ---
 
 ```python

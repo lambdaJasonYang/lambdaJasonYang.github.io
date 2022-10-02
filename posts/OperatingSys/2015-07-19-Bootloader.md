@@ -4,20 +4,28 @@ tags: prog, OS
 toc: y
 ---
 
-# Summary
+# Bootloader
 
-## Simple
+## Summary
 
 1. BIOS reads first 512 bytes  
 2. Check for magic 2-byte at end  
 3. Loads the 512 bytes
 
-## Extra
+## Theory 
 
 * The 512 bytes is in the first boot sector of the bootable drive.
 * The magic 2-bytes is `0x55 0xaa`
 
-# Implement
+```asm
+e9 fd ff 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 29 more lines with sixteen zero-bytes each ]
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 55 aa
+```
+
+
+## Implement
 
 Using nasm x86 asm
 
@@ -25,25 +33,33 @@ Using nasm x86 asm
 sudo apt install nasm
 sudo apt-get install qemu-system
 
-nasm -f bin boot.bin -o boot.asm
+nasm -fbin boot.asm -o boot.bin
 qemu-system-x86_64 -nographic boot.bin 
 ```
-single dollar = current address  
-double dollar = section start  
-  
-(\$-\$\$) = (current addr - section start) = length of previous code  
-db := define byte  
 
 Zero out 510 bytes, then add the 2-byte bootloader identifier 0x55 0xaa
 
-```asm
+```{.asm filename=boot.asm}
 jmp $
 times 510-($-$$) db 0
 db 0x55, 0xaa
 ```
+```{.txt filename=output}
+Booting from Hard Disk...
+```
+`jmp $` means jump back to this line AKA infinite loop.
+
+single dollar = current address  
+double dollar = section start  
+  
+`(\$-\$\$)` = (current addr - section start) = length of previous code  
+db := define byte  
+
+`db 0x55, 0xaa` is equivalent to `dw 0xaa55`
+
 510 - length of previous code = allows us to fill the memory to 510 bytes 
 
----
+
 
 BIOS (vs UEFI)
 

@@ -1,6 +1,6 @@
 ---
 title: Very Long Lean
-tags: lean, mathcs, puremath ,categorytheory
+tags: lean, mathcs
 toc: y
 ---
 
@@ -64,26 +64,3 @@ B -| (A -> B)
 
 $$\cfrac{\vdash b}{ha \vdash b}$$
 
-::: {.hobbies group="hi" glabel="do"}
-hafe
-:::
-
-::: {.hobbies group="hi" glabel="do"}
-hafe
-:::
-
-::: {.hobbies group="hi" glabel="do"}
-hafe
-:::
-
-::: {.hobbies group="hi2" glabel="do2"}
-hafe
-:::
-
-::: {.hobbies group="hi2" glabel="do2"}
-hafe
-:::
-
-::: {.hobbies group="hi2" glabel="do2"}
-hafe
-:::

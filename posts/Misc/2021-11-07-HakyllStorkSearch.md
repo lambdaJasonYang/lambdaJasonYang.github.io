@@ -40,7 +40,15 @@ $endfor$
                 >>= loadAndApplyTemplate "templates/search.toml" indexCtx
 ```
 
+for rhel:
+
 ```bash
 #on RHEL
 ./stork-amazon-linux build --input "./docs/searchindex.toml" --output "./docs/storksearch.st"
+```
+
+for debian:
+
+```bash
+./stork-ubuntu-20-04 build --input "./docs/searchindex.toml" --output "./docs/storksearch.st"  
 ```

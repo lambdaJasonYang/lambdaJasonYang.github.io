@@ -1,6 +1,6 @@
 ---
 title: Loading and Plotting Financial Data
-tags: prog, python, musings
+tags: prog, python, musings, misc
 ---
 
 ## Python  

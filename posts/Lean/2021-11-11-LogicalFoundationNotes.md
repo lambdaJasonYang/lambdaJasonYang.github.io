@@ -1,6 +1,6 @@
 ---
 title: Logical Foundations notes
-tags: mathcs, logic
+tags: lean, mathcs
 toc: y
 ---
 

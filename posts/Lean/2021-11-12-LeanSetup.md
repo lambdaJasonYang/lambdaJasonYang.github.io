@@ -1,6 +1,6 @@
 ---
 title: LeanSetup
-tags: lean, mathcs, puremath ,categorytheory
+tags: lean, mathcs
 toc: y
 ---
 

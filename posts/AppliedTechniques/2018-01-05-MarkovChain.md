@@ -1,6 +1,6 @@
 ---
 title: Markov Chain and State machines
-tags: mathcs, AI, statistics
+tags: mathcs, AI, stats, appliedmath
 toc: y
 ---
 

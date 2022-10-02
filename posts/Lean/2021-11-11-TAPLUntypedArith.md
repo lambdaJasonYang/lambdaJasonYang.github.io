@@ -1,6 +1,6 @@
 ---
 title: TAPL Untyped Arith
-tags: mathcs, musings, functional, prog
+tags: lean, mathcs, haskell
 ---
 
 A faithful haskell implementation of Pierce's Types and Programming Languages TAPL book for Untyped ARITH Ch 3

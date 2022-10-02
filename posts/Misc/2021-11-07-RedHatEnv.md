@@ -77,7 +77,7 @@ export SAM_CLI_TELEMETRY=0
 
 ```
 
-
+```txt
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/kali/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -95,7 +95,7 @@ unset __conda_setup
 
 export PATH="$PATH:/home/kali/.local/bin"
 export PATH="$HOME/.elan/bin:$PATH"
-
+```
 
 
 # Install docker
@@ -119,3 +119,4 @@ sudo chmod 666 /var/run/docker.sock
 ```bash
 sudo dnf install alsa-lib
 ```
+

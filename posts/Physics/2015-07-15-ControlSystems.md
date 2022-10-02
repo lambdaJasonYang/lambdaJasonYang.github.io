@@ -1,6 +1,6 @@
 ---
 title: ControlSystems
-tags: mathcs, appliedmath, AI, stats
+tags: mathcs, appliedmath, physics
 ---
 
 # Summary

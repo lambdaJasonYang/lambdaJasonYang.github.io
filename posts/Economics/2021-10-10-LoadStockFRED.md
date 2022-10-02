@@ -1,6 +1,6 @@
 ---
 title: Import, load, FRED, TDtrade in python, R
-tags: python,R,stats,AI,prog
+tags: python, R, musings, misc
 ---
 
 # import CSV data

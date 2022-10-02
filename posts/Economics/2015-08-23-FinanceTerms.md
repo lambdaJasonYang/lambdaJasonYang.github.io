@@ -4,6 +4,13 @@ tags: musings, misc
 toc: y
 ---
 
+# Techniques
+
+https://quantpedia.com/alternative-fair-value-models-for-currency-value-strategy/  
+
+
+ Seasonality analysis 
+
 Keeping track of random terms on Investopedia
 
 > Examples are better than definitions

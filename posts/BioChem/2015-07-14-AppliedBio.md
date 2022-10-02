@@ -1,6 +1,6 @@
 ---
 title: Applied Bio
-tags: mathcs, algorithms
+tags: musings, bio
 toc: y
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: lean makefile
-tags: prog, C, QuickCode, OS
+tags: lean, mathcs
 ---
 
 filepaths
