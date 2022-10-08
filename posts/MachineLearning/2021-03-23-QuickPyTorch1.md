@@ -1,6 +1,6 @@
 ---
 title: Quick Pytorch template 1
-tags: AI, mathcs, prog, python
+tags: AI, mathcs, prog, python, pytorch
 toc: y
 ---
 
@@ -119,8 +119,11 @@ tensor([1.])
 
 ## Build our dataset INPUTS
 
+
 * In our coin change problem, these are the bags of coins.
 * `self.data` which we will implement in the future will follow this pattern
+
+`def buildinput(self):` in the next section will use this code
 
 ```python
 torch.randint(low=1,high=5,size=(10,3))
@@ -143,6 +146,8 @@ tensor([[2, 1, 3],
 
 * In our coin change problem, either 1 or 0 represent whether it is possible to make 40 from each of the bags from our previous section.
 * `self.label` which we will implement in the future will follow this pattern
+
+`def buildlabel(self):` in the next section will use this code
 
 ```python
 acc = torch.empty((0,))
@@ -170,6 +175,8 @@ tensor([1.])
 print(acc)
 ```
 
+**Notice the shape is not a vector but a single list**
+
 ```{.txt filename=output}
 tensor([1., 1., 1., 1., 1., 1., 0., 0., 1., 1.])
 ```
@@ -196,11 +203,11 @@ class MainDataset(data.Dataset):
     def generateData(self):
         self.buildinput()
         self.buildlabel() #label AKA the output AKA expected result
-    def buildinput(self):
+    def buildinput(self): #We built this from the previous section
         FeaturesCount = 3
         data = torch.randint(low=1,high=240,size=(self.size,FeaturesCount))
         self.data = data
-    def buildlabel(self):
+    def buildlabel(self):  #We built this from the previous section
         acc = torch.empty((0,))
         for i in self.data:
             minCoinsLabel = torchChangeMake(i,250)
@@ -224,7 +231,7 @@ class templateDataset(data.Dataset):
         super().__init__()
         self.size = size
         self.generateData()
-    def generateData():
+    def generateData(self):
         self.data = #... 
         self.label = #...
         pass
@@ -251,7 +258,9 @@ Size of dataset: 200
 Data point 0: (tensor([218,   6,  90]), tensor(0.))
 ```
 
-# torch's Dataloader
+## Torch Dataloader
+
+We are not using the dataloader yet, just investigating it in this section
 
 * Since we built our dataset class based on torch's spec, loading it into torch's dataloader is trivial.
 
@@ -335,7 +344,7 @@ loss_module = nn.BCEWithLogitsLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 ```
 
-# Training
+# Training - Putting it all together
 
 ```python
 train_dataset = MainDataset(size=200)

@@ -112,7 +112,7 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'python'." href="../tags/python.html">python</a>
+    Tags: <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'python'." href="../tags/python.html">python</a>, <a title="All pages tagged 'pytorch'." href="../tags/pytorch.html">pytorch</a>
     
 </div>
 <div id="TOC"><ul>
@@ -127,13 +127,15 @@
 <li><a href="#build-our-dataset-inputs"><span class="toc-section-number">4.1</span> Build our dataset INPUTS</a></li>
 <li><a href="#build-out-dataset-outputs"><span class="toc-section-number">4.2</span> Build out dataset OUTPUTS</a></li>
 </ul></li>
-<li><a href="#creating-your-dataset-class"><span class="toc-section-number">5</span> Creating your Dataset class</a></li>
-<li><a href="#torchs-dataloader"><span class="toc-section-number">6</span> torch’s Dataloader</a></li>
-<li><a href="#building-the-neuron"><span class="toc-section-number">7</span> Building the Neuron</a></li>
-<li><a href="#loss-function"><span class="toc-section-number">8</span> Loss function</a></li>
-<li><a href="#gradient-descent"><span class="toc-section-number">9</span> Gradient Descent</a></li>
-<li><a href="#training"><span class="toc-section-number">10</span> Training</a></li>
-<li><a href="#evaluation"><span class="toc-section-number">11</span> Evaluation</a></li>
+<li><a href="#creating-your-dataset-class"><span class="toc-section-number">5</span> Creating your Dataset class</a>
+<ul>
+<li><a href="#torch-dataloader"><span class="toc-section-number">5.1</span> Torch Dataloader</a></li>
+</ul></li>
+<li><a href="#building-the-neuron"><span class="toc-section-number">6</span> Building the Neuron</a></li>
+<li><a href="#loss-function"><span class="toc-section-number">7</span> Loss function</a></li>
+<li><a href="#gradient-descent"><span class="toc-section-number">8</span> Gradient Descent</a></li>
+<li><a href="#training---putting-it-all-together"><span class="toc-section-number">9</span> Training - Putting it all together</a></li>
+<li><a href="#evaluation"><span class="toc-section-number">10</span> Evaluation</a></li>
 </ul></div>
 <section id="summary" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Summary</h1>
@@ -233,6 +235,7 @@ since 5+5+2+2=14</p>
 <li>In our coin change problem, these are the bags of coins.</li>
 <li><code>self.data</code> which we will implement in the future will follow this pattern</li>
 </ul>
+<p><code>def buildinput(self):</code> in the next section will use this code</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>torch.randint(low<span class="op">=</span><span class="dv">1</span>,high<span class="op">=</span><span class="dv">5</span>,size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">3</span>))</span></code></pre></div>
 <div class="sourceCode" id="cb11" data-filename="output"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tensor([[2, 1, 3],</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        [2, 1, 3],</span>
@@ -251,6 +254,7 @@ since 5+5+2+2=14</p>
 <li>In our coin change problem, either 1 or 0 represent whether it is possible to make 40 from each of the bags from our previous section.</li>
 <li><code>self.label</code> which we will implement in the future will follow this pattern</li>
 </ul>
+<p><code>def buildlabel(self):</code> in the next section will use this code</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>acc <span class="op">=</span> torch.empty((<span class="dv">0</span>,))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> torch.randint(low<span class="op">=</span><span class="dv">1</span>,high<span class="op">=</span><span class="dv">30</span>,size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">3</span>)):</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> torch.cat((acc,torchChangeMake(i,<span class="dv">40</span>)),<span class="dv">0</span>)</span>
@@ -267,6 +271,7 @@ since 5+5+2+2=14</p>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>tensor([1.])</span></code></pre></div>
 <p><code>acc</code> is the data output which merged the tensors in the loop above into 1 tensor array</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(acc)</span></code></pre></div>
+<p><strong>Notice the shape is not a vector but a single list</strong></p>
 <div class="sourceCode" id="cb15" data-filename="output"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tensor([1., 1., 1., 1., 1., 1., 0., 0., 1., 1.])</span></code></pre></div>
 </section>
 </section>
@@ -295,11 +300,11 @@ Must fill the 2 class parameters below
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generateData(<span class="va">self</span>):</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.buildinput()</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.buildlabel() <span class="co">#label AKA the output AKA expected result</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> buildinput(<span class="va">self</span>):</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> buildinput(<span class="va">self</span>): <span class="co">#We built this from the previous section</span></span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        FeaturesCount <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> torch.randint(low<span class="op">=</span><span class="dv">1</span>,high<span class="op">=</span><span class="dv">240</span>,size<span class="op">=</span>(<span class="va">self</span>.size,FeaturesCount))</span>
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> buildlabel(<span class="va">self</span>):</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> buildlabel(<span class="va">self</span>):  <span class="co">#We built this from the previous section</span></span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        acc <span class="op">=</span> torch.empty((<span class="dv">0</span>,))</span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="va">self</span>.data:</span>
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>            minCoinsLabel <span class="op">=</span> torchChangeMake(i,<span class="dv">250</span>)</span>
@@ -320,7 +325,7 @@ Must fill the 2 class parameters below
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.size <span class="op">=</span> size</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.generateData()</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generateData():</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generateData(<span class="va">self</span>):</span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> <span class="co">#... </span></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.label <span class="op">=</span> <span class="co">#...</span></span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>
@@ -339,9 +344,9 @@ Must fill the 2 class parameters below
 <div class="sourceCode" id="cb20" data-filename="output"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>print(&quot;Data point 0:&quot;, dataset[0])</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>Size of dataset: 200</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>Data point 0: (tensor([218,   6,  90]), tensor(0.))</span></code></pre></div>
-</section>
-<section id="torchs-dataloader" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> torch’s Dataloader</h1>
+<section id="torch-dataloader" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Torch Dataloader</h2>
+<p>We are not using the dataloader yet, just investigating it in this section</p>
 <ul>
 <li>Since we built our dataset class based on torch’s spec, loading it into torch’s dataloader is trivial.</li>
 </ul>
@@ -367,8 +372,9 @@ Must fill the 2 class parameters below
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>Data labels torch.Size([8]) </span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a> tensor([0., 0., 0., 0., 0., 0., 1., 0.])</span></code></pre></div>
 </section>
-<section id="building-the-neuron" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Building the Neuron</h1>
+</section>
+<section id="building-the-neuron" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Building the Neuron</h1>
 <div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span></code></pre></div>
 <ul>
@@ -400,17 +406,17 @@ Our output is either yes or no which is 1 dimensions so <code>num_outputs=1</cod
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span></code></pre></div>
 <div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ExampleNeuron(num_inputs<span class="op">=</span><span class="dv">3</span>, num_hidden<span class="op">=</span><span class="dv">1</span>, num_outputs<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
 </section>
-<section id="loss-function" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Loss function</h1>
+<section id="loss-function" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Loss function</h1>
 <div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>loss_module <span class="op">=</span> nn.BCEWithLogitsLoss()</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># loss_module = nn.L1Loss()</span></span></code></pre></div>
 </section>
-<section id="gradient-descent" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Gradient Descent</h1>
+<section id="gradient-descent" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Gradient Descent</h1>
 <div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.SGD(model.parameters(), lr<span class="op">=</span><span class="fl">0.1</span>)</span></code></pre></div>
 </section>
-<section id="training" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Training</h1>
+<section id="training---putting-it-all-together" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Training - Putting it all together</h1>
 <div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>train_dataset <span class="op">=</span> MainDataset(size<span class="op">=</span><span class="dv">200</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>train_data_loader <span class="op">=</span> data.DataLoader(train_dataset, batch_size<span class="op">=</span><span class="dv">12</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_model(model, optimizer, data_loader, loss_module, num_epochs<span class="op">=</span><span class="dv">100</span>):</span>
@@ -443,8 +449,8 @@ Our output is either yes or no which is 1 dimensions so <code>num_outputs=1</cod
 <span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>            optimizer.step()</span></code></pre></div>
 <div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>train_model(model.cuda(), optimizer, train_data_loader, loss_module)</span></code></pre></div>
 </section>
-<section id="evaluation" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> Evaluation</h1>
+<section id="evaluation" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Evaluation</h1>
 <div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>test_dataset <span class="op">=</span> MainDataset(size<span class="op">=</span><span class="dv">500</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># drop_last -&gt; Don't drop the last batch although it is smaller than 128</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>test_data_loader <span class="op">=</span> data.DataLoader(test_dataset, batch_size<span class="op">=</span><span class="dv">128</span>, shuffle<span class="op">=</span><span class="va">False</span>, drop_last<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>

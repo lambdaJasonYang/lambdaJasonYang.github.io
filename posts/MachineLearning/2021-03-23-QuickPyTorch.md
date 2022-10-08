@@ -1,6 +1,6 @@
 ---
 title: Quick Pytorch
-tags: AI, mathcs, prog, python
+tags: AI, mathcs, prog, python, pytorch
 toc: y
 ---
 
