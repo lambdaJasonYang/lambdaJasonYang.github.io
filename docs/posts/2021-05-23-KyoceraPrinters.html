@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Convert Enterprise printer to a prosumer printer</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Convert Enterprise printer to a prosumer printer</h1>
+            
+
+            <div class="info">
+    Posted on May 23, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'hardware'." href="../tags/hardware.html">hardware</a>
+    
+</div>
+<section id="background" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> background</h4>
+<p>My workplace was upgrading their equipment so they let me take home their kyocera printer (manufactured in 2016). It’s sticker price is ~$10,000 and used ones around the webs were ~$3000. Well, I got it for free as long as I could handle moving a 200 lb printer to my home.</p>
+</section>
+<section id="guide" class="level4" data-number="0.0.0.2">
+<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Guide</h4>
+<p>CUPS server<br />
+Set up</p>
+<p>Configuration<br />
+Select AppSocket/HP Jet Direct<br />
+Enter “socket://169.233.52.233”<br />
+use ip of your printer<br />
+The ip address can be found by going through your kyocera network panel.<br />
+use the kyocera ppd 6002i file</p>
+</section>
+<section id="a-better-way-if-you-are-using-openwrt" class="level4" data-number="0.0.0.3">
+<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> A Better way if you are using OpenWrt</h4>
+<p>This option allows you to use kyocera interface.</p>
+<p>Requires: 2 OpenWrt routers<br />
+Mesh the 2 OpenWrt routers<br />
+There are cheap archer c7’s floating around ebay for ~$20 that can mesh their 2.5Ghz bands.</p>
+<p>Simply find the ip of the printer then use that as the url.<br />
+You can download a phone app to search IPs in your LAN network or just look at the printer network settings.</p>
+</section>
+<section id="toner" class="level4" data-number="0.0.0.4">
+<h4 data-number="0.0.0.4"><span class="header-section-number">0.0.0.4</span> Toner</h4>
+<p>Drill a hole, buy a rubber plug and use that hole to refill the toner.</p>
+</section>
+<section id="conclusion" class="level4" data-number="0.0.0.5">
+<h4 data-number="0.0.0.5"><span class="header-section-number">0.0.0.5</span> Conclusion</h4>
+<p>A 60 ppm(pages per minute) MFP printer doesn’t come cheap and I don’t think I ’ll need to replace this printer anytime in the near or far future.</p>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

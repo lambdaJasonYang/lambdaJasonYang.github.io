@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Integrate PlantUML diagrams into Hakyll (Updated)</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Integrate PlantUML diagrams into Hakyll (Updated)</h1>
+            
+
+            <div class="info">
+    Posted on August 24, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'HakyllSetupSeries'." href="../tags/HakyllSetupSeries.html">HakyllSetupSeries</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#understand-the-process"><span class="toc-section-number">1</span> Understand the Process</a></li>
+<li><a href="#cabal-and-imports"><span class="toc-section-number">2</span> Cabal and Imports</a>
+<ul>
+<li><a href="#cabal-file"><span class="toc-section-number">2.1</span> Cabal file</a></li>
+<li><a href="#imports-to-site.hs"><span class="toc-section-number">2.2</span> Imports to site.hs</a></li>
+</ul></li>
+<li><a href="#site.hs"><span class="toc-section-number">3</span> site.hs</a>
+<ul>
+<li><a href="#encoding-and-process-to-img"><span class="toc-section-number">3.1</span> Encoding and process to img</a></li>
+<li><a href="#pandoc-codeblock-filtering-translation"><span class="toc-section-number">3.2</span> Pandoc Codeblock filtering + translation</a></li>
+</ul></li>
+<li><a href="#compiler-modification"><span class="toc-section-number">4</span> Compiler modification</a></li>
+</ul></div>
+<p><strong>Hakyll Setup Series</strong></p>
+<ol type="1">
+<li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
+<li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
+<li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
+<li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
+<li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
+<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
+<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
+</ol>
+<section id="understand-the-process" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Understand the Process</h1>
+<p>Goal is to</p>
+<ol type="1">
+<li>write plantuml code in markdown</li>
+<li>pandoc encode our code into some base64 format</li>
+<li>process the base64 encoding into a plantuml image HTML element</li>
+<li>pandoc codeblock will filter codeblocks and translate them into HTML elements</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f62203a204920616d207573696e67206865780a40656e64756d6c</span></span></code></pre></div>
+<ol type="1">
+<li>Converts code into ASCII decimal</li>
+<li>Converts ASCII decimal into hex</li>
+<li>Hex is part of URL of planttext which will generate our image</li>
+</ol>
+</section>
+<section id="cabal-and-imports" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Cabal and Imports</h1>
+<section id="cabal-file" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Cabal file</h2>
+<div class="sourceCode" id="cb2" data-filename="myblog.cabal"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc,</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc-types,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">text,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">base16-bytestring,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bytestring,</span> </span></code></pre></div>
+</section>
+<section id="imports-to-site.hs" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Imports to site.hs</h2>
+<div class="sourceCode" id="cb3" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.ByteString.Char8</span> <span class="co">--for convert str to bytestr plantuml, requires cabal 'bytestring'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="dt">Data.ByteString.Base16</span> (encode, decode) <span class="co">-- for encoding plantuml, requires cabal 'base16-bytestring' </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="dt">Text.Pandoc.Walk</span> <span class="co">--for post-processing pandoc, requires cabal 'pandoc-types'</span></span></code></pre></div>
+</section>
+</section>
+<section id="site.hs" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> site.hs</h1>
+<section id="encoding-and-process-to-img" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Encoding and process to img</h2>
+<div class="sourceCode" id="cb4" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ot">mhexCode ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">String</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mhexCode y <span class="ot">=</span> <span class="fu">tail</span> <span class="op">$</span> <span class="fu">init</span> ( <span class="fu">show</span> ( Data.ByteString.Base16.encode <span class="op">$</span> Data.ByteString.Char8.pack <span class="op">$</span> Data.Text.unpack y ))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ot">planthtml ::</span> <span class="dt">Data.Text.Text</span> <span class="ot">-&gt;</span> <span class="dt">Data.Text.Text</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">--planthtml y = T.pack (&quot;&lt;figure&gt;&lt;img src='http://www.plantuml.com/plantuml/svg/~h&quot; &lt;&gt; (T.unpack $ hexCode y) &lt;&gt;&quot;'&gt;&lt;/figure&gt;&quot;) </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>planthtml y <span class="ot">=</span> Data.Text.pack (<span class="st">&quot;&lt;figure&gt;&lt;img src='http://www.plantuml.com/plantuml/svg/~h&quot;</span> <span class="op">&lt;&gt;</span> (mhexCode <span class="op">$</span> y) <span class="op">&lt;&gt;</span><span class="st">&quot;'&gt;&lt;/figure&gt;&quot;</span>) </span></code></pre></div>
+<p>Above is our helper functions that will be used to generate the hex of our code.</p>
+<p>example:<br />
+INPUT Markdown codeblock content : <code class="sourceCode bash"><span class="ex">@startuml</span></code></p>
+<ol type="1">
+<li><code class="sourceCode haskell">Data.ByteString.Base16.encode</code> - Convert <code class="sourceCode bash"><span class="ex">@startuml</span></code> to “407374617274756D6C”</li>
+<li>intermediate hex result: “407374617274756D6C”</li>
+<li><code class="sourceCode haskell">planthtml</code> - Use hex result to create a ‘http://www.plantuml.com…’ img src DOM string.</li>
+</ol>
+<p>Notice in the plantuml image link above http://www.plantuml.com/plantuml/svg/~h407374617274756d6c…<br />
+the string after “~h” begins with “407374617274756D6C” which is our result.</p>
+</section>
+<section id="pandoc-codeblock-filtering-translation" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Pandoc Codeblock filtering + translation</h2>
+<p>Now we need to modify site.hs so that Hakyll will transform a PlantUML code block into a html img that links to the Planttext generated image.<br />
+We can do this with Hakyll’s Pandocs Filtering.</p>
+<div class="sourceCode" id="cb5" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">--Pandoc filtering, </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ot">addToCodeBlock ::</span> <span class="dt">Pandoc</span> <span class="ot">-&gt;</span> <span class="dt">Pandoc</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>addToCodeBlock  <span class="ot">=</span> walk ftranslate </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">where</span><span class="ot"> ftranslate ::</span> <span class="dt">Block</span> <span class="ot">-&gt;</span> <span class="dt">Block</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[]) txt ) <span class="ot">=</span> <span class="dt">RawBlock</span> (<span class="dt">Format</span> <span class="st">&quot;html&quot;</span>) (planthtml txt)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        ftranslate x <span class="ot">=</span> x </span></code></pre></div>
+<p><code class="sourceCode haskell">ftranslate (<span class="dt">CodeBlock</span> (<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[]) txt )</code> pattern matches CodeBlock objects in pandoc and finds “plantuml” annotations denoted by the Attr object <code class="sourceCode haskell">(<span class="st">&quot;&quot;</span>,[<span class="st">&quot;plantuml&quot;</span>],[])</code><br />
+The Content of our CodeBlock is pattern matched as <code class="sourceCode haskell">txt</code>.</p>
+<p>After pattern matching it converts it into a raw html block, and applies our “Code to Img DOM” transformation function <code class="sourceCode haskell">planthtml</code> on the content.</p>
+<p>INPUT Markdown codeblock :</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="st">'''plantuml</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">@startuml  </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">Alice-&gt;Bob : I am using hex  </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">@enduml</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">'''</span></span></code></pre></div>
+<p>Output DOM element :</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a416c6963652d3e426f62203a204920616d207573696e67206865780a40656e64756d6c"></figure>
+</section>
+</section>
+<section id="compiler-modification" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Compiler modification</h1>
+<ul>
+<li>If you’ve followed my <a href="2021-08-23-HakyllSetupMathjax.html">mathjax hakyll tutorial</a>, simply add the code below:</li>
+</ul>
+<div class="sourceCode" id="cb7" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ot">mathJaxAddedCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>mathJaxAddedCompiler <span class="ot">=</span> pandocCompilerWithTransform readMathjaxOptions writeMathjaxOptions addToCodeBlock</span></code></pre></div>
+<ul>
+<li>If you didn’t follow my mathjax hakyll tutorial, then add the code below:</li>
+</ul>
+<div class="sourceCode" id="cb8" data-filename="site.hs"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ot">simpleCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>simpleCompiler <span class="ot">=</span> pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions addToCodeBlock</span></code></pre></div>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

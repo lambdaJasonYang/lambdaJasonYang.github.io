@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Abstract Linear Algebra</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Abstract Linear Algebra</h1>
+            
+
+            <div class="info">
+    Posted on July 14, 2015
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#direct-sum"><span class="toc-section-number">0.1</span> Direct Sum</a></li>
+<li><a href="#direct-sum-of-matrices"><span class="toc-section-number">0.2</span> Direct Sum of matrices</a>
+<ul>
+<li><a href="#example"><span class="toc-section-number">0.2.1</span> Example</a></li>
+</ul></li>
+<li><a href="#linear-map"><span class="toc-section-number">1</span> Linear Map</a></li>
+<li><a href="#storytime"><span class="toc-section-number">2</span> StoryTime</a></li>
+<li><a href="#spectral-theorem"><span class="toc-section-number">3</span> Spectral Theorem</a></li>
+<li><a href="#by-2-matrix"><span class="toc-section-number">4</span> 2 by 2 matrix</a>
+<ul>
+<li><a href="#positive-definite-matrices"><span class="toc-section-number">4.1</span> Positive definite matrices</a></li>
+</ul></li>
+</ul></div>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6672616d6520224162656c69616e2047726f7570227b0a202020206672616d652047726f75707b0a20202020202020206672616d65204d6f6e6f6964207b0a2020202020202020202020206672616d652053656d6967726f7570207b0a2020202020202020202020206f626a6563742022536574204d22206173205365740a2020202020202020202020206f626a656374202242696e617279204f7065726174696f6e222061732042696e0a2020202020202020202020207d0a2020202020202020202020206f626a65637420226964656e7469747920656c656d656e7422206173204f6e650a2020202020202020202020204f6e65202d2d3e205365740a20202020202020207d0a20202020202020206f626a6563742022696e766572736520656c656d656e74732220617320496e760a2020202020202020496e76202d2d3e205365740a202020207d0a202020206f626a6563742022436f6d6d756e617469746976652220617320436f6d6d0a20202020436f6d6d202d2d3e2042696e0a7d0a0a40656e64756d6c6d6c"></figure>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print vector_space</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vector_space</span> <span class="er">(</span><span class="ex">R:</span> Type u<span class="kw">)</span> <span class="kw">(</span><span class="ex">M:</span> Type v<span class="kw">)</span> <span class="ex">[field</span> R] [add_comm_group M] := semimodule R M</span></code></pre></div>
+<p>vector space is a</p>
+<ul>
+<li>semi-module over a
+<ul>
+<li>field R</li>
+<li>additive communitative group M ```plantuml</li>
+</ul></li>
+</ul>
+<p>```</p>
+<section id="direct-sum" class="level2" data-number="0.1">
+<h2 data-number="0.1"><span class="header-section-number">0.1</span> Direct Sum</h2>
+<blockquote>
+<p>Find two unrelated spaces in your universe and slam them together</p>
+</blockquote>
+<p>Given some vector space <span class="math inline">\(S\)</span>, we choose some subspaces <span class="math inline">\(\{X,Y,Z...\}\)</span></p>
+<ol type="1">
+<li>None of these subspaces share any element but the null vector</li>
+<li>there is no combination of <span class="math inline">\(\{Y,Z...\}\)</span> that can form an element of <span class="math inline">\(X\)</span>.</li>
+</ol>
+<p>take an element from each subspace in <span class="math inline">\(\{X,Y,Z...\}\)</span> then add them.<br />
+<span class="math display">\[\oplus \{X,Y,Z...\} = \{x + y + ... | x \in X, y \in Y ...\}\]</span></p>
+</section>
+<section id="direct-sum-of-matrices" class="level2" data-number="0.2">
+<h2 data-number="0.2"><span class="header-section-number">0.2</span> Direct Sum of matrices</h2>
+<p>Given that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices themselves.<br />
+Note that <span class="math inline">\(0\)</span> stands for zero matrices of varying sizes.<br />
+Block matrix notation of direct sum:</p>
+<p><span class="math display">\[A \oplus B = \begin{bmatrix}
+A &amp; 0 \\
+0 &amp; B 
+\end{bmatrix}\]</span></p>
+<p><span class="math display">\[B \oplus A = \begin{bmatrix}
+B &amp; 0 \\
+0 &amp; A 
+\end{bmatrix}\]</span></p>
+<p><span class="math display">\[ A \oplus B \cong B \oplus A \]</span></p>
+<ul>
+<li>Direct sum is commutative up to isomorphism</li>
+</ul>
+<section id="example" class="level3" data-number="0.2.1">
+<h3 data-number="0.2.1"><span class="header-section-number">0.2.1</span> Example</h3>
+<p><span class="math inline">\(\{(x,0) | x\in \mathbb{R}\} \oplus \{(0,y) | x\in \mathbb{R}\}=\mathbb{R}^2\)</span> or written as<br />
+<span class="math inline">\((\mathbb{R},0) \oplus (0,\mathbb{R})\)</span><br />
+but some might even do notational abuse and just write<br />
+<span class="math inline">\(\mathbb{R} \oplus \mathbb{R}\)</span></p>
+</section>
+</section>
+<section id="linear-map" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Linear Map</h1>
+<p><span class="math display">\[ T \in \mathcal{L}(V,W) \]</span></p>
+<p><code class="sourceCode haskell"><span class="dt">T</span><span class="ot"> ::</span> <span class="dt">V</span> <span class="ot">-&gt;</span> <span class="dt">W</span></code></p>
+</section>
+<section id="storytime" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> StoryTime</h1>
+<p>Vector space of cars Field of colors Add means “mix”</p>
+<p>Red car mix Blue car can be exchanged for a purple Car and vice-versa.</p>
+<p>Vector space of cars equivalent to saying a magic rainbow brush that can paint any car.</p>
+<ul>
+<li>Basis vectorspace: cars of fundamental colors.<br />
+</li>
+<li>Zero-Vector: The no-car when painted with any color still results in the no-car.</li>
+<li>Inverse: Green car mix Red car makes the no-car. Green is known as anti-red.</li>
+</ul>
+<p>Linear Map <code class="sourceCode haskell"><span class="dt">T</span><span class="ot"> ::</span> <span class="dt">Cars</span> <span class="ot">-&gt;</span> <span class="dt">Trucks</span></code><br />
+We can exchange our painted cars for painted trucks.</p>
+<p>T is linear map if</p>
+<ul>
+<li>we can trade a red car for a red truck, blue car blue truck, etc.<br />
+</li>
+<li>we can trade “red car mix blue car” for a “purple truck”</li>
+</ul>
+<p>Proof: Dim Range + Dim Null</p>
+<ul>
+<li>red car trades for purple truck</li>
+<li>yellow car trade for purple truck</li>
+<li>red car mix anti-yellow car trades for no-truck.</li>
+<li>Null space = red mix anti-yellow car</li>
+<li>Range = purple truck</li>
+</ul>
+<p>Notice how the 2 cars collapse into the 1 purple truck in the range<br />
+is given back through the 1 “red mix anti-yellow car” in the null space</p>
+</section>
+<section id="spectral-theorem" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Spectral Theorem</h1>
+<ul>
+<li>Hermitian operator
+<ul>
+<li>For Real vector space its symmetric matrix</li>
+<li>For Complex vector space its symmetric complex conjugate matrix</li>
+<li>For Infinite dim vector space its Complex self adjoint</li>
+</ul></li>
+<li>Symmetric matrix means it looks the same when transposed</li>
+<li>Typically a random matrix has complex and real eigenvalues regardless of elements are only real</li>
+<li><strong>Spectral Thm: A Hermitian(symmetric) matrix that can have complex or real elements will always have real eigenvalues</strong>
+<ul>
+<li>Eigenvectors are orthogonal</li>
+</ul></li>
+</ul>
+</section>
+<section id="by-2-matrix" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 2 by 2 matrix</h1>
+<section id="positive-definite-matrices" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Positive definite matrices</h2>
+<p>Given a symmetric 2 by 2 matrix, four ways to tell if positive definite:</p>
+<ol type="1">
+<li>Eigenvalue test: <span class="math inline">\(\lambda_1 \gt 0, \lambda_2 \gt 0\)</span></li>
+<li>Determinants test: <span class="math inline">\(a \gt 0, ac - b^2 \gt 0\)</span></li>
+<li>Pivot test: <span class="math inline">\(a \gt 0, \frac{ac-b^2}{a} \gt 0\)</span></li>
+<li><span class="math inline">\(x^TAx\)</span> is positive definite except when <span class="math inline">\(x=0\)</span> (the actual definition of positive definite)</li>
+</ol>
+<p>Note that <span class="math inline">\(x^TAx\)</span> results in an eqn like <span class="math inline">\(2x_1^2+12x_1x_2+18x_2^2\)</span> and if this eqn is postive for all real <span class="math inline">\(x_1, x_2\)</span> then the matrix <span class="math inline">\(A\)</span> is postive definite.</p>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - PySpark ML recommender</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>PySpark ML recommender</h1>
+            
+
+            <div class="info">
+    Posted on March 23, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'python'." href="../tags/python.html">python</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>
+    
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyspark.mllib</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.rdd <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.classification <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.mllib.recommendation <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> SparkContext(<span class="st">&quot;local&quot;</span>,<span class="st">&quot;music&quot;</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> SparkSession(sc)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>sampleUsersPath <span class="op">=</span> <span class="st">&quot;sampleUsers.txt&quot;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>sampleTracksPath <span class="op">=</span> <span class="st">&quot;sampleTracks.txt&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Generate random data from sample</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>randomUsersPath <span class="op">=</span> <span class="st">&quot;randomusers.txt&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(sampleUsersPath) <span class="im">as</span> sampleFile:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> random.sample(sampleFile.readlines(), <span class="dv">2000</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>outF <span class="op">=</span> <span class="bu">open</span>(randomUsersPath, <span class="st">&quot;w&quot;</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>outF.writelines(lines)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>outF.close()</span></code></pre></div>
+<section id="load" class="level2" data-number="0.1">
+<h2 data-number="0.1"><span class="header-section-number">0.1</span> Load</h2>
+<p>Load data as Spark’s dataframe.<br />
+Columns separated by “.<br />
+Counts higher than 20 are reduced to 20.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">user</td>
+<td>StringType()</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">song</td>
+<td>StringType()</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">count</td>
+<td>IntegerType()</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load(path):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    csvSchema <span class="op">=</span> (StructType() </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                .add(<span class="st">&quot;user&quot;</span>,StringType())</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                .add(<span class="st">&quot;song&quot;</span>,StringType())</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                .add(<span class="st">&quot;count&quot;</span>,IntegerType()))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> spark.read.load(path,<span class="bu">format</span><span class="op">=</span><span class="st">&quot;csv&quot;</span>,sep <span class="op">=</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, schema <span class="op">=</span> csvSchema)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    newdf <span class="op">=</span> df.withColumn(<span class="st">&quot;count&quot;</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                          pyspark.sql.functions.when(</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                              pyspark.sql.functions.col(<span class="st">&quot;count&quot;</span>) <span class="op">&gt;</span> <span class="dv">20</span>,<span class="dv">20</span>     <span class="co">#if row with count &gt; 20 True, replace with 20</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                          ).otherwise(</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                      pyspark.sql.functions.col(<span class="st">&quot;count&quot;</span>)                     <span class="co">#otherwise replace with default count</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                          )</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                         )</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#newdf[newdf['count'] &gt; 20].show(5) </span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">#newdf.show(5) </span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(df[df['count'] &gt; 20].show(5))</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> newdf</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    </span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>loaded <span class="op">=</span> load(sampleUsersPath).persist()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>loaded.show()</span></code></pre></div>
+<pre><code>+--------------------+------------------+-----+
+|                user|              song|count|
++--------------------+------------------+-----+
+|b80344d063b5ccb32...|SOBBMDR12A8C13253B|    2|
+|b80344d063b5ccb32...|SODZWFT12A8C13C0E4|    1|
+|b80344d063b5ccb32...|SOHQWYZ12A6D4FA701|    1|
+|b80344d063b5ccb32...|SOJNNUA12A8AE48C7A|    1|
+|b80344d063b5ccb32...|SOLXHAI12A6D4FD6F3|    1|
+|b80344d063b5ccb32...|SOOSIVQ12A6D4F8AE0|    1|
+|b80344d063b5ccb32...|SORJNVW12A8C13BF90|    1|
+|85c1f87fea955d09b...|SODJTHN12AF72A8FCD|    2|
+|85c1f87fea955d09b...|SOIDFHN12A8C13ABAC|    2|
+|4bd88bfb25263a75b...|SOWEHOM12A6BD4E09E|    1|
+|9d6f0ead607ac2a6c...|SOCLQES12A58A7BB1D|    2|
+|9d6f0ead607ac2a6c...|SOKLRPJ12A8C13C3FE|    2|
+|9bb911319fbc04f01...|SOXBXBI12A8C13C71C|    5|
+|b64cdd1a0bd907e5e...|SOBDWET12A6701F114|    2|
+|b64cdd1a0bd907e5e...|SOLQYOG12B0B80BA71|    2|
+|b64cdd1a0bd907e5e...|SOZPQES12A6D4F8E57|    2|
+|17aa9f6dbdf753831...|SODHHEG12A58A779FB|    2|
+|17aa9f6dbdf753831...|SODUANR12A6D4F5036|    1|
+|17aa9f6dbdf753831...|SOJPFPR12AB018109D|    1|
+|17aa9f6dbdf753831...|SOJUVYA12AB01860BA|    2|
++--------------------+------------------+-----+
+only showing top 20 rows</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''load test'''</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>correctCols <span class="op">=</span> StructType([<span class="op">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;user&quot;</span>,StringType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;song&quot;</span>,StringType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;count&quot;</span>,IntegerType(),<span class="va">True</span>)])</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fakeData <span class="op">=</span> [(<span class="st">&quot;abc123&quot;</span>, <span class="st">&quot;123abc&quot;</span>, <span class="dv">2</span>)]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>fakeDf <span class="op">=</span> spark.createDataFrame(fakeData, correctCols)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> loaded.dtypes <span class="op">==</span> fakeDf.dtypes, <span class="st">&quot;the schema was expected to be </span><span class="sc">%s</span><span class="st"> but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> (fakeDf.dtypes, loaded.dtypes)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> loaded.<span class="bu">filter</span>(<span class="st">'count&gt;20'</span>).count() <span class="op">==</span> <span class="dv">0</span>, <span class="st">&quot;counts higher than 20 was expected to be 0 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> loaded.<span class="bu">filter</span>(<span class="st">'count&gt;20'</span>).count()</span></code></pre></div>
+</section>
+<section id="convert" class="level2" data-number="0.2">
+<h2 data-number="0.2"><span class="header-section-number">0.2</span> Convert</h2>
+<p>Convert user and song fields into doubles. Use mllib’s StringIndexer.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">user</td>
+<td>StringType()</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">song</td>
+<td>StringType()</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">count</td>
+<td>IntegerType()</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">user_indexed</td>
+<td>DoubleType()</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">song_indexed</td>
+<td>DoubleType()</td>
+</tr>
+</tbody>
+</table>
+<p>param <code>df</code> Dataframe which has been created using method <code>load()</code><br />
+<code>return</code> Dataframe</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert(df):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ColInputs <span class="op">=</span> [<span class="st">&quot;user&quot;</span>,<span class="st">&quot;song&quot;</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    ColOutputs <span class="op">=</span> [<span class="st">&quot;user_indexed&quot;</span>,<span class="st">&quot;song_indexed&quot;</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    stringIndexer <span class="op">=</span> StringIndexer(inputCols<span class="op">=</span>ColInputs,outputCols<span class="op">=</span>ColOutputs)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> stringIndexer.fit(df)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    newdf <span class="op">=</span> model.transform(df)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#sorted(set([(i[0], i[1]) for i in td.select(td.id, td.indexed).collect()]),key=lambda x: x[0])</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> newdf</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#raise NotImplementedError()</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>converted <span class="op">=</span> convert(loaded).persist()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>converted.show()</span></code></pre></div>
+<pre><code>+--------------------+------------------+-----+------------+------------+
+|                user|              song|count|user_indexed|song_indexed|
++--------------------+------------------+-----+------------+------------+
+|b80344d063b5ccb32...|SOBBMDR12A8C13253B|    2|       162.0|       577.0|
+|b80344d063b5ccb32...|SODZWFT12A8C13C0E4|    1|       162.0|      1053.0|
+|b80344d063b5ccb32...|SOHQWYZ12A6D4FA701|    1|       162.0|      1646.0|
+|b80344d063b5ccb32...|SOJNNUA12A8AE48C7A|    1|       162.0|      1945.0|
+|b80344d063b5ccb32...|SOLXHAI12A6D4FD6F3|    1|       162.0|      2306.0|
+|b80344d063b5ccb32...|SOOSIVQ12A6D4F8AE0|    1|       162.0|      2702.0|
+|b80344d063b5ccb32...|SORJNVW12A8C13BF90|    1|       162.0|      3124.0|
+|85c1f87fea955d09b...|SODJTHN12AF72A8FCD|    2|       810.0|       951.0|
+|85c1f87fea955d09b...|SOIDFHN12A8C13ABAC|    2|       810.0|      1728.0|
+|4bd88bfb25263a75b...|SOWEHOM12A6BD4E09E|    1|      1151.0|      3824.0|
+|9d6f0ead607ac2a6c...|SOCLQES12A58A7BB1D|    2|       839.0|       803.0|
+|9d6f0ead607ac2a6c...|SOKLRPJ12A8C13C3FE|    2|       839.0|         5.0|
+|9bb911319fbc04f01...|SOXBXBI12A8C13C71C|    5|      1317.0|      3948.0|
+|b64cdd1a0bd907e5e...|SOBDWET12A6701F114|    2|       560.0|       586.0|
+|b64cdd1a0bd907e5e...|SOLQYOG12B0B80BA71|    2|       560.0|       245.0|
+|b64cdd1a0bd907e5e...|SOZPQES12A6D4F8E57|    2|       560.0|      4289.0|
+|17aa9f6dbdf753831...|SODHHEG12A58A779FB|    2|       115.0|       934.0|
+|17aa9f6dbdf753831...|SODUANR12A6D4F5036|    1|       115.0|      1013.0|
+|17aa9f6dbdf753831...|SOJPFPR12AB018109D|    1|       115.0|      1958.0|
+|17aa9f6dbdf753831...|SOJUVYA12AB01860BA|    2|       115.0|      1988.0|
++--------------------+------------------+-----+------------+------------+
+only showing top 20 rows</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''convert test'''</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>correctCols <span class="op">=</span> StructType([<span class="op">\</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;user&quot;</span>,StringType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;song&quot;</span>,StringType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;count&quot;</span>,IntegerType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;user_indexed&quot;</span>,DoubleType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;song_indexed&quot;</span>,DoubleType(),<span class="va">True</span>)])</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>fakeData <span class="op">=</span> [(<span class="st">&quot;abc123&quot;</span>, <span class="st">&quot;123abc&quot;</span>, <span class="dv">2</span>, <span class="fl">1.0</span>, <span class="fl">2.0</span>)]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>fakeDf <span class="op">=</span> spark.createDataFrame(fakeData, correctCols)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> converted.dtypes <span class="op">==</span> fakeDf.dtypes, <span class="st">&quot;the schema was expected to be </span><span class="sc">%s</span><span class="st"> but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> (fakeDf.dtypes, converted.dtypes)</span></code></pre></div>
+</section>
+<section id="to-rating" class="level2" data-number="0.3">
+<h2 data-number="0.3"><span class="header-section-number">0.3</span> To Rating</h2>
+<p>create RDD of Rating classes.<br />
+https://spark.apache.org/docs/latest/api/python/pyspark.mllib.html#pyspark.mllib.recommendation.Rating</p>
+<p>The params of the Rating function (user=<code>user_indexed</code>, product=<code>song_indexed</code>and rating=<code>count</code>)</p>
+<p>param <code>df</code> Dataframe which has <code>user_indexed</code> and <code>song_indexed</code> fields (output from <code>convert()</code> method)<br />
+<code>return</code> RDD containg Rating objects</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> toRating(df):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    rowRDD <span class="op">=</span> df.rdd</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(rowRDD.map(lambda x: x[&quot;user&quot;]).take(4))</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    map1 <span class="op">=</span> rowRDD.<span class="bu">map</span>(<span class="kw">lambda</span> x: Rating(user<span class="op">=</span>x[<span class="st">&quot;user_indexed&quot;</span>],product<span class="op">=</span>x[<span class="st">&quot;song_indexed&quot;</span>],rating<span class="op">=</span>x[<span class="st">&quot;count&quot;</span>]))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(map1.take(4))</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#r = Rating</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> map1</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>rated <span class="op">=</span> toRating(converted).persist()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>rated.take(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>[Rating(user=162, product=577, rating=2.0),
+ Rating(user=162, product=1053, rating=1.0),
+ Rating(user=162, product=1646, rating=1.0),
+ Rating(user=162, product=1945, rating=1.0),
+ Rating(user=162, product=2306, rating=1.0),
+ Rating(user=162, product=2702, rating=1.0),
+ Rating(user=162, product=3124, rating=1.0),
+ Rating(user=810, product=951, rating=2.0),
+ Rating(user=810, product=1728, rating=2.0),
+ Rating(user=1151, product=3824, rating=1.0)]</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''toRating tests'''</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [Rating(user<span class="op">=</span><span class="dv">162</span>, product<span class="op">=</span><span class="dv">577</span>, rating<span class="op">=</span><span class="fl">2.0</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a> Rating(user<span class="op">=</span><span class="dv">162</span>, product<span class="op">=</span><span class="dv">1053</span>, rating<span class="op">=</span><span class="fl">1.0</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a> Rating(user<span class="op">=</span><span class="dv">162</span>, product<span class="op">=</span><span class="dv">1646</span>, rating<span class="op">=</span><span class="fl">1.0</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a> Rating(user<span class="op">=</span><span class="dv">162</span>, product<span class="op">=</span><span class="dv">1945</span>, rating<span class="op">=</span><span class="fl">1.0</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a> Rating(user<span class="op">=</span><span class="dv">162</span>, product<span class="op">=</span><span class="dv">2306</span>, rating<span class="op">=</span><span class="fl">1.0</span>)]</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> rated.take(<span class="dv">5</span>) <span class="op">==</span> rows, <span class="st">&quot;the first 5 rows were expected to be </span><span class="sc">%s</span><span class="st"> but they were </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> (rows, rated.take(<span class="dv">5</span>))</span></code></pre></div>
+</section>
+<section id="train-als" class="level2" data-number="0.4">
+<h2 data-number="0.4"><span class="header-section-number">0.4</span> Train ALS</h2>
+<p>train ALS model. https://spark.apache.org/docs/latest/mllib-collaborative-filtering.html#collaborative-filtering</p>
+<p>param <code>data</code> RDD of Rating objects that is created using <code>toRating()</code> method.<br />
+param <code>seed</code> value used for testing purposes. <code>return</code> trained ALS model</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> trainALS(data, seed):</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> ALS.train(data,rank<span class="op">=</span><span class="dv">2</span>,seed<span class="op">=</span>seed)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> model</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>rSeed <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">10000</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> trainALS(rated, rSeed)</span></code></pre></div>
+</section>
+<section id="recommend-songs" class="level2" data-number="0.5">
+<h2 data-number="0.5"><span class="header-section-number">0.5</span> Recommend Songs</h2>
+<p>Recommend 5 songs to a given user.</p>
+<p>param <code>model</code> trained ALS model<br />
+param <code>user</code> user id converted (user_indexed) to Integer (with <code>convert()</code>)<br />
+<code>return</code> recommendations in Array</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recommendSongs(model, user):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    prediction <span class="op">=</span> model.recommendProducts(user,<span class="dv">5</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> prediction</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>recommends <span class="op">=</span> recommendSongs(model, <span class="dv">162</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>recommends</span></code></pre></div>
+<pre><code>[Rating(user=162, product=391, rating=20.684566349984323),
+ Rating(user=162, product=1334, rating=19.216739435985964),
+ Rating(user=162, product=3283, rating=18.964715987473852),
+ Rating(user=162, product=157, rating=18.746516460716293),
+ Rating(user=162, product=3674, rating=18.70421335719181)]</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''model and recommendSongs tests'''</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">type</span>(recommends[<span class="dv">0</span>]) <span class="op">==</span> pyspark.mllib.recommendation.Rating, <span class="st">&quot;the type was expected to be pyspark.mllib.recommendation.Rating  but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">type</span>(recommends[<span class="dv">0</span>]) </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> recommends[<span class="dv">0</span>].user <span class="op">==</span> <span class="dv">162</span>, <span class="st">&quot;the user was expected to be 162 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> recommends[<span class="dv">0</span>].user</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(recommends) <span class="op">==</span> <span class="dv">5</span>, <span class="st">&quot;the amount of recommendations was expected to be 5 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">len</span>(recommends)</span></code></pre></div>
+</section>
+<section id="get-song-names" class="level2" data-number="0.6">
+<h2 data-number="0.6"><span class="header-section-number">0.6</span> Get Song Names</h2>
+<p>Input: List RatingObject<br />
+Output: List (List SongName Artist)<br />
+Map each RatingObject to a Pair of SongName and Artist</p>
+<p>Example Input:</p>
+<p><code>[Rating(182412,218057,29.471691093542958),   Rating(182412,206693,28.39630617887081),   Rating(182412,230654,28.090021579109706),   Rating(182412,200542,27.43900484648816),   Rating(182412,254771,24.82362529344695)]</code></p>
+<p>Output:</p>
+<p><code>[["My Business","Guy"],   ["The Man With The Bag","Floyd/Animal/Zoot"],   ["Challenger","Growing"],   ["Una Ragazza In Due", "I Giganti"], ["That Is Why", "Say Anything"]]</code></p>
+<p>Return [[SongName,NameOfBand]…]</p>
+<p>Convert unique_tracks into dataframe, Cols seperated by <code>&lt;SEP&gt;</code>. The schema is shown b elow</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">track_id</td>
+<td>StringType()</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">song_id</td>
+<td>StringType()</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">artist</td>
+<td>StringType()</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">title</td>
+<td>StringType()</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>Filter <code>converted</code> dataframe based on if the <code>song_indexed</code> value is found in the Rating object list.<br />
+Join <code>converted</code> with <code>song_indexed</code> on “title” and “artist” columns.</li>
+<li>Remove duplicates<br />
+</li>
+<li>convert dataframe into rdd using collect()</li>
+</ol>
+<p>param <code>converted</code> Dataframe created using <code>convert()</code> method<br />
+param <code>ar</code> Array of Rating object produced using <code>recommendSongs()</code><br />
+param <code>path</code> path to unique track names file<br />
+<code>return</code> corresponding song + artist names inside array, e.g., [[‘Our Song’, ‘Taylor Swift’], [‘Boom (2006 Remastered Album Version)’, ‘P.O.D.’]]</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getSongNames(converted, ar, path):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    RecommendedSongIndexList <span class="op">=</span> [i.product <span class="cf">for</span> i <span class="kw">in</span> ar]</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(RecommendedSongIndexList)</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    csvSchema <span class="op">=</span> (StructType() </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                .add(<span class="st">&quot;track_id&quot;</span>,StringType())</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                .add(<span class="st">&quot;song_id&quot;</span>,StringType())</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                .add(<span class="st">&quot;artist&quot;</span>,StringType())</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                .add(<span class="st">&quot;title&quot;</span>,StringType())</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> spark.read.load(path,<span class="bu">format</span><span class="op">=</span><span class="st">&quot;csv&quot;</span>,sep <span class="op">=</span> <span class="st">&quot;&lt;SEP&gt;&quot;</span>, schema <span class="op">=</span> csvSchema)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">#df.show(5)</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#converted.show(5)</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    filteredDF <span class="op">=</span> converted[converted[<span class="st">&quot;song_indexed&quot;</span>].isin(RecommendedSongIndexList)]</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    joinedDF <span class="op">=</span> filteredDF.join(df,filteredDF.song <span class="op">==</span> df.song_id,<span class="st">&quot;INNER&quot;</span>).drop(df.song_id)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    outDF <span class="op">=</span> joinedDF[[<span class="st">&quot;title&quot;</span>,<span class="st">&quot;artist&quot;</span>]].drop_duplicates()</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#filteredDF.show(3)</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    outRDD <span class="op">=</span> outDF.rdd.<span class="bu">map</span>(<span class="bu">list</span>)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> outRDD.collect()</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>songNames <span class="op">=</span> getSongNames(converted, recommends, sampleTracksPath)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>songNames</span></code></pre></div>
+<pre><code>[[&quot;The Emperor's New Clothes&quot;, &quot;Sinéad O'Connor&quot;],
+ ['Alhos Verdes', 'GNR'],
+ ['Whataya Want From Me', 'Adam Lambert'],
+ ['Street Justice', 'MSTRKRFT'],
+ ['North Sea Storm (Live)', 'Amon Amarth']]</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''getSongNames test'''</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(songNames) <span class="op">==</span> <span class="dv">5</span>, <span class="st">&quot;the amount of song names was expected to be 5 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">len</span>(songNames)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">type</span>(songNames[<span class="dv">0</span>]) <span class="op">==</span> <span class="bu">list</span>, <span class="st">&quot;the type of a songNames element was expected to be list but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">type</span>(songNames[<span class="dv">0</span>])</span></code></pre></div>
+</section>
+<section id="recommend" class="level2" data-number="0.7">
+<h2 data-number="0.7"><span class="header-section-number">0.7</span> Recommend</h2>
+<p>Input: user_id Output: List (List SongName Artist) representing recommendations</p>
+<p>Example return</p>
+<p><code>[["My Business","Guy"],   ["The Man With The Bag","Floyd/Animal/Zoot"],   ["Challenger","Growing"],   ["Una Ragazza In Due", "I Giganti"], ["That Is Why", "Say Anything"]]</code></p>
+<p>param <code>path</code> path to user data<br />
+param <code>userId</code> user_id (String) that can be found from user dataset<br />
+param <code>tracksPath</code> path to unique song names dataset<br />
+param <code>seed</code> used for testing, put it into the <code>trainsALS()</code> method<br />
+<code>return</code> corresponding song + artist names inside array</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recommend(path, userId, tracksPath, seed):</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> getUserIndex(uId,conversionTable):</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        cDF <span class="op">=</span> conversionTable.where(conversionTable.user <span class="op">==</span> uId).select(conversionTable.user_indexed)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">#.where is same as .select</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>(cDF.rdd.first()[<span class="st">&quot;user_indexed&quot;</span>])</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    loaded <span class="op">=</span> load(path).persist()</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    converted <span class="op">=</span> convert(loaded).persist()</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    ConvertedUserId <span class="op">=</span> getUserIndex(userId,converted)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    rated <span class="op">=</span> toRating(converted).persist()</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> trainALS(rated,seed)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    recommends <span class="op">=</span> recommendSongs(model,ConvertedUserId)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    songNames <span class="op">=</span> getSongNames(converted,recommends,tracksPath)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> songNames</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>recom <span class="op">=</span> recommend(sampleUsersPath, <span class="st">&quot;b80344d063b5ccb3212f76538f3d9e43d87dca9e&quot;</span> ,sampleTracksPath, rSeed)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>recom</span></code></pre></div>
+<pre><code>[[&quot;The Emperor's New Clothes&quot;, &quot;Sinéad O'Connor&quot;],
+ ['Alhos Verdes', 'GNR'],
+ ['Whataya Want From Me', 'Adam Lambert'],
+ ['Street Justice', 'MSTRKRFT'],
+ ['North Sea Storm (Live)', 'Amon Amarth']]</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''recommend test'''</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(recom) <span class="op">==</span> <span class="dv">5</span>, <span class="st">&quot;the amount of recommendations was expected to be 5 but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">len</span>(recom)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">type</span>(recom[<span class="dv">0</span>]) <span class="op">==</span> <span class="bu">list</span>, <span class="st">&quot;the type of a 'recommend' element was expected to be list but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">type</span>(recom[<span class="dv">0</span>])</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#test if the same user and seed returns the same as songNames</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> recom <span class="op">==</span> songNames, <span class="st">&quot;the song names were expected to be </span><span class="sc">%s</span><span class="st"> but they were </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> (songNames, recom)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>spark.catalog.clearCache()</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>sc.stop()</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>spark.stop()</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Econ Notes</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Econ Notes</h1>
+            
+
+            <div class="info">
+    Posted on August 23, 2015
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>, <a title="All pages tagged 'misc'." href="../tags/misc.html">misc</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#geometric-series"><span class="toc-section-number">1</span> Geometric Series</a></li>
+<li><a href="#multivariate-hypergeometric-dist"><span class="toc-section-number">2</span> Multivariate Hypergeometric Dist</a></li>
+<li><a href="#modeling-covid-19"><span class="toc-section-number">3</span> Modeling COVID-19</a></li>
+<li><a href="#linear-algebra"><span class="toc-section-number">4</span> Linear Algebra</a></li>
+<li><a href="#qr-decomposition"><span class="toc-section-number">5</span> QR Decomposition</a></li>
+<li><a href="#singular-value-decomposition"><span class="toc-section-number">6</span> Singular Value Decomposition</a></li>
+<li><a href="#complex-numbers"><span class="toc-section-number">7</span> Complex Numbers</a></li>
+<li><a href="#lln-and-clt"><span class="toc-section-number">8</span> LLN and CLT</a></li>
+<li><a href="#two-meanings-of-probability"><span class="toc-section-number">9</span> Two meanings of probability</a></li>
+<li><a href="#heavy-tailed-dist"><span class="toc-section-number">10</span> Heavy tailed Dist</a></li>
+<li><a href="#multivariate-normal-dist"><span class="toc-section-number">11</span> Multivariate normal dist</a></li>
+<li><a href="#univariate-time-series-with-matrix-algebra"><span class="toc-section-number">12</span> Univariate Time Series with matrix algebra</a></li>
+<li><a href="#linear-programming"><span class="toc-section-number">13</span> Linear Programming</a></li>
+<li><a href="#optimal-transport"><span class="toc-section-number">14</span> Optimal Transport</a></li>
+<li><a href="#von-neumann-growth-model"><span class="toc-section-number">15</span> Von Neumann Growth model</a></li>
+<li><a href="#dynamics-in-one-dimension"><span class="toc-section-number">16</span> Dynamics in One dimension</a></li>
+<li><a href="#ar1-process"><span class="toc-section-number">17</span> AR1 Process</a></li>
+<li><a href="#finite-markov-chain"><span class="toc-section-number">18</span> Finite Markov Chain</a></li>
+<li><a href="#inventory-dynamics"><span class="toc-section-number">19</span> Inventory Dynamics</a></li>
+<li><a href="#linear-state-space-models"><span class="toc-section-number">20</span> Linear State Space Models</a></li>
+<li><a href="#the-samuelson-multiplier-accelerator"><span class="toc-section-number">21</span> The Samuelson Multiplier-Accelerator</a></li>
+<li><a href="#kesten-process-and-firm-dynamics"><span class="toc-section-number">22</span> Kesten Process and Firm Dynamics</a></li>
+<li><a href="#wealth-distribution-dynamics"><span class="toc-section-number">23</span> Wealth Distribution Dynamics</a></li>
+<li><a href="#kalman-filter"><span class="toc-section-number">24</span> Kalman Filter</a></li>
+<li><a href="#shortest-path"><span class="toc-section-number">25</span> Shortest Path</a></li>
+<li><a href="#cass-koopman-planning-problem"><span class="toc-section-number">26</span> Cass-Koopman Planning Problem</a></li>
+<li><a href="#cass-koopman-competitive-equilibrium"><span class="toc-section-number">27</span> Cass-Koopman Competitive Equilibrium</a></li>
+</ul></div>
+<section id="geometric-series" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Geometric Series</h1>
+<p>Summary</p>
+<p>LINEAR PROG ASSUMPTIONS INPUT Cost-function, decision-variable OUTPUT optimal-decision-variables</p>
+<p>OPTIMAL TRANSPORT is example of LINEAR PROG Two types of nodes, supply nodes(initial object) and demand nodes(terminal object) Each initial object has required min capacity Each terminal object has required min capacity</p>
+<p>The decision variable are basically the intensity of edge between these nodes.<br />
+More intense edges mean more items delivered between nodes.</p>
+</section>
+<section id="multivariate-hypergeometric-dist" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Multivariate Hypergeometric Dist</h1>
+</section>
+<section id="modeling-covid-19" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Modeling COVID-19</h1>
+</section>
+<section id="linear-algebra" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Linear Algebra</h1>
+</section>
+<section id="qr-decomposition" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> QR Decomposition</h1>
+</section>
+<section id="singular-value-decomposition" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Singular Value Decomposition</h1>
+</section>
+<section id="complex-numbers" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Complex Numbers</h1>
+</section>
+<section id="lln-and-clt" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> LLN and CLT</h1>
+</section>
+<section id="two-meanings-of-probability" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Two meanings of probability</h1>
+</section>
+<section id="heavy-tailed-dist" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Heavy tailed Dist</h1>
+</section>
+<section id="multivariate-normal-dist" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Multivariate normal dist</h1>
+</section>
+<section id="univariate-time-series-with-matrix-algebra" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Univariate Time Series with matrix algebra</h1>
+</section>
+<section id="linear-programming" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Linear Programming</h1>
+</section>
+<section id="optimal-transport" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Optimal Transport</h1>
+</section>
+<section id="von-neumann-growth-model" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Von Neumann Growth model</h1>
+</section>
+<section id="dynamics-in-one-dimension" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Dynamics in One dimension</h1>
+</section>
+<section id="ar1-process" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> AR1 Process</h1>
+</section>
+<section id="finite-markov-chain" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Finite Markov Chain</h1>
+</section>
+<section id="inventory-dynamics" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> Inventory Dynamics</h1>
+</section>
+<section id="linear-state-space-models" class="level1" data-number="20">
+<h1 data-number="20"><span class="header-section-number">20</span> Linear State Space Models</h1>
+</section>
+<section id="the-samuelson-multiplier-accelerator" class="level1" data-number="21">
+<h1 data-number="21"><span class="header-section-number">21</span> The Samuelson Multiplier-Accelerator</h1>
+</section>
+<section id="kesten-process-and-firm-dynamics" class="level1" data-number="22">
+<h1 data-number="22"><span class="header-section-number">22</span> Kesten Process and Firm Dynamics</h1>
+</section>
+<section id="wealth-distribution-dynamics" class="level1" data-number="23">
+<h1 data-number="23"><span class="header-section-number">23</span> Wealth Distribution Dynamics</h1>
+</section>
+<section id="kalman-filter" class="level1" data-number="24">
+<h1 data-number="24"><span class="header-section-number">24</span> Kalman Filter</h1>
+</section>
+<section id="shortest-path" class="level1" data-number="25">
+<h1 data-number="25"><span class="header-section-number">25</span> Shortest Path</h1>
+</section>
+<section id="cass-koopman-planning-problem" class="level1" data-number="26">
+<h1 data-number="26"><span class="header-section-number">26</span> Cass-Koopman Planning Problem</h1>
+</section>
+<section id="cass-koopman-competitive-equilibrium" class="level1" data-number="27">
+<h1 data-number="27"><span class="header-section-number">27</span> Cass-Koopman Competitive Equilibrium</h1>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

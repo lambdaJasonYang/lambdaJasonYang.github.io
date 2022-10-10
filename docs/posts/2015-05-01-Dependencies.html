@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Dependencies, Arrows and Confusion</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Dependencies, Arrows and Confusion</h1>
+            
+
+            <div class="info">
+    Posted on May  1, 2015
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#syntax-dependency-are-ast-in-fp"><span class="toc-section-number">1</span> Syntax Dependency are AST in FP</a></li>
+<li><a href="#semantic-dependency"><span class="toc-section-number">2</span> Semantic Dependency</a>
+<ul>
+<li><a href="#arrays-function-map-vs-dependency-duality-misconception"><span class="toc-section-number">2.1</span> Arrays , Function Map vs Dependency Duality misconception</a></li>
+<li><a href="#functional-method-to-simulate-oo-objects"><span class="toc-section-number">2.2</span> Functional method to simulate OO objects</a>
+<ul>
+<li><a href="#comparing-with-oo-version"><span class="toc-section-number">2.2.1</span> Comparing with OO version</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#readwrite-arrow"><span class="toc-section-number">3</span> Read/Write arrow</a>
+<ul>
+<li><a href="#write-to"><span class="toc-section-number">3.1</span> Write-To</a></li>
+<li><a href="#read-to"><span class="toc-section-number">3.2</span> Read To</a></li>
+<li><a href="#pointers"><span class="toc-section-number">3.3</span> Pointers</a></li>
+<li><a href="#linked-lists-recursive-dependency"><span class="toc-section-number">3.4</span> Linked Lists, recursive dependency</a></li>
+</ul></li>
+</ul></div>
+<ul>
+<li>AST
+<ul>
+<li>Syntax Dependency (Blue)</li>
+</ul></li>
+<li>OO
+<ul>
+<li>Semantic Dependency (Red)</li>
+<li>Semantic Modification (Purple)</li>
+</ul></li>
+<li>Math
+<ul>
+<li>Function Map (Black)</li>
+</ul></li>
+</ul>
+<section id="syntax-dependency-are-ast-in-fp" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Syntax Dependency are AST in FP</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plus(x,y):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">+</span> y</span></code></pre></div>
+<ul>
+<li>plus is pure</li>
+<li>plus is pass-by-value
+<ul>
+<li>plus does not modify args, x y</li>
+</ul></li>
+</ul>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h6469677261706820477b0a0a20202020706c75730a20202020706c7573202d3e2078205b636f6c6f72203d20626c75655d0a20202020706c7573202d3e2079205b636f6c6f72203d20626c75655d0a7d"></figure>
+<p><strong>Blue arrows = Syntax Dependency</strong><br />
+Blue arrows DO NOT represent Semantic Dependency</p>
+<p>In OO, the same diagram does not exist because the arrows now represent object dependency.</p>
+<p>Therefore plus does not have an object dependency diagram.</p>
+<hr />
+</section>
+<section id="semantic-dependency" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Semantic Dependency</h1>
+<p>Arguments to functions are NOT semantic dependencies even though they are syntax dependencies.</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020202072616e6b646972203d204c520a2020202042205b636f6c6f723d6f72616e67655d3b0a2020202041202d3e2042205b636f6c6f723d7265645d0a7d"></figure>
+<p>B is orange meaning it has a <strong>possibility of mutation</strong></p>
+<ul>
+<li><strong>Semantic Dependency Test</strong>
+<ul>
+<li><strong>“Does Changing B cause a Change in A?”</strong></li>
+<li><strong>“If we remove B does A cease to exist?”</strong></li>
+<li><strong>Does B have a possibility of mutation?</strong>
+<ul>
+<li>What if B can’t mutate? We don’t even need to show dependency because this is just pure FP.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Red arrows = Semantic Dependency</strong></p>
+<p>Another way to represent this is nested codeblocks like below.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>class A<span class="op">{</span> <span class="co">// A -&gt; B</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    B <span class="op">=</span> new B<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>class B<span class="op">{</span> <span class="co">// B -&gt; C</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    C <span class="op">=</span> new C<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> new A<span class="op">;</span></span></code></pre></div>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020202072616e6b646972203d204c520a20202020737562677261706820636c757374657241207b0a202020202020202041205b73686170653d706c61696e746578745d0a2020202020202020737562677261706820636c7573746572427b0a20202020202020202020202042205b73686170653d706c61696e746578745d0a202020202020202020202020737562677261706820636c7573746572437b0a2020202020202020202020202020202043205b73686170653d706c61696e746578745d0a2020202020202020202020207d0a20202020202020207d0a202020207d0a2020202043202d3e2042205b6c6162656c3d2270726f7061676174655c6e6d75746174696f6e2220666f6e74636f6c6f723d677265656e20636f6c6f723d677265656e205d0a2020202042202d3e2041205b6c6162656c3d2270726f7061676174655c6e6d75746174696f6e2220666f6e74636f6c6f723d677265656e20636f6c6f723d677265656e5d0a2020202041202d3e2042205b636f6c6f723d7265645d0a2020202042202d3e2043205b636f6c6f723d7265645d0a7d"></figure>
+<ul>
+<li>If we mutate object C, mutation propagates to B then to A</li>
+<li><strong>Mutation propagates from INNER to OUTWARDS</strong> which is reverse direction of dependency.</li>
+<li>Semantic dependency <strong>REQUIRES</strong> the object it points towards to have a possibility of mutation.
+<ul>
+<li>A –&gt; B means B must be an object that is capable of mutating</li>
+<li>Counter Example, if this wasnt the case, all pure functions would have Semantic dependencies which is WRONG.</li>
+</ul></li>
+</ul>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020202072616e6b646972203d204c523b0a20202020737562677261706820636c757374657241207b0a202020202020202056616c7565205b6c6162656c3d436f446f6d61696e2073686170653d706c61696e746578745d0a2020202020202020737562677261706820636c7573746572427b0a202020202020202020202020496e646578205b6c6162656c3d446f6d61696e2073686170653d706c61696e746578745d0a2020202020202020202020200a20202020202020207d0a202020207d0a202020202020496e646578202d3e2056616c7565205b6c6162656c3d2257524f4e475c6e5c6e6d61707320746f225d3b0a2020202056616c7565202d3e20496e646578205b6c6162656c3d3c3c733e646570656e64733c2f733e3e20636f6c6f723d227265642220666f6e74636f6c6f723d2272656422207374796c653d6461736865645d3b0a7d"></figure>
+<p>WRONG because this is a pure function, meaning Domain will never mutate.</p>
+<hr />
+<section id="arrays-function-map-vs-dependency-duality-misconception" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Arrays , Function Map vs Dependency Duality misconception</h2>
+<blockquote>
+<p>An array is simply a function.<br />
+OO Objects can be modeled as functions.</p>
+</blockquote>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>f[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>f[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>f[n] <span class="op">=</span> ..</span></code></pre></div>
+<p><span class="math display">\[ Index \overset{f}{\mapsto} Value \]</span> <span class="math display">\[ \xcancel{Index {\color{red}\underset{depends}{\leftarrow}} Value} \]</span></p>
+<p><strong>Duality between Function Map and Semantic Dependency is WRONG</strong></p>
+<p>Chart showing Independent Variable(x) vs Dependent Variable(y)<br />
+<span class="math inline">\(x\mapsto y\)</span></p>
+<p><img src="../images/BoxDependency/graph2.svg" /> The red arrow is wrong! Why? the semantic depends relation is based upon the fact that the object it points to can mutate. Can x mutate? NO, 1 is 1, 2 is 2 and will always be 2.</p>
+<p>PURE FUNCTIONS DO NOT HAVE SEMANTIC DEPENDENCIES!<br />
+Or more precisely there is no point in showing semantic dependencies.</p>
+<p><strong>Black arrows = Function map</strong></p>
+<hr />
+</section>
+<section id="functional-method-to-simulate-oo-objects" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Functional method to simulate OO objects</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Record_A bobby<span class="op">{</span>name<span class="op">:</span><span class="st">&quot;bob&quot;</span><span class="op">,</span>age<span class="op">:</span><span class="dv">3</span><span class="op">}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>String name<span class="op">(</span>x<span class="op">):</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">.</span>name</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>Nat age<span class="op">(</span>x<span class="op">):</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">.</span>age</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>name<span class="op">(</span>A<span class="op">)</span> <span class="co">//&quot;bob&quot;</span></span></code></pre></div>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020202041202d3e20537472696e67205b6c6162656c3d226e616d65225d0a2020202041202d3e204e6174205b6c6162656c3d22616765225d0a0a7d"></figure>
+<p><img src="../images/BoxDependency/Anameage.svg" /></p>
+<p>Notice no semantic dependency. This is the reason FP doesn’t require dependency injection.</p>
+<hr />
+<section id="comparing-with-oo-version" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1"><span class="header-section-number">2.2.1</span> Comparing with OO version</h3>
+<ul>
+<li>Notice in OO, we wouldn’t see the entire Domain, Nat and String but the objects age and name.</li>
+<li>The objects age and name would also be inside the object A</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>class age<span class="op">{...}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>class name<span class="op">{...}</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>class A<span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    myAge <span class="op">=</span> new age<span class="op">()</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    myName <span class="op">=</span> new name<span class="op">()</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>A<span class="op">.</span>myAge <span class="co">//projection</span></span></code></pre></div>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020202041202d3e20616765205b636f6c6f723d7265645d0a2020202041202d3e206e616d65205b636f6c6f723d7265645d0a2020202041202d3e20616765205b6c6162656c3d70726f6a656374696f6e5d0a2020202041202d3e206e616d65205b6c6162656c3d70726f6a656374696f6e5d0a7d"></figure>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h6469677261706820477b0a202020200a2020202020202020737562677261706820636c757374657241207b0a202020202020202041205b6c6162656c3d22415c6e5c6e4f4f2076657273696f6e222073686170653d706c61696e746578745d0a2020202020202020737562677261706820636c7573746572427b0a2020202020202020202020206e616d65205b73686170653d706c61696e746578745d0a2020202020202020202020200a20202020202020207d0a2020202020202020737562677261706820636c7573746572437b0a202020202020202020202020616765205b73686170653d706c61696e746578745d0a20202020202020207d0a202020207d0a0a7d"></figure>
+</section>
+</section>
+</section>
+<section id="readwrite-arrow" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Read/Write arrow</h1>
+<section id="write-to" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Write-To</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> plus<span class="op">(&amp;</span>x<span class="op">,&amp;</span>y<span class="op">,&amp;</span>z<span class="op">):</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> x <span class="op">+</span> y</span></code></pre></div>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a2020202072616e6b646972203d204c523b0a20202020706c7573202d3e207a205b636f6c6f723d707572706c655d3b0a7d"></figure>
+<p><strong>Purple arrows = Write-To</strong></p>
+<p><strong>Write-To Test</strong> vs Semantic Dependency</p>
+<ul>
+<li><strong>The target does not depend on the modifier, aka the target can still exist if the modifier is gone</strong>
+<ul>
+<li>“z” does not semantically depend on plus.<br />
+</li>
+<li>“z” will still exist even if “plus” does not exist</li>
+</ul></li>
+</ul>
+<p>Tidbit: Passing x,y by reference is same as pass-by-value if we don’t modify the values.<br />
+<code class="sourceCode c"><span class="dt">void</span> plus<span class="op">(&amp;</span>x<span class="op">,&amp;</span>y<span class="op">,&amp;</span>z<span class="op">)</span></code> is effectively the same as <code class="sourceCode c"><span class="dt">void</span> plus<span class="op">(</span>x<span class="op">,</span>y<span class="op">,&amp;</span>z<span class="op">)</span></code></p>
+<section id="is-a-meta-write-to" class="level4" data-number="3.1.0.1">
+<h4 data-number="3.1.0.1"><span class="header-section-number">3.1.0.1</span> := is a Meta Write-To</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">:=</span> <span class="dv">5</span></span></code></pre></div>
+</section>
+</section>
+<section id="read-to" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Read To</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> lambda x <span class="op">:</span> print x</span></code></pre></div>
+</section>
+<section id="pointers" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> Pointers</h2>
+<blockquote>
+<p>Everything in memory is just one big array<br />
+Arrays are just functions<br />
+Everything in memory is just one big function</p>
+</blockquote>
+<p><span class="math display">\[ Address \rightarrow Value \]</span> <span class="math display">\[ Pointer \rightarrow Address \rightarrow Value \]</span></p>
+<ul>
+<li><span class="math inline">\(Address\)</span> really means the domain of all valid addresses, same for <span class="math inline">\(Pointer, Value\)</span>.</li>
+</ul>
+<p>Semantic Dependency Test: If we change pointer, does the address and value change? YES</p>
+<p>If we change address, does the value change? YES</p>
+<p>Value Depends on Address, we have to check <strong>does Address have the possibility of mutation</strong>? Tricky question.<br />
+Mutation includes object creation.<br />
+Addresses are isomorphic to variable names.<br />
+So whenever we initialize a new variable, we are causing a mutation. So Yes.</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682067207b0a6772617068205b0a72616e6b646972203d20224c52220a5d3b0a6e6f6465205b0a666f6e7473697a65203d20223136220a7368617065203d2022656c6c69707365220a5d3b0a65646765205b0a5d3b0a226e6f64653022205b0a6c6162656c203d20223c66303e20307831306261382028696e742079297c203c66313e3233220a7368617065203d20227265636f7264220a5d3b0a226e6f64653122205b0a6c6162656c203d20223c66303e203078663766632028737472696e672070297c203c66313e202768656c6c6f2720220a7368617065203d20227265636f7264220a5d3b0a0a226e6f64653322205b0a6c6162656c203d20223c66303e203078396733632028696e742a2078297c203c66313e2030783130626138207c203c66323e203233220a7368617065203d20227265636f7264220a5d3b0a0a0a226e6f64653222205b0a6c6162656c203d20223c66303e204164647220285661726961626c65297c2056616c756520220a7368617065203d20227265636f7264220a5d3b0a0a226e6f64653522205b0a6c6162656c203d20223c66303e20507472204164647220285661726961626c65297c205461726765742041646472207c205461726765742056616c756520220a7368617065203d20227265636f7264220a5d3b0a0a226e6f646533222d3e20226e6f64653022205b6c6162656c3d22646570656e6473222069643d3120636f6c6f723d7265645d0a0a7d0a40656e64756d6c0a"></figure>
+<p>A pointer can semantically modify the object it points to but it is not dependent on the object it points to.</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a20202020737562677261706820636c757374657241207b0a202020202020202056616c7565205b73686170653d706c61696e746578745d0a2020202020202020737562677261706820636c7573746572427b0a20202020202020202020202041646472657373205b73686170653d706c61696e746578745d0a2020202020202020202020200a20202020202020207d0a202020207d0a7d"></figure>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a20202020737562677261706820636c757374657241207b0a202020202020202056616c7565205b73686170653d706c61696e746578745d0a2020202020202020737562677261706820636c7573746572427b0a20202020202020202020202041646472657373205b73686170653d706c61696e746578745d0a2020202020202020202020200a20202020202020207d0a202020207d0a20202020737562677261706820636c7573746572437b0a20202020202020202020202020202020506f696e746572205b73686170653d706c61696e746578745d0a2020202020202020202020207d0a20202020506f696e746572202d3e2041646472657373205b636f6c6f723d707572706c655d0a7d"></figure>
+<ul>
+<li>Pointer can modify Address (purple)
+<ul>
+<li>Mutated Address propagates change to Value</li>
+</ul></li>
+</ul>
+</section>
+<section id="linked-lists-recursive-dependency" class="level2" data-number="3.4">
+<h2 data-number="3.4"><span class="header-section-number">3.4</span> Linked Lists, recursive dependency</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>class linkedlist<span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> head <span class="op">=</span> data<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    linkedlist<span class="op">*</span> next <span class="op">=</span> <span class="op">&amp;</span>second </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a20202020737562677261706820636c757374657241207b0a20202020202020204c696e6b65644c697374205b73686170653d706c61696e746578745d0a2020202020202020737562677261706820636c7573746572427b0a20202020202020202020202042205b6c6162656c3d222a706f696e746572222073686170653d706c61696e746578745d0a2020202020202020202020200a20202020202020207d0a202020207d0a0a20202020737562677261706820636c7573746572427b0a20202020202020204c696e6b65644c69737432205b6c6162656c3d4c696e6b65644c6973742073686170653d706c61696e746578745d0a20202020202020206e756c6c205b73686170653d72656374616e676c655d0a202020207d0a7d"></figure>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

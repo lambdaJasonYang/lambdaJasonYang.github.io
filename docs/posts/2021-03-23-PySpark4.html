@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - PySpark MLlib</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>PySpark MLlib</h1>
+            
+
+            <div class="info">
+    Posted on March 23, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'python'." href="../tags/python.html">python</a>, <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>
+    
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>NAME <span class="op">=</span> <span class="st">&quot;UserJY&quot;</span></span></code></pre></div>
+<hr />
+<p>Jupyter notebook:</p>
+<p><img src="jupyter.png" /></p>
+<section id="mllib" class="level2" data-number="0.1">
+<h2 data-number="0.1"><span class="header-section-number">0.1</span> Mllib</h2>
+<p>We will use multiple small methods that to predict if a customer is going to be a <code>paid_customer</code>. We use logistic regression (https://en.wikipedia.org/wiki/Logistic_regression) for solving the classification problem.</p>
+<p>sample of data from http://cs.hut.fi/u/arasalo1/resources/osge_pool-1-thread-1.data.zip.</p>
+<p>A machine learning pipeline that transform the data so that mllib’s logistic regression can make predictions on if a customer is going to pay for the service. First method <code>convert</code> transforms the file into a dataframe so that it is easier to process. Categorical features are transformed using method <code>indexer</code>. <code>featureAssembler</code> creates a single feature vector. Most mllib’s machine learning algorithms require this. <code>scaler</code> scales the variables. <code>createModel</code>creates and trains the logistic regression model. Training data has been transformed properly using the previous methods. Finally <code>predict</code> is used to make predictions whether the user is a paying customer using the trained model.</p>
+<section id="data-schema" class="level3" data-number="0.1.1">
+<h3 data-number="0.1.1"><span class="header-section-number">0.1.1</span> Data schema</h3>
+<table>
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 13%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">column_header</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: left;">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">cid</td>
+<td style="text-align: left;">uuid</td>
+<td style="text-align: left;">customer id</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cname</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">name of the user</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">email</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">email address of the user</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">customer’s gender</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">age of the customer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">address</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">user provided address during registration, stores only US based addresses other countries gets ‘N/A’</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">country</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">country to which customer belongs to</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">register_date</td>
+<td style="text-align: left;">long</td>
+<td style="text-align: left;">date on which user registered with us in milliseconds</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">friend_count</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">number of friends a user has</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lifetime</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">number of days a user has been active since registration date</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">citygame_played</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">number of times citygame has been played by user</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pictionarygame_played</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">number of times pictionary game has been played by user</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">scramblegame_played</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">number of times scaramble game has been played by user</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">snipergame_played</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">number of times sniper game has been played by user</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">revenue</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">revenue generated by the user</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">paid_subscriber</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">whether the customer is paid customer or not, represented by <code>yes</code> or <code>no</code></td>
+</tr>
+</tbody>
+</table>
+<p>Use Spark’s machine learning library mllib’s Binomial Logistic Regression algorithm.<br />
+https://spark.apache.org/docs/latest/ml-classification-regression.html#binomial-logistic-regression</p>
+<p>Use these features for training your model: * gender * age * country * friend_count * lifetime * citygame_played * pictionarygame_played * scramblegame_played * snipergame_played * paid_subscriber(this is the feature to predict)</p>
+<p>The data contains categorical features, so you need to change them accordingly.<br />
+https://spark.apache.org/docs/latest/ml-features.html</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.classification <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> SparkSession.builder<span class="op">\</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    .master(<span class="st">&quot;local[*]&quot;</span>)<span class="op">\</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    .appName(<span class="st">&quot;gaming&quot;</span>)<span class="op">\</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    .config(<span class="st">&quot;spark.dynamicAllocation.enabled&quot;</span>, <span class="st">&quot;true&quot;</span>)<span class="op">\</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    .config(<span class="st">&quot;spark.shuffle.service.enabled&quot;</span>, <span class="st">&quot;true&quot;</span>)<span class="op">\</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    .getOrCreate()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>sampleDataPath <span class="op">=</span> <span class="st">&quot;testData.data&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Generate random sample</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>randomData <span class="op">=</span> <span class="st">&quot;randomsample.data&quot;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(sampleDataPath) <span class="im">as</span> sampleFile:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> random.sample(sampleFile.readlines(), <span class="dv">4000</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>outF <span class="op">=</span> <span class="bu">open</span>(randomData, <span class="st">&quot;w&quot;</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>outF.writelines(lines)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>outF.close()</span></code></pre></div>
+</section>
+</section>
+<section id="convert" class="level2" data-number="0.2">
+<h2 data-number="0.2"><span class="header-section-number">0.2</span> Convert</h2>
+<p><code>convert</code> creates a dataframe, removes unnecessary colums and converts the rest to right format.<br />
+Data schema: * gender: Double (1 if male else 0) * age: Double * country: String * friend_count: Double * lifetime: Double * game1: Double (citygame_played) * game2: Double (pictionarygame_played) * game3: Double (scramblegame_played) * game4: Double (snipergame_played) * paid_customer: Double (1 if yes else 0)</p>
+<p>The function already creates a SQL table called “gaming”, your job is to remove unneccesary columns and convert the rest to right format. Hint: SQL <code>SELECT</code> query and <code>CAST</code>. You will also need to use <code>IF</code> to properly parse and read some of the variables. e.g. <code>IF(gender='male',1,0)</code>.</p>
+<p>param <code>path</code>: path to file<br />
+<code>return</code>: converted DataFrame</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert(path):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    originalCols <span class="op">=</span> StructType([<span class="op">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;session_id&quot;</span>, StringType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;cname&quot;</span>, StringType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;email&quot;</span>,StringType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;gender&quot;</span>,StringType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;age&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;address&quot;</span>,StringType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;country&quot;</span>,StringType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;register_date&quot;</span>,StringType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;friend_count&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;lifetime&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;game1&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;game2&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;game3&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;game4&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;revenue&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">&quot;paid_customer&quot;</span>,StringType(),<span class="va">False</span>)])</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> spark.read.option(<span class="st">&quot;header&quot;</span>,<span class="st">&quot;false&quot;</span>).schema(originalCols).csv(path)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    data.createOrReplaceTempView(<span class="st">&quot;gaming&quot;</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> spark.sql(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT </span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="st">            CAST (IF(gender='male',1,0) AS Double) AS gender,</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="st">            age,</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="st">            country,</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="st">            friend_count,</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="st">            lifetime,</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="st">            game1,</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="st">            game2,</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="st">            game3,</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="st">            game4,</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="st">            CAST (IF(paid_customer='yes',1,0) AS Double) AS paid_customer</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="st">        FROM gaming</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="st">        &quot;&quot;&quot;</span>)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> convert(sampleDataPath)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data.cache()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>data.show()</span></code></pre></div>
+<pre><code>+------+----+-------+------------+--------+-----+-----+-----+-----+-------------+
+|gender| age|country|friend_count|lifetime|game1|game2|game3|game4|paid_customer|
++------+----+-------+------------+--------+-----+-----+-----+-----+-------------+
+|   1.0|23.0|    USA|         0.0|     5.0|  0.0|  1.0|  1.0|  3.0|          0.0|
+|   1.0|20.0|     UK|         2.0|     4.0|  0.0|  0.0|  0.0|  4.0|          0.0|
+|   1.0|24.0|     UK|         9.0|    13.0|  1.0|  0.0|  2.0| 10.0|          0.0|
+|   1.0|21.0|    USA|       412.0|    80.0|  8.0|  7.0| 17.0| 48.0|          1.0|
+|   1.0|20.0|    USA|         0.0|    38.0|  0.0|  3.0|  6.0| 29.0|          0.0|
+|   0.0|22.0| FRANCE|        86.0|     2.0|  0.0|  2.0|  0.0|  0.0|          0.0|
+|   1.0|27.0|GERMANY|         2.0|     5.0|  1.0|  1.0|  1.0|  2.0|          0.0|
+|   0.0|30.0|    USA|         0.0|    45.0| 19.0| 21.0|  3.0|  2.0|          0.0|
+|   0.0|26.0|GERMANY|         7.0|    20.0|  6.0|  8.0|  5.0|  1.0|          0.0|
+|   0.0|18.0|     UK|         0.0|     7.0|  5.0|  2.0|  0.0|  0.0|          0.0|
+|   1.0|22.0|    USA|         0.0|     0.0|  0.0|  0.0|  0.0|  0.0|          0.0|
+|   1.0|24.0|GERMANY|       417.0|     1.0|  0.0|  0.0|  0.0|  1.0|          0.0|
+|   0.0|21.0|    USA|         3.0|     3.0|  2.0|  1.0|  0.0|  0.0|          0.0|
+|   1.0|18.0|    USA|         8.0|     1.0|  0.0|  0.0|  0.0|  1.0|          0.0|
+|   0.0|23.0|    USA|         7.0|     8.0|  4.0|  2.0|  2.0|  0.0|          0.0|
+|   1.0|22.0|     UK|        60.0|     8.0|  0.0|  0.0|  4.0|  4.0|          0.0|
+|   1.0|18.0|    USA|         3.0|     7.0|  0.0|  2.0|  1.0|  4.0|          0.0|
+|   0.0|20.0| CANADA|         0.0|     0.0|  0.0|  0.0|  0.0|  0.0|          0.0|
+|   1.0|22.0|    USA|         5.0|    83.0|  6.0|  9.0| 10.0| 58.0|          0.0|
+|   1.0|23.0|    USA|       351.0|     5.0|  0.0|  0.0|  0.0|  5.0|          0.0|
++------+----+-------+------------+--------+-----+-----+-----+-----+-------------+
+only showing top 20 rows</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''convert schema test'''</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>correctCols <span class="op">=</span> StructType([<span class="op">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;gender&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;age&quot;</span>,DoubleType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;country&quot;</span>,StringType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;friend_count&quot;</span>,DoubleType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;lifetime&quot;</span>,DoubleType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game1&quot;</span>,DoubleType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game2&quot;</span>,DoubleType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game3&quot;</span>,DoubleType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game4&quot;</span>,DoubleType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;paid_customer&quot;</span>,DoubleType(),<span class="va">False</span>)])</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>fakeData <span class="op">=</span> [(<span class="fl">0.0</span>,<span class="fl">1.0</span>,<span class="st">&quot;A&quot;</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">0.0</span>)]</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>fakeDf <span class="op">=</span> spark.createDataFrame(fakeData, correctCols)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> data.dtypes <span class="op">==</span> fakeDf.dtypes, <span class="st">&quot;the schema was expected to be </span><span class="sc">%s</span><span class="st"> but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> (fakeDf.dtypes, data.dtypes)</span></code></pre></div>
+</section>
+<section id="indexer" class="level2" data-number="0.3">
+<h2 data-number="0.3"><span class="header-section-number">0.3</span> Indexer</h2>
+<p><code>indexer</code> converts categorical features into doubles.<br />
+https://spark.apache.org/docs/latest/ml-features.html#stringindexer <code>country</code> is the only categorical feature.<br />
+After these modifications schema should be: * gender: Double (1 if male else 0) * age: Double * country: String * friend_count: Double * lifetime: Double * game1: Double (citygame_played) * game2: Double (pictionarygame_played) * game3: Double (scramblegame_played) * game4: Double (snipergame_played) * paid_customer: Double (1 if yes else 0) * country_index: Double</p>
+<p>param <code>df</code>: DataFrame<br />
+<code>return</code>: transformed Dataframe. The returned dataframe should have a new column called “country_index”.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> indexer(df):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#a=df[['country']]</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#b = a.drop_duplicates()</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    stringIndexer <span class="op">=</span> StringIndexer(inputCol<span class="op">=</span><span class="st">&quot;country&quot;</span>, outputCol<span class="op">=</span><span class="st">&quot;country_index&quot;</span>, stringOrderType<span class="op">=</span><span class="st">&quot;frequencyDesc&quot;</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> stringIndexer.fit(df).transform(df)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> model</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>indexed <span class="op">=</span> indexer(data)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>indexed.show()</span></code></pre></div>
+<pre><code>+------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+
+|gender| age|country|friend_count|lifetime|game1|game2|game3|game4|paid_customer|country_index|
++------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+
+|   1.0|23.0|    USA|         0.0|     5.0|  0.0|  1.0|  1.0|  3.0|          0.0|          0.0|
+|   1.0|20.0|     UK|         2.0|     4.0|  0.0|  0.0|  0.0|  4.0|          0.0|          1.0|
+|   1.0|24.0|     UK|         9.0|    13.0|  1.0|  0.0|  2.0| 10.0|          0.0|          1.0|
+|   1.0|21.0|    USA|       412.0|    80.0|  8.0|  7.0| 17.0| 48.0|          1.0|          0.0|
+|   1.0|20.0|    USA|         0.0|    38.0|  0.0|  3.0|  6.0| 29.0|          0.0|          0.0|
+|   0.0|22.0| FRANCE|        86.0|     2.0|  0.0|  2.0|  0.0|  0.0|          0.0|          3.0|
+|   1.0|27.0|GERMANY|         2.0|     5.0|  1.0|  1.0|  1.0|  2.0|          0.0|          2.0|
+|   0.0|30.0|    USA|         0.0|    45.0| 19.0| 21.0|  3.0|  2.0|          0.0|          0.0|
+|   0.0|26.0|GERMANY|         7.0|    20.0|  6.0|  8.0|  5.0|  1.0|          0.0|          2.0|
+|   0.0|18.0|     UK|         0.0|     7.0|  5.0|  2.0|  0.0|  0.0|          0.0|          1.0|
+|   1.0|22.0|    USA|         0.0|     0.0|  0.0|  0.0|  0.0|  0.0|          0.0|          0.0|
+|   1.0|24.0|GERMANY|       417.0|     1.0|  0.0|  0.0|  0.0|  1.0|          0.0|          2.0|
+|   0.0|21.0|    USA|         3.0|     3.0|  2.0|  1.0|  0.0|  0.0|          0.0|          0.0|
+|   1.0|18.0|    USA|         8.0|     1.0|  0.0|  0.0|  0.0|  1.0|          0.0|          0.0|
+|   0.0|23.0|    USA|         7.0|     8.0|  4.0|  2.0|  2.0|  0.0|          0.0|          0.0|
+|   1.0|22.0|     UK|        60.0|     8.0|  0.0|  0.0|  4.0|  4.0|          0.0|          1.0|
+|   1.0|18.0|    USA|         3.0|     7.0|  0.0|  2.0|  1.0|  4.0|          0.0|          0.0|
+|   0.0|20.0| CANADA|         0.0|     0.0|  0.0|  0.0|  0.0|  0.0|          0.0|          4.0|
+|   1.0|22.0|    USA|         5.0|    83.0|  6.0|  9.0| 10.0| 58.0|          0.0|          0.0|
+|   1.0|23.0|    USA|       351.0|     5.0|  0.0|  0.0|  0.0|  5.0|          0.0|          0.0|
++------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+
+only showing top 20 rows</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''indexer schema test'''</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>correctCols <span class="op">=</span> StructType([<span class="op">\</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;gender&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;age&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;country&quot;</span>,StringType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;friend_count&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;lifetime&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game1&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game2&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game3&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game4&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;paid_customer&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;country_index&quot;</span>,DoubleType(),<span class="va">False</span>)])</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>fakeData <span class="op">=</span> [(<span class="fl">0.0</span>,<span class="fl">1.0</span>,<span class="st">&quot;A&quot;</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>)]</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>fakeDf <span class="op">=</span> spark.createDataFrame(fakeData, correctCols)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> indexed.dtypes <span class="op">==</span> fakeDf.dtypes, <span class="st">&quot;the schema was expected to be </span><span class="sc">%s</span><span class="st"> but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> (fakeDf.dtypes, indexed.dtypes)</span></code></pre></div>
+</section>
+<section id="feature-assembler" class="level2" data-number="0.4">
+<h2 data-number="0.4"><span class="header-section-number">0.4</span> Feature Assembler</h2>
+<p><code>featureAssembler</code> combines features into one vector. Most mllib algorithms require this step.<br />
+https://spark.apache.org/docs/latest/ml-features.html#vectorassembler. In this task your vector assembler should take and combine the following columns in the same order listed: <code>["gender", "age","friend_count","lifetime","game1","game2","game3","game4","country_index"]</code>.</p>
+<p>param <code>df</code>: Dataframe that is transformed using indexer<br />
+<code>return</code> transformed Dataframe. The returned dataframe should have a new column called “features”</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> featureAssembler(df):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    assembler <span class="op">=</span> VectorAssembler(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        inputCols <span class="op">=</span> [<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;age&quot;</span>,<span class="st">&quot;friend_count&quot;</span>,<span class="st">&quot;lifetime&quot;</span>,<span class="st">&quot;game1&quot;</span>,<span class="st">&quot;game2&quot;</span>,<span class="st">&quot;game3&quot;</span>,<span class="st">&quot;game4&quot;</span>,<span class="st">&quot;country_index&quot;</span>],</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        outputCol <span class="op">=</span> <span class="st">&quot;features&quot;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> assembler.transform(df)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>assembled <span class="op">=</span> featureAssembler(indexed)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>assembled.show()</span></code></pre></div>
+<pre><code>+------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+--------------------+
+|gender| age|country|friend_count|lifetime|game1|game2|game3|game4|paid_customer|country_index|            features|
++------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+--------------------+
+|   1.0|23.0|    USA|         0.0|     5.0|  0.0|  1.0|  1.0|  3.0|          0.0|          0.0|[1.0,23.0,0.0,5.0...|
+|   1.0|20.0|     UK|         2.0|     4.0|  0.0|  0.0|  0.0|  4.0|          0.0|          1.0|[1.0,20.0,2.0,4.0...|
+|   1.0|24.0|     UK|         9.0|    13.0|  1.0|  0.0|  2.0| 10.0|          0.0|          1.0|[1.0,24.0,9.0,13....|
+|   1.0|21.0|    USA|       412.0|    80.0|  8.0|  7.0| 17.0| 48.0|          1.0|          0.0|[1.0,21.0,412.0,8...|
+|   1.0|20.0|    USA|         0.0|    38.0|  0.0|  3.0|  6.0| 29.0|          0.0|          0.0|[1.0,20.0,0.0,38....|
+|   0.0|22.0| FRANCE|        86.0|     2.0|  0.0|  2.0|  0.0|  0.0|          0.0|          3.0|[0.0,22.0,86.0,2....|
+|   1.0|27.0|GERMANY|         2.0|     5.0|  1.0|  1.0|  1.0|  2.0|          0.0|          2.0|[1.0,27.0,2.0,5.0...|
+|   0.0|30.0|    USA|         0.0|    45.0| 19.0| 21.0|  3.0|  2.0|          0.0|          0.0|[0.0,30.0,0.0,45....|
+|   0.0|26.0|GERMANY|         7.0|    20.0|  6.0|  8.0|  5.0|  1.0|          0.0|          2.0|[0.0,26.0,7.0,20....|
+|   0.0|18.0|     UK|         0.0|     7.0|  5.0|  2.0|  0.0|  0.0|          0.0|          1.0|[0.0,18.0,0.0,7.0...|
+|   1.0|22.0|    USA|         0.0|     0.0|  0.0|  0.0|  0.0|  0.0|          0.0|          0.0|(9,[0,1],[1.0,22.0])|
+|   1.0|24.0|GERMANY|       417.0|     1.0|  0.0|  0.0|  0.0|  1.0|          0.0|          2.0|[1.0,24.0,417.0,1...|
+|   0.0|21.0|    USA|         3.0|     3.0|  2.0|  1.0|  0.0|  0.0|          0.0|          0.0|[0.0,21.0,3.0,3.0...|
+|   1.0|18.0|    USA|         8.0|     1.0|  0.0|  0.0|  0.0|  1.0|          0.0|          0.0|[1.0,18.0,8.0,1.0...|
+|   0.0|23.0|    USA|         7.0|     8.0|  4.0|  2.0|  2.0|  0.0|          0.0|          0.0|[0.0,23.0,7.0,8.0...|
+|   1.0|22.0|     UK|        60.0|     8.0|  0.0|  0.0|  4.0|  4.0|          0.0|          1.0|[1.0,22.0,60.0,8....|
+|   1.0|18.0|    USA|         3.0|     7.0|  0.0|  2.0|  1.0|  4.0|          0.0|          0.0|[1.0,18.0,3.0,7.0...|
+|   0.0|20.0| CANADA|         0.0|     0.0|  0.0|  0.0|  0.0|  0.0|          0.0|          4.0|(9,[1,8],[20.0,4.0])|
+|   1.0|22.0|    USA|         5.0|    83.0|  6.0|  9.0| 10.0| 58.0|          0.0|          0.0|[1.0,22.0,5.0,83....|
+|   1.0|23.0|    USA|       351.0|     5.0|  0.0|  0.0|  0.0|  5.0|          0.0|          0.0|[1.0,23.0,351.0,5...|
++------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+--------------------+
+only showing top 20 rows</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''assembler schema test'''</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.linalg <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.linalg <span class="im">import</span> VectorUDT</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>correctCols <span class="op">=</span> StructType([<span class="op">\</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;gender&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;age&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;country&quot;</span>,StringType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;friend_count&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;lifetime&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game1&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game2&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game3&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game4&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;paid_customer&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;country_index&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;features&quot;</span>, VectorUDT(),<span class="va">True</span>)])</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>fakeData <span class="op">=</span> [(<span class="fl">0.0</span>,<span class="fl">1.0</span>,<span class="st">&quot;A&quot;</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,(Vectors.dense([<span class="fl">1.0</span>, <span class="fl">2.0</span>])))]</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>fakeDf <span class="op">=</span> spark.createDataFrame(fakeData, correctCols)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> assembled.dtypes <span class="op">==</span> fakeDf.dtypes, <span class="st">&quot;the schema was expected to be </span><span class="sc">%s</span><span class="st"> but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> (fakeDf.dtypes, assembled.dtypes)</span></code></pre></div>
+</section>
+<section id="scaler" class="level2" data-number="0.5">
+<h2 data-number="0.5"><span class="header-section-number">0.5</span> Scaler</h2>
+<p><code>scaler</code> standardizes data to improve performance.<br />
+https://spark.apache.org/docs/latest/ml-features.html#standardscaler. For this task please remember to set the <code>withStd</code> and <code>withMean</code> parameters to true.</p>
+<p>param <code>df</code> Dataframe that is transformed using featureAssembler<br />
+param <code>outputColName</code> name of the scaled feature vector (output column name)<br />
+<code>return</code> transformed Dataframe. The returned dataframe should have a new column named after the passed <code>outputColName</code> parameter.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scaler(df, outputColName):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    scaler <span class="op">=</span> StandardScaler(inputCol<span class="op">=</span><span class="st">&quot;features&quot;</span>,outputCol<span class="op">=</span>outputColName,withStd<span class="op">=</span><span class="va">True</span>,withMean<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    scalerModel <span class="op">=</span> scaler.fit(df)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    scaledData <span class="op">=</span> scalerModel.transform(df)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scaledData</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>scaled <span class="op">=</span> scaler(assembled, <span class="st">&quot;scaledFeatures&quot;</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>scaled.show()</span></code></pre></div>
+<pre><code>+------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+--------------------+--------------------+
+|gender| age|country|friend_count|lifetime|game1|game2|game3|game4|paid_customer|country_index|            features|      scaledFeatures|
++------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+--------------------+--------------------+
+|   1.0|23.0|    USA|         0.0|     5.0|  0.0|  1.0|  1.0|  3.0|          0.0|          0.0|[1.0,23.0,0.0,5.0...|[0.90079513989473...|
+|   1.0|20.0|     UK|         2.0|     4.0|  0.0|  0.0|  0.0|  4.0|          0.0|          1.0|[1.0,20.0,2.0,4.0...|[0.90079513989473...|
+|   1.0|24.0|     UK|         9.0|    13.0|  1.0|  0.0|  2.0| 10.0|          0.0|          1.0|[1.0,24.0,9.0,13....|[0.90079513989473...|
+|   1.0|21.0|    USA|       412.0|    80.0|  8.0|  7.0| 17.0| 48.0|          1.0|          0.0|[1.0,21.0,412.0,8...|[0.90079513989473...|
+|   1.0|20.0|    USA|         0.0|    38.0|  0.0|  3.0|  6.0| 29.0|          0.0|          0.0|[1.0,20.0,0.0,38....|[0.90079513989473...|
+|   0.0|22.0| FRANCE|        86.0|     2.0|  0.0|  2.0|  0.0|  0.0|          0.0|          3.0|[0.0,22.0,86.0,2....|[-1.1099082973702...|
+|   1.0|27.0|GERMANY|         2.0|     5.0|  1.0|  1.0|  1.0|  2.0|          0.0|          2.0|[1.0,27.0,2.0,5.0...|[0.90079513989473...|
+|   0.0|30.0|    USA|         0.0|    45.0| 19.0| 21.0|  3.0|  2.0|          0.0|          0.0|[0.0,30.0,0.0,45....|[-1.1099082973702...|
+|   0.0|26.0|GERMANY|         7.0|    20.0|  6.0|  8.0|  5.0|  1.0|          0.0|          2.0|[0.0,26.0,7.0,20....|[-1.1099082973702...|
+|   0.0|18.0|     UK|         0.0|     7.0|  5.0|  2.0|  0.0|  0.0|          0.0|          1.0|[0.0,18.0,0.0,7.0...|[-1.1099082973702...|
+|   1.0|22.0|    USA|         0.0|     0.0|  0.0|  0.0|  0.0|  0.0|          0.0|          0.0|(9,[0,1],[1.0,22.0])|[0.90079513989473...|
+|   1.0|24.0|GERMANY|       417.0|     1.0|  0.0|  0.0|  0.0|  1.0|          0.0|          2.0|[1.0,24.0,417.0,1...|[0.90079513989473...|
+|   0.0|21.0|    USA|         3.0|     3.0|  2.0|  1.0|  0.0|  0.0|          0.0|          0.0|[0.0,21.0,3.0,3.0...|[-1.1099082973702...|
+|   1.0|18.0|    USA|         8.0|     1.0|  0.0|  0.0|  0.0|  1.0|          0.0|          0.0|[1.0,18.0,8.0,1.0...|[0.90079513989473...|
+|   0.0|23.0|    USA|         7.0|     8.0|  4.0|  2.0|  2.0|  0.0|          0.0|          0.0|[0.0,23.0,7.0,8.0...|[-1.1099082973702...|
+|   1.0|22.0|     UK|        60.0|     8.0|  0.0|  0.0|  4.0|  4.0|          0.0|          1.0|[1.0,22.0,60.0,8....|[0.90079513989473...|
+|   1.0|18.0|    USA|         3.0|     7.0|  0.0|  2.0|  1.0|  4.0|          0.0|          0.0|[1.0,18.0,3.0,7.0...|[0.90079513989473...|
+|   0.0|20.0| CANADA|         0.0|     0.0|  0.0|  0.0|  0.0|  0.0|          0.0|          4.0|(9,[1,8],[20.0,4.0])|[-1.1099082973702...|
+|   1.0|22.0|    USA|         5.0|    83.0|  6.0|  9.0| 10.0| 58.0|          0.0|          0.0|[1.0,22.0,5.0,83....|[0.90079513989473...|
+|   1.0|23.0|    USA|       351.0|     5.0|  0.0|  0.0|  0.0|  5.0|          0.0|          0.0|[1.0,23.0,351.0,5...|[0.90079513989473...|
++------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+--------------------+--------------------+
+only showing top 20 rows</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''scaler schema test'''</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>correctCols <span class="op">=</span> StructType([<span class="op">\</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;gender&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;age&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;country&quot;</span>,StringType(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;friend_count&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;lifetime&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game1&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game2&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game3&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;game4&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;paid_customer&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;country_index&quot;</span>,DoubleType(),<span class="va">False</span>),<span class="op">\</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;features&quot;</span>, VectorUDT(),<span class="va">True</span>),<span class="op">\</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>StructField(<span class="st">&quot;scaledFeatures&quot;</span>, VectorUDT(),<span class="va">True</span>)])</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>fakeData <span class="op">=</span> [(<span class="fl">0.0</span>,<span class="fl">1.0</span>,<span class="st">&quot;A&quot;</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,(Vectors.dense([<span class="fl">1.0</span>, <span class="fl">2.0</span>])),(Vectors.dense([<span class="fl">2.0</span>, <span class="fl">0.0</span>])))]</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>fakeDf <span class="op">=</span> spark.createDataFrame(fakeData, correctCols)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> scaled.dtypes <span class="op">==</span> fakeDf.dtypes, <span class="st">&quot;the schema was expected to be </span><span class="sc">%s</span><span class="st"> but it was </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> (fakeDf.dtypes, scaled.dtypes)</span></code></pre></div>
+</section>
+<section id="create-model" class="level2" data-number="0.6">
+<h2 data-number="0.6"><span class="header-section-number">0.6</span> Create Model</h2>
+<p><code>createModel</code> creates a Logistic Regression model. When training, 5 iterations should be enough.<br />
+https://spark.apache.org/docs/latest/ml-classification-regression.html#binomial-logistic-regression</p>
+<p>param <code>training</code> transformed dataframe<br />
+param <code>featuresCol</code> name of the features column<br />
+param <code>labelCol</code> name of the label col (paid_customer)<br />
+param <code>predCol</code> name of the prediction col<br />
+<code>return</code> trained Logistic Regression model</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> createModel(training, featuresCol, labelCol, predCol):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    lr <span class="op">=</span> LogisticRegression(maxIter <span class="op">=</span> <span class="dv">5</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    lr.setFeaturesCol(featuresCol)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    lr.setLabelCol(labelCol)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    lr.setPredictionCol(predCol)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    lrModel <span class="op">=</span> lr.fit(training)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(lrModel)</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lrModel</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#split the dataset into training(70%) and prediction(30%) sets</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>splitted <span class="op">=</span> scaled.randomSplit([<span class="fl">0.7</span>,<span class="fl">0.3</span>])</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> createModel(splitted[<span class="dv">0</span>],<span class="st">&quot;scaledFeatures&quot;</span>,<span class="st">&quot;paid_customer&quot;</span>,<span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<pre><code>LogisticRegressionModel: uid=LogisticRegression_4951db8e602c, numClasses=2, numFeatures=9</code></pre>
+</section>
+<section id="predict" class="level2" data-number="0.7">
+<h2 data-number="0.7"><span class="header-section-number">0.7</span> Predict</h2>
+<p>Given a transformed and normalized dataset <code>predict</code> predicts if the customer is going to subscribe to the service.</p>
+<p>85% correct will give you 3 points.<br />
+70% correct will give you 2 points.<br />
+50% correct will give you 1 point.</p>
+<p>param <code>model</code> trained logistic regression model<br />
+param <code>dataToPredict</code> normalized dataframe for prediction<br />
+<code>return</code> DataFrame with predicted scores (1.0 == yes, 0.0 == no)</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict(model, dataToPredict):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> model.transform(dataToPredict)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> predict(model, splitted[<span class="dv">1</span>])</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>correct <span class="op">=</span> predictions.where(<span class="st">&quot;prediction == paid_customer&quot;</span>).count()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> predictions.count()</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((correct <span class="op">/</span> total) <span class="op">*</span> <span class="dv">100</span>, <span class="st">&quot;% predicted correctly&quot;</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>predictions.show()</span></code></pre></div>
+<pre><code>95.80327868852459 % predicted correctly
++------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+--------------------+--------------------+--------------------+--------------------+----------+
+|gender| age|country|friend_count|lifetime|game1|game2|game3|game4|paid_customer|country_index|            features|      scaledFeatures|       rawPrediction|         probability|prediction|
++------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+--------------------+--------------------+--------------------+--------------------+----------+
+|   0.0|18.0| CANADA|         0.0|     1.0|  0.0|  0.0|  1.0|  0.0|          0.0|          4.0|(9,[1,3,6,8],[18....|[-1.1099082973702...|[4.99559262560287...|[0.99327778480500...|       0.0|
+|   0.0|18.0| CANADA|         0.0|    54.0| 28.0| 15.0|  7.0|  4.0|          0.0|          4.0|[0.0,18.0,0.0,54....|[-1.1099082973702...|[3.57955249526850...|[0.97286847322793...|       0.0|
+|   0.0|18.0| CANADA|         3.0|    26.0| 11.0|  6.0|  8.0|  1.0|          0.0|          4.0|[0.0,18.0,3.0,26....|[-1.1099082973702...|[4.14194339582123...|[0.98435666573439...|       0.0|
+|   0.0|18.0| CANADA|         7.0|     6.0|  2.0|  4.0|  0.0|  0.0|          0.0|          4.0|[0.0,18.0,7.0,6.0...|[-1.1099082973702...|[4.87021457153555...|[0.99238668820979...|       0.0|
+|   0.0|18.0| CANADA|        71.0|    47.0| 26.0| 11.0|  6.0|  4.0|          0.0|          4.0|[0.0,18.0,71.0,47...|[-1.1099082973702...|[3.23307263069343...|[0.96206006484016...|       0.0|
+|   0.0|18.0|  EGYPT|         6.0|   100.0| 45.0| 32.0| 16.0|  7.0|          0.0|          6.0|[0.0,18.0,6.0,100...|[-1.1099082973702...|[1.93735846291887...|[0.87406165588822...|       0.0|
+|   0.0|18.0|  EGYPT|         9.0|     4.0|  3.0|  0.0|  1.0|  0.0|          0.0|          6.0|[0.0,18.0,9.0,4.0...|[-1.1099082973702...|[4.67385048293821...|[0.99075010816165...|       0.0|
+|   0.0|18.0|  EGYPT|         9.0|     8.0|  3.0|  0.0|  4.0|  1.0|          0.0|          6.0|[0.0,18.0,9.0,8.0...|[-1.1099082973702...|[4.45248997207777...|[0.98848462479986...|       0.0|
+|   0.0|18.0| FRANCE|         0.0|     9.0|  3.0|  4.0|  2.0|  0.0|          0.0|          3.0|[0.0,18.0,0.0,9.0...|[-1.1099082973702...|[4.87584026342622...|[0.99242907475375...|       0.0|
+|   0.0|18.0| FRANCE|         0.0|    81.0| 46.0| 17.0| 12.0|  6.0|          0.0|          3.0|[0.0,18.0,0.0,81....|[-1.1099082973702...|[2.89556186017502...|[0.94762660725686...|       0.0|
+|   0.0|18.0| FRANCE|         2.0|    87.0| 43.0| 23.0| 16.0|  5.0|          0.0|          3.0|[0.0,18.0,2.0,87....|[-1.1099082973702...|[2.57911443534171...|[0.92950526434730...|       0.0|
+|   0.0|18.0| FRANCE|         9.0|     0.0|  0.0|  0.0|  0.0|  0.0|          0.0|          3.0|(9,[1,2,8],[18.0,...|[-1.1099082973702...|[5.08632173265312...|[0.99385725410626...|       0.0|
+|   0.0|18.0|GERMANY|         0.0|     7.0|  5.0|  2.0|  0.0|  0.0|          0.0|          2.0|[0.0,18.0,0.0,7.0...|[-1.1099082973702...|[5.10646771499869...|[0.99397902988660...|       0.0|
+|   0.0|18.0|GERMANY|         0.0|     9.0|  4.0|  2.0|  1.0|  2.0|          0.0|          2.0|[0.0,18.0,0.0,9.0...|[-1.1099082973702...|[4.99666173139974...|[0.99328491949002...|       0.0|
+|   0.0|18.0|GERMANY|         0.0|     9.0|  6.0|  2.0|  0.0|  1.0|          0.0|          2.0|[0.0,18.0,0.0,9.0...|[-1.1099082973702...|[5.05345088485828...|[0.99365328438896...|       0.0|
+|   0.0|18.0|GERMANY|         0.0|    19.0|  5.0|  7.0|  5.0|  2.0|          0.0|          2.0|[0.0,18.0,0.0,19....|[-1.1099082973702...|[4.60742115368499...|[0.99012105172261...|       0.0|
+|   0.0|18.0|GERMANY|         0.0|    24.0| 13.0|  6.0|  3.0|  2.0|          0.0|          2.0|[0.0,18.0,0.0,24....|[-1.1099082973702...|[4.59950569851941...|[0.99004332671759...|       0.0|
+|   0.0|18.0|GERMANY|         0.0|    38.0| 20.0| 13.0|  3.0|  2.0|          0.0|          2.0|[0.0,18.0,0.0,38....|[-1.1099082973702...|[4.29553129537215...|[0.98655393230056...|       0.0|
+|   0.0|18.0|GERMANY|         0.0|    66.0| 29.0| 20.0| 11.0|  6.0|          0.0|          2.0|[0.0,18.0,0.0,66....|[-1.1099082973702...|[3.31748753051268...|[0.96502388763751...|       0.0|
+|   0.0|18.0|GERMANY|         1.0|     2.0|  0.0|  1.0|  1.0|  0.0|          0.0|          2.0|[0.0,18.0,1.0,2.0...|[-1.1099082973702...|[5.15809258630837...|[0.99428024190099...|       0.0|
++------+----+-------+------------+--------+-----+-----+-----+-----+-------------+-------------+--------------------+--------------------+--------------------+--------------------+----------+
+only showing top 20 rows</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''prediction correctness test'''</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> convert(randomData)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>data.cache()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>indexed <span class="op">=</span> indexer(data)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>assembled <span class="op">=</span> featureAssembler(indexed)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>scaled <span class="op">=</span> scaler(assembled, <span class="st">&quot;scaledFeatures&quot;</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>splitted <span class="op">=</span> scaled.randomSplit([<span class="fl">0.7</span>,<span class="fl">0.3</span>])</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> createModel(splitted[<span class="dv">0</span>],<span class="st">&quot;scaledFeatures&quot;</span>,<span class="st">&quot;paid_customer&quot;</span>,<span class="st">&quot;prediction&quot;</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> predict(model, splitted[<span class="dv">1</span>])</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>correct <span class="op">=</span> predictions.where(<span class="st">&quot;prediction == paid_customer&quot;</span>).count()</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> predictions.count()</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>answer <span class="op">=</span> (correct <span class="op">/</span> total) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(answer, <span class="st">&quot;% predicted correctly&quot;</span>)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> answer <span class="op">&gt;=</span> <span class="fl">50.0</span>, <span class="st">&quot;less than 50% predicted correctly, you get 0 points&quot;</span></span></code></pre></div>
+<pre><code>LogisticRegressionModel: uid=LogisticRegression_9c24b6de42a1, numClasses=2, numFeatures=9
+95.787700084246 % predicted correctly</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> answer <span class="op">&gt;=</span> <span class="fl">70.0</span>, <span class="st">&quot;less than 70% predicted correctly, you get 1 point&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> answer <span class="op">&gt;=</span> <span class="fl">85.0</span>, <span class="st">&quot;less than 85% predicted correctly, you get 2 points&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>spark.stop()</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

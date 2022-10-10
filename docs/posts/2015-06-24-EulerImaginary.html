@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Euler, Complex and Imaginary</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Euler, Complex and Imaginary</h1>
+            
+
+            <div class="info">
+    Posted on June 24, 2015
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'mathbasics'." href="../tags/mathbasics.html">mathbasics</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#fundamental-theorem-of-algebra"><span class="toc-section-number">1</span> Fundamental Theorem of Algebra</a></li>
+<li><a href="#euler"><span class="toc-section-number">2</span> Euler</a>
+<ul>
+<li><a href="#coordinate-systems"><span class="toc-section-number">2.1</span> Coordinate systems</a></li>
+<li><a href="#de-moivre-theorem"><span class="toc-section-number">2.2</span> De Moivre Theorem</a></li>
+<li><a href="#exponent-in-complex-field"><span class="toc-section-number">2.3</span> Exponent in Complex field</a></li>
+</ul></li>
+<li><a href="#derivatives"><span class="toc-section-number">3</span> Derivatives</a>
+<ul>
+<li><a href="#partial-fractions"><span class="toc-section-number">3.1</span> Partial Fractions</a></li>
+<li><a href="#taylor-series"><span class="toc-section-number">3.2</span> Taylor Series</a></li>
+</ul></li>
+<li><a href="#practical"><span class="toc-section-number">4</span> Practical</a>
+<ul>
+<li><a href="#integral"><span class="toc-section-number">4.1</span> Integral</a></li>
+<li><a href="#helices"><span class="toc-section-number">4.2</span> Helices</a></li>
+</ul></li>
+<li><a href="#random-problems"><span class="toc-section-number">5</span> Random Problems</a></li>
+</ul></div>
+<section id="fundamental-theorem-of-algebra" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Fundamental Theorem of Algebra</h1>
+<ul>
+<li>Complex polynomials(complex coefficients) can be factored in to n factors with n roots that may not be distinct.</li>
+<li>Since reals are subset of complex, implies typical real polynomials can always be factored resulting in real or complex roots.</li>
+<li>Complex numbers have a closure property in factoring</li>
+</ul>
+</section>
+<section id="euler" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Euler</h1>
+<p><span class="math inline">\(e^x\)</span> is not really a power.<br />
+<span class="math inline">\(e^x\)</span> is really a series <span class="math inline">\(1 + x + \frac{x^2}{2} + ,,,\)</span><br />
+This makes it easier to understand <span class="math inline">\(e^i\)</span></p>
+<section id="coordinate-systems" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Coordinate systems</h2>
+<p>Everything in the table is equal</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>cart</th>
+<th>complex</th>
+<th>geometric cart</th>
+<th>geocomplex</th>
+<th>polar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\((x,y)\)</span></td>
+<td><span class="math inline">\(x+yi\)</span></td>
+<td><span class="math inline">\((rcos\theta,rsin\theta)\)</span></td>
+<td><span class="math inline">\(r(cos\theta + i sin\theta)\)</span></td>
+<td><span class="math inline">\(\langle r, \theta \rangle\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Either find <span class="math inline">\(x,y\)</span> or find <span class="math inline">\(r,\theta\)</span></p>
+<ul>
+<li>Find <span class="math inline">\(r,\theta\)</span>
+<ul>
+<li><span class="math inline">\(r=\sqrt{x^2 + y^2}\)</span></li>
+<li><span class="math inline">\(\theta=tan^{-1}\frac{y}{x}\)</span></li>
+</ul></li>
+<li>Find <span class="math inline">\(x,y\)</span>
+<ul>
+<li><span class="math inline">\(x=rcos\theta\)</span></li>
+<li><span class="math inline">\(y=rsin\theta\)</span></li>
+</ul></li>
+</ul>
+<p>One can think of all of these as vectors.</p>
+<p>Shorthand notation <span class="math inline">\(rcis\theta = \langle r,\theta \rangle\)</span></p>
+</section>
+<section id="de-moivre-theorem" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> De Moivre Theorem</h2>
+<p><span class="math inline">\((r\ cis\ \alpha)(s\ cis\ \beta) = (r\cdot s)cis\ (\alpha + \beta)\)</span></p>
+<p>We can derive this by converting polar to geocomplex then multiplying.</p>
+<p><strong>multiplying vectors in polar results in</strong></p>
+<ul>
+<li><span class="math inline">\(\cdot\)</span> length of 2 vectors <span class="math inline">\((r\cdot s)\)</span></li>
+<li><span class="math inline">\(+\)</span> angle of 2 vectors <span class="math inline">\((\alpha + \beta)\)</span></li>
+</ul>
+<p>if we assume r and s are 1 meaning we have unit vectors<br />
+<strong>Multiplying unit length vectors simply results in rotations.</strong></p>
+<p><span class="math inline">\((cos\theta + isin\theta)^{n}=cos\ n\theta + isin\ n\theta\)</span></p>
+<p>short hand: <span class="math inline">\((cis \theta)^{n} = cis\ n\theta\)</span></p>
+<p><strong>Warning:</strong></p>
+<ul>
+<li>DO NOT multiply elements with a Coordinate system type
+<ul>
+<li>There isn’t even an operation defined for Multiplying by cartesian or polar coordinate systems !!</li>
+</ul></li>
+<li>BAD <span class="math inline">\((a,b)\cdot(c,d)\)</span></li>
+<li>BAD <span class="math inline">\(\langle r,\theta \rangle \cdot \langle s,\delta \rangle\)</span><br />
+</li>
+<li>Look at the above table, translate Coordinate to Complex form
+<ul>
+<li>{cart,polar,geometric cart} <span class="math inline">\(\rightarrow\)</span> {complex,geocomplex}</li>
+</ul></li>
+<li>GOOD <span class="math inline">\((r\ cis\ \alpha)(s\ cis\ \beta) = r(cos \alpha + i sin \alpha) \cdot s(cos\beta + i sin \beta) = ...\)</span></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">z</span> <span class="ex">=</span> <span class="fu">Sqrt</span><span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="sc">+</span> <span class="fu">I</span> <span class="sc">*</span> <span class="fu">Sqrt</span><span class="op">[</span><span class="dv">2</span><span class="op">]</span></span></code></pre></div>
+<p>Group of n-th roots of unity</p>
+<p><span class="math display">\[U_n =\{z \in \mathbb{C} | z^n = 1 \}= \{cos\frac{2k\pi}{n}+isin\frac{2k\pi}{n} | k = 1..n-1\}\]</span></p>
+<p><span class="math inline">\(\underset{n\rightarrow\infty}{lim}(1+\frac{1}{n})^n = e\)</span></p>
+</section>
+<section id="exponent-in-complex-field" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> Exponent in Complex field</h2>
+<p>What do imaginary exponents even mean?</p>
+<p><span class="math display">\[a^i = ?\]</span></p>
+<p><strong>First</strong> look at what relates the Imaginary with Reals? <span class="math inline">\(e\)</span></p>
+<p>Proof using derivative of <span class="math inline">\(e^x\)</span> and Taylor series tells us <span class="math inline">\(e^x\)</span> is a series.</p>
+<p><span class="math display">\[ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + ... \]</span></p>
+<ol type="1">
+<li><span class="math inline">\(e^{ix}\)</span> can be expressed as a sum of series as well.<br />
+</li>
+<li>The series can be realigned to sum of 2 series.<br />
+</li>
+<li>These 2 series represent the Taylor expansion of <span class="math inline">\(sin \theta\)</span> and <span class="math inline">\(icos \theta\)</span></li>
+</ol>
+<p><span class="math display">\[ e^{ix} = sin(x) + i cos(x)\]</span></p>
+<p>It is obvious <span class="math inline">\(e^{a+ib} = e^a e^{ib} = e^a (sin(b)+i cos(b))\)</span></p>
+<p><strong>Second</strong> look at what relates the real with <span class="math inline">\(e\)</span>?</p>
+<p><span class="math display">\[a = e^{ln(a)}\]</span></p>
+<p>convert base of power to <span class="math inline">\(e\)</span></p>
+<p><span class="math display">\[\begin{align} a^{(b+ic)} &amp;= e^{ln(a^{(b+ic)})} \\
+&amp;= e^{(b+ic)ln(a)} \\
+&amp;= e^{b\cdot ln(a)}e^{ic\cdot ln(a)} \\
+&amp;=e^{b\cdot ln(a)}[cos(c\cdot ln(a)) + i sin(c\cdot ln(a)) ] \\
+&amp;= a^b[cos(c\cdot ln(a)) + i sin(c\cdot ln(a)) ] \\
+\end{align} \]</span></p>
+</section>
+</section>
+<section id="derivatives" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Derivatives</h1>
+<p>Derivatives operate on functions</p>
+<p><span class="math inline">\(D(f(x)) + D(g(x)) = D(f+g)(x)\)</span><br />
+<span class="math inline">\(c \cdot D(f)(x) = D(c \cdot f)(x) ,\ given\ constant\  c\in \mathbb{R}\)</span><br />
+Derivative operator is a linear operator</p>
+<p>Functional identity for trig functions <span class="math inline">\(f(x+y) = f(x)g(y) + f(y)g(x)\)</span></p>
+<section id="partial-fractions" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Partial Fractions</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Apart</span><span class="op">[</span>(<span class="dv">6</span> <span class="fu">x</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">12</span> <span class="fu">x</span> <span class="sc">+</span> <span class="dv">14</span>)<span class="sc">/</span>(<span class="fu">x</span><span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span> <span class="fu">x</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="fu">x</span> <span class="sc">+</span> <span class="dv">15</span>)<span class="op">]</span></span></code></pre></div>
+<p><span class="math display">\[\frac{4 (4 x+1)}{7 \left(x^2+3\right)}+\frac{26}{7 (x+5)}\]</span></p>
+</section>
+<section id="taylor-series" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Taylor Series</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Series</span><span class="op">[</span><span class="fu">E</span><span class="sc">^</span>(<span class="fu">I</span><span class="sc">*</span><span class="fu">x</span>)<span class="op">,</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">7</span><span class="op">}]</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Series</span><span class="op">[</span><span class="fu">Cos</span><span class="op">[</span><span class="fu">x</span><span class="op">],</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">7</span><span class="op">}]</span> <span class="sc">+</span> (<span class="fu">I</span><span class="sc">*</span><span class="fu">Series</span><span class="op">[</span><span class="fu">Sin</span><span class="op">[</span><span class="fu">x</span><span class="op">],</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">7</span><span class="op">}]</span>)</span></code></pre></div>
+<p><span class="math display">\[
+e^{ix} = 1+i x-\frac{x^2}{2}-\frac{i x^3}{6}+\frac{x^4}{24}+\frac{i
+   x^5}{120}-\frac{x^6}{720}-\frac{i x^7}{5040}+O\left(x^8\right)
+\]</span></p>
+<p><span class="math display">\[
+cos(x) = 1-\frac{x^2}{2}+\frac{x^4}{24}-\frac{x^6}{720}+O\left(x^8\right)
+\]</span></p>
+<p><span class="math display">\[
+i\cdot sin(x) = i x-\frac{i x^3}{6}+\frac{i x^5}{120}-\frac{i
+   x^7}{5040}+O\left(x^8\right)
+\]</span></p>
+<p><span class="math display">\[e^{ix} = cos(x) + i\cdot sin(x)\]</span> <span class="math display">\[e^{i\pi} + 1 = 0\ when\ x = \pi \]</span></p>
+</section>
+</section>
+<section id="practical" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Practical</h1>
+<ul>
+<li>A speed limit is 15mph, a driver moves 40mi in 2 hour. Did the driver ever break the speed limit?
+<ul>
+<li>Draw a graph, <span class="math inline">\(\frac{dx}{dt}\ vs\ t\)</span>, the area or integral must always be 40mi.</li>
+<li>Suppose the driver went slowly then speed up
+<ul>
+<li>eventually the driver must’ve hit the speed limit</li>
+<li>Think of it like debt, every time the driver slows down, they have debt in speed which must be paid.</li>
+<li>The graph is like a bubble, push down on one area(slow down in speed) results in push up on other area(speed up)</li>
+</ul></li>
+<li>To minimize the maximum speed, the driver should move at the same constant speed the whole duration.</li>
+</ul></li>
+</ul>
+<section id="integral" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Integral</h2>
+<ul>
+<li>Find something x that can be enumerated or indexed.
+<ul>
+<li>velocity can be indexed by time</li>
+<li>stockprice can be indexed by volume</li>
+</ul></li>
+<li>Find something that has meaning when x is multiplied by f(x).
+<ul>
+<li>time multipled by velocity is distance</li>
+<li>volume multipled by stockprice is marketcap</li>
+</ul></li>
+<li>Find something that has meaning when you sum by index x
+<ul>
+<li>distanced summed over each index of time is total distance</li>
+<li>stock price summed over each index of volume is total portfolio value <span class="math inline">\(velocity=\frac{distance}{time}\ stockprice=\frac{marketcap}{volume}\)</span></li>
+</ul></li>
+</ul>
+<p>Examples: pairs (x,f(x),x*fx) = {(time,velocity,distance),(volume,stock price,marketcap),(time, current, charge)}</p>
+<p><img src="\images\BasicMath\Integram.svg" /></p>
+<p>The arrows denote velocity being indexed by time.<br />
+The binary operation multiply is applied to each pair then summed.</p>
+</section>
+<section id="helices" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> Helices</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r</span> <span class="ex">:=</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span> <span class="ex">:=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ParametricPlot3D</span><span class="op">[</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span><span class="fu">r</span><span class="sc">*</span><span class="fu">Cos</span><span class="op">[</span><span class="fu">t</span><span class="op">],</span><span class="fu">r</span><span class="sc">*</span><span class="fu">Sin</span><span class="op">[</span><span class="fu">t</span><span class="op">],</span> <span class="fu">c</span><span class="sc">*</span><span class="fu">t</span><span class="op">},</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span><span class="fu">t</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">8</span><span class="sc">*</span><span class="fu">Pi</span><span class="op">},</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ImageSize</span> <span class="ot">-&gt;</span> <span class="fu">Small</span><span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">PlotRange</span> <span class="ot">-&gt;</span> <span class="op">{{</span><span class="sc">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span><span class="op">},</span> <span class="op">{</span><span class="sc">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span><span class="op">},</span> <span class="op">{</span><span class="dv">0</span><span class="op">,</span> <span class="dv">8</span><span class="op">}}</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">]</span></span></code></pre></div>
+<p><img src="\images\BasicMath\helix.svg" /></p>
+<p><span class="math display">\[s(t) = \langle rcos(t),rsin(t),c*t \rangle \]</span> <span class="math display">\[\frac{1}{c} = \# cycles,frequency\]</span> <span class="math display">\[r = radius \]</span></p>
+<hr />
+</section>
+</section>
+<section id="random-problems" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Random Problems</h1>
+<p><a href="https://artofproblemsolving.com/wiki/index.php/2021_AMC_12A_Problems/Problem_19">2021 AMC 12A</a></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Solve</span><span class="op">[</span><span class="fu">Sin</span><span class="op">[</span>(<span class="fu">Pi</span><span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span><span class="fu">Cos</span><span class="op">[</span><span class="fu">x</span><span class="op">]]</span><span class="ex">==</span><span class="fu">Cos</span><span class="op">[</span>(<span class="fu">Pi</span><span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span><span class="fu">Sin</span><span class="op">[</span><span class="fu">x</span><span class="op">]]</span> &amp;&amp; <span class="fu">x</span> &gt;<span class="ex">=</span> <span class="dv">0</span> &amp;&amp; <span class="fu">Pi</span> &gt;<span class="ex">=</span> <span class="fu">x</span><span class="op">,</span><span class="fu">x</span><span class="op">,</span><span class="bu">Reals</span><span class="op">]</span></span></code></pre></div>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

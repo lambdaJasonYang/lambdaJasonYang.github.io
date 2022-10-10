@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Simple</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Simple</h1>
+            
+
+            <div class="info">
+    Posted on January  1, 2015
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#load-data"><span class="toc-section-number">0.1</span> Load Data</a></li>
+<li><a href="#timeseries-are-tsibble"><span class="toc-section-number">1</span> Timeseries are tsibble</a>
+<ul>
+<li><a href="#convert-dataframe-to-tsibble"><span class="toc-section-number">1.1</span> Convert Dataframe to tsibble</a></li>
+</ul></li>
+<li><a href="#pipes"><span class="toc-section-number">2</span> Pipes %&gt;%</a></li>
+<li><a href="#select-filter-mutate"><span class="toc-section-number">3</span> Select Filter Mutate</a>
+<ul>
+<li><a href="#autoplot"><span class="toc-section-number">3.1</span> autoplot</a></li>
+<li><a href="#seasonal-plot"><span class="toc-section-number">3.2</span> Seasonal Plot</a></li>
+<li><a href="#correlation"><span class="toc-section-number">3.3</span> Correlation</a></li>
+</ul></li>
+</ul></div>
+<p><code>install.packages("fpp3")</code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;fpp3&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;readr&quot;</span>) <span class="co">#for loading csv</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;jsonlite&quot;</span>) <span class="co">#for loading json</span></span></code></pre></div>
+<pre><code>── [1mAttaching packages[22m ──────────────────────────────────────────────────────────────────────────────────────────────── fpp3 0.4.0 ──
+
+[32m✔[39m [34mtibble     [39m 3.1.6     [32m✔[39m [34mtsibble    [39m 1.1.1
+[32m✔[39m [34mdplyr      [39m 1.0.7     [32m✔[39m [34mtsibbledata[39m 0.3.0
+[32m✔[39m [34mtidyr      [39m 1.1.4     [32m✔[39m [34mfeasts     [39m 0.2.2
+[32m✔[39m [34mlubridate  [39m 1.8.0     [32m✔[39m [34mfable      [39m 0.3.1
+[32m✔[39m [34mggplot2    [39m 3.3.5     
+
+── [1mConflicts[22m ───────────────────────────────────────────────────────────────────────────────────────────────────── fpp3_conflicts ──
+[31m✖[39m [34mlubridate[39m::[32mdate()[39m    masks [34mbase[39m::date()
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m      masks [34mstats[39m::filter()
+[31m✖[39m [34mtsibble[39m::[32mintersect()[39m masks [34mbase[39m::intersect()
+[31m✖[39m [34mtsibble[39m::[32minterval()[39m  masks [34mlubridate[39m::interval()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m         masks [34mstats[39m::lag()
+[31m✖[39m [34mtsibble[39m::[32msetdiff()[39m   masks [34mbase[39m::setdiff()
+[31m✖[39m [34mtsibble[39m::[32munion()[39m     masks [34mbase[39m::union()</code></pre>
+<section id="load-data" class="level2" data-number="0.1">
+<h2 data-number="0.1"><span class="header-section-number">0.1</span> Load Data</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>prison <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;https://OTexts.com/fpp3/extrafiles/prison_population.csv&quot;</span>)</span></code></pre></div>
+<pre><code>[1mRows: [22m[34m3072[39m [1mColumns: [22m[34m6[39m
+
+[36m──[39m [1mColumn specification[22m [36m────────────────────────────────────────────────────────────────────────────────────────────────────────────[39m
+[1mDelimiter:[22m &quot;,&quot;
+[31mchr[39m  (4): State, Gender, Legal, Indigenous
+[32mdbl[39m  (1): Count
+[34mdate[39m (1): Date
+
+
+[36mℹ[39m Use [30m[47m[30m[47m`spec()`[47m[30m[49m[39m to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set [30m[47m[30m[47m`show_col_types = FALSE`[47m[30m[49m[39m to quiet this message.</code></pre>
+</section>
+<section id="timeseries-are-tsibble" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Timeseries are tsibble</h1>
+<p><code>2015:2019</code> means inclusive [2015,2019]</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">tsibble</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Year =</span> <span class="dv">2015</span><span class="sc">:</span><span class="dv">2019</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Observation =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">index =</span> Year,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    </span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<table class="dataframe">
+<caption>
+A tbl_ts: 5 × 2
+</caption>
+<thead>
+<pre><code>&lt;tr&gt;&lt;th scope=col&gt;Year&lt;/th&gt;&lt;th scope=col&gt;Observation&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th scope=col&gt;&amp;lt;int&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;&lt;td&gt;2015&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2016&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2017&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2018&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2019&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+<section id="convert-dataframe-to-tsibble" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Convert Dataframe to tsibble</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"></code></pre></div>
+</section>
+</section>
+<section id="pipes" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Pipes %&gt;%</h1>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>y <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Year =</span> Year<span class="sc">+</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span> (<span class="at">Observation =</span> Observation<span class="sc">+</span><span class="dv">2</span>)</span></code></pre></div>
+<table class="dataframe">
+<caption>
+A tbl_ts: 5 × 2
+</caption>
+<thead>
+<pre><code>&lt;tr&gt;&lt;th scope=col&gt;Year&lt;/th&gt;&lt;th scope=col&gt;Observation&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;&lt;td&gt;2025&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2026&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2027&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2028&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2029&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+</section>
+<section id="select-filter-mutate" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Select Filter Mutate</h1>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>PBS <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    head</span></code></pre></div>
+<table class="dataframe">
+<caption>
+A tbl_ts: 6 × 9
+</caption>
+<thead>
+<pre><code>&lt;tr&gt;&lt;th scope=col&gt;Month&lt;/th&gt;&lt;th scope=col&gt;Concession&lt;/th&gt;&lt;th scope=col&gt;Type&lt;/th&gt;&lt;th scope=col&gt;ATC1&lt;/th&gt;&lt;th scope=col&gt;ATC1_desc&lt;/th&gt;&lt;th scope=col&gt;ATC2&lt;/th&gt;&lt;th scope=col&gt;ATC2_desc&lt;/th&gt;&lt;th scope=col&gt;Scripts&lt;/th&gt;&lt;th scope=col&gt;Cost&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th scope=col&gt;&amp;lt;mth&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;&lt;td&gt;1991 Jul&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;td&gt;Alimentary tract and metabolism&lt;/td&gt;&lt;td&gt;A01&lt;/td&gt;&lt;td&gt;STOMATOLOGICAL PREPARATIONS&lt;/td&gt;&lt;td&gt;18228&lt;/td&gt;&lt;td&gt;67877&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1991 Aug&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;td&gt;Alimentary tract and metabolism&lt;/td&gt;&lt;td&gt;A01&lt;/td&gt;&lt;td&gt;STOMATOLOGICAL PREPARATIONS&lt;/td&gt;&lt;td&gt;15327&lt;/td&gt;&lt;td&gt;57011&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1991 Sep&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;td&gt;Alimentary tract and metabolism&lt;/td&gt;&lt;td&gt;A01&lt;/td&gt;&lt;td&gt;STOMATOLOGICAL PREPARATIONS&lt;/td&gt;&lt;td&gt;14775&lt;/td&gt;&lt;td&gt;55020&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1991 Oct&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;td&gt;Alimentary tract and metabolism&lt;/td&gt;&lt;td&gt;A01&lt;/td&gt;&lt;td&gt;STOMATOLOGICAL PREPARATIONS&lt;/td&gt;&lt;td&gt;15380&lt;/td&gt;&lt;td&gt;57222&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1991 Nov&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;td&gt;Alimentary tract and metabolism&lt;/td&gt;&lt;td&gt;A01&lt;/td&gt;&lt;td&gt;STOMATOLOGICAL PREPARATIONS&lt;/td&gt;&lt;td&gt;14371&lt;/td&gt;&lt;td&gt;52120&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1991 Dec&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;td&gt;Alimentary tract and metabolism&lt;/td&gt;&lt;td&gt;A01&lt;/td&gt;&lt;td&gt;STOMATOLOGICAL PREPARATIONS&lt;/td&gt;&lt;td&gt;15028&lt;/td&gt;&lt;td&gt;54299&lt;/td&gt;&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>PBS <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(ATC2 <span class="sc">==</span> <span class="st">&quot;A10&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Month, Concession, ATC2, Cost) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    head</span></code></pre></div>
+<table class="dataframe">
+<caption>
+A tbl_ts: 6 × 6
+</caption>
+<thead>
+<pre><code>&lt;tr&gt;&lt;th scope=col&gt;Month&lt;/th&gt;&lt;th scope=col&gt;Concession&lt;/th&gt;&lt;th scope=col&gt;ATC2&lt;/th&gt;&lt;th scope=col&gt;Cost&lt;/th&gt;&lt;th scope=col&gt;Type&lt;/th&gt;&lt;th scope=col&gt;ATC1&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th scope=col&gt;&amp;lt;mth&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;&lt;td&gt;1991 Jul&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;A10&lt;/td&gt;&lt;td&gt;2092878&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1991 Aug&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;A10&lt;/td&gt;&lt;td&gt;1795733&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1991 Sep&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;A10&lt;/td&gt;&lt;td&gt;1777231&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1991 Oct&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;A10&lt;/td&gt;&lt;td&gt;1848507&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1991 Nov&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;A10&lt;/td&gt;&lt;td&gt;1686458&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1991 Dec&lt;/td&gt;&lt;td&gt;Concessional&lt;/td&gt;&lt;td&gt;A10&lt;/td&gt;&lt;td&gt;1843079&lt;/td&gt;&lt;td&gt;Co-payments&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+<section id="autoplot" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> autoplot</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Plots Type</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Scatter</td>
+<td><code>ggplot(aes(x = Temperature, y = Demand)) +geom_point()</code></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(vic_elec)</span></code></pre></div>
+<table class="dataframe">
+<caption>
+A tbl_ts: 6 × 5
+</caption>
+<thead>
+<pre><code>&lt;tr&gt;&lt;th scope=col&gt;Time&lt;/th&gt;&lt;th scope=col&gt;Demand&lt;/th&gt;&lt;th scope=col&gt;Temperature&lt;/th&gt;&lt;th scope=col&gt;Date&lt;/th&gt;&lt;th scope=col&gt;Holiday&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th scope=col&gt;&amp;lt;dttm&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;date&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;lgl&amp;gt;&lt;/th&gt;&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;&lt;td&gt;2012-01-01 00:00:00&lt;/td&gt;&lt;td&gt;4382.825&lt;/td&gt;&lt;td&gt;21.40&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2012-01-01 00:30:00&lt;/td&gt;&lt;td&gt;4263.366&lt;/td&gt;&lt;td&gt;21.05&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2012-01-01 01:00:00&lt;/td&gt;&lt;td&gt;4048.966&lt;/td&gt;&lt;td&gt;20.70&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2012-01-01 01:30:00&lt;/td&gt;&lt;td&gt;3877.563&lt;/td&gt;&lt;td&gt;20.55&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2012-01-01 02:00:00&lt;/td&gt;&lt;td&gt;4036.230&lt;/td&gt;&lt;td&gt;20.40&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2012-01-01 02:30:00&lt;/td&gt;&lt;td&gt;3865.597&lt;/td&gt;&lt;td&gt;20.25&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>vic_elec <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">year</span>(Time)<span class="sc">==</span><span class="dv">2014</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">autoplot</span>(Demand)</span></code></pre></div>
+<figure>
+<img src="output_17_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>vic_elec <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    head</span></code></pre></div>
+<table class="dataframe">
+<caption>
+A tbl_ts: 6 × 5
+</caption>
+<thead>
+<pre><code>&lt;tr&gt;&lt;th scope=col&gt;Time&lt;/th&gt;&lt;th scope=col&gt;Demand&lt;/th&gt;&lt;th scope=col&gt;Temperature&lt;/th&gt;&lt;th scope=col&gt;Date&lt;/th&gt;&lt;th scope=col&gt;Holiday&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th scope=col&gt;&amp;lt;dttm&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;date&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;lgl&amp;gt;&lt;/th&gt;&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;&lt;td&gt;2012-01-01 00:00:00&lt;/td&gt;&lt;td&gt;4382.825&lt;/td&gt;&lt;td&gt;21.40&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2012-01-01 00:30:00&lt;/td&gt;&lt;td&gt;4263.366&lt;/td&gt;&lt;td&gt;21.05&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2012-01-01 01:00:00&lt;/td&gt;&lt;td&gt;4048.966&lt;/td&gt;&lt;td&gt;20.70&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2012-01-01 01:30:00&lt;/td&gt;&lt;td&gt;3877.563&lt;/td&gt;&lt;td&gt;20.55&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2012-01-01 02:00:00&lt;/td&gt;&lt;td&gt;4036.230&lt;/td&gt;&lt;td&gt;20.40&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2012-01-01 02:30:00&lt;/td&gt;&lt;td&gt;3865.597&lt;/td&gt;&lt;td&gt;20.25&lt;/td&gt;&lt;td&gt;2012-01-01&lt;/td&gt;&lt;td&gt;TRUE&lt;/td&gt;&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+</section>
+<section id="seasonal-plot" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Seasonal Plot</h2>
+<p>Plots a single year on the x-axis to see patterns by months/seasons.</p>
+</section>
+<section id="correlation" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> Correlation</h2>
+<p><span class="math display">\[r = \frac{\sum (x_{t} - \bar{x})(y_{t}-\bar{y})}{\sqrt{\sum(x_{t}-\bar{x})^2}\sqrt{\sum(y_{t}-\bar{y})^2}}\]</span></p>
+<p><span class="math inline">\(r\)</span> lies [-1,1]</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>recent_production <span class="ot">&lt;-</span> aus_production <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">year</span>(Quarter) <span class="sc">&gt;=</span> <span class="dv">2000</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>recent_production <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gg_lag</span>(Beer, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;lag(Beer, k)&quot;</span>)</span></code></pre></div>
+<figure>
+<img src="output_22_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>vic_elec <span class="sc">%&gt;%</span> <span class="fu">gg_season</span>(Demand, <span class="at">period =</span> <span class="st">&quot;day&quot;</span>) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;MWh&quot;</span>, <span class="at">title=</span><span class="st">&quot;Electricity demand: Victoria&quot;</span>)</span></code></pre></div>
+<figure>
+<img src="output_23_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"></code></pre></div>
+<pre><code>Attaching package: ‘zoo’
+
+
+The following object is masked from ‘package:tsibble’:
+
+    index
+
+
+The following objects are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>gafa_stock <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">autoplot</span>()</span></code></pre></div>
+<pre><code>Plot variable not specified, automatically selected `.vars = Open`</code></pre>
+<figure>
+<img src="output_25_1.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gafa_stock)</span></code></pre></div>
+<table class="dataframe">
+<caption>
+A tbl_ts: 6 × 8
+</caption>
+<thead>
+<pre><code>&lt;tr&gt;&lt;th scope=col&gt;Symbol&lt;/th&gt;&lt;th scope=col&gt;Date&lt;/th&gt;&lt;th scope=col&gt;Open&lt;/th&gt;&lt;th scope=col&gt;High&lt;/th&gt;&lt;th scope=col&gt;Low&lt;/th&gt;&lt;th scope=col&gt;Close&lt;/th&gt;&lt;th scope=col&gt;Adj_Close&lt;/th&gt;&lt;th scope=col&gt;Volume&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;date&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;&lt;td&gt;AAPL&lt;/td&gt;&lt;td&gt;2014-01-02&lt;/td&gt;&lt;td&gt;79.38286&lt;/td&gt;&lt;td&gt;79.57571&lt;/td&gt;&lt;td&gt;78.86000&lt;/td&gt;&lt;td&gt;79.01857&lt;/td&gt;&lt;td&gt;66.96433&lt;/td&gt;&lt;td&gt; 58671200&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;AAPL&lt;/td&gt;&lt;td&gt;2014-01-03&lt;/td&gt;&lt;td&gt;78.98000&lt;/td&gt;&lt;td&gt;79.10000&lt;/td&gt;&lt;td&gt;77.20428&lt;/td&gt;&lt;td&gt;77.28286&lt;/td&gt;&lt;td&gt;65.49342&lt;/td&gt;&lt;td&gt; 98116900&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;AAPL&lt;/td&gt;&lt;td&gt;2014-01-06&lt;/td&gt;&lt;td&gt;76.77857&lt;/td&gt;&lt;td&gt;78.11429&lt;/td&gt;&lt;td&gt;76.22857&lt;/td&gt;&lt;td&gt;77.70428&lt;/td&gt;&lt;td&gt;65.85053&lt;/td&gt;&lt;td&gt;103152700&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;AAPL&lt;/td&gt;&lt;td&gt;2014-01-07&lt;/td&gt;&lt;td&gt;77.76000&lt;/td&gt;&lt;td&gt;77.99429&lt;/td&gt;&lt;td&gt;76.84571&lt;/td&gt;&lt;td&gt;77.14857&lt;/td&gt;&lt;td&gt;65.37959&lt;/td&gt;&lt;td&gt; 79302300&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;AAPL&lt;/td&gt;&lt;td&gt;2014-01-08&lt;/td&gt;&lt;td&gt;76.97285&lt;/td&gt;&lt;td&gt;77.93714&lt;/td&gt;&lt;td&gt;76.95571&lt;/td&gt;&lt;td&gt;77.63715&lt;/td&gt;&lt;td&gt;65.79363&lt;/td&gt;&lt;td&gt; 64632400&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;AAPL&lt;/td&gt;&lt;td&gt;2014-01-09&lt;/td&gt;&lt;td&gt;78.11429&lt;/td&gt;&lt;td&gt;78.12286&lt;/td&gt;&lt;td&gt;76.47857&lt;/td&gt;&lt;td&gt;76.64571&lt;/td&gt;&lt;td&gt;64.95345&lt;/td&gt;&lt;td&gt; 69787200&lt;/td&gt;&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>dgoog <span class="ot">&lt;-</span> gafa_stock <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Symbol <span class="sc">==</span> <span class="st">&quot;GOOG&quot;</span>, <span class="fu">year</span>(Date) <span class="sc">&gt;=</span> <span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trading_day =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update_tsibble</span>(<span class="at">index =</span> trading_day, <span class="at">regular =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> <span class="fu">difference</span>(Close))</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>dgoog <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">difference</span>(close, <span class="at">differences =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>Error in lag &lt; 1: comparison (3) is possible only for atomic and list types
+Traceback:
+
+
+1. dgoog %&gt;% difference(close, differences = 2)
+
+2. difference(., close, differences = 2)</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"></code></pre></div>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

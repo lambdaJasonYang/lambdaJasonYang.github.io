@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Access Hakyll website on LAN and iptables</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Access Hakyll website on LAN and iptables</h1>
+            
+
+            <div class="info">
+    Posted on November  7, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#scenario"><span class="toc-section-number">1</span> Scenario</a></li>
+<li><a href="#solution"><span class="toc-section-number">2</span> Solution</a></li>
+<li><a href="#theory"><span class="toc-section-number">3</span> Theory</a></li>
+<li><a href="#iptables-netstat-diagnosis"><span class="toc-section-number">4</span> iptables netstat diagnosis</a>
+<ul>
+<li><a href="#netstat"><span class="toc-section-number">4.1</span> netstat</a></li>
+<li><a href="#iptables"><span class="toc-section-number">4.2</span> iptables</a></li>
+<li><a href="#rate-limiting"><span class="toc-section-number">4.3</span> Rate limiting</a></li>
+</ul></li>
+<li><a href="#occupied-port-scenario"><span class="toc-section-number">5</span> Occupied port scenario</a></li>
+</ul></div>
+<p><strong>Hakyll Setup Series</strong></p>
+<ol type="1">
+<li><a href="2021-08-23-HakyllSetupMathjax.html">Setup Mathjax</a></li>
+<li><a href="2021-08-24-HakyllPlantUML2.html">Setup PlantUML</a></li>
+<li><a href="2021-06-28-HakyllGitAction.html">Setup autobuild Hakyll site Git action CI</a></li>
+<li><a href="2021-08-23-PandocFiltering.html">Very Simple Hakyll Pandoc Filtering Example</a></li>
+<li><a href="2021-10-01-RailroadSyntax.html">Add Railroad Syntax to Hakyll</a></li>
+<li><a href="2021-10-01-TableOfContent.html">Table Of Content in Hakyll</a></li>
+<li><a href="2021-11-07-HakyllAccessOnLAN.html">Hakyll Access on LAN server</a></li>
+</ol>
+<section id="scenario" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Scenario</h1>
+<ol type="1">
+<li>Hakyll server: <code class="sourceCode bash"><span class="ex">listening</span> on 127.0.0.1 port 8000...</code><br />
+</li>
+<li>Client in LAN: must hit 192.168.1.245 port 8000 to see the website<br />
+Client goes to http://192.168.1.245:8000 but sees ERROR<br />
+</li>
+<li>Hakyll server: 127.0.0.1 in port 8000 cant be seen in LAN</li>
+</ol>
+<p><strong>GOAL</strong> Hakyll server: must open 127.0.0.1 port 8000 for LAN</p>
+</section>
+<section id="solution" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Solution</h1>
+<p>Solution 1:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">stack</span> exec <span class="at">--</span> site watch <span class="at">--host</span> <span class="st">&quot;0.0.0.0&quot;</span></span></code></pre></div>
+<p>Solution 2:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sysctl <span class="at">-w</span> net.ipv4.conf.all.route_localnet=1</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-t</span> nat <span class="at">-I</span> PREROUTING <span class="at">-p</span> tcp <span class="at">-d</span> 192.168.1.0/24 <span class="at">--dport</span> 8000 <span class="at">-j</span> DNAT <span class="at">--to-destination</span> 127.0.0.1:8000</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#list nat table rules</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-t</span> nat <span class="at">-L</span> <span class="at">--line-numbers</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get nat table, select PREROUTING chain, delete number 2 </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-t</span> nat <span class="at">-D</span> PREROUTING 2</span></code></pre></div>
+<ul>
+<li><code>-j DNAT</code> means rewriting Destination Network Address Translation aka IP rewriting.</li>
+<li>if any site is trying to connect to “192.168.1.245:8000”(<code>-p tcp -d 192.168.1.0/24 --dport 8000</code>),<br />
+it will translate that address to “127.0.0.1:8000”(<code>-j DNAT --to-destination 127.0.0.1:8000</code>)</li>
+</ul>
+</section>
+<section id="theory" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Theory</h1>
+<p><img src="https://www.karlrupp.net/en/computer/computer/graphics/nat-chains.gif" /></p>
+<ul>
+<li><code>iptables -t filter ..</code> is default table w/ INPUT, FORWARD, OUTPUT
+<ul>
+<li>FORWARD chain is typically useless, it’s when packets isnt directed towards you but passes through you like most router packets.</li>
+</ul></li>
+<li><code>iptables -t nat ..</code> w/ PREROUTING, OUTPUT, POSTROUTING</li>
+</ul>
+</section>
+<section id="iptables-netstat-diagnosis" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> iptables netstat diagnosis</h1>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">sudo</span> iptables <span class="at">--append</span> INPUT <span class="at">--source</span> 1.2.3.4 <span class="at">--jump</span> DROP</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">--list</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Chain</span> INPUT <span class="er">(</span><span class="ex">policy</span> ACCEPT<span class="kw">)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">target</span>     prot opt source               destination</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">DROP</span>       all  <span class="at">--</span>  1.2.3.4              anywhere</span></code></pre></div>
+<ul>
+<li>says append a rule to the INPUT chain and if a packet matches source 1.2.3.4 then DROP it
+<ul>
+<li>INPUT chain means all packets coming to the server is affected by this rule</li>
+</ul></li>
+</ul>
+<section id="netstat" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> netstat</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-lnp</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 0.0.0.0:8787            0.0.0.0:*               LISTEN      734/rserver </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN      149480/myblog </span></span></code></pre></div>
+</section>
+<section id="iptables" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> iptables</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">### list INPUT rules</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span> INPUT <span class="at">--line-numbers</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">### delete rule 2</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-D</span> INPUT 2</span></code></pre></div>
+</section>
+<section id="rate-limiting" class="level2" data-number="4.3">
+<h2 data-number="4.3"><span class="header-section-number">4.3</span> Rate limiting</h2>
+<ul>
+<li>Rate limiting is not possible with vanilla iptables because it ratelimiting requires stateful connections
+<ul>
+<li>A hashmap maps “ConnectionSrc-ConnectionDst” to {“NEW”,“ESTABLISHED”,…}</li>
+</ul></li>
+</ul>
+<p><img src="https://docs.google.com/drawings/d/e/2PACX-1vTu9nsWsRUn_a9IBpaKgBjGNGR14-AknVFs70pix7PFL2eQcqY1BagQztrH_duZDUleZ97Iq5vBnnPc/pub?w=1238&amp;h=676" /></p>
+<ul>
+<li>Using Connection state to rate limit</li>
+</ul>
+<p><img src="https://docs.google.com/drawings/d/e/2PACX-1vQgl3VdRoyti8ryMF-_NwUSgiDpdF88qGAKm3XTfAOLdV1_SOqeoJllLFtsLXSp5is9lxNHH7rlxd9H/pub?w=1297&amp;h=554" /></p>
+</section>
+</section>
+<section id="occupied-port-scenario" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Occupied port scenario</h1>
+<p>Say you launch a server to listen on port 8000<br />
+but ERROR: port 8000 being used</p>
+<p>first check what process is running on port 8000</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-lnp</span></span></code></pre></div>
+<p>next check what the parent process is</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-aef</span> <span class="at">--forest</span> <span class="co">#outputs PID ParentPID tree</span></span></code></pre></div>
+<p>terminate the process or it’s parent</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-9</span> <span class="op">&lt;</span>PID<span class="op">&gt;</span></span></code></pre></div>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

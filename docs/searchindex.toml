@@ -1,0 +1,589 @@
+[input]
+
+files = [
+
+{path = "posts/Misc/2022-08-15-Ender3Pro.md", url = "/posts/2022-08-15-Ender3Pro.html", title = "Ender 3 Pro 3d printing setup"},
+
+{path = "posts/Misc/2022-04-09-SetupCoq.md", url = "/posts/2022-04-09-SetupCoq.html", title = "Coq Setup"},
+
+{path = "posts/Misc/2022-04-09-FrigateNVR.md", url = "/posts/2022-04-09-FrigateNVR.html", title = "Setup Frigate NVR"},
+
+{path = "posts/2022-04-09-WebGL.md", url = "/posts/2022-04-09-WebGL.html", title = "WebGL"},
+
+{path = "posts/2022-04-03-UnrealEngine2.md", url = "/posts/2022-04-03-UnrealEngine2.html", title = "Unreal Engine and C++"},
+
+{path = "posts/2022-04-03-UnrealEngine.md", url = "/posts/2022-04-03-UnrealEngine.html", title = "Unreal Engine and Android Setup"},
+
+{path = "posts/Misc/2021-11-15-MarkdownStyles.md", url = "/posts/2021-11-15-MarkdownStyles.html", title = "Markdown Styling"},
+
+{path = "posts/2021-11-15-GoogleAnalytics.md", url = "/posts/2021-11-15-GoogleAnalytics.html", title = "Understanding Google Analytics"},
+
+{path = "posts/Lean/2021-11-12-LeanSetup.md", url = "/posts/2021-11-12-LeanSetup.html", title = "LeanSetup"},
+
+{path = "posts/Lean/2021-11-12-LeanRepo.md", url = "/posts/2021-11-12-LeanRepo.html", title = "Navigate Lean Repo"},
+
+{path = "posts/Lean/2021-11-12-LeanMathlib.md", url = "/posts/2021-11-12-LeanMathlib.html", title = "Lean Mathlib"},
+
+{path = "posts/TypeTheory/2021-11-11-TypeTheory.md", url = "/posts/2021-11-11-TypeTheory.html", title = "Quick Type theory"},
+
+{path = "posts/TypeTheory/2021-11-11-Lambdas.md", url = "/posts/2021-11-11-Lambdas.html", title = "Lambdas abstractions Types, Term building"},
+
+{path = "posts/Lean/2021-11-11-leanmakefile.md", url = "/posts/2021-11-11-leanmakefile.html", title = "lean makefile"},
+
+{path = "posts/Lean/2021-11-11-VeryLongLean.md", url = "/posts/2021-11-11-VeryLongLean.html", title = "Very Long Lean"},
+
+{path = "posts/Lean/2021-11-11-TAPLUntypedArith.md", url = "/posts/2021-11-11-TAPLUntypedArith.html", title = "TAPL Untyped Arith"},
+
+{path = "posts/Lean/2021-11-11-LogicalFoundationNotes.md", url = "/posts/2021-11-11-LogicalFoundationNotes.html", title = "Logical Foundations notes"},
+
+{path = "posts/Lean/2021-11-11-LeanType.md", url = "/posts/2021-11-11-LeanType.html", title = "Lean Simple Prog Lang implementation"},
+
+{path = "posts/Lean/2021-11-11-LeanProver.md", url = "/posts/2021-11-11-LeanProver.html", title = "Lean"},
+
+{path = "posts/Lean/2021-11-11-LeanAgain.md", url = "/posts/2021-11-11-LeanAgain.html", title = "Very Long Lean - Dependent Type"},
+
+{path = "posts/Lean/2021-11-11-IntroLean3.md", url = "/posts/2021-11-11-IntroLean3.html", title = "Intro Lean 3"},
+
+{path = "posts/Lean/2021-11-11-IntroLean2.md", url = "/posts/2021-11-11-IntroLean2.html", title = "Intro Lean 2"},
+
+{path = "posts/Lean/2021-11-11-IntroLean.md", url = "/posts/2021-11-11-IntroLean.html", title = "Intro Lean"},
+
+{path = "posts/2021-11-11-HaskellTips.md", url = "/posts/2021-11-11-HaskellTips.html", title = "Lessons from Haskell"},
+
+{path = "posts/Misc/2021-11-10-CodeServer.md", url = "/posts/2021-11-10-CodeServer.html", title = "Code-Server"},
+
+{path = "posts/2021-11-10-BigDataPlots.md", url = "/posts/2021-11-10-BigDataPlots.html", title = "Excursions with plotting big data"},
+
+{path = "posts/2021-11-10-Authentication.md", url = "/posts/2021-11-10-Authentication.html", title = "Authentication OAuth2 SAML"},
+
+{path = "posts/Misc/2021-11-07-RedHatEnv.md", url = "/posts/2021-11-07-RedHatEnv.html", title = "Setting up Dev Env in Red-hat linux"},
+
+{path = "posts/Misc/2021-11-07-QEMUrhel.md", url = "/posts/2021-11-07-QEMUrhel.html", title = "Install QEMU on RHEL 9"},
+
+{path = "posts/Misc/2021-11-07-HakyllStorkSearch.md", url = "/posts/2021-11-07-HakyllStorkSearch.html", title = "Hakyll stork search"},
+
+{path = "posts/Misc/2021-11-07-HakyllCodeTabs.md", url = "/posts/2021-11-07-HakyllCodeTabs.html", title = "Tabbed Code blocks in Hakyll"},
+
+{path = "posts/Misc/2021-11-07-HakyllAccessOnLAN.md", url = "/posts/2021-11-07-HakyllAccessOnLAN.html", title = "Access Hakyll website on LAN and iptables"},
+
+{path = "posts/Economics/2021-11-07-ExamP.md", url = "/posts/2021-11-07-ExamP.html", title = "Exam P"},
+
+{path = "posts/Economics/2021-11-07-ExamIFM.md", url = "/posts/2021-11-07-ExamIFM.html", title = "Exam IFM"},
+
+{path = "posts/Economics/2021-11-01-MarketConcepts.md", url = "/posts/2021-11-01-MarketConcepts.html", title = "Market Concepts"},
+
+{path = "posts/2021-10-15-3dplots/2021-10-15-3dplots.md", url = "/posts/2021-10-15-3dplots.html", title = "3d plots and Contour plot"},
+
+{path = "posts/Economics/2021-10-10-LoadStockFRED.md", url = "/posts/2021-10-10-LoadStockFRED.html", title = "Import, load, FRED, TDtrade in python, R"},
+
+{path = "posts/Misc/2021-10-01-TableOfContent.md", url = "/posts/2021-10-01-TableOfContent.html", title = "Table Of Content in Hakyll"},
+
+{path = "posts/Misc/2021-10-01-RailroadSyntax.md", url = "/posts/2021-10-01-RailroadSyntax.html", title = "Add Railroad Syntax to Hakyll"},
+
+{path = "posts/Misc/2021-09-21-dotfile.md", url = "/posts/2021-09-21-dotfile.html", title = "dotfile"},
+
+{path = "posts/Misc/2021-09-21-Bread.md", url = "/posts/2021-09-21-Bread.html", title = "Panasonic SD-MDX102-K Breadmaker Translated"},
+
+{path = "posts/2021-09-21-Bookmarks.md", url = "/posts/2021-09-21-Bookmarks.html", title = "Bookmarks"},
+
+{path = "posts/Misc/2021-08-25-PlantUMLkey.md", url = "/posts/2021-08-25-PlantUMLkey.html", title = "PlantUML diagram list"},
+
+{path = "posts/2021-08-25-RequestHeader.md", url = "/posts/2021-08-25-RequestHeader.html", title = "HTTP requests - Design proper headers in python"},
+
+{path = "posts/2021-08-25-HttpTut.md", url = "/posts/2021-08-25-HttpTut.html", title = "HTTP TLS(SSL) Certificates"},
+
+{path = "posts/2021-08-25-Alexa.md", url = "/posts/2021-08-25-Alexa.html", title = "Alexa"},
+
+{path = "posts/Misc/2021-08-24-HakyllPlantUML2.md", url = "/posts/2021-08-24-HakyllPlantUML2.html", title = "Integrate PlantUML diagrams into Hakyll (Updated)"},
+
+{path = "posts/Misc/2021-08-23-PandocFiltering.md", url = "/posts/2021-08-23-PandocFiltering.html", title = "Hakyll Pandoc filtering"},
+
+{path = "posts/Misc/2021-08-23-HakyllSetupMathjax.md", url = "/posts/2021-08-23-HakyllSetupMathjax.html", title = "Adding Mathjax to Hakyll in 2021"},
+
+{path = "posts/Misc/2021-08-23-HakyllPlantUML.md", url = "/posts/2021-08-23-HakyllPlantUML.html", title = "Integrate PlantUML diagrams into Hakyll (Old)"},
+
+{path = "posts/Statistics/2021-08-10-SampleData.md", url = "/posts/2021-08-10-SampleData.html", title = "Import or Generate Sample Data"},
+
+{path = "posts/QuickCode/2021-08-10-ServiceWorker.md", url = "/posts/2021-08-10-ServiceWorker.html", title = "Service Worker and Web Workers"},
+
+{path = "posts/QuickCode/2021-08-10-SVG.md", url = "/posts/2021-08-10-SVG.html", title = "SVG"},
+
+{path = "posts/QuickCode/2021-08-10-PythonFrameScope.md", url = "/posts/2021-08-10-PythonFrameScope.html", title = "Frames Scope and Python"},
+
+{path = "posts/QuickCode/2021-08-10-PromisesGraphQL.md", url = "/posts/2021-08-10-PromisesGraphQL.html", title = "Promises Callback GraphQL and fetch"},
+
+{path = "posts/QuickCode/2021-08-10-Callcc.md", url = "/posts/2021-08-10-Callcc.html", title = "Visualize Callcc"},
+
+{path = "posts/QuickCode/2021-08-10-CSSFlexbox.md", url = "/posts/2021-08-10-CSSFlexbox.html", title = "CSS Flexbox Grid"},
+
+{path = "posts/QuickCode/2021-08-10-CSS.md", url = "/posts/2021-08-10-CSS.html", title = "CSS"},
+
+{path = "posts/Misc/2021-08-10-WhyHakyll.md", url = "/posts/2021-08-10-WhyHakyll.html", title = "Why Hakyll"},
+
+{path = "posts/Economics/2021-08-10-FinTimeData.md", url = "/posts/2021-08-10-FinTimeData.html", title = "Loading and Plotting Financial Data"},
+
+{path = "posts/CyberSec/2021-08-10-RemoteSoundToPhone.md", url = "/posts/2021-08-10-RemoteSoundToPhone.html", title = "Remote Desktop Audio to phone"},
+
+{path = "posts/CyberSec/2021-08-10-MonitorPhonePacket.md", url = "/posts/2021-08-10-MonitorPhonePacket.html", title = "Monitor Phone Packets"},
+
+{path = "posts/Algorithms/2021-08-10-IO.md", url = "/posts/2021-08-10-IO.html", title = "Competitive file IO"},
+
+{path = "posts/2021-08-10-trace.md", url = "/posts/2021-08-10-trace.html", title = "Trace and Decorators"},
+
+{path = "posts/2021-08-10-TemplatePage.md", url = "/posts/2021-08-10-TemplatePage.html", title = "Template Page (Ignore)"},
+
+{path = "posts/QuickCode/2021-06-28-NextGithubpages.md", url = "/posts/2021-06-28-NextGithubpages.html", title = "Autobuild Nextjs github pages"},
+
+{path = "posts/Misc/2021-06-28-HakyllGitAction.md", url = "/posts/2021-06-28-HakyllGitAction.html", title = "Autobuild Hakyll"},
+
+{path = "posts/TypeTheory/2021-05-25-TypeTheoryInterpreter.md", url = "/posts/2021-05-25-TypeTheoryInterpreter.html", title = "Haskell prog lang"},
+
+{path = "posts/CyberSec/2021-05-24-SFTPtransfer.md", url = "/posts/2021-05-24-SFTPtransfer.html", title = "Transfer files SFTP"},
+
+{path = "posts/Misc/2021-05-23-MusicTheory.md", url = "/posts/2021-05-23-MusicTheory.html", title = "Music Theory"},
+
+{path = "posts/Misc/2021-05-23-KyoceraPrinters.md", url = "/posts/2021-05-23-KyoceraPrinters.html", title = "Convert Enterprise printer to a prosumer printer"},
+
+{path = "posts/Misc/2021-05-22-InstallWifiDongle.md", url = "/posts/2021-05-22-InstallWifiDongle.html", title = "Installing Generic Wifi dongle on Kali/Debian/Linux"},
+
+{path = "posts/Misc/2021-05-22-ForeignOpenWrtRouter.md", url = "/posts/2021-05-22-ForeignOpenWrtRouter.html", title = "2021 Installing Openwrt"},
+
+{path = "posts/Misc/2021-05-21-GuideToChoosingRouters.md", url = "/posts/2021-05-21-GuideToChoosingRouters.html", title = "Guide to Choosing Routers"},
+
+{path = "posts/Misc/2021-05-04-ArcherC7.md", url = "/posts/2021-05-04-ArcherC7.html", title = "2021 OpenWrt - Archer C7"},
+
+{path = "posts/QuickCode/2021-04-26-GitCrashCourse.md", url = "/posts/2021-04-26-GitCrashCourse.html", title = "Git Crashcourse"},
+
+{path = "posts/QuickCode/2021-04-22-GithubAction.md", url = "/posts/2021-04-22-GithubAction.html", title = "CI/CD in GithubAction"},
+
+{path = "posts/QuickCode/2021-04-20-Rosetta2.md", url = "/posts/2021-04-20-Rosetta2.html", title = "Rosetta 2"},
+
+{path = "posts/QuickCode/2021-04-20-Rosetta1.md", url = "/posts/2021-04-20-Rosetta1.html", title = "Rosetta 1"},
+
+{path = "posts/QuickCode/2021-03-24-JSGraphLibs.md", url = "/posts/2021-03-24-JSGraphLibs.html", title = "Graph libraries in JS"},
+
+{path = "posts/QuickCode/2021-03-23-example.md", url = "/posts/2021-03-23-example.html", title = "example page"},
+
+{path = "posts/QuickCode/2021-03-23-ReactVsJS.md", url = "/posts/2021-03-23-ReactVsJS.html", title = "React vs JS"},
+
+{path = "posts/QuickCode/2021-03-23-ReactDomTree.md", url = "/posts/2021-03-23-ReactDomTree.html", title = "Dom Tree rendering in VanillaJS and React"},
+
+{path = "posts/QuickCode/2021-03-23-QuickReactclass.md", url = "/posts/2021-03-23-QuickReactclass.html", title = "Quick React class"},
+
+{path = "posts/QuickCode/2021-03-23-QuickReact4.md", url = "/posts/2021-03-23-QuickReact4.html", title = "Quick React 4"},
+
+{path = "posts/QuickCode/2021-03-23-QuickReact3.md", url = "/posts/2021-03-23-QuickReact3.html", title = "Quick React Part 3 - Rerenders and VanillaJS"},
+
+{path = "posts/QuickCode/2021-03-23-QuickReact2.md", url = "/posts/2021-03-23-QuickReact2.html", title = "Quick React Part 2"},
+
+{path = "posts/QuickCode/2021-03-23-QuickReact.md", url = "/posts/2021-03-23-QuickReact.html", title = "Quick React"},
+
+{path = "posts/QuickCode/2021-03-23-QuickExpress.md", url = "/posts/2021-03-23-QuickExpress.html", title = "Quick Express"},
+
+{path = "posts/QuickCode/2021-03-23-NextAuth.md", url = "/posts/2021-03-23-NextAuth.html", title = "example page"},
+
+{path = "posts/QuickCode/2021-03-23-MinLoginSystem.md", url = "/posts/2021-03-23-MinLoginSystem.html", title = "Min - Login System Express"},
+
+{path = "posts/QuickCode/2021-03-23-BlockChain.md", url = "/posts/2021-03-23-BlockChain.html", title = "Blockchain"},
+
+{path = "posts/MachineLearning/2021-03-23-QuickPyTorch1.md", url = "/posts/2021-03-23-QuickPyTorch1.html", title = "Quick Pytorch template 1"},
+
+{path = "posts/MachineLearning/2021-03-23-QuickPyTorch.md", url = "/posts/2021-03-23-QuickPyTorch.html", title = "Quick Pytorch"},
+
+{path = "posts/MachineLearning/2021-03-23-PyTorch.md", url = "/posts/2021-03-23-PyTorch.html", title = "EBM deep learning with Pytorch"},
+
+{path = "posts/MachineLearning/2021-03-23-PySpark6.md", url = "/posts/2021-03-23-PySpark6.html", title = "PySpark Graph Frames"},
+
+{path = "posts/MachineLearning/2021-03-23-PySpark5.md", url = "/posts/2021-03-23-PySpark5.html", title = "PySpark ML recommender"},
+
+{path = "posts/MachineLearning/2021-03-23-PySpark4.md", url = "/posts/2021-03-23-PySpark4.html", title = "PySpark MLlib"},
+
+{path = "posts/MachineLearning/2021-03-23-PySpark3.md", url = "/posts/2021-03-23-PySpark3.html", title = "PySpark Structured Streaming"},
+
+{path = "posts/MachineLearning/2021-03-23-PySpark2.md", url = "/posts/2021-03-23-PySpark2.html", title = "PySpark RDD"},
+
+{path = "posts/MachineLearning/2021-03-23-PySpark1.md", url = "/posts/2021-03-23-PySpark1.html", title = "PySpark"},
+
+{path = "posts/MachineLearning/2021-03-23-LogicNeuron.md", url = "/posts/2021-03-23-LogicNeuron.html", title = "Logic Neuron Mathematica"},
+
+{path = "posts/MachineLearning/2021-03-23-LinearRegTorch/2021-03-23-LinearRegTorch.md", url = "/posts/2021-03-23-LinearRegTorch.html", title = "Simulate Linear Regression with Torch"},
+
+{path = "posts/MachineLearning/2021-03-23-HyperParameters.md", url = "/posts/2021-03-23-HyperParameters.html", title = "HyperParameters"},
+
+{path = "posts/MachineLearning/2021-03-23-CNN2/2021-03-23-CNN2.md", url = "/posts/2021-03-23-CNN2.html", title = "CNN Convolution and Pooling"},
+
+{path = "posts/MachineLearning/2021-03-23-CNN.md", url = "/posts/2021-03-23-CNN.html", title = "CNN"},
+
+{path = "posts/QuickCode/2021-03-20-QuickRedux.md", url = "/posts/2021-03-20-QuickRedux.html", title = "Quick Redux"},
+
+{path = "posts/QuickCode/2021-03-20-QuickNext.md", url = "/posts/2021-03-20-QuickNext.html", title = "Quick Nextjs"},
+
+{path = "posts/QuickCode/2021-02-21-QuickR.md", url = "/posts/2021-02-21-QuickR.html", title = "Quick R"},
+
+{path = "posts/QuickCode/2021-02-20-QuirkyPythonTraps.md", url = "/posts/2021-02-20-QuirkyPythonTraps.html", title = "Quirky Python Traps"},
+
+{path = "posts/QuickCode/2021-02-20-QuickSQL2.md", url = "/posts/2021-02-20-QuickSQL2.html", title = "Quick SQL 2"},
+
+{path = "posts/QuickCode/2021-02-20-QuickSQL1.md", url = "/posts/2021-02-20-QuickSQL1.html", title = "Quick SQL 1"},
+
+{path = "posts/QuickCode/2021-02-20-QuickSQL0.md", url = "/posts/2021-02-20-QuickSQL0.html", title = "Quick Postgres SQL Setup"},
+
+{path = "posts/QuickCode/2021-02-20-QuickRust.md", url = "/posts/2021-02-20-QuickRust.html", title = "Quick Rust"},
+
+{path = "posts/QuickCode/2021-02-20-QuickRedis.md", url = "/posts/2021-02-20-QuickRedis.html", title = "Quick Redis"},
+
+{path = "posts/QuickCode/2021-02-20-QuickProtoBuf.md", url = "/posts/2021-02-20-QuickProtoBuf.html", title = "Quick ProtoBuf"},
+
+{path = "posts/QuickCode/2021-02-20-QuickMicro.md", url = "/posts/2021-02-20-QuickMicro.html", title = "Quick Microservice"},
+
+{path = "posts/QuickCode/2021-02-20-QuickMatlab.md", url = "/posts/2021-02-20-QuickMatlab.html", title = "Quick Matlab"},
+
+{path = "posts/QuickCode/2021-02-20-QuickMathematicaPre.md", url = "/posts/2021-02-20-QuickMathematicaPre.html", title = "Quick Mathematica Utils"},
+
+{path = "posts/QuickCode/2021-02-20-QuickMathematica2.md", url = "/posts/2021-02-20-QuickMathematica2.html", title = "Quick Mathematica Graphs"},
+
+{path = "posts/QuickCode/2021-02-20-QuickMathematica.md", url = "/posts/2021-02-20-QuickMathematica.html", title = "Quick Mathematica"},
+
+{path = "posts/QuickCode/2021-02-20-QuickMQTT.md", url = "/posts/2021-02-20-QuickMQTT.html", title = "Quick MQTT"},
+
+{path = "posts/QuickCode/2021-02-20-QuickJavaSpring2.md", url = "/posts/2021-02-20-QuickJavaSpring2.html", title = "Quick Springboot 2"},
+
+{path = "posts/QuickCode/2021-02-20-QuickJavaSpring1.md", url = "/posts/2021-02-20-QuickJavaSpring1.html", title = "Something"},
+
+{path = "posts/QuickCode/2021-02-20-QuickJavaSpring.md", url = "/posts/2021-02-20-QuickJavaSpring.html", title = "Quick Springboot"},
+
+{path = "posts/QuickCode/2021-02-20-QuickGoPre.md", url = "/posts/2021-02-20-QuickGoPre.html", title = "Quick Golang 0"},
+
+{path = "posts/QuickCode/2021-02-20-QuickGo.md", url = "/posts/2021-02-20-QuickGo.html", title = "Quick Golang 1"},
+
+{path = "posts/QuickCode/2021-02-20-QuickASP.md", url = "/posts/2021-02-20-QuickASP.html", title = "Quick ASP"},
+
+{path = "posts/QuickCode/2021-02-20-PythonSnips.md", url = "/posts/2021-02-20-PythonSnips.html", title = "Python Snippets"},
+
+{path = "posts/QuickCode/2021-02-20-HaskellSnips.md", url = "/posts/2021-02-20-HaskellSnips.html", title = "Haskell snippets"},
+
+{path = "posts/QuickCode/2021-02-20-GoSnips.md", url = "/posts/2021-02-20-GoSnips.html", title = "Go Snippets"},
+
+{path = "posts/MachineLearning/2021-01-23-Boltzmann.md", url = "/posts/2021-01-23-Boltzmann.html", title = "Boltzmann probability distribution"},
+
+{path = "posts/MachineLearning/2020-10-08-EnergyBasedModel.md", url = "/posts/2020-10-08-EnergyBasedModel.html", title = "Energy Based Models"},
+
+{path = "posts/MachineLearning/2020-10-05-mathmlNotes.md", url = "/posts/2020-10-05-mathmlNotes.html", title = "Math for ML Notes"},
+
+{path = "posts/TypeTheory/2020-09-21-SequentsNaturalDed.md", url = "/posts/2020-09-21-SequentsNaturalDed.html", title = "Translate Sequent Calculus to ND"},
+
+{path = "posts/QuickCode/2020-09-01-LitReview.md", url = "/posts/2020-09-01-LitReview.html", title = "Literature review"},
+
+{path = "posts/Economics/2020-07-07-Cointegration.md", url = "/posts/2020-07-07-Cointegration.html", title = "Cointegration and Spreads"},
+
+{path = "posts/Induction/2020-06-25-DownwardInduction.md", url = "/posts/2020-06-25-DownwardInduction.html", title = "Recursive Code for Downward Induction"},
+
+{path = "posts/TypeTheory/2020-05-21-Homotopy.md", url = "/posts/2020-05-21-Homotopy.html", title = "Quick Homotopy Type Theory"},
+
+{path = "posts/Statistics/2020-04-20-LookaheadBias.md", url = "/posts/2020-04-20-LookaheadBias.html", title = "Lookahead Bias"},
+
+{path = "posts/QuickCode/2020-04-20-Kubernetes.md", url = "/posts/2020-04-20-Kubernetes.html", title = "Kubernetes"},
+
+{path = "posts/QuickCode/2020-04-20-Docker3.md", url = "/posts/2020-04-20-Docker3.html", title = "Docker Compose"},
+
+{path = "posts/QuickCode/2020-04-20-Docker2.md", url = "/posts/2020-04-20-Docker2.html", title = "Docker Snippets"},
+
+{path = "posts/QuickCode/2020-04-20-Docker.md", url = "/posts/2020-04-20-Docker.html", title = "Docker"},
+
+{path = "posts/Statistics/2020-04-09-Kolmogorov-Smirnov.md", url = "/posts/2020-04-09-Kolmogorov-Smirnov.html", title = "Testing for normal dist with Kolmogorov-Smirnov"},
+
+{path = "posts/QuickCode/2020-04-05-TLA.md", url = "/posts/2020-04-05-TLA.html", title = "TLA"},
+
+{path = "posts/TypeTheory/2020-01-27-HomSet.md", url = "/posts/2020-01-27-HomSet.html", title = "HomSet"},
+
+{path = "posts/CyberSec/2020-01-23-SettingUpHyperV.md", url = "/posts/2020-01-23-SettingUpHyperV.html", title = "HyperV on a home server"},
+
+{path = "posts/CyberSec/2020-01-23-HyperVExpand.md", url = "/posts/2020-01-23-HyperVExpand.html", title = "HyperV Expand win 10 VM virtual hard drive space"},
+
+{path = "posts/QuickCode/2019-09-01-NQueen.md", url = "/posts/2019-09-01-NQueen.html", title = "NQueen in Haskell"},
+
+{path = "posts/TypeTheory/2019-08-23-PatternMatch.md", url = "/posts/2019-08-23-PatternMatch.html", title = "What is Pattern matching?"},
+
+{path = "posts/Functional/2019-08-23-Monad.md", url = "/posts/2019-08-23-Monad.html", title = "Monads, Bind, Return"},
+
+{path = "posts/Functional/2019-08-23-FoldInduction.md", url = "/posts/2019-08-23-FoldInduction.html", title = "Fold and Induction"},
+
+{path = "posts/Functional/2019-08-23-Applicative.md", url = "/posts/2019-08-23-Applicative.html", title = "Applicative"},
+
+{path = "posts/QuickCode/2019-06-12-PythonDeepCopy.md", url = "/posts/2019-06-12-PythonDeepCopy.html", title = "Shallow vs Deep copy"},
+
+{path = "posts/QuickCode/2019-06-12-CodeIdiosyncrasy.md", url = "/posts/2019-06-12-CodeIdiosyncrasy.html", title = "Programming Lang Idiosyncrasies and Similarities"},
+
+{path = "posts/Induction/2019-03-25-RecursionToIterative.md", url = "/posts/2019-03-25-RecursionToIterative.html", title = "Convert Recursion to Iteration"},
+
+{path = "posts/Induction/2019-03-23-mutualRecursion.md", url = "/posts/2019-03-23-mutualRecursion.html", title = "Mutual recursion"},
+
+{path = "posts/Induction/2019-03-20-InductiveAMGMDown.md", url = "/posts/2019-03-20-InductiveAMGMDown.html", title = "Proof Downward Induction AM-GM"},
+
+{path = "posts/Algorithms/2019-03-17-ProofBFS.md", url = "/posts/2019-03-17-ProofBFS.html", title = "Proof - BFS gets shortest distance"},
+
+{path = "posts/TypeTheory/2019-03-07-LangCat.md", url = "/posts/2019-03-07-LangCat.html", title = "Language and Category theory"},
+
+{path = "posts/TypeTheory/2019-03-07-CatNotes.md", url = "/posts/2019-03-07-CatNotes.html", title = "Category theory Notes"},
+
+{path = "posts/TypeTheory/2019-03-07-CatHask.md", url = "/posts/2019-03-07-CatHask.html", title = "Category theory for programmer notes"},
+
+{path = "posts/LinearAlgebra/2019-03-07-Math51.md", url = "/posts/2019-03-07-Math51.html", title = "Math51 notes"},
+
+{path = "posts/LinearAlgebra/2019-03-07-InnerProduct.md", url = "/posts/2019-03-07-InnerProduct.html", title = "Inner Product and Norms"},
+
+{path = "posts/Economics/2018-08-25-StockOptionsNotes.md", url = "/posts/2018-08-25-StockOptionsNotes.html", title = "Options Derivatives Notes"},
+
+{path = "posts/Economics/2018-08-25-StockIndicators.md", url = "/posts/2018-08-25-StockIndicators.html", title = "Trading Indicators"},
+
+{path = "posts/OtherMath/2018-08-23-BuildNatSets.md", url = "/posts/2018-08-23-BuildNatSets.html", title = "Building Natural numbers from Sets with python"},
+
+{path = "posts/Induction/2018-08-23-RecursionInduction.md", url = "/posts/2018-08-23-RecursionInduction.html", title = "Recursion Induction Duality"},
+
+{path = "posts/Algorithms/2018-07-16-GreedyAlgo.md", url = "/posts/2018-07-16-GreedyAlgo.html", title = "Proof - Greedy Algo"},
+
+{path = "posts/OtherMath/2018-07-15-TeachingSets.md", url = "/posts/2018-07-15-TeachingSets.html", title = "Language, Teaching and Set theory"},
+
+{path = "posts/AWS/2018-07-15-SQS.md", url = "/posts/2018-07-15-SQS.html", title = "Quick AWS SQS"},
+
+{path = "posts/AWS/2018-07-15-QuickTerraForm.md", url = "/posts/2018-07-15-QuickTerraForm.html", title = "Quick TerraForm"},
+
+{path = "posts/AWS/2018-07-15-QuickAWS2.md", url = "/posts/2018-07-15-QuickAWS2.html", title = "Quick AWS 2 - S3"},
+
+{path = "posts/AWS/2018-07-15-QuickAWS.md", url = "/posts/2018-07-15-QuickAWS.html", title = "Quick AWS"},
+
+{path = "posts/Softdev/2018-06-23-DependencyInjection.md", url = "/posts/2018-06-23-DependencyInjection.html", title = "Dependency Injection, Design Patterns, OO vs FP"},
+
+{path = "posts/QuickCode/2018-06-23-TypeScript.md", url = "/posts/2018-06-23-TypeScript.html", title = "Typescript"},
+
+{path = "posts/QuickCode/2018-06-23-ReactConditionalDOM.md", url = "/posts/2018-06-23-ReactConditionalDOM.html", title = "Conditional rendering JS React"},
+
+{path = "posts/QuickCode/2018-06-23-JSVanilla.md", url = "/posts/2018-06-23-JSVanilla.html", title = "VanillaJS mini scripts"},
+
+{path = "posts/QuickCode/2018-06-23-JSScoping.md", url = "/posts/2018-06-23-JSScoping.html", title = "Closures in JS, Python"},
+
+{path = "posts/QuickCode/2018-06-23-JSModules.md", url = "/posts/2018-06-23-JSModules.html", title = "JS Modules and NPM packages"},
+
+{path = "posts/QuickCode/2018-06-23-JSClosure.md", url = "/posts/2018-06-23-JSClosure.html", title = "Closures in JS, Python"},
+
+{path = "posts/QuickCode/2018-06-23-JSAsyncAwait.md", url = "/posts/2018-06-23-JSAsyncAwait.html", title = "JS Async Await"},
+
+{path = "posts/Physics/2018-05-28-DiffyQ.md", url = "/posts/2018-05-28-DiffyQ.html", title = "Calculus"},
+
+{path = "posts/Physics/2018-05-25-DiffyQ1.md", url = "/posts/2018-05-25-DiffyQ1.html", title = "Finding Steady States"},
+
+{path = "posts/OtherMath/2018-05-23-YParadox2.md", url = "/posts/2018-05-23-YParadox2.html", title = "Y Combinator, Partial Recursive functions"},
+
+{path = "posts/OtherMath/2018-05-05-YParadox.md", url = "/posts/2018-05-05-YParadox.html", title = "Russell's Paradox, AST and Bears"},
+
+{path = "posts/QuickCode/2018-03-24-pyplot.md", url = "/posts/2018-03-24-pyplot.html", title = "Pyplot matplotlib"},
+
+{path = "posts/QuickCode/2018-03-24-pandas.md", url = "/posts/2018-03-24-pandas.html", title = "Pandas"},
+
+{path = "posts/QuickCode/2018-03-24-makefile.md", url = "/posts/2018-03-24-makefile.html", title = "makefile"},
+
+{path = "posts/QuickCode/2018-03-24-QuickSetup.md", url = "/posts/2018-03-24-QuickSetup.html", title = "Quick Setup"},
+
+{path = "posts/QuickCode/2018-03-24-QuickCppHeader.md", url = "/posts/2018-03-24-QuickCppHeader.html", title = "Quick C++ Header and Doxygen"},
+
+{path = "posts/QuickCode/2018-03-24-QuickCpp.md", url = "/posts/2018-03-24-QuickCpp.html", title = "Quick C++"},
+
+{path = "posts/QuickCode/2018-03-24-QuickC.md", url = "/posts/2018-03-24-QuickC.html", title = "Quick C"},
+
+{path = "posts/Economics/2018-03-24-Stochastic.md", url = "/posts/2018-03-24-Stochastic.html", title = "Stochastic calculus and brownian motion"},
+
+{path = "posts/Misc/2018-01-05-RandTips.md", url = "/posts/2018-01-05-RandTips.html", title = "Random Shortcuts"},
+
+{path = "posts/Misc/2018-01-05-Politics.md", url = "/posts/2018-01-05-Politics.html", title = "Economic Report"},
+
+{path = "posts/AppliedTechniques/2018-01-05-MarkovChain.md", url = "/posts/2018-01-05-MarkovChain.html", title = "Markov Chain and State machines"},
+
+{path = "posts/Softdev/OO/2017-07-15-ClassComposition.md", url = "/posts/2017-07-15-ClassComposition.html", title = "Interfaces, Class Composition, Diamond Problem"},
+
+{path = "posts/Softdev/2017-07-15-SoftwareEng.md", url = "/posts/2017-07-15-SoftwareEng.html", title = "Software Engineering lessons"},
+
+{path = "posts/Softdev/2017-07-15-OOP.md", url = "/posts/2017-07-15-OOP.html", title = "OOP Class Access Modifiers Public Private"},
+
+{path = "posts/Softdev/2017-07-15-OOP copy.md", url = "/posts/2017-07-15-OOP%20copy.html", title = "UML ReEnvisioned"},
+
+{path = "posts/Softdev/2017-07-15-Debug.md", url = "/posts/2017-07-15-Debug.html", title = "Debug"},
+
+{path = "posts/QuickCode/2017-07-15-SpringPatterns.md", url = "/posts/2017-07-15-SpringPatterns.html", title = "Design Patterns"},
+
+{path = "posts/QuickCode/2017-07-15-CPython.md", url = "/posts/2017-07-15-CPython.html", title = "Everything is a pointer perspective"},
+
+{path = "posts/Economics/2017-07-15-thinkScript.md", url = "/posts/2017-07-15-thinkScript.html", title = "Thinkscript"},
+
+{path = "posts/CyberSec/2017-07-15-pyFTP.md", url = "/posts/2017-07-15-pyFTP.html", title = "python FTP SMTP POP3 IMAP DNS"},
+
+{path = "posts/Concurrency/2017-07-15-PythonConcurrency.md", url = "/posts/2017-07-15-PythonConcurrency.html", title = "Python Concurrency"},
+
+{path = "posts/2016-07-07-LinReg/2016-07-07-LinReg.md", url = "/posts/2016-07-07-LinReg.html", title = "Linear Regression and Matrices"},
+
+{path = "posts/Misc/2016-03-25-UpdateHakyllPost.md", url = "/posts/2016-03-25-UpdateHakyllPost.html", title = "Updating Hakyll posts"},
+
+{path = "posts/Economics/2016-01-01-TradingMeasurement.md", url = "/posts/2016-01-01-TradingMeasurement.html", title = "Benchmarks for algotrading"},
+
+{path = "posts/Functional/2015-12-05-LeftFoldTailLoop.md", url = "/posts/2015-12-05-LeftFoldTailLoop.html", title = "For Loops, Tail recursion, and Left fold"},
+
+{path = "posts/Softdev/2015-09-17-SystemDesign.md", url = "/posts/2015-09-17-SystemDesign.html", title = "System Design"},
+
+{path = "posts/Softdev/2015-09-17-DistributedSystem.md", url = "/posts/2015-09-17-DistributedSystem.html", title = "Distributed Systems, CAP, Raft"},
+
+{path = "posts/QuickCode/2015-09-17-Pointers.md", url = "/posts/2015-09-17-Pointers.html", title = "C Pointers"},
+
+{path = "posts/QuickCode/2015-09-17-CHeaders.md", url = "/posts/2015-09-17-CHeaders.html", title = "Linux and C header location"},
+
+{path = "posts/OperatingSys/2015-09-17-xv6.md", url = "/posts/2015-09-17-xv6.html", title = "xv6"},
+
+{path = "posts/OperatingSys/2015-09-17-PacketsNetwork.md", url = "/posts/2015-09-17-PacketsNetwork.html", title = "Linux and Networking"},
+
+{path = "posts/OperatingSys/2015-09-17-Kernel.md", url = "/posts/2015-09-17-Kernel.html", title = "Linux Kernel"},
+
+{path = "posts/Misc/2015-09-17-Vim.md", url = "/posts/2015-09-17-Vim.html", title = "Vim"},
+
+{path = "posts/CyberSec/2015-09-17-PenTest3.md", url = "/posts/2015-09-17-PenTest3.html", title = "Pen Testing 3 SQL, Burp"},
+
+{path = "posts/CyberSec/2015-09-17-PenTest2.md", url = "/posts/2015-09-17-PenTest2.html", title = "Pen Testing 2"},
+
+{path = "posts/CyberSec/2015-09-17-PenTest.md", url = "/posts/2015-09-17-PenTest.html", title = "Pen Testing"},
+
+{path = "posts/CyberSec/2015-09-17-LinuxScripts.md", url = "/posts/2015-09-17-LinuxScripts.html", title = "Linux annoying setup commands"},
+
+{path = "posts/CyberSec/2015-09-17-CyberSec.md", url = "/posts/2015-09-17-CyberSec.html", title = "Misc CyberSecurity"},
+
+{path = "posts/CyberSec/2015-09-16-AndroidBash.md", url = "/posts/2015-09-16-AndroidBash.html", title = "Android and Bash"},
+
+{path = "posts/TypeTheory/2015-08-23-NatDed.md", url = "/posts/2015-08-23-NatDed.html", title = "ND"},
+
+{path = "posts/TypeTheory/2015-08-23-LinearLogic.md", url = "/posts/2015-08-23-LinearLogic.html", title = "Linear Logic"},
+
+{path = "posts/TypeTheory/2015-08-23-GentzenCut.md", url = "/posts/2015-08-23-GentzenCut.html", title = "Sequents and Gentzen Cut"},
+
+{path = "posts/Economics/2015-08-23-FinanceTerms.md", url = "/posts/2015-08-23-FinanceTerms.html", title = "Finance terms"},
+
+{path = "posts/Economics/2015-08-23-EconSignals.md", url = "/posts/2015-08-23-EconSignals.html", title = "Econ terms"},
+
+{path = "posts/Economics/2015-08-23-EconNotes.md", url = "/posts/2015-08-23-EconNotes.html", title = "Econ Notes"},
+
+{path = "posts/Economics/2015-08-23-EconGeo.md", url = "/posts/2015-08-23-EconGeo.html", title = "Geometric Series Banking"},
+
+{path = "posts/Economics/2015-08-23-DecisionTheory.md", url = "/posts/2015-08-23-DecisionTheory.html", title = "Decision Minimax/min"},
+
+{path = "posts/Algorithms/2015-08-23-BitwiseSets.md", url = "/posts/2015-08-23-BitwiseSets.html", title = "Bitwise Operations and Sets"},
+
+{path = "posts/Functional/2015-08-20-StreamLambda.md", url = "/posts/2015-08-20-StreamLambda.html", title = "Implementing Stream with lambdas"},
+
+{path = "posts/Physics/2015-07-23-RNA.md", url = "/posts/2015-07-23-RNA.html", title = "Genetics and Bio lab techniques"},
+
+{path = "posts/TypeTheory/2015-07-22-REPL.md", url = "/posts/2015-07-22-REPL.html", title = "Compilers and REPL"},
+
+{path = "posts/Softdev/2015-07-22-Agile.md", url = "/posts/2015-07-22-Agile.html", title = "Agile"},
+
+{path = "posts/Physics/2015-07-22-PenrosePhysics.md", url = "/posts/2015-07-22-PenrosePhysics.html", title = "Penrose Physics notes"},
+
+{path = "posts/Physics/2015-07-22-LawsMotion.md", url = "/posts/2015-07-22-LawsMotion.html", title = "Derive kinematics + motion w/ calculus"},
+
+{path = "posts/Physics/2015-07-22-FeynmanPhysics.md", url = "/posts/2015-07-22-FeynmanPhysics.html", title = "Feynman Physics notes"},
+
+{path = "posts/Physics/2015-07-22-Circuits.md", url = "/posts/2015-07-22-Circuits.html", title = "Circuits"},
+
+{path = "posts/Physics/2015-07-22-Chemistry.md", url = "/posts/2015-07-22-Chemistry.html", title = "Chemistry"},
+
+{path = "posts/Algorithms/2015-07-22-BalancedTree.md", url = "/posts/2015-07-22-BalancedTree.html", title = "Data Struct - Balanced Trees"},
+
+{path = "posts/OtherMath/2015-07-19-GeneratingFunctions.md", url = "/posts/2015-07-19-GeneratingFunctions.html", title = "Generating Functions"},
+
+{path = "posts/OperatingSys/2015-07-19-OperatingSys.md", url = "/posts/2015-07-19-OperatingSys.html", title = "Operating Systems"},
+
+{path = "posts/OperatingSys/2015-07-19-Bootloader.md", url = "/posts/2015-07-19-Bootloader.html", title = "BootLoader"},
+
+{path = "posts/Functional/2015-07-19-TailNotPure.md", url = "/posts/2015-07-19-TailNotPure.html", title = "Recursion - Slicing the tail of list is impure"},
+
+{path = "posts/Algorithms/2015-07-19-CSESProblemSet.md", url = "/posts/2015-07-19-CSESProblemSet.html", title = "Algorithm Problem Sets"},
+
+{path = "posts/Algorithms/2015-07-19-CLRSAlgos.md", url = "/posts/2015-07-19-CLRSAlgos.html", title = "CLRS Algos"},
+
+{path = "posts/Algorithms/2015-07-19-CFProblemSet.md", url = "/posts/2015-07-19-CFProblemSet.html", title = "CF Problem Sets"},
+
+{path = "posts/TypeTheory/2015-07-15-ListFunctor.md", url = "/posts/2015-07-15-ListFunctor.html", title = "List Functors Lambda Laziness"},
+
+{path = "posts/Statistics/2015-07-15-RegressionOLS.md", url = "/posts/2015-07-15-RegressionOLS.html", title = "Regression and OLS"},
+
+{path = "posts/Softdev/2015-07-15-DataDrivenDesign.md", url = "/posts/2015-07-15-DataDrivenDesign.html", title = "Data Driven Design Notes"},
+
+{path = "posts/Probability/2015-07-15-IntroStatLearn.md", url = "/posts/2015-07-15-IntroStatLearn.html", title = "Intro To Statistical Learning Notes"},
+
+{path = "posts/Physics/2015-07-15-ControlSystems.md", url = "/posts/2015-07-15-ControlSystems.html", title = "ControlSystems"},
+
+{path = "posts/LinearAlgebra/2015-07-15-PCA.md", url = "/posts/2015-07-15-PCA.html", title = "PCA"},
+
+{path = "posts/LinearAlgebra/2015-07-15-Matrix.md", url = "/posts/2015-07-15-Matrix.html", title = "Matrices"},
+
+{path = "posts/LinearAlgebra/2015-07-15-Eigenvector.md", url = "/posts/2015-07-15-Eigenvector.html", title = "Eigenvectors"},
+
+{path = "posts/Induction/2015-07-15-RecursionImagine.md", url = "/posts/2015-07-15-RecursionImagine.html", title = "Recursion Scenarios"},
+
+{path = "posts/AppliedTechniques/2015-07-15-Z3.md", url = "/posts/2015-07-15-Z3.html", title = "Z3"},
+
+{path = "posts/AppliedTechniques/2015-07-15-SVD.md", url = "/posts/2015-07-15-SVD.html", title = "SVD"},
+
+{path = "posts/AppliedTechniques/2015-07-15-FFT.md", url = "/posts/2015-07-15-FFT.html", title = "FFT DFT"},
+
+{path = "posts/PureMath/2015-07-14-RealAnalysis.md", url = "/posts/2015-07-14-RealAnalysis.html", title = "Real Analysis"},
+
+{path = "posts/Probability/2015-07-14-QuickStatsA.md", url = "/posts/2015-07-14-QuickStatsA.html", title = "Quick Stats Part 1"},
+
+{path = "posts/Probability/2015-07-14-PyProbDist.md", url = "/posts/2015-07-14-PyProbDist.html", title = "Generate Random Samples and Probability Distribution"},
+
+{path = "posts/Probability/2015-07-14-ProbStatsTerms.md", url = "/posts/2015-07-14-ProbStatsTerms.html", title = "Measure theory and probability"},
+
+{path = "posts/Probability/2015-07-14-DataScience.md", url = "/posts/2015-07-14-DataScience.html", title = "Data Science"},
+
+{path = "posts/Probability/2015-07-14-BayesianProbability.md", url = "/posts/2015-07-14-BayesianProbability.html", title = "Bayesian Probability"},
+
+{path = "posts/Physics/2015-07-14-SolvingDiffyQ.md", url = "/posts/2015-07-14-SolvingDiffyQ.html", title = "Solving Differential Equations"},
+
+{path = "posts/Physics/2015-07-14-Maxwell.md", url = "/posts/2015-07-14-Maxwell.html", title = "Maxwell Equations"},
+
+{path = "posts/LinearAlgebra/2015-07-14-AbstractLinearAlg.md", url = "/posts/2015-07-14-AbstractLinearAlg.html", title = "Abstract Linear Algebra"},
+
+{path = "posts/LinearAlgebra/2015-07-14-AbstractAlg.md", url = "/posts/2015-07-14-AbstractAlg.html", title = "Abstract Algebra"},
+
+{path = "posts/BioChem/2015-07-14-BioChem.md", url = "/posts/2015-07-14-BioChem.html", title = "BioChem"},
+
+{path = "posts/BioChem/2015-07-14-AppliedBio.md", url = "/posts/2015-07-14-AppliedBio.html", title = "Applied Bio"},
+
+{path = "posts/Algorithms/2015-07-14-GraphTheory.md", url = "/posts/2015-07-14-GraphTheory.html", title = "Graph theory"},
+
+{path = "posts/TypeTheory/2015-07-01-Lattices.md", url = "/posts/2015-07-01-Lattices.html", title = "Lattices"},
+
+{path = "posts/PureMath/2015-07-01-Topology.md", url = "/posts/2015-07-01-Topology.html", title = "Topology"},
+
+{path = "posts/PureMath/2015-07-01-TopTheorems.md", url = "/posts/2015-07-01-TopTheorems.html", title = "Top Theorems"},
+
+{path = "posts/PureMath/2015-07-01-HilbertSpace.md", url = "/posts/2015-07-01-HilbertSpace.html", title = "Hilbert Space"},
+
+{path = "posts/OtherMath/2015-07-01-Primes.md", url = "/posts/2015-07-01-Primes.html", title = "Primes"},
+
+{path = "posts/OtherMath/2015-07-01-FunctionalEq.md", url = "/posts/2015-07-01-FunctionalEq.html", title = "Functional equations and why we need to verify solutions"},
+
+{path = "posts/OtherMath/2015-07-01-Discrete.md", url = "/posts/2015-07-01-Discrete.html", title = "Discrete Math"},
+
+{path = "posts/OtherMath/2015-06-24-EulerImaginary.md", url = "/posts/2015-06-24-EulerImaginary.html", title = "Euler, Complex and Imaginary"},
+
+{path = "posts/Softdev/2015-05-01-Dependencies.md", url = "/posts/2015-05-01-Dependencies.html", title = "Dependencies, Arrows and Confusion"},
+
+{path = "posts/Induction/2015-04-27-InductionNotes.md", url = "/posts/2015-04-27-InductionNotes.html", title = "List of Induction problems"},
+
+{path = "posts/OtherMath/2015-04-26-Combinatorics.md", url = "/posts/2015-04-26-Combinatorics.html", title = "Combinatorics"},
+
+{path = "posts/OtherMath/2015-04-24-Patterns.md", url = "/posts/2015-04-24-Patterns.html", title = "Patterns"},
+
+{path = "posts/2015-01-01-stuff/2015-01-01-stuff.md", url = "/posts/2015-01-01-stuff.html", title = "Simple"},
+
+]
+
+[output]
+
+displayed_results_count=20

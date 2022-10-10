@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Intro Lean</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Intro Lean</h1>
+            
+
+            <div class="info">
+    Posted on November 11, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'lean'." href="../tags/lean.html">lean</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#notation"><span class="toc-section-number">1</span> Notation</a>
+<ul>
+<li><a href="#type-parameters-vs-arguments"><span class="toc-section-number">1.1</span> Type Parameters vs Arguments</a></li>
+</ul></li>
+<li><a href="#forall-pi"><span class="toc-section-number">2</span> Forall, Pi</a></li>
+<li><a href="#inductive-type"><span class="toc-section-number">3</span> Inductive type</a>
+<ul>
+<li><a href="#inductive-type-parameters"><span class="toc-section-number">3.1</span> Inductive Type parameters</a></li>
+<li><a href="#dependently-typed-constructors"><span class="toc-section-number">3.2</span> dependently typed constructors</a></li>
+<li><a href="#parameter-behavior-in-functions"><span class="toc-section-number">3.3</span> Parameter Behavior in functions</a></li>
+<li><a href="#structures"><span class="toc-section-number">3.4</span> Structures</a></li>
+</ul></li>
+<li><a href="#implicit-vs-explicit-parameters"><span class="toc-section-number">4</span> Implicit vs Explicit parameters</a></li>
+<li><a href="#recursion"><span class="toc-section-number">5</span> Recursion</a></li>
+<li><a href="#intro"><span class="toc-section-number">6</span> Intro</a>
+<ul>
+<li><a href="#parameters-vs-arguments"><span class="toc-section-number">6.1</span> Parameters vs Arguments</a></li>
+</ul></li>
+</ul></div>
+<section id="notation" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Notation</h1>
+<section id="type-parameters-vs-arguments" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Type Parameters vs Arguments</h2>
+<p><code>def bleh (PARAMETER1 : Type) (PARAMETER2 : Type) : ARGUMENT1 -&gt; ARGUMENT2 := ...</code></p>
+<ul>
+<li>PARAMETER: Before the main semicolon</li>
+<li>ARGUMENT: After the main semicolon <!--  --></li>
+<li>Example <code>def Bigger (x : Nat) (y : Nat): Bool := ...</code>
+<ul>
+<li>Parameter: <code>(x : Nat) (y : Nat)</code></li>
+<li>Argument: <code>Bool</code> <!--  --></li>
+</ul></li>
+<li>PARAMETER and ARGUMENTS do not behave in the same way in Function vs Inductive Type definitons</li>
+</ul>
+</section>
+</section>
+<section id="forall-pi" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Forall, Pi</h1>
+<ul>
+<li>Π and ∀ are interchangable.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>constant consA <span class="op">:</span>  Πa  <span class="op">:</span> <span class="dt">Type</span> u , a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>constant consB <span class="op">:</span> ∀a  <span class="op">:</span> <span class="dt">Type</span> u , a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>constant consC <span class="op">:</span> ∀(a <span class="op">:</span> <span class="dt">Type</span> u), a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>constant consD <span class="op">:</span> Π(a <span class="op">:</span> <span class="dt">Type</span> u) , a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>constant consE (a <span class="op">:</span> <span class="dt">Type</span> u) <span class="op">:</span> a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>def injective {<span class="dt">A</span> <span class="dt">B</span>} (f<span class="op">:</span> <span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span>) <span class="op">:=</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  Π x y <span class="op">:</span> <span class="dt">A</span>, f x <span class="ot">=</span> f y <span class="ot">-&gt;</span> x <span class="ot">=</span> y</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>def injective {<span class="dt">A</span> <span class="dt">B</span>} (f<span class="op">:</span> <span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span>) <span class="op">:=</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  ∀ x y <span class="op">:</span> <span class="dt">A</span>, f x <span class="ot">=</span> f y <span class="ot">-&gt;</span> x <span class="ot">=</span> y</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>def injective {<span class="dt">A</span> <span class="dt">B</span>} (f<span class="op">:</span> <span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span>) <span class="op">:=</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  λ x y <span class="op">:</span> <span class="dt">A</span>, f x <span class="ot">=</span> f y <span class="ot">-&gt;</span> x <span class="ot">=</span> y</span></code></pre></div>
+</section>
+<section id="inductive-type" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Inductive type</h1>
+<ul>
+<li>An inductive type aka inductive datatype aka algebraic datatype is a type that consists all the values that can be built using a finite number of applications of its constructors and only those. <!--  --></li>
+<li><code>Inductive</code> keyword bundles together Type formation and Term introduction</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>inductive nat <span class="op">:</span> <span class="dt">Type</span> <span class="co">--type formation</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> zero <span class="op">:</span> nat <span class="co">--term introduction</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="fu">succ</span> <span class="op">:</span> nat → nat <span class="co">--term introduction</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>constant nat <span class="op">:</span> <span class="dt">Type</span> <span class="co">--type formation</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>constant nat<span class="op">.</span>zero <span class="op">:</span> nat <span class="co">--term introduction</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>constant nat<span class="op">.</span><span class="fu">succ</span> <span class="op">:</span> nat → nat <span class="co">--term introduction</span></span></code></pre></div>
+<section id="inductive-type-parameters" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Inductive Type parameters</h2>
+<ul>
+<li>By adding parameters, we can have Inductive dependent types meaning the constructors are dependent typed functions.</li>
+<li><strong>Notice the last Type of the constructor <code>mk :..-&gt; prod</code> is the inductive type itself <code>prod</code></strong>
+<ul>
+<li>Constructors must always refer back to the inductive type</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb5" data-group="g1" data-glabel="lean"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>inductive prod <span class="op">(</span>A B <span class="op">:</span> Type<span class="op">)</span> <span class="op">:</span> Type</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> mk <span class="op">:</span> A <span class="op">-&gt;</span> B <span class="op">-&gt;</span> prod</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="er">#check prod.mk 2 4 </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>OUTPUT<span class="op">&gt;</span> mk <span class="dv">2</span> <span class="dv">4</span> <span class="op">::</span> prod nat nat</span></code></pre></div>
+<div class="sourceCode" id="cb6" data-group="g1" data-glabel="coq"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Inductive</span> prod (<span class="dt">A</span> <span class="dt">B</span><span class="op">:</span><span class="dt">Type</span>) <span class="op">:</span> <span class="dt">Type</span> <span class="op">:=</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> pair (x<span class="op">:</span><span class="dt">A</span>) (y<span class="op">:</span><span class="dt">B</span>) <span class="op">:</span> <span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span> <span class="ot">-&gt;</span> prod <span class="dt">A</span> <span class="dt">B</span><span class="op">.</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">Check</span> mk nat nat <span class="dv">2</span> <span class="dv">4</span><span class="op">.</span> <span class="co">--notice how this diff from Lean's mk</span></span></code></pre></div>
+</section>
+<section id="dependently-typed-constructors" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> dependently typed constructors</h2>
+<ul>
+<li>Instead of having typed parameters like <code>prod (A B : Type) : Type</code> we use dependently typed constructors like <code>mk : Π ( A B : Type )...</code></li>
+</ul>
+<div class="sourceCode" id="cb7" data-group="g2" data-glabel="lean"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>inductive prod <span class="op">:</span> Type <span class="op">-&gt;</span> Type <span class="op">-&gt;</span> Type <span class="dv">1</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> mk <span class="op">:</span> Π <span class="op">(</span>A B <span class="op">:</span> Type<span class="op">),</span> A <span class="op">-&gt;</span> B <span class="op">-&gt;</span> prod A B</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="er">#check mk nat nat 2 4 </span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>OUTPUT<span class="op">&gt;</span> mk nat nat <span class="dv">2</span> <span class="dv">4</span> <span class="op">::</span> prod ℕ ℕ</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="er">#check mk</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>OUTPUT<span class="op">&gt;</span> mk <span class="op">::</span> Π <span class="op">(</span>A B <span class="op">:</span> Type<span class="op">),</span> A <span class="op">-&gt;</span> B <span class="op">-&gt;</span> prod A B</span></code></pre></div>
+<div class="sourceCode" id="cb8" data-group="g2" data-glabel="coq"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Inductive prod <span class="op">:</span>  Type <span class="op">-&gt;</span> Type <span class="op">-&gt;</span> Type <span class="op">:=</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> mk <span class="op">:</span> forall A B <span class="op">:</span>Type <span class="op">,</span> A <span class="op">-&gt;</span> B <span class="op">-&gt;</span> prod A B <span class="op">.</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Check pair nat nat <span class="dv">2</span> <span class="fl">4.</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>OUTPUT<span class="op">&gt;</span> pair nat nat <span class="dv">2</span> <span class="dv">4</span> <span class="op">::</span> prod nat nat </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>Check mk<span class="op">.</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>OUTPUT<span class="op">&gt;</span> mk <span class="op">::</span> forall A B <span class="op">:</span> Type<span class="op">,</span> A <span class="op">-&gt;</span> B <span class="op">-&gt;</span> prod A B</span></code></pre></div>
+</section>
+<section id="parameter-behavior-in-functions" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> Parameter Behavior in functions</h2>
+<ul>
+<li>Observe how <code>(m : ℕ)</code> as a parameter behaves
+<ul>
+<li>argument m of <code>powerB m</code> is fixed inside the definition<br />
+but outside the definition, like in <code>eval powerB 2 5</code>, m is not fixed</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>def power <span class="op">:</span> ℕ → ℕ → ℕ</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> _ nat<span class="op">.</span>zero     <span class="op">:=</span> <span class="dv">1</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> m (nat<span class="op">.</span><span class="fu">succ</span> n) <span class="op">:=</span> m <span class="op">*</span> power m n</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#eval power 2 5</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>def powerB (m <span class="op">:</span> ℕ) <span class="op">:</span> ℕ → ℕ</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> nat<span class="op">.</span>zero     <span class="op">:=</span> <span class="dv">1</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> (nat<span class="op">.</span><span class="fu">succ</span> n) <span class="op">:=</span> m <span class="op">*</span> powerB n <span class="co">--notice we can omit argument m here</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#eval powerB 2 5 </span></span></code></pre></div>
+</section>
+<section id="structures" class="level2" data-number="3.4">
+<h2 data-number="3.4"><span class="header-section-number">3.4</span> Structures</h2>
+<p><strong>Structures are non-recursive inductive data types</strong><br />
+In other langs, they are called records</p>
+</section>
+</section>
+<section id="implicit-vs-explicit-parameters" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Implicit vs Explicit parameters</h1>
+<div class="sourceCode" id="cb10"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>constant consImplicit {a <span class="op">:</span> <span class="dt">Type</span> u } <span class="op">:</span>  a <span class="ot">-&gt;</span> list a <span class="ot">-&gt;</span> list a </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>constant nilImplicit <span class="op">:</span> Π {a <span class="op">:</span> <span class="dt">Type</span> u}, list a</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#check consImplicit </span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dt">OUTPUT</span><span class="op">&gt;</span> <span class="op">?</span><span class="dt">M_1</span> → list <span class="op">?</span><span class="dt">M_1</span> → list <span class="op">?</span><span class="dt">M_1</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">--using @ fills in the metavar with types</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#check @consImplicit</span></span></code></pre></div>
+</section>
+<section id="recursion" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Recursion</h1>
+<ul>
+<li>If a function uses a recursive call to itself lean must also provide a proof of well-foundedness
+<ul>
+<li>Contrary to Coq which does not require a proof</li>
+</ul></li>
+</ul>
+</section>
+<section id="intro" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Intro</h1>
+<section id="parameters-vs-arguments" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> Parameters vs Arguments</h2>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

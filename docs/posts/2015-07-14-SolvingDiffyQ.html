@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Solving Differential Equations</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
+                    <span class="link-text">React</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Solving Differential Equations</h1>
+            
+
+            <div class="info">
+    Posted on July 14, 2015
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'physics'." href="../tags/physics.html">physics</a>
+    
+</div>
+<section id="differential-equations" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Differential Equations</h3>
+<p>Properties</p>
+<ul>
+<li>Order: order of highest derivative</li>
+<li>(Non)Linear:</li>
+<li>(ODE)PDE</li>
+<li>Homogeneity</li>
+</ul>
+<hr />
+<section id="initial-value-problems" class="level5" data-number="0.0.1.0.1">
+<h5 data-number="0.0.1.0.1"><span class="header-section-number">0.0.1.0.1</span> Initial Value Problems</h5>
+<p>notation: <span class="math inline">\(y' := \frac{dy}{dx}\)</span> <span class="math inline">\(y := y(x)\)</span></p>
+<p>Given Differential Equation <span class="math display">\[y'' - 5y' + 6y = 0\]</span><br />
+Solve for set of equations that satisfy Differential equation:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DSolve</span><span class="op">[</span>y''<span class="op">[</span><span class="fu">x</span><span class="op">]</span> <span class="sc">-</span> <span class="dv">5</span><span class="sc">*</span>y'<span class="op">[</span><span class="fu">x</span><span class="op">]</span> <span class="sc">+</span> <span class="dv">6</span> <span class="fu">y</span><span class="op">[</span><span class="fu">x</span><span class="op">]</span> <span class="ex">==</span> <span class="dv">0</span><span class="op">,</span> <span class="fu">y</span><span class="op">[</span><span class="fu">x</span><span class="op">],</span> <span class="fu">x</span><span class="op">]</span></span></code></pre></div>
+<p><span class="math display">\[\left\{\left\{y(x)\to c_1 e^{2 x}+c_2 e^{3 x}\right\}\right\}\]</span></p>
+<p>Given Initial conditions: <span class="math display">\[y(0)=3\]</span> <span class="math display">\[y'(0)=1\]</span> Solve by finding the specific functions that satisfy the initial condition and the given differential equation</p>
+<ul>
+<li><span class="math inline">\(y(0)=3\)</span>
+<ul>
+<li>Plug into previous solution <span class="math inline">\(y(x)=c_1 e^{2 x}+c_2 e^{3 x}\)</span></li>
+<li><span class="math inline">\(y(0)=c_1 +c_2 = 3\)</span></li>
+</ul></li>
+<li><span class="math inline">\(y'(0)=2\)</span>
+<ul>
+<li>Find derivative of previous solution <span class="math inline">\(y(x)=c_1 e^{2 x}+c_2 e^{3 x}\)</span>
+<ul>
+<li><span class="math inline">\(y'(x) = 2c_1 + 3c_2\)</span></li>
+</ul></li>
+<li><span class="math inline">\(y'(0)=2c_1 + 3c_2 = 1\)</span></li>
+</ul></li>
+</ul>
+<p>Solve system of linear equations for constants <span class="math inline">\(c_1\)</span>,<span class="math inline">\(c_2\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+    c_1 + c_2  &amp;=  3\\
+    2c_1 + 3c_2 &amp;= 1 
+  \end{aligned}
+  \quad\Longleftrightarrow\quad
+  \begin{bmatrix}
+ 1 &amp; 1 \\
+ 2 &amp; 3 \\
+\end{bmatrix}
+\begin{bmatrix}
+ c_1 \\
+ c_2 \\
+\end{bmatrix}=
+\begin{bmatrix}
+ \text{3} \\
+ \text{1} \\
+\end{bmatrix} \]</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ex">=</span> <span class="op">{{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">},</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">}}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>vars <span class="ex">=</span> <span class="op">{{</span>c1<span class="op">},</span> <span class="op">{</span>c2<span class="op">}}</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">b</span> <span class="ex">=</span> <span class="op">{{</span><span class="dv">3</span><span class="op">},</span> <span class="op">{</span><span class="dv">1</span><span class="op">}}</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Solve</span><span class="op">[{</span>mat . vars <span class="ex">==</span> <span class="fu">b</span><span class="op">},</span> <span class="op">{</span>c1<span class="op">,</span> c2<span class="op">}]</span></span></code></pre></div>
+<p><span class="math display">\[\{\{c_1\to 8,c_2\to -5\}\}\]</span></p>
+<p>Solution: <span class="math display">\[y = 8e^{2x}-5e^{3x}\]</span></p>
+<hr />
+</section>
+</section>
+<section id="examples" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Examples</h3>
+<section id="radioactive-decay-substance-amount-yt" class="level5" data-number="0.0.2.0.1">
+<h5 data-number="0.0.2.0.1"><span class="header-section-number">0.0.2.0.1</span> Radioactive Decay , substance amount y[t]</h5>
+<p><span class="math display">\[\frac{dy}{dt} = -ky(t)\]</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DSolve</span><span class="op">[</span>y'<span class="op">[</span><span class="fu">t</span><span class="op">]</span> <span class="ex">==</span> <span class="sc">-</span><span class="fu">k</span><span class="sc">*</span><span class="fu">y</span><span class="op">[</span><span class="fu">t</span><span class="op">],</span> <span class="fu">y</span><span class="op">[</span><span class="fu">t</span><span class="op">],</span> <span class="fu">t</span><span class="op">]</span> <span class="sc">//</span> <span class="fu">TeXForm</span></span></code></pre></div>
+<p><span class="math display">\[\left\{\left\{y(t)\to c_1 e^{-k t}\right\}\right\}\]</span></p>
+<p><span class="math display">\[y(0)=k\]</span></p>
+<hr />
+<hr />
+</section>
+<section id="uniqueness-and-existence-problems" class="level5" data-number="0.0.2.0.2">
+<h5 data-number="0.0.2.0.2"><span class="header-section-number">0.0.2.0.2</span> Uniqueness and Existence Problems</h5>
+<p>Theorem:<br />
+Given f(x,y) continous</p>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>
