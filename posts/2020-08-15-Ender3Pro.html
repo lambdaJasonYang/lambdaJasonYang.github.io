@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Lean Proof trees to Types</title>
+        <title>Jason Yang - Ender 3 Pro 3d printing setup</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,68 +103,84 @@
         </div>
 
         <div id="content">
-            <h1>Lean Proof trees to Types</h1>
+            <h1>Ender 3 Pro 3d printing setup</h1>
             
 
             <div class="info">
-    Posted on November 11, 2021
+    Posted on August 15, 2020
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'lean'." href="../tags/lean.html">lean</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<div id="TOC"></div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>variables (<span class="dt">P</span> <span class="dt">Q</span> <span class="dt">R</span> <span class="op">:</span> <span class="dt">Prop</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Here is a proof which does not use tactics at all, but uses lambda calculus.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- It is called a &quot;term mode&quot; proof. We will not be discussing term mode</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- much in this course. It is a cool way to do basic logic proofs, but</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- it does not scale well in practice.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>example <span class="op">:</span> <span class="dt">P</span> → ¬ (¬ <span class="dt">P</span>) <span class="op">:=</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>λ hP hnP, hnP hP</span>
+<div id="TOC"><ul>
+<li><a href="#summary"><span class="toc-section-number">1</span> Summary</a></li>
+<li><a href="#setup"><span class="toc-section-number">2</span> Setup</a>
+<ul>
+<li><a href="#wifi"><span class="toc-section-number">2.1</span> Wifi</a></li>
+<li><a href="#rpi-voltage"><span class="toc-section-number">2.2</span> rpi voltage</a></li>
+</ul></li>
+<li><a href="#slicer"><span class="toc-section-number">3</span> Slicer</a></li>
+<li><a href="#docker"><span class="toc-section-number">4</span> Docker</a></li>
+</ul></div>
+<section id="summary" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Summary</h1>
+<ul>
+<li><code>*.stl</code> from thingiverse -&gt; slicing into <code>*.gcode</code> (3d mechanical instructions)</li>
+<li>octoprint doesnt work as docker container on rpi debian distro but does work as a normal server</li>
+</ul>
+</section>
+<section id="setup" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Setup</h1>
+<section id="wifi" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Wifi</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">--version</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-pip python3-dev python3-setuptools python3-venv git libyaml-dev build-essential</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> OctoPrint <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> OctoPrint</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv venv</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> venv/bin/activate</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- This one cannot be proved using constructive mathematics!</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- You _have_ to use a tactic like `by_contra` (or, if you're happy</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- to cheat, the full &quot;truth table&quot; tactic `tauto!`.</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">-- Try it without using these, and you'll get stuck!</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>theorem double_negation_elimination <span class="op">:</span> ¬ (¬ <span class="dt">P</span>) → <span class="dt">P</span> <span class="op">:=</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>begin</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  sorry,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>end</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>def <span class="dt">C</span> <span class="op">:</span> (<span class="dt">A</span> → β → <span class="dt">C</span>) → β → <span class="dt">A</span> → <span class="dt">C</span> <span class="op">:=</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>λg b a, g a b</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">/-!</span> <span class="dt">Let</span> <span class="ot">`D`</span> <span class="op">:=</span> <span class="ot">`g : A → β → C, b : β, a : A`</span><span class="op">.</span> <span class="dt">We</span> have</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------ Var    ---------- Var</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>         <span class="dt">D</span> ⊢ a <span class="op">:</span> <span class="dt">A</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------------------------ App    ---------- Var</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g a <span class="op">:</span> β → <span class="dt">C</span>                             <span class="dt">D</span> ⊢ b <span class="op">:</span> β</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------------------------------------------ App</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g a b <span class="op">:</span> <span class="dt">C</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">---------------------------------------------- Lam</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>, b <span class="op">:</span> β ⊢ (λa <span class="op">:</span> <span class="dt">A</span>, g a b) <span class="op">:</span> <span class="dt">A</span> → <span class="dt">C</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">----------------------------------------------------- Lam</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span> ⊢ (λ(b <span class="op">:</span> β) (a <span class="op">:</span> <span class="dt">A</span>), g a b) <span class="op">:</span> β → <span class="dt">A</span> → <span class="dt">C</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">--------------------------------------------------------------------- Lam</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    ⊢ (λ(g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>) (b <span class="op">:</span> β) (a <span class="op">:</span> <span class="dt">A</span>), g a b) <span class="op">:</span> (<span class="dt">A</span> → β → <span class="dt">C</span>) → β → <span class="dt">A</span> → <span class="dt">C</span> <span class="op">-/</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>def more_nonsense <span class="op">:</span> ((<span class="dt">A</span> → <span class="dt">B</span>) → <span class="dt">C</span> → <span class="dt">D</span>) → <span class="dt">C</span> → <span class="dt">B</span> → <span class="dt">D</span> <span class="op">:=</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>λ f c b, (f (λ (ha<span class="op">:</span><span class="dt">A</span> ),b) ) c</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    λ f c b</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="op">@</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>   <span class="op">/</span>  <span class="op">|</span>     \     </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  f (λha<span class="op">.</span>b)   c</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>λ f c b ⊢ f (λha<span class="op">.</span>b) c </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">--notice how we don't have (A-&gt;B) so we must build it by abstracting a lambda from B.</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">--proof theoretically, if we have a proof of B we can create a proof of A implies B.</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="dt">B</span> <span class="op">-|</span> (<span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>λb <span class="op">-|</span> λ(ha<span class="op">:</span><span class="dt">A</span> ),b</span></code></pre></div>
-<p><span class="math display">\[\cfrac{\vdash b}{ha \vdash b}\]</span></p>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pip <span class="at">--upgrade</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install octoprint</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-a</span> <span class="at">-G</span> tty pi</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-a</span> <span class="at">-G</span> dialout pi</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">~/OctoPrint/venv/bin/octoprint</span> serve</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#octoprint on http://rpi_IP_addr:5000</span></span></code></pre></div>
+<p>Optional: you can make a bash file to run octoprint</p>
+<div class="sourceCode" id="cb2" data-filename="octorun"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">!#/bin/bash</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">~/OctoPrint/venv/bin/octoprint</span> serve</span></code></pre></div>
+</section>
+<section id="rpi-voltage" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> rpi voltage</h2>
+<ul>
+<li>Make sure rpi is not undervolted <code>dmesg | grep -iC3 "voltage"</code>
+<ul>
+<li><code>-iC3</code> just means look 3 lines before and ahead</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="slicer" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Slicer</h1>
+<ul>
+<li>Most popular slicer is prusaslicer
+<ul>
+<li>For ender3pro : <a href="https://github.com/PavelTajdus/Ender-3-profily-pro-Prusa-Slicer/blob/master/PT-Slicer-Config-Ender-3-PLA.ini">github PavelTajdus prusaslicer config.ini</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="docker" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Docker</h1>
+<blockquote>
+<p>Unexpected error while reading serial port, please consult octoprint.log for details: OSError: ‘[Errno 25] Inappropriate ioctl for device’ @ comm.py:_readline:3997</p>
+</blockquote>
+</section>
 
         </div>
         <div id="footer">

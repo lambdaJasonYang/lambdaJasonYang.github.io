@@ -134,6 +134,9 @@
 <li><a href="#helices"><span class="toc-section-number">4.2</span> Helices</a></li>
 </ul></li>
 <li><a href="#random-problems"><span class="toc-section-number">5</span> Random Problems</a></li>
+<li><a href="#determinants"><span class="toc-section-number">6</span> Determinants</a></li>
+<li><a href="#geometric-series"><span class="toc-section-number">7</span> Geometric series</a></li>
+<li><a href="#min-max-by-exploiting-dot-product"><span class="toc-section-number">8</span> min max by exploiting dot product</a></li>
 </ul></div>
 <section id="fundamental-theorem-of-algebra" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Fundamental Theorem of Algebra</h1>
@@ -342,6 +345,39 @@ The binary operation multiply is applied to each pair then summed.</p>
 <h1 data-number="5"><span class="header-section-number">5</span> Random Problems</h1>
 <p><a href="https://artofproblemsolving.com/wiki/index.php/2021_AMC_12A_Problems/Problem_19">2021 AMC 12A</a></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Solve</span><span class="op">[</span><span class="fu">Sin</span><span class="op">[</span>(<span class="fu">Pi</span><span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span><span class="fu">Cos</span><span class="op">[</span><span class="fu">x</span><span class="op">]]</span><span class="ex">==</span><span class="fu">Cos</span><span class="op">[</span>(<span class="fu">Pi</span><span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span><span class="fu">Sin</span><span class="op">[</span><span class="fu">x</span><span class="op">]]</span> &amp;&amp; <span class="fu">x</span> &gt;<span class="ex">=</span> <span class="dv">0</span> &amp;&amp; <span class="fu">Pi</span> &gt;<span class="ex">=</span> <span class="fu">x</span><span class="op">,</span><span class="fu">x</span><span class="op">,</span><span class="bu">Reals</span><span class="op">]</span></span></code></pre></div>
+</section>
+<section id="determinants" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Determinants</h1>
+<ul>
+<li>Determinant of matrix is thought of as volume changed when the matrix is applied.</li>
+<li>Negative determinant will flip an image</li>
+<li>Determinant of identity matrix is 1.</li>
+<li>Matrix <strong>DO NOT</strong> have inverses if determinant is 0</li>
+</ul>
+<p><span class="math display">\[ Ax = b \Rightarrow A^{-1}Ax = A^{-1} b\]</span></p>
+<p>Obviously <strong>requires Inverse of <span class="math inline">\(A\)</span> to Exist</strong><br />
+Inverse of matrix exist when Determinant is 0.</p>
+</section>
+<section id="geometric-series" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Geometric series</h1>
+<p><span class="math display">\[a^n - b^n = a^{n-1} + a^{n-1}b + ... + ab^{n-2} + b^{n-1} = GeomSeries(start=a^{n-1},ratio=\frac{b}{a}^n) = \frac{a^{n-1}-a^{n-1}\frac{b}{a}^n}{1-\frac{b}{a}}=\frac{a^n-b^n}{a-b}\]</span></p>
+<p><span class="math display">\[a^n-b^n = (a-b)(a^n - b^n = a^{n-1} + a^{n-1}b + ... + ab^{n-2} + b^{n-1})\]</span></p>
+</section>
+<section id="min-max-by-exploiting-dot-product" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> min max by exploiting dot product</h1>
+<p><span class="math display">\[f(x,y) = 2sin x cos y + 3 sin x sin y + 6 cos x \]</span></p>
+<p>Find the max and min output value of f.</p>
+<ol type="1">
+<li>rewrite function as dot product, <span class="math inline">\(f(x,y) = (2\ 3\ 6) \cdot (\sin x cos y\quad sin x sin y\quad cos x)\)</span>
+<ul>
+<li>Goal is to maximize the dotproduct</li>
+</ul></li>
+</ol>
+<p>REMEMBER: dotproduct = <span class="math inline">\(A \cdot B = |A| |B| sin(\angle AB)\)</span></p>
+<ol start="2" type="1">
+<li>max value of dot product is when angle is 0 AKA parallel in the same direction. Now all we do is add the length of each vector. <span class="math inline">\(\sqrt{2^2 + 3^2 + 6^2} * \sqrt{\sin^2 x cos^2 y + sin^2 x sin^2 y + cos^2 x} = 7 * 1 = 7\)</span></li>
+<li>min value is when angle is 180 AKA two vectors are parallel in opposite direction, which is -7.</li>
+</ol>
 </section>
 
         </div>

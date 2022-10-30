@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Lean Proof trees to Types</title>
+        <title>Jason Yang - Setup Kubernetes Cluster</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,68 +103,79 @@
         </div>
 
         <div id="content">
-            <h1>Lean Proof trees to Types</h1>
+            <h1>Setup Kubernetes Cluster</h1>
             
 
             <div class="info">
-    Posted on November 11, 2021
+    Posted on August 15, 2022
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'lean'." href="../tags/lean.html">lean</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<div id="TOC"></div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>variables (<span class="dt">P</span> <span class="dt">Q</span> <span class="dt">R</span> <span class="op">:</span> <span class="dt">Prop</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Here is a proof which does not use tactics at all, but uses lambda calculus.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- It is called a &quot;term mode&quot; proof. We will not be discussing term mode</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- much in this course. It is a cool way to do basic logic proofs, but</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- it does not scale well in practice.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>example <span class="op">:</span> <span class="dt">P</span> → ¬ (¬ <span class="dt">P</span>) <span class="op">:=</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>λ hP hnP, hnP hP</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- This one cannot be proved using constructive mathematics!</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- You _have_ to use a tactic like `by_contra` (or, if you're happy</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- to cheat, the full &quot;truth table&quot; tactic `tauto!`.</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">-- Try it without using these, and you'll get stuck!</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>theorem double_negation_elimination <span class="op">:</span> ¬ (¬ <span class="dt">P</span>) → <span class="dt">P</span> <span class="op">:=</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>begin</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  sorry,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>end</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>def <span class="dt">C</span> <span class="op">:</span> (<span class="dt">A</span> → β → <span class="dt">C</span>) → β → <span class="dt">A</span> → <span class="dt">C</span> <span class="op">:=</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>λg b a, g a b</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">/-!</span> <span class="dt">Let</span> <span class="ot">`D`</span> <span class="op">:=</span> <span class="ot">`g : A → β → C, b : β, a : A`</span><span class="op">.</span> <span class="dt">We</span> have</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------ Var    ---------- Var</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>         <span class="dt">D</span> ⊢ a <span class="op">:</span> <span class="dt">A</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------------------------ App    ---------- Var</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g a <span class="op">:</span> β → <span class="dt">C</span>                             <span class="dt">D</span> ⊢ b <span class="op">:</span> β</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------------------------------------------ App</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g a b <span class="op">:</span> <span class="dt">C</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">---------------------------------------------- Lam</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>, b <span class="op">:</span> β ⊢ (λa <span class="op">:</span> <span class="dt">A</span>, g a b) <span class="op">:</span> <span class="dt">A</span> → <span class="dt">C</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">----------------------------------------------------- Lam</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span> ⊢ (λ(b <span class="op">:</span> β) (a <span class="op">:</span> <span class="dt">A</span>), g a b) <span class="op">:</span> β → <span class="dt">A</span> → <span class="dt">C</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">--------------------------------------------------------------------- Lam</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    ⊢ (λ(g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>) (b <span class="op">:</span> β) (a <span class="op">:</span> <span class="dt">A</span>), g a b) <span class="op">:</span> (<span class="dt">A</span> → β → <span class="dt">C</span>) → β → <span class="dt">A</span> → <span class="dt">C</span> <span class="op">-/</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>def more_nonsense <span class="op">:</span> ((<span class="dt">A</span> → <span class="dt">B</span>) → <span class="dt">C</span> → <span class="dt">D</span>) → <span class="dt">C</span> → <span class="dt">B</span> → <span class="dt">D</span> <span class="op">:=</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>λ f c b, (f (λ (ha<span class="op">:</span><span class="dt">A</span> ),b) ) c</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    λ f c b</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="op">@</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>   <span class="op">/</span>  <span class="op">|</span>     \     </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  f (λha<span class="op">.</span>b)   c</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>λ f c b ⊢ f (λha<span class="op">.</span>b) c </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">--notice how we don't have (A-&gt;B) so we must build it by abstracting a lambda from B.</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">--proof theoretically, if we have a proof of B we can create a proof of A implies B.</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="dt">B</span> <span class="op">-|</span> (<span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>λb <span class="op">-|</span> λ(ha<span class="op">:</span><span class="dt">A</span> ),b</span></code></pre></div>
-<p><span class="math display">\[\cfrac{\vdash b}{ha \vdash b}\]</span></p>
+<div id="TOC"><ul>
+<li><a href="#install-docker"><span class="toc-section-number">1</span> Install docker</a></li>
+<li><a href="#install-kubernetes-master-node"><span class="toc-section-number">2</span> Install kubernetes master node</a></li>
+<li><a href="#kube-commands"><span class="toc-section-number">3</span> Kube commands</a>
+<ul>
+<li><a href="#stopping-kubernetes-cluster"><span class="toc-section-number">3.1</span> Stopping Kubernetes Cluster</a></li>
+<li><a href="#starting-kubernetes-cluster"><span class="toc-section-number">3.2</span> Starting Kubernetes Cluster</a></li>
+</ul></li>
+<li><a href="#kube-worker"><span class="toc-section-number">4</span> Kube worker</a></li>
+<li><a href="#autocomplete-kube-yaml"><span class="toc-section-number">5</span> Autocomplete kube yaml</a></li>
+</ul></div>
+<section id="install-docker" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Install docker</h1>
+</section>
+<section id="install-kubernetes-master-node" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Install kubernetes master node</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sfL</span> https://get.k3s.io <span class="kw">|</span> <span class="fu">sh</span> <span class="at">-</span></span></code></pre></div>
+<p>You will encounter an error:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode .txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>WARN[0000] Unable to read /etc/rancher/k3s/k3s.yaml, please start server with --write-kubeconfig-mode to modify kube config permissions </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>error: error loading config file &quot;/etc/rancher/k3s/k3s.yaml&quot;: open /etc/rancher/k3s/k3s.yaml: permission denied</span></code></pre></div>
+<p>If on homeserver, just follow instructions below, but note that doing do exposes the k3s.yaml file to other users on the server.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sh <span class="at">-c</span> <span class="st">&quot;echo &quot;</span>K3S_KUBECONFIG_MODE=<span class="dt">\&quot;</span>644<span class="dt">\&quot;</span><span class="st">&quot; &gt;&gt; /etc/systemd/system/k3s.service.env&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart k3s</span></code></pre></div>
+<ul>
+<li>kubectl, crictl, ctr, k3s-killall.sh, and k3s-uninstall.sh are installed</li>
+<li>kubeconfig is in /etc/rancher/k3s/k3s.yaml</li>
+</ul>
+</section>
+<section id="kube-commands" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Kube commands</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> get nodes</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># NAME     STATUS   ROLES                  AGE     VERSION</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># debian   Ready    control-plane,master   8m19s   v1.24.6+k3s1</span></span></code></pre></div>
+<section id="stopping-kubernetes-cluster" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Stopping Kubernetes Cluster</h2>
+<ul>
+<li>The file came installed in your <code>/usr/local/bin/k3s-killall.sh</code></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">k3s-killall.sh</span></span></code></pre></div>
+<p>WARN: <code>systemctl stop k3s</code> will not stop the pods/containers.</p>
+</section>
+<section id="starting-kubernetes-cluster" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Starting Kubernetes Cluster</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">k3s</span> server</span></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart k3s</span></code></pre></div>
+</section>
+</section>
+<section id="kube-worker" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Kube worker</h1>
+<ul>
+<li>get token</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /var/lib/rancher/k3s/server/node-token</span></code></pre></div>
+</section>
+<section id="autocomplete-kube-yaml" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Autocomplete kube yaml</h1>
+<p>install kubernetes support on vscode.<br />
+type <code>Kubernetes Deployment</code></p>
+</section>
 
         </div>
         <div id="footer">

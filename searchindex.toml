@@ -2,7 +2,9 @@
 
 files = [
 
-{path = "posts/Misc/2022-08-15-Ender3Pro.md", url = "/posts/2022-08-15-Ender3Pro.html", title = "Ender 3 Pro 3d printing setup"},
+{path = "posts/Misc/2022-08-15-LoadTesting.md", url = "/posts/2022-08-15-LoadTesting.html", title = "Load Testing Vegeta"},
+
+{path = "posts/DevOp/2022-08-15-KubernetesSetup.md", url = "/posts/2022-08-15-KubernetesSetup.html", title = "Setup Kubernetes Cluster"},
 
 {path = "posts/Misc/2022-04-09-SetupCoq.md", url = "/posts/2022-04-09-SetupCoq.html", title = "Coq Setup"},
 
@@ -26,21 +28,23 @@ files = [
 
 {path = "posts/TypeTheory/2021-11-11-TypeTheory.md", url = "/posts/2021-11-11-TypeTheory.html", title = "Quick Type theory"},
 
+{path = "posts/TypeTheory/2021-11-11-OperationalCalculus.md", url = "/posts/2021-11-11-OperationalCalculus.html", title = "Operational Calculus"},
+
 {path = "posts/TypeTheory/2021-11-11-Lambdas.md", url = "/posts/2021-11-11-Lambdas.html", title = "Lambdas abstractions Types, Term building"},
 
 {path = "posts/Lean/2021-11-11-leanmakefile.md", url = "/posts/2021-11-11-leanmakefile.html", title = "lean makefile"},
 
-{path = "posts/Lean/2021-11-11-VeryLongLean.md", url = "/posts/2021-11-11-VeryLongLean.html", title = "Very Long Lean"},
+{path = "posts/Lean/2021-11-11-VeryLongLean.md", url = "/posts/2021-11-11-VeryLongLean.html", title = "Lean Proof trees to Types"},
 
-{path = "posts/Lean/2021-11-11-TAPLUntypedArith.md", url = "/posts/2021-11-11-TAPLUntypedArith.html", title = "TAPL Untyped Arith"},
+{path = "posts/Lean/2021-11-11-TAPLUntypedArith.md", url = "/posts/2021-11-11-TAPLUntypedArith.html", title = "TAPL Untyped Arith Haskell"},
 
-{path = "posts/Lean/2021-11-11-LogicalFoundationNotes.md", url = "/posts/2021-11-11-LogicalFoundationNotes.html", title = "Logical Foundations notes"},
+{path = "posts/Lean/2021-11-11-LogicalFoundationNotes.md", url = "/posts/2021-11-11-LogicalFoundationNotes.html", title = "Logical Foundations notes Coq + Lean"},
 
 {path = "posts/Lean/2021-11-11-LeanType.md", url = "/posts/2021-11-11-LeanType.html", title = "Lean Simple Prog Lang implementation"},
 
-{path = "posts/Lean/2021-11-11-LeanProver.md", url = "/posts/2021-11-11-LeanProver.html", title = "Lean"},
+{path = "posts/Lean/2021-11-11-LeanProver.md", url = "/posts/2021-11-11-LeanProver.html", title = "Lean 3"},
 
-{path = "posts/Lean/2021-11-11-LeanAgain.md", url = "/posts/2021-11-11-LeanAgain.html", title = "Very Long Lean - Dependent Type"},
+{path = "posts/Lean/2021-11-11-LeanAgain.md", url = "/posts/2021-11-11-LeanAgain.html", title = "Lean - Dependent Type"},
 
 {path = "posts/Lean/2021-11-11-IntroLean3.md", url = "/posts/2021-11-11-IntroLean3.html", title = "Intro Lean 3"},
 
@@ -256,6 +260,8 @@ files = [
 
 {path = "posts/QuickCode/2021-02-20-QuickGo.md", url = "/posts/2021-02-20-QuickGo.html", title = "Quick Golang 1"},
 
+{path = "posts/QuickCode/2021-02-20-QuickErlang.md", url = "/posts/2021-02-20-QuickErlang.html", title = "Quick Erlang"},
+
 {path = "posts/QuickCode/2021-02-20-QuickASP.md", url = "/posts/2021-02-20-QuickASP.html", title = "Quick ASP"},
 
 {path = "posts/QuickCode/2021-02-20-PythonSnips.md", url = "/posts/2021-02-20-PythonSnips.html", title = "Python Snippets"},
@@ -274,6 +280,12 @@ files = [
 
 {path = "posts/QuickCode/2020-09-01-LitReview.md", url = "/posts/2020-09-01-LitReview.html", title = "Literature review"},
 
+{path = "posts/Misc/2020-08-15-Sewing.md", url = "/posts/2020-08-15-Sewing.html", title = "Sewing machines"},
+
+{path = "posts/Misc/2020-08-15-Screens.md", url = "/posts/2020-08-15-Screens.html", title = "Screens"},
+
+{path = "posts/Misc/2020-08-15-Ender3Pro.md", url = "/posts/2020-08-15-Ender3Pro.html", title = "Ender 3 Pro 3d printing setup"},
+
 {path = "posts/Economics/2020-07-07-Cointegration.md", url = "/posts/2020-07-07-Cointegration.html", title = "Cointegration and Spreads"},
 
 {path = "posts/Induction/2020-06-25-DownwardInduction.md", url = "/posts/2020-06-25-DownwardInduction.html", title = "Recursive Code for Downward Induction"},
@@ -282,13 +294,13 @@ files = [
 
 {path = "posts/Statistics/2020-04-20-LookaheadBias.md", url = "/posts/2020-04-20-LookaheadBias.html", title = "Lookahead Bias"},
 
-{path = "posts/QuickCode/2020-04-20-Kubernetes.md", url = "/posts/2020-04-20-Kubernetes.html", title = "Kubernetes"},
+{path = "posts/DevOp/2020-04-20-Kubernetes.md", url = "/posts/2020-04-20-Kubernetes.html", title = "Kubernetes"},
 
-{path = "posts/QuickCode/2020-04-20-Docker3.md", url = "/posts/2020-04-20-Docker3.html", title = "Docker Compose"},
+{path = "posts/DevOp/2020-04-20-Docker3.md", url = "/posts/2020-04-20-Docker3.html", title = "Docker Compose"},
 
-{path = "posts/QuickCode/2020-04-20-Docker2.md", url = "/posts/2020-04-20-Docker2.html", title = "Docker Snippets"},
+{path = "posts/DevOp/2020-04-20-Docker2.md", url = "/posts/2020-04-20-Docker2.html", title = "Docker Snippets"},
 
-{path = "posts/QuickCode/2020-04-20-Docker.md", url = "/posts/2020-04-20-Docker.html", title = "Docker"},
+{path = "posts/DevOp/2020-04-20-Docker.md", url = "/posts/2020-04-20-Docker.html", title = "Docker"},
 
 {path = "posts/Statistics/2020-04-09-Kolmogorov-Smirnov.md", url = "/posts/2020-04-09-Kolmogorov-Smirnov.html", title = "Testing for normal dist with Kolmogorov-Smirnov"},
 
@@ -394,6 +406,8 @@ files = [
 
 {path = "posts/Misc/2018-01-05-RandTips.md", url = "/posts/2018-01-05-RandTips.html", title = "Random Shortcuts"},
 
+{path = "posts/Misc/2018-01-05-Psychology.md", url = "/posts/2018-01-05-Psychology.html", title = "Transactional Psychology"},
+
 {path = "posts/Misc/2018-01-05-Politics.md", url = "/posts/2018-01-05-Politics.html", title = "Economic Report"},
 
 {path = "posts/AppliedTechniques/2018-01-05-MarkovChain.md", url = "/posts/2018-01-05-MarkovChain.html", title = "Markov Chain and State machines"},
@@ -417,6 +431,8 @@ files = [
 {path = "posts/CyberSec/2017-07-15-pyFTP.md", url = "/posts/2017-07-15-pyFTP.html", title = "python FTP SMTP POP3 IMAP DNS"},
 
 {path = "posts/Concurrency/2017-07-15-PythonConcurrency.md", url = "/posts/2017-07-15-PythonConcurrency.html", title = "Python Concurrency"},
+
+{path = "posts/Misc/2017-01-01-Kant/2017-01-01-Kant.md", url = "/posts/2017-01-01-Kant.html", title = "Philosophy"},
 
 {path = "posts/2016-07-07-LinReg/2016-07-07-LinReg.md", url = "/posts/2016-07-07-LinReg.html", title = "Linear Regression and Matrices"},
 
@@ -566,7 +582,7 @@ files = [
 
 {path = "posts/OtherMath/2015-07-01-Primes.md", url = "/posts/2015-07-01-Primes.html", title = "Primes"},
 
-{path = "posts/OtherMath/2015-07-01-FunctionalEq.md", url = "/posts/2015-07-01-FunctionalEq.html", title = "Functional equations and why we need to verify solutions"},
+{path = "posts/OtherMath/2015-07-01-FunctionalEq.md", url = "/posts/2015-07-01-FunctionalEq.html", title = "Functional equations"},
 
 {path = "posts/OtherMath/2015-07-01-Discrete.md", url = "/posts/2015-07-01-Discrete.html", title = "Discrete Math"},
 

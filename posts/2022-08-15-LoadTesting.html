@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Lean Proof trees to Types</title>
+        <title>Jason Yang - Load Testing Vegeta</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,68 +103,64 @@
         </div>
 
         <div id="content">
-            <h1>Lean Proof trees to Types</h1>
+            <h1>Load Testing Vegeta</h1>
             
 
             <div class="info">
-    Posted on November 11, 2021
+    Posted on August 15, 2022
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'lean'." href="../tags/lean.html">lean</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
     
 </div>
-<div id="TOC"></div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>variables (<span class="dt">P</span> <span class="dt">Q</span> <span class="dt">R</span> <span class="op">:</span> <span class="dt">Prop</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Here is a proof which does not use tactics at all, but uses lambda calculus.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- It is called a &quot;term mode&quot; proof. We will not be discussing term mode</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- much in this course. It is a cool way to do basic logic proofs, but</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- it does not scale well in practice.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>example <span class="op">:</span> <span class="dt">P</span> → ¬ (¬ <span class="dt">P</span>) <span class="op">:=</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>λ hP hnP, hnP hP</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- This one cannot be proved using constructive mathematics!</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- You _have_ to use a tactic like `by_contra` (or, if you're happy</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- to cheat, the full &quot;truth table&quot; tactic `tauto!`.</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">-- Try it without using these, and you'll get stuck!</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>theorem double_negation_elimination <span class="op">:</span> ¬ (¬ <span class="dt">P</span>) → <span class="dt">P</span> <span class="op">:=</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>begin</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  sorry,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>end</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>def <span class="dt">C</span> <span class="op">:</span> (<span class="dt">A</span> → β → <span class="dt">C</span>) → β → <span class="dt">A</span> → <span class="dt">C</span> <span class="op">:=</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>λg b a, g a b</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">/-!</span> <span class="dt">Let</span> <span class="ot">`D`</span> <span class="op">:=</span> <span class="ot">`g : A → β → C, b : β, a : A`</span><span class="op">.</span> <span class="dt">We</span> have</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------ Var    ---------- Var</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>         <span class="dt">D</span> ⊢ a <span class="op">:</span> <span class="dt">A</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------------------------ App    ---------- Var</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g a <span class="op">:</span> β → <span class="dt">C</span>                             <span class="dt">D</span> ⊢ b <span class="op">:</span> β</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">------------------------------------------------------ App</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span> ⊢ g a b <span class="op">:</span> <span class="dt">C</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">---------------------------------------------- Lam</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>, b <span class="op">:</span> β ⊢ (λa <span class="op">:</span> <span class="dt">A</span>, g a b) <span class="op">:</span> <span class="dt">A</span> → <span class="dt">C</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">----------------------------------------------------- Lam</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span> ⊢ (λ(b <span class="op">:</span> β) (a <span class="op">:</span> <span class="dt">A</span>), g a b) <span class="op">:</span> β → <span class="dt">A</span> → <span class="dt">C</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">--------------------------------------------------------------------- Lam</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    ⊢ (λ(g <span class="op">:</span> <span class="dt">A</span> → β → <span class="dt">C</span>) (b <span class="op">:</span> β) (a <span class="op">:</span> <span class="dt">A</span>), g a b) <span class="op">:</span> (<span class="dt">A</span> → β → <span class="dt">C</span>) → β → <span class="dt">A</span> → <span class="dt">C</span> <span class="op">-/</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>def more_nonsense <span class="op">:</span> ((<span class="dt">A</span> → <span class="dt">B</span>) → <span class="dt">C</span> → <span class="dt">D</span>) → <span class="dt">C</span> → <span class="dt">B</span> → <span class="dt">D</span> <span class="op">:=</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>λ f c b, (f (λ (ha<span class="op">:</span><span class="dt">A</span> ),b) ) c</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    λ f c b</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="op">@</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>   <span class="op">/</span>  <span class="op">|</span>     \     </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  f (λha<span class="op">.</span>b)   c</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>λ f c b ⊢ f (λha<span class="op">.</span>b) c </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">--notice how we don't have (A-&gt;B) so we must build it by abstracting a lambda from B.</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">--proof theoretically, if we have a proof of B we can create a proof of A implies B.</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="dt">B</span> <span class="op">-|</span> (<span class="dt">A</span> <span class="ot">-&gt;</span> <span class="dt">B</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>λb <span class="op">-|</span> λ(ha<span class="op">:</span><span class="dt">A</span> ),b</span></code></pre></div>
-<p><span class="math display">\[\cfrac{\vdash b}{ha \vdash b}\]</span></p>
+<div id="TOC"><ul>
+<li><a href="#install-vegeta"><span class="toc-section-number">1</span> Install vegeta</a></li>
+<li><a href="#load-testing"><span class="toc-section-number">2</span> Load testing</a>
+<ul>
+<li><a href="#hits-per-second"><span class="toc-section-number">2.1</span> 100 hits per second</a></li>
+<li><a href="#as-much-as-possible-hits"><span class="toc-section-number">2.2</span> As much as possible hits</a></li>
+</ul></li>
+<li><a href="#plotting"><span class="toc-section-number">3</span> Plotting</a></li>
+<li><a href="#report"><span class="toc-section-number">4</span> Report</a></li>
+</ul></div>
+<section id="install-vegeta" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Install vegeta</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> Vegeta</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Vegeta</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/tsenart/vegeta/releases/download/v12.8.4/vegeta_12.8.4_linux_amd64.tar.gz</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> vegeta_12.8.4_linux_amd64.tar.gz </span></code></pre></div>
+</section>
+<section id="load-testing" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Load testing</h1>
+<section id="hits-per-second" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> 100 hits per second</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;GET http://192.168.1.245:3300&quot;</span> <span class="kw">|</span> <span class="ex">./vegeta</span> attack <span class="at">-name</span><span class="op">=</span>bleh <span class="at">-rate</span><span class="op">=</span>100 <span class="at">-duration</span><span class="op">=</span>5s <span class="op">&gt;</span> results.100qps.bin</span></code></pre></div>
+</section>
+<section id="as-much-as-possible-hits" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> As much as possible hits</h2>
+<ul>
+<li>Set <code>-rate=0</code> representing infinity. Set <code>max-workers=100</code> to num of virtual threads.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;GET http://192.168.1.245:3300&quot;</span> <span class="kw">|</span> <span class="ex">./vegeta</span> attack <span class="at">-name</span><span class="op">=</span>1000qps <span class="at">-rate</span><span class="op">=</span>0 <span class="at">-duration</span><span class="op">=</span>15s <span class="at">-max-workers</span><span class="op">=</span>100</span></code></pre></div>
+</section>
+</section>
+<section id="plotting" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Plotting</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./vegeta</span> plot results.100qps.bin <span class="op">&gt;</span> plot.html</span></code></pre></div>
+</section>
+<section id="report" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Report</h1>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./vegeta</span> report results.100qps.bin</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Requests      [total, rate, throughput]         405037, 6696.28, 5508.40</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Duration      [total, attack, wait]             1m7s, 1m0s, 6.869s</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Latencies     [min, mean, 50, 90, 95, 99, max]  1.101ms, 6.598s, 4.256s, 16.925s, 21.484s, 26.89s, 51.645s</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Bytes In      [total, mean]                     5936336, 14.66</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Bytes Out     [total, mean]                     0, 0.00</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Success       [ratio]                           91.60%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Status Codes  [code:count]                      0:34016  200:371021</span></span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">

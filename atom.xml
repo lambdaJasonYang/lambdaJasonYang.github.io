@@ -10,9 +10,9 @@
     </author>
     <updated>2022-08-15T00:00:00Z</updated>
     <entry>
-    <title>Ender 3 Pro 3d printing setup</title>
-    <link href="https://userjy.github.io/posts/2022-08-15-Ender3Pro.html" />
-    <id>https://userjy.github.io/posts/2022-08-15-Ender3Pro.html</id>
+    <title>Load Testing Vegeta</title>
+    <link href="https://userjy.github.io/posts/2022-08-15-LoadTesting.html" />
+    <id>https://userjy.github.io/posts/2022-08-15-LoadTesting.html</id>
     <published>2022-08-15T00:00:00Z</published>
     <updated>2022-08-15T00:00:00Z</updated>
     <summary type="html"><![CDATA[<div class="info">
@@ -25,70 +25,128 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#summary"><span class="toc-section-number">1</span> Summary</a></li>
-<li><a href="#setup"><span class="toc-section-number">2</span> Setup</a>
+<li><a href="#install-vegeta"><span class="toc-section-number">1</span> Install vegeta</a></li>
+<li><a href="#load-testing"><span class="toc-section-number">2</span> Load testing</a>
 <ul>
-<li><a href="#wifi"><span class="toc-section-number">2.1</span> Wifi</a></li>
-<li><a href="#rpi-voltage"><span class="toc-section-number">2.2</span> rpi voltage</a></li>
+<li><a href="#hits-per-second"><span class="toc-section-number">2.1</span> 100 hits per second</a></li>
+<li><a href="#as-much-as-possible-hits"><span class="toc-section-number">2.2</span> As much as possible hits</a></li>
 </ul></li>
-<li><a href="#slicer"><span class="toc-section-number">3</span> Slicer</a></li>
-<li><a href="#docker"><span class="toc-section-number">4</span> Docker</a></li>
+<li><a href="#plotting"><span class="toc-section-number">3</span> Plotting</a></li>
+<li><a href="#report"><span class="toc-section-number">4</span> Report</a></li>
 </ul></div>
-<section id="summary" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Summary</h1>
+<section id="install-vegeta" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Install vegeta</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> Vegeta</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Vegeta</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/tsenart/vegeta/releases/download/v12.8.4/vegeta_12.8.4_linux_amd64.tar.gz</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> vegeta_12.8.4_linux_amd64.tar.gz </span></code></pre></div>
+</section>
+<section id="load-testing" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Load testing</h1>
+<section id="hits-per-second" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> 100 hits per second</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;GET http://192.168.1.245:3300&quot;</span> <span class="kw">|</span> <span class="ex">./vegeta</span> attack <span class="at">-name</span><span class="op">=</span>bleh <span class="at">-rate</span><span class="op">=</span>100 <span class="at">-duration</span><span class="op">=</span>5s <span class="op">&gt;</span> results.100qps.bin</span></code></pre></div>
+</section>
+<section id="as-much-as-possible-hits" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> As much as possible hits</h2>
 <ul>
-<li><code>*.stl</code> from thingiverse -&gt; slicing into <code>*.gcode</code> (3d mechanical instructions)</li>
-<li>octoprint doesnt work as docker container on rpi debian distro but does work as a normal server</li>
+<li>Set <code>-rate=0</code> representing infinity. Set <code>max-workers=100</code> to num of virtual threads.</li>
 </ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;GET http://192.168.1.245:3300&quot;</span> <span class="kw">|</span> <span class="ex">./vegeta</span> attack <span class="at">-name</span><span class="op">=</span>1000qps <span class="at">-rate</span><span class="op">=</span>0 <span class="at">-duration</span><span class="op">=</span>15s <span class="at">-max-workers</span><span class="op">=</span>100</span></code></pre></div>
 </section>
-<section id="setup" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Setup</h1>
-<section id="wifi" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> Wifi</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">--version</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-pip python3-dev python3-setuptools python3-venv git libyaml-dev build-essential</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> OctoPrint <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> OctoPrint</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv venv</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> venv/bin/activate</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pip <span class="at">--upgrade</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install octoprint</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-a</span> <span class="at">-G</span> tty pi</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-a</span> <span class="at">-G</span> dialout pi</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">~/OctoPrint/venv/bin/octoprint</span> serve</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#octoprint on http://rpi_IP_addr:5000</span></span></code></pre></div>
-<p>Optional: you can make a bash file to run octoprint</p>
-<div class="sourceCode" id="cb2" data-filename="octorun"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">!#/bin/bash</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">~/OctoPrint/venv/bin/octoprint</span> serve</span></code></pre></div>
 </section>
-<section id="rpi-voltage" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> rpi voltage</h2>
+<section id="plotting" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Plotting</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./vegeta</span> plot results.100qps.bin <span class="op">&gt;</span> plot.html</span></code></pre></div>
+</section>
+<section id="report" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Report</h1>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./vegeta</span> report results.100qps.bin</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Requests      [total, rate, throughput]         405037, 6696.28, 5508.40</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Duration      [total, attack, wait]             1m7s, 1m0s, 6.869s</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Latencies     [min, mean, 50, 90, 95, 99, max]  1.101ms, 6.598s, 4.256s, 16.925s, 21.484s, 26.89s, 51.645s</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Bytes In      [total, mean]                     5936336, 14.66</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Bytes Out     [total, mean]                     0, 0.00</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Success       [ratio]                           91.60%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Status Codes  [code:count]                      0:34016  200:371021</span></span></code></pre></div>
+</section>
+]]></summary>
+</entry>
+<entry>
+    <title>Setup Kubernetes Cluster</title>
+    <link href="https://userjy.github.io/posts/2022-08-15-KubernetesSetup.html" />
+    <id>https://userjy.github.io/posts/2022-08-15-KubernetesSetup.html</id>
+    <published>2022-08-15T00:00:00Z</published>
+    <updated>2022-08-15T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on August 15, 2022
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged &#39;prog&#39;." href="/tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#install-docker"><span class="toc-section-number">1</span> Install docker</a></li>
+<li><a href="#install-kubernetes-master-node"><span class="toc-section-number">2</span> Install kubernetes master node</a></li>
+<li><a href="#kube-commands"><span class="toc-section-number">3</span> Kube commands</a>
 <ul>
-<li>Make sure rpi is not undervolted <code>dmesg | grep -iC3 "voltage"</code>
-<ul>
-<li><code>-iC3</code> just means look 3 lines before and ahead</li>
+<li><a href="#stopping-kubernetes-cluster"><span class="toc-section-number">3.1</span> Stopping Kubernetes Cluster</a></li>
+<li><a href="#starting-kubernetes-cluster"><span class="toc-section-number">3.2</span> Starting Kubernetes Cluster</a></li>
 </ul></li>
+<li><a href="#kube-worker"><span class="toc-section-number">4</span> Kube worker</a></li>
+<li><a href="#autocomplete-kube-yaml"><span class="toc-section-number">5</span> Autocomplete kube yaml</a></li>
+</ul></div>
+<section id="install-docker" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Install docker</h1>
+</section>
+<section id="install-kubernetes-master-node" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Install kubernetes master node</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sfL</span> https://get.k3s.io <span class="kw">|</span> <span class="fu">sh</span> <span class="at">-</span></span></code></pre></div>
+<p>You will encounter an error:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode .txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>WARN[0000] Unable to read /etc/rancher/k3s/k3s.yaml, please start server with --write-kubeconfig-mode to modify kube config permissions </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>error: error loading config file &quot;/etc/rancher/k3s/k3s.yaml&quot;: open /etc/rancher/k3s/k3s.yaml: permission denied</span></code></pre></div>
+<p>If on homeserver, just follow instructions below, but note that doing do exposes the k3s.yaml file to other users on the server.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sh <span class="at">-c</span> <span class="st">&quot;echo &quot;</span>K3S_KUBECONFIG_MODE=<span class="dt">\&quot;</span>644<span class="dt">\&quot;</span><span class="st">&quot; &gt;&gt; /etc/systemd/system/k3s.service.env&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart k3s</span></code></pre></div>
+<ul>
+<li>kubectl, crictl, ctr, k3s-killall.sh, and k3s-uninstall.sh are installed</li>
+<li>kubeconfig is in /etc/rancher/k3s/k3s.yaml</li>
 </ul>
 </section>
-</section>
-<section id="slicer" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Slicer</h1>
+<section id="kube-commands" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Kube commands</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> get nodes</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># NAME     STATUS   ROLES                  AGE     VERSION</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># debian   Ready    control-plane,master   8m19s   v1.24.6+k3s1</span></span></code></pre></div>
+<section id="stopping-kubernetes-cluster" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Stopping Kubernetes Cluster</h2>
 <ul>
-<li>Most popular slicer is prusaslicer
-<ul>
-<li>For ender3pro : <a href="https://github.com/PavelTajdus/Ender-3-profily-pro-Prusa-Slicer/blob/master/PT-Slicer-Config-Ender-3-PLA.ini">github PavelTajdus prusaslicer config.ini</a></li>
-</ul></li>
+<li>The file came installed in your <code>/usr/local/bin/k3s-killall.sh</code></li>
 </ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">k3s-killall.sh</span></span></code></pre></div>
+<p>WARN: <code>systemctl stop k3s</code> will not stop the pods/containers.</p>
 </section>
-<section id="docker" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Docker</h1>
-<blockquote>
-<p>Unexpected error while reading serial port, please consult octoprint.log for details: OSError: ‘[Errno 25] Inappropriate ioctl for device’ @ comm.py:_readline:3997</p>
-</blockquote>
+<section id="starting-kubernetes-cluster" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Starting Kubernetes Cluster</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">k3s</span> server</span></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart k3s</span></code></pre></div>
+</section>
+</section>
+<section id="kube-worker" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Kube worker</h1>
+<ul>
+<li>get token</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /var/lib/rancher/k3s/server/node-token</span></code></pre></div>
+</section>
+<section id="autocomplete-kube-yaml" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Autocomplete kube yaml</h1>
+<p>install kubernetes support on vscode.<br />
+type <code>Kubernetes Deployment</code></p>
 </section>
 ]]></summary>
 </entry>
@@ -1437,119 +1495,6 @@ log<sub>n</sub>k <code>log~n~k</code><br />
 <span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>  srcDir <span class="op">:=</span> <span class="st">&quot;.&quot;</span> <span class="co">--entry points to ./srcDir/./Main.lean</span></span>
 <span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-</section>
-]]></summary>
-</entry>
-<entry>
-    <title>Navigate Lean Repo</title>
-    <link href="https://userjy.github.io/posts/2021-11-12-LeanRepo.html" />
-    <id>https://userjy.github.io/posts/2021-11-12-LeanRepo.html</id>
-    <published>2021-11-12T00:00:00Z</published>
-    <updated>2021-11-12T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on November 12, 2021
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged &#39;lean&#39;." href="/tags/lean.html">lean</a>, <a title="All pages tagged &#39;mathcs&#39;." href="/tags/mathcs.html">mathcs</a>
-    
-</div>
-<div id="TOC"><ul>
-<li><a href="#std"><span class="toc-section-number">1</span> Std</a></li>
-<li><a href="#c-library"><span class="toc-section-number">2</span> C library</a></li>
-<li><a href="#lean-ffi"><span class="toc-section-number">3</span> Lean FFI</a></li>
-</ul></div>
-<p>Most of the basic lemmas and functions will be in <code>Init</code> directory</p>
-<p>Option,some,none is Maybe,Just,Nothing</p>
-<div class="sourceCode" id="cb1" data-filename="/.elan/toolchains/leanprover--lean4/src/lean/Init/Data/List/BasicAux.lean"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">--BasicAux.lean</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">--different ways to get an element from a List:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- if you define a function based on this get!</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- the function must also assume [Inhabited α]</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>def get<span class="op">!</span> [<span class="dt">Inhabited</span> α] <span class="op">...</span> </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- This is the Option get that returns a Just _ or none</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>def get<span class="op">?</span> <span class="op">...</span> </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>def <span class="fu">head</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>def <span class="fu">tail</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>def getLast</span></code></pre></div>
-<section id="std" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Std</h1>
-<ul>
-<li><code>lean4/src/Std/Data/HashMap.lean</code></li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="dt">Std.Data.HashMap</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#check Std.HashMap String Nat </span></span></code></pre></div>
-</section>
-<section id="c-library" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> C library</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span>      <span class="va">m_rc</span><span class="op">;</span> <span class="co">//reference counter - used for garbage collection </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="va">m_cs_sz</span><span class="op">:</span><span class="dv">16</span><span class="op">;</span> <span class="co">//object size - used for garbage collection</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="va">m_other</span><span class="op">:</span><span class="dv">8</span><span class="op">;</span> <span class="co">//#fields of a constructor object or element size of array</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="va">m_tag</span><span class="op">:</span><span class="dv">8</span><span class="op">;</span> <span class="co">//</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> lean_object<span class="op">;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">//linear logic applied to lean function arguments</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">//The &quot;resource&quot; is the reference counter of the ARGUMENT of some function call which can be consumed or not</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">/* The following typedef&#39;s are used to document the calling convention for the primitives. */</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">//All of these are just pointers to a lean_object</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">/* Standard object argument: </span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">Argument&#39;s reference counter is viewed as resource that is consumed when called by a function.</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">A function call like `f(lean_obj_arg x)` means it is safe to mutate aka &quot;destructive update&quot; `x` if the reference counter of x is 1.</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">[In C++, this is `f(shared_ptr&lt;leanobj&gt;&amp;&amp; x)` ]</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> lean_object <span class="op">*</span> lean_obj_arg<span class="op">;</span>   </span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">/* Borrowed object argument convention:</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">We use this to say argument&#39;s reference counter doesnt automically get consumed when called by a function meaning it is responsibility of caller to decrement the reference counter.  </span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">[In C++, this is `f(shared_ptr&lt;leanobj&gt; const&amp; x)` ]</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> lean_object <span class="op">*</span> b_lean_obj_arg<span class="op">;</span> </span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">/* Unique (aka non shared) object argument. like unique_ptr in C++ */</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> lean_object <span class="op">*</span> u_lean_obj_arg<span class="op">;</span> </span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co">//Below are the function return conventions. Aka function will return a ptr to a leanObject and the convention tells us if we have to do something after the return. </span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">/*If a function return type is `lean_obj_res` then whoever called that function is responsible for consuming the reference counter. </span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">[In C++, this mean returning a smart_ptr by value] */</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> lean_object <span class="op">*</span> lean_obj_res<span class="op">;</span>   <span class="co">/* Standard object result. */</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co">/*Borrowed result, The caller is not responsible for decreasing the reference counter</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">[In C++, this means function returns `shared_ptr&lt;leanobj&gt; const&amp;` aka a reference to a smart pointer. ] */</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> lean_object <span class="op">*</span> b_lean_obj_res<span class="op">;</span> <span class="co">/* Borrowed object result. */</span></span></code></pre></div>
-</section>
-<section id="lean-ffi" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Lean FFI</h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    lean_external_finalize_proc <span class="va">m_finalize</span><span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    lean_external_foreach_proc  <span class="va">m_foreach</span><span class="op">;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> lean_external_class<span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>LEAN_SHARED lean_external_class <span class="op">*</span> lean_register_external_class<span class="op">(</span>lean_external_finalize_proc<span class="op">,</span> lean_external_foreach_proc<span class="op">);</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">/* Object for wrapping external data. */</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    lean_object           <span class="va">m_header</span><span class="op">;</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    lean_external_class <span class="op">*</span> <span class="va">m_class</span><span class="op">;</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">*</span>                <span class="va">m_data</span><span class="op">;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> lean_external_object<span class="op">;</span></span></code></pre></div>
-<p>https://www.internalpointers.com/post/understanding-meaning-lvalues-and-rvalues-c</p>
-<p>https://www.internalpointers.com/post/c-rvalue-references-and-move-semantics-beginners</p>
-<p><code>std::shared_ptr</code> allows multiple <code>std::shared_ptr</code>’s to point to the same object. It keeps the number of pointers pointing to the number as the <strong>reference counter</strong>. Once the counter hits 0, the object is deallocated.</p>
-<ul>
-<li>Passing smart pointer by value to a function means it has been copied meaning that the reference counter has increased by one.</li>
-</ul>
 </section>
 ]]></summary>
 </entry>

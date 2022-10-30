@@ -158,6 +158,10 @@
 <li><a href="#tree"><span class="toc-section-number">16.2</span> Tree</a></li>
 </ul></li>
 <li><a href="#runes"><span class="toc-section-number">17</span> Runes</a></li>
+<li><a href="#scenarios"><span class="toc-section-number">18</span> Scenarios</a>
+<ul>
+<li><a href="#loops-and-mutation-fail"><span class="toc-section-number">18.1</span> Loops and mutation fail</a></li>
+</ul></li>
 </ul></div>
 <ul>
 <li>Go func pass-by-value</li>
@@ -682,6 +686,16 @@ Iterators will loop through <strong>runes</strong>.</p>
 <span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a><span class="co">// 19990  &lt;--This is 世 represented as 3 bytes unicode</span></span>
 <span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a><span class="co">// 3      &lt;--3 bytes</span></span>
 <span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a><span class="co">// 30028  &lt;--This is 界 represented as 3 bytes unicode</span></span></code></pre></div>
+</section>
+<section id="scenarios" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Scenarios</h1>
+<section id="loops-and-mutation-fail" class="level2" data-number="18.1">
+<h2 data-number="18.1"><span class="header-section-number">18.1</span> Loops and mutation fail</h2>
+<div class="sourceCode" id="cb37"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> index<span class="op">,</span> edge <span class="op">:=</span> <span class="kw">range</span> mygraph<span class="op">.</span>Edges<span class="op">{</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>	edge<span class="op">.</span>Size <span class="op">=</span> <span class="dv">1</span> <span class="co">//Fails to modify mygraph object</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Why? <code>edge.Size</code> is just a local copy.</p>
+</section>
 </section>
 
         </div>

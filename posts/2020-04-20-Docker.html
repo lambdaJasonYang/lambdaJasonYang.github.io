@@ -116,33 +116,42 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#image"><span class="toc-section-number">0.1</span> image</a></li>
-<li><a href="#container"><span class="toc-section-number">0.2</span> container</a>
+<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
 <ul>
-<li><a href="#run-detached-container-and-removing-containers"><span class="toc-section-number">0.2.1</span> Run detached container and removing containers</a></li>
-<li><a href="#prune"><span class="toc-section-number">0.2.2</span> Prune</a></li>
-<li><a href="#pauseunpause-container"><span class="toc-section-number">0.2.3</span> pause/unpause container</a></li>
-<li><a href="#container-flags"><span class="toc-section-number">0.2.4</span> container flags</a></li>
-<li><a href="#name-for-containers--t-for-naming-images"><span class="toc-section-number">0.2.5</span> –name for containers , -t for naming images</a></li>
-<li><a href="#logs"><span class="toc-section-number">0.2.6</span> logs</a></li>
-<li><a href="#attach-current-terminal-to-container"><span class="toc-section-number">0.2.7</span> attach current terminal to container</a></li>
-<li><a href="#execute-terminal-inside-container"><span class="toc-section-number">0.2.8</span> execute terminal inside container</a></li>
-</ul></li>
-<li><a href="#dockerfile-docker-build-outputs-image"><span class="toc-section-number">0.3</span> Dockerfile docker build =&gt; outputs image</a>
+<li><a href="#image"><span class="toc-section-number">1.1</span> image</a></li>
+<li><a href="#container"><span class="toc-section-number">1.2</span> container</a>
 <ul>
-<li><a href="#workdir"><span class="toc-section-number">0.3.1</span> WORKDIR</a></li>
-<li><a href="#cmd"><span class="toc-section-number">0.3.2</span> CMD</a></li>
-<li><a href="#entrypoint"><span class="toc-section-number">0.3.3</span> ENTRYPOINT</a></li>
-<li><a href="#docker-run-containerid-sh--c-echo-hi"><span class="toc-section-number">0.3.4</span> docker run &lt;containerID&gt; sh -c ‘echo hi’</a></li>
-<li><a href="#copy-files-from-local-to-container"><span class="toc-section-number">0.3.5</span> Copy files from local to container</a></li>
-<li><a href="#docker-diff---check-what-our-container-did"><span class="toc-section-number">0.3.6</span> docker diff - Check what our container did</a></li>
-<li><a href="#v-volume-for-shared-access"><span class="toc-section-number">0.3.7</span> -v Volume for shared access</a></li>
+<li><a href="#run-detached-container-and-removing-containers"><span class="toc-section-number">1.2.1</span> Run detached container and removing containers</a></li>
+<li><a href="#prune"><span class="toc-section-number">1.2.2</span> Prune</a></li>
+<li><a href="#pauseunpause-container"><span class="toc-section-number">1.2.3</span> pause/unpause container</a></li>
+<li><a href="#container-flags"><span class="toc-section-number">1.2.4</span> container flags</a></li>
+<li><a href="#name-for-containers--t-for-naming-images"><span class="toc-section-number">1.2.5</span> –name for containers , -t for naming images</a></li>
+<li><a href="#logs"><span class="toc-section-number">1.2.6</span> logs</a></li>
 </ul></li>
-<li><a href="#ports-and-network"><span class="toc-section-number">0.4</span> Ports and Network</a></li>
-<li><a href="#docker-compose"><span class="toc-section-number">1</span> Docker-Compose</a></li>
+</ul></li>
+<li><a href="#terminal"><span class="toc-section-number">2</span> Terminal</a>
+<ul>
+<li><a href="#attach-current-terminal-to-container"><span class="toc-section-number">2.1</span> attach current terminal to container</a></li>
+<li><a href="#execute-terminal-inside-container"><span class="toc-section-number">2.2</span> execute terminal inside container</a></li>
+<li><a href="#dockerfile-docker-build-outputs-image"><span class="toc-section-number">2.3</span> Dockerfile docker build =&gt; outputs image</a>
+<ul>
+<li><a href="#workdir"><span class="toc-section-number">2.3.1</span> WORKDIR</a></li>
+<li><a href="#cmd"><span class="toc-section-number">2.3.2</span> CMD</a></li>
+<li><a href="#entrypoint"><span class="toc-section-number">2.3.3</span> ENTRYPOINT</a></li>
+<li><a href="#docker-run-containerid-sh--c-echo-hi"><span class="toc-section-number">2.3.4</span> docker run &lt;containerID&gt; sh -c ‘echo hi’</a></li>
+<li><a href="#copy-files-from-local-to-container"><span class="toc-section-number">2.3.5</span> Copy files from local to container</a></li>
+<li><a href="#docker-diff---check-what-our-container-did"><span class="toc-section-number">2.3.6</span> docker diff - Check what our container did</a></li>
+<li><a href="#v-volume-for-shared-access"><span class="toc-section-number">2.3.7</span> -v Volume for shared access</a></li>
+</ul></li>
+<li><a href="#ports-and-network"><span class="toc-section-number">2.4</span> Ports and Network</a></li>
+</ul></li>
+<li><a href="#memory-limit"><span class="toc-section-number">3</span> Memory limit</a></li>
+<li><a href="#docker-compose"><span class="toc-section-number">4</span> Docker-Compose</a></li>
 </ul></div>
-<section id="image" class="level2" data-number="0.1">
-<h2 data-number="0.1"><span class="header-section-number">0.1</span> image</h2>
+<section id="basics" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Basics</h1>
+<section id="image" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> image</h2>
 <table>
 <thead>
 <tr class="header">
@@ -170,8 +179,8 @@
 </tbody>
 </table>
 </section>
-<section id="container" class="level2" data-number="0.2">
-<h2 data-number="0.2"><span class="header-section-number">0.2</span> container</h2>
+<section id="container" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> container</h2>
 <table>
 <colgroup>
 <col style="width: 33%" />
@@ -211,8 +220,8 @@
 <blockquote>
 <p>Docker containers don’t remove themselves when they terminate, they enter a stopped state.</p>
 </blockquote>
-<section id="run-detached-container-and-removing-containers" class="level3" data-number="0.2.1">
-<h3 data-number="0.2.1"><span class="header-section-number">0.2.1</span> Run detached container and removing containers</h3>
+<section id="run-detached-container-and-removing-containers" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1"><span class="header-section-number">1.2.1</span> Run detached container and removing containers</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> container run <span class="at">-d</span> <span class="at">--name</span> bleh nginx</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;d89war8wf0489fwa08498w0atr48q0g8949a439w0</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -229,18 +238,18 @@
 <code class="sourceCode bash"><span class="ex">--name</span> bleh</code> means we can refer to “bleh” instead of “d89war8wf048”</p>
 <p><code class="sourceCode bash"><span class="ex">docker</span> container kill d89war</code> is faster than <code class="sourceCode bash"><span class="ex">docker</span> container stop d89war</code></p>
 </section>
-<section id="prune" class="level3" data-number="0.2.2">
-<h3 data-number="0.2.2"><span class="header-section-number">0.2.2</span> Prune</h3>
+<section id="prune" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2"><span class="header-section-number">1.2.2</span> Prune</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> container prune <span class="co">#removes stopped containers</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> image prune</span></code></pre></div>
 </section>
-<section id="pauseunpause-container" class="level3" data-number="0.2.3">
-<h3 data-number="0.2.3"><span class="header-section-number">0.2.3</span> pause/unpause container</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> pause <span class="op">&lt;</span>containerID or name<span class="op">&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> unpause <span class="op">&lt;</span>containerID or name<span class="op">&gt;</span></span></code></pre></div>
+<section id="pauseunpause-container" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3"><span class="header-section-number">1.2.3</span> pause/unpause container</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> pause c3d288</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> unpause c3d288</span></code></pre></div>
 </section>
-<section id="container-flags" class="level3" data-number="0.2.4">
-<h3 data-number="0.2.4"><span class="header-section-number">0.2.4</span> container flags</h3>
+<section id="container-flags" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4"><span class="header-section-number">1.2.4</span> container flags</h3>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -276,33 +285,37 @@
 </tbody>
 </table>
 </section>
-<section id="name-for-containers--t-for-naming-images" class="level3" data-number="0.2.5">
-<h3 data-number="0.2.5"><span class="header-section-number">0.2.5</span> –name for containers , -t for naming images</h3>
+<section id="name-for-containers--t-for-naming-images" class="level3" data-number="1.2.5">
+<h3 data-number="1.2.5"><span class="header-section-number">1.2.5</span> –name for containers , -t for naming images</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> container run <span class="at">-d</span> <span class="at">-it</span> <span class="at">--name</span> looperA ubuntu sh <span class="at">-c</span> <span class="st">'while true; do date; sleep 1; done'</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> logs <span class="at">-f</span> looperA</span></code></pre></div>
 </section>
-<section id="logs" class="level3" data-number="0.2.6">
-<h3 data-number="0.2.6"><span class="header-section-number">0.2.6</span> logs</h3>
+<section id="logs" class="level3" data-number="1.2.6">
+<h3 data-number="1.2.6"><span class="header-section-number">1.2.6</span> logs</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> logs <span class="at">-f</span> looperA</span></code></pre></div>
 </section>
-<section id="attach-current-terminal-to-container" class="level3" data-number="0.2.7">
-<h3 data-number="0.2.7"><span class="header-section-number">0.2.7</span> attach current terminal to container</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> attach looperA</span>
+</section>
+</section>
+<section id="terminal" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Terminal</h1>
+<section id="attach-current-terminal-to-container" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> attach current terminal to container</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> attach c3d288</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#hit Ctrl-C to terminate the container looperA</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> attach <span class="at">--no-stdin</span> looperA</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> attach <span class="at">--no-stdin</span> c3d288</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#will not terminate container if hit Ctrl-C</span></span></code></pre></div>
+<ul>
+<li>If attach results in a <strong>hanging terminal with no output</strong>, it means there is no bash terminal running inside the container and you must execute one, by <strong>following instructions in next section</strong></li>
+</ul>
 </section>
-<section id="execute-terminal-inside-container" class="level3" data-number="0.2.8">
-<h3 data-number="0.2.8"><span class="header-section-number">0.2.8</span> execute terminal inside container</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="at">-it</span> <span class="op">&lt;</span>containerID or name<span class="op">&gt;</span> bash </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="at">-it</span> looperA bash</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#&gt;root@d89war8wf048 we are now in as bash inside the container</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> <span class="co">#this won't stop the container, let's us exit terminal</span></span></code></pre></div>
-<hr />
+<section id="execute-terminal-inside-container" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> execute terminal inside container</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="at">-it</span> c3d288 bash </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#&gt;root@d89war8wf048 we are now in as bash inside the container</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> <span class="co">#this won't stop the container, let's us exit terminal</span></span></code></pre></div>
 </section>
-</section>
-<section id="dockerfile-docker-build-outputs-image" class="level2" data-number="0.3">
-<h2 data-number="0.3"><span class="header-section-number">0.3</span> Dockerfile docker build =&gt; outputs image</h2>
+<section id="dockerfile-docker-build-outputs-image" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> Dockerfile docker build =&gt; outputs image</h2>
 <div class="sourceCode" id="cb9" data-filename="Dockerfile"><pre class="sourceCode Dockerfile"><code class="sourceCode dockerfile"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start from the alpine image</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> alpine:3.13</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -329,8 +342,8 @@
 change more at the bottom of the Dockerfile file.</li>
 </ul>
 <p>Keywords List: <code class="sourceCode dockerfile"><span class="kw">RUN</span> <span class="kw">CMD</span> <span class="kw">ADD</span> <span class="kw">COPY</span> <span class="kw">ENTRYPOINT</span> <span class="kw">WORKDIR</span> <span class="kw">ENV</span></code></p>
-<section id="workdir" class="level3" data-number="0.3.1">
-<h3 data-number="0.3.1"><span class="header-section-number">0.3.1</span> WORKDIR</h3>
+<section id="workdir" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1"><span class="header-section-number">2.3.1</span> WORKDIR</h3>
 <ul>
 <li><code class="sourceCode dockerfile"><span class="kw">WORKDIR</span></code> sets the execution directory of commands:
 <ul>
@@ -344,15 +357,15 @@ change more at the bottom of the Dockerfile file.</li>
 <p><code class="sourceCode dockerfile"><span class="kw">RUN</span></code> is our internal image build terminal which runs before <code class="sourceCode dockerfile"><span class="kw">CMD</span></code>.<br />
 <code class="sourceCode dockerfile"><span class="kw">CMD</span></code> is that single command we run when we start our new image as a container. Therefore only one <code class="sourceCode dockerfile"><span class="kw">CMD</span></code> will run, rest is overidden.</p>
 </section>
-<section id="cmd" class="level3" data-number="0.3.2">
-<h3 data-number="0.3.2"><span class="header-section-number">0.3.2</span> CMD</h3>
+<section id="cmd" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2"><span class="header-section-number">2.3.2</span> CMD</h3>
 <p>The 2 blocks below are equal.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run blehImage:latest <span class="va">$somecommand</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> blehImage:latest</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> $somecommand </span></code></pre></div>
 </section>
-<section id="entrypoint" class="level3" data-number="0.3.3">
-<h3 data-number="0.3.3"><span class="header-section-number">0.3.3</span> ENTRYPOINT</h3>
+<section id="entrypoint" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3"><span class="header-section-number">2.3.3</span> ENTRYPOINT</h3>
 <p>Entrypoint is the main binary ran when you call<br />
 <code class="sourceCode bash"><span class="ex">docker</span> run <span class="op">&lt;</span>containerID or name<span class="op">&gt;</span> args</code></p>
 <p>default <code class="sourceCode dockerfile"><span class="kw">ENTRYPOINT</span> [<span class="st">&quot;/bin/sh&quot;</span>]</code></p>
@@ -364,8 +377,8 @@ change more at the bottom of the Dockerfile file.</li>
 Executing <code class="sourceCode bash"><span class="ex">/usr/local/bin/youtube-dl</span> http://imgur.com/asf</code> inside the container</li>
 </ul>
 </section>
-<section id="docker-run-containerid-sh--c-echo-hi" class="level3" data-number="0.3.4">
-<h3 data-number="0.3.4"><span class="header-section-number">0.3.4</span> docker run &lt;containerID&gt; sh -c ‘echo hi’</h3>
+<section id="docker-run-containerid-sh--c-echo-hi" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4"><span class="header-section-number">2.3.4</span> docker run &lt;containerID&gt; sh -c ‘echo hi’</h3>
 <p>we use <code class="sourceCode bash"><span class="fu">sh</span> <span class="at">-c</span></code> because it allows us to run shell with $PATH and Environment vars.</p>
 <p>We can have our Dockerfile use <code class="sourceCode bash"><span class="fu">sh</span> <span class="at">-c</span></code> by <strong>unbracketing</strong> the ENTRYPOINT or CMD</p>
 <ol type="1">
@@ -408,15 +421,14 @@ Executing <code class="sourceCode bash"><span class="ex">/usr/local/bin/youtube-
 <li><code class="sourceCode bash"><span class="ex">/bin/ping</span> <span class="at">-c</span> 3 localhost</code></li>
 </ul></li>
 </ul>
-<hr />
 </section>
-<section id="copy-files-from-local-to-container" class="level3" data-number="0.3.5">
-<h3 data-number="0.3.5"><span class="header-section-number">0.3.5</span> Copy files from local to container</h3>
+<section id="copy-files-from-local-to-container" class="level3" data-number="2.3.5">
+<h3 data-number="2.3.5"><span class="header-section-number">2.3.5</span> Copy files from local to container</h3>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> bleh.txt</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> cp ./bleh.txt <span class="dt">\&lt;</span>containerID or name\&gt;:/usr/src/app/</span></code></pre></div>
 </section>
-<section id="docker-diff---check-what-our-container-did" class="level3" data-number="0.3.6">
-<h3 data-number="0.3.6"><span class="header-section-number">0.3.6</span> docker diff - Check what our container did</h3>
+<section id="docker-diff---check-what-our-container-did" class="level3" data-number="2.3.6">
+<h3 data-number="2.3.6"><span class="header-section-number">2.3.6</span> docker diff - Check what our container did</h3>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> diff <span class="dt">\&lt;</span>containerID or name<span class="dt">\&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C /usr</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C /usr/src</span></span>
@@ -429,24 +441,29 @@ C = Changed<br />
 D = Deleted</p>
 <hr />
 </section>
-<section id="v-volume-for-shared-access" class="level3" data-number="0.3.7">
-<h3 data-number="0.3.7"><span class="header-section-number">0.3.7</span> -v Volume for shared access</h3>
+<section id="v-volume-for-shared-access" class="level3" data-number="2.3.7">
+<h3 data-number="2.3.7"><span class="header-section-number">2.3.7</span> -v Volume for shared access</h3>
 <p>Allow your local machine and container to access the same resource</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-v</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span><span class="st">/localdir:/remotedir&quot;</span> ubuntu </span></code></pre></div>
 <p><code class="sourceCode bash"><span class="ex">-v</span> <span class="op">&lt;</span>localpath<span class="op">&gt;</span>:<span class="op">&lt;</span>remotepath<span class="op">&gt;</span></code></p>
 </section>
 </section>
-<section id="ports-and-network" class="level2" data-number="0.4">
-<h2 data-number="0.4"><span class="header-section-number">0.4</span> Ports and Network</h2>
+<section id="ports-and-network" class="level2" data-number="2.4">
+<h2 data-number="2.4"><span class="header-section-number">2.4</span> Ports and Network</h2>
 <p>Expose port: tell container to listen to a certain port(doesn’t do much but helps for documentation) <code class="sourceCode dockerfile"><span class="kw">EXPOSE</span> &lt;port&gt;</code> in Dockerfile</p>
 <p>Publish port: map local port to container port<br />
 <code class="sourceCode bash"><span class="ex">-p</span> <span class="op">&lt;</span>local-port<span class="op">&gt;</span>:<span class="op">&lt;</span>remote-container-port<span class="op">&gt;</span></code></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-p</span> 3000:5000 ubuntu</span></code></pre></div>
 <p>We go to http://localhost:3000 to access the site.</p>
-<hr />
 </section>
-<section id="docker-compose" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Docker-Compose</h1>
+</section>
+<section id="memory-limit" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Memory limit</h1>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--memory</span><span class="op">=</span><span class="st">&quot;256m&quot;</span> nginx </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--cpus</span><span class="op">=</span><span class="st">&quot;.5&quot;</span> nginx</span></code></pre></div>
+</section>
+<section id="docker-compose" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Docker-Compose</h1>
 <p>File Structure</p>
 <ul>
 <li>docker-compose.yml</li>
@@ -459,20 +476,20 @@ D = Deleted</p>
 <li>Dockerfile</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb17" data-filename="docker-compose.yml"><pre class="sourceCode numberSource yml numberLines"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;3.9&quot;</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">services</span><span class="kw">:</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="at">     </span><span class="fu">myFront</span><span class="kw">:</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> frontend:v1</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="at">          </span><span class="fu">ports</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="at">              </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;3200:5000&quot;</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="at">          </span><span class="fu">build</span><span class="kw">:</span><span class="at"> ./example-frontend</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="at">     </span><span class="fu">myBack</span><span class="kw">:</span></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> backend:v1</span></span>
-<span id="cb17-10"><a href="#cb17-10"></a><span class="at">          </span><span class="fu">ports</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="at">              </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;3300:8080&quot;</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="at">          </span><span class="fu">build</span><span class="kw">:</span><span class="at"> ./example-backend</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> build </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div>
+<div class="sourceCode" id="cb18" data-filename="docker-compose.yml"><pre class="sourceCode numberSource yml numberLines"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;3.9&quot;</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="at">     </span><span class="fu">myFront</span><span class="kw">:</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> frontend:v1</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="at">          </span><span class="fu">ports</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="at">              </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;3200:5000&quot;</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="at">          </span><span class="fu">build</span><span class="kw">:</span><span class="at"> ./example-frontend</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="at">     </span><span class="fu">myBack</span><span class="kw">:</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> backend:v1</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="at">          </span><span class="fu">ports</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="at">              </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;3300:8080&quot;</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="at">          </span><span class="fu">build</span><span class="kw">:</span><span class="at"> ./example-backend</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> build </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div>
 <p>line 6 build “Dockerfile” in current dir “.”<br />
 and create image named “ads/wrga:latest” (line 5)</p>
 <p>docker-compose <code class="sourceCode yaml"><span class="at">environment</span></code> vs Dockerfile <code class="sourceCode dockerfile"><span class="kw">ENV</span></code>.<br />

@@ -144,7 +144,8 @@
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> /home/kali/.local/share/code-server/VsCodeOpn.crt</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cert-key</span><span class="kw">:</span><span class="at"> /home/kali/.local/share/code-server/VsCodeOpn.key</span></span></code></pre></div>
 <ol type="1">
-<li>Next you have to generate your Certificate Root Authority. (This is what your browser downloads)</li>
+<li>Next you have to generate your Certificate Root Authority.<br />
+(This is what your browser downloads)</li>
 </ol>
 <p>Trust &gt;&gt; Authorities &gt;&gt; Add</p>
 <ul>
@@ -154,7 +155,8 @@
 <li>Use valid city and state data</li>
 </ul>
 <ol start="2" type="1">
-<li>Next you have to generate your Server Certificate. (This is what you put in your remote “~/.local/share/code-server/” directory)</li>
+<li>Next you have to generate your Server Certificate.<br />
+(This is what you put in your remote “~/.local/share/code-server/” directory)</li>
 </ol>
 <p>Trust &gt;&gt; Certificates &gt;&gt; Add</p>
 <ul>
@@ -168,8 +170,9 @@
 <li>IP: 192.168.1.245</li>
 </ul></li>
 </ul>
-<p>Download the VsCodeOpn.crt and VsCodeOpn.key<br />
-SSH into PC hosting your code-server, Move them to some directory like :<br />
+<p>NOTE: Every new PC or computer you use as a server requires you to remake a new certificate</p>
+<p>Download the VsCodeOpn.crt and VsCodeOpn.key in your server PC, or just drag them using your server VsCode-server or SSH.<br />
+Move them to some directory like :<br />
 ~/.local/share/code-server/VsCodeOpn.crt<br />
 ~/.local/share/code-server/VsCodeOpn.key</p>
 <ol start="3" type="1">
@@ -184,7 +187,7 @@ Note we DO NOT need to install VsCodeOpn.crt on our browser.</p>
 <section id="rhel" class="level2" data-number="2.1">
 <h2 data-number="2.1"><span class="header-section-number">2.1</span> RHEL</h2>
 <ul>
-<li>Unliked in the offical documents, <code>sudo rpm -i code-server...</code> will error about your preinstalled code-server so you need to add a <code>-U</code> flag to it.</li>
+<li>Unlike in the offical documents, <code>sudo rpm -i code-server...</code> will error on preinstalled code-server so you need to add a <code>-U</code> flag to it.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fOL</span> https://github.com/coder/code-server/releases/download/v<span class="va">$VERSION</span>/code-server-<span class="va">$VERSION</span>-amd64.rpm</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rpm <span class="at">-U</span> <span class="at">-i</span> code-server-<span class="va">$VERSION</span>-amd64.rpm <span class="co">#ADD THE '-U' flag here</span></span>

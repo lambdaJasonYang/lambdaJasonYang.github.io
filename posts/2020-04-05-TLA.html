@@ -147,6 +147,151 @@
 <p>TLA+ Notation: sqr = [i  i^2 ]</p>
 <p>code: sqrt[i] = i^2</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a7469746c65204163746976697479204469616772616d205c6e0a73746172740a3a69203d20736f6d654e756d62657228293b3b0a6e6f7465206c6566740a202020207063203d20227374617274220a656e64206e6f74650a3a69203d20692b313b3b0a6e6f7465206c6566740a202020207063203d20226d6964646c65220a656e64206e6f74650a73746f700a6e6f7465206c6566740a202020207063203d2022646f6e65220a656e64206e6f74650a40656e64756d6c"></figure>
+<section id="example-1" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Example 1</h1>
+<section id="original-program" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Original program</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> i<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> main<span class="op">()</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> <span class="op">{</span>i <span class="op">=</span>someNumber<span class="op">();</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  i <span class="op">=</span> i<span class="op">+</span><span class="dv">1</span><span class="op">;}</span></span></code></pre></div>
+</section>
+<section id="draft-of-spec" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> draft of spec</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">(</span><span class="ex">pc</span> = <span class="st">&quot;start&quot;</span><span class="kw">)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">then</span> <span class="kw">(</span> <span class="ex">i</span> <span class="dt">\i</span>n 0..1000<span class="kw">)</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="kw">(</span><span class="ex">pc</span><span class="st">' = &quot;middle&quot;)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">  elif ( pc = &quot;middle&quot; )</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">       then (i'</span> = i+1<span class="kw">)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="kw">(</span><span class="ex">pc</span><span class="st">' = &quot;done&quot;)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">       else (FALSE)</span></span></code></pre></div>
+</section>
+<section id="spec" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> Spec</h2>
+<div class="sourceCode" id="cb5" data-filename="simple.cfg"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>\<span class="op">*</span> SPECIFICATION</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>\<span class="op">*</span> Uncomment the previous line and provide the specification name <span class="cf">if</span> it's declared</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>\<span class="op">*</span> in the specification file<span class="op">.</span> Comment INIT <span class="op">/</span> NEXT parameters <span class="cf">if</span> you use SPECIFICATION<span class="op">.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>INIT Init</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>NEXT Next</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>\<span class="op">*</span> PROPERTY</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>\<span class="op">*</span> Uncomment the previous line and add property names</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>\<span class="op">*</span> INVARIANT</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>\<span class="op">*</span> Uncomment the previous line and add invariant names</span></code></pre></div>
+<div class="sourceCode" id="cb6" data-filename="simple.tla"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">------------------------------</span> MODULE simple <span class="op">-------------------------------</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> First<span class="op">,</span> we write a spec that describes all allowable behaviors of our    <span class="op">*)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> heros<span class="op">.</span>                                                                  <span class="op">*)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>EXTENDS Naturals</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">(*************************************************************************)</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">(*</span> This statement imports the definitions of the ordinary operators on   <span class="op">*)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">(*</span> natural numbers<span class="op">,</span> such as <span class="op">+.</span>                                           <span class="op">*)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">(*************************************************************************)</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> We next declare the specification's variables<span class="op">.</span>                          <span class="op">*)</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>VARIABLES i<span class="op">,</span> pc</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> We now define TypeOK to be the type invariant<span class="op">,</span> asserting that the value <span class="op">*)</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> of each variable is an element of the appropriate set<span class="op">.</span>  A type          <span class="op">*)</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> invariant like this is not part of the specification<span class="op">,</span> but it's          <span class="op">*)</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> generally a good idea to include it because it helps the reader         <span class="op">*)</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> understand the spec<span class="op">.</span>  Moreover<span class="op">,</span> having TLC check that it is an          <span class="op">*)</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> invariant of the spec catches errors that<span class="op">,</span> in a typed language<span class="op">,</span> are     <span class="op">*)</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> caught by type checking<span class="op">.</span>                                                <span class="op">*)</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span>                                                                         <span class="op">*)</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> Note<span class="op">:</span> TLA<span class="op">+</span> uses the convention that a list of formulas bulleted by <span class="op">/</span>\   <span class="op">*)</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> or \<span class="op">/</span> denotes the conjunction or disjunction of those formulas<span class="op">.</span>         <span class="op">*)</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> Indentation of subitems is significant<span class="op">,</span> allowing one to eliminate lots  <span class="op">*)</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> of parentheses<span class="op">.</span>  This makes a large formula much easier to read<span class="op">.</span>        <span class="op">*)</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> However<span class="op">,</span> it does mean that you have to be careful with your indentation<span class="op">.*)</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>TypeOK <span class="op">==</span> <span class="op">/</span>\ i \in <span class="fl">0.</span><span class="er">.1000</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> Now we define of the initial predicate<span class="op">,</span> that specifies the initial      <span class="op">*)</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> values of the variables<span class="op">.</span>  I like to name this predicate Init<span class="op">,</span> but the   <span class="op">*)</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> name doesn't matter<span class="op">.</span>                                                    <span class="op">*)</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>Init <span class="op">==</span>  <span class="op">/</span>\ <span class="op">(</span>pc <span class="op">=</span> <span class="st">&quot;start&quot;</span><span class="op">)</span> </span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>         <span class="op">/</span>\ <span class="op">(</span>i <span class="op">=</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> Now we define the actions that our hero can perform<span class="op">.</span>  There are three   <span class="op">*)</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> things they can <span class="cf">do</span><span class="op">:</span>                                                     <span class="op">*)</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span>                                                                         <span class="op">*)</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span>   <span class="op">-</span> At Starting state we can pick any number from <span class="dv">0</span> to <span class="dv">1000</span>             <span class="op">*)</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span>                                                                         <span class="op">*)</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span>   <span class="op">-</span> At middle state we can add <span class="dv">1</span>                                        <span class="op">*)</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span>                                                                         <span class="op">*)</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span>   <span class="op">-</span> At middle state we can add <span class="dv">99</span>                                       <span class="op">*)</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span>                                                                         <span class="op">*)</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>Pick <span class="op">==</span> \<span class="op">/</span> <span class="op">/</span>\ pc <span class="op">=</span> <span class="st">&quot;start&quot;</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>           <span class="op">/</span>\ i' \in <span class="fl">0.</span><span class="er">.1000</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>           <span class="op">/</span>\ pc' <span class="op">=</span> <span class="st">&quot;middle&quot;</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>Add1 <span class="op">==</span> \<span class="op">/</span> <span class="op">/</span>\ pc <span class="op">=</span> <span class="st">&quot;middle&quot;</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>           <span class="op">/</span>\ i' <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>           <span class="op">/</span>\ pc' <span class="op">=</span> <span class="st">&quot;done&quot;</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>Add2 <span class="op">==</span> \<span class="op">/</span> <span class="op">/</span>\ pc <span class="op">=</span> <span class="st">&quot;middle&quot;</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>           <span class="op">/</span>\ i' <span class="op">=</span> i <span class="op">+</span> <span class="dv">99</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>           <span class="op">/</span>\ pc' <span class="op">=</span> <span class="st">&quot;yum&quot;</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> We define the next<span class="op">-</span>state relation<span class="op">,</span> which I like to call Next<span class="op">.</span>  A Next   <span class="op">*)</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> step is a step of one of the six actions defined above<span class="op">.</span>  Hence<span class="op">,</span> Next is <span class="op">*)</span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span> the disjunction of those actions<span class="op">.</span>                                       <span class="op">*)</span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="op">(***************************************************************************)</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>Next <span class="op">==</span> Pick \<span class="op">/</span> Add1 \<span class="op">/</span> Add2</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode .txt"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Status</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Checking coinchange.tla / coinchange.cfg</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Errors 1 error(s)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>Start: 15:01:27 (Oct 20), end: 15:01:27 (Oct 20)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>States</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>Time	    Diameter	Found	  Distinct	Queue</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>00:00:00	3	        3,004	  3,004	    2,001</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>Coverage</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>Module	    Action  Total   Distinct</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>coinchange  Init	  2	      2</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>Errors</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>Deadlock reached.</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>Error Trace</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>1: Initial predicate</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  i     0</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  pc    &quot;start&quot;</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>2: Pick in simple</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  i     0</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  pc M  &quot;middle&quot;</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>3: Add1 in coinchange</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  i M   1</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  pc M  &quot;done&quot;</span></code></pre></div>
+<ul>
+<li>The error trace will only show the most recent error.
+<ul>
+<li>Notice <code>i</code> couldve been any number from 0 to 1000 in <code>"start"</code> but the error trace only showed 0.</li>
+<li>Notice how <code>Add2</code> doesnt show up since it takes the most recent error which is <code>Add1</code></li>
+</ul></li>
+</ul>
+</section>
+</section>
 
         </div>
         <div id="footer">

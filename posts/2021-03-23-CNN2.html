@@ -212,8 +212,21 @@
 <ul>
 <li>This is how it should be and how convolution works</li>
 <li><strong>Multi-channel convolution collapses the 3 channels into 1 channel.</strong></li>
-</ul></li>
 </ul>
+<h1 id="tfjs">TFjs</h1></li>
+<li>vertical filter</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>const kernFilter <span class="op">=</span> tf.tensor4d([<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>],[<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>],<span class="st">&quot;float32&quot;</span>) </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#gets converted into </span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>const kernFilter <span class="op">=</span>      tf.tensor4d([[[[<span class="op">-</span><span class="dv">1</span>],[<span class="op">-</span><span class="dv">1</span>],[<span class="op">-</span><span class="dv">1</span>]],</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                                      [[<span class="dv">2</span>],[<span class="dv">2</span>],[<span class="dv">2</span>]],</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                                      [[<span class="op">-</span><span class="dv">1</span>],[<span class="op">-</span><span class="dv">1</span>],[<span class="op">-</span><span class="dv">1</span>]]],</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                                     [[[<span class="op">-</span><span class="dv">1</span>],[<span class="op">-</span><span class="dv">1</span> ],[<span class="op">-</span><span class="dv">1</span>]],</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                                      [[<span class="dv">2</span>],[<span class="dv">2</span> ],[<span class="dv">2</span>]],</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                                      [[<span class="op">-</span><span class="dv">1</span>],[<span class="op">-</span><span class="dv">1</span> ],[<span class="op">-</span><span class="dv">1</span>]]],</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                                     [[[<span class="op">-</span><span class="dv">1</span>],[<span class="op">-</span><span class="dv">1</span>],[<span class="op">-</span><span class="dv">1</span>]],</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                                      [[<span class="dv">2</span>],[<span class="dv">2</span>],[<span class="dv">2</span>]],</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                                      [[<span class="op">-</span><span class="dv">1</span>],[<span class="op">-</span><span class="dv">1</span>],[<span class="op">-</span><span class="dv">1</span>]]]])</span></code></pre></div>
 </section>
 
         </div>
