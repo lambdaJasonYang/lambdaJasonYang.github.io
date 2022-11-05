@@ -83,9 +83,9 @@
 
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
-                    <span class="link-text">React</span>
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
                 </a>
             </li>
         </nav>
@@ -115,7 +115,30 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>
     
 </div>
-
+<section id="induction-on-queue" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Induction on queue</h1>
+<ul>
+<li><code>n</code> is the starting node of the bfs</li>
+<li><code>edgelist</code> is the neighbor nodes of <code>n</code></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>void bfs(<span class="bu">int</span> n, vector<span class="op">&lt;</span>vector<span class="op">&lt;</span><span class="bu">int</span><span class="op">&gt;&gt;&amp;</span> edgelist, vector<span class="op">&lt;</span><span class="bu">int</span><span class="op">&gt;&amp;</span> dist, queue<span class="op">&lt;</span><span class="bu">int</span><span class="op">&gt;&amp;</span> q) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="bu">int</span> i : edgelist[n]) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (dist[i] <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>) <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        dist[i] <span class="op">=</span> dist[n] <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        q.push(i)<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># invariant: top of queue is an immediate neighbor node of n</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>q.empty()) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> q.front()<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        q.pop()<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        bfs(n, edgelist, dist, q)<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The topological ordering on the neighbors of <code>n</code> aka head of queue is the induction variable.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Front of Queue                                          End of Queue</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n | neigh1_A | neigh1_B | neigh1_C | ... | neigh4_A | neigh4_B | ...</span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">

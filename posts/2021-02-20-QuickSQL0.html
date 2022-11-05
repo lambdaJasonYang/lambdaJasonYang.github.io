@@ -83,9 +83,9 @@
 
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
-                    <span class="link-text">React</span>
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
                 </a>
             </li>
         </nav>
@@ -116,95 +116,104 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#rpi"><span class="toc-section-number">1</span> rpi</a>
+<li><a href="#docker"><span class="toc-section-number">1</span> Docker</a></li>
+<li><a href="#rpi"><span class="toc-section-number">2</span> rpi</a>
 <ul>
-<li><a href="#make-internal-postgres-account"><span class="toc-section-number">1.1</span> Make internal Postgres Account</a></li>
-<li><a href="#accessing-postgres"><span class="toc-section-number">1.2</span> Accessing Postgres</a></li>
+<li><a href="#make-internal-postgres-account"><span class="toc-section-number">2.1</span> Make internal Postgres Account</a></li>
+<li><a href="#accessing-postgres"><span class="toc-section-number">2.2</span> Accessing Postgres</a></li>
 </ul></li>
-<li><a href="#where-is-postgresql.conf"><span class="toc-section-number">2</span> Where is postgresql.conf</a>
+<li><a href="#where-is-postgresql.conf"><span class="toc-section-number">3</span> Where is postgresql.conf</a>
 <ul>
-<li><a href="#where-is-pga_hba.conf"><span class="toc-section-number">2.0.1</span> Where is pga_hba.conf</a></li>
+<li><a href="#where-is-pga_hba.conf"><span class="toc-section-number">3.0.1</span> Where is pga_hba.conf</a></li>
 </ul></li>
 </ul></div>
-<section id="rpi" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> rpi</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install postgres</span></code></pre></div>
-<p>starting up postgres</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pg_ctlcluster 11 main start</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#alternatively</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart postgresql@11-main</span></code></pre></div>
-<p>this creates a default postgres linux user account</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> /etc/passwd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#use command to show list of linux accounts</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#postgres:x:112:121:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash</span></span></code></pre></div>
-<section id="make-internal-postgres-account" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> Make internal Postgres Account</h2>
-<p>switch to the postgres account</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su postgres</span></code></pre></div>
-<p>make an account within postgres(This is not a linux acc but an internal postgres accs)</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">createuser</span> pi <span class="at">-P</span> <span class="at">--interactive</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#exit out of postgres account back to linux pi </span></span></code></pre></div>
+<section id="docker" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Docker</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> pull postgres</span></code></pre></div>
+<p>from 192.168.1.244</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-p</span> 7890:5432 <span class="at">--name</span> some-postgres <span class="at">-e</span> POSTGRES_PASSWORD=root <span class="at">-d</span> postgres</span></code></pre></div>
+<p>from 192.168.1.245</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-h</span> 192.168.1.244 <span class="at">-p</span> 7890 <span class="at">-U</span> postgres </span></code></pre></div>
 </section>
-<section id="accessing-postgres" class="level2" data-number="1.2">
-<h2 data-number="1.2"><span class="header-section-number">1.2</span> Accessing Postgres</h2>
+<section id="rpi" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> rpi</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install postgres</span></code></pre></div>
+<p>starting up postgres</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pg_ctlcluster 11 main start</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#alternatively</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart postgresql@11-main</span></code></pre></div>
+<p>this creates a default postgres linux user account</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> /etc/passwd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#use command to show list of linux accounts</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#postgres:x:112:121:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash</span></span></code></pre></div>
+<section id="make-internal-postgres-account" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Make internal Postgres Account</h2>
+<p>switch to the postgres account</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su postgres</span></code></pre></div>
+<p>make an account within postgres(This is not a linux acc but an internal postgres accs)</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">createuser</span> pi <span class="at">-P</span> <span class="at">--interactive</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#exit out of postgres account back to linux pi </span></span></code></pre></div>
+</section>
+<section id="accessing-postgres" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Accessing Postgres</h2>
 <p>Check if your postgres is accessible in your LAN</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-tlnpu</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      17917/postgres</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-tlnpu</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      17917/postgres</span></span></code></pre></div>
 <p>It says <code>127.0.0.1</code> but it should be <code>0.0.0.0</code> for it to be accessible on LAN.</p>
 </section>
 </section>
-<section id="where-is-postgresql.conf" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Where is postgresql.conf</h1>
+<section id="where-is-postgresql.conf" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Where is postgresql.conf</h1>
 <p>To resolve this, we need to know where is postgres config file.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres psql <span class="at">-c</span> <span class="st">'SHOW config_file'</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#               config_file</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#-----------------------------------------</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># /etc/postgresql/11/main/postgresql.conf</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#(1 row)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8" data-filename="/etc/postgresql/11/main/postgresql.conf"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CONNECTIONS AND AUTHENTICATION</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - Connection Settings -</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#listen_addresses = 'localhost'         # what IP address(es) to listen on;</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="co"># comma-separated list of addresses;</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="co"># defaults to 'localhost'; use '*' for all</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="co"># (change requires restart)</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">port</span> = 5432                             <span class="co"># (change requires restart)</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ex">max_connections</span> = 100                   <span class="co"># (change requires restart)</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#superuser_reserved_connections = 3     # (change requires restart)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres psql <span class="at">-c</span> <span class="st">'SHOW config_file'</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#               config_file</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#-----------------------------------------</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># /etc/postgresql/11/main/postgresql.conf</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#(1 row)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11" data-filename="/etc/postgresql/11/main/postgresql.conf"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CONNECTIONS AND AUTHENTICATION</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - Connection Settings -</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#listen_addresses = 'localhost'         # what IP address(es) to listen on;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="co"># comma-separated list of addresses;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="co"># defaults to 'localhost'; use '*' for all</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="co"># (change requires restart)</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="ex">port</span> = 5432                             <span class="co"># (change requires restart)</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="ex">max_connections</span> = 100                   <span class="co"># (change requires restart)</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#superuser_reserved_connections = 3     # (change requires restart)</span></span></code></pre></div>
 <p>Change the above file <code>'localhost'</code> to <code>'0.0.0.0'</code></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart postgresql@11-main</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart postgresql@11-main</span></code></pre></div>
 <p>You may attempt to now try to login but will see ERROR:<br />
 <code>[28000] FATAL: no pg_hba.conf entry for host "192.168.1.26", user "pi", database "postgres", SSL on</code></p>
 <p>Error is b/c any newly made database by default will reject users unless authorized in <code>pga_hba.conf</code></p>
-<section id="where-is-pga_hba.conf" class="level3" data-number="2.0.1">
-<h3 data-number="2.0.1"><span class="header-section-number">2.0.1</span> Where is pga_hba.conf</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres psql <span class="at">-c</span> <span class="st">'SHOW hba_file'</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#              hba_file</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#-------------------------------------</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># /etc/postgresql/11/main/pg_hba.conf</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#(1 row)</span></span></code></pre></div>
-<div class="sourceCode" id="cb11" data-filename="/etc/postgresql/11/main/pg_hba.conf"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PostgreSQL Client Authentication Configuration File</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ===================================================</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Refer to the &quot;Client Authentication&quot; section in the PostgreSQL</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># documentation for a complete description of this file.  A short</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># synopsis follows.</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This file controls: which hosts are allowed to connect, how clients</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># are authenticated, which PostgreSQL user names they can use, which</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># databases they can access.  Records take one of these forms:</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># local      DATABASE  USER  METHOD  [OPTIONS]</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># host       DATABASE  USER  ADDRESS  METHOD  [OPTIONS]</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># hostssl    DATABASE  USER  ADDRESS  METHOD  [OPTIONS]</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="ex">host</span>  all  all 192.168.1.0/0 md5 <span class="co">#&lt;--- Add this line</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart postgresql@11-main</span></code></pre></div>
+<section id="where-is-pga_hba.conf" class="level3" data-number="3.0.1">
+<h3 data-number="3.0.1"><span class="header-section-number">3.0.1</span> Where is pga_hba.conf</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres psql <span class="at">-c</span> <span class="st">'SHOW hba_file'</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#              hba_file</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#-------------------------------------</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># /etc/postgresql/11/main/pg_hba.conf</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#(1 row)</span></span></code></pre></div>
+<div class="sourceCode" id="cb14" data-filename="/etc/postgresql/11/main/pg_hba.conf"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PostgreSQL Client Authentication Configuration File</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ===================================================</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Refer to the &quot;Client Authentication&quot; section in the PostgreSQL</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># documentation for a complete description of this file.  A short</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># synopsis follows.</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This file controls: which hosts are allowed to connect, how clients</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># are authenticated, which PostgreSQL user names they can use, which</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># databases they can access.  Records take one of these forms:</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># local      DATABASE  USER  METHOD  [OPTIONS]</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># host       DATABASE  USER  ADDRESS  METHOD  [OPTIONS]</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># hostssl    DATABASE  USER  ADDRESS  METHOD  [OPTIONS]</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="ex">host</span>  all  all 192.168.1.0/0 md5 <span class="co">#&lt;--- Add this line</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart postgresql@11-main</span></code></pre></div>
 </section>
 </section>
 

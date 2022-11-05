@@ -83,9 +83,9 @@
 
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <svg><use href="../images/icons/IconSheet.svg#react"></use></svg>
-                    <span class="link-text">React</span>
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
                 </a>
             </li>
         </nav>
@@ -118,6 +118,7 @@
 <div id="TOC"><ul>
 <li><a href="#cargo"><span class="toc-section-number">1</span> Cargo</a></li>
 <li><a href="#rust"><span class="toc-section-number">2</span> Rust</a></li>
+<li><a href="#vector-range-loops"><span class="toc-section-number">3</span> vector, range loops</a></li>
 </ul></div>
 <section id="cargo" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Cargo</h1>
@@ -155,6 +156,19 @@
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="vector-range-loops" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> vector, range loops</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> vec1 <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span>]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// (1..10) is a range type</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> i <span class="kw">in</span> (<span class="dv">1</span><span class="op">..</span><span class="dv">10</span>)<span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">..</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>convert range to vector. Why? because <code>iter()</code> doesnt work on range</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> v3 <span class="op">:</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span> <span class="op">=</span> (<span class="dv">1</span><span class="op">..</span><span class="dv">10</span>)<span class="op">.</span>collect()<span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">//build a vector of tuples</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> v4<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span>(<span class="op">&amp;</span><span class="dt">i32</span><span class="op">,&amp;</span><span class="dt">i32</span>)<span class="op">&gt;=</span> v3<span class="op">.</span>iter()<span class="op">.</span>map(<span class="op">|</span>x<span class="op">|</span> (x<span class="op">,</span>x))<span class="op">.</span>collect()<span class="op">;</span></span></code></pre></div>
 </section>
 
         </div>
