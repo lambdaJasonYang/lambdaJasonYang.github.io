@@ -134,6 +134,7 @@
 <li><a href="#dynamic-routes-dont-work-in-ssg"><span class="toc-section-number">8.2</span> Dynamic Routes DONT work in SSG</a></li>
 </ul></li>
 <li><a href="#webpack"><span class="toc-section-number">9</span> Webpack</a></li>
+<li><a href="#source-maps"><span class="toc-section-number">10</span> Source maps</a></li>
 </ul></div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">npx</span> create-next-app@latest <span class="at">--ts</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
@@ -310,7 +311,8 @@ This is NOT like <code>window.addEventlistener('onload',..)</code> that fetches 
 <p>SSG at build time and SSG at first request both are affected by stale data.</p>
 <ul>
 <li>If db changes once, SSG at build time is already stale</li>
-<li>If db changes more than once, SSG at first request becomes stale This means if more than one update in db we have to rebuild the ENTIRE site.</li>
+<li>If db changes more than once, SSG at first request becomes stale
+This means if more than one update in db we have to rebuild the ENTIRE site.</li>
 </ul>
 <hr />
 </section>
@@ -474,6 +476,19 @@ Example: <code>&lt;Image src={"/vercel.svg"} width={50} height={50}&gt;&lt;/Imag
 <span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section id="source-maps" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Source maps</h1>
+<p>Nextjs gives cryptic errors without sourcemaps</p>
+<div class="sourceCode" id="cb11" data-filename="next.config.js"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="er">/**</span> <span class="er">@type</span> <span class="fu">{</span><span class="er">import('next').NextConfig</span><span class="fu">}</span> <span class="er">*/</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="er">const</span> <span class="er">nextConfig</span> <span class="er">=</span> <span class="fu">{</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="er">reactStrictMode</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="er">swcMinify</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="er">productionBrowserSourceMaps</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>  <span class="er">&lt;---</span> <span class="er">ADD</span> <span class="er">THIS</span> <span class="er">FOR</span> <span class="er">SOURCE</span> <span class="er">MAP</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">output</span><span class="fu">:</span> <span class="er">'standalone'</span><span class="fu">,</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="er">module.exports</span> <span class="er">=</span> <span class="er">nextConfig</span></span></code></pre></div>
 </section>
 
         </div>

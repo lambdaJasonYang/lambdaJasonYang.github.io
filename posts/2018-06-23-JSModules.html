@@ -116,16 +116,33 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#vanillajs-module"><span class="toc-section-number">1</span> VanillaJS module</a></li>
-<li><a href="#build-your-own-npm-package-module"><span class="toc-section-number">2</span> Build your own NPM package module</a>
+<li><a href="#using-node_modules"><span class="toc-section-number">1</span> Using node_modules</a></li>
+<li><a href="#vanillajs-module"><span class="toc-section-number">2</span> VanillaJS module</a></li>
+<li><a href="#build-your-own-npm-package-module"><span class="toc-section-number">3</span> Build your own NPM package module</a>
 <ul>
-<li><a href="#node-module"><span class="toc-section-number">2.1</span> Node module</a></li>
-<li><a href="#client-consumer"><span class="toc-section-number">2.2</span> Client consumer</a></li>
+<li><a href="#node-module"><span class="toc-section-number">3.1</span> Node module</a></li>
+<li><a href="#client-consumer"><span class="toc-section-number">3.2</span> Client consumer</a></li>
 </ul></li>
-<li><a href="#requirejs-vs-esmodule-syntax"><span class="toc-section-number">3</span> RequireJS vs ESModule syntax</a></li>
+<li><a href="#removing-npm-link"><span class="toc-section-number">4</span> Removing <code>npm link</code></a></li>
+<li><a href="#build-your-own-npm-package"><span class="toc-section-number">5</span> build Your Own NPM package</a></li>
+<li><a href="#service-workers-inside-npm-packages"><span class="toc-section-number">6</span> Service workers inside npm packages?</a></li>
 </ul></div>
-<section id="vanillajs-module" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> VanillaJS module</h1>
+<section id="using-node_modules" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Using node_modules</h1>
+<ul>
+<li><code>node_module</code> directory path is implicity added in all js projects
+<ul>
+<li>This means if <code>myapp/node_module/braces</code> exists, you can use it with<br />
+<code>import x from "braces"</code></li>
+</ul></li>
+</ul>
+<p>Useful pointers:</p>
+<ul>
+<li>if you use a JS framework like <code>react</code>, you also gain access to all of it’s <code>node_module</code> dependencies like <code>/node_module/braces</code></li>
+</ul>
+</section>
+<section id="vanillajs-module" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> VanillaJS module</h1>
 <ul>
 <li>We can import modules in vanilla JS like in <code>index.js</code> as long we give attribute <code>type="module"</code></li>
 </ul>
@@ -141,18 +158,34 @@
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> bleh<span class="op">;</span></span></code></pre></div>
 <div class="sourceCode" id="cb3" data-filename="mymodule.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> bleh <span class="op">=</span> <span class="st">&quot;shit&quot;</span><span class="op">;</span></span></code></pre></div>
 </section>
-<section id="build-your-own-npm-package-module" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Build your own NPM package module</h1>
+<section id="build-your-own-npm-package-module" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Build your own NPM package module</h1>
 <p>How do we make our own npm package and run it locally?</p>
-<section id="node-module" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> Node module</h2>
+<p>2 methods, <code>npm link</code> vs Webpack</p>
+<ul>
+<li><code>npm link</code>
+<ul>
+<li>pro: no setup, just make 2 npm projects, 1 for library, 1 to import and run it</li>
+<li>con: Browser API’s cant be demoed the library independently; we are forced to import library to try it</li>
+<li>con: If it uses Browser API’s, we cant unit-test it</li>
+</ul></li>
+<li>Webpack
+<ul>
+<li>pro: can test library on browser since Webpack starts a server.</li>
+<li>con: hard setup</li>
+</ul></li>
+</ul>
+<section id="node-module" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Node module</h2>
+<p>Note: Alot of outdated guides out there used <code>commonJS</code> <code>var x = require(..)</code> <code>module.exports()</code> whhen nodejs didnt support es6.<br />
+Now we can just use ES6 syntax which is similar to react, <code>import x from 'y'</code> <code>export default func</code></p>
 <ol type="1">
 <li>Make directory <code>producerLib</code> for our library<br />
 </li>
 <li>Go to <code>producerLib</code> and run <code>npm init</code><br />
 The entry point in package.json is <code>index.js</code> therefore we MUST name our file <code>index.js</code></li>
 </ol>
-<div data-group="1" data-glabel="requireJS">
+<div data-group="1" data-glabel="commonJS">
 <div class="sourceCode" id="cb4" data-filename="/producerLib/index.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> (x) <span class="kw">=&gt;</span> {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="vs">`hi </span><span class="sc">${</span>x<span class="sc">}</span><span class="vs">`</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
@@ -187,8 +220,8 @@ The entry point in package.json is <code>index.js</code> therefore we MUST name 
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 </div>
 </section>
-<section id="client-consumer" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> Client consumer</h2>
+<section id="client-consumer" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Client consumer</h2>
 <ol type="1">
 <li>Make directory <code>consumer</code><br />
 </li>
@@ -196,7 +229,7 @@ The entry point in package.json is <code>index.js</code> therefore we MUST name 
 Since this is NOT a package or library but an application we can name our file anything like <code>app.js</code><br />
 despite the package.json telling us the entry point is <code>index.js</code></li>
 </ol>
-<div data-group="2" data-glabel="requireJS">
+<div data-group="2" data-glabel="commonJS">
 <div class="sourceCode" id="cb8" data-filename="/consumer/app.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">//import greeter from &quot;producerLib&quot;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> greeter <span class="op">=</span> <span class="pp">require</span>(<span class="st">&quot;producerLib&quot;</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -216,8 +249,7 @@ despite the package.json telling us the entry point is <code>index.js</code></li
 <div data-group="2" data-glabel="ESModule">
 <div class="sourceCode" id="cb10" data-filename="/consumer/app.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> greeter <span class="im">from</span> <span class="st">&quot;producerLib&quot;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">// const greeter = require(&quot;producerLib&quot;)</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="fu">greeter</span>(<span class="st">&quot;he&quot;</span>))</span></code></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="fu">greeter</span>(<span class="st">&quot;he&quot;</span>))</span></code></pre></div>
 <div class="sourceCode" id="cb11" data-filename="/consumer/package.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;consumer&quot;</span><span class="fu">,</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;module&quot;</span><span class="fu">,</span></span>
@@ -239,14 +271,98 @@ which is not required for clients using requireJS imports.</p>
 <li>Go to directory consumer and run <code>npm link producerLib</code></li>
 </ul>
 <p>Run consumer with <code>node app.js</code></p>
+<p>Note: This links the producerLib package globally as a symlink. You will find the symlink in all the node_modules directory.</p>
 </section>
 </section>
-<section id="requirejs-vs-esmodule-syntax" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> RequireJS vs ESModule syntax</h1>
+<section id="removing-npm-link" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Removing <code>npm link</code></h1>
+<p>Find all the linked packages</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> ls <span class="at">-g</span> <span class="at">--depth</span><span class="op">=</span>0 <span class="at">--link</span><span class="op">=</span>true</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># /home/rhel/.nvm/versions/node/v19.0.1/lib</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># └── svcworker@1.0.0 -&gt; ./../../../../../ReactProjs/1trash/svcworker</span></span></code></pre></div>
+<p>Remove the linked package</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> unlink svcworker@1.0.0</span></code></pre></div>
+</section>
+<section id="build-your-own-npm-package" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> build Your Own NPM package</h1>
 <ul>
-<li><code>const bleh = require("somelib")</code> vs <code>import bleh from "somelib</code></li>
+<li>Remember that npm package targeting NodeJS <strong>DIFFERENT</strong> from targeting Browser.
+<ul>
+<li>Browser cannot open local files or use libraries like <code>fs</code></li>
+</ul></li>
 </ul>
-<p>Use ESModule; RequireJS is only there for backward compatibility</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> login</span></code></pre></div>
+<p>tsconfig.json : Generate a separate folder “dist” for our emitted js library</p>
+<ul>
+<li><code>mkdir dist</code></li>
+<li>add to compilerOptions config <code>"outDir": "./dist",</code><br />
+</li>
+<li>add “dist” to exclude <code>"exclude": ["dist","README.md", ...</code></li>
+<li>add <code>"declarations":true</code> to generate types “index.d.ts”</li>
+</ul>
+<p>package.json : npm publish only to the dist directory</p>
+<ul>
+<li>add <code>"files" : ["dist"]</code></li>
+</ul>
+</section>
+<section id="service-workers-inside-npm-packages" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Service workers inside npm packages?</h1>
+<p>Here we make 2 service workers. 1 way is by using Blob and the other is the typical method</p>
+<div class="sourceCode" id="cb15" data-filename="mypkg/myworker.js" data-group="blob1" data-glabel="blob"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> workerblob <span class="op">=</span> <span class="kw">new</span> <span class="bu">Blob</span>([</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="vs">`onmessage = (e) =&gt; {</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    console.log(&quot;remote&quot;)</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    // console.log(e);</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="vs">    // console.log(e.data);</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="vs">    postMessage(&quot;hi&quot;);</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="vs">    console.log(&quot;remote&quot;)</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="vs">  }`</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> workerblob2 <span class="op">=</span> URL<span class="op">.</span><span class="fu">createObjectURL</span>(workerblob)</span></code></pre></div>
+<div class="sourceCode" id="cb16" data-filename="mypkg/myworker.js" data-group="blob1" data-glabel="typical"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>onmessage <span class="op">=</span> (e) <span class="kw">=&gt;</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;remote&quot;</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">postMessage</span>(<span class="st">&quot;hi&quot;</span>)<span class="op">;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;remote&quot;</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> {}</span></code></pre></div>
+<div class="sourceCode" id="cb17" data-filename="mypkg/index.js" data-group="blob1" data-glabel="blob"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { myblob } <span class="im">from</span> <span class="st">'./myworker.js'</span><span class="op">;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {} <span class="im">from</span> <span class="st">'./myworker2.js'</span><span class="op">;</span> <span class="co">//IMPORTANT!! to copy myworker2.js into output folder</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> c <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>   <span class="kw">let</span> timingworker <span class="op">=</span> <span class="cf">await</span> <span class="kw">new</span> <span class="bu">Worker</span>(myblob)<span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>   timingworker<span class="op">.</span><span class="at">onmessage</span> <span class="op">=</span> (e) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;recv&quot;</span>)<span class="op">;</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> timingworker<span class="op">;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> c<span class="op">;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">//# sourceMappingURL=index.js.map</span></span></code></pre></div>
+<div class="sourceCode" id="cb18" data-filename="mypkg/index.js" data-group="blob1" data-glabel="typical"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {} <span class="im">from</span> <span class="st">'./myworker.js'</span><span class="op">;</span> <span class="co">//IMPORTANT!! to copy myworker2.js into output folder</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> c <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>   <span class="kw">let</span> timingworker <span class="op">=</span> <span class="kw">new</span> <span class="bu">Worker</span>(<span class="st">&quot;myworker.js&quot;</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>   timingworker<span class="op">.</span><span class="at">onmessage</span> <span class="op">=</span> (e) <span class="kw">=&gt;</span> {</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;recv&quot;</span>)<span class="op">;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> timingworker<span class="op">;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> c<span class="op">;</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">//# sourceMappingURL=index.js.map</span></span></code></pre></div>
+<p><strong>Big Question</strong>: Our npm package only links to index.js but the service worker requires the <code>myworker.js</code> file to be in the same directory as index.js.<br />
+How do make sure of this especially in webpack?<br />
+<code>import {} from './myworker.js';</code> in <code>index.js</code> will make sure that myworker.js gets copied along with index.js when building output.</p>
+<p>Now install the mypkg into our React app with <code>npm link mypkg</code></p>
+<div class="sourceCode" id="cb19" data-filename="App.jsx"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> buildworker <span class="im">from</span> <span class="st">'mypkg'</span><span class="op">;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">fn</span>(){</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> myworker <span class="op">=</span> <span class="cf">await</span> <span class="fu">buildworker</span>()<span class="op">;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  myworker<span class="op">.</span><span class="at">onmessage</span> <span class="op">=</span> (e) <span class="kw">=&gt;</span> {</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;recv&quot;</span>)<span class="op">;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>      }<span class="op">;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  myworker<span class="op">.</span><span class="fu">postMessage</span>(<span class="st">&quot;hiasdad&quot;</span>)<span class="op">;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">App</span>(){</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">useEffect</span>(()<span class="kw">=&gt;</span>{<span class="fu">fn</span>()}<span class="op">,</span>[])</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span>(<span class="op">&lt;</span>div<span class="op">&gt;..&lt;/</span>div<span class="op">&gt;</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 
         </div>

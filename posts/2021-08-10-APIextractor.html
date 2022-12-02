@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - API Extractor</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>API Extractor</h1>
+            
+
+            <div class="info">
+    Posted on August 10, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
+    
+</div>
+<section id="setup" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Setup</h1>
+<p>This will install the tools globally</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @microsoft/api-documenter</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @microsoft/api-extractor</span></code></pre></div>
+</section>
+<section id="instruction" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Instruction</h1>
+<p>Go to your folder’s <code>tsconfig.json</code> and add the three</p>
+<div class="sourceCode" id="cb2" data-filename="tsconfig.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;$schema&quot;</span><span class="fu">:</span> <span class="st">&quot;http://json.schemastore.org/tsconfig&quot;</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="er">...</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;declaration&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;sourceMap&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;declarationMap&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">api-extractor</span> init</span></code></pre></div>
+<p>This will generate our <code>api-extractor.json</code></p>
+<p><strong>FIND PATH OF THE <code>index.d.ts</code> YOU WANT TO EXTRACT</strong></p>
+<p>In our example we found 1 of many <code>index.d.ts</code>’s in <code>./packages/next/index.d.ts</code></p>
+<p>Add <code>"typings" : "{PATH TO index.d.ts}"</code> to your package.json (Shown below)<br />
+BUT if you’re documenting a repo that already pregenerated it’s typings you dont have to modify package.json.</p>
+<div class="sourceCode" id="cb4" data-filename="package.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Bleh&quot;</span><span class="fu">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.0&quot;</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;typings&quot;</span><span class="fu">:</span> <span class="st">&quot;./packages/next/index.d.ts&quot;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>Run <code>npm run tsc</code> to generate the typings.</p>
+<p>The path of our chosen <code>index.d.ts</code> is in <code>./packages/next/index.d.ts</code></p>
+<div class="sourceCode" id="cb5" data-filename="api-extractor.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="er">&quot;mainEntryPointFilePath&quot;:</span> <span class="er">&quot;&lt;projectFolder&gt;/packages/next/index.d.ts&quot;,</span></span></code></pre></div>
+<p>Note some repos can have multiple <code>index.d.ts</code> which is the case in nextjs so we just choose one of them in the folders as the path.</p>
+<section id="mkdir" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> mkdir</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> etc</span></code></pre></div>
+</section>
+<section id="running" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> running</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">api-extractor</span> run <span class="at">--local</span> <span class="at">--verbose</span></span></code></pre></div>
+<p>API extractor generates a <code>temp</code> folder with <code>*.api.json</code> and <code>*.md</code> files</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> mydocs</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> mydocs/input </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> mydocs/markdown</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> temp/<span class="pp">*</span>.api.json mydocs/input/</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> temp/<span class="pp">*</span>.md mydocs/markdown/</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> mydocs</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">api-documenter</span> markdown</span></code></pre></div>
+<ul>
+<li>drag <code>temp/*.api.json</code> files into <code>mydocs/input</code></li>
+<li>drag <code>temp/*.md</code> files into <code>mydocs/markdown</code></li>
+</ul>
+<p>Alternatively you can just run this command below in project folder</p>
+<div class="sourceCode" id="cb9" data-filename="MkDocs"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> etc <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-r</span> mydocs <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-r</span> temp <span class="kw">&amp;&amp;</span> <span class="fu">mkdir</span> etc <span class="kw">&amp;&amp;</span> <span class="ex">api-extractor</span> run <span class="at">--local</span> <span class="at">--verbose</span> <span class="kw">&amp;&amp;</span> <span class="fu">mkdir</span> mydocs <span class="kw">&amp;&amp;</span> <span class="fu">mkdir</span> mydocs/input <span class="kw">&amp;&amp;</span> <span class="fu">mkdir</span> mydocs/markdown <span class="kw">&amp;&amp;</span> <span class="fu">cp</span> temp/<span class="pp">*</span>.api.json mydocs/input/ <span class="kw">&amp;&amp;</span> <span class="fu">cp</span> temp/<span class="pp">*</span>.md mydocs/markdown/ <span class="kw">&amp;&amp;</span> <span class="ex">api-documenter</span> markdown <span class="at">-i</span> mydocs/markdown</span></code></pre></div>
+<div class="sourceCode" id="cb10" data-filename="cleanDocs"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> etc <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-r</span> mydocs <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-r</span> temp</span></code></pre></div>
+</section>
+</section>
+<section id="typedoc" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Typedoc</h1>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">typedoc</span> <span class="at">--entryPoints</span> ./dist/uPlot.d.ts</span></code></pre></div>
+</section>
+<section id="next" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> next</h1>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install typedoc <span class="at">--save-dev</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> typedoc <span class="at">--version</span></span></code></pre></div>
+<section id="using-typedoc-on-nextjs" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> using typedoc on nextjs</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pnpm</span> install @vercel/cc <span class="at">-w</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pnpm</span> install <span class="at">-D</span> microbundle <span class="at">-w</span></span></code></pre></div>
+</section>
+</section>
+<section id="typedoc-1" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> typedoc</h1>
+<ul>
+<li>Typedoc depends on tsconfig.json file</li>
+</ul>
+<p>Example file structure</p>
+<ul>
+<li>myproj
+<ul>
+<li>package.json</li>
+<li>tsconfig.json</li>
+<li><span class="citation" data-cites="types">@types</span>
+<ul>
+<li>customtypes.d.ts</li>
+</ul></li>
+<li>node_modules
+<ul>
+<li><span class="citation" data-cites="types">@types</span></li>
+<li>node</li>
+</ul></li>
+<li>index.ts</li>
+<li>dist
+<ul>
+<li>index.d.ts</li>
+<li>index.js</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb14" data-filename="package.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>  <span class="er">&quot;scripts&quot;:</span> <span class="fu">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;npm run clean &amp;&amp; tsc&quot;</span><span class="fu">,</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;clean&quot;</span><span class="fu">:</span> <span class="st">&quot;tsc --build --clean&quot;</span><span class="fu">,</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;cleandoc&quot;</span><span class="fu">:</span> <span class="st">&quot;rm -r docs&quot;</span><span class="fu">,</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;doc&quot;</span><span class="fu">:</span> <span class="st">&quot;typedoc --entryPointStrategy resolve .&quot;</span><span class="fu">,</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;echo </span><span class="ch">\&quot;</span><span class="st">Error: no test specified</span><span class="ch">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="er">,</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="er">:::</span><span class="fu">{</span><span class="er">group=1At</span> <span class="er">glabel=plugin</span><span class="fu">}</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="er">```bash</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="er">npm</span> <span class="er">install</span> <span class="er">--save-dev</span> <span class="er">typedoc-plugin-missing-exports</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="er">npm</span> <span class="er">install</span> <span class="er">--save-dev</span> <span class="er">typedoc-umlclass</span></span></code></pre></div>
+<p>You dont even need to install typedoc since the plugins will use the appropriate versions.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">typedoc</span> .</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">//</span> is the same as the line below<span class="kw">;</span> <span class="ex">default</span> strategy is <span class="kw">`</span><span class="ex">resolve</span><span class="kw">`</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">typedoc</span> <span class="at">--entryPointStrategy</span> resolve <span class="at">--entryPoints</span> .</span></code></pre></div>
+<p>This will document basically exactly what you ened
+* Your index.ts generated index.d.ts (REMEMBER: if you dont export the variable the types wont be generated)</p>
+<p>:::</p>
+<div data-group="1At" data-glabel="noplugin">
+<p>Right now there is no way to generate EXACTLY the types of your files and it’s dependencies WITHOUT documenting all of the node_modules.</p>
+<hr />
+<p>Document your 1 main file generated index.d.ts</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">typedoc</span> .</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">//</span> is the same as the line below<span class="kw">;</span> <span class="ex">default</span> strategy is <span class="kw">`</span><span class="ex">resolve</span><span class="kw">`</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">typedoc</span> <span class="at">--entryPointStrategy</span> resolve <span class="at">--entryPoints</span> .</span></code></pre></div>
+<hr />
+<p>Document our generated index.d.ts and our manually created customtypes.d.ts without documenting the other node_modules.</p>
+<p>In tsconfig.json, Compiler options can be anything since our <code>--exclude</code> option will override it. (this means we can do <code>"skipLibCheck": true,</code> with <code>"typeRoots" : [ "node_modules/@types"]</code> in tsconfig which will be ignored by typedoc due to exclude option)</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">typedoc</span> <span class="at">--exclude</span> <span class="st">'node_modules/**/*.ts'</span> <span class="at">--entryPointStrategy</span> expand <span class="at">--entryPoints</span> .</span></code></pre></div>
+<p>Alternatively</p>
+<div class="sourceCode" id="cb19" data-filename="tsconfig.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="er">&quot;skipLibCheck&quot;:</span> <span class="er">true,</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="er">&quot;typeRoots&quot;</span> <span class="er">:</span> <span class="ot">[]</span><span class="er">,</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="er">//</span> <span class="er">DO</span> <span class="er">NOT</span> <span class="er">SET</span> <span class="er">typeRoots</span> <span class="er">as</span> <span class="er">--&gt;</span> <span class="er">//</span> <span class="er">&quot;typeRoots&quot;</span> <span class="er">:</span> <span class="ot">[</span> <span class="st">&quot;node_modules/@types&quot;</span><span class="ot">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">typedoc</span> <span class="at">--expand</span> <span class="at">--entryPoints</span> .</span></code></pre></div>
+<hr />
+<p>Document including types from node_modules</p>
+<p>In tsconfig.json, Compiler options</p>
+<div class="sourceCode" id="cb21" data-filename="tsconfig.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="er">//</span> <span class="er">&quot;skipLibCheck&quot;:</span> <span class="er">true</span> <span class="er">or</span> <span class="er">false</span> <span class="er">doesnt</span> <span class="er">really</span> <span class="er">matter</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="er">&quot;typeRoots&quot;</span> <span class="er">:</span> <span class="ot">[</span> <span class="st">&quot;node_modules/@types&quot;</span><span class="ot">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">typedoc</span> <span class="at">--entryPointStrategy</span> expand <span class="at">--entryPoints</span> .</span></code></pre></div>
+<p>This may be useful if you use use types from node_modules dependencies but the downside is you cant force it to only choose dependencies that your code uses, so it documents types from all dependencies.</p>
+</div>
+</section>
+<section id="webpack-npm-package" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Webpack npm package</h1>
+<p><a href="https://github.com/userJY/npmFrontendTemplateWebpack">https://github.com/userJY/npmFrontendTemplateWebpack</a></p>
+<ul>
+<li>Write our code in the <code>src</code> folder.</li>
+<li>Webpack will build our js and types to the <code>lib</code> folder and the htmlplugin generate a html file in the <code>lib/demo</code> folder to run our library on the browser.<br />
+</li>
+<li>On publish, we simply delete the <code>lib/demo</code> folder and publish the rest of the <code>lib</code> folder.</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> typedoc-plugin-missing-exports</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> typedoc-umlclass</span></code></pre></div>
+<ul>
+<li>repo
+<ul>
+<li>package.json</li>
+<li>tsconfig.json</li>
+<li>webpack.config.js</li>
+<li>lib &lt;—- <code>path: path.resolve(__dirname, 'lib'),</code> output used for publishing
+<ul>
+<li>demo
+<ul>
+<li>index.html &lt;— <code>filename: path.resolve('lib', 'demo','index.html'),</code> HTMLWebpackPlugin input (3)</li>
+</ul></li>
+<li><span class="citation" data-cites="types">@types</span> &lt;—-<code>{ from: "src/@types", to: "@types" },</code> CopyPlugin output (5)
+<ul>
+<li>custom.d.ts<br />
+</li>
+</ul></li>
+<li>index.d.ts &lt;— Generated from typescript declarations</li>
+<li>index.js &lt;—- <code>filename: 'index.js',</code> (2)</li>
+</ul></li>
+<li>src
+<ul>
+<li><span class="citation" data-cites="types">@types</span> &lt;—-<code>{ from: "src/@types", to: "@types" },</code> CopyPlugin input (5)
+<ul>
+<li>custom.d.ts<br />
+</li>
+</ul></li>
+<li>template.html &lt;—- <code>template: path.resolve('src','template.html')</code> HTMLWebpackPlugin input (4)</li>
+<li>index.ts &lt;– <code>index: path.resolve(__dirname, 'src', 'index.ts'),</code> (1)</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">'path'</span>)<span class="op">;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> HTMLWebpackPlugin <span class="op">=</span> <span class="pp">require</span>(<span class="st">'html-webpack-plugin'</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> CopyPlugin <span class="op">=</span> <span class="pp">require</span>(<span class="st">&quot;copy-webpack-plugin&quot;</span>)<span class="op">;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">//commonJS syntax</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> {</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">mode</span><span class="op">:</span> <span class="st">'development'</span><span class="op">,</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">entry</span><span class="op">:</span> {</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">index</span><span class="op">:</span> path<span class="op">.</span><span class="fu">resolve</span>(<span class="bu">__dirname</span><span class="op">,</span> <span class="st">'src'</span><span class="op">,</span> <span class="st">'index.ts'</span>)<span class="op">,</span> <span class="co">// (1)</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span><span class="op">:</span> {</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>        <span class="dt">path</span><span class="op">:</span> path<span class="op">.</span><span class="fu">resolve</span>(<span class="bu">__dirname</span><span class="op">,</span> <span class="st">'lib'</span>)<span class="op">,</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">filename</span><span class="op">:</span> <span class="st">'index.js'</span><span class="op">,</span> <span class="co">// (2)</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">clean</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>        <span class="dt">assetModuleFilename</span><span class="op">:</span> <span class="st">'[name][ext]'</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">...,</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">plugins</span> <span class="op">:</span> [</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>        <span class="kw">new</span> <span class="fu">HTMLWebpackPlugin</span>({</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>            <span class="dt">bleh</span><span class="op">:</span> <span class="st">&quot;Webpack App&quot;</span><span class="op">,</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>            <span class="dt">filename</span><span class="op">:</span> path<span class="op">.</span><span class="fu">resolve</span>(<span class="st">'lib'</span><span class="op">,</span> <span class="st">'demo'</span><span class="op">,</span><span class="st">'index.html'</span>)<span class="op">,</span> <span class="co">// (3)</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>            <span class="dt">template</span><span class="op">:</span> path<span class="op">.</span><span class="fu">resolve</span>(<span class="st">'src'</span><span class="op">,</span><span class="st">'template.html'</span>) <span class="co">// (4)</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>        })<span class="op">,</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>        <span class="kw">new</span> <span class="fu">CopyPlugin</span>({</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>            <span class="dt">patterns</span><span class="op">:</span> [</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>              { <span class="dt">from</span><span class="op">:</span> <span class="st">&quot;src/@types&quot;</span><span class="op">,</span> <span class="dt">to</span><span class="op">:</span> <span class="st">&quot;@types&quot;</span> }<span class="op">,</span>  <span class="co">// (5)</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>            ]<span class="op">,</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>          })<span class="op">,</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">devServer</span><span class="op">:</span> {</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>        <span class="dt">static</span><span class="op">:</span> {</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>            <span class="dt">directory</span><span class="op">:</span> path<span class="op">.</span><span class="fu">resolve</span>(<span class="bu">__dirname</span><span class="op">,</span><span class="st">'lib'</span><span class="op">,</span> <span class="st">'demo'</span>)</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>        }<span class="op">,</span></span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>        <span class="dt">port</span><span class="op">:</span> <span class="dv">5555</span><span class="op">,</span></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>        <span class="dt">open</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>        <span class="dt">hot</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>        <span class="dt">compress</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>        <span class="dt">historyApiFallback</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>    <span class="dt">devtool</span><span class="op">:</span> <span class="st">&quot;inline-source-map&quot;</span><span class="op">,</span></span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">//the compiled website is obfusticated JS, and errors will only show the compiled JS</span></span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>    <span class="co">//source-map lets you know where in your source is your error</span></span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>package.json</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>  <span class="er">&quot;main&quot;:</span> <span class="er">&quot;./lib/index.js&quot;,</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="er">&quot;types&quot;:</span> <span class="er">&quot;./lib/index.d.ts&quot;,</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="er">&quot;files&quot;:</span> <span class="ot">[</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;lib/**/*&quot;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="er">,</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">&quot;scripts&quot;:</span> <span class="fu">{</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;webpack&quot;</span><span class="fu">,</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;dclean&quot;</span><span class="fu">:</span> <span class="st">&quot;rm -rf docs&quot;</span><span class="fu">,</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;doc&quot;</span><span class="fu">:</span> <span class="st">&quot;rm -rf docs &amp;&amp; typedoc --entryPointStrategy resolve ./src/index.ts&quot;</span><span class="fu">,</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;npm run clean &amp;&amp; webpack &amp;&amp; webpack serve --https&quot;</span><span class="fu">,</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;clean&quot;</span><span class="fu">:</span> <span class="st">&quot;tsc --build --clean&quot;</span><span class="fu">,</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;publish&quot;</span> <span class="fu">:</span> <span class="st">&quot;npm run build &amp;&amp; rm -rf lib/demo &amp;&amp; npm run doc &amp;&amp; npm publish&quot;</span><span class="fu">,</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;echo </span><span class="ch">\&quot;</span><span class="st">Error: no test specified</span><span class="ch">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="er">,</span></span></code></pre></div>
+<p>tsconfig.json</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        <span class="er">/*</span> <span class="er">Basics</span> <span class="er">*/</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;outDir&quot;</span><span class="fu">:</span> <span class="st">&quot;./lib&quot;</span><span class="fu">,</span> <span class="er">/*</span> <span class="er">output</span> <span class="er">dir</span> <span class="er">of</span> <span class="er">emitted</span> <span class="er">js</span> <span class="er">files</span> <span class="er">*/</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;declaration&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="er">/*Generate</span> <span class="er">*.d.ts</span> <span class="er">files*/</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="er">...</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;skipLibCheck&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="er">/*</span> <span class="er">skips</span> <span class="er">checking</span> <span class="er">*.d.ts</span> <span class="er">of</span> <span class="er">ALL</span> <span class="er">node_modules/@types</span> <span class="er">BUT</span> <span class="er">type-checks</span> <span class="er">if</span> <span class="er">app</span> <span class="er">depends</span> <span class="er">on</span> <span class="er">the</span> <span class="er">module</span> <span class="er">*/</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;typeRoots&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;src/@types&quot;</span><span class="ot">,</span><span class="st">&quot;node_modules/@types&quot;</span><span class="ot">]</span><span class="fu">,</span> <span class="er">/*List</span> <span class="er">of</span> <span class="er">folder</span> <span class="er">to</span> <span class="er">include</span> <span class="er">type</span> <span class="er">definition</span><span class="fu">,</span> <span class="er">default</span> <span class="er">is</span> <span class="er">`node_modules/@types/</span> <span class="er">*/</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="er">//Generally</span><span class="fu">,</span> <span class="er">include</span> <span class="er">source</span> <span class="er">directory;</span> <span class="er">exclude</span> <span class="er">distribution</span> <span class="er">directory</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;include&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;src/**/*.ts&quot;</span><span class="ot">,</span> <span class="st">&quot;src/**/*.tsx&quot;</span><span class="ot">,</span> <span class="st">&quot;src/**/*.js&quot;</span><span class="ot">,</span> <span class="st">&quot;src/**/*.jsx&quot;</span><span class="ot">]</span><span class="fu">,</span> <span class="er">/*</span> <span class="er">Specifies</span> <span class="er">an</span> <span class="er">array</span> <span class="er">of</span> <span class="er">filenames</span> <span class="er">or</span> <span class="er">patterns</span> <span class="er">to</span> <span class="er">include</span> <span class="er">in</span> <span class="er">the</span> <span class="er">program.</span> <span class="er">*/</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;exclude&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;lib&quot;</span><span class="ot">,</span><span class="st">&quot;node_modules&quot;</span><span class="ot">,</span> <span class="st">&quot;doc&quot;</span><span class="ot">,</span> <span class="st">&quot;jest.config.ts&quot;</span><span class="ot">,</span> <span class="st">&quot;**/*.spec.ts&quot;</span><span class="ot">]</span>  <span class="er">/*</span> <span class="er">Specifies</span> <span class="er">an</span> <span class="er">array</span> <span class="er">of</span> <span class="er">filenames</span> <span class="er">or</span> <span class="er">patterns</span> <span class="er">that</span> <span class="er">should</span> <span class="er">be</span> <span class="er">skipped</span> <span class="er">when</span> <span class="er">resolving</span> <span class="st">&quot;include&quot;</span><span class="er">:</span><span class="ot">[</span><span class="er">..</span><span class="ot">]</span> <span class="er">above</span> <span class="er">*/</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+   
+            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

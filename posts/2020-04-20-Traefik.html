@@ -146,8 +146,7 @@
 <li><a href="#ports-and-network"><span class="toc-section-number">2.4</span> Ports and Network</a></li>
 </ul></li>
 <li><a href="#memory-limit"><span class="toc-section-number">3</span> Memory limit</a></li>
-<li><a href="#neat-trick"><span class="toc-section-number">4</span> Neat trick</a></li>
-<li><a href="#mistakes"><span class="toc-section-number">5</span> Mistakes</a></li>
+<li><a href="#docker-compose"><span class="toc-section-number">4</span> Docker-Compose</a></li>
 </ul></div>
 <section id="basics" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Basics</h1>
@@ -380,7 +379,6 @@ Executing <code class="sourceCode bash"><span class="ex">/usr/local/bin/youtube-
 </section>
 <section id="docker-run-containerid-sh--c-echo-hi" class="level3" data-number="2.3.4">
 <h3 data-number="2.3.4"><span class="header-section-number">2.3.4</span> docker run &lt;containerID&gt; sh -c ‘echo hi’</h3>
-<p>Summary: Use brackets to supply arguments to binary executables</p>
 <p>we use <code class="sourceCode bash"><span class="fu">sh</span> <span class="at">-c</span></code> because it allows us to run shell with $PATH and Environment vars.</p>
 <p>We can have our Dockerfile use <code class="sourceCode bash"><span class="fu">sh</span> <span class="at">-c</span></code> by <strong>unbracketing</strong> the ENTRYPOINT or CMD</p>
 <ol type="1">
@@ -423,26 +421,21 @@ Executing <code class="sourceCode bash"><span class="ex">/usr/local/bin/youtube-
 <li><code class="sourceCode bash"><span class="ex">/bin/ping</span> <span class="at">-c</span> 3 localhost</code></li>
 </ul></li>
 </ul>
-<section id="examples" class="level4" data-number="2.3.4.1">
-<h4 data-number="2.3.4.1"><span class="header-section-number">2.3.4.1</span> Examples</h4>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">CMD</span> [<span class="st">&quot;/code-server&quot;</span>,<span class="st">&quot;--accept-server-license-terms&quot;</span>]</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN</span> [<span class="st">&quot;ls&quot;</span>,<span class="st">&quot;/lib&quot;</span>]</span></code></pre></div>
-</section>
 </section>
 <section id="copy-files-from-local-to-container" class="level3" data-number="2.3.5">
 <h3 data-number="2.3.5"><span class="header-section-number">2.3.5</span> Copy files from local to container</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> bleh.txt</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> cp ./bleh.txt <span class="dt">\&lt;</span>containerID or name\&gt;:/usr/src/app/</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> bleh.txt</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> cp ./bleh.txt <span class="dt">\&lt;</span>containerID or name\&gt;:/usr/src/app/</span></code></pre></div>
 </section>
 <section id="docker-diff---check-what-our-container-did" class="level3" data-number="2.3.6">
 <h3 data-number="2.3.6"><span class="header-section-number">2.3.6</span> docker diff - Check what our container did</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> diff <span class="dt">\&lt;</span>containerID or name<span class="dt">\&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C /usr</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C /usr/src</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C /usr/src/app</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A /usr/src/app/bleh.txt</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C /root</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A /root/.ash_history</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> diff <span class="dt">\&lt;</span>containerID or name<span class="dt">\&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C /usr</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C /usr/src</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C /usr/src/app</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A /usr/src/app/bleh.txt</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C /root</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A /root/.ash_history</span></span></code></pre></div>
 <p>A = Added<br />
 C = Changed<br />
 D = Deleted</p>
@@ -451,70 +444,52 @@ D = Deleted</p>
 <section id="v-volume-for-shared-access" class="level3" data-number="2.3.7">
 <h3 data-number="2.3.7"><span class="header-section-number">2.3.7</span> -v Volume for shared access</h3>
 <p>Allow your local machine and container to access the same resource</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-v</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span><span class="st">/localdir:/remotedir&quot;</span> ubuntu </span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-v</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span><span class="st">/localdir:/remotedir&quot;</span> ubuntu </span></code></pre></div>
 <p><code class="sourceCode bash"><span class="ex">-v</span> <span class="op">&lt;</span>localpath<span class="op">&gt;</span>:<span class="op">&lt;</span>remotepath<span class="op">&gt;</span></code></p>
 </section>
 </section>
 <section id="ports-and-network" class="level2" data-number="2.4">
 <h2 data-number="2.4"><span class="header-section-number">2.4</span> Ports and Network</h2>
-<p>Expose port: tell container to listen to a certain port(doesn’t do much but helps for documentation)
-<code class="sourceCode dockerfile"><span class="kw">EXPOSE</span> &lt;port&gt;</code> in Dockerfile</p>
+<p>Expose port: tell container to listen to a certain port(doesn’t do much but helps for documentation) <code class="sourceCode dockerfile"><span class="kw">EXPOSE</span> &lt;port&gt;</code> in Dockerfile</p>
 <p>Publish port: map local port to container port<br />
 <code class="sourceCode bash"><span class="ex">-p</span> <span class="op">&lt;</span>local-port<span class="op">&gt;</span>:<span class="op">&lt;</span>remote-container-port<span class="op">&gt;</span></code></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-p</span> 3000:5000 ubuntu</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-p</span> 3000:5000 ubuntu</span></code></pre></div>
 <p>We go to http://localhost:3000 to access the site.</p>
 </section>
 </section>
 <section id="memory-limit" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Memory limit</h1>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--memory</span><span class="op">=</span><span class="st">&quot;256m&quot;</span> nginx </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--cpus</span><span class="op">=</span><span class="st">&quot;.5&quot;</span> nginx</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--memory</span><span class="op">=</span><span class="st">&quot;256m&quot;</span> nginx </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--cpus</span><span class="op">=</span><span class="st">&quot;.5&quot;</span> nginx</span></code></pre></div>
 </section>
-<section id="neat-trick" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Neat trick</h1>
-<p>In your <code>Dockerfile</code> put this as your CMD to keep your container running so you can investigate it</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="at">CMD sh -c 'while true; do date; sleep 1; done'</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="at">CMD [&quot;sh&quot;,&quot;-c&quot;, &quot;while true; do date; sleep 1; done&quot;]</span><span class="co"> #alternatively</span></span></code></pre></div>
-</section>
-<section id="mistakes" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Mistakes</h1>
-<p><strong>Double check</strong> your <code>Dockerfile</code> with <code>vim</code> because even using vscode on a linux-server, there will be some strange inputs</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN</span> mv /tmp/lib /lib <span class="co">#BAD </span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#copied lib folder INTO a lib folder, results in /lib/lib</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN</span> mv /tmp/lib/<span class="pp">*</span> /lib <span class="co">#BAD</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#surprisingly doesnt work because docker run `sh -c` which is shell and does NOT have wildcards * </span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN</span> cp <span class="at">-r</span> /tmp/lib/ /lib <span class="co">#GOOD</span></span></code></pre></div>
-<p>Scenario: We want to add our library files</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#no permission</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN</span> chmod 777 /lib <span class="co">#BAD</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Docker-Compose</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="ex">File</span> Structure  </span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> docker-compose.yml</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> example-frontend</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*</span> Dockerfile</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> example-backend</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*</span> Dockerfile</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="kw">```</span><span class="ex">{.yml</span> .numberLines filename=<span class="st">&quot;docker-compose.yml&quot;</span>}</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="ex">version:</span> <span class="st">&quot;3.9&quot;</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="ex">services:</span></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>     <span class="ex">myFront:</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>          <span class="ex">image:</span> frontend:v1</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>          <span class="ex">ports:</span> </span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>              <span class="ex">-</span> <span class="st">&quot;3200:5000&quot;</span></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>          <span class="ex">build:</span> ./example-frontend</span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>     <span class="ex">myBack:</span></span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>          <span class="ex">image:</span> backend:v1</span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>          <span class="ex">ports:</span> </span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>              <span class="ex">-</span> <span class="st">&quot;3300:8080&quot;</span></span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>          <span class="ex">build:</span> ./example-backend</span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> build </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div>
+<section id="docker-compose" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Docker-Compose</h1>
+<p>File Structure</p>
+<ul>
+<li>docker-compose.yml</li>
+<li>example-frontend
+<ul>
+<li>Dockerfile</li>
+</ul></li>
+<li>example-backend
+<ul>
+<li>Dockerfile</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb18" data-filename="docker-compose.yml"><pre class="sourceCode numberSource yml numberLines"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;3.9&quot;</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="at">     </span><span class="fu">myFront</span><span class="kw">:</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> frontend:v1</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="at">          </span><span class="fu">ports</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="at">              </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;3200:5000&quot;</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="at">          </span><span class="fu">build</span><span class="kw">:</span><span class="at"> ./example-frontend</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="at">     </span><span class="fu">myBack</span><span class="kw">:</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> backend:v1</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="at">          </span><span class="fu">ports</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="at">              </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;3300:8080&quot;</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="at">          </span><span class="fu">build</span><span class="kw">:</span><span class="at"> ./example-backend</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> build </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div>
 <p>line 6 build “Dockerfile” in current dir “.”<br />
 and create image named “ads/wrga:latest” (line 5)</p>
 <p>docker-compose <code class="sourceCode yaml"><span class="at">environment</span></code> vs Dockerfile <code class="sourceCode dockerfile"><span class="kw">ENV</span></code>.<br />
