@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - functional tag</title>
+        <title>Jason Yang - JS Functions that Replace HTMLElement</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,49 +103,61 @@
         </div>
 
         <div id="content">
-            <h1>functional tag</h1>
+            <h1>JS Functions that Replace HTMLElement</h1>
             
 
-            <ul class="postlist">
+            <div class="info">
+    Posted on March 23, 2021
     
-        <li>
-            <a href="../posts/2022-07-01-PatternMatch.html">What is Pattern matching?</a> 
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2020-04-05-TLA.html">TLA</a> 
-        </li>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
     
-        <li>
-            <a href="../posts/2019-09-01-NQueen.html">NQueen in Haskell</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Monad.html">Monads, Bind, Return</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-FoldInduction.html">Fold and Induction</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Applicative.html">Applicative</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-12-05-LeftFoldTailLoop.html">For Loops, Tail recursion, and Left fold</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-08-20-StreamLambda.html">Implementing Stream with lambdas</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-07-19-TailNotPure.html">Recursion - Slicing the tail of list is impure</a> 
-        </li>
-    
-</ul>
-<script></script>
+</div>
+<p>Common method is a function that replaces an existing DOM element with the one we created in the function. Common mistake is to simply assign the pre-existing target Element with the one we built in the function.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">//Silent failure</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> modDom <span class="op">=</span> (target<span class="op">:</span> <span class="bu">HTMLCanvasElement</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> source <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">'canvas'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    source<span class="op">.</span><span class="at">width</span> <span class="op">=</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    source<span class="op">.</span><span class="at">height</span> <span class="op">=</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    source<span class="op">.</span><span class="fu">getContext</span>(<span class="st">&quot;2d&quot;</span>)<span class="op">.</span><span class="fu">fillRect</span>(<span class="dv">20</span><span class="op">,</span><span class="dv">20</span><span class="op">,</span><span class="dv">150</span><span class="op">,</span><span class="dv">150</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">//DOES NOT WORK</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    target <span class="op">=</span> source  </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">//Silent failure</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> modDom <span class="op">=</span> (target<span class="op">:</span> <span class="bu">HTMLCanvasElement</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> source <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">'canvas'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    source<span class="op">.</span><span class="at">width</span> <span class="op">=</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    source<span class="op">.</span><span class="at">height</span> <span class="op">=</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    source<span class="op">.</span><span class="fu">getContext</span>(<span class="st">&quot;2d&quot;</span>)<span class="op">.</span><span class="fu">fillRect</span>(<span class="dv">20</span><span class="op">,</span><span class="dv">20</span><span class="op">,</span><span class="dv">150</span><span class="op">,</span><span class="dv">150</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">//DOES NOT WORK</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Object</span><span class="op">.</span><span class="fu">assign</span>(target<span class="op">,</span>source)    </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">//Meh?</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> modDom <span class="op">=</span> (target<span class="op">:</span> <span class="bu">HTMLCanvasElement</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> source <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">'canvas'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    source<span class="op">.</span><span class="at">width</span> <span class="op">=</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    source<span class="op">.</span><span class="at">height</span> <span class="op">=</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    source<span class="op">.</span><span class="fu">getContext</span>(<span class="st">&quot;2d&quot;</span>)<span class="op">.</span><span class="fu">fillRect</span>(<span class="dv">20</span><span class="op">,</span><span class="dv">20</span><span class="op">,</span><span class="dv">150</span><span class="op">,</span><span class="dv">150</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">//GOOD? Sometimes this fails when dealing with Webgl</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    target<span class="op">.</span><span class="fu">replaceWith</span>(source)<span class="op">;</span>     </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Best way is just to modify it directly</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">//GOOD </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> modDom <span class="op">=</span> (target<span class="op">:</span> <span class="bu">HTMLCanvasElement</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// target = document.createElement('canvas')</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    target<span class="op">.</span><span class="at">width</span> <span class="op">=</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    target<span class="op">.</span><span class="at">height</span> <span class="op">=</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    target<span class="op">.</span><span class="fu">getContext</span>(<span class="st">&quot;2d&quot;</span>)<span class="op">.</span><span class="fu">fillRect</span>(<span class="dv">20</span><span class="op">,</span><span class="dv">20</span><span class="op">,</span><span class="dv">150</span><span class="op">,</span><span class="dv">150</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">

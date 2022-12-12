@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - functional tag</title>
+        <title>Jason Yang - Property</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,49 +103,61 @@
         </div>
 
         <div id="content">
-            <h1>functional tag</h1>
+            <h1>Property</h1>
             
 
-            <ul class="postlist">
+            <div class="info">
+    Posted on September 21, 2021
     
-        <li>
-            <a href="../posts/2022-07-01-PatternMatch.html">What is Pattern matching?</a> 
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2020-04-05-TLA.html">TLA</a> 
-        </li>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>
     
-        <li>
-            <a href="../posts/2019-09-01-NQueen.html">NQueen in Haskell</a> 
-        </li>
+</div>
+<script blocking>  
+    // const a = document.getElementById("content")
+    // a.innerHTML = "<div>line 26: 'window' element not defined</div>".repeat(50)
+    const addNext = (src,tgt) => {src.parentNode.insertBefore(tgt,src.nextSibling)};
+    const strToNode = (src) => (new DOMParser().parseFromString(src, "text/html").body.firstElementChild)
+    window.addEventListener("load", () => {
+        const content = document.querySelectorAll("section")
+        const builds = [...content].map(x=>(btoa(x.outerHTML)))
+    const a = document.getElementById("content")
+    // const saved = btoa(a.innerHTML)
+    // a.innerHTML = ""
+    const b = document.createElement("input")
+    a.appendChild(b);
+    b.addEventListener("change",(e)=>{
+        if(e.target.value == "5"){
+            const dcontent = document.querySelectorAll("section")
+            const starterdiv = document.querySelectorAll("div.info")[document.querySelectorAll("div.info").length - 1]
+            const lcontent = [...builds].map(x=>(strToNode(atob(x))))
+            lcontent.forEach(x => {addNext(starterdiv,x)})
+            // lcontent.forEach(x => {addNext(starterdiv,x)})
+        }
+    })
     
-        <li>
-            <a href="../posts/2019-08-23-Monad.html">Monads, Bind, Return</a> 
-        </li>
+    })
     
-        <li>
-            <a href="../posts/2019-08-23-FoldInduction.html">Fold and Induction</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Applicative.html">Applicative</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-12-05-LeftFoldTailLoop.html">For Loops, Tail recursion, and Left fold</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-08-20-StreamLambda.html">Implementing Stream with lambdas</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-07-19-TailNotPure.html">Recursion - Slicing the tail of list is impure</a> 
-        </li>
-    
+</script>
+<ol type="1">
+<li>Go to ad</li>
+</ol>
+<section id="no" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> no</h1>
+<p>fae</p>
+<p>wade</p>
+</section>
+<section id="search-request" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Search request</h1>
+<ul>
+<li>Search request for Block: XXXX, Lot: XX, “house and street addr , NY zip add”.</li>
+<li>Requesting Any and all open or closed permits, surveys, plans and violations regarding septic and well.</li>
+<li>Information regarding presence of an underground oil tank including permits, remediation reports, environmental reports.</li>
 </ul>
-<script></script>
+</section>
+
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">

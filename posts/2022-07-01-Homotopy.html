@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - functional tag</title>
+        <title>Jason Yang - Quick Homotopy Type Theory</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,49 +103,33 @@
         </div>
 
         <div id="content">
-            <h1>functional tag</h1>
+            <h1>Quick Homotopy Type Theory</h1>
             
 
-            <ul class="postlist">
+            <div class="info">
+    Posted on July  1, 2022
     
-        <li>
-            <a href="../posts/2022-07-01-PatternMatch.html">What is Pattern matching?</a> 
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2020-04-05-TLA.html">TLA</a> 
-        </li>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'logic'." href="../tags/logic.html">logic</a>
     
-        <li>
-            <a href="../posts/2019-09-01-NQueen.html">NQueen in Haskell</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Monad.html">Monads, Bind, Return</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-FoldInduction.html">Fold and Induction</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Applicative.html">Applicative</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-12-05-LeftFoldTailLoop.html">For Loops, Tail recursion, and Left fold</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-08-20-StreamLambda.html">Implementing Stream with lambdas</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-07-19-TailNotPure.html">Recursion - Slicing the tail of list is impure</a> 
-        </li>
-    
+</div>
+<section id="type-formation" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Type formation</h1>
+<p><span class="math display">\[ \cfrac{\vdash A: Type \qquad \vdash x,y: A}{\vdash x=_{A}y : Type} \tag{type formation}\]</span></p>
+<ul>
+<li>forming a type like <span class="math inline">\(\vdash 0 = 1 : Type\)</span> is not asserting that <span class="math inline">\(0 = 1\)</span> , it is more like it is asking whether <span class="math inline">\(0 = 1\)</span> which is only true if a term inhabits this type <span class="math inline">\(0 = 1\)</span></li>
+<li><span class="math inline">\(\vdash x = y : Type\)</span> means there are many prove <span class="math inline">\(x = y\)</span> similarly a function from <span class="math inline">\(Int -&gt; Bool\)</span> there are many functions that satisfy the typing.
+<ul>
+<li>A single path between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> represents a single proof of equality.</li>
+<li>The path between aka connect 2 paths aka the proof that connects two proof of equality is called a homotopy.</li>
+</ul></li>
 </ul>
-<script></script>
+<p><span class="math display">\[ cfrac{\vdash x: A}{\vdash refl_{x} : x=_{A}x} \tag{term intro}\]</span></p>
+<p><span class="math inline">\(x,y: A , p : x =_{A} y \vdash B(x,y,p)\)</span> , to produce a term of type B(x,y,p) it suffices to assume y is x and p is refl_{x}</p>
+</section>
+
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">

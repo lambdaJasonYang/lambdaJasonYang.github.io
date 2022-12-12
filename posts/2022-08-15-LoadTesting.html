@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Load Testing Vegeta</title>
+        <title>Jason Yang - Load Testing Vegeta Locust</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,7 +103,7 @@
         </div>
 
         <div id="content">
-            <h1>Load Testing Vegeta</h1>
+            <h1>Load Testing Vegeta Locust</h1>
             
 
             <div class="info">
@@ -116,42 +116,42 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#install-vegeta"><span class="toc-section-number">1</span> Install vegeta</a></li>
-<li><a href="#load-testing"><span class="toc-section-number">2</span> Load testing</a>
+<li><a href="#vegeta"><span class="toc-section-number">1</span> vegeta</a>
 <ul>
-<li><a href="#hits-per-second"><span class="toc-section-number">2.1</span> 100 hits per second</a></li>
-<li><a href="#as-much-as-possible-hits"><span class="toc-section-number">2.2</span> As much as possible hits</a></li>
+<li><a href="#install"><span class="toc-section-number">1.1</span> Install</a></li>
+<li><a href="#hits-per-second"><span class="toc-section-number">1.2</span> 100 hits per second</a></li>
+<li><a href="#as-much-as-possible-hits"><span class="toc-section-number">1.3</span> As much as possible hits</a></li>
+<li><a href="#plotting"><span class="toc-section-number">1.4</span> Plotting</a></li>
+<li><a href="#report"><span class="toc-section-number">1.5</span> Report</a></li>
 </ul></li>
-<li><a href="#plotting"><span class="toc-section-number">3</span> Plotting</a></li>
-<li><a href="#report"><span class="toc-section-number">4</span> Report</a></li>
+<li><a href="#locust"><span class="toc-section-number">2</span> Locust</a></li>
 </ul></div>
-<section id="install-vegeta" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Install vegeta</h1>
+<section id="vegeta" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> vegeta</h1>
+<section id="install" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Install</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> Vegeta</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Vegeta</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/tsenart/vegeta/releases/download/v12.8.4/vegeta_12.8.4_linux_amd64.tar.gz</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> vegeta_12.8.4_linux_amd64.tar.gz </span></code></pre></div>
 </section>
-<section id="load-testing" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Load testing</h1>
-<section id="hits-per-second" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> 100 hits per second</h2>
+<section id="hits-per-second" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> 100 hits per second</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;GET http://192.168.1.245:3300&quot;</span> <span class="kw">|</span> <span class="ex">./vegeta</span> attack <span class="at">-name</span><span class="op">=</span>bleh <span class="at">-rate</span><span class="op">=</span>100 <span class="at">-duration</span><span class="op">=</span>5s <span class="op">&gt;</span> results.100qps.bin</span></code></pre></div>
 </section>
-<section id="as-much-as-possible-hits" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> As much as possible hits</h2>
+<section id="as-much-as-possible-hits" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> As much as possible hits</h2>
 <ul>
 <li>Set <code>-rate=0</code> representing infinity. Set <code>max-workers=100</code> to num of virtual threads.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;GET http://192.168.1.245:3300&quot;</span> <span class="kw">|</span> <span class="ex">./vegeta</span> attack <span class="at">-name</span><span class="op">=</span>1000qps <span class="at">-rate</span><span class="op">=</span>0 <span class="at">-duration</span><span class="op">=</span>15s <span class="at">-max-workers</span><span class="op">=</span>100</span></code></pre></div>
 </section>
-</section>
-<section id="plotting" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Plotting</h1>
+<section id="plotting" class="level2" data-number="1.4">
+<h2 data-number="1.4"><span class="header-section-number">1.4</span> Plotting</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./vegeta</span> plot results.100qps.bin <span class="op">&gt;</span> plot.html</span></code></pre></div>
 </section>
-<section id="report" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Report</h1>
+<section id="report" class="level2" data-number="1.5">
+<h2 data-number="1.5"><span class="header-section-number">1.5</span> Report</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./vegeta</span> report results.100qps.bin</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Requests      [total, rate, throughput]         405037, 6696.28, 5508.40</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Duration      [total, attack, wait]             1m7s, 1m0s, 6.869s</span></span>
@@ -160,6 +160,18 @@
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Bytes Out     [total, mean]                     0, 0.00</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Success       [ratio]                           91.60%</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Status Codes  [code:count]                      0:34016  200:371021</span></span></code></pre></div>
+</section>
+</section>
+<section id="locust" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Locust</h1>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip3</span> install locust</span></code></pre></div>
+<div class="sourceCode" id="cb7" data-filename="locustfile.py"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> locust <span class="im">import</span> HttpUser, task</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HelloWorldUser(HttpUser):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">@task</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> hello_world(<span class="va">self</span>):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.client.post(<span class="st">&quot;/api/authenticate&quot;</span>, json<span class="op">=</span>{<span class="st">&quot;username&quot;</span>:<span class="st">&quot;user&quot;</span>, <span class="st">&quot;password&quot;</span>:<span class="st">&quot;user&quot;</span>, <span class="st">&quot;rememberMe&quot;</span>: <span class="st">&quot;false&quot;</span>})</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a> </span></code></pre></div>
 </section>
 
         </div>

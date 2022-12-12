@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - functional tag</title>
+        <title>Jason Yang - Translate Sequent Calculus to ND</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,49 +103,59 @@
         </div>
 
         <div id="content">
-            <h1>functional tag</h1>
+            <h1>Translate Sequent Calculus to ND</h1>
             
 
-            <ul class="postlist">
+            <div class="info">
+    Posted on July  1, 2022
     
-        <li>
-            <a href="../posts/2022-07-01-PatternMatch.html">What is Pattern matching?</a> 
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2020-04-05-TLA.html">TLA</a> 
-        </li>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'logic'." href="../tags/logic.html">logic</a>
     
-        <li>
-            <a href="../posts/2019-09-01-NQueen.html">NQueen in Haskell</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Monad.html">Monads, Bind, Return</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-FoldInduction.html">Fold and Induction</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Applicative.html">Applicative</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-12-05-LeftFoldTailLoop.html">For Loops, Tail recursion, and Left fold</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-08-20-StreamLambda.html">Implementing Stream with lambdas</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-07-19-TailNotPure.html">Recursion - Slicing the tail of list is impure</a> 
-        </li>
-    
+</div>
+<p>3 types of systems: LK or Sequent Calc, ND and my custom.</p>
+<p>Visual proof trees with the root being the conclusion.<br />
+The leafs on top (P,Q,R,S) are the assumptions or <span class="math inline">\(\Gamma\)</span></p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820776f726c64207b0a73697a653d22332c33223b0a097b72616e6b3d73616d653b20502051205220533b7d0a202020207b205020512052207d2d3e20540a2020202053202d3e20550a202020207b542055207d202d3e20436f6e636c7573696f6e0a090a7d0a40656e64756d6c"></figure>
+<p>Each Sequent is it’s own proof tree. The rules tell us how to transform one tree to another.</p>
+<p>ND:</p>
+<p>elim-and</p>
+<p><span class="math display">\[\frac{\Gamma \vdash A \land B  }{\Gamma \vdash A}\]</span></p>
+<p>intro-and</p>
+<p><span class="math display">\[\frac{\Gamma \vdash A \qquad \Pi \vdash B  }{\Gamma, \Pi \vdash A \land B}\]</span></p>
+<ul>
+<li>Given: Some set of assumptions <span class="math inline">\(\Gamma\)</span> can produce a proof for <span class="math inline">\(A\)</span></li>
+<li>Given: another set of assumptions <span class="math inline">\(\Pi\)</span> can produce a proof for <span class="math inline">\(B\)</span>.<br />
+</li>
+<li>Therefore: we can produce a proof for <span class="math inline">\(A \land B\)</span> by combining the two set of assumptions <span class="math inline">\(\Gamma, \Pi\)</span>.</li>
 </ul>
-<script></script>
+<p>LK:</p>
+<p>left-and</p>
+<p><span class="math display">\[\frac{\Gamma , A,B  \vdash \Delta  }{\Gamma, A \land B \vdash \Delta}\]</span></p>
+<p>right-and</p>
+<p><span class="math display">\[\frac{\Gamma \vdash A, \Delta \qquad \Sigma \vdash B, \Pi  }{\Gamma, \Sigma \vdash \Delta, \Pi, A \land B}\]</span></p>
+<section id="lem" class="level4" data-number="0.0.0.1">
+<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> LEM</h4>
+<p>ND:</p>
+<p><span class="math display">\[\frac{\Gamma , A \vdash B \qquad \Pi , \neg A \vdash B  }{\Gamma, \Pi \vdash B}\]</span></p>
+<p>custom:</p>
+<p><span class="math display">\[\cfrac{\cfrac{[A \lor \neg A]^{lem}}{...}}{B} \]</span></p>
+</section>
+<section id="interlude" class="level4" data-number="0.0.0.2">
+<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Interlude</h4>
+<p>Notice that the right rules of LK, is very similar to the rules of ND.</p>
+</section>
+<section id="transformation" class="level4" data-number="0.0.0.3">
+<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> Transformation</h4>
+<p>LK builds proof trees from bottom up using pattern matching.<br />
+We want to prove</p>
+<p><span class="math display">\[ \vdash \neg \neg A \rightarrow A \]</span></p>
+<p>[look through LK table find a rule that looks like <span class="math inline">\(\cfrac{...}{... \vdash\ \fbox{}\rightarrow\fbox{}}\)</span>]<br />
+[the right-implication rule matches <span class="math inline">\(\cfrac{A,\Gamma \vdash \Delta, B}{\Gamma \vdash \Delta, A \rightarrow B}\)</span> ]</p>
+</section>
+
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">

@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - functional tag</title>
+        <title>Jason Yang - Category theory Notes</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,49 +103,169 @@
         </div>
 
         <div id="content">
-            <h1>functional tag</h1>
+            <h1>Category theory Notes</h1>
             
 
-            <ul class="postlist">
+            <div class="info">
+    Posted on July  1, 2022
     
-        <li>
-            <a href="../posts/2022-07-01-PatternMatch.html">What is Pattern matching?</a> 
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2020-04-05-TLA.html">TLA</a> 
-        </li>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'categorytheory'." href="../tags/categorytheory.html">categorytheory</a>
     
-        <li>
-            <a href="../posts/2019-09-01-NQueen.html">NQueen in Haskell</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Monad.html">Monads, Bind, Return</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-FoldInduction.html">Fold and Induction</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Applicative.html">Applicative</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-12-05-LeftFoldTailLoop.html">For Loops, Tail recursion, and Left fold</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-08-20-StreamLambda.html">Implementing Stream with lambdas</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-07-19-TailNotPure.html">Recursion - Slicing the tail of list is impure</a> 
-        </li>
-    
+</div>
+<p><a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=931719">Category theory with UML</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>Cat</th>
+<th>object</th>
+<th>morphism</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vect</td>
+<td>vector space</td>
+<td>linear maps</td>
+</tr>
+<tr class="even">
+<td>Groups</td>
+<td>unit</td>
+<td>group homomorphisms</td>
+</tr>
+<tr class="odd">
+<td>Mfd(manifolds)</td>
+<td>smooth manifolds</td>
+<td>Continuous Maps</td>
+</tr>
+<tr class="even">
+<td>Top</td>
+<td>Topological Spaces</td>
+<td>Continuous Maps</td>
+</tr>
+<tr class="odd">
+<td>Rel</td>
+<td>Sets</td>
+<td>Binary relations</td>
+</tr>
+<tr class="even">
+<td>Meas</td>
+<td>Measurable Spaces</td>
+<td>measurable maps</td>
+</tr>
+<tr class="odd">
+<td>Par</td>
+<td>sets</td>
+<td>partial functions</td>
+</tr>
+</tbody>
+</table>
+<section id="basics" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Basics</h1>
+<section id="isomorphisms" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Isomorphisms</h2>
+<ul>
+<li>Set: bijective maps</li>
+<li>Mfd(manifolds): diffeomorphisms</li>
+<li>Top : homeomorphisms which are invertible continuous map with continuous inverses.</li>
 </ul>
-<script></script>
+</section>
+<section id="monomorphisms" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Monomorphisms</h2>
+<ul>
+<li>Set: Injective maps</li>
+<li>Top: Injective continuous maps</li>
+<li>FVect(finite-dimension Vect): injective linear map</li>
+<li>Group: injective group homeomorphisms</li>
+</ul>
+</section>
+<section id="split-monomorphisms" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> Split monomorphisms</h2>
+<ul>
+<li><p>Set: Every injective function has a left inverse. Therefore every monomorphism is split.</p></li>
+<li><p>FVect: Every injective linear map has a left inverse. Therefore every monomorphism is split.</p></li>
+<li><p>Top:</p></li>
+</ul>
+<blockquote>
+<p>Generally, monomorphisms are not conceptually related to splits even though it looks the case in Set and FVect. General case is Top</p>
+</blockquote>
+</section>
+<section id="epimorphism" class="level2" data-number="1.4">
+<h2 data-number="1.4"><span class="header-section-number">1.4</span> Epimorphism</h2>
+<ul>
+<li>Set: Surjective map</li>
+<li>FVect: Surjective continuous linear map</li>
+<li>Algebra: inclusion
+<ul>
+<li>Natural number is Included in Integers</li>
+</ul></li>
+</ul>
+</section>
+<section id="split-epimorphism" class="level2" data-number="1.5">
+<h2 data-number="1.5"><span class="header-section-number">1.5</span> Split Epimorphism</h2>
+</section>
+</section>
+<section id="functors" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Functors</h1>
+<section id="cocycle" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Cocycle</h2>
+<p>Functors are just 1-cocycles</p>
+</section>
+</section>
+<section id="yoneda-embedding-theorem" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Yoneda Embedding Theorem</h1>
+<section id="matrix-example" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Matrix Example</h2>
+<p>A matrix transformation through row operation is a natural transformation between presheaves.</p>
+<p>Matrix transformation by row operation is isomorphic to a matrix</p>
+</section>
+</section>
+<section id="presheaf" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> PreSheaf</h1>
+<p>A functor that takes a dual morphism to set category.</p>
+<p><span class="math display">\[f^{OP} \Rightarrow Set\]</span></p>
+</section>
+<section id="applicative" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Applicative</h1>
+</section>
+<section id="natural" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Natural</h1>
+<ul>
+<li>All functors are endofunctors <code>functor :: Type* =&gt; Type*</code> wrt to coding
+<ul>
+<li><code>List :: Type* =&gt; Type*</code></li>
+<li><code>Maybe :: Type* =&gt; Type*</code></li>
+</ul></li>
+</ul>
+<p>Below is a natural transformation wrt Object a on functors List and Maybe<br />
+Natural Transformation can be considered a family of morphisms between functors wrt an object or morphism.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ot">g ::</span> ∀a b<span class="op">.</span> a <span class="ot">-&gt;</span> b </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">naturaltransformation_a ::</span> ∀ a<span class="op">.</span> <span class="dt">List</span> a <span class="ot">-&gt;</span> <span class="dt">Maybe</span> a</span></code></pre></div>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820666f6f207b0a202072616e6b646972203d204c520a202061205b6c6162656c203d2022666f72616c6c20613a3a547970652a225d0a20200a20200a2020737562677261706820636c7573746572617b0a20202062205b6c6162656c3d224c6973742061225d0a20202063205b6c6162656c3d224d617962652061225d0a20202062202d3e2063205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a202061202d3e2062205b636f6c6f723d677265656e206c6162656c3d2266756e63746f72225d0a202061202d3e2063205b636f6c6f723d677265656e206c6162656c3d2266756e63746f7222205d0a7d0a40656e64756d6c"></figure>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820666f6f207b0a72616e6b6469723d4c520a0a202061205b6c6162656c203d2022666f72616c6c20613a3a547970652a225d0a206131205b6c6162656c203d2022666f72616c6c20623a3a547970652a225d0a612d3e6131205b6c6162656c3d2267225d0a20200a20200a2020737562677261706820636c7573746572617b0a20202062205b6c6162656c3d224c6973742061225d0a20202063205b6c6162656c3d224d617962652061225d0a20202062202d3e2063205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a2020737562677261706820636c7573746572627b0a2020206231205b6c6162656c3d224c6973742062225d0a2020206331205b6c6162656c3d224d617962652062225d0a2020206231202d3e206331205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a202061202d3e2062205b636f6c6f723d677265656e206c6162656c3d224c69737446225d0a202061202d3e2063205b636f6c6f723d677265656e206c6162656c3d224d617962654622205d0a0a20206131202d3e206231205b636f6c6f723d677265656e206c6162656c3d224c69737446225d0a20206131202d3e206331205b636f6c6f723d677265656e206c6162656c3d224d617962654622205d0a202062202d3e206231205b6c6162656c3d224c69737446286729225d0a202063202d3e206331205b6c6162656c3d224d6179626546286729225d0a7d0a40656e64756d6c"></figure>
+<section id="naturality-square" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> Naturality square</h2>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a6469677261706820666f6f207b0a0a72616e6b6469723d4c520a20200a20200a2020737562677261706820636c7573746572617b0a20202062205b6c6162656c3d224c6973742061225d0a20202063205b6c6162656c3d224d617962652061225d0a20202062202d3e2063205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a2020737562677261706820636c7573746572627b0a2020206231205b6c6162656c3d224c6973742062225d0a2020206331205b6c6162656c3d224d617962652062225d0a2020206231202d3e206331205b636f6c6f723d726564206c6162656c3d226e61747572616c5c6e7472616e73225d0a20207d0a0a202062202d3e206231205b6c6162656c3d224c69737446286729225d0a202063202d3e206331205b6c6162656c3d224d6179626546286729225d0a7d0a40656e64756d6c"></figure>
+</section>
+</section>
+<section id="algebras" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Algebras</h1>
+<p>3 equivalent ways to define an algebra</p>
+<p><span class="math display">\[(\mathbb{N},0::\top \rightarrow \mathbb{N},(+)::\mathbb{N}\times\mathbb{N} \rightarrow \mathbb{N})\]</span>
+<span class="math display">\[(\mathbb{N},in::\top + \mathbb{N}\times\mathbb{N} \rightarrow \mathbb{N}) \tag{fuse + and 0}\]</span>
+<span class="math display">\[let\ F X = \top + X \times X \qquad (\mathbb{N}, in::F\ \mathbb{N} \rightarrow \mathbb{N})\tag{package into functor}\]</span></p>
+<p>Other examples of an algebra</p>
+<ul>
+<li><span class="math inline">\((\mathbb{B},true::\top \rightarrow \mathbb{B},(\equiv)::\mathbb{B}\times\mathbb{B}\rightarrow\mathbb{B})\)</span></li>
+<li><span class="math inline">\((\mathbb{B},false::\top \rightarrow \mathbb{B},(\lor)::\mathbb{B}\times\mathbb{B}\rightarrow\mathbb{B})\)</span></li>
+</ul>
+<p>F Algebras are just a set with operations that return values in that set</p>
+<p>Inductive datatypes correspond to initial algebras.<br />
+The homomorphisms are catamorphisms or folds.</p>
+</section>
+
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">

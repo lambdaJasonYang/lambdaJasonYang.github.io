@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - functional tag</title>
+        <title>Jason Yang - Lattices</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,49 +103,110 @@
         </div>
 
         <div id="content">
-            <h1>functional tag</h1>
+            <h1>Lattices</h1>
             
 
-            <ul class="postlist">
+            <div class="info">
+    Posted on July  1, 2022
     
-        <li>
-            <a href="../posts/2022-07-01-PatternMatch.html">What is Pattern matching?</a> 
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2020-04-05-TLA.html">TLA</a> 
-        </li>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'mathbasics'." href="../tags/mathbasics.html">mathbasics</a>
     
-        <li>
-            <a href="../posts/2019-09-01-NQueen.html">NQueen in Haskell</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Monad.html">Monads, Bind, Return</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-FoldInduction.html">Fold and Induction</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Applicative.html">Applicative</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-12-05-LeftFoldTailLoop.html">For Loops, Tail recursion, and Left fold</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-08-20-StreamLambda.html">Implementing Stream with lambdas</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-07-19-TailNotPure.html">Recursion - Slicing the tail of list is impure</a> 
-        </li>
-    
+</div>
+<table>
+<thead>
+<tr class="header">
+<th>L</th>
+<th><span class="math inline">\(\sqsubseteq\)</span></th>
+<th><span class="math inline">\(\sqcap\)</span></th>
+<th><span class="math inline">\(\sqcup\)</span></th>
+<th><span class="math inline">\(\bot\)</span></th>
+<th><span class="math inline">\(\top\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bool</td>
+<td>implies</td>
+<td>and</td>
+<td>or</td>
+<td>false</td>
+<td>true</td>
+</tr>
+<tr class="even">
+<td>Reals</td>
+<td><span class="math inline">\(\leq\)</span></td>
+<td>min</td>
+<td>max</td>
+<td><span class="math inline">\(-\infty\)</span></td>
+<td><span class="math inline">\(\infty\)</span></td>
+</tr>
+<tr class="odd">
+<td>Nat</td>
+<td>divides</td>
+<td>gcd</td>
+<td>lcm</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Substructures of a datatype with substructural ordering
+<ul>
+<li>sets, subset ordering</li>
+<li>list, subsequence ordering</li>
+<li>tree, subtree ordering</li>
+</ul></li>
 </ul>
-<script></script>
+<p><strong>Ordering</strong> : a relation <span class="math inline">\(\sqsubseteq :: L \times L \rightarrow Bool\)</span> that satisfy the refl,trans,antisym</p>
+<p><span class="math display">\[refl:\ a\sqsubseteq a \qquad trans:\ a\sqsubseteq b \land b \sqsubseteq c \rightarrow a \sqsubseteq c \qquad antisym:\ a \sqsubseteq b \land b \sqsubseteq a \rightarrow a \equiv b\]</span></p>
+<p><strong>Bounded</strong> : <span class="math inline">\(\top,\bot \in L\)</span> that are the upper,lower bounds of ALL elements in L</p>
+<p><strong>lattice</strong> : meet, join <span class="math inline">\(\sqcap,\sqcup :: L \times L \rightarrow L\)</span> monoidal operations</p>
+<p><span class="math display">\[ a \sqsubseteq c \land b \sqsubseteq c \iff a \sqcup b \sqsubseteq c \]</span></p>
+<p><span class="math display">\[ c \sqsubseteq a  \land c \sqsubseteq b \iff c \sqsubseteq a \sqcap b \]</span></p>
+<section id="examples" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Examples</h1>
+<ul>
+<li>join
+<ul>
+<li>a &lt; c and b &lt; c then min(a,b) &lt; c</li>
+<li>a divides c and b divides c then gcd(a,b) divides c</li>
+</ul></li>
+</ul>
+</section>
+<section id="laws-of-meet-and-joins" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Laws of Meet and Joins</h1>
+<p>:<strong>Symmetry</strong>
+* min(a,b) = min(b,a)
+* max(a,b) = max(b,a)
+* gcd(a,b) = gcd(b,a)
+* lcm(a,b) = lcm(b,a)</p>
+<p>Associativity</p>
+<ul>
+<li>min(a,min(b,c)) = min(a,(min(b,c)))</li>
+</ul>
+<p>Idempotency</p>
+<ul>
+<li>min(a,a) = a</li>
+</ul>
+<p>Zero</p>
+<ul>
+<li>max(a,inf) = inf</li>
+<li>gcd(a,1) = 1</li>
+<li>lcm(a,0) = 0</li>
+</ul>
+<p>Identity</p>
+<ul>
+<li>max(a,-inf) = a</li>
+<li>gcd(a,0)</li>
+</ul>
+<p>Absorption</p>
+<p>Weakening</p>
+</section>
+
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">

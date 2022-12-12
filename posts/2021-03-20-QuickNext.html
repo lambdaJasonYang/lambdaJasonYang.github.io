@@ -116,117 +116,207 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#document"><span class="toc-section-number">1</span> _document</a></li>
-<li><a href="#app"><span class="toc-section-number">2</span> _app</a></li>
-<li><a href="#file-structure-determines-routing"><span class="toc-section-number">3</span> File structure determines routing</a></li>
-<li><a href="#how-do-you-select-ssg-pwa-ssr"><span class="toc-section-number">4</span> How do you select SSG, PWA, SSR</a></li>
-<li><a href="#capturing-the-carid-and-modelid-as-variables"><span class="toc-section-number">5</span> Capturing the [carID] and [modelID] as variables</a></li>
-<li><a href="#serverside-render"><span class="toc-section-number">6</span> ServerSide Render</a>
+<li><a href="#extensions-setup"><span class="toc-section-number">1</span> Extensions setup</a></li>
+<li><a href="#install"><span class="toc-section-number">2</span> install</a></li>
+<li><a href="#setup-bootstrap"><span class="toc-section-number">3</span> Setup bootstrap</a></li>
+<li><a href="#setup-configs"><span class="toc-section-number">4</span> Setup configs</a>
 <ul>
-<li><a href="#types-of-ssg"><span class="toc-section-number">6.1</span> 2 types of SSG</a></li>
-<li><a href="#why-ssg-can-be-bad"><span class="toc-section-number">6.2</span> Why SSG can be bad?</a></li>
-<li><a href="#solution-to-stale-ssg---isr"><span class="toc-section-number">6.3</span> Solution to Stale SSG - ISR</a></li>
+<li><a href="#files"><span class="toc-section-number">4.1</span> files</a></li>
 </ul></li>
-<li><a href="#self-is-not-defined"><span class="toc-section-number">7</span> Self is Not Defined</a></li>
-<li><a href="#exporting-as-static-site"><span class="toc-section-number">8</span> Exporting as static site</a>
+<li><a href="#setup-eslint"><span class="toc-section-number">5</span> Setup eslint</a>
 <ul>
-<li><a href="#images"><span class="toc-section-number">8.1</span> Images</a></li>
-<li><a href="#dynamic-routes-dont-work-in-ssg"><span class="toc-section-number">8.2</span> Dynamic Routes DONT work in SSG</a></li>
+<li><a href="#run-eslint-and-prettier"><span class="toc-section-number">5.1</span> Run eslint and prettier</a></li>
+<li><a href="#typical-lint-errors"><span class="toc-section-number">5.2</span> Typical lint errors</a></li>
 </ul></li>
-<li><a href="#webpack"><span class="toc-section-number">9</span> Webpack</a></li>
-<li><a href="#source-maps"><span class="toc-section-number">10</span> Source maps</a></li>
+<li><a href="#file-structure-determines-routing"><span class="toc-section-number">6</span> File structure determines routing</a></li>
+<li><a href="#next-auth"><span class="toc-section-number">7</span> Next auth</a></li>
+<li><a href="#how-do-you-select-ssg-pwa-ssr"><span class="toc-section-number">8</span> How do you select SSG, PWA, SSR</a></li>
+<li><a href="#capturing-the-carid-and-modelid-as-variables"><span class="toc-section-number">9</span> Capturing the [carID] and [modelID] as variables</a></li>
+<li><a href="#serverside-render"><span class="toc-section-number">10</span> ServerSide Render</a>
+<ul>
+<li><a href="#types-of-ssg"><span class="toc-section-number">10.1</span> 2 types of SSG</a></li>
+<li><a href="#why-ssg-can-be-bad"><span class="toc-section-number">10.2</span> Why SSG can be bad?</a></li>
+<li><a href="#solution-to-stale-ssg---isr"><span class="toc-section-number">10.3</span> Solution to Stale SSG - ISR</a></li>
+</ul></li>
+<li><a href="#self-is-not-defined"><span class="toc-section-number">11</span> Self is Not Defined</a></li>
+<li><a href="#exporting-as-static-site"><span class="toc-section-number">12</span> Exporting as static site</a>
+<ul>
+<li><a href="#images"><span class="toc-section-number">12.1</span> Images</a></li>
+<li><a href="#dynamic-routes-dont-work-in-ssg"><span class="toc-section-number">12.2</span> Dynamic Routes DONT work in SSG</a></li>
+</ul></li>
 </ul></div>
+<section id="extensions-setup" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Extensions setup</h1>
+<ul>
+<li>Install Es-lint and Prettier vs-code plugin if you havent done so</li>
+<li>In <strong>vs-code settings</strong> search “default formatter” and set to “Prettier”</li>
+<li>Important vscode trick : highlight codeblock, Ctrl+Shift+P &gt; Emmet: Wrap with abbreviation, enter <code>div.col</code> generates <code>&lt;div className="col"&gt;..&lt;/div&gt;</code>
+<ul>
+<li>Set a keyboard shortcut to this like Shift+Alt+[</li>
+<li>Very useful for positioning JSXElements via Bootstrap’s <code>&lt;div className="row"</code> and <code>&lt;div className="col"</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="install" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> install</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">npx</span> create-next-app@latest <span class="at">--ts</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="ex">npm</span> install prettier <span class="at">--save-dev</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="ex">npm</span> install eslint-config-prettier <span class="at">--save-dev</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="ex">npm</span> install @emotion/babel-plugin <span class="at">--save-dev</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="ex">npm</span> install @emotion/eslint-plugin <span class="at">--save-dev</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="ex">npm</span> install @typescript-eslint/parser <span class="at">--save-dev</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="ex">npm</span> install @typescript-eslint/eslint-plugin <span class="at">--save-dev</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#Dependencies for MUI</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="ex">npm</span> install @emotion/react</span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="ex">npm</span> install @emotion/styled</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="co">#MUI</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="ex">npm</span> install @mui/material</span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="ex">npm</span> install @mui/icons-material</span>
-<span id="cb1-17"><a href="#cb1-17"></a></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="co">#SSR MUI+emotion components</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="ex">npm</span> install @emotion/server</span>
-<span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="co">#auth</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="ex">npm</span> install <span class="at">--save</span> next-auth</span></code></pre></div>
-<div class="sourceCode" id="cb2" data-filename=".eslintrc.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;env&quot;</span><span class="fu">:{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;browser&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;es2021&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;node&quot;</span><span class="fu">:</span><span class="kw">true</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;parser&quot;</span><span class="fu">:</span><span class="st">&quot;@typescript-eslint/parser&quot;</span><span class="fu">,</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;parserOptions&quot;</span><span class="fu">:{</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;emcaVersion&quot;</span><span class="fu">:</span><span class="dv">2020</span><span class="fu">,</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;sourceType&quot;</span><span class="fu">:</span><span class="st">&quot;module&quot;</span><span class="fu">,</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;emcaFeatures&quot;</span><span class="fu">:{</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;jsx&quot;</span><span class="fu">:</span><span class="kw">true</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;project&quot;</span><span class="fu">:</span><span class="st">&quot;./tsconfig.json&quot;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;extends&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;next/core-web-vitals&quot;</span><span class="ot">,</span><span class="st">&quot;plugin:@typescript-eslint/recommended&quot;</span><span class="ot">,</span><span class="st">&quot;prettier&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;plugins&quot;</span> <span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;@emotion&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;rules&quot;</span> <span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@emotion/jsx-import&quot;</span> <span class="fu">:</span> <span class="st">&quot;error&quot;</span><span class="fu">,</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@emotion/no-vanilla&quot;</span> <span class="fu">:</span> <span class="st">&quot;error&quot;</span><span class="fu">,</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@emotion/import-from-emotion&quot;</span> <span class="fu">:</span> <span class="st">&quot;error&quot;</span><span class="fu">,</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@emotion/styled-import&quot;</span><span class="fu">:</span> <span class="st">&quot;error&quot;</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;settings&quot;</span><span class="fu">:{</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;react&quot;</span><span class="fu">:{</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;version&quot;</span><span class="fu">:</span><span class="st">&quot;detect&quot;</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb3" data-filename=".babelrc"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;presets&quot;</span> <span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;next/babel&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;plugins&quot;</span> <span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;@emotion&quot;</span><span class="ot">]</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb4" data-filename="/lib/emotionCache.tsx"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> createCache from <span class="st">'@emotion/cache'</span><span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>const createEmotionCache <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">createCache</span>({ key<span class="op">:</span> <span class="st">'css'</span> })<span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>export default createEmotionCache<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb5" data-filename="/src/components/StyledButton.tsx"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> styled from <span class="st">'@emotion/styled'</span><span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>interface IStyleProps{</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  backColor<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>} </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>const MyButton <span class="op">=</span> styled<span class="op">.</span><span class="at">button</span><span class="op">&lt;</span>IStyleProps<span class="op">&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="vs">  padding: 100px;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="vs">  color: hotpink;</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="vs">  background-color: </span><span class="sc">${</span>(props) <span class="kw">=&gt;</span> props<span class="op">.</span><span class="at">backColor</span><span class="sc">}</span><span class="vs">;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="vs">  &amp;:hover {</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="vs">    color: purple;</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="vs">   }</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span><span class="op">;</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>const StyledButton <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  return <span class="op">&lt;</span>MyButton backColor<span class="op">=</span><span class="st">&quot;green&quot;</span><span class="op">&gt;</span>hello<span class="op">&lt;/</span>MyButton<span class="op">&gt;</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>export default StyledButton<span class="op">;</span></span></code></pre></div>
-<section id="document" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> _document</h1>
-<p>taken from <a href="https://github.com/mui-org/material-ui/blob/master/examples/nextjs/pages/_document.js">Official Nextjs example</a></p>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="ex">npm</span> install bootstrap</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> typedoc-plugin-missing-exports</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> typedoc-umlclass</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> typedoc</span></code></pre></div>
 </section>
-<section id="app" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> _app</h1>
-<p>taken from <a href="https://github.com/mui-org/material-ui/blob/master/examples/nextjs/pages/_app.js">Official Nextjs example</a></p>
+<section id="setup-bootstrap" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Setup bootstrap</h1>
+<div class="sourceCode" id="cb2" data-filename="_app.tsx"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="st">&quot;bootstrap/dist/css/bootstrap.min.css&quot;</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> type { AppProps } <span class="im">from</span> <span class="st">&quot;next/app&quot;</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">App</span>({ Component<span class="op">,</span> pageProps }<span class="op">:</span> AppProps)<span class="op">:</span> any {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="pp">require</span>(<span class="st">&quot;bootstrap/dist/js/bootstrap.bundle.min.js&quot;</span>)<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">&lt;</span>Component {<span class="op">...</span>pageProps} <span class="op">/&gt;;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
-<section id="file-structure-determines-routing" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> File structure determines routing</h1>
+<section id="setup-configs" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Setup configs</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> eslint <span class="at">--init</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>? How would you like to use ESLint? … </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  To check syntax only</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  To check syntax and find problems</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>▸ To check syntax, find problems, and enforce code style</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>? What type of modules does your project use? … </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>▸ JavaScript modules (import/export)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  CommonJS (require/exports)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  None of these</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>? Which framework does your project use? … </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>▸ React</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  Vue.js</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  None of these</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>? Does your project use TypeScript? ‣ No / [Yes]</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>? Where does your code run? …  (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to invert selection)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>▸  Browser</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>   Node </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>? How would you like to define a style for your project? … </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>▸ Use a popular style guide</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  Answer questions about your style</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>? Which style guide do you want to follow? … </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>▸ Standard: https://github.com/standard/eslint-config-standard-with-typescript</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  XO: https://github.com/xojs/eslint-config-xo-typescript</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>? What format do you want your config file to be in? … </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  JavaScript</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  YAML</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>▸ JSON</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>? Missing packages. Would you like to install them now? ‣ No / [Yes]</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> prettier</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> eslint-config-prettier</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> eslint-plugin-prettier</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> eslint-config-next </span></code></pre></div>
+<section id="files" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> files</h2>
+<ul>
+<li>make a typedoc.json file and .env file</li>
+</ul>
+<div class="sourceCode" id="cb6" data-filename="typedoc.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;$schema&quot;</span><span class="fu">:</span> <span class="st">&quot;https://typedoc.org/schema.json&quot;</span><span class="fu">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;entryPoints&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;./pages/*.tsx&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;out&quot;</span><span class="fu">:</span> <span class="st">&quot;docs&quot;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb7" data-filename=".env"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ghpageURL=mygithubrepoName</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>#comment the above out if running locally</span></code></pre></div>
+<ul>
+<li>modify next.config.js to below so that the relative path works with ghpages</li>
+</ul>
+<div class="sourceCode" id="cb8" data-filename="next.config.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import('next').NextConfig} */</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> ghpageURL <span class="op">=</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">ghpageURL</span> <span class="op">?</span> <span class="vs">`/</span><span class="sc">${</span><span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">ghpageURL</span><span class="sc">}</span><span class="vs">`</span> <span class="op">:</span> <span class="kw">undefined</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> nextConfig <span class="op">=</span> {</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">reactStrictMode</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">swcMinify</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">assetPrefix</span><span class="op">:</span> ghpageURL<span class="op">,</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">basePath</span><span class="op">:</span> ghpageURL<span class="op">,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">images</span><span class="op">:</span> {</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unoptimized</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> nextConfig</span></code></pre></div>
+</section>
+</section>
+<section id="setup-eslint" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Setup eslint</h1>
+<ul>
+<li>Add this <code>.eslintignore</code> file</li>
+</ul>
+<div class="sourceCode" id="cb9" data-filename=".eslintignore"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>**/node_modules/*</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>**/out/*</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>**/.next/*</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>**/next-env.d.ts</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>**/next.config.js</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>**/docs/*</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>**/storybook/*</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>**/storybook-static/*</span></code></pre></div>
+<ul>
+<li>Add <code>"react/prop-types": "off", "react/react-in-jsx-scope": "off"</code> to eslint “rules”</li>
+<li>Add <code>"plugin:@next/next/recommended",</code> to eslint “extends”</li>
+<li>Add <code>"project": ["tsconfig.json"],</code> to eslint “parserOptions”s</li>
+</ul>
+<div class="sourceCode" id="cb10" data-filename=".eslintrc.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;env&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;browser&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;es2021&quot;</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;extends&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;plugin:react/recommended&quot;</span><span class="ot">,</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;standard-with-typescript&quot;</span><span class="ot">,</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;prettier&quot;</span><span class="ot">,</span> <span class="er">//&lt;--</span> <span class="er">add</span> <span class="er">this</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;plugin:@next/next/recommended&quot;</span> <span class="er">//&lt;--</span> <span class="er">add</span> <span class="er">this</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;overrides&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;parserOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;project&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;tsconfig.json&quot;</span><span class="ot">]</span><span class="fu">,</span> <span class="er">//&lt;--</span> <span class="er">add</span> <span class="er">this</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;ecmaVersion&quot;</span><span class="fu">:</span> <span class="st">&quot;latest&quot;</span><span class="fu">,</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;sourceType&quot;</span><span class="fu">:</span> <span class="st">&quot;module&quot;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;plugins&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;react&quot;</span><span class="ot">,</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;prettier&quot;</span> <span class="er">//&lt;--</span> <span class="er">add</span> <span class="er">this</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;rules&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;prettier/prettier&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;error&quot;</span><span class="ot">]</span><span class="fu">,</span> <span class="er">//&lt;--</span> <span class="er">addthis</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@typescript-eslint/no-misused-promises&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;error&quot;</span><span class="ot">,</span> <span class="fu">{</span> <span class="dt">&quot;checksVoidReturn&quot;</span><span class="fu">:</span> <span class="kw">false</span> <span class="fu">}</span><span class="ot">]</span><span class="fu">,</span> <span class="er">//&lt;--</span> <span class="er">add</span> <span class="er">this</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;react/prop-types&quot;</span><span class="fu">:</span> <span class="st">&quot;off&quot;</span><span class="fu">,</span> <span class="er">//</span> <span class="er">&lt;--</span> <span class="er">add</span> <span class="er">this</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;react/react-in-jsx-scope&quot;</span><span class="fu">:</span> <span class="st">&quot;off&quot;</span><span class="fu">,</span> <span class="er">//</span> <span class="er">&lt;--</span> <span class="er">add</span> <span class="er">this</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;react/jsx-props-no-spreading&quot;</span><span class="fu">:</span> <span class="st">&quot;off&quot;</span> <span class="er">//</span> <span class="er">&lt;--</span> <span class="er">add</span> <span class="er">this</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<section id="run-eslint-and-prettier" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Run eslint and prettier</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run lint</span></code></pre></div>
+<p>In package.json add to scripts <code>"prettier": "prettier --write ."</code></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run prettier</span></code></pre></div>
+<ul>
+<li>Ctrl+Shift+P &gt; ESLint: Fix all auto-fixable problems
+<ul>
+<li>You have to do this for each page</li>
+</ul></li>
+</ul>
+</section>
+<section id="typical-lint-errors" class="level2" data-number="5.2">
+<h2 data-number="5.2"><span class="header-section-number">5.2</span> Typical lint errors</h2>
+<ul>
+<li>PROBLEM: Nextjs page return type not given
+<ul>
+<li>SOLUTION: Add <code>any</code> type</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb13" data-filename="index.ts"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { NextPage } from <span class="st">'next'</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>export default <span class="kw">function</span> <span class="fu">Home</span> ()<span class="op">:</span> <span class="dt">any</span> { <span class="op">....</span></span></code></pre></div>
+</section>
+</section>
+<section id="file-structure-determines-routing" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> File structure determines routing</h1>
 <p>Page filename in nextjs like “landingpage.js” must be lowercase letters<br />
 React Component filename in nextjs must be Uppercase like “MyCustomButton”.</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h40737461727473616c740a0a7b0a202020207b540a20202020202b202f0a20202020202b2b207372630a20202020202b2b2b20636f6d6d6f6e0a20202020202b2b2b2b20636f6d706f6e656e74730a20202020202b2b2b2b2b204578427574746f6e0a20202020202b2b2b2b2b2b204578427574746f6e2e7473780a20202020202b2b2b2b2b2b204578427574746f6e2e746573742e74730a20202020202b2b2b2b20686f6f6b730a20202020202b2b2b2b207574696c730a20202020202b2b2b206d6f64756c65730a20202020202b2b2b2070616765730a20202020202b2b2b2b206170690a20202020202b2b2b2b205b63617249445d0a20202020202b2b2b2b2b20696e6465782e7473780a20202020202b2b2b2b2b205b6d6f64656c49445d0a20202020202b2b2b2b2b2b20696e6465782e7473780a20202020202b2b2b2b205f6170702e7473780a20202020202b2b2b2b205f646f63756d656e742e7473780a20202020202b2b2b2b20696e6465782e7473780a20202020202b2b207374796c65730a20202020202b2b207075626c69630a20202020202b2b0a0a202020207d0a7d0a0a40656e6473616c74"></figure>
@@ -260,37 +350,41 @@ React Component filename in nextjs must be Uppercase like “MyCustomButton”.<
 <li>theme.tsx</li>
 </ul>
 </section>
-<section id="how-do-you-select-ssg-pwa-ssr" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> How do you select SSG, PWA, SSR</h1>
+<section id="next-auth" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Next auth</h1>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save</span> next-auth</span></code></pre></div>
+</section>
+<section id="how-do-you-select-ssg-pwa-ssr" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> How do you select SSG, PWA, SSR</h1>
 <ul>
 <li>Using react hooks means it “may” rerender thus behaving like a PWA</li>
 <li>Using getStaticProp() and never using hooks gives you a static site</li>
 </ul>
 <p>Notice how the lines are actually blurred. You can mix and match so the site behaves like an PWA or a static site.</p>
 </section>
-<section id="capturing-the-carid-and-modelid-as-variables" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Capturing the [carID] and [modelID] as variables</h1>
-<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">'next/router'</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Home</span>() {</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> {myrouteINPUT} <span class="op">=</span> router<span class="op">.</span><span class="at">query</span><span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(<span class="op">&lt;</span>div<span class="op">&gt;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>h1<span class="op">&gt;</span>hi the text <span class="kw">in</span> the url parameter is {myrouteINPUT}</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<section id="capturing-the-carid-and-modelid-as-variables" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Capturing the [carID] and [modelID] as variables</h1>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">'next/router'</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Home</span>() {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> {myrouteINPUT} <span class="op">=</span> router<span class="op">.</span><span class="at">query</span><span class="op">;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(<span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>h1<span class="op">&gt;</span>hi the text <span class="kw">in</span> the url parameter is {myrouteINPUT}</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
-<section id="serverside-render" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> ServerSide Render</h1>
+<section id="serverside-render" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> ServerSide Render</h1>
 <ol type="1">
 <li>getStaticPath prerenders dynamic routes, basically you tell [car].js to use <code>{toyota, hyundai}</code> then we prebuild <code>toyota.html hyundai.html</code></li>
 <li>getStaticProps fetches data <strong>on build</strong> when <code>next build</code> is called. It only runs on server-side.<br />
 The client or window will never see any network call.<br />
 This is NOT like <code>window.addEventlistener('onload',..)</code> that fetches data on each client request.</li>
 </ol>
-<section id="types-of-ssg" class="level2" data-number="6.1">
-<h2 data-number="6.1"><span class="header-section-number">6.1</span> 2 types of SSG</h2>
+<section id="types-of-ssg" class="level2" data-number="10.1">
+<h2 data-number="10.1"><span class="header-section-number">10.1</span> 2 types of SSG</h2>
 <table>
 <thead>
 <tr class="header">
@@ -306,8 +400,8 @@ This is NOT like <code>window.addEventlistener('onload',..)</code> that fetches 
 </tbody>
 </table>
 </section>
-<section id="why-ssg-can-be-bad" class="level2" data-number="6.2">
-<h2 data-number="6.2"><span class="header-section-number">6.2</span> Why SSG can be bad?</h2>
+<section id="why-ssg-can-be-bad" class="level2" data-number="10.2">
+<h2 data-number="10.2"><span class="header-section-number">10.2</span> Why SSG can be bad?</h2>
 <p>SSG at build time and SSG at first request both are affected by stale data.</p>
 <ul>
 <li>If db changes once, SSG at build time is already stale</li>
@@ -316,16 +410,16 @@ This means if more than one update in db we have to rebuild the ENTIRE site.</li
 </ul>
 <hr />
 </section>
-<section id="solution-to-stale-ssg---isr" class="level2" data-number="6.3">
-<h2 data-number="6.3"><span class="header-section-number">6.3</span> Solution to Stale SSG - ISR</h2>
+<section id="solution-to-stale-ssg---isr" class="level2" data-number="10.3">
+<h2 data-number="10.3"><span class="header-section-number">10.3</span> Solution to Stale SSG - ISR</h2>
 <ul>
 <li>Solution ISR which basically means the specific static page ONLY will be rebuilt,</li>
 <li>If your clientside code auto refreshes every 10 sec, the data will be relatively current.</li>
 </ul>
 </section>
 </section>
-<section id="self-is-not-defined" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Self is Not Defined</h1>
+<section id="self-is-not-defined" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Self is Not Defined</h1>
 <ul>
 <li>When importing react Pixi</li>
 </ul>
@@ -336,11 +430,11 @@ This means if more than one update in db we have to rebuild the ENTIRE site.</li
 <li><p>Use useEffect because it only runs on client side</p></li>
 </ol>
 </section>
-<section id="exporting-as-static-site" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Exporting as static site</h1>
+<section id="exporting-as-static-site" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Exporting as static site</h1>
 <p>modify package.json for <code>"export": "next export"</code></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run build</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run export</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run build</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run export</span></code></pre></div>
 <p>build will create an <code>.next</code> file that is only useful for servers<br />
 export will create an <code>out</code> file containing static files like <code>index.html</code><br />
 All we need are the <code>out</code> files</p>
@@ -352,143 +446,78 @@ All we need are the <code>out</code> files</p>
 <li>apparently assetPrefix is js files and css files while basePath is for images and route links</li>
 </ul></li>
 </ol>
-<div class="sourceCode" id="cb8" data-filename="next.config.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import('next').NextConfig} */</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PHASE_DEVELOPMENT_SERVER } <span class="op">=</span> <span class="pp">require</span>(<span class="st">'next/constants'</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> isProd <span class="op">=</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">myEnv</span> <span class="op">===</span> <span class="st">&quot;prod&quot;</span><span class="op">;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> (phase<span class="op">,</span> { defaultConfig }) <span class="kw">=&gt;</span> {</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (phase <span class="op">===</span> PHASE_DEVELOPMENT_SERVER){ isProd <span class="op">=</span> <span class="kw">false</span> }<span class="op">;</span>  </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* config options for all phases except development here */</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">reactStrictMode</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">assetPrefix</span><span class="op">:</span> isProd <span class="op">?</span> <span class="st">&quot;/MathematicaDocNetwork&quot;</span> <span class="op">:</span> <span class="kw">undefined</span><span class="op">,</span> <span class="co">//static assets are in the /out folder</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">basePath</span><span class="op">:</span> isProd <span class="op">?</span> <span class="st">&quot;/MathematicaDocNetwork&quot;</span> <span class="op">:</span> <span class="kw">undefined</span><span class="op">,</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">experimental</span><span class="op">:</span> {</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">images</span><span class="op">:</span> {</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="dt">unoptimized</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<section id="images" class="level2" data-number="8.1">
-<h2 data-number="8.1"><span class="header-section-number">8.1</span> Images</h2>
+<div class="sourceCode" id="cb17" data-filename="next.config.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import('next').NextConfig} */</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PHASE_DEVELOPMENT_SERVER } <span class="op">=</span> <span class="pp">require</span>(<span class="st">'next/constants'</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> isProd <span class="op">=</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">myEnv</span> <span class="op">===</span> <span class="st">&quot;prod&quot;</span><span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> (phase<span class="op">,</span> { defaultConfig }) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (phase <span class="op">===</span> PHASE_DEVELOPMENT_SERVER){ isProd <span class="op">=</span> <span class="kw">false</span> }<span class="op">;</span>  </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* config options for all phases except development here */</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">reactStrictMode</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">assetPrefix</span><span class="op">:</span> isProd <span class="op">?</span> <span class="st">&quot;/MathematicaDocNetwork&quot;</span> <span class="op">:</span> <span class="kw">undefined</span><span class="op">,</span> <span class="co">//static assets are in the /out folder</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">basePath</span><span class="op">:</span> isProd <span class="op">?</span> <span class="st">&quot;/MathematicaDocNetwork&quot;</span> <span class="op">:</span> <span class="kw">undefined</span><span class="op">,</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">experimental</span><span class="op">:</span> {</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">images</span><span class="op">:</span> {</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        <span class="dt">unoptimized</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<section id="images" class="level2" data-number="12.1">
+<h2 data-number="12.1"><span class="header-section-number">12.1</span> Images</h2>
 <p>Also note that referring to images in *.jsx must be <code>/vercel.svg</code>, NOT <code>./vercel.svg</code> or <code>vercel.svg</code>.<br />
 Example: <code>&lt;Image src={"/vercel.svg"} width={50} height={50}&gt;&lt;/Image&gt;</code></p>
 </section>
-<section id="dynamic-routes-dont-work-in-ssg" class="level2" data-number="8.2">
-<h2 data-number="8.2"><span class="header-section-number">8.2</span> Dynamic Routes DONT work in SSG</h2>
+<section id="dynamic-routes-dont-work-in-ssg" class="level2" data-number="12.2">
+<h2 data-number="12.2"><span class="header-section-number">12.2</span> Dynamic Routes DONT work in SSG</h2>
 <ul>
 <li>Dynamic routes don’t really work but the build still runs
 <ul>
 <li><code>getStaticPaths()</code> is used to pregenerate the routes which defeats the whole purpose of “Dynamic” routes.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb9" data-filename="pages/[car].js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> Head <span class="im">from</span> <span class="st">'next/head'</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">'next/router'</span> </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Home</span>(props) {</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> {BLEHdata} <span class="op">=</span> props <span class="co">// This is data loaded from getStaticProps</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(BLEHdata)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> {myrouteINPUT} <span class="op">=</span> router<span class="op">.</span><span class="at">query</span><span class="op">;</span> </span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">//</span><span class="al">NOTICE</span><span class="co"> `myrouteINPUT` is undefined, </span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">//since exported static site cant capture dynamic routes</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(<span class="op">&lt;</span>div<span class="op">&gt;</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>h1<span class="op">&gt;</span>hi</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>         {myrouteINPUT}</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span>)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">//this pregenerates the &quot;dynamic route&quot; for [car].js</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">//REQUIRED FOR ANY DYNAMIC ROUTE that gets exported as static site.</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">//clearly this isnt really that dynamic since we have to hardcode this.</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">getStaticPaths</span>(){</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>{</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">paths</span><span class="op">:</span> [{ <span class="dt">params</span> <span class="op">:</span> {<span class="dt">car</span><span class="op">:</span> <span class="st">&quot;1&quot;</span>}}]<span class="op">,</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        <span class="dt">fallback</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">//This is NOT like just calling window.addEventlistener(&quot;onload&quot;,...)</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">//This runs on build time, meaning the browser will NEVER see the GET request to the json server.</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">getStaticProps</span>(){</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> response <span class="op">=</span><span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">&quot;http://jsonplaceholder.typicode.com/users&quot;</span>)</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> BLEHdata <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(BLEHdata) <span class="co">//this will not output on browser but in terminal</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>{</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        <span class="dt">props</span><span class="op">:</span> {BLEHdata}</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb18" data-filename="pages/[car].js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> Head <span class="im">from</span> <span class="st">'next/head'</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">'next/router'</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Home</span>(props) {</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> {BLEHdata} <span class="op">=</span> props <span class="co">// This is data loaded from getStaticProps</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(BLEHdata)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> {myrouteINPUT} <span class="op">=</span> router<span class="op">.</span><span class="at">query</span><span class="op">;</span> </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">//</span><span class="al">NOTICE</span><span class="co"> `myrouteINPUT` is undefined, </span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">//since exported static site cant capture dynamic routes</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(<span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>h1<span class="op">&gt;</span>hi</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>         {myrouteINPUT}</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">//this pregenerates the &quot;dynamic route&quot; for [car].js</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">//REQUIRED FOR ANY DYNAMIC ROUTE that gets exported as static site.</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">//clearly this isnt really that dynamic since we have to hardcode this.</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">getStaticPaths</span>(){</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>{</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">paths</span><span class="op">:</span> [{ <span class="dt">params</span> <span class="op">:</span> {<span class="dt">car</span><span class="op">:</span> <span class="st">&quot;1&quot;</span>}}]<span class="op">,</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>        <span class="dt">fallback</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co">//This is NOT like just calling window.addEventlistener(&quot;onload&quot;,...)</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="co">//This runs on build time, meaning the browser will NEVER see the GET request to the json server.</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">getStaticProps</span>(){</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> response <span class="op">=</span><span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">&quot;http://jsonplaceholder.typicode.com/users&quot;</span>)</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> BLEHdata <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(BLEHdata) <span class="co">//this will not output on browser but in terminal</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>{</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>        <span class="dt">props</span><span class="op">:</span> {BLEHdata}</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
-</section>
-<section id="webpack" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Webpack</h1>
-<ul>
-<li><p>Hackish do not recommend</p></li>
-<li><p>CopyWebpackPlugin only works on <code>npm build</code> but gets removed on <code>npm export</code></p></li>
-<li><p>Without <code>path.join</code>, a hard coded path <code>.</code> translates to <code>.next/cache</code></p></li>
-</ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import('next').NextConfig} */</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PHASE_DEVELOPMENT_SERVER } <span class="op">=</span> <span class="pp">require</span>(<span class="st">'next/constants'</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> isProd <span class="op">=</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">myEnv</span> <span class="op">===</span> <span class="st">&quot;prod&quot;</span><span class="op">;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">&quot;path&quot;</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> CopyWebpackPlugin <span class="op">=</span> <span class="pp">require</span>(<span class="st">'copy-webpack-plugin'</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> (phase<span class="op">,</span> { defaultConfig }) <span class="kw">=&gt;</span> {</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (phase <span class="op">===</span> PHASE_DEVELOPMENT_SERVER){ isProd <span class="op">=</span> <span class="kw">false</span> }<span class="op">;</span>  </span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">webpack</span><span class="op">:</span> (config<span class="op">,</span> options) <span class="kw">=&gt;</span> {</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      <span class="co">////Apparently only works on `npm build` but gets removed on `npm export`</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>      config<span class="op">.</span><span class="at">plugins</span><span class="op">.</span><span class="fu">push</span>(</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="kw">new</span> <span class="fu">CopyWebpackPlugin</span>({</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>            <span class="dt">patterns</span><span class="op">:</span> [</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                {</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>                    <span class="dt">from</span><span class="op">:</span> path<span class="op">.</span><span class="fu">join</span>(<span class="bu">__dirname</span><span class="op">,</span><span class="st">&quot;/.github&quot;</span>)<span class="op">,</span><span class="co">//'/.github',</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                    <span class="dt">to</span><span class="op">:</span> path<span class="op">.</span><span class="fu">join</span>(<span class="bu">__dirname</span><span class="op">,</span><span class="st">&quot;/out/.github&quot;</span>)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                    <span class="co">//nextjs seems to mess up the `to` path but `path.join` fixes it</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>                    <span class="co">//'../../out/.github' </span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                    <span class="co">//moves `.github` into `./.next/cache` folder with path `/.github`</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>                }<span class="op">,</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>            ]<span class="op">,</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> config</span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* config options for all phases except development here */</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">reactStrictMode</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">assetPrefix</span><span class="op">:</span> isProd <span class="op">?</span> <span class="st">&quot;/MathematicaDocNetwork&quot;</span> <span class="op">:</span> <span class="kw">undefined</span><span class="op">,</span> <span class="co">//static assets are in the /out folder</span></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>    <span class="dt">basePath</span><span class="op">:</span> isProd <span class="op">?</span> <span class="st">&quot;/MathematicaDocNetwork&quot;</span> <span class="op">:</span> <span class="kw">undefined</span><span class="op">,</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    <span class="dt">experimental</span><span class="op">:</span> {</span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>      <span class="dt">images</span><span class="op">:</span> {</span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>        <span class="dt">unoptimized</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-</section>
-<section id="source-maps" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Source maps</h1>
-<p>Nextjs gives cryptic errors without sourcemaps</p>
-<div class="sourceCode" id="cb11" data-filename="next.config.js"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="er">/**</span> <span class="er">@type</span> <span class="fu">{</span><span class="er">import('next').NextConfig</span><span class="fu">}</span> <span class="er">*/</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="er">const</span> <span class="er">nextConfig</span> <span class="er">=</span> <span class="fu">{</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="er">reactStrictMode</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="er">swcMinify</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="er">productionBrowserSourceMaps</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>  <span class="er">&lt;---</span> <span class="er">ADD</span> <span class="er">THIS</span> <span class="er">FOR</span> <span class="er">SOURCE</span> <span class="er">MAP</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">output</span><span class="fu">:</span> <span class="er">'standalone'</span><span class="fu">,</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="er">module.exports</span> <span class="er">=</span> <span class="er">nextConfig</span></span></code></pre></div>
 </section>
 
         </div>

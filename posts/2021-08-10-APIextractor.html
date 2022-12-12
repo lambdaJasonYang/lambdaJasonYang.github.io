@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - API Extractor</title>
+        <title>Jason Yang - Making npm packages, typedoc, storybook</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,7 +103,7 @@
         </div>
 
         <div id="content">
-            <h1>API Extractor</h1>
+            <h1>Making npm packages, typedoc, storybook</h1>
             
 
             <div class="info">
@@ -115,6 +115,11 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
     
 </div>
+<p>Just look at the github repos:</p>
+<ul>
+<li>Storybook: <a href="https://github.com/userJY/npmFrontendTemplateStoryBook">https://github.com/userJY/npmFrontendTemplateStoryBook</a></li>
+<li>Webpack: <a href="https://github.com/userJY/npmFrontendTemplateWebpack">https://github.com/userJY/npmFrontendTemplateWebpack</a></li>
+</ul>
 <section id="setup" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Setup</h1>
 <p>This will install the tools globally</p>
@@ -221,19 +226,16 @@ BUT if you’re documenting a repo that already pregenerated it’s typings you 
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;doc&quot;</span><span class="fu">:</span> <span class="st">&quot;typedoc --entryPointStrategy resolve .&quot;</span><span class="fu">,</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;echo </span><span class="ch">\&quot;</span><span class="st">Error: no test specified</span><span class="ch">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="er">,</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="er">:::</span><span class="fu">{</span><span class="er">group=1At</span> <span class="er">glabel=plugin</span><span class="fu">}</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="er">```bash</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="er">npm</span> <span class="er">install</span> <span class="er">--save-dev</span> <span class="er">typedoc-plugin-missing-exports</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="er">npm</span> <span class="er">install</span> <span class="er">--save-dev</span> <span class="er">typedoc-umlclass</span></span></code></pre></div>
-<p>You dont even need to install typedoc since the plugins will use the appropriate versions.</p>
+<div data-group="1At" data-glabel="plugin">
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> typedoc-plugin-missing-exports</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> typedoc-umlclass</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install typedoc</span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">typedoc</span> .</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">//</span> is the same as the line below<span class="kw">;</span> <span class="ex">default</span> strategy is <span class="kw">`</span><span class="ex">resolve</span><span class="kw">`</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">typedoc</span> <span class="at">--entryPointStrategy</span> resolve <span class="at">--entryPoints</span> .</span></code></pre></div>
 <p>This will document basically exactly what you ened
 * Your index.ts generated index.d.ts (REMEMBER: if you dont export the variable the types wont be generated)</p>
-<p>:::</p>
+</div>
 <div data-group="1At" data-glabel="noplugin">
 <p>Right now there is no way to generate EXACTLY the types of your files and it’s dependencies WITHOUT documenting all of the node_modules.</p>
 <hr />
@@ -269,86 +271,25 @@ BUT if you’re documenting a repo that already pregenerated it’s typings you 
 <li>On publish, we simply delete the <code>lib/demo</code> folder and publish the rest of the <code>lib</code> folder.</li>
 </ul>
 <div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> typedoc-plugin-missing-exports</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> typedoc-umlclass</span></code></pre></div>
-<ul>
-<li>repo
-<ul>
-<li>package.json</li>
-<li>tsconfig.json</li>
-<li>webpack.config.js</li>
-<li>lib &lt;—- <code>path: path.resolve(__dirname, 'lib'),</code> output used for publishing
-<ul>
-<li>demo
-<ul>
-<li>index.html &lt;— <code>filename: path.resolve('lib', 'demo','index.html'),</code> HTMLWebpackPlugin input (3)</li>
-</ul></li>
-<li><span class="citation" data-cites="types">@types</span> &lt;—-<code>{ from: "src/@types", to: "@types" },</code> CopyPlugin output (5)
-<ul>
-<li>custom.d.ts<br />
-</li>
-</ul></li>
-<li>index.d.ts &lt;— Generated from typescript declarations</li>
-<li>index.js &lt;—- <code>filename: 'index.js',</code> (2)</li>
-</ul></li>
-<li>src
-<ul>
-<li><span class="citation" data-cites="types">@types</span> &lt;—-<code>{ from: "src/@types", to: "@types" },</code> CopyPlugin input (5)
-<ul>
-<li>custom.d.ts<br />
-</li>
-</ul></li>
-<li>template.html &lt;—- <code>template: path.resolve('src','template.html')</code> HTMLWebpackPlugin input (4)</li>
-<li>index.ts &lt;– <code>index: path.resolve(__dirname, 'src', 'index.ts'),</code> (1)</li>
-</ul></li>
-</ul></li>
-</ul>
-<div class="sourceCode" id="cb24"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">'path'</span>)<span class="op">;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> HTMLWebpackPlugin <span class="op">=</span> <span class="pp">require</span>(<span class="st">'html-webpack-plugin'</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> CopyPlugin <span class="op">=</span> <span class="pp">require</span>(<span class="st">&quot;copy-webpack-plugin&quot;</span>)<span class="op">;</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">//commonJS syntax</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> {</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">mode</span><span class="op">:</span> <span class="st">'development'</span><span class="op">,</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">entry</span><span class="op">:</span> {</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">index</span><span class="op">:</span> path<span class="op">.</span><span class="fu">resolve</span>(<span class="bu">__dirname</span><span class="op">,</span> <span class="st">'src'</span><span class="op">,</span> <span class="st">'index.ts'</span>)<span class="op">,</span> <span class="co">// (1)</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span><span class="op">:</span> {</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>        <span class="dt">path</span><span class="op">:</span> path<span class="op">.</span><span class="fu">resolve</span>(<span class="bu">__dirname</span><span class="op">,</span> <span class="st">'lib'</span>)<span class="op">,</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">filename</span><span class="op">:</span> <span class="st">'index.js'</span><span class="op">,</span> <span class="co">// (2)</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">clean</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>        <span class="dt">assetModuleFilename</span><span class="op">:</span> <span class="st">'[name][ext]'</span></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">...,</span></span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">plugins</span> <span class="op">:</span> [</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>        <span class="kw">new</span> <span class="fu">HTMLWebpackPlugin</span>({</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>            <span class="dt">bleh</span><span class="op">:</span> <span class="st">&quot;Webpack App&quot;</span><span class="op">,</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>            <span class="dt">filename</span><span class="op">:</span> path<span class="op">.</span><span class="fu">resolve</span>(<span class="st">'lib'</span><span class="op">,</span> <span class="st">'demo'</span><span class="op">,</span><span class="st">'index.html'</span>)<span class="op">,</span> <span class="co">// (3)</span></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>            <span class="dt">template</span><span class="op">:</span> path<span class="op">.</span><span class="fu">resolve</span>(<span class="st">'src'</span><span class="op">,</span><span class="st">'template.html'</span>) <span class="co">// (4)</span></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>        })<span class="op">,</span></span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>        <span class="kw">new</span> <span class="fu">CopyPlugin</span>({</span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>            <span class="dt">patterns</span><span class="op">:</span> [</span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>              { <span class="dt">from</span><span class="op">:</span> <span class="st">&quot;src/@types&quot;</span><span class="op">,</span> <span class="dt">to</span><span class="op">:</span> <span class="st">&quot;@types&quot;</span> }<span class="op">,</span>  <span class="co">// (5)</span></span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>            ]<span class="op">,</span></span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>          })<span class="op">,</span></span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">devServer</span><span class="op">:</span> {</span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>        <span class="dt">static</span><span class="op">:</span> {</span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>            <span class="dt">directory</span><span class="op">:</span> path<span class="op">.</span><span class="fu">resolve</span>(<span class="bu">__dirname</span><span class="op">,</span><span class="st">'lib'</span><span class="op">,</span> <span class="st">'demo'</span>)</span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>        }<span class="op">,</span></span>
-<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>        <span class="dt">port</span><span class="op">:</span> <span class="dv">5555</span><span class="op">,</span></span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>        <span class="dt">open</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>        <span class="dt">hot</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>        <span class="dt">compress</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>        <span class="dt">historyApiFallback</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>    <span class="dt">devtool</span><span class="op">:</span> <span class="st">&quot;inline-source-map&quot;</span><span class="op">,</span></span>
-<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">//the compiled website is obfusticated JS, and errors will only show the compiled JS</span></span>
-<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>    <span class="co">//source-map lets you know where in your source is your error</span></span>
-<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> typedoc-umlclass</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install typedoc</span></code></pre></div>
+<div class="sourceCode" id="cb24" data-filename="filestructure"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>* repo</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  * package.json</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  * tsconfig.json</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  * webpack.config.js</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  * lib    &lt;---- `path: path.resolve(__dirname, 'lib'),` output used for publishing</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    * demo</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>      * index.html   &lt;--- `filename: path.resolve('lib', 'demo','index.html'),` HTMLWebpackPlugin input (3)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    * @types    &lt;----`{ from: &quot;src/@types&quot;, to: &quot;@types&quot; },` CopyPlugin output (5)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>      * custom.d.ts  </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    * index.d.ts &lt;--- Generated from typescript declarations</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    * index.js  &lt;---- `filename: 'index.js',` (2)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  * src</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    * @types   &lt;----`{ from: &quot;src/@types&quot;, to: &quot;@types&quot; },` CopyPlugin input (5)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>      * custom.d.ts  </span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    * template.html &lt;---- ` template: path.resolve('src','template.html') ` HTMLWebpackPlugin input (4)</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    * index.ts  &lt;-- `index: path.resolve(__dirname, 'src', 'index.ts'),`  (1)</span></code></pre></div>
+<p><code>{.js webpack.config.js} module.exports = {     mode: 'development',     entry: {         index: path.resolve(__dirname, 'src', 'index.ts'), // (1)             },     output: {         path: path.resolve(__dirname, 'lib'),         filename: 'index.js', // (2)         clean: true,         assetModuleFilename: '[name][ext]'     },     ...,     plugins : [         new HTMLWebpackPlugin({             bleh: "Webpack App",             filename: path.resolve('lib', 'demo','index.html'), // (3)             template: path.resolve('src','template.html') // (4)         }),         new CopyPlugin({             patterns: [               { from: "src/@types", to: "@types" },  // (5)             ],           }),     ],     devServer: {         static: {             directory: path.resolve(__dirname,'lib', 'demo')         },       ...     }, }</code></p>
 <p>package.json</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>  <span class="er">&quot;main&quot;:</span> <span class="er">&quot;./lib/index.js&quot;,</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="er">&quot;types&quot;:</span> <span class="er">&quot;./lib/index.d.ts&quot;,</span></span>
@@ -364,8 +305,7 @@ BUT if you’re documenting a repo that already pregenerated it’s typings you 
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;publish&quot;</span> <span class="fu">:</span> <span class="st">&quot;npm run build &amp;&amp; rm -rf lib/demo &amp;&amp; npm run doc &amp;&amp; npm publish&quot;</span><span class="fu">,</span></span>
 <span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;echo </span><span class="ch">\&quot;</span><span class="st">Error: no test specified</span><span class="ch">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span></span>
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="er">,</span></span></code></pre></div>
-<p>tsconfig.json</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<div class="sourceCode" id="cb26" data-filename="tsconfig.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        <span class="er">/*</span> <span class="er">Basics</span> <span class="er">*/</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;outDir&quot;</span><span class="fu">:</span> <span class="st">&quot;./lib&quot;</span><span class="fu">,</span> <span class="er">/*</span> <span class="er">output</span> <span class="er">dir</span> <span class="er">of</span> <span class="er">emitted</span> <span class="er">js</span> <span class="er">files</span> <span class="er">*/</span></span>
@@ -380,6 +320,16 @@ BUT if you’re documenting a repo that already pregenerated it’s typings you 
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;exclude&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;lib&quot;</span><span class="ot">,</span><span class="st">&quot;node_modules&quot;</span><span class="ot">,</span> <span class="st">&quot;doc&quot;</span><span class="ot">,</span> <span class="st">&quot;jest.config.ts&quot;</span><span class="ot">,</span> <span class="st">&quot;**/*.spec.ts&quot;</span><span class="ot">]</span>  <span class="er">/*</span> <span class="er">Specifies</span> <span class="er">an</span> <span class="er">array</span> <span class="er">of</span> <span class="er">filenames</span> <span class="er">or</span> <span class="er">patterns</span> <span class="er">that</span> <span class="er">should</span> <span class="er">be</span> <span class="er">skipped</span> <span class="er">when</span> <span class="er">resolving</span> <span class="st">&quot;include&quot;</span><span class="er">:</span><span class="ot">[</span><span class="er">..</span><span class="ot">]</span> <span class="er">above</span> <span class="er">*/</span></span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb27" data-filename="typedoc.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;$schema&quot;</span><span class="fu">:</span> <span class="st">&quot;https://typedoc.org/schema.json&quot;</span><span class="fu">,</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;entryPoints&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;./pages/*.tsx&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;out&quot;</span><span class="fu">:</span> <span class="st">&quot;docs&quot;</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+</section>
+<section id="view-typedoc" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> View typedoc</h1>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install browser-sync <span class="at">--save-dev</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="er">&quot;viewdocs&quot;:</span> <span class="er">&quot;browser-sync</span> <span class="er">start</span> <span class="er">--server</span> <span class="er">'docs'&quot;,</span></span></code></pre></div>
 </section>
 
         </div>

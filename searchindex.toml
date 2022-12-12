@@ -2,9 +2,45 @@
 
 files = [
 
-{path = "posts/Misc/2022-08-15-LoadTesting.md", url = "/posts/2022-08-15-LoadTesting.html", title = "Load Testing Vegeta"},
+{path = "posts/Misc/2022-08-15-LoadTesting.md", url = "/posts/2022-08-15-LoadTesting.html", title = "Load Testing Vegeta Locust"},
 
-{path = "posts/DevOp/2022-08-15-KubernetesSetup.md", url = "/posts/2022-08-15-KubernetesSetup.html", title = "Setup Kubernetes Cluster"},
+{path = "posts/DevOp/2022-08-15-KubernetesSetup.md", url = "/posts/2022-08-15-KubernetesSetup.html", title = "Setup Kubernetes Cluster k3"},
+
+{path = "posts/DevOp/2022-08-01-BookKubernetes/2022-08-01-BookKubernetes.md", url = "/posts/2022-08-01-BookKubernetes.html", title = "Setup Kubernetes Cluster"},
+
+{path = "posts/TypeTheory/2022-07-01-TypeTheoryInterpreter.md", url = "/posts/2022-07-01-TypeTheoryInterpreter.html", title = "Haskell prog lang"},
+
+{path = "posts/TypeTheory/2022-07-01-TypeTheory.md", url = "/posts/2022-07-01-TypeTheory.html", title = "Quick Type theory"},
+
+{path = "posts/TypeTheory/2022-07-01-SequentsNaturalDed.md", url = "/posts/2022-07-01-SequentsNaturalDed.html", title = "Translate Sequent Calculus to ND"},
+
+{path = "posts/TypeTheory/2022-07-01-REPL.md", url = "/posts/2022-07-01-REPL.html", title = "Compilers and REPL"},
+
+{path = "posts/TypeTheory/2022-07-01-PatternMatch.md", url = "/posts/2022-07-01-PatternMatch.html", title = "What is Pattern matching?"},
+
+{path = "posts/TypeTheory/2022-07-01-OperationalCalculus.md", url = "/posts/2022-07-01-OperationalCalculus.html", title = "Operational Calculus"},
+
+{path = "posts/TypeTheory/2022-07-01-NatDed.md", url = "/posts/2022-07-01-NatDed.html", title = "ND"},
+
+{path = "posts/TypeTheory/2022-07-01-ListFunctor.md", url = "/posts/2022-07-01-ListFunctor.html", title = "List Functors Lambda Laziness"},
+
+{path = "posts/TypeTheory/2022-07-01-LinearLogic.md", url = "/posts/2022-07-01-LinearLogic.html", title = "Linear Logic"},
+
+{path = "posts/TypeTheory/2022-07-01-Lattices.md", url = "/posts/2022-07-01-Lattices.html", title = "Lattices"},
+
+{path = "posts/TypeTheory/2022-07-01-LangCat.md", url = "/posts/2022-07-01-LangCat.html", title = "Language and Category theory"},
+
+{path = "posts/TypeTheory/2022-07-01-Lambdas.md", url = "/posts/2022-07-01-Lambdas.html", title = "Lambdas abstractions Types, Term building"},
+
+{path = "posts/TypeTheory/2022-07-01-Homotopy.md", url = "/posts/2022-07-01-Homotopy.html", title = "Quick Homotopy Type Theory"},
+
+{path = "posts/TypeTheory/2022-07-01-HomSet.md", url = "/posts/2022-07-01-HomSet.html", title = "HomSet"},
+
+{path = "posts/TypeTheory/2022-07-01-GentzenCut.md", url = "/posts/2022-07-01-GentzenCut.html", title = "Sequents and Gentzen Cut"},
+
+{path = "posts/TypeTheory/2022-07-01-CatNotes.md", url = "/posts/2022-07-01-CatNotes.html", title = "Category theory Notes"},
+
+{path = "posts/TypeTheory/2022-07-01-CatHask.md", url = "/posts/2022-07-01-CatHask.html", title = "Category theory for programmer notes"},
 
 {path = "posts/Misc/2022-04-09-SetupCoq.md", url = "/posts/2022-04-09-SetupCoq.html", title = "Coq Setup"},
 
@@ -27,12 +63,6 @@ files = [
 {path = "posts/Lean/2021-11-12-LeanMathlib.md", url = "/posts/2021-11-12-LeanMathlib.html", title = "Lean Mathlib"},
 
 {path = "posts/Lean/2021-11-12-Lean4Tut.md", url = "/posts/2021-11-12-Lean4Tut.html", title = "Lean 4 Tut"},
-
-{path = "posts/TypeTheory/2021-11-11-TypeTheory.md", url = "/posts/2021-11-11-TypeTheory.html", title = "Quick Type theory"},
-
-{path = "posts/TypeTheory/2021-11-11-OperationalCalculus.md", url = "/posts/2021-11-11-OperationalCalculus.html", title = "Operational Calculus"},
-
-{path = "posts/TypeTheory/2021-11-11-Lambdas.md", url = "/posts/2021-11-11-Lambdas.html", title = "Lambdas abstractions Types, Term building"},
 
 {path = "posts/Lean/2021-11-11-leanmakefile.md", url = "/posts/2021-11-11-leanmakefile.html", title = "lean makefile"},
 
@@ -88,7 +118,11 @@ files = [
 
 {path = "posts/Misc/2021-09-21-dotfile.md", url = "/posts/2021-09-21-dotfile.html", title = "dotfile"},
 
+{path = "posts/Misc/2021-09-21-Shipping.md", url = "/posts/2021-09-21-Shipping.html", title = "Shipping"},
+
 {path = "posts/Misc/2021-09-21-PropertyLoans.md", url = "/posts/2021-09-21-PropertyLoans.html", title = "Property Loans"},
+
+{path = "posts/Misc/2021-09-21-House.md", url = "/posts/2021-09-21-House.html", title = "Property"},
 
 {path = "posts/Misc/2021-09-21-Bread.md", url = "/posts/2021-09-21-Bread.html", title = "Panasonic SD-MDX102-K Breadmaker Translated"},
 
@@ -126,11 +160,13 @@ files = [
 
 {path = "posts/Misc/2021-08-10-WhyHakyll.md", url = "/posts/2021-08-10-WhyHakyll.html", title = "Why Hakyll"},
 
+{path = "posts/Javascript/2021-08-10-StoryBook.md", url = "/posts/2021-08-10-StoryBook.html", title = "StoryBook and Rollup"},
+
 {path = "posts/Javascript/2021-08-10-ServiceWorker.md", url = "/posts/2021-08-10-ServiceWorker.html", title = "Service Worker and Web Workers"},
 
 {path = "posts/Javascript/2021-08-10-MonoRepo.md", url = "/posts/2021-08-10-MonoRepo.html", title = "Monorepo"},
 
-{path = "posts/Javascript/2021-08-10-APIextractor.md", url = "/posts/2021-08-10-APIextractor.html", title = "API Extractor"},
+{path = "posts/Javascript/2021-08-10-APIextractor.md", url = "/posts/2021-08-10-APIextractor.html", title = "Making npm packages, typedoc, storybook"},
 
 {path = "posts/Economics/2021-08-10-FinTimeData.md", url = "/posts/2021-08-10-FinTimeData.html", title = "Loading and Plotting Financial Data"},
 
@@ -147,8 +183,6 @@ files = [
 {path = "posts/QuickCode/2021-06-28-NextGithubpages.md", url = "/posts/2021-06-28-NextGithubpages.html", title = "Autobuild Nextjs github pages"},
 
 {path = "posts/Misc/2021-06-28-HakyllGitAction.md", url = "/posts/2021-06-28-HakyllGitAction.html", title = "Autobuild Hakyll"},
-
-{path = "posts/TypeTheory/2021-05-25-TypeTheoryInterpreter.md", url = "/posts/2021-05-25-TypeTheoryInterpreter.html", title = "Haskell prog lang"},
 
 {path = "posts/CyberSec/2021-05-24-SFTPtransfer.md", url = "/posts/2021-05-24-SFTPtransfer.html", title = "Transfer files SFTP"},
 
@@ -206,6 +240,8 @@ files = [
 
 {path = "posts/MachineLearning/2021-03-23-CNN.md", url = "/posts/2021-03-23-CNN.html", title = "CNN"},
 
+{path = "posts/MachineLearning/2021-03-23-Boltzmann.md", url = "/posts/2021-03-23-Boltzmann.html", title = "Boltzmann probability distribution"},
+
 {path = "posts/Javascript/2021-03-23-ReactVsJS.md", url = "/posts/2021-03-23-ReactVsJS.html", title = "React vs JS"},
 
 {path = "posts/Javascript/2021-03-23-ReactDomTree.md", url = "/posts/2021-03-23-ReactDomTree.html", title = "Dom Tree rendering in VanillaJS and React"},
@@ -214,7 +250,7 @@ files = [
 
 {path = "posts/Javascript/2021-03-23-QuickReact4.md", url = "/posts/2021-03-23-QuickReact4.html", title = "Quick React 4"},
 
-{path = "posts/Javascript/2021-03-23-QuickReact3.md", url = "/posts/2021-03-23-QuickReact3.html", title = "Quick React Part 3 - Rerenders and VanillaJS"},
+{path = "posts/Javascript/2021-03-23-QuickReact3.md", url = "/posts/2021-03-23-QuickReact3.html", title = "Quick React Part 3 - Real world scenarios"},
 
 {path = "posts/Javascript/2021-03-23-QuickReact2.md", url = "/posts/2021-03-23-QuickReact2.html", title = "Quick React Part 2"},
 
@@ -225,6 +261,8 @@ files = [
 {path = "posts/Javascript/2021-03-23-NextAuth.md", url = "/posts/2021-03-23-NextAuth.html", title = "example page"},
 
 {path = "posts/Javascript/2021-03-23-MinLoginSystem.md", url = "/posts/2021-03-23-MinLoginSystem.html", title = "Min - Login System Express"},
+
+{path = "posts/Javascript/2021-03-23-JSmodifyHTML.md", url = "/posts/2021-03-23-JSmodifyHTML.html", title = "JS Functions that Replace HTMLElement"},
 
 {path = "posts/Javascript/2021-03-20-QuickRedux.md", url = "/posts/2021-03-20-QuickRedux.html", title = "Quick Redux"},
 
@@ -260,12 +298,6 @@ files = [
 
 {path = "posts/QuickCode/2021-02-20-QuickMQTT.md", url = "/posts/2021-02-20-QuickMQTT.html", title = "Quick MQTT"},
 
-{path = "posts/QuickCode/2021-02-20-QuickJavaSpring2.md", url = "/posts/2021-02-20-QuickJavaSpring2.html", title = "Quick Springboot 2"},
-
-{path = "posts/QuickCode/2021-02-20-QuickJavaSpring1.md", url = "/posts/2021-02-20-QuickJavaSpring1.html", title = "Springboot project"},
-
-{path = "posts/QuickCode/2021-02-20-QuickJavaSpring.md", url = "/posts/2021-02-20-QuickJavaSpring.html", title = "Quick Springboot"},
-
 {path = "posts/QuickCode/2021-02-20-QuickGoTool.md", url = "/posts/2021-02-20-QuickGoTool.html", title = "Quick Golang Tooling"},
 
 {path = "posts/QuickCode/2021-02-20-QuickGoPre.md", url = "/posts/2021-02-20-QuickGoPre.html", title = "Quick Golang 0"},
@@ -282,13 +314,15 @@ files = [
 
 {path = "posts/QuickCode/2021-02-20-GoSnips.md", url = "/posts/2021-02-20-GoSnips.html", title = "Go Snippets"},
 
-{path = "posts/MachineLearning/2021-01-23-Boltzmann.md", url = "/posts/2021-01-23-Boltzmann.html", title = "Boltzmann probability distribution"},
+{path = "posts/Java/2021-02-20-QuickJavaSpring2.md", url = "/posts/2021-02-20-QuickJavaSpring2.html", title = "Quick Springboot 2"},
+
+{path = "posts/Java/2021-02-20-QuickJavaSpring1.md", url = "/posts/2021-02-20-QuickJavaSpring1.html", title = "Springboot project"},
+
+{path = "posts/Java/2021-02-20-QuickJavaSpring.md", url = "/posts/2021-02-20-QuickJavaSpring.html", title = "Quick Springboot"},
 
 {path = "posts/MachineLearning/2020-10-08-EnergyBasedModel.md", url = "/posts/2020-10-08-EnergyBasedModel.html", title = "Energy Based Models"},
 
 {path = "posts/MachineLearning/2020-10-05-mathmlNotes.md", url = "/posts/2020-10-05-mathmlNotes.html", title = "Math for ML Notes"},
-
-{path = "posts/TypeTheory/2020-09-21-SequentsNaturalDed.md", url = "/posts/2020-09-21-SequentsNaturalDed.html", title = "Translate Sequent Calculus to ND"},
 
 {path = "posts/QuickCode/2020-09-01-LitReview.md", url = "/posts/2020-09-01-LitReview.html", title = "Literature review"},
 
@@ -301,8 +335,6 @@ files = [
 {path = "posts/Economics/2020-07-07-Cointegration.md", url = "/posts/2020-07-07-Cointegration.html", title = "Cointegration and Spreads"},
 
 {path = "posts/Induction/2020-06-25-DownwardInduction.md", url = "/posts/2020-06-25-DownwardInduction.html", title = "Recursive Code for Downward Induction"},
-
-{path = "posts/TypeTheory/2020-05-21-Homotopy.md", url = "/posts/2020-05-21-Homotopy.html", title = "Quick Homotopy Type Theory"},
 
 {path = "posts/Statistics/2020-04-20-LookaheadBias.md", url = "/posts/2020-04-20-LookaheadBias.html", title = "Lookahead Bias"},
 
@@ -322,15 +354,11 @@ files = [
 
 {path = "posts/QuickCode/2020-04-05-TLA.md", url = "/posts/2020-04-05-TLA.html", title = "TLA"},
 
-{path = "posts/TypeTheory/2020-01-27-HomSet.md", url = "/posts/2020-01-27-HomSet.html", title = "HomSet"},
-
 {path = "posts/CyberSec/2020-01-23-SettingUpHyperV.md", url = "/posts/2020-01-23-SettingUpHyperV.html", title = "HyperV on a home server"},
 
 {path = "posts/CyberSec/2020-01-23-HyperVExpand.md", url = "/posts/2020-01-23-HyperVExpand.html", title = "HyperV Expand win 10 VM virtual hard drive space"},
 
 {path = "posts/QuickCode/2019-09-01-NQueen.md", url = "/posts/2019-09-01-NQueen.html", title = "NQueen in Haskell"},
-
-{path = "posts/TypeTheory/2019-08-23-PatternMatch.md", url = "/posts/2019-08-23-PatternMatch.html", title = "What is Pattern matching?"},
 
 {path = "posts/Functional/2019-08-23-Monad.md", url = "/posts/2019-08-23-Monad.html", title = "Monads, Bind, Return"},
 
@@ -349,12 +377,6 @@ files = [
 {path = "posts/Induction/2019-03-20-InductiveAMGMDown.md", url = "/posts/2019-03-20-InductiveAMGMDown.html", title = "Proof Downward Induction AM-GM"},
 
 {path = "posts/Algorithms/2019-03-17-ProofBFS.md", url = "/posts/2019-03-17-ProofBFS.html", title = "Proof - BFS gets shortest distance"},
-
-{path = "posts/TypeTheory/2019-03-07-LangCat.md", url = "/posts/2019-03-07-LangCat.html", title = "Language and Category theory"},
-
-{path = "posts/TypeTheory/2019-03-07-CatNotes.md", url = "/posts/2019-03-07-CatNotes.html", title = "Category theory Notes"},
-
-{path = "posts/TypeTheory/2019-03-07-CatHask.md", url = "/posts/2019-03-07-CatHask.html", title = "Category theory for programmer notes"},
 
 {path = "posts/LinearAlgebra/2019-03-07-Mathlib.md", url = "/posts/2019-03-07-Mathlib.html", title = "Math library notes"},
 
@@ -391,6 +413,8 @@ files = [
 {path = "posts/Javascript/2018-06-23-Tsconfig.md", url = "/posts/2018-06-23-Tsconfig.html", title = "Typescript tsconfig.json"},
 
 {path = "posts/Javascript/2018-06-23-ReactConditionalDOM.md", url = "/posts/2018-06-23-ReactConditionalDOM.html", title = "Conditional rendering JS React"},
+
+{path = "posts/Javascript/2018-06-23-JSfileBlogs.md", url = "/posts/2018-06-23-JSfileBlogs.html", title = "JS and file Blobs"},
 
 {path = "posts/Javascript/2018-06-23-JSVanilla.md", url = "/posts/2018-06-23-JSVanilla.html", title = "VanillaJS mini scripts"},
 
@@ -446,9 +470,9 @@ files = [
 
 {path = "posts/Softdev/2017-07-15-Debug.md", url = "/posts/2017-07-15-Debug.html", title = "Debug"},
 
-{path = "posts/QuickCode/2017-07-15-SpringPatterns.md", url = "/posts/2017-07-15-SpringPatterns.html", title = "Design Patterns"},
-
 {path = "posts/QuickCode/2017-07-15-CPython.md", url = "/posts/2017-07-15-CPython.html", title = "Everything is a pointer perspective"},
+
+{path = "posts/Java/2017-07-15-SpringPatterns.md", url = "/posts/2017-07-15-SpringPatterns.html", title = "Design Patterns"},
 
 {path = "posts/Economics/2017-07-15-thinkScript.md", url = "/posts/2017-07-15-thinkScript.html", title = "Thinkscript"},
 
@@ -496,12 +520,6 @@ files = [
 
 {path = "posts/CyberSec/2015-09-16-AndroidBash.md", url = "/posts/2015-09-16-AndroidBash.html", title = "Android and Bash"},
 
-{path = "posts/TypeTheory/2015-08-23-NatDed.md", url = "/posts/2015-08-23-NatDed.html", title = "ND"},
-
-{path = "posts/TypeTheory/2015-08-23-LinearLogic.md", url = "/posts/2015-08-23-LinearLogic.html", title = "Linear Logic"},
-
-{path = "posts/TypeTheory/2015-08-23-GentzenCut.md", url = "/posts/2015-08-23-GentzenCut.html", title = "Sequents and Gentzen Cut"},
-
 {path = "posts/Economics/2015-08-23-FinanceTerms.md", url = "/posts/2015-08-23-FinanceTerms.html", title = "Finance terms"},
 
 {path = "posts/Economics/2015-08-23-EconSignals.md", url = "/posts/2015-08-23-EconSignals.html", title = "Econ terms"},
@@ -517,8 +535,6 @@ files = [
 {path = "posts/Functional/2015-08-20-StreamLambda.md", url = "/posts/2015-08-20-StreamLambda.html", title = "Implementing Stream with lambdas"},
 
 {path = "posts/Physics/2015-07-23-RNA.md", url = "/posts/2015-07-23-RNA.html", title = "Genetics and Bio lab techniques"},
-
-{path = "posts/TypeTheory/2015-07-22-REPL.md", url = "/posts/2015-07-22-REPL.html", title = "Compilers and REPL"},
 
 {path = "posts/Softdev/2015-07-22-Agile.md", url = "/posts/2015-07-22-Agile.html", title = "Agile"},
 
@@ -547,8 +563,6 @@ files = [
 {path = "posts/Algorithms/2015-07-19-CLRSAlgos.md", url = "/posts/2015-07-19-CLRSAlgos.html", title = "CLRS Algos"},
 
 {path = "posts/Algorithms/2015-07-19-CFProblemSet.md", url = "/posts/2015-07-19-CFProblemSet.html", title = "CF Problem Sets"},
-
-{path = "posts/TypeTheory/2015-07-15-ListFunctor.md", url = "/posts/2015-07-15-ListFunctor.html", title = "List Functors Lambda Laziness"},
 
 {path = "posts/Statistics/2015-07-15-RegressionOLS.md", url = "/posts/2015-07-15-RegressionOLS.html", title = "Regression and OLS"},
 
@@ -597,8 +611,6 @@ files = [
 {path = "posts/BioChem/2015-07-14-AppliedBio.md", url = "/posts/2015-07-14-AppliedBio.html", title = "Applied Bio"},
 
 {path = "posts/Algorithms/2015-07-14-GraphTheory.md", url = "/posts/2015-07-14-GraphTheory.html", title = "Graph theory"},
-
-{path = "posts/TypeTheory/2015-07-01-Lattices.md", url = "/posts/2015-07-01-Lattices.html", title = "Lattices"},
 
 {path = "posts/PureMath/2015-07-01-Topology.md", url = "/posts/2015-07-01-Topology.html", title = "Topology"},
 

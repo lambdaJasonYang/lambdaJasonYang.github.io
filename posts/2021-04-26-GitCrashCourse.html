@@ -150,8 +150,9 @@
 <ul>
 <li><a href="#creating-your-git-project"><span class="toc-section-number">6.1</span> Creating your git project</a></li>
 <li><a href="#rebasing"><span class="toc-section-number">6.2</span> Rebasing</a></li>
+<li><a href="#remove-files-after-adding-.gitignore"><span class="toc-section-number">6.3</span> remove files after adding .gitignore</a></li>
 </ul></li>
-<li><a href="#vim-micro-tut"><span class="toc-section-number">7</span> Vim micro tut</a></li>
+<li><a href="#git-vim-micro-tut-for-merging"><span class="toc-section-number">7</span> git Vim micro tut for merging</a></li>
 </ul></div>
 <p><a href="ohshitgit.com">ohshitgit because messing up is too ez</a></p>
 <p>WARNING: The terms I use are nonstandard from most other tutorials.</p>
@@ -266,16 +267,24 @@ The “HEAD” pointer refers to the layer 3 pointer.</p>
 </tbody>
 </table>
 <p>Every git node has a ref that looks like 3bed42g14584b3c0c04fdcc4f503346f92be1003</p>
-<p>We can point HEAD(layer 3) to aliases(layer 2) like “main” with git checkout main</p>
-<p>Switching branch = move HEAD(layer 3) to alias(layer 2) of new branch git checkout someotherbranch</p>
+<p>We can point HEAD(layer 3) to aliases(layer 2) like “main” with
+git checkout main</p>
+<p>Switching branch = move HEAD(layer 3) to alias(layer 2) of new branch
+git checkout someotherbranch</p>
 <p>git checkout can<br />
 1) switch branch<br />
 2) go to older version</p>
-<p><strong>Pointing HEAD(layer 3) directly to ref(layer 1), Detached HEAD mode</strong> We can point HEAD(layer 3) to ref(layer 1) like “3bed42g1…” with git checkout “3bed42g1…”</p>
-<p>If you modify files, then commit. Any change will be discarded if you switch back to main (git checkout main)</p>
-<p>To make changes permanent, you have to build a branch by making an alias(layer 2) with your commit(layer 1). git branch SomeName</p>
-<p><strong>Why and When do we point HEAD to naked refs</strong> The newest version has compatibility issues and you want to build off an old version.</p>
-<p>transverse git commit tree using the HEAD pointer. HEAD pointer can point to alias like “main” or refs like “3bed42g…”</p>
+<p><strong>Pointing HEAD(layer 3) directly to ref(layer 1), Detached HEAD mode</strong>
+We can point HEAD(layer 3) to ref(layer 1) like “3bed42g1…” with
+git checkout “3bed42g1…”</p>
+<p>If you modify files, then commit.
+Any change will be discarded if you switch back to main (git checkout main)</p>
+<p>To make changes permanent, you have to build a branch by making an alias(layer 2) with your commit(layer 1).
+git branch SomeName</p>
+<p><strong>Why and When do we point HEAD to naked refs</strong>
+The newest version has compatibility issues and you want to build off an old version.</p>
+<p>transverse git commit tree using the HEAD pointer.
+HEAD pointer can point to alias like “main” or refs like “3bed42g…”</p>
 <p>“git branch” vs “git checkout -b”<br />
 git branch makes a new alias and branch, BUT HEAD stays on current branch<br />
 git checkout -b behaves the same as git branch BUT moves HEAD to new branch</p>
@@ -287,15 +296,19 @@ git checkout -b behaves the same as git branch BUT moves HEAD to new branch</p>
 </section>
 <section id="extras" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Extras</h1>
-<p>tags are just renaming refs, they are NOT at the same level as aliases. Meaning if you point HEAD to a tag, you are in a detached head state.</p>
-<p>In gitk yellow node HEAD pointer points to blue untagged node(meaning it is not the local head of a branch)git</p>
+<p>tags are just renaming refs, they are NOT at the same level as aliases.
+Meaning if you point HEAD to a tag, you are in a detached head state.</p>
+<p>In gitk
+yellow node HEAD pointer points to
+blue untagged node(meaning it is not the local head of a branch)git</p>
 <hr />
 </section>
 <section id="merging" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Merging</h1>
 <section id="example" class="level2" data-number="5.1">
 <h2 data-number="5.1"><span class="header-section-number">5.1</span> Example</h2>
-<p>Example: clone git project first commit</p>
+<p>Example:
+clone git project first commit</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> 0382315a65a3fa24595718b3bf141f09a49b6469 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main, origin/main, origin/HEAD<span class="kw">)</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> JY <span class="op">&lt;</span>example@example.com<span class="op">&gt;</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Mon Sep 27 16:04:23 2021 <span class="at">-0700</span></span>
@@ -468,14 +481,32 @@ But now we have 2 repos with separate histories.</p>
 <h2 data-number="6.2"><span class="header-section-number">6.2</span> Rebasing</h2>
 <p>rebasing just means we can reorder our commit history</p>
 </section>
+<section id="remove-files-after-adding-.gitignore" class="level2" data-number="6.3">
+<h2 data-number="6.3"><span class="header-section-number">6.3</span> remove files after adding .gitignore</h2>
+<p>Scenario:</p>
+<ul>
+<li>You acidentally pushed .bleh on to github</li>
+<li>Later you commited to local repo a .gitignore to ignore .bleh then synced it with github repo</li>
+<li>Problem: .bleh is still in the github repo</li>
+</ul>
+<p>Solution:</p>
+<ul>
+<li><code>git rm -r --cached .bleh</code> then add,commit and push to github will remove the remote github .bleh file or directory</li>
+</ul>
 </section>
-<section id="vim-micro-tut" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Vim micro tut</h1>
+</section>
+<section id="git-vim-micro-tut-for-merging" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> git Vim micro tut for merging</h1>
 <p>ctrl-w-w to switch screen on 3 way commit</p>
-<p>esc-u to undo esc-:diffupdate after undo to rescan difference</p>
-<p>esc-:diffget LO to apply Local, left most window esc-:diffget remote to apply Remote, right most window esc-:diffget BA to apply base, top center window</p>
-<p>esc-i to insert mode esc-dd to delete line</p>
-<p>esc-]-c to move to next conflict esc-[-c to move to prev conflict</p>
+<p>esc-u to undo
+esc-:diffupdate after undo to rescan difference</p>
+<p>esc-:diffget LO to apply Local, left most window
+esc-:diffget remote to apply Remote, right most window
+esc-:diffget BA to apply base, top center window</p>
+<p>esc-i to insert mode
+esc-dd to delete line</p>
+<p>esc-]-c to move to next conflict
+esc-[-c to move to prev conflict</p>
 </section>
 
         </div>

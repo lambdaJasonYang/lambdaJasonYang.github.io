@@ -140,12 +140,13 @@
 <li><a href="#bashrc-zshrc"><span class="toc-section-number">8</span> bashrc zshrc</a></li>
 <li><a href="#install-node"><span class="toc-section-number">9</span> install node</a></li>
 <li><a href="#install-docker"><span class="toc-section-number">10</span> Install docker</a></li>
-<li><a href="#wolfram"><span class="toc-section-number">11</span> Wolfram</a></li>
-<li><a href="#troubleshooting"><span class="toc-section-number">12</span> TroubleShooting</a>
+<li><a href="#install-golang"><span class="toc-section-number">11</span> Install golang</a></li>
+<li><a href="#wolfram"><span class="toc-section-number">12</span> Wolfram</a></li>
+<li><a href="#troubleshooting"><span class="toc-section-number">13</span> TroubleShooting</a>
 <ul>
-<li><a href="#failure-in-apt-update"><span class="toc-section-number">12.1</span> Failure in apt update</a></li>
+<li><a href="#failure-in-apt-update"><span class="toc-section-number">13.1</span> Failure in apt update</a></li>
 </ul></li>
-<li><a href="#install-ghcup"><span class="toc-section-number">13</span> Install ghcup</a></li>
+<li><a href="#install-ghcup"><span class="toc-section-number">14</span> Install ghcup</a></li>
 </ul></div>
 <section id="while-in-disk-installation" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> While in disk installation</h1>
@@ -298,31 +299,45 @@ nmcli connection up example</p>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-aG</span> docker <span class="va">$USER</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 666 /var/run/docker.sock</span></code></pre></div>
 </section>
-<section id="wolfram" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> Wolfram</h1>
+<section id="install-golang" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Install golang</h1>
+<p>Get linux download link from golang website</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> /usr/local/go</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /usr/local</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> https://go.dev/dl/go1.19.3.linux-amd64.tar.gz</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> https://go.dev/dl/go1.19.3.linux-amd64.tar.gz</span></code></pre></div>
+<p>either in .zshrc or .bashrc, or .zprofile .profile add the lines</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">GOBIN</span><span class="op">=</span>/usr/local/go/bin</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">$GOBIN</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">GOPATH</span><span class="op">=</span><span class="va">$(</span><span class="ex">go</span> env GOPATH<span class="va">)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">$GOPATH</span></span></code></pre></div>
+</section>
+<section id="wolfram" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Wolfram</h1>
 <ul>
 <li>follow the instructions</li>
 <li>also chmod -R 777 the wolfram engine</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install alsa-lib</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install alsa-lib</span></code></pre></div>
 </section>
-<section id="troubleshooting" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> TroubleShooting</h1>
-<section id="failure-in-apt-update" class="level2" data-number="12.1">
-<h2 data-number="12.1"><span class="header-section-number">12.1</span> Failure in apt update</h2>
+<section id="troubleshooting" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> TroubleShooting</h1>
+<section id="failure-in-apt-update" class="level2" data-number="13.1">
+<h2 data-number="13.1"><span class="header-section-number">13.1</span> Failure in apt update</h2>
 <ul>
 <li><code>vi /etc/apt/sources.list</code></li>
 </ul>
 </section>
 </section>
-<section id="install-ghcup" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> Install ghcup</h1>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#for debian</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install libnuma-dev</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#for redhat</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">dnf</span> install numactl</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ghcup</span> tui</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ghcup</span> set ghc 8.10.7</span></code></pre></div>
+<section id="install-ghcup" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Install ghcup</h1>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#for debian</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install libnuma-dev</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#for redhat</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">dnf</span> install numactl</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ghcup</span> tui</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ghcup</span> set ghc 8.10.7</span></code></pre></div>
 </section>
 
         </div>

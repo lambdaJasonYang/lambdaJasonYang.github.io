@@ -30,7 +30,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - functional tag</title>
+        <title>Jason Yang - Category theory for programmer notes</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -103,49 +103,78 @@
         </div>
 
         <div id="content">
-            <h1>functional tag</h1>
+            <h1>Category theory for programmer notes</h1>
             
 
-            <ul class="postlist">
+            <div class="info">
+    Posted on July  1, 2022
     
-        <li>
-            <a href="../posts/2022-07-01-PatternMatch.html">What is Pattern matching?</a> 
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2020-04-05-TLA.html">TLA</a> 
-        </li>
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'categorytheory'." href="../tags/categorytheory.html">categorytheory</a>
     
-        <li>
-            <a href="../posts/2019-09-01-NQueen.html">NQueen in Haskell</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Monad.html">Monads, Bind, Return</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-FoldInduction.html">Fold and Induction</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2019-08-23-Applicative.html">Applicative</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-12-05-LeftFoldTailLoop.html">For Loops, Tail recursion, and Left fold</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-08-20-StreamLambda.html">Implementing Stream with lambdas</a> 
-        </li>
-    
-        <li>
-            <a href="../posts/2015-07-19-TailNotPure.html">Recursion - Slicing the tail of list is impure</a> 
-        </li>
-    
+</div>
+<section id="function-composition" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Function composition</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> G<span class="op">,</span> <span class="kw">typename</span> F<span class="op">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> compose<span class="op">(</span>G<span class="op">&amp;&amp;</span> g<span class="op">,</span> F<span class="op">&amp;&amp;</span> f<span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">[</span>g<span class="op">,</span>f<span class="op">](</span><span class="kw">auto</span><span class="op">&amp;&amp;</span> t<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> g<span class="op">(</span>f<span class="op">(</span><span class="bu">std::</span>forward<span class="op">&lt;</span><span class="kw">decltype</span><span class="op">(</span>t<span class="op">)&gt;(</span>t<span class="op">)));</span> <span class="op">};</span> <span class="op">}</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> <span class="at">const</span> id <span class="op">=</span> <span class="op">[](</span><span class="kw">auto</span><span class="op">&amp;&amp;</span> t<span class="op">)</span> <span class="op">-&gt;</span> <span class="kw">decltype</span><span class="op">(</span>t<span class="op">)&amp;&amp;</span> <span class="op">{</span> <span class="cf">return</span> <span class="bu">std::</span>forward<span class="op">&lt;</span><span class="kw">decltype</span><span class="op">(</span>t<span class="op">)&gt;(</span>t<span class="op">);</span> <span class="op">};</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Usage sample</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> <span class="at">const</span> f <span class="op">=</span> <span class="op">[](</span><span class="dt">int</span> v<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> v <span class="op">-</span> <span class="fl">1.</span><span class="bu">f</span><span class="op">;</span> <span class="op">};</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> <span class="at">const</span> g <span class="op">=</span> <span class="op">[](</span><span class="dt">float</span> v<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;(</span>v<span class="op">);</span> <span class="op">};</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> <span class="at">const</span> <span class="va">g_after_f</span> <span class="op">=</span> compose<span class="op">(</span>g <span class="op">,</span>f<span class="op">);</span></span></code></pre></div>
+</section>
+<section id="top-type" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Top Type</h1>
+<ul>
+<li>Top is called <code>void</code> in C++ but <code>void</code> in haskell is Bottom or False.</li>
+<li>Top aka True is constructed by one constant term true.
+<ul>
+<li>term true proves the Type True</li>
+</ul></li>
 </ul>
-<script></script>
+<p><span class="math display">\[ \cfrac{}{}\]</span></p>
+<div class="sourceCode" id="cb2" data-group="unit" data-glabel="cpp"><pre class="sourceCode Cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">class</span> T<span class="op">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> unit<span class="op">(</span>T<span class="op">)</span> <span class="op">{}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3" data-group="unit" data-glabel="cpp"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">f44 ::</span> () <span class="ot">-&gt;</span> <span class="dt">Integer</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>f44 () <span class="ot">=</span> <span class="dv">44</span></span></code></pre></div>
+</section>
+<section id="bottom-type" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Bottom Type</h1>
+<ul>
+<li>Bottom aka False has no constructor
+<ul>
+<li>no term can construct Type False therefore there is no way to prove False</li>
+</ul></li>
+<li>Haskell bottom is called <code>void</code>. REMEMBER <code>void</code> is not bottom in C++.</li>
+</ul>
+</section>
+<section id="polymorphic-types-are-natural-transformations" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> polymorphic types are Natural transformations</h1>
+<section id="either-sum-type" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Either Sum Type</h2>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a0a202072616e6b646972203d2042540a43205b6c6162656c3d22426f6f6c5c6e412b42225d3b0a413b0a423b0a443b0a0a41202d3e2043205b6c6162656c3d226c656674225d3b0a42202d3e2043205b6c6162656c3d227269676874225d3b0a43202d3e20443b0a41202d3e20443b0a42202d3e20443b0a0a7d"></figure>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Either</span> <span class="dt">Bool</span> <span class="dt">Int</span> <span class="ot">=</span> <span class="dt">Left</span> <span class="dt">Bool</span> <span class="op">|</span> <span class="dt">Right</span> <span class="dt">Int</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ot">to ::</span> <span class="dt">Either</span> <span class="dt">Bool</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">String</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>to x <span class="ot">=</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ot">from ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Either</span> <span class="dt">Bool</span> <span class="dt">Int</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>from <span class="st">&quot;True&quot;</span> <span class="ot">=</span> <span class="dt">Left</span> <span class="dt">True</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>from _ <span class="ot">=</span> <span class="dt">Right</span> <span class="dv">0</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+</section>
+</section>
+
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">
