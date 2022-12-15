@@ -230,7 +230,9 @@
 </section>
 <section id="types" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Types</h1>
-<p>if <code class="sourceCode haskell">p <span class="op">:</span> <span class="dt">Prop</span></code> then <code class="sourceCode haskell">x<span class="op">:</span>p</code> is a proof of proposition <code class="sourceCode haskell">p <span class="op">:</span> <span class="dt">Prop</span></code>. if <code class="sourceCode haskell">y<span class="op">:</span>p</code> is also a proof then <strong>proof irrelevance</strong> means <code class="sourceCode haskell">x<span class="op">:</span>p</code> and <code class="sourceCode haskell">y<span class="op">:</span>p</code> are indistinguishable.</p>
+<p>if <code class="sourceCode haskell">p <span class="op">:</span> <span class="dt">Prop</span></code> then
+<code class="sourceCode haskell">x<span class="op">:</span>p</code> is a proof of proposition <code class="sourceCode haskell">p <span class="op">:</span> <span class="dt">Prop</span></code>.
+if <code class="sourceCode haskell">y<span class="op">:</span>p</code> is also a proof then <strong>proof irrelevance</strong> means <code class="sourceCode haskell">x<span class="op">:</span>p</code> and <code class="sourceCode haskell">y<span class="op">:</span>p</code> are indistinguishable.</p>
 <ul>
 <li>Props, terms
 <ul>
@@ -357,7 +359,8 @@ We apply <code class="sourceCode haskell">(Π x <span class="op">:</span> α, β
 bound variable <code class="sourceCode haskell">Π x <span class="op">:</span> α</code> then<br />
 <code class="sourceCode haskell">β[x]</code> = <code class="sourceCode haskell">β</code></p>
 </blockquote>
-<p>example: <code class="sourceCode haskell"><span class="ot">f ::</span> Π x <span class="op">:</span> α, β</code> = <code class="sourceCode haskell">f<span class="ot"> x ::</span> β[x]</code> = <code class="sourceCode haskell">f<span class="ot"> x ::</span> β</code> = <code class="sourceCode haskell"><span class="ot">f ::</span> α <span class="ot">-&gt;</span> β</code></p>
+<p>example:
+<code class="sourceCode haskell"><span class="ot">f ::</span> Π x <span class="op">:</span> α, β</code> = <code class="sourceCode haskell">f<span class="ot"> x ::</span> β[x]</code> = <code class="sourceCode haskell">f<span class="ot"> x ::</span> β</code> = <code class="sourceCode haskell"><span class="ot">f ::</span> α <span class="ot">-&gt;</span> β</code></p>
 <p>example <code>β</code> is <code>bool</code>, <code>α</code> is <code>nat</code><br />
 Notice <code>bool</code> is an expression that does not include any bound variable <code>x:nat</code></p>
 <ul>

@@ -116,7 +116,10 @@
     
 </div>
 <p>In python, headers are key-value pairs in dicts.</p>
-<p>Some api’s require that headers must satisfy certain requirements: * “User-Agent”: “Mozilla/5.0 (Windows NT 10.0)” * messing with User-Agent; even using a valid one like “Mozilla/5.0 (X11; U; Linux i686)” can make your request hang or timeout. * “sec-fetch-mode”: “cors”</p>
+<p>Some api’s require that headers must satisfy certain requirements:
+* “User-Agent”: “Mozilla/5.0 (Windows NT 10.0)”
+* messing with User-Agent; even using a valid one like “Mozilla/5.0 (X11; U; Linux i686)” can make your request hang or timeout.
+* “sec-fetch-mode”: “cors”</p>
 <p>adding “accept-encoding”: “gzip, deflate, br”, will print out hex so leave it out of your header if you can</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&quot;https://api.example.com/api/endpoint&quot;</span></span>

@@ -119,15 +119,19 @@
 <h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> On Client Windows PC</h3>
 <p><code class="sourceCode bash"><span class="ex">Get-NetConnectionProfile</span></code><br />
 For me it returns “Wi-Fi” in the name field, use this in the next command.</p>
-<p><code class="sourceCode bash"><span class="ex">Set-NetConnectionProfile</span> <span class="at">-InterfaceAlias</span> Wi-Fi <span class="at">-NetworkCategory</span> Private</code> <code class="sourceCode bash"><span class="ex">winrm</span> quickconfig</code></p>
-<p><code class="sourceCode bash"><span class="ex">Set-Item</span> WSMan:<span class="dt">\l</span>ocalhost<span class="dt">\C</span>lient<span class="dt">\T</span>rustedHosts <span class="at">-Value</span> <span class="st">&quot;192.168.1.66&quot;</span></code> <code class="sourceCode bash"><span class="ex">Enable-WSManCredSSP</span> <span class="at">-Role</span> client <span class="at">-DelegateComputer</span> <span class="st">&quot;192.168.1.66&quot;</span></code></p>
-<p>Go to group policy Computer Configuration &gt; Administrative Templates &gt; System &gt; Credential Delegation<br />
+<p><code class="sourceCode bash"><span class="ex">Set-NetConnectionProfile</span> <span class="at">-InterfaceAlias</span> Wi-Fi <span class="at">-NetworkCategory</span> Private</code>
+<code class="sourceCode bash"><span class="ex">winrm</span> quickconfig</code></p>
+<p><code class="sourceCode bash"><span class="ex">Set-Item</span> WSMan:<span class="dt">\l</span>ocalhost<span class="dt">\C</span>lient<span class="dt">\T</span>rustedHosts <span class="at">-Value</span> <span class="st">&quot;192.168.1.66&quot;</span></code>
+<code class="sourceCode bash"><span class="ex">Enable-WSManCredSSP</span> <span class="at">-Role</span> client <span class="at">-DelegateComputer</span> <span class="st">&quot;192.168.1.66&quot;</span></code></p>
+<p>Go to group policy
+Computer Configuration &gt; Administrative Templates &gt; System &gt; Credential Delegation<br />
 Enable “Allow delegating fresh credentials”, Press “Show…” next to “Add servers to the list:<br />
 Add value”wsman/*”</p>
 <p>Enable “Allow delegating fresh credentials with NTLM-only server authentication”, Press “Show…” next to “Add servers to the list:<br />
 Add value”wsman/*”</p>
 <p>Click on hyper-v manager “Connect to Server…”<br />
-DESKTOP-ABCD2E Your password to login to Administrator</p>
+DESKTOP-ABCD2E
+Your password to login to Administrator</p>
 <p>“DESKTOP-ABCD2E” will be replaced by the name of your PC.</p>
 </section>
 <section id="bad-server-wifi-startup-fix" class="level2" data-number="0.1">

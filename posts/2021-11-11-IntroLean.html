@@ -142,11 +142,13 @@
 <p><code>def bleh (PARAMETER1 : Type) (PARAMETER2 : Type) : ARGUMENT1 -&gt; ARGUMENT2 := ...</code></p>
 <ul>
 <li>PARAMETER: Before the main semicolon</li>
-<li>ARGUMENT: After the main semicolon <!--  --></li>
+<li>ARGUMENT: After the main semicolon
+<!--  --></li>
 <li>Example <code>def Bigger (x : Nat) (y : Nat): Bool := ...</code>
 <ul>
 <li>Parameter: <code>(x : Nat) (y : Nat)</code></li>
-<li>Argument: <code>Bool</code> <!--  --></li>
+<li>Argument: <code>Bool</code>
+<!--  --></li>
 </ul></li>
 <li>PARAMETER and ARGUMENTS do not behave in the same way in Function vs Inductive Type definitons</li>
 </ul>
@@ -172,7 +174,10 @@
 <section id="inductive-type" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Inductive type</h1>
 <ul>
-<li>An inductive type aka inductive datatype aka algebraic datatype is a type that consists all the values that can be built using a finite number of applications of its constructors and only those. <!--  --></li>
+<li>An inductive type aka inductive datatype aka algebraic datatype is a type that consists all the
+values that can be built using a finite number of applications of its
+constructors and only those.
+<!--  --></li>
 <li><code>Inductive</code> keyword bundles together Type formation and Term introduction</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>inductive nat <span class="op">:</span> <span class="dt">Type</span> <span class="co">--type formation</span></span>

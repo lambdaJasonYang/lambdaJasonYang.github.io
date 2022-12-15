@@ -195,7 +195,8 @@
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">--our custom designed version</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>example <span class="op">:</span> imply <span class="dt">P</span> <span class="dt">P</span> <span class="op">:=</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>imply<span class="op">.</span>intro (λ (x<span class="op">:</span><span class="dt">P</span>), x)</span></code></pre></div>
-<p>Notice we just designed the lean proof system. The constructor <code>imply.intro</code> builds the term aka proof for it’s associated inductive type below</p>
+<p>Notice we just designed the lean proof system.
+The constructor <code>imply.intro</code> builds the term aka proof for it’s associated inductive type below</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>inductive imply ( a b <span class="op">:</span> <span class="dt">Prop</span>) <span class="op">:</span> <span class="dt">Prop</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> intro<span class="op">:</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> imply</span></code></pre></div>
 </section>
@@ -207,7 +208,8 @@
 </li>
 <li>Props hold infinitely many terms, as you can make infinitely many
 <ul>
-<li>Props like <code>imply P P :: Prop</code> or <code>imply (imply P P) P :: Prop</code>,etc <!--  --></li>
+<li>Props like <code>imply P P :: Prop</code> or <code>imply (imply P P) P :: Prop</code>,etc
+<!--  --></li>
 </ul></li>
 <li>Bool
 <ul>

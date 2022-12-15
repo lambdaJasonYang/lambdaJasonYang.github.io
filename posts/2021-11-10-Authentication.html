@@ -129,7 +129,8 @@
 <p>OAuth2 is a protocol that typically uses JWT</p>
 <section id="oauth2" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Oauth2</h1>
-<p>4 parties: User(Resource Owner) on Browser,<br />
+<p>4 parties:
+User(Resource Owner) on Browser,<br />
 Leetcode(Client),<br />
 github-auth(Authorization Server),<br />
 github profile db(Resource Server)</p>
@@ -149,10 +150,12 @@ github profile db(Resource Server)</p>
 <section id="openid-connect" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> OpenID connect</h1>
 <p>OIDC sits ontop of OAuth2<br />
-OIDC gives a more typical behavior of a login session. OIDC allows a Client(Leetcode) to establish a login session and identity for the User(Resource-Owner).<br />
+OIDC gives a more typical behavior of a login session.
+OIDC allows a Client(Leetcode) to establish a login session and identity for the User(Resource-Owner).<br />
 When github-auth(Authorization Server) allows OIDC, it is called an <strong>identity provider</strong> since it provide identity information about the User(Resource-Owner) back to the Client(Leetcode).</p>
 <p>OIDC allows one login to github-auth(Authorization Server) to be used for multiple Client/Apps.<br />
-Eg. Using gmail to sign into multiple apps. This single login is called <strong>SSO</strong> Single-Sign-On</p>
+Eg. Using gmail to sign into multiple apps.
+This single login is called <strong>SSO</strong> Single-Sign-On</p>
 <p>OIDC process is same as OAuth except at step 9, it returns {JWT ID token, Access Token}.</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a736b696e706172616d20736861646f77696e672066616c73650a42726f77736572202d3e2057656273697465203a20476574206578616d706c652e636f6d0a57656273697465202d2d3e2042726f777365723a206f6b2c2068657265206973206d792053534c2063657274205c6e636f6e7461696e696e67206d79207075626c69636b65795c6e7369676e6564206279204c657473456e63727970740a6e6f7465206f7665722042726f777365720a557365207072652d696e7374616c6c6564204c657473456e63727970740a5075626c69634b657920696e2042726f7773657220746f0a766572696679207468652053534c2063657274207369676e6564207573696e670a4c657473456e6372797074277320507269766174654b65790a656e646e6f74650a42726f77736572202d3e20576562736974653a2049207472757374204c657473456e63727970745c6e5468657265666f7265204920747275737420796f757220636572742e5c6e49206d6164652061205365637265744b6579205c6e656e6372797074656420697420772f20796f7572205075626c69634b65790a6e6f7465206f76657220576562736974650a576562736974652063616e2072657665616c200a746865205365637265744b6579200a62792064656372797074696e6720746865206d657373616765200a772f2057656273697465277320507269766174654b6579200a656e646e6f74650a57656273697465203c2d3e2042726f777365723a20436f6d6d756e69636174696f6e20772f205365637265744b65790a40656e64756d6c"></figure>
 </section>
@@ -167,7 +170,8 @@ Eg. Using gmail to sign into multiple apps. This single login is called <strong>
 <ul>
 <li>Login flow</li>
 <li>client input pass —-&gt; compare bcrypt(pass)+user with DB</li>
-<li>Server &lt;–{JWT}– Server <!--  --></li>
+<li>Server &lt;–{JWT}– Server
+<!--  --></li>
 </ul>
 <section id="bcrypt" class="level2" data-number="3.1">
 <h2 data-number="3.1"><span class="header-section-number">3.1</span> bcrypt</h2>

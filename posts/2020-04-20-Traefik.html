@@ -450,7 +450,8 @@ D = Deleted</p>
 </section>
 <section id="ports-and-network" class="level2" data-number="2.4">
 <h2 data-number="2.4"><span class="header-section-number">2.4</span> Ports and Network</h2>
-<p>Expose port: tell container to listen to a certain port(doesn’t do much but helps for documentation) <code class="sourceCode dockerfile"><span class="kw">EXPOSE</span> &lt;port&gt;</code> in Dockerfile</p>
+<p>Expose port: tell container to listen to a certain port(doesn’t do much but helps for documentation)
+<code class="sourceCode dockerfile"><span class="kw">EXPOSE</span> &lt;port&gt;</code> in Dockerfile</p>
 <p>Publish port: map local port to container port<br />
 <code class="sourceCode bash"><span class="ex">-p</span> <span class="op">&lt;</span>local-port<span class="op">&gt;</span>:<span class="op">&lt;</span>remote-container-port<span class="op">&gt;</span></code></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-p</span> 3000:5000 ubuntu</span></code></pre></div>

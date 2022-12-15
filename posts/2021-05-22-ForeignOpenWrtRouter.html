@@ -116,7 +116,8 @@
     
 </div>
 <p>I will be installing Openwrt on black cylindrical Xiaomi mi router ac2100.</p>
-<p>As of 2021, I’ve found the openwrt to be incorrect or outdated. This guide will tell you how to flash your xiaomi mi router ac2100 to a snapshot build then upgrade to a stable build.</p>
+<p>As of 2021, I’ve found the openwrt to be incorrect or outdated.
+This guide will tell you how to flash your xiaomi mi router ac2100 to a snapshot build then upgrade to a stable build.</p>
 <p>Why not just flash directly to a stable build? Simply because I followed the Openwrt wiki then realized only later a stable newer build existed. yea… OpenWrt Wiki is not maintained well at all…</p>
 <ul>
 <li>For xiaomi mi ac2100 you must first downgrade the firmware.
@@ -130,7 +131,8 @@
 <p>Once you set up your ssid login to the router panel by going to <code class="sourceCode html">http://192.168.31.1</code></p>
 <p>The Url should show<br />
 <code class="sourceCode html">http://192.168.31.1/cgi-bin/luci/;stok=\<span class="kw">&lt;STOK</span><span class="er">\</span><span class="kw">&gt;</span>/web/home#router</code></p>
-<p>For each of the below, replace &lt;STOK&gt; with your STOK After each command you should see a page that display “Code: 0”</p>
+<p>For each of the below, replace &lt;STOK&gt; with your STOK
+After each command you should see a page that display “Code: 0”</p>
 <ol type="1">
 <li><div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>http://192.168.31.1/cgi-bin/luci/;stok=\<span class="kw">&lt;STOK</span><span class="er">\</span><span class="kw">&gt;</span>/api/misystem/set_config_iotdev?bssid=Xiaomi<span class="er">&amp;</span>user_id=longdike<span class="er">&amp;</span>ssid=-h%3Bnvram%20set%20ssh%5Fen%3D1%3B%20nvram%20commit%3B</span></code></pre></div></li>
 <li><div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>http://192.168.31.1/cgi-bin/luci/;stok=\<span class="kw">&lt;STOK</span><span class="er">\</span><span class="kw">&gt;</span>/api/misystem/set_config_iotdev?bssid=Xiaomi<span class="er">&amp;</span>user_id=longdike<span class="er">&amp;</span>ssid=-h%3Bsed%20-i%20's/channel=.*/channel=%5C%22debug%5C%22/g'%20/etc/init.d/dropbear%3B</span></code></pre></div></li>
@@ -138,10 +140,13 @@
 <li><div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>http://192.168.31.1/cgi-bin/luci/;stok=<span class="kw">&lt;STOK&gt;</span>/api/misystem/set_config_iotdev?bssid=Xiaomi<span class="er">&amp;</span>user_id=longdike<span class="er">&amp;</span>ssid=-h%3B%20echo%20-e%20'admin%5Cnadmin' %20%7C%20passwd%20root%3B</span></code></pre></div></li>
 </ol>
 <p><code class="sourceCode bash"><span class="fu">ssh</span> root@192.168.31.1</code></p>
-<p>On windows, Download WinSCP in WinSCP, connect to your router and select protocol “SCP” Download snapshot files on your windows</p>
+<p>On windows, Download WinSCP
+in WinSCP, connect to your router and select protocol “SCP”
+Download snapshot files on your windows</p>
 <p><a href="http://downloads.openwrt.org/snapshots/targets/ramips/mt7621/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-kernel1.bin">kernel1.bin</a><br />
 <a href="http://downloads.openwrt.org/snapshots/targets/ramips/mt7621/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-rootfs0.bin">rootfs0.bin</a></p>
-<p>On WinSCP, on the remote router folder, go up one level to the root folder then go to “/tmp/” folder Then drag the two files you downloaded onto your windows machine into that the remote “/tmp/” folder</p>
+<p>On WinSCP, on the remote router folder, go up one level to the root folder then go to “/tmp/” folder
+Then drag the two files you downloaded onto your windows machine into that the remote “/tmp/” folder</p>
 <p>Then on your ssh session</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mtd</span> write /tmp/openwrt-ramips-mt7621-xiaomi_mi-router-ac2100-squashfs-kernel1.bin kernel1</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -151,7 +156,8 @@
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">nvram</span> set bootdelay=5</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">nvram</span> set flag_try_sys1_failed=1</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">nvram</span> commit</span></code></pre></div>
-<p>Then disconnect your router by unplugging the power. You may notice this portion of the guide differs from the OpenWRT wiki.</p>
+<p>Then disconnect your router by unplugging the power.
+You may notice this portion of the guide differs from the OpenWRT wiki.</p>
 <p>Well that is because when I followed the wiki, everytime I ran the commands in their order, the router just factory reset back to the original mi firmware.</p>
 <section id="turning-on-the-wifi" class="level3" data-number="0.0.1">
 <h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Turning on the Wifi</h3>
@@ -163,7 +169,8 @@
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set wireless.radio1.disabled=<span class="st">'0'</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> commit wireless</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">wifi</span> up</span></code></pre></div>
-<p>WARNING: THE DEFAULT SSID is OpenWrt So if you had an old OpenWrt router setup already, be aware.</p>
+<p>WARNING: THE DEFAULT SSID is OpenWrt
+So if you had an old OpenWrt router setup already, be aware.</p>
 </section>
 <section id="setting-up-a-web-gui-interface" class="level3" data-number="0.0.2">
 <h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Setting up a Web GUI interface</h3>
@@ -199,8 +206,10 @@
 <li>disable odhcpd</li>
 </ul></li>
 </ul>
-<p>IMPORTANT: Wait a few seconds, then disconnect the ethernet on your PC and connect it to the main router so that your OpenWRT AP is connected to your router. This has to be done within 90 seconds or the settings will rollback.</p>
-<p>If you misconfigured something that results in locking yourself out of access to the router, simply factory reset your router and it will reset to default OpenWrt settings.</p>
+<p>IMPORTANT: Wait a few seconds, then disconnect the ethernet on your PC and connect it to the main router so that your OpenWRT AP is connected to your router.
+This has to be done within 90 seconds or the settings will rollback.</p>
+<p>If you misconfigured something that results in locking yourself out of access to the router,
+simply factory reset your router and it will reset to default OpenWrt settings.</p>
 <p>Note the default settings doesn’t have wifi turned on automatically so you have to access your router by ethernet to turn it on.</p>
 <ul>
 <li>The next step is to change back your LAN interface,
@@ -217,7 +226,9 @@ enter 8.8.8.8 or 1.1.1.1 as Custom DNS servers.(Google DNS and Cloudflare DNS re
 </section>
 <section id="some-issues-with-openwrt" class="level3" data-number="0.0.4">
 <h3 data-number="0.0.4"><span class="header-section-number">0.0.4</span> Some issues with OpenWRT</h3>
-<p>Your wifi SSID may not appear while searching for networks if you use the incorrect channels and channel width. You have to keep playing around with the configuration. If your wifi disappears, then you have to play around with the channels and channel width and country origin settings on your wifi radio tab.</p>
+<p>Your wifi SSID may not appear while searching for networks if you use the incorrect channels and channel width.
+You have to keep playing around with the configuration.
+If your wifi disappears, then you have to play around with the channels and channel width and country origin settings on your wifi radio tab.</p>
 </section>
 
         </div>

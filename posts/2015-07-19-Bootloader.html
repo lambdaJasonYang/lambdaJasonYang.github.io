@@ -174,12 +174,14 @@ db := define byte</p>
 <p>Boot into the bootsector we enter into “REAL MODE”.<br />
 “REAL MODE” is a 16 bit mode assisted by BIOS.</p>
 <ol type="1">
-<li>Switch to teletype mode by modifying a register then calling a BIOS interrupt</li>
+<li>Switch to teletype mode
+by modifying a register then calling a BIOS interrupt</li>
 </ol>
 <div class="sourceCode" id="cb5"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">mov</span> <span class="kw">ah</span><span class="op">,</span> <span class="bn">0x0e</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">mov</span> <span class="kw">al</span><span class="op">,</span> <span class="st">'A'</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span> <span class="bn">0x10</span></span></code></pre></div>
-<p>Printing ‘A’s. ’A’ = 65 in dec = 0x41 in hex = 0b1000001 in binary(0b means binary)</p>
+<p>Printing ‘A’s.
+’A’ = 65 in dec = 0x41 in hex = 0b1000001 in binary(0b means binary)</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">mov</span> <span class="kw">ah</span><span class="op">,</span> <span class="bn">0x0e</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">mov</span> <span class="kw">al</span><span class="op">,</span> <span class="st">'A'</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span> <span class="bn">0x10</span></span>
@@ -200,7 +202,9 @@ db := define byte</p>
 <section id="disks" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Disks</h1>
 <p>Memory is divided into 512 chunks.</p>
-<p>Cylinder = [0..) Head = [0..) Sector = [1..)</p>
+<p>Cylinder = [0..)
+Head = [0..)
+Sector = [1..)</p>
 <p>The location of each 512 chunk of memory on a disk is determined by<br />
 (Cylinder,Head,Sector)</p>
 <p>The first chunk of memory = “Boot Sector” at (C=0,H=0,S=1)</p>

@@ -130,7 +130,8 @@
 <p><span class="math display">\[P(X=\text{&quot;it will rain today&quot;})\]</span><br />
 <span class="math inline">\(X\)</span> is the random variable<br />
 <span class="math inline">\(\mu\)</span> mu is the mean<br />
-<span class="math inline">\(\sigma\)</span> sigma is std (z-score = sigma) <span class="math inline">\(\sigma^2\)</span> sigma squared is variance</p>
+<span class="math inline">\(\sigma\)</span> sigma is std (z-score = sigma)
+<span class="math inline">\(\sigma^2\)</span> sigma squared is variance</p>
 </section>
 <section id="probability-density-function-pdf" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Probability density function (pdf)</h1>
@@ -177,7 +178,9 @@
 </section>
 <section id="rule" class="level2" data-number="3.2">
 <h2 data-number="3.2"><span class="header-section-number">3.2</span> 68-95-99 Rule</h2>
-<p><span class="math display">\[ 68 = \int_{-1\sigma}^{1\sigma}pdf(x;\mu , \sigma^2) \partial x \]</span> <span class="math display">\[ 95 = \int_{-2\sigma}^{2\sigma}pdf(x;\mu , \sigma^2) \partial x \]</span> <span class="math display">\[ 99 = \int_{-3\sigma}^{3\sigma}pdf(x;\mu , \sigma^2) \partial x \]</span></p>
+<p><span class="math display">\[ 68 = \int_{-1\sigma}^{1\sigma}pdf(x;\mu , \sigma^2) \partial x \]</span>
+<span class="math display">\[ 95 = \int_{-2\sigma}^{2\sigma}pdf(x;\mu , \sigma^2) \partial x \]</span>
+<span class="math display">\[ 99 = \int_{-3\sigma}^{3\sigma}pdf(x;\mu , \sigma^2) \partial x \]</span></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>std1 <span class="op">=</span> integrate.quad(f,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>std2 <span class="op">=</span> integrate.quad(f,<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>std3 <span class="op">=</span> integrate.quad(f,<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>)</span>

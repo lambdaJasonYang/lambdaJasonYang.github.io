@@ -165,7 +165,8 @@ The Solution is using convolution which is a type of information compression.</p
 </ul>
 <p>Convolution is elementwise multiplication. It is NOT the dotproduct matrix multiplication.<br />
 X convolve with kernel means<br />
-submatrix(X) elementwise multiply by kernel matrix. Example of the</p>
+submatrix(X) elementwise multiply by kernel matrix.
+Example of the</p>
 <p><span class="math display">\[kernel = \begin{bmatrix} 2 &amp; 5 \\ -7 &amp; -6 \end{bmatrix}\]</span></p>
 <p><span class="math display">\[\begin{bmatrix}
     a &amp; b &amp; c\\
@@ -176,7 +177,8 @@ submatrix(X) elementwise multiply by kernel matrix. Example of the</p>
     Sum(\begin{bmatrix} 2a &amp; 5b \\ -7d &amp; -6e \end{bmatrix}) &amp; Conv2\\
     Conv3 &amp; Conv4 \\
     Conv5 &amp; Conv6\\
-  \end{bmatrix}\]</span> <span class="math display">\[Conv1 = Sum(\begin{bmatrix} 2a &amp; 5b \\ -7d &amp; -6e \end{bmatrix}) = 2a + 5b -7d -6e\]</span></p>
+  \end{bmatrix}\]</span>
+<span class="math display">\[Conv1 = Sum(\begin{bmatrix} 2a &amp; 5b \\ -7d &amp; -6e \end{bmatrix}) = 2a + 5b -7d -6e\]</span></p>
 </section>
 <section id="pooling" class="level2" data-number="2.2">
 <h2 data-number="2.2"><span class="header-section-number">2.2</span> Pooling</h2>
@@ -229,7 +231,8 @@ submatrix(X) elementwise multiply by kernel matrix. Example of the</p>
 </ul></li>
 <li>Number of Channels of input must match Number of Channels of kernel(filter)</li>
 </ul>
-<p>Convolving a RGB image denoted with dimensions 100-50-3 with a 6-6-3 results in a 95-45-1 matrix. How did we calculate the output dimensions 95-45-1?<br />
+<p>Convolving a RGB image denoted with dimensions 100-50-3 with a 6-6-3 results in a 95-45-1 matrix.
+How did we calculate the output dimensions 95-45-1?<br />
 <strong>(InputDim-ConvolveDim+1)=OutputDim</strong><br />
 (100-6+1)=95<br />
 (50-6+1)=45<br />

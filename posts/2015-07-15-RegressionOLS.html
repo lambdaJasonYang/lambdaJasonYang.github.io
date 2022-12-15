@@ -118,12 +118,16 @@
 <section id="abstract" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Abstract</h1>
 <p>Goal: Find <span class="math inline">\(\beta\)</span> weight vector that minimizes sum square residual</p>
-<p>Method: 1. Find inflection(min/max): Solve derivative of Error wrt. weight equal to 0 2. Prove that this is a min, not a max: Check 2nd derivative is positive definite(analogous to postive in real numbers)</p>
+<p>Method:
+1. Find inflection(min/max): Solve derivative of Error wrt. weight equal to 0
+2. Prove that this is a min, not a max: Check 2nd derivative is positive definite(analogous to postive in real numbers)</p>
 </section>
 <section id="reality-vs-estimate" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Reality vs Estimate</h1>
-<p>Ideal Model of Reality <span class="math display">\[Y = X\beta + \epsilon\]</span></p>
-<p>Estimated Model <span class="math display">\[Y=X\hat{\beta} + e\]</span></p>
+<p>Ideal Model of Reality
+<span class="math display">\[Y = X\beta + \epsilon\]</span></p>
+<p>Estimated Model
+<span class="math display">\[Y=X\hat{\beta} + e\]</span></p>
 <ul>
 <li>Population analogous to Reality</li>
 <li>Sample analogous to a simulation or model of reality</li>
@@ -131,10 +135,14 @@
 <p>Statistics is about using Samples(Simulation/Models/Estimations) to estimate Population(Reality)</p>
 <section id="residual-vs-error" class="level2" data-number="2.1">
 <h2 data-number="2.1"><span class="header-section-number">2.1</span> Residual vs Error</h2>
-<p><span class="math display">\[X_1 .. X_n \sim N(\mu ,\sigma^2)\]</span> <span class="math inline">\(X_1..X_n\)</span> each represent the choice of a random singleton subset AKA singleton sample from population.<br />
+<p><span class="math display">\[X_1 .. X_n \sim N(\mu ,\sigma^2)\]</span>
+<span class="math inline">\(X_1..X_n\)</span> each represent the choice of a random singleton subset AKA singleton sample from population.<br />
 <span class="math inline">\(\mu\)</span> is the population mean.</p>
-<p><span class="math display">\[\bar{X} = \frac{X_1 + .. X_n}{n}\]</span> <span class="math inline">\(\bar{X}\)</span> is sample mean. Notice it is a random variable because our choice of sample subset is random which also implies a random meam for each of these possible subsets.</p>
-<p><span class="math display">\[\bar{X} \sim N(\mu, \sigma^2)\]</span> <span class="math display">\[\epsilon_i = X_i - \mu\]</span> <span class="math display">\[ e_i = X_i - \bar{X}\]</span></p>
+<p><span class="math display">\[\bar{X} = \frac{X_1 + .. X_n}{n}\]</span>
+<span class="math inline">\(\bar{X}\)</span> is sample mean. Notice it is a random variable because our choice of sample subset is random which also implies a random meam for each of these possible subsets.</p>
+<p><span class="math display">\[\bar{X} \sim N(\mu, \sigma^2)\]</span>
+<span class="math display">\[\epsilon_i = X_i - \mu\]</span>
+<span class="math display">\[ e_i = X_i - \bar{X}\]</span></p>
 <p><span class="math display">\[e \neq \epsilon\]</span></p>
 <p>Residuals <span class="math inline">\(e\)</span> are basically estimates of Error <span class="math inline">\(\epsilon\)</span></p>
 <ul>

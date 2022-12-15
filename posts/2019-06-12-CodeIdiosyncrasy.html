@@ -157,9 +157,12 @@
 </section>
 <section id="js-fetch" class="level3" data-number="0.0.5">
 <h3 data-number="0.0.5"><span class="header-section-number">0.0.5</span> JS fetch</h3>
-<p>Try fetch request with no-cors If returns opaque response, it means cors is not allowed by the website</p>
+<p>Try
+fetch request with no-cors
+If returns opaque response, it means cors is not allowed by the website</p>
 <p>const res = fetch(<code>https://bleh.com/examples/data/asset/data/tempdata.json</code>,{mode: “no-cors”}).then((data)=&gt;{console.log(data.body)})</p>
-<p>If data.body is a readable stream, you first have to convert it to Know that .json() returns a promise so you have to pass it again</p>
+<p>If data.body is a readable stream, you first have to convert it to
+Know that .json() returns a promise so you have to pass it again</p>
 <p>const res = fetch(<code>https://bleh.com/examples/data/asset/data/tempdata.json</code>,{mode: “no-cors”}).then((re)=&gt;{return re.json()}).then(response =&gt; {console.log(response)})</p>
 </section>
 <section id="python-arrays-and-references" class="level1" data-number="1">

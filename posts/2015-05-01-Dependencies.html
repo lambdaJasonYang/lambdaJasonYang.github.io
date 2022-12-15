@@ -213,11 +213,14 @@ OO Objects can be modeled as functions.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>f[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">6</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>f[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>f[n] <span class="op">=</span> ..</span></code></pre></div>
-<p><span class="math display">\[ Index \overset{f}{\mapsto} Value \]</span> <span class="math display">\[ \xcancel{Index {\color{red}\underset{depends}{\leftarrow}} Value} \]</span></p>
+<p><span class="math display">\[ Index \overset{f}{\mapsto} Value \]</span>
+<span class="math display">\[ \xcancel{Index {\color{red}\underset{depends}{\leftarrow}} Value} \]</span></p>
 <p><strong>Duality between Function Map and Semantic Dependency is WRONG</strong></p>
 <p>Chart showing Independent Variable(x) vs Dependent Variable(y)<br />
 <span class="math inline">\(x\mapsto y\)</span></p>
-<p><img src="../images/BoxDependency/graph2.svg" /> The red arrow is wrong! Why? the semantic depends relation is based upon the fact that the object it points to can mutate. Can x mutate? NO, 1 is 1, 2 is 2 and will always be 2.</p>
+<p><img src="../images/BoxDependency/graph2.svg" /> The red arrow is wrong! Why?
+the semantic depends relation is based upon the fact that the object it points to can mutate.
+Can x mutate? NO, 1 is 1, 2 is 2 and will always be 2.</p>
 <p>PURE FUNCTIONS DO NOT HAVE SEMANTIC DEPENDENCIES!<br />
 Or more precisely there is no point in showing semantic dependencies.</p>
 <p><strong>Black arrows = Function map</strong></p>
@@ -289,7 +292,8 @@ Or more precisely there is no point in showing semantic dependencies.</p>
 Arrays are just functions<br />
 Everything in memory is just one big function</p>
 </blockquote>
-<p><span class="math display">\[ Address \rightarrow Value \]</span> <span class="math display">\[ Pointer \rightarrow Address \rightarrow Value \]</span></p>
+<p><span class="math display">\[ Address \rightarrow Value \]</span>
+<span class="math display">\[ Pointer \rightarrow Address \rightarrow Value \]</span></p>
 <ul>
 <li><span class="math inline">\(Address\)</span> really means the domain of all valid addresses, same for <span class="math inline">\(Pointer, Value\)</span>.</li>
 </ul>

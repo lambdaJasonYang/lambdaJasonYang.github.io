@@ -131,15 +131,19 @@
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>np.linalg.inv(x) </span></code></pre></div>
 <p>An matrix <span class="math display">\[ A_{m \times n} :: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m} \]</span></p>
-<p>Given a vectorspace V, a set of vectors Q that can build any element in this vector space is the “generating set” V = span(Q) This says Q spans V.</p>
+<p>Given a vectorspace V, a set of vectors Q that can build any element in this vector space is the “generating set”
+V = span(Q)
+This says Q spans V.</p>
 <p>Note there can be multiple generating sets that span V that hold dependent or independent vectors.<br />
 We call the minimal such set, the basis and it is easy to see the basis is linearly independent.<br />
-<span class="math display">\[\widetilde{A}\]</span> <span class="math inline">\(\widetilde{A}\)</span> is the minimal set that spans V<br />
+<span class="math display">\[\widetilde{A}\]</span>
+<span class="math inline">\(\widetilde{A}\)</span> is the minimal set that spans V<br />
 <span class="math inline">\(\widetilde{A}\)</span> is the maximal set that is linearly independent.</p>
 <p>Note minimal and maximal are not unique.<br />
 The basis is not unique.<br />
 There can be multiple basis but they will all have the same number of elements.<br />
-<span class="math display">\[ \{ \begin{bmatrix}1 \\0 \end{bmatrix}, \begin{bmatrix}0 \\1 \end{bmatrix} \}\qquad Canonical\ Basis\]</span> <span class="math display">\[\{ \begin{bmatrix}1 \\0 \end{bmatrix}, \begin{bmatrix}1 \\1 \end{bmatrix} \}\qquad Another\ Basis\]</span></p>
+<span class="math display">\[ \{ \begin{bmatrix}1 \\0 \end{bmatrix}, \begin{bmatrix}0 \\1 \end{bmatrix} \}\qquad Canonical\ Basis\]</span>
+<span class="math display">\[\{ \begin{bmatrix}1 \\0 \end{bmatrix}, \begin{bmatrix}1 \\1 \end{bmatrix} \}\qquad Another\ Basis\]</span></p>
 <section id="common-misunderstanding-with-linear-independence" class="level4" data-number="0.0.0.1">
 <h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> Common misunderstanding with linear (in)dependence:</h4>
 <p>Despite the fact that one can envision <span class="math inline">\(\begin{bmatrix}1 \\0 \end{bmatrix}\)</span> as being a component of <span class="math inline">\(\begin{bmatrix}1 \\1 \end{bmatrix}\)</span> , these two basis vectors are independent.</p>
@@ -159,16 +163,19 @@ There can be multiple basis but they will all have the same number of elements.<
 <span class="math inline">\(T :: \widetilde{C} \rightarrow C\)</span></p>
 <p>Goal is to design a change of basis for the matrix <span class="math inline">\(A\)</span> which we define as<br />
 <span class="math inline">\(\widetilde{A} :: \widetilde{B} \rightarrow \widetilde{C}\)</span></p>
-<p>Predefined Theorem: Each vector of one basis can be defined as a linear combination of another basis. Using Thm we can design linear combinations:</p>
+<p>Predefined Theorem: Each vector of one basis can be defined as a linear combination of another basis.
+Using Thm we can design linear combinations:</p>
 <p>kernel or null space of a matrix or linear transformation is the preimage or set of vectors that hits the zero vector.</p>
-<p>Matrices are called linear mapping or vectorspace homomorphism or linear transformation Matrices are linear maps which can be classified as</p>
+<p>Matrices are called linear mapping or vectorspace homomorphism or linear transformation
+Matrices are linear maps which can be classified as</p>
 <ul>
 <li>Isomorphism V → W ,bijective</li>
 <li>Endomorphism V → V</li>
 <li>Automorphism V → V, bijective</li>
 <li>identity Automorphism x ↦ x :: V → V</li>
 </ul>
-<p>Finite-dim vector spaces V and W are is Basis Change</p>
+<p>Finite-dim vector spaces V and W are is
+Basis Change</p>
 <p>Affine subspace or Linear manifold</p>
 </section>
 <section id="geometric-intrepetation" class="level1" data-number="1">
@@ -177,7 +184,8 @@ There can be multiple basis but they will all have the same number of elements.<
 </section>
 <section id="matrix-decomposition" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Matrix Decomposition</h1>
-<p>Triangular matrix * Determinant = product diagonal</p>
+<p>Triangular matrix
+* Determinant = product diagonal</p>
 </section>
 <section id="continuous-optimization" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Continuous optimization</h1>

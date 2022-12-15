@@ -153,7 +153,8 @@
 <ul>
 <li><code>inductive nat: Type</code> is a plain inductive type</li>
 <li><code>inductive nat (k: Type) : Type</code> is a dependent inductive type `</li>
-<li><code>inductive nat : Type -&gt; Type</code> is same as above <!--  --></li>
+<li><code>inductive nat : Type -&gt; Type</code> is same as above
+<!--  --></li>
 <li>whenever our <code>Inductive</code> associates with function type, it indicates we are using a dependent type
 <ul>
 <li><code>Inductive binary_word1 (n:nat) : Type</code> means that <code>binary_word1</code> takes a <code>(n:nat)</code> and returns a new type. This means the canonical types we see in the wild is <code>binary_word1 1, binary_word1 2,...</code><br />
@@ -266,10 +267,13 @@
 </ul>
 <!--  -->
 <ul>
-<li>Type formation and Term introduction rules are inside the <code>Inductive</code> type keyword <span class="math display">\[\cfrac{}{\vdash False : Prop} \tag{type formation}\]</span> <span class="math display">\[\text{There is no term intro for False} \tag{term intro}\]</span></li>
+<li>Type formation and Term introduction rules are inside the <code>Inductive</code> type keyword
+<span class="math display">\[\cfrac{}{\vdash False : Prop} \tag{type formation}\]</span>
+<span class="math display">\[\text{There is no term intro for False} \tag{term intro}\]</span></li>
 </ul>
 <div class="sourceCode" id="cb10" data-filename="False.coq"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Inductive</span> <span class="dt">False</span> <span class="op">:</span> <span class="dt">Prop</span><span class="op">.</span></span></code></pre></div>
-<p><span class="math display">\[\cfrac{}{\vdash True : Prop} \tag{type formation}\]</span> <span class="math display">\[\cfrac{}{\vdash top : True} \tag{term intro}\]</span></p>
+<p><span class="math display">\[\cfrac{}{\vdash True : Prop} \tag{type formation}\]</span>
+<span class="math display">\[\cfrac{}{\vdash top : True} \tag{term intro}\]</span></p>
 <div class="sourceCode" id="cb11" data-filename="True.coq"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Inductive</span> <span class="dt">True</span> <span class="op">:</span> <span class="dt">Prop</span> <span class="op">:=</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> top <span class="op">:</span> <span class="dt">True</span><span class="op">.</span></span></code></pre></div>
 <p><span class="math display">\[\cfrac{\vdash P : Prop \qquad \vdash Q : Prop}{\vdash and\ P\ Q : Prop} \tag{type formation}\]</span></p>
@@ -311,7 +315,8 @@
 <div class="sourceCode" id="cb14" data-filename="logic.v"><pre class="sourceCode v"><code class="sourceCode verilog"></code></pre></div>
 <section id="sum-type-and-product-types" class="level3" data-number="3.0.1">
 <h3 data-number="3.0.1"><span class="header-section-number">3.0.1</span> SUM TYPE and PRODUCT TYPES</h3>
-<p>use inductive keyword to create intro rules use def or function definitions to create elim rules</p>
+<p>use inductive keyword to create intro rules
+use def or function definitions to create elim rules</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>universes j k </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -365,7 +370,8 @@
 <ul>
 <li>intro then elim, then reduce the proof tree
 <ul>
-<li>the resulting proof tree lacks elim rules <!--  --></li>
+<li>the resulting proof tree lacks elim rules
+<!--  --></li>
 </ul></li>
 </ul></li>
 <li>Pragmatist

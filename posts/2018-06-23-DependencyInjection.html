@@ -130,14 +130,17 @@ ASP.NET Core uses reflection which is the only way it could swap a concrete clas
 <li>Class Implements Interface</li>
 <li>Class Superset Interface</li>
 </ul>
-<p><span class="math display">\[Interface \subset Class\]</span> <span class="math display">\[INat \subset Nat\]</span></p>
+<p><span class="math display">\[Interface \subset Class\]</span>
+<span class="math display">\[INat \subset Nat\]</span></p>
 <ul>
 <li>Design an interface example
 <ul>
 <li>Given 4 classes: <span class="math inline">\(Dog, Cat, Mouse, Human\)</span>.</li>
 <li><span class="math inline">\(\underset{properties}{\bigcap} \{Dog, Cat, Mouse, Human\} = IMammel\)</span></li>
 </ul>
-<span class="math display">\[IMammel \subset Dog\]</span> <span class="math display">\[IMammel \subset Cat\]</span> <span class="math display">\[...\]</span></li>
+<span class="math display">\[IMammel \subset Dog\]</span>
+<span class="math display">\[IMammel \subset Cat\]</span>
+<span class="math display">\[...\]</span></li>
 </ul>
 <p>Notice these are <strong>strict subsets</strong>.<br />
 <span class="math inline">\(IMammel \nsubseteq Dog\)</span> since <span class="math inline">\(Dog\)</span> will always contain a constructor method new() which interfaces cannot have.</p>

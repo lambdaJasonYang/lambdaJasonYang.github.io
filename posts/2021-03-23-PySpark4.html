@@ -224,7 +224,17 @@
 </table>
 <p>Use Spark’s machine learning library mllib’s Binomial Logistic Regression algorithm.<br />
 https://spark.apache.org/docs/latest/ml-classification-regression.html#binomial-logistic-regression</p>
-<p>Use these features for training your model: * gender * age * country * friend_count * lifetime * citygame_played * pictionarygame_played * scramblegame_played * snipergame_played * paid_subscriber(this is the feature to predict)</p>
+<p>Use these features for training your model:
+* gender
+* age
+* country
+* friend_count
+* lifetime
+* citygame_played
+* pictionarygame_played
+* scramblegame_played
+* snipergame_played
+* paid_subscriber(this is the feature to predict)</p>
 <p>The data contains categorical features, so you need to change them accordingly.<br />
 https://spark.apache.org/docs/latest/ml-features.html</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
@@ -257,7 +267,17 @@ https://spark.apache.org/docs/latest/ml-features.html</p>
 <section id="convert" class="level2" data-number="0.2">
 <h2 data-number="0.2"><span class="header-section-number">0.2</span> Convert</h2>
 <p><code>convert</code> creates a dataframe, removes unnecessary colums and converts the rest to right format.<br />
-Data schema: * gender: Double (1 if male else 0) * age: Double * country: String * friend_count: Double * lifetime: Double * game1: Double (citygame_played) * game2: Double (pictionarygame_played) * game3: Double (scramblegame_played) * game4: Double (snipergame_played) * paid_customer: Double (1 if yes else 0)</p>
+Data schema:
+* gender: Double (1 if male else 0)
+* age: Double
+* country: String
+* friend_count: Double
+* lifetime: Double
+* game1: Double (citygame_played)
+* game2: Double (pictionarygame_played)
+* game3: Double (scramblegame_played)
+* game4: Double (snipergame_played)
+* paid_customer: Double (1 if yes else 0)</p>
 <p>The function already creates a SQL table called “gaming”, your job is to remove unneccesary columns and convert the rest to right format. Hint: SQL <code>SELECT</code> query and <code>CAST</code>. You will also need to use <code>IF</code> to properly parse and read some of the variables. e.g. <code>IF(gender='male',1,0)</code>.</p>
 <p>param <code>path</code>: path to file<br />
 <code>return</code>: converted DataFrame</p>
@@ -350,8 +370,20 @@ only showing top 20 rows</code></pre>
 <section id="indexer" class="level2" data-number="0.3">
 <h2 data-number="0.3"><span class="header-section-number">0.3</span> Indexer</h2>
 <p><code>indexer</code> converts categorical features into doubles.<br />
-https://spark.apache.org/docs/latest/ml-features.html#stringindexer <code>country</code> is the only categorical feature.<br />
-After these modifications schema should be: * gender: Double (1 if male else 0) * age: Double * country: String * friend_count: Double * lifetime: Double * game1: Double (citygame_played) * game2: Double (pictionarygame_played) * game3: Double (scramblegame_played) * game4: Double (snipergame_played) * paid_customer: Double (1 if yes else 0) * country_index: Double</p>
+https://spark.apache.org/docs/latest/ml-features.html#stringindexer
+<code>country</code> is the only categorical feature.<br />
+After these modifications schema should be:
+* gender: Double (1 if male else 0)
+* age: Double
+* country: String
+* friend_count: Double
+* lifetime: Double
+* game1: Double (citygame_played)
+* game2: Double (pictionarygame_played)
+* game3: Double (scramblegame_played)
+* game4: Double (snipergame_played)
+* paid_customer: Double (1 if yes else 0)
+* country_index: Double</p>
 <p>param <code>df</code>: DataFrame<br />
 <code>return</code>: transformed Dataframe. The returned dataframe should have a new column called “country_index”.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> indexer(df):</span>
@@ -412,7 +444,9 @@ only showing top 20 rows</code></pre>
 <section id="feature-assembler" class="level2" data-number="0.4">
 <h2 data-number="0.4"><span class="header-section-number">0.4</span> Feature Assembler</h2>
 <p><code>featureAssembler</code> combines features into one vector. Most mllib algorithms require this step.<br />
-https://spark.apache.org/docs/latest/ml-features.html#vectorassembler. In this task your vector assembler should take and combine the following columns in the same order listed: <code>["gender", "age","friend_count","lifetime","game1","game2","game3","game4","country_index"]</code>.</p>
+https://spark.apache.org/docs/latest/ml-features.html#vectorassembler. In this task your vector
+assembler should take and combine the following columns in the same order listed:
+<code>["gender", "age","friend_count","lifetime","game1","game2","game3","game4","country_index"]</code>.</p>
 <p>param <code>df</code>: Dataframe that is transformed using indexer<br />
 <code>return</code> transformed Dataframe. The returned dataframe should have a new column called “features”</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> featureAssembler(df):</span>
@@ -477,7 +511,8 @@ only showing top 20 rows</code></pre>
 <section id="scaler" class="level2" data-number="0.5">
 <h2 data-number="0.5"><span class="header-section-number">0.5</span> Scaler</h2>
 <p><code>scaler</code> standardizes data to improve performance.<br />
-https://spark.apache.org/docs/latest/ml-features.html#standardscaler. For this task please remember to set the <code>withStd</code> and <code>withMean</code> parameters to true.</p>
+https://spark.apache.org/docs/latest/ml-features.html#standardscaler.
+For this task please remember to set the <code>withStd</code> and <code>withMean</code> parameters to true.</p>
 <p>param <code>df</code> Dataframe that is transformed using featureAssembler<br />
 param <code>outputColName</code> name of the scaled feature vector (output column name)<br />
 <code>return</code> transformed Dataframe. The returned dataframe should have a new column named after the passed <code>outputColName</code> parameter.</p>

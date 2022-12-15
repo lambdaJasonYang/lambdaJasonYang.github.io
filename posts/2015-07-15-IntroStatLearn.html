@@ -145,8 +145,10 @@
 <li><a href="#chapter-4-classification"><span class="toc-section-number">3</span> Chapter 4 Classification</a></li>
 <li><a href="#chapter-5-resampling"><span class="toc-section-number">4</span> Chapter 5 Resampling</a></li>
 </ul></div>
-<p><code class="sourceCode r">Wage</code> : Linear Regression How does <code class="sourceCode r">age</code> affect <code class="sourceCode r">wage</code></p>
-<p><code class="sourceCode r">Smarket</code> : Classification Classification</p>
+<p><code class="sourceCode r">Wage</code> : Linear Regression
+How does <code class="sourceCode r">age</code> affect <code class="sourceCode r">wage</code></p>
+<p><code class="sourceCode r">Smarket</code> : Classification
+Classification</p>
 <section id="terms" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> terms</h1>
 <section id="variance" class="level2" data-number="1.1">
@@ -161,11 +163,15 @@ The square operation has an absolute value like effect.</p>
 <section id="chapter-2-ols" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Chapter 2 OLS</h1>
 <p>Goal: Find <span class="math inline">\(\beta\)</span> weight vector that minimizes sum square residual</p>
-<p>Method: 1. Find inflection(min/max): Solve derivative of Error wrt. weight equal to 0 2. Prove that this is a min, not a max: Check 2nd derivative is positive definite(analogous to postive in real numbers)</p>
+<p>Method:
+1. Find inflection(min/max): Solve derivative of Error wrt. weight equal to 0
+2. Prove that this is a min, not a max: Check 2nd derivative is positive definite(analogous to postive in real numbers)</p>
 <section id="reality-vs-estimate" class="level2" data-number="2.1">
 <h2 data-number="2.1"><span class="header-section-number">2.1</span> Reality vs Estimate</h2>
-<p>Ideal Model of Reality <span class="math display">\[Y = X\beta + \epsilon\]</span></p>
-<p>Estimated Model <span class="math display">\[Y=X\hat{\beta} + e\]</span></p>
+<p>Ideal Model of Reality
+<span class="math display">\[Y = X\beta + \epsilon\]</span></p>
+<p>Estimated Model
+<span class="math display">\[Y=X\hat{\beta} + e\]</span></p>
 <ul>
 <li>Population analogous to Reality</li>
 <li>Sample analogous to a simulation or model of reality</li>
@@ -174,11 +180,14 @@ The square operation has an absolute value like effect.</p>
 </section>
 <section id="residual-vs-irreducible-error" class="level2" data-number="2.2">
 <h2 data-number="2.2"><span class="header-section-number">2.2</span> Residual vs Irreducible Error</h2>
-<p><span class="math display">\[X_1 .. X_n \sim N(\mu ,\sigma^2)\]</span> <span class="math inline">\(X_1..X_n\)</span> each represent the choice of a random singleton subset AKA singleton sample from population.<br />
+<p><span class="math display">\[X_1 .. X_n \sim N(\mu ,\sigma^2)\]</span>
+<span class="math inline">\(X_1..X_n\)</span> each represent the choice of a random singleton subset AKA singleton sample from population.<br />
 <span class="math inline">\(\mu\)</span> is the population mean.</p>
-<p><span class="math display">\[\bar{X} = \frac{X_1 + .. X_n}{n}\]</span> <span class="math inline">\(\bar{X}\)</span> is sample mean. Notice it is a random variable because our choice of sample subset is random which also implies a random meam for each of these possible subsets.</p>
+<p><span class="math display">\[\bar{X} = \frac{X_1 + .. X_n}{n}\]</span>
+<span class="math inline">\(\bar{X}\)</span> is sample mean. Notice it is a random variable because our choice of sample subset is random which also implies a random meam for each of these possible subsets.</p>
 <p><span class="math display">\[\bar{X} \sim N(\mu, \sigma^2)\]</span></p>
-<p><span class="math display">\[E(Y_i) = \mu\]</span> <span class="math display">\[\epsilon_i = Y_i - E(Y_i) \text{ typically impossible to find}\]</span></p>
+<p><span class="math display">\[E(Y_i) = \mu\]</span>
+<span class="math display">\[\epsilon_i = Y_i - E(Y_i) \text{ typically impossible to find}\]</span></p>
 <p><span class="math display">\[ e_i = X_i - \bar{X}\]</span></p>
 <p><span class="math display">\[e \neq \epsilon\]</span></p>
 <p>Residuals <span class="math inline">\(e\)</span> are basically estimates of Error <span class="math inline">\(\epsilon\)</span></p>
@@ -341,7 +350,9 @@ Alt H: At least one of the independent variable have a linear relationship with 
 <li>Close to 0 means the datapoint are scattered but broadly follow trend with our regression line.</li>
 </ul>
 <p>Optional: Drop coefficients aka Independent Random variables that do not contribute well in <span class="math inline">\(R^2\)</span> <strong>despite having low p-value</strong></p>
-<p>Example: Age variable gives <span class="math inline">\(R^2\)</span> 0.7 with p-value: 0.04 Adding a height variable gives <span class="math inline">\(R^2\)</span> 0.71 with p-value 0.005<br />
+<p>Example:
+Age variable gives <span class="math inline">\(R^2\)</span> 0.7 with p-value: 0.04
+Adding a height variable gives <span class="math inline">\(R^2\)</span> 0.71 with p-value 0.005<br />
 We can safely drop height variable</p>
 <p>Cons:</p>
 <ul>

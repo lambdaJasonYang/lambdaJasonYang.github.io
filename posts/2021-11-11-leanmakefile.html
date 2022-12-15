@@ -115,7 +115,10 @@
     Tags: <a title="All pages tagged 'lean'." href="../tags/lean.html">lean</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>
     
 </div>
-<p>filepaths * <code>$(addsuffix .c,foo bar)</code> returns foo.c bar.c * <code>$(addprefix $(OUT)/testcpp/,$(CPP_SRCS:.cpp=.o))</code> returns path appended object, home/testcpp/myfuns.o *<code>$(CPP_SRCS:.cpp=.o)</code> replaces extension .cpp with .o<br />
+<p>filepaths
+* <code>$(addsuffix .c,foo bar)</code> returns foo.c bar.c
+* <code>$(addprefix $(OUT)/testcpp/,$(CPP_SRCS:.cpp=.o))</code> returns path appended object, home/testcpp/myfuns.o
+*<code>$(CPP_SRCS:.cpp=.o)</code> replaces extension .cpp with .o<br />
 CPP_SRCS is myfuncs.cpp meaning this replaces myfuncs.cpp to myfuncs.o</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tells us $(CXX) means g++ compiler</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">CXX ?= c++</span></span>

@@ -119,8 +119,15 @@
 <h3 data-number="0.0.1"><span class="header-section-number">0.0.1</span> Greedy Swap Proof</h3>
 <section id="example-problem" class="level4" data-number="0.0.1.1">
 <h4 data-number="0.0.1.1"><span class="header-section-number">0.0.1.1</span> Example problem:</h4>
-<p><span class="math display">\[ A = [a_1 , a_2, a_3 ...]\]</span> <span class="math display">\[ O = [o_1, o_2, o_3 ...]\]</span> Each element of A represents a state.<br />
-<span class="math display">\[ Assume\ A \neq O \]</span> (NOTE THIS IS NOT A PROOF BY CONTRADICTION AS THERE MAY BE MULTIPLE OPTIMAL SOLUTIONS THAT ARE NOT EQUAL) Therefore <span class="math display">\[ Either\ \]</span> <span class="math display">\[\exists x \in O , x \notin A \]</span> <span class="math display">\[ \exists x \in A, x \notin O\]</span> <span class="math display">\[ a_p = o_q , a_q = o_p \ Swap\]</span></p>
+<p><span class="math display">\[ A = [a_1 , a_2, a_3 ...]\]</span>
+<span class="math display">\[ O = [o_1, o_2, o_3 ...]\]</span>
+Each element of A represents a state.<br />
+<span class="math display">\[ Assume\ A \neq O \]</span> (NOTE THIS IS NOT A PROOF BY CONTRADICTION AS THERE MAY BE MULTIPLE OPTIMAL SOLUTIONS THAT ARE NOT EQUAL)
+Therefore
+<span class="math display">\[ Either\ \]</span>
+<span class="math display">\[\exists x \in O , x \notin A \]</span>
+<span class="math display">\[ \exists x \in A, x \notin O\]</span>
+<span class="math display">\[ a_p = o_q , a_q = o_p \ Swap\]</span></p>
 <p>Prove by contradiction</p>
 </section>
 </section>
@@ -130,9 +137,11 @@
 <h4 data-number="0.0.2.1"><span class="header-section-number">0.0.2.1</span> Example problem: A frog can take 1..k Steps each turn, get least number of turns to reach the n Step.</h4>
 <p>State = turn<br />
 Greedy Solution, take the max k Step each State</p>
-<p>Proof of Correctness: Show by induction that for all states, the current state is the most optimal</p>
+<p>Proof of Correctness:
+Show by induction that for all states, the current state is the most optimal</p>
 <p>Instinctively we believe that jumping farther in position is correlated to optimal least number of jumps.</p>
-<p>Denote <span class="math inline">\(P(i,..)\)</span> as the position function after <span class="math inline">\(i\)</span> steps. <span class="math display">\[P(i,..)\ \propto\ Optimality\]</span></p>
+<p>Denote <span class="math inline">\(P(i,..)\)</span> as the position function after <span class="math inline">\(i\)</span> steps.
+<span class="math display">\[P(i,..)\ \propto\ Optimality\]</span></p>
 <p>Proving our naive Greedy algo <span class="math inline">\(J\)</span> will jump at least as far as some theoretical optimal algo <span class="math inline">\(J^*\)</span></p>
 <p>Prove: <span class="math inline">\(P(i+1,J^*) \leq P(i+1,J)\)</span></p>
 <p>IH: <span class="math inline">\(P(i,J^*) \leq P(i,J)\)</span></p>

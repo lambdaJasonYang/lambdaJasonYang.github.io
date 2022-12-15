@@ -356,9 +356,11 @@ https://spark.apache.org/docs/latest/api/python/pyspark.mllib.html#pyspark.mllib
 </section>
 <section id="train-als" class="level2" data-number="0.4">
 <h2 data-number="0.4"><span class="header-section-number">0.4</span> Train ALS</h2>
-<p>train ALS model. https://spark.apache.org/docs/latest/mllib-collaborative-filtering.html#collaborative-filtering</p>
+<p>train ALS model.
+https://spark.apache.org/docs/latest/mllib-collaborative-filtering.html#collaborative-filtering</p>
 <p>param <code>data</code> RDD of Rating objects that is created using <code>toRating()</code> method.<br />
-param <code>seed</code> value used for testing purposes. <code>return</code> trained ALS model</p>
+param <code>seed</code> value used for testing purposes.
+<code>return</code> trained ALS model</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> trainALS(data, seed):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> ALS.train(data,rank<span class="op">=</span><span class="dv">2</span>,seed<span class="op">=</span>seed)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -393,7 +395,8 @@ param <code>user</code> user id converted (user_indexed) to Integer (with <code>
 <p>Input: List RatingObject<br />
 Output: List (List SongName Artist)<br />
 Map each RatingObject to a Pair of SongName and Artist</p>
-<p>Example Input:</p>
+<p>Example
+Input:</p>
 <p><code>[Rating(182412,218057,29.471691093542958),   Rating(182412,206693,28.39630617887081),   Rating(182412,230654,28.090021579109706),   Rating(182412,200542,27.43900484648816),   Rating(182412,254771,24.82362529344695)]</code></p>
 <p>Output:</p>
 <p><code>[["My Business","Guy"],   ["The Man With The Bag","Floyd/Animal/Zoot"],   ["Challenger","Growing"],   ["Una Ragazza In Due", "I Giganti"], ["That Is Why", "Say Anything"]]</code></p>
@@ -435,7 +438,8 @@ Join <code>converted</code> with <code>song_indexed</code> on “title” and �
 <p>param <code>converted</code> Dataframe created using <code>convert()</code> method<br />
 param <code>ar</code> Array of Rating object produced using <code>recommendSongs()</code><br />
 param <code>path</code> path to unique track names file<br />
-<code>return</code> corresponding song + artist names inside array, e.g., [[‘Our Song’, ‘Taylor Swift’], [‘Boom (2006 Remastered Album Version)’, ‘P.O.D.’]]</p>
+<code>return</code> corresponding song + artist names inside array, e.g., [[‘Our Song’, ‘Taylor Swift’],
+[‘Boom (2006 Remastered Album Version)’, ‘P.O.D.’]]</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getSongNames(converted, ar, path):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    RecommendedSongIndexList <span class="op">=</span> [i.product <span class="cf">for</span> i <span class="kw">in</span> ar]</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(RecommendedSongIndexList)</span></span>
@@ -470,7 +474,8 @@ param <code>path</code> path to unique track names file<br />
 </section>
 <section id="recommend" class="level2" data-number="0.7">
 <h2 data-number="0.7"><span class="header-section-number">0.7</span> Recommend</h2>
-<p>Input: user_id Output: List (List SongName Artist) representing recommendations</p>
+<p>Input: user_id
+Output: List (List SongName Artist) representing recommendations</p>
 <p>Example return</p>
 <p><code>[["My Business","Guy"],   ["The Man With The Bag","Floyd/Animal/Zoot"],   ["Challenger","Growing"],   ["Una Ragazza In Due", "I Giganti"], ["That Is Why", "Say Anything"]]</code></p>
 <p>param <code>path</code> path to user data<br />

@@ -147,7 +147,8 @@
 </section>
 <section id="simple-linear-regression" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Simple Linear Regression</h1>
-<p>The <code>ISLR2</code> library contains the <code>Boston</code> data set, which records <code>medv</code> (median house value) for <span class="math inline">\(506\)</span> census tracts in Boston. We will seek to predict <code>medv</code> using <span class="math inline">\(12\)</span> predictors such as <code>rmvar</code> (average number of rooms per house), <code>age</code> (average age of houses), and <code>lstat</code> (percent of households with low socioeconomic status).</p>
+<p>The <code>ISLR2</code> library contains the <code>Boston</code> data set, which
+records <code>medv</code> (median house value) for <span class="math inline">\(506\)</span> census tracts in Boston. We will seek to predict <code>medv</code> using <span class="math inline">\(12\)</span> predictors such as <code>rmvar</code> (average number of rooms per house), <code>age</code> (average age of houses), and <code>lstat</code> (percent of households with low socioeconomic status).</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Boston.head()</span></code></pre></div>
 <div>
 <style scoped>
@@ -521,10 +522,15 @@ RSS: 19472.3828125
 MSE: 38.48296998517786</code></pre>
 <section id="prob-plot" class="level2" data-number="3.1">
 <h2 data-number="3.1"><span class="header-section-number">3.1</span> prob-plot</h2>
-<p>Prob-plot is what ISLR actually uses but misleading labels QQ plot. QQ plot, plots againsts quantiles which are non-negative. We get these quantiles using the inverse CDF.</p>
+<p>Prob-plot is what ISLR actually uses but misleading labels QQ plot.
+QQ plot, plots againsts quantiles which are non-negative. We get these quantiles using the inverse CDF.</p>
 <p>Prob-plot the theoretical quantiles is plotted on the x(Calculated using Filliben’s estimate) and our data’s z-score is plotting on the y.</p>
-<p>Gotcha: Sort the x-axis of your Plot, REMEMBER TO USE PARAM <code>axis=0</code> The x-axis, are the points that are divided into n-quantiles of the bell curve, n being the number of residuals you have. This means that the area under the bell curve bounded between each of the n points are equal. Know that since bell-curve is bigger in the middle means that there are denser points in the middle(less distance) and spread apart at each ends.</p>
-<p>Z-score tells how many std-devs we are from the mean, can be positive or negative. Quantile is equal area partition of probability density function.<br />
+<p>Gotcha: Sort the x-axis of your Plot, REMEMBER TO USE PARAM <code>axis=0</code>
+The x-axis, are the points that are divided into n-quantiles of the bell curve, n being the number of residuals you have.
+This means that the area under the bell curve bounded between each of the n points are equal.
+Know that since bell-curve is bigger in the middle means that there are denser points in the middle(less distance) and spread apart at each ends.</p>
+<p>Z-score tells how many std-devs we are from the mean, can be positive or negative.
+Quantile is equal area partition of probability density function.<br />
 <code>CDF :: Z-score --&gt; 100-Quantile</code>, note that 100-quantile is just the percentile<br />
 <code>InvCDF = stats.norm.ppf :: 100-Quantile --&gt; Z-score</code></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Resid_normed <span class="op">=</span> Residual<span class="op">/</span>Residual.std()</span>
@@ -588,7 +594,8 @@ MSE: 38.48296998517786</code></pre>
 </ul></li>
 </ul>
 <p><span class="math display">\[ Variance(\hat{Y}) = \sigma^2 = \frac{\sum_i (\hat{Y}_i-\overline{\hat{Y}}_i)^2}{n}\]</span><br />
-<span class="math display">\[ TSS = \sum_i (\hat{Y}_i-\overline{\hat{Y}}_i)^2 \]</span> <span class="math display">\[ Stddev(\hat{Y}) = \sigma\]</span><br />
+<span class="math display">\[ TSS = \sum_i (\hat{Y}_i-\overline{\hat{Y}}_i)^2 \]</span>
+<span class="math display">\[ Stddev(\hat{Y}) = \sigma\]</span><br />
 <span class="math display">\[R^2 = 1-\frac{RSS}{TSS} \]</span></p>
 <ul>
 <li>TSS is just the numerator of Variance of Predictions</li>

@@ -154,11 +154,16 @@
 <p>The memory addresses are indexes of the array.<br />
 The values that memory addresses point to are the elements of the array.</p>
 <p>To emulate the dynamic state of a computer we use pointers to change the values of the array.</p>
-<p>See everything is just part of the array even pointers. BUT pointers are given a unique function we call “dereference”. <span class="math display">\[ \underset{\downarrow}{\bbox[5px, border: 2px dotted purple]{P} } \ \ \ \ \ \]</span> <span class="math display">\[ \underset{\downarrow}{\bbox[5px, border: 2px solid green]{0} } \underset{\downarrow}{\bbox[5px, border: 2px solid green]{1}}  \underset{\downarrow}{\bbox[5px, border: 2px solid green]{2}}  \underset{\downarrow}{\bbox[5px, border: 2px solid green]{3}}   \]</span> <span class="math display">\[ \bbox[5px, border: 2px solid red]{7} \bbox[5px, border: 2px solid red]{2} \bbox[5px, border: 2px solid red]{6} \bbox[5px, border: 2px solid red]{4}\]</span></p>
+<p>See everything is just part of the array even pointers.
+BUT pointers are given a unique function we call “dereference”.
+<span class="math display">\[ \underset{\downarrow}{\bbox[5px, border: 2px dotted purple]{P} } \ \ \ \ \ \]</span>
+<span class="math display">\[ \underset{\downarrow}{\bbox[5px, border: 2px solid green]{0} } \underset{\downarrow}{\bbox[5px, border: 2px solid green]{1}}  \underset{\downarrow}{\bbox[5px, border: 2px solid green]{2}}  \underset{\downarrow}{\bbox[5px, border: 2px solid green]{3}}   \]</span>
+<span class="math display">\[ \bbox[5px, border: 2px solid red]{7} \bbox[5px, border: 2px solid red]{2} \bbox[5px, border: 2px solid red]{6} \bbox[5px, border: 2px solid red]{4}\]</span></p>
 <p>The image above is our array MEM.<br />
 The green boxes indicate the indexes, like any array it starts at 0.<br />
 The red boxes indicate the values of our array.</p>
-<p>In OS language, the green boxes indicate memory addresses. The red boxes are the value that the memory addresses refer to.</p>
+<p>In OS language, the green boxes indicate memory addresses.
+The red boxes are the value that the memory addresses refer to.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">//filling our MEM, aka loading a program into memory</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>MEM<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="dv">9</span>   </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>MEM<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">2</span></span>
@@ -170,17 +175,22 @@ The red boxes indicate the values of our array.</p>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">//This will output 6 </span></span></code></pre></div>
 <p>Calling Dereference(MEM[1]) can be reduced to Dereference(2), which can be reduced to MEM[2] which is just 6.</p>
 <p>Dereference(MEM[1]) == MEM[MEM[1]]</p>
-<p>Let’s say “3” is a pointer. then dereference(3) will return 1 For the intents of this section of understanding pointers, let’s just assume we can magically determine which indexes of MEM are pointers.</p>
+<p>Let’s say “3” is a pointer.
+then dereference(3) will return 1
+For the intents of this section of understanding pointers, let’s just assume we can magically determine which indexes of MEM are pointers.</p>
 </section>
 <section id="registers" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Registers</h1>
-<p>Just think of these registers as powerful as pointers. someaddr = 3</p>
+<p>Just think of these registers as powerful as pointers.
+someaddr = 3</p>
 <p>the assembly notation <code>mov [eax],3</code> is equal to MEM[EAX] set to 3</p>
 </section>
 <section id="math-theory" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Math theory</h1>
-<p><span class="math display">\[ Address \rightarrow Value \]</span> <span class="math display">\[ Pointer \rightarrow Address \rightarrow Value \]</span></p>
-<p><span class="math display">\[ p = &amp;x \equiv *p = x \]</span> <span class="math display">\[ arr + i = &amp;arr[i] \]</span></p>
+<p><span class="math display">\[ Address \rightarrow Value \]</span>
+<span class="math display">\[ Pointer \rightarrow Address \rightarrow Value \]</span></p>
+<p><span class="math display">\[ p = &amp;x \equiv *p = x \]</span>
+<span class="math display">\[ arr + i = &amp;arr[i] \]</span></p>
 <ul>
 <li><p>*(arr + i) = arr[i]</p></li>
 <li><p>*arr = arr[0]</p></li>
@@ -193,7 +203,9 @@ The red boxes indicate the values of our array.</p>
 </p></li>
 <li><p>pass-by-pointer requires passing an address</p></li>
 </ul>
-<p>All variables are pointers All languages do implicit dereference of variables. C allows the option to make it explicit with pointers.</p>
+<p>All variables are pointers
+All languages do implicit dereference of variables.
+C allows the option to make it explicit with pointers.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">//pass-by-pointer</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">&amp;</span>x <span class="op">=</span> <span class="op">...;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> func<span class="op">(*</span>p<span class="op">){</span></span>

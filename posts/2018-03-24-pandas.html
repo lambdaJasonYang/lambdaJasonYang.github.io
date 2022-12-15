@@ -149,7 +149,10 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df[df.wage <span class="op">&gt;</span> <span class="dv">12</span>]</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>wh[wh.isnull().<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>wh.dropna(axis<span class="op">=</span><span class="dv">1</span>).shape <span class="co"># Drops the columns containing missing values</span></span></code></pre></div>
-<p>fillna parameter * None - use position parameter to fill missing content * ffill - use previous value to fill current value * bfill - use next value to fill current value</p>
+<p>fillna parameter
+* None - use position parameter to fill missing content
+* ffill - use previous value to fill current value
+* bfill - use next value to fill current value</p>
 <div class="sourceCode" id="cb6" data-group="p1" data-glabel="sp500"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="vs">r'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>tables <span class="op">=</span> pd.read_html(url) <span class="co"># Returns list of all tables on page</span></span>

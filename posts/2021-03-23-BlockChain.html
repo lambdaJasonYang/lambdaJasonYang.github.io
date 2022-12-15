@@ -123,61 +123,61 @@
 <p>A block chain is just a linked list of blocks which each block holding a history or prevhash.</p>
 <p><code>[blockA, blockB, blockC,...]</code> with blockA as the most recently added aka HEAD.</p>
 <p>We ignore that each block also has hash of itself h(dataA + prevAhash); conceptually not the main point of block chain.</p>
-<pre class="text"><code>      +-----------+             +-----------+           +------------+
-      |prevAhash= |&lt;--+         |prevBhash= |&lt;-+        |prevChash=  |
-      |h(blockB)  |   |         |h(blockC)  |  |        |h(blockD)   |
-      +--+--------+   |         +--+--------+  |        +--+---------+
-dataA    |            |   dataB    |           |    dataC  |
-  |      |            |     |      |           |      |    |
-  |      |         hash     |      |        hash      |    |
-  |      |            |     |      |           |      |    |
-+-v------v-----+      |  +--v------v---+       |  +---v----v---+
-|              |      |  |             |       |  |            |
-|  blockA      |      +--+   blockB    |       +--+   blockC   |
-|              |         |             |          |            |
-+--------------+         +-------------+          +------------+
-                 -next--&gt;               --next---&gt;</code></pre>
-<div class="sourceCode" id="cb2"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>blockA = dataA + prevAhash</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>prevAhash = h(blockB) = h(dataB + prevBhash)</span></code></pre></div>
-<div class="sourceCode" id="cb3" data-filename="singleblock"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>     +                  </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    / \      =======  blockA</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dataA  h(blockB)     </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    +</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>   / \</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>dataA h   ----------------+</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      |                   |</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      +                   |</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>     / \                  | ====== prevAhash = h(blockB)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>dataB   h                 | </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        |                 .</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        +                 .</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>       / \                .</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  dataC   ..              .</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode .txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>      +-----------+             +-----------+           +------------+</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>      |prevAhash= |&lt;--+         |prevBhash= |&lt;-+        |prevChash=  |</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      |h(blockB)  |   |         |h(blockC)  |  |        |h(blockD)   |</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      +--+--------+   |         +--+--------+  |        +--+---------+</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dataA    |            |   dataB    |           |    dataC  |</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  |      |            |     |      |           |      |    |</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  |      |           h|     |      |          h|      |    |</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  |      |            |     |      |           |      |    |</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>+-v------v-----+      |  +--v------v---+       |  +---v----v---+</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>|              |      |  |             |       |  |            |</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>|  blockA      |      +--+   blockB    |       +--+   blockC   |</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>|              |         |             |          |            |</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>+--------------+         +-------------+          +------------+</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                ---next-&gt;               ---next-&gt;</span></code></pre></div>
+<p><span class="math display">\[blockA = dataA + prevAhash\]</span></p>
+<p><span class="math display">\[prevAhash = h(blockB) = h(dataB + prevBhash)\]</span></p>
+<div class="sourceCode" id="cb2" data-filename="singleblock"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>     +                  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    / \      =======  blockA</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dataA  h(blockB)     </span></code></pre></div>
+<div class="sourceCode" id="cb3" data-filename="singleblock_Expanded"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    +</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>   / \</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dataA h   ----------------+   This entire thing downwards represents hash of blockB.</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      |                   |</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      +                   |</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>     / \                  | ====== prevAhash = h(blockB)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>dataB   h                 | </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        |                 .</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        +                 .</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>       / \                .</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  dataC   ..              .</span></code></pre></div>
+<p>The above is still just a single block, NOT a block chain.</p>
 <ul>
 <li>When the head of the tree is a <code>+</code> it is a block</li>
 <li>When the head of the tree is a <code>h</code> it is a prevhash</li>
 </ul>
-<p>Above was a representation of a single block, here we show a blockchain aka a list of the tree above.</p>
-<div class="sourceCode" id="cb4" data-filename="blockchain"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>           ---next-&gt;            ----next-&gt;</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    +</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>   / \</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>dataA h    </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      |                   </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      +                  +                          </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>     / \                / \  </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>dataB   h          dataB   h       </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        |                  |</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        +                  +                    +</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>       / \                / \                  / \</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  dataC   ..         dataC   ..           dataC   ..</span></code></pre></div>
+<p>Above was a representation of a single block, here we show a blockchain aka a list</p>
+<div class="sourceCode" id="cb4" data-filename="blockchain"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    +</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>   / \</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>dataA h    </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      |                   </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      +                  +                          </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>     / \                / \  </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>dataB   h          dataB   h       </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        |                  |</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        +                  +                    +</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>       / \                / \                  / \</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  dataC   ..         dataC   ..           dataC   ..</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>            ---next-&gt;            ---next-&gt;</span></code></pre></div>
 <hr />
 <section id="general-form" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> General Form</h1>
 <p>Analogous to <a href="../posts/2018-08-23-BuildNatSets.html">Set theoretical natural numbers</a><br />
-<span class="math display">\[Set: N =  Pred(N) \cup \{N-1\} \]</span> <span class="math display">\[Block: N = d(N) + h(N-1) \]</span></p>
+<span class="math display">\[Set: N =  Pred(N) \cup \{N-1\} \]</span>
+<span class="math display">\[Block: N = d(N) + h(N-1) \]</span></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n = blockA</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>d(n) = dataA</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>h(n-1) = prevAhash</span>

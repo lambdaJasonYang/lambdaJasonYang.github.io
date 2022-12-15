@@ -192,7 +192,8 @@ all we can do is infinitely chaining with more <code>.then(..)</code> which just
 </section>
 <section id="location.hash" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> location.hash</h1>
-<p>Not the hash function! Given a url: <code class="sourceCode javascript">https<span class="op">:</span><span class="co">//example.com/stuff#blah%20ads%20bah</span></code></p>
+<p>Not the hash function!
+Given a url: <code class="sourceCode javascript">https<span class="op">:</span><span class="co">//example.com/stuff#blah%20ads%20bah</span></code></p>
 <p><code class="sourceCode javascript">location<span class="op">.</span><span class="at">hash</span></code> –&gt; <code class="sourceCode javascript">#blah<span class="op">%</span>20ads<span class="op">%</span>20bah</code></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">decodeURIComponent</span>(location<span class="op">.</span><span class="at">hash</span><span class="op">.</span><span class="fu">substr</span>(<span class="dv">1</span>))</span></code></pre></div>
 <hr />
@@ -233,7 +234,8 @@ all we can do is infinitely chaining with more <code>.then(..)</code> which just
 <ul>
 <li><code>let a = b</code> means <code>context</code> of <code>b</code> depends on where this assignment happened.</li>
 </ul></li>
-<li><code>.bind()</code> allows us change the <code>context</code> <!--  --></li>
+<li><code>.bind()</code> allows us change the <code>context</code>
+<!--  --></li>
 </ul></li>
 <li>idiosyncrasy:<code>const f = ()=&gt;{}</code> keeps the <code>this</code> or <code>context</code> where the function was declared but <code>function(){}</code> does not.</li>
 </ul>

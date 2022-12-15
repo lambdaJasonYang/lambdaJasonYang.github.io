@@ -386,7 +386,8 @@ param <code>codeData</code>: data from countrycodes.csv file</p>
 </section>
 <section id="hotels-in-area" class="level2" data-number="0.7">
 <h2 data-number="0.7"><span class="header-section-number">0.7</span> Hotels In Area</h2>
-<p><code>hotelsInArea</code> determines how many hotels there are within 10 km (&lt;=10000.0) from given latitude and longitude. Use Haversine formula ( https://en.wikipedia.org/wiki/Haversine_formula ). Earth radius is 6371000 meters.</p>
+<p><code>hotelsInArea</code> determines how many hotels there are within 10 km (&lt;=10000.0) from given latitude and longitude.
+Use Haversine formula ( https://en.wikipedia.org/wiki/Haversine_formula ). Earth radius is 6371000 meters.</p>
 <p>Don’t use the feature code field. You should start by reading the data and getting the correct fields (name, latitude, longitude) similarly to the <code>extractData</code> function. After that you should use the Haversine formula to filter the places in 10 Km radius from the latitude and longitude. You will probably want to use a helper function, Python lets you create functions inside functions. Finally, you will want to filter the places that contain the word “hotel”. Location is a hotel if the name contains the word “hotel” (can be “Hotel” or “hOtel” for instance). There can exist multiple hotels in the same location.</p>
 <p>Note that both latitude and longitude in the data are in decimal degree so you have to change them to radians ( https://en.wikipedia.org/wiki/Decimal_degrees ). They should also be converted to double values. E.g <code>math.radians(float(x))</code></p>
 <p>param <code>lat</code>: latitude as Double<br />

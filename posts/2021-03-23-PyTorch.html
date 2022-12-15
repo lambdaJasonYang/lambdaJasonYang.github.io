@@ -184,7 +184,8 @@ Now we will plot a 2d vector and have the color represent a static label of x-ax
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p><img src="../images/pytorchimg/Figure_2.svg" /></p>
 <p>Notice that 99% of the points fall within an imaginary circle of radius of 3 units.<br />
-Remember in statistics <strong>68-95-99 rule</strong> (assuming normal dist ) The 3 unit radius circle = 3 standard deviations containing 99% of points<br />
+Remember in statistics <strong>68-95-99 rule</strong> (assuming normal dist )
+The 3 unit radius circle = 3 standard deviations containing 99% of points<br />
 Therefore 1 unit radius circle = 1 standard deviation</p>
 </section>
 <section id="svd" class="level1" data-number="5">
@@ -207,9 +208,14 @@ Therefore 1 unit radius circle = 1 standard deviation</p>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>plot_bases(mbases)</span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p><img src="../images/pytorchimg/Figure_3.svg" /> Notice how the yellow dots rotated to the bottom</p>
-<p><span class="math display">\[Weight = \begin{bmatrix} 0.3439 \\ 0.9503 \end{bmatrix} \begin{bmatrix} -0.2960 \\ 0.1503 \end{bmatrix}\]</span> <span class="math display">\[U = Rotation = \begin{bmatrix} 0.9990 &amp; 0.0449 \\ 0.0449 &amp; -0.9990 \end{bmatrix}\]</span> <span class="math display">\[S = Symmetry = \begin{bmatrix} 1.0115 &amp; 0 \\ 0 &amp; 0.3292 \end{bmatrix}\]</span> <span class="math display">\[V = Reflection = \begin{bmatrix} 0.3265 &amp; 0.9452 \\ 0.9452 &amp; -0.3265 \end{bmatrix}\]</span></p>
-<p><span class="math display">\[SVD(Weight) = Rotation \times Symmetric\ Matrix \times Reflection^{T}\]</span> <span class="math display">\[W = U \begin{bmatrix} s_1 &amp; 0 \\ 0 &amp; s_2 \end{bmatrix} V^T\]</span></p>
+<p><img src="../images/pytorchimg/Figure_3.svg" />
+Notice how the yellow dots rotated to the bottom</p>
+<p><span class="math display">\[Weight = \begin{bmatrix} 0.3439 \\ 0.9503 \end{bmatrix} \begin{bmatrix} -0.2960 \\ 0.1503 \end{bmatrix}\]</span>
+<span class="math display">\[U = Rotation = \begin{bmatrix} 0.9990 &amp; 0.0449 \\ 0.0449 &amp; -0.9990 \end{bmatrix}\]</span>
+<span class="math display">\[S = Symmetry = \begin{bmatrix} 1.0115 &amp; 0 \\ 0 &amp; 0.3292 \end{bmatrix}\]</span>
+<span class="math display">\[V = Reflection = \begin{bmatrix} 0.3265 &amp; 0.9452 \\ 0.9452 &amp; -0.3265 \end{bmatrix}\]</span></p>
+<p><span class="math display">\[SVD(Weight) = Rotation \times Symmetric\ Matrix \times Reflection^{T}\]</span>
+<span class="math display">\[W = U \begin{bmatrix} s_1 &amp; 0 \\ 0 &amp; s_2 \end{bmatrix} V^T\]</span></p>
 <p>We can decompose the Weight matrix into 3 easily understood operations</p>
 <ul>
 <li>U = Rotation</li>
@@ -226,11 +232,13 @@ Therefore 1 unit radius circle = 1 standard deviation</p>
 <hr />
 <section id="linear-classifier" class="level3" data-number="5.0.1">
 <h3 data-number="5.0.1"><span class="header-section-number">5.0.1</span> Linear Classifier</h3>
-<p><span class="math display">\[ y = sign(W \cdot X + b)\]</span> Partitions the input space into two spaces divided by a hyperplane.</p>
+<p><span class="math display">\[ y = sign(W \cdot X + b)\]</span>
+Partitions the input space into two spaces divided by a hyperplane.</p>
 <p>$y {-1,0,1} :: Classification $$</p>
 <p>We are computing dot product of input vector against the weight vector. If these two vectors are orthogonal then <span class="math inline">\(y\)</span> is 0 which is the separating hyperplane.</p>
 <p><strong>The hyperplane is NOT the weight vector</strong></p>
-<p>Imagine in 3d space, we have a 1d weight vector. The set of points that are orthogonal to this vector make up a 2d hyperplane. <span class="math inline">\(hyperplane = \{x \in \mathbb{R}^2 | w\cdot x = 0\}\)</span></p>
+<p>Imagine in 3d space, we have a 1d weight vector. The set of points that are orthogonal to this vector make up a 2d hyperplane.
+<span class="math inline">\(hyperplane = \{x \in \mathbb{R}^2 | w\cdot x = 0\}\)</span></p>
 <hr />
 </section>
 </section>

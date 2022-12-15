@@ -462,7 +462,10 @@
 </section>
 <section id="simplify-with-condition" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Simplify with condition</h1>
-<p>Simplify[expr,assum] : simjply with assumptions Expand[expr,patt] : expand all but pattern patt ExpandAll[expr] : expand product and exponents ExpandAll[expr,patt] : expand when matching pattern patt</p>
+<p>Simplify[expr,assum] : simjply with assumptions
+Expand[expr,patt] : expand all but pattern patt
+ExpandAll[expr] : expand product and exponents
+ExpandAll[expr,patt] : expand when matching pattern patt</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Assuming</span><span class="op">[</span><span class="fu">Element</span><span class="op">[</span><span class="fu">n</span><span class="op">,</span> <span class="bu">Integers</span><span class="op">]</span> &amp;&amp; <span class="fu">n</span> &gt; <span class="dv">0</span><span class="op">,</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">Integrate</span><span class="op">[</span><span class="fu">Sin</span><span class="op">[</span><span class="fu">n</span> <span class="fu">x</span><span class="op">]</span><span class="sc">^</span><span class="dv">2</span><span class="op">,</span> <span class="op">{</span><span class="fu">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="fu">Pi</span><span class="op">}]]</span></span></code></pre></div>
 </section>

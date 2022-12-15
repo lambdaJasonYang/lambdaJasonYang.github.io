@@ -128,8 +128,10 @@
 <h2 data-number="2.1"><span class="header-section-number">2.1</span> self</h2>
 <ul>
 <li><code>self</code> in the main thread means the <code>window</code> object</li>
-<li><code>self</code> for webworker thread means the ServiceWorkerGlobalScope <!--  --></li>
-<li>Webworkers have no access to DOM elements <!--  --></li>
+<li><code>self</code> for webworker thread means the ServiceWorkerGlobalScope
+<!--  --></li>
+<li>Webworkers have no access to DOM elements
+<!--  --></li>
 <li>The main thread is the only thread that can create web workers with <code>const x = new Worker("henchman.js)</code></li>
 </ul>
 </section>

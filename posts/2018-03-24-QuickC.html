@@ -307,7 +307,8 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 <section id="string-literals-are-immutable-in-memory" class="level4" data-number="6.0.0.1">
 <h4 data-number="6.0.0.1"><span class="header-section-number">6.0.0.1</span> String literals are immutable in memory</h4>
 <ul>
-<li>Typing a string like “hello” in your code editor means your progam will allocate a permanent address and memory for “hello” that all other “hello” in your code will refer to.</li>
+<li>Typing a string like “hello” in your code editor means your progam will allocate a permanent address and memory for “hello” that all other
+“hello” in your code will refer to.</li>
 </ul>
 <div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%s&quot;</span><span class="op">,</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">//init string literal &quot;hello&quot; at SOME address </span></span>
@@ -345,42 +346,166 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 </section>
 <section id="dynamic-mem-allocation" class="level3" data-number="6.0.1">
 <h3 data-number="6.0.1"><span class="header-section-number">6.0.1</span> Dynamic mem allocation</h3>
-<p>malloc(size_t x) allocates x bytes of heap memory return address for x return a void pointer, void <em> int </em>a; a = malloc(5 * sizeof(int));</p>
-<p>free(void * p) release dynamically allocated memory input: pointer[aka address] to the beginning of a dynamically allocated block of memory</p>
-<p>calloc(size_t n, size_t x) basically just malloc with n*x bytes of memory</p>
-<p>realloc(void *p, size_t x) p must point to beginning of block reallocate memory to x size.</p>
-<p>GDB must compile with -g gcc -g … gdb someprogram</p>
+<p>malloc(size_t x)
+allocates x bytes of heap memory
+return address for x
+return a void pointer, void <em>
+int </em>a;
+a = malloc(5 * sizeof(int));</p>
+<p>free(void * p)
+release dynamically allocated memory
+input: pointer[aka address] to the beginning of a dynamically allocated block of memory</p>
+<p>calloc(size_t n, size_t x)
+basically just malloc with n*x bytes of memory</p>
+<p>realloc(void *p, size_t x)
+p must point to beginning of block
+reallocate memory to x size.</p>
+<p>GDB
+must compile with -g
+gcc -g …
+gdb someprogram</p>
 <p>run</p>
-<p>file functions &lt;fcntl.h&gt; open add a . file to file table returns file descriptor if open fails =&gt; -1</p>
-<p>open(path,flags, mode) * mode - basically file permission like 777 * used in file creation * flags - what to do with file * O_RDONLY * O_WRONLY * O_RDWR * O_CREAT</p>
-<p>&lt;sys/stat.h&gt; umask set file creation for all files; umask(777); //gives all new file that will be created full permission</p>
-<p>&lt;unistd.h&gt; read data from file read(filename, buffer , size) read size bytes from filename into buffer</p>
-<p>&lt;unistd.h&gt; write(filename,buffer,size)</p>
-<p>&lt;unistd.h&gt; lseek set current position in open file lseek(file_descriptor, offset,whence) * offset - number of bytes to move position by, (-inf,inf) * whence - where to measure offset from * SEEK_SET - beginning of file * SEEK_CUR - current position in file * SEEK)END - end of file</p>
-<p>&lt;sys/stat.h&gt; stat(path , stat_buffer ) get information about a file</p>
+<p>file functions
+&lt;fcntl.h&gt;
+open
+add a . file to file table returns file descriptor
+if open fails =&gt; -1</p>
+<p>open(path,flags, mode)
+* mode - basically file permission like 777
+* used in file creation
+* flags - what to do with file
+* O_RDONLY
+* O_WRONLY
+* O_RDWR
+* O_CREAT</p>
+<p>&lt;sys/stat.h&gt;
+umask
+set file creation for all files;
+umask(777); //gives all new file that will be created full permission</p>
+<p>&lt;unistd.h&gt;
+read data from file
+read(filename, buffer , size)
+read size bytes from filename into buffer</p>
+<p>&lt;unistd.h&gt;
+write(filename,buffer,size)</p>
+<p>&lt;unistd.h&gt;
+lseek
+set current position in open file
+lseek(file_descriptor, offset,whence)
+* offset - number of bytes to move position by, (-inf,inf)
+* whence - where to measure offset from
+* SEEK_SET - beginning of file
+* SEEK_CUR - current position in file
+* SEEK)END - end of file</p>
+<p>&lt;sys/stat.h&gt;
+stat(path , stat_buffer )
+get information about a file</p>
 <p>DIRECTORIES</p>
-<p>&lt;dirent.h&gt; opendir <em>Open a directory file opendir( path); returns a pointer to a directory stream typed “DIR </em>”</p>
-<p>closedir(dir_stream) closes directory stream and frees the pointer</p>
-<p>readdir(dir_stream) returns pointer to next entry in a directory stream or NULL if all entries have already been returned.</p>
+<p>&lt;dirent.h&gt;
+opendir
+<em>Open a directory file
+opendir( path);
+returns a pointer to a directory stream typed “DIR </em>”</p>
+<p>closedir(dir_stream)
+closes directory stream and frees the pointer</p>
+<p>readdir(dir_stream)
+returns pointer to next entry in a directory stream or NULL if all entries have already been returned.</p>
 <p>rewinddir(DIR * d)</p>
 <pre><code>resets directory stream of d to the beginngin</code></pre>
-<p>INPUT OUTPUT int main( int argc, char *argv[] ) argc - number of command line args argv - array of command line args as strings</p>
-<p>stdin input &lt;stdio.h&gt; fgets(char * s, int size, FILE * f) reads size-1 characters fomr file stream f and stores it in s and appends NULL. stops at newline, EOF. File stream has type “FILE <em>” </em> more complex than file descriptor <em>stdin is a universal FILE </em> variable fgets(s,100 stdin);</p>
+<p>INPUT OUTPUT
+int main( int argc, char *argv[] )
+argc - number of command line args
+argv - array of command line args as strings</p>
+<p>stdin input
+&lt;stdio.h&gt;
+fgets(char * s, int size, FILE * f)
+reads size-1 characters fomr file stream f and stores it in s and appends NULL.
+stops at newline, EOF.
+File stream has type “FILE <em>”
+</em> more complex than file descriptor
+<em>stdin is a universal FILE </em> variable
+fgets(s,100 stdin);</p>
 <p>Signals</p>
 <p>kill(pid,signal)</p>
-<p>sighandler is basically a callback function you define. static void sighandler (int signo ) intercept signals in a c program, cannot catch SIGKILL,SIGSTOP</p>
-<p>signal(SIGNUMBER, sighandler) attach a signal to a signal handling function</p>
-<p>static void sighandler(int signo){ if (signo == SIGUSR1 ) printf(“YO”); } signal(SIGUSR1,sighandler);</p>
-<p>Exec - c functions that run other proc or replace current proc with anothe proc &lt;unistd.h&gt;</p>
+<p>sighandler is basically a callback function you define.
+static void sighandler (int signo )
+intercept signals in a c program, cannot catch SIGKILL,SIGSTOP</p>
+<p>signal(SIGNUMBER, sighandler)
+attach a signal to a signal handling function</p>
+<p>static void sighandler(int signo){
+if (signo == SIGUSR1 )
+printf(“YO”);
+}
+signal(SIGUSR1,sighandler);</p>
+<p>Exec - c functions that run other proc or replace current proc with anothe proc
+&lt;unistd.h&gt;</p>
 <p>execl(path, command ,arg0, arg1 .. )</p>
-<p>execlp(path, command, arg0,arg1 ..) same as execlp but uses $PATH environment variables</p>
+<p>execlp(path, command, arg0,arg1 ..)
+same as execlp but uses $PATH environment variables</p>
 <p>Managing Sub-processes</p>
-<p>&lt;unistd.h&gt; fork()</p>
-<p>&lt;sys/wait.h&gt; wait(status) stops parent process until child exited return pid of child exited * status * WIFEEXITED - true if exit normally * WEXITSTATUS - return value of child * WIFSIGNALED - true if exit with signal * WTERMSIG - signal number intercepted dby child</p>
-<p>waidpid(pid,status,options) wait for specific child</p>
-<p>Redirection &lt;unistd.h&gt; dup2(fd1,fd2) * redirects fd2 to fd1</p>
-<p>Pipes A conduit between 2 separate processes on the same computer. Pipes have 2 ends, a read end and a write end. Pipes act just like files (i.e. you can read() and write() to send any kind of data). Pipes exist in memory. Unnamed Pipes Unnamed pipes have no external identifier. pipe - &lt;unistd.h&gt; Create an unnamed pipe. Returns 0 if the pipe was created, -1 if not. pipe( descriptors ) descriptors Array that will contain the descriptors for each end of the pipe. Must be an int array of size 2. descriptors[0] is the read end. descriptors[1] is the write end. example int fds[2]; pipe( fds ); char line[100]; f = fork(); if (f == 0) { close( fds[0] ); write( fds[1], “hello!”, 7); } else { close( fds[1] ); read( fds[0], line, sizeof(line) ); } Named Pipes Also known as FIFOs. Same as unnamed pipes except FIFOs have a name that can be used to identify them via different programs. Like unnamed pipes, FIFOS are unidirectional. mkfifo Shell command to make a FIFO $ mkfifo name mkfifo - &lt;sys/types.h&gt; &lt;sys/stat.h&gt; c function to create a FIFO Returns 0 on success and -1 on failure Once created, the FIFO acts like a regular file, and we can use open, read, write, and close on it. FIFOs will block on open until both ends of the pipe have a connection. mkfifo( name, permissions )</p>
-<p>Shared Memory &lt;sys/shm.h&gt; &lt;sys/ipc.h&gt; &lt;sys/types.h&gt; A segment of heap memory that can be accessed by multiple processes. Shared memory is accessed via a key that is known by any process that needs to access it. Shared memory does not get released when a program exits.`</p>
+<p>&lt;unistd.h&gt;
+fork()</p>
+<p>&lt;sys/wait.h&gt;
+wait(status)
+stops parent process until child exited
+return pid of child exited
+* status
+* WIFEEXITED - true if exit normally
+* WEXITSTATUS - return value of child
+* WIFSIGNALED - true if exit with signal
+* WTERMSIG - signal number intercepted dby child</p>
+<p>waidpid(pid,status,options)
+wait for specific child</p>
+<p>Redirection
+&lt;unistd.h&gt;
+dup2(fd1,fd2)
+* redirects fd2 to fd1</p>
+<p>Pipes
+A conduit between 2 separate processes on the same computer.
+Pipes have 2 ends, a read end and a write end.
+Pipes act just like files (i.e. you can read() and write() to send any kind of data).
+Pipes exist in memory.
+Unnamed Pipes
+Unnamed pipes have no external identifier.
+pipe - &lt;unistd.h&gt;
+Create an unnamed pipe.
+Returns 0 if the pipe was created, -1 if not.
+pipe( descriptors )
+descriptors
+Array that will contain the descriptors for each end of the pipe. Must be an int array of size 2.
+descriptors[0] is the read end.
+descriptors[1] is the write end.
+example
+int fds[2];
+pipe( fds );
+char line[100];
+f = fork();
+if (f == 0) {
+close( fds[0] );
+write( fds[1], “hello!”, 7);
+}
+else {
+close( fds[1] );
+read( fds[0], line, sizeof(line) );
+}
+Named Pipes
+Also known as FIFOs.
+Same as unnamed pipes except FIFOs have a name that can be used to identify them via different programs.
+Like unnamed pipes, FIFOS are unidirectional.
+mkfifo
+Shell command to make a FIFO
+$ mkfifo name
+mkfifo - &lt;sys/types.h&gt; &lt;sys/stat.h&gt;
+c function to create a FIFO
+Returns 0 on success and -1 on failure
+Once created, the FIFO acts like a regular file, and we can use open, read, write, and close on it.
+FIFOs will block on open until both ends of the pipe have a connection.
+mkfifo( name, permissions )</p>
+<p>Shared Memory
+&lt;sys/shm.h&gt; &lt;sys/ipc.h&gt; &lt;sys/types.h&gt;
+A segment of heap memory that can be accessed by multiple processes.
+Shared memory is accessed via a key that is known by any process that needs to access it.
+Shared memory does not get released when a program exits.`</p>
 <ul>
 <li>5 Shared memory operations</li>
 <li>Create the segment (happens once) - shmget</li>
@@ -399,7 +524,8 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>data <span class="op">=</span> <span class="op">*</span> data <span class="op">+</span> <span class="dv">10</span><span class="op">;</span></span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>data<span class="op">);</span></span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>shmdt<span class="op">(</span>data<span class="op">);</span> </span></code></pre></div>
-<p>Server Design * Handshake - ensure a connection between 2 programs</p>
+<p>Server Design
+* Handshake - ensure a connection between 2 programs</p>
 <ul>
 <li>3-way-handshake - verify both client and server can BOTH SEND AND RECIEVE DATA</li>
 <li>Client send msg to Server. (lets server know client can recieve data)</li>
@@ -411,7 +537,8 @@ main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
 <p>Setup</p>
 <ul>
 <li>Server creates a FIFO (Well Known Pipe) and waits for a connection.</li>
-<li>Client creates a “private” FIFO. sprintf(buffer, “%d”, getpid() );</li>
+<li>Client creates a “private” FIFO.
+sprintf(buffer, “%d”, getpid() );</li>
 </ul>
 <p>Handshake</p>
 <ul>

@@ -137,7 +137,8 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tot <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> pd.read_csv(<span class="st">&quot;test.csv&quot;</span>,chunksize<span class="op">=</span><span class="dv">100</span>):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  tot <span class="op">+=</span> i[<span class="st">&quot;price&quot;</span>].<span class="bu">sum</span>()</span></code></pre></div>
-<p>Server is sqlalchemy, Client is pandas. We want to get Server side cursors (streaming) to lazy fetch when the client pandas needs it.</p>
+<p>Server is sqlalchemy, Client is pandas.
+We want to get Server side cursors (streaming) to lazy fetch when the client pandas needs it.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>

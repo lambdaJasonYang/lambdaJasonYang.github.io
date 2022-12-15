@@ -138,7 +138,8 @@
 <li><a href="#transform-into-hypertable"><span class="toc-section-number">10.3</span> Transform into Hypertable</a></li>
 </ul></li>
 </ul></div>
-<p><a href="https://jepsen.io/consistency">on CAP</a> <a href="https://www.the-paper-trail.org/page/cap-faq/">on CAP 2</a></p>
+<p><a href="https://jepsen.io/consistency">on CAP</a>
+<a href="https://www.the-paper-trail.org/page/cap-faq/">on CAP 2</a></p>
 <div class="sourceCode" id="cb1" data-filename="buildtable.sql"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> bleh (<span class="kw">id</span> <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, name TEXT, age <span class="dt">INTEGER</span>);</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> bleh (name,age) <span class="kw">VALUES</span> (<span class="st">'bob'</span>,<span class="dv">30</span>);</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> bleh (name,age) <span class="kw">VALUES</span> (<span class="st">'rex'</span>,<span class="dv">2</span>);</span>

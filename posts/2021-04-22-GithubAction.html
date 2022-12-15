@@ -139,9 +139,13 @@
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">	</span><span class="fu">push</span><span class="kw">:</span><span class="at"> </span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">		</span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span></code></pre></div>
 <ol start="3" type="1">
-<li>Define the job to start Steps) are the instructions to test and run code actions/checkout@v2 is what clones the repo to your VM</li>
+<li>Define the job to start
+Steps) are the instructions to test and run code
+actions/checkout@v2 is what clones the repo to your VM</li>
 </ol>
-<p>WARNING jobs will run in parallel, steps do not if you need a job to wait, add a “needs:…” parameter under</p>
+<p>WARNING
+jobs will run in parallel, steps do not
+if you need a job to wait, add a “needs:…” parameter under</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">	</span><span class="fu">build-job</span><span class="kw">:</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">		...</span></span>
@@ -163,7 +167,10 @@
 <section id="cd-exec-on-merge-pullrequest" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> CD :exec on merge PullRequest</h1>
 <p>CD is used to push your updates to some cloud server so the internet can see your new updated website.</p>
-<p>You have to connect to servers like AWS to deploy your website First you need a secret token from AWS on Github: Settings &gt; Secrets &gt; Add a new secret Now you can securely access with github action securely</p>
+<p>You have to connect to servers like AWS to deploy your website
+First you need a secret token from AWS
+on Github: Settings &gt; Secrets &gt; Add a new secret
+Now you can securely access with github action securely</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">	</span><span class="fu">pull_request</span><span class="kw">:</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">		</span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span></code></pre></div>

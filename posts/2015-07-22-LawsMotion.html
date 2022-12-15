@@ -149,13 +149,17 @@ Solving for 1) distance function and 2) velocity function, each wrt time</p>
 </ol>
 <p><span class="math display">\[m \frac{ds^2}{d^2t} = f\]</span></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DSolve</span><span class="op">[</span><span class="fu">m</span><span class="sc">*</span>s''<span class="op">[</span><span class="fu">t</span><span class="op">]</span> <span class="ex">==</span> <span class="fu">f</span><span class="op">,</span> <span class="fu">s</span><span class="op">[</span><span class="fu">t</span><span class="op">],</span> <span class="fu">t</span><span class="op">]</span> <span class="sc">//</span> <span class="fu">TeXForm</span></span></code></pre></div>
-<p><span class="math display">\[\left\{\left\{s(t)\to \frac{f}{m}\frac{1}{2}t^2+c_2 t+c_1\right\}\right\}\]</span> looks familiar <span class="math inline">\(s = \frac{1}{2} at^2 + v_0t\)</span></p>
+<p><span class="math display">\[\left\{\left\{s(t)\to \frac{f}{m}\frac{1}{2}t^2+c_2 t+c_1\right\}\right\}\]</span>
+looks familiar
+<span class="math inline">\(s = \frac{1}{2} at^2 + v_0t\)</span></p>
 <ol start="2" type="1">
 <li></li>
 </ol>
 <p><span class="math display">\[m \frac{dv}{dt} = f\]</span></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode mathematica"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DSolve</span><span class="op">[</span><span class="fu">m</span><span class="sc">*</span>v'<span class="op">[</span><span class="fu">t</span><span class="op">]</span> <span class="ex">==</span> <span class="fu">f</span><span class="op">,</span> <span class="fu">v</span><span class="op">[</span><span class="fu">t</span><span class="op">],</span> <span class="fu">t</span><span class="op">]</span> <span class="sc">//</span> <span class="fu">TeXForm</span></span></code></pre></div>
-<p><span class="math display">\[\left\{\left\{v(t)\to \frac{f t}{m}+c_1\right\}\right\}\]</span> looks familiar <span class="math inline">\(v_n=at+v_0\)</span></p>
+<p><span class="math display">\[\left\{\left\{v(t)\to \frac{f t}{m}+c_1\right\}\right\}\]</span>
+looks familiar
+<span class="math inline">\(v_n=at+v_0\)</span></p>
 </section>
 
         </div>

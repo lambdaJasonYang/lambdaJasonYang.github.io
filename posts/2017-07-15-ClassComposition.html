@@ -143,7 +143,8 @@
 <section id="interface-composition" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Interface Composition</h1>
 <ul>
-<li><span class="math inline">\(f(g(),h(i(),j()))\)</span> <span class="math inline">\(f\)</span> is ReadAll and it has it’s own type called ReadAll_attr along with composing <span class="math inline">\(g\)</span> and <span class="math inline">\(h(i(),j())\)</span> which are ReadRPC and ReadREST respectively.</li>
+<li><span class="math inline">\(f(g(),h(i(),j()))\)</span>
+<span class="math inline">\(f\)</span> is ReadAll and it has it’s own type called ReadAll_attr along with composing <span class="math inline">\(g\)</span> and <span class="math inline">\(h(i(),j())\)</span> which are ReadRPC and ReadREST respectively.</li>
 </ul>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a20202020202020207b72616e6b3d73616d653b353b363b7d0a20202020202020207b72616e6b3d73616d653b20323b333b7d0a20202020202020207b72616e6b3d73616d653b20343b313b373b7d0a0931205b6c6162656c3d52656164524553545d3b0a0932205b6c6162656c3d52656164584d4c5d3b0a0933205b6c6162656c3d526561644a534f4e5d3b200a202020202020202034205b6c6162656c3d526561645250435d3b0a202020202020202035205b6c6162656c3d52656164416c6c5d3b0a202020202020202036205b6c6162656c3d52656164416c6c5f617474722073686170653d626f785d3b0a202020202020202037205b6c6162656c3d52656164524553545f617474722073686170653d626f785d3b0a0931202d3e20323b0a202020202020202031202d3e20333b0a202020202020202035202d3e20313b0a202020202020202035202d3e20343b0a2020202020202020362d3e353b0a2020202020202020372d3e313b0a20202020202020200a20202020202020200a7d0a40656e64756d6c"></figure>
 <div class="sourceCode" id="cb1"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> ReadJSON <span class="kw">interface</span> <span class="op">{</span></span>

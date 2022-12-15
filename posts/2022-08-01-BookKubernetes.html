@@ -121,17 +121,20 @@
 <p><img src="../images/2208_fe3uwoj.png" /></p>
 <section id="running-postgres-pod-in-a-docker-like-manner" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Running postgres pod in a docker-like manner</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --port=5432 determines the local port INSIDE the pod, 127.0.0.1:5432 wont work</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> run postgres <span class="at">--image</span><span class="op">=</span>postgres <span class="at">--restart</span><span class="op">=</span>Never <span class="at">--port</span><span class="op">=</span>5432 <span class="at">--env</span><span class="op">=</span><span class="st">&quot;POSTGRES_PASSWORD=root&quot;</span> <span class="at">--labels</span><span class="op">=</span><span class="st">&quot;app=mypostgres,env=prod&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># postgres on 127.0.0.1:8098</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> port-forward postgres 8098:5432</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># postgres on 0.0.0.0:8098</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> port-forward postgres 8098:5432 <span class="at">--address</span><span class="op">=</span><span class="st">'0.0.0.0'</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#demo</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-h</span> 127.0.0.1 <span class="at">-p</span> 8098 <span class="at">-U</span> postgres</span></code></pre></div>
+<p>In a .yaml file the <code>- containerPort=5432</code> (your program determines this port)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --port=5432 aka containerPort determines the local port INSIDE the pod </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># hitting 127.0.0.1:5432 wont work</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> run postgrespod <span class="at">--image</span><span class="op">=</span>postgres <span class="at">--restart</span><span class="op">=</span>Never <span class="at">--port</span><span class="op">=</span>5432 <span class="at">--env</span><span class="op">=</span><span class="st">&quot;POSTGRES_PASSWORD=root&quot;</span> <span class="at">--labels</span><span class="op">=</span><span class="st">&quot;app=mypostgres,env=prod&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># container port 5432 ==&gt; 127.0.0.1:8098</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> port-forward postgres 8098:5432</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># container port 5432 ==&gt; postgres on 0.0.0.0:8098</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> port-forward postgres 8098:5432 <span class="at">--address</span><span class="op">=</span><span class="st">'0.0.0.0'</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#demo</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-h</span> 127.0.0.1 <span class="at">-p</span> 8098 <span class="at">-U</span> postgres</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> run cockroachdb <span class="at">--image</span><span class="op">=</span>cockroachdb/cockroach <span class="at">--restart</span><span class="op">=</span>Never <span class="at">--port</span><span class="op">=</span>26257 <span class="at">--</span> start-single-node <span class="at">--insecure</span> <span class="at">--logtostderr</span></span></code></pre></div>
 </section>
 
         </div>

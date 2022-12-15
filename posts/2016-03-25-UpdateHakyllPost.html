@@ -121,11 +121,13 @@
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        route   idRoute</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        compile copyFileCompiler</span></code></pre></div>
 <p>3 main functions: match route compile</p>
-<p><code class="sourceCode haskell">match <span class="st">&quot;images/*&quot;</span></code> images/dog.png will be matched</p>
+<p><code class="sourceCode haskell">match <span class="st">&quot;images/*&quot;</span></code>
+images/dog.png will be matched</p>
 <p><code class="sourceCode haskell">route idRoute</code><br />
 route basically transforms the filename<br />
 In this case idRoute is the identity function meaning no change to the name “dog.png”</p>
-<p><code class="sourceCode haskell">compile copyFileCompiler</code> we copy “/images/dog.png” to the same path meaning no change.</p>
+<p><code class="sourceCode haskell">compile copyFileCompiler</code>
+we copy “/images/dog.png” to the same path meaning no change.</p>
 </section>
 <section id="updating-hakyll-posts" class="level3" data-number="0.0.2">
 <h3 data-number="0.0.2"><span class="header-section-number">0.0.2</span> Updating hakyll posts</h3>

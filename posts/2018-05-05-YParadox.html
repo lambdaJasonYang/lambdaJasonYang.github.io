@@ -117,9 +117,14 @@
 </div>
 <section id="russells-paradox-with-sets" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Russell’s paradox with Sets</h1>
-<p>Russell’s paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself. (Note everything in our current model is a set; even the elements of sets are sets) <span class="math display">\[ S = \{ x | x \notin x \} \tag{1}\]</span> Next we ask can S be an element of S?<br />
-[Assume S is element of itself] <span class="math display">\[S \in S \tag{2}\]</span><br />
-[This would imply by definition (1)] <span class="math display">\[S \notin S \tag{3}\]</span> [By contradiction (2) and (3)]<br />
+<p>Russell’s paradox starts by designing a Set S that contains/specifies all Sets that are not elements of itself. (Note everything in our current model is a set; even the elements of sets are sets)
+<span class="math display">\[ S = \{ x | x \notin x \} \tag{1}\]</span>
+Next we ask can S be an element of S?<br />
+[Assume S is element of itself]
+<span class="math display">\[S \in S \tag{2}\]</span><br />
+[This would imply by definition (1)]
+<span class="math display">\[S \notin S \tag{3}\]</span>
+[By contradiction (2) and (3)]<br />
 <span class="math display">\[S \notin S \tag{4}\]</span></p>
 <p>[but by the definition of (1) ]<br />
 <span class="math display">\[S \in S \tag{5}\]</span><br />
@@ -133,8 +138,10 @@ It is a paradox because there is no end to this proof ( we cannot conclude wheth
 </section>
 <section id="analogy-and-abstracting-russells-paradox-with-bears" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Analogy and Abstracting Russell’s paradox with bears</h1>
-<p>In set theory, the propositional function is elementhood. Elementhood takes two sets (lets call the universe that contain our sets of interest, <span class="math inline">\(SET\)</span>) and return a truth value. Also remember everything is a set.<br />
-We can think of our standard set theory as a pair that contains the universe and it’s associated function. <span class="math display">\[(SET,\in)\]</span></p>
+<p>In set theory, the propositional function is elementhood.
+Elementhood takes two sets (lets call the universe that contain our sets of interest, <span class="math inline">\(SET\)</span>) and return a truth value. Also remember everything is a set.<br />
+We can think of our standard set theory as a pair that contains the universe and it’s associated function.
+<span class="math display">\[(SET,\in)\]</span></p>
 <p><span class="math display">\[ \in :: (SET,SET) \rightarrow bool \]</span></p>
 <p>Let’s design another theory <span class="math display">\[(BEAR, like)\]</span> with <span class="math inline">\(BEAR\)</span> being defined as the universe of bears.<br />
 <span class="math display">\[ like :: (BEAR,BEAR) \rightarrow bool \]</span></p>

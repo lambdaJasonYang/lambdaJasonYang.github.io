@@ -126,7 +126,8 @@
 <li><a href="#createslice"><span class="toc-section-number">4</span> createSlice</a></li>
 <li><a href="#nextjs-ssr-redux"><span class="toc-section-number">5</span> nextjs SSR redux</a></li>
 </ul></div>
-<p><span class="math display">\[ Click \overset{dispatch(action)}{\rightarrow} Slice \overset{reduce\ store}{\rightarrow} store'\]</span> <span class="math display">\[ \{reducerA, reducerB ...\} \in Slice \]</span></p>
+<p><span class="math display">\[ Click \overset{dispatch(action)}{\rightarrow} Slice \overset{reduce\ store}{\rightarrow} store'\]</span>
+<span class="math display">\[ \{reducerA, reducerB ...\} \in Slice \]</span></p>
 <section id="use-case" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Use-case:</h1>
 <ul>
@@ -297,7 +298,8 @@
 <ol type="1">
 <li>SSR getServerSideProps() fetches stuff from backend and fills the store</li>
 <li>SSR sends the store to the clientside as props</li>
-<li>clientside takes the props to initialize it’s own store <!--  --></li>
+<li>clientside takes the props to initialize it’s own store
+<!--  --></li>
 </ol>
 <ul>
 <li>very loose psuedocode</li>

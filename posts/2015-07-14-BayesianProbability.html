@@ -161,7 +161,8 @@ WARNING: <strong>The normal curves DO NOT represent each of the 2 sample populat
 <ul>
 <li><p>Type 1 or alpha: P(t-test tells us there is difference | Reality there is no difference)</p></li>
 <li><p>Type 2 or beta: P(t-test tells us there is no difference | Reality there is a difference)</p></li>
-<li><p>Power or (1-beta): P(t-test tells us there is a difference | Reality there is a difference) # My Interpretation</p></li>
+<li><p>Power or (1-beta): P(t-test tells us there is a difference | Reality there is a difference)
+# My Interpretation</p></li>
 <li><p>Shaded node <span class="math inline">\(P(A)\)</span> behaves like <strong>existential intro</strong></p></li>
 </ul>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a646967726170682047207b0a202072616e6b646972203d204c520a636f6d706f756e643d747275650a0a09737562677261706820636c75737465725f31207b0a09096e6f6465205b7374796c653d22225d3b0a09096c6162656c203d202250284129223b0a090941205b6c6162656c3d224122207374796c653d66696c6c65645d3b0a2020200a097d0a0a7d0a40656e64756d6c"></figure>
@@ -188,14 +189,18 @@ Example is fueling <span class="math inline">\(P(B|A)\)</span> with <span class=
 </section>
 <section id="another-logic-example" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Another logic example</h1>
-<p><span class="math display">\[P(B|A)P(A) + P(B| \lnot A)P(\lnot A)\]</span> <span class="math display">\[ (A \land B) \lor (A \land \lnot B) \vdash A \]</span></p>
+<p><span class="math display">\[P(B|A)P(A) + P(B| \lnot A)P(\lnot A)\]</span>
+<span class="math display">\[ (A \land B) \lor (A \land \lnot B) \vdash A \]</span></p>
 <section id="chain-rule" class="level2" data-number="5.1">
 <h2 data-number="5.1"><span class="header-section-number">5.1</span> Chain rule</h2>
 <p><span class="math display">\[\begin{aligned} P(A \land B \land C \land D) &amp;= P(A | B \land C \land D) \cdot P(B \land C \land D) \\ &amp;= P(A | B \land C \land D) \cdot P(B | C \land D) \cdot P(C \land D) \\ &amp;= P(A | B \land C \land D) \cdot P(B | C \land D) \cdot P(C | D) \cdot P(D) \end{aligned}\]</span></p>
 <blockquote>
 <p>All nodes are called priors. The bridge between nodes are called conditional probabilites.</p>
 </blockquote>
-<p>Question: We want to know what the probability that a set of events happen simultaneously. Given that we know all possible transitions or conditionals. Answer: Say we have n nodes(events). Partition n nodes to 1 and […n-1] nodes. We can find the P(n) = P(A| …n-1)P(…n-1)<br />
+<p>Question: We want to know what the probability that a set of events happen simultaneously. Given that we know all possible transitions or conditionals.
+Answer:
+Say we have n nodes(events).
+Partition n nodes to 1 and […n-1] nodes. We can find the P(n) = P(A| …n-1)P(…n-1)<br />
 What if we don’t know the probability of the […n-1] nodes,<br />
 PARTITION n-1 nodes to 1 and […n-2] nodes. …</p>
 <p>Know this is only easy if we know all the conditional probabilities before hand.</p>

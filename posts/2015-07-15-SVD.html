@@ -135,9 +135,14 @@
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plot_bases(mbases)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p><img src="../images/pytorchimg/Figure_3.svg" /> Notice how the yellow dots rotated to the bottom</p>
-<p><span class="math display">\[Weight = \begin{bmatrix} 0.3439 \\ 0.9503 \end{bmatrix} \begin{bmatrix} -0.2960 \\ 0.1503 \end{bmatrix}\]</span> <span class="math display">\[U = Rotation = \begin{bmatrix} 0.9990 &amp; 0.0449 \\ 0.0449 &amp; -0.9990 \end{bmatrix}\]</span> <span class="math display">\[S = Symmetry = \begin{bmatrix} 1.0115 &amp; 0 \\ 0 &amp; 0.3292 \end{bmatrix}\]</span> <span class="math display">\[V = Reflection = \begin{bmatrix} 0.3265 &amp; 0.9452 \\ 0.9452 &amp; -0.3265 \end{bmatrix}\]</span></p>
-<p><span class="math display">\[SVD(Weight) = Rotation \times Symmetric\ Matrix \times Reflection^{T}\]</span> <span class="math display">\[W = U \begin{bmatrix} s_1 &amp; 0 \\ 0 &amp; s_2 \end{bmatrix} V^T\]</span></p>
+<p><img src="../images/pytorchimg/Figure_3.svg" />
+Notice how the yellow dots rotated to the bottom</p>
+<p><span class="math display">\[Weight = \begin{bmatrix} 0.3439 \\ 0.9503 \end{bmatrix} \begin{bmatrix} -0.2960 \\ 0.1503 \end{bmatrix}\]</span>
+<span class="math display">\[U = Rotation = \begin{bmatrix} 0.9990 &amp; 0.0449 \\ 0.0449 &amp; -0.9990 \end{bmatrix}\]</span>
+<span class="math display">\[S = Symmetry = \begin{bmatrix} 1.0115 &amp; 0 \\ 0 &amp; 0.3292 \end{bmatrix}\]</span>
+<span class="math display">\[V = Reflection = \begin{bmatrix} 0.3265 &amp; 0.9452 \\ 0.9452 &amp; -0.3265 \end{bmatrix}\]</span></p>
+<p><span class="math display">\[SVD(Weight) = Rotation \times Symmetric\ Matrix \times Reflection^{T}\]</span>
+<span class="math display">\[W = U \begin{bmatrix} s_1 &amp; 0 \\ 0 &amp; s_2 \end{bmatrix} V^T\]</span></p>
 <p>We can decompose the Weight matrix into 3 easily understood operations</p>
 <ul>
 <li>U = Rotation
