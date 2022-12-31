@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Group Theory</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Group Theory</h1>
+            
+
+            <div class="info">
+    Posted on July 14, 2015
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#summary"><span class="toc-section-number">1</span> Summary</a></li>
+<li><a href="#dihedral-d6-aka-s3"><span class="toc-section-number">2</span> Dihedral D<sub>6</sub> aka S<sub>3</sub></a></li>
+<li><a href="#c1-s1-s0"><span class="toc-section-number">3</span> C<sub>1</sub> S<sub>1</sub> S<sub>0</sub></a></li>
+<li><a href="#c2"><span class="toc-section-number">4</span> C<sub>2</sub></a></li>
+<li><a href="#c3"><span class="toc-section-number">5</span> C<sub>3</sub></a></li>
+<li><a href="#c4"><span class="toc-section-number">6</span> C<sub>4</sub></a></li>
+<li><a href="#distinct-elements-can-build-v4-and-c4"><span class="toc-section-number">7</span> 4 distinct elements can build V<sub>4</sub> and C<sub>4</sub></a>
+<ul>
+<li><a href="#disguised-c4"><span class="toc-section-number">7.1</span> Disguised C<sub>4</sub></a></li>
+</ul></li>
+<li><a href="#revisit-c4-and-learn-about-generators"><span class="toc-section-number">8</span> Revisit C<sub>4</sub> and learn about Generators</a>
+<ul>
+<li><a href="#lagrange-theorem"><span class="toc-section-number">8.1</span> Lagrange Theorem</a>
+<ul>
+<li><a href="#deduce-operations-of-groups-w-lagrange"><span class="toc-section-number">8.1.1</span> Deduce Operations of groups w/ Lagrange</a></li>
+</ul></li>
+<li><a href="#deduce-prime-group-property-w-lagrange"><span class="toc-section-number">8.2</span> Deduce Prime group property w/ Lagrange</a></li>
+</ul></li>
+<li><a href="#direct-products-c6-c3-c2"><span class="toc-section-number">9</span> Direct products C<sub>6</sub> = C<sub>3</sub> * C<sub>2</sub></a></li>
+</ul></div>
+<section id="summary" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Summary</h1>
+<p>Think of groups as a set of different operations.<br />
+Fundamental identity group = identity operation = Do Nothing.<br />
+Composing operations which End up Doing nothing is interesting.</p>
+</section>
+<section id="dihedral-d6-aka-s3" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Dihedral D<sub>6</sub> aka S<sub>3</sub></h1>
+<ul>
+<li>D<sub>6</sub> (Dihedral group): Symmetries of equilateral triangle {identity, two rotations, three reflections}</li>
+<li>S<sub>3</sub> (3-symmetric group): A queue of 3 people in order A,B,C: {identity, pop A + add to back, pop C + add to front, swap A B, swap A C, swap B C }</li>
+</ul>
+<p>Notice the operations of D<sub>6</sub> and S<sub>3</sub> are isomorphic!</p>
+<p><strong>Operations</strong></p>
+<p>operations are {identity, rotate 120, rotate -120, reflect 1st vertex, reflect 2nd vertex, reflect 3rd vertex}</p>
+</section>
+<section id="c1-s1-s0" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> C<sub>1</sub> S<sub>1</sub> S<sub>0</sub></h1>
+<ul>
+<li>Group with 1 identity operation</li>
+<li>Analogous to the action of <strong>doing nothing</strong> or Identity operation</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\times\)</span></th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1</strong></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operations</strong></p>
+<p>operations are {1: identity}</p>
+</section>
+<section id="c2" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> C<sub>2</sub></h1>
+<ul>
+<li>group of order 2</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\times\)</span></th>
+<th>1</th>
+<th>a</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1</strong></td>
+<td>1</td>
+<td>a</td>
+</tr>
+<tr class="even">
+<td><strong>a</strong></td>
+<td>a</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operations</strong></p>
+<p>operations are {1: identity, a: swap}</p>
+<ul>
+<li>Given a 2-char string, the action of swapping 2 characters defines a symmetry group.</li>
+</ul>
+</section>
+<section id="c3" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> C<sub>3</sub></h1>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\times\)</span></th>
+<th>1</th>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1</strong></td>
+<td>1</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr class="even">
+<td><strong>a</strong></td>
+<td>a</td>
+<td>b</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td><strong>b</strong></td>
+<td>b</td>
+<td>1</td>
+<td>a</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operations</strong></p>
+<p>operations are {1: identity, a: rotate 120, b: rotate -120}<br />
+rotations of a triangle</p>
+<ul>
+<li>a*a = b, rotate 240 which is basically rotate -120</li>
+</ul>
+<p>We also notice on a <strong>META</strong> level we can swap the operations ‘a’ and ‘b’ and it would still remain a group.</p>
+<p>This symmetry of swapping the ‘a: rotate 120’ and ‘b: rotate -120’ tells us at Meta level this group itself has a symmetry group C<sub>2</sub>.</p>
+<ul>
+<li>This Meta level symmetry on a group is called an <strong>AUTOMORPHISM</strong>
+<ul>
+<li>To find an AUTOMORPHISM check if you can rearrange the non-identity elements in a pre-existing symmetry pattern C<sub>n</sub> and still form a group</li>
+<li>Permutation of {a,b} is <span class="math inline">\(_2 P _2=2\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[ Aut(C_3)=C_2\]</span></p>
+<p>What about C<sub>2</sub>, what is it’s automorphism?</p>
+<p>Since C<sub>2</sub> only has 1 non-identity element, it can only <strong>do nothing</strong> (C<sub>1</sub>)</p>
+<p><span class="math display">\[ Aut(C_2) = C_1\]</span>
+<span class="math display">\[ Aut(C_1) = C_1\]</span></p>
+</section>
+<section id="c4" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> C<sub>4</sub></h1>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\times\)</span></th>
+<th>1</th>
+<th>a</th>
+<th>a<sup>2</sup></th>
+<th>a<sup>3</sup></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td>a</td>
+<td>a<sup>2</sup></td>
+<td>a<sup>3</sup></td>
+</tr>
+<tr class="even">
+<td><strong>a</strong></td>
+<td>a</td>
+<td><strong>a<sup>2</sup></strong></td>
+<td>a<sup>3</sup></td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td><strong>a<sup>2</sup></strong></td>
+<td>a<sup>2</sup></td>
+<td>a<sup>3</sup></td>
+<td><strong>1</strong></td>
+<td>a</td>
+</tr>
+<tr class="even">
+<td><strong>a<sup>3</sup></strong></td>
+<td>a<sup>3</sup></td>
+<td>1</td>
+<td>a</td>
+<td><strong>a<sup>2</sup></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operations</strong></p>
+<p>operations are : {1: identity, a: rotate 90, a<sup>2</sup>: rotate 180, a<sup>3</sup>: rotate 270}<br />
+rotations of a square</p>
+</section>
+<section id="distinct-elements-can-build-v4-and-c4" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 4 distinct elements can build V<sub>4</sub> and C<sub>4</sub></h1>
+<ul>
+<li>V<sub>4</sub> notice any element squared is an identity</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\times\)</span></th>
+<th>1</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+</tr>
+<tr class="even">
+<td><strong>a</strong></td>
+<td>a</td>
+<td><strong>1</strong></td>
+<td>c</td>
+<td>b</td>
+</tr>
+<tr class="odd">
+<td><strong>b</strong></td>
+<td>b</td>
+<td>c</td>
+<td><strong>1</strong></td>
+<td>a</td>
+</tr>
+<tr class="even">
+<td><strong>c</strong></td>
+<td>c</td>
+<td>b</td>
+<td>a</td>
+<td><strong>1</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>V<sub>4</sub> Operations</strong><br />
+Operations is {1: identity, a: reflect_horizontal, b: reflect_vertical, c: rotate 180}</p>
+<p>V<sub>4</sub> can represent symmetry of a rectangle:</p>
+<p>What is it’s automorphism?<br />
+There are <span class="math inline">\(_{3} P_{3}=6\)</span> ways to rearrange {a,b,c} and each of them still result in groups meaning
+<span class="math display">\[Aut(V_4) = D_6\]</span></p>
+<p>WARN: You must check if all permutations of group operations still satify the group properties.(We omit it here for brevity)</p>
+<section id="disguised-c4" class="level2" data-number="7.1">
+<h2 data-number="7.1"><span class="header-section-number">7.1</span> Disguised C<sub>4</sub></h2>
+<p>Let’s make another group</p>
+<p>we can define b * b = a, which implies b * c = c * b=1 which implies c * c = a<br />
+This group is actually just C<sub>4</sub> which we already did in the previous section!</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\times\)</span></th>
+<th>1</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+</tr>
+<tr class="even">
+<td><strong>a</strong></td>
+<td>a</td>
+<td><strong>1</strong></td>
+<td>c</td>
+<td>b</td>
+</tr>
+<tr class="odd">
+<td><strong>b</strong></td>
+<td>b</td>
+<td>c</td>
+<td><strong>a</strong></td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><strong>c</strong></td>
+<td>c</td>
+<td>b</td>
+<td>1</td>
+<td><strong>a</strong></td>
+</tr>
+</tbody>
+</table>
+<p>What is it’s automorphism?<br />
+Remember C<sub>4</sub> is the rotational symmetry of a square {identity, rotate 90, rotate -90, rotate 180}<br />
+We can only swap {rotate 90, rotate -90} and REMEMBER the act of swapping is C<sub>2</sub> meaning</p>
+<p><span class="math display">\[Aut(C_4)=C_2\]</span></p>
+</section>
+</section>
+<section id="revisit-c4-and-learn-about-generators" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Revisit C<sub>4</sub> and learn about Generators</h1>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\times\)</span></th>
+<th>1</th>
+<th>a</th>
+<th>a<sup>2</sup></th>
+<th>a<sup>3</sup></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td>a</td>
+<td>a<sup>2</sup></td>
+<td>a<sup>3</sup></td>
+</tr>
+<tr class="even">
+<td><strong>a</strong></td>
+<td>a</td>
+<td><strong>a<sup>2</sup></strong></td>
+<td>a<sup>3</sup></td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td><strong>a<sup>2</sup></strong></td>
+<td>a<sup>2</sup></td>
+<td>a<sup>3</sup></td>
+<td><strong>1</strong></td>
+<td>a</td>
+</tr>
+<tr class="even">
+<td><strong>a<sup>3</sup></strong></td>
+<td>a<sup>3</sup></td>
+<td>1</td>
+<td>a</td>
+<td><strong>a<sup>2</sup></strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Find the Generated(a<sup>2</sup>) aka generated set of a<sup>2</sup> ?
+<ul>
+<li>Keep multiplying an element by itself
+<ul>
+<li>HINT: Look at diagonal to see which element may have interesting generated sets.</li>
+</ul></li>
+<li>Solution: {1,a<sup>2</sup>}
+<ul>
+<li>{1,a<sup>2</sup>} is called the generated <strong>SUBGROUP</strong> C<sub>2</sub></li>
+</ul></li>
+<li><strong>Order(a<sup>2</sup>,C<sub>4</sub>)=2</strong> ,Order of an element wrt to a group is cardinality of the generated set of the element</li>
+</ul></li>
+</ul>
+<section id="lagrange-theorem" class="level2" data-number="8.1">
+<h2 data-number="8.1"><span class="header-section-number">8.1</span> Lagrange Theorem</h2>
+<ul>
+<li>Order is an overloaded term.
+<ul>
+<li>Order of a group = number of operations/elements in the group. ex: Order(C<sub>4</sub>)</li>
+<li>Order of an element wrt to a group = Order of a subgroup. ex: Order(a<sup>2</sup>,C<sub>4</sub>)</li>
+</ul></li>
+</ul>
+<p>Lagrange Theorem: Order of an element wrt to a group Always DIVIDES Order of the group.</p>
+<p>Example: Order(a<sup>2</sup>,C<sub>4</sub>)=2 divides Order(C<sub>4</sub>)=4</p>
+<section id="deduce-operations-of-groups-w-lagrange" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1"><span class="header-section-number">8.1.1</span> Deduce Operations of groups w/ Lagrange</h3>
+<ul>
+<li>Given Group with Order(C<sub>6</sub>)
+<ul>
+<li>then we know there must be a subgroup with operations of order 3, since 3 divides 6.</li>
+<li>order 3 subgroup has to have operations {1, a, a<sup>2</sup>}</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="deduce-prime-group-property-w-lagrange" class="level2" data-number="8.2">
+<h2 data-number="8.2"><span class="header-section-number">8.2</span> Deduce Prime group property w/ Lagrange</h2>
+<blockquote>
+<p>Prime order groups can only have a subgroup of itself and the identity group C<sub>1</sub></p>
+</blockquote>
+<p>Since a prime number can only be divided by itself and 1.</p>
+</section>
+</section>
+<section id="direct-products-c6-c3-c2" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Direct products C<sub>6</sub> = C<sub>3</sub> * C<sub>2</sub></h1>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\times\)</span></th>
+<th>1</th>
+<th>a</th>
+<th>a<sup>2</sup></th>
+<th>b</th>
+<th>ab</th>
+<th>a<sup>2</sup> b</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td>a</td>
+<td>a<sup>2</sup></td>
+<td>b</td>
+<td>ab</td>
+<td>a<sup>2</sup>b</td>
+</tr>
+<tr class="even">
+<td><strong>a</strong></td>
+<td>a</td>
+<td><strong>a<sup>2</sup></strong></td>
+<td>a<sup>3</sup></td>
+<td>ab</td>
+<td>a<sup>2</sup>b</td>
+<td>b</td>
+</tr>
+<tr class="odd">
+<td><strong>a<sup>2</sup></strong></td>
+<td>a<sup>2</sup></td>
+<td>a<sup>3</sup></td>
+<td><strong>1</strong></td>
+<td>a<sup>2</sup>b</td>
+<td>b</td>
+<td>ab</td>
+</tr>
+<tr class="even">
+<td><strong>a<sup>3</sup></strong></td>
+<td>a<sup>3</sup></td>
+<td>1</td>
+<td>a</td>
+<td><strong>1</strong></td>
+<td>a</td>
+<td>a<sup>2</sup></td>
+</tr>
+<tr class="odd">
+<td><strong>ab</strong></td>
+<td>ab</td>
+<td>a<sup>2</sup>b</td>
+<td>b</td>
+<td>a</td>
+<td><strong>a<sup>2</sup></strong></td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><strong>a<sup>2</sup>b</strong></td>
+<td>a<sup>2</sup>b</td>
+<td>b</td>
+<td>ab</td>
+<td>a<sup>2</sup></td>
+<td>1</td>
+<td><strong>a</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <img class="pagehitscounter" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <script>
+            mermaid.initialize({startOnLoad:true});
+        </script>
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

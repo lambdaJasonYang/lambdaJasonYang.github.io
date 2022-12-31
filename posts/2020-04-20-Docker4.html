@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        <!-- Google Analytics TAG END  ---------------------->
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Docker - linux container file structure</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Docker - linux container file structure</h1>
+            
+
+            <div class="info">
+    Posted on April 20, 2020
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'DevOps'." href="../tags/DevOps.html">DevOps</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#root-directory-alpine-linux"><span class="toc-section-number">1</span> root directory alpine linux</a>
+<ul>
+<li><a href="#usr-directory"><span class="toc-section-number">1.1</span> /usr directory</a></li>
+</ul></li>
+<li><a href="#root-directory-golang1.19"><span class="toc-section-number">2</span> root directory golang:1.19</a>
+<ul>
+<li><a href="#usr-directory-1"><span class="toc-section-number">2.1</span> /usr directory</a></li>
+<li><a href="#etc-directory"><span class="toc-section-number">2.2</span> /etc directory</a></li>
+</ul></li>
+</ul></div>
+<section id="root-directory-alpine-linux" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> root directory alpine linux</h1>
+<div class="sourceCode" id="cb1" data-filename="Dockerfile"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">FROM alpine:3.14</span></span></code></pre></div>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h40737461727473616c740a7b7b540a20202b202f0a20202b2b207573720a20202b2b2062696e0a20202b2b2b2062757379626f7820636174206563686f206464206772657020736564207375206e657473746174206d6f756e74200a20202b2b207362696e0a20202b2b2b206c64636f6e6669670a20202b2b2b2061706b20666469736b206673636b2069667570206966646f776e206970206c736d6f642073797363746c0a20202b2b206c69620a20202b2b2b206c642d6d75736c2d7838365f36342e736f2e310a20202b2b2b206c696261706b2e736f2e332e31322e300a20202b2b2b206c69627a2e736f2e312e322e31320a20202b2b2b206c696263727970746f2e736f2e312e310a20202b2b2b206c696273736c2e736f2e312e310a20202b2b206d656469610a20202b2b206574630a20202b2b2b2073736c206365727473202b2070726976617465206b6579732c2061707420736f75726365732e6c6973742c2063726f6e2e636f6e6620616e64206f7468657220636f6e666967730a20202b2b206d6e740a20202b2b2070726f632028636f6e7461696e2066696c657320726570726573656e74696e67206465766963657320616e642073746420696f20290a20202b2b2b20696e74657272757074732062757320206e65742074747920766d737461742073656c6620696f6d656d2c20646d612c20646576696365730a20202b2b206465762028646576696365732066696c652077686963682073796d6c696e6b7320746f202f70726f63290a20202b2b2b207474790a20202b2b2b20737464696e202d3e202f70726f632f73656c662f66642f300a20202b2b2b207374646f7574202d3e202f70726f632f73656c662f66642f31200a20202b2b20737973202873696d696c617220746f202f70726f63290a20202b2b206f70740a20202b2b20726f6f740a20202b2b2b202e70726f66696c65202e6261736872630a20202b2b207661720a20202b2b2b206261636b757073206361636865206c6962206c6f63616c206c6f636b206c6f67206d61696c206f70742072756e2073706f6f6c20746d700a20202b2b20626f6f742028456d707479290a20202b2b20686f6d652028456d707479290a20202b2b20746d702028456d707479290a20202b2b2072756e20286c696b65202f746d702062757420666f7220736f636b65747320616e642070726f63657373206964290a20202b2b207372762028456d707479290a7d7d0a40656e6473616c74"></figure>
+<section id="usr-directory" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> /usr directory</h2>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h40737461727473616c740a7b7b540a20202b202f0a20202b2b207573720a20202b2b2b206c69620a20202b2b2b2b206c696273736c2e736f2e312e3120202020200a20202b2b2b2b206c6962746c732e736f2e322e302e330a20202b2b2b2b206c696263727970746f2e736f2e312e3120200a20202b2b2b2b206c6962746c732e736f2e32200a20202b2b2b2062696e0a20202b2b2b2b206c64642069636f6e762061776b2062632062756e7a69702063726f6e746162206e6320756e7a697020706b696c6c207363616e656c66206e736c6f6f6b75700a20202b2b2b207362696e200a20202b2b2b2b206164642d7368656c6c20617270696e6720627263746c206368726f6f74207265616461686561640a20202b2b2b206c6f63616c0a20202b2b2b2b2062696e2028456d707479290a20202b2b2b2b206c69622028456d707479290a20202b2b2b2b2073686172652028456d707479290a0a7d7d0a40656e6473616c74"></figure>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apk</span> add libc6-compat</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'GET /get HTTP/1.1\r\nHost:httpbin.org\r\n\r\n'</span> <span class="kw">|</span> <span class="ex">nc</span> <span class="at">-v</span> 127.0.0.1 5000</span></code></pre></div>
+</section>
+</section>
+<section id="root-directory-golang1.19" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> root directory golang:1.19</h1>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h40737461727473616c740a7b7b540a20202b202f0a20202b2b207573720a20202b2b2062696e0a20202b2b2b2062617368206361742063686d6f64206c73206b696c6c2067726570206563686f20677a697020726d207375206464206d76206d6f756e740a20202b2b207362696e0a20202b2b2b206c64636f6e6669670a20202b2b2b20626164626c6f636b732c206673636b2c206877636c6f636b2c2073797363746c0a20202b2b206c69620a20202b2b2b207838365f36342d6c696e75782d676e750a20202b2b2b2b206c6962632d322e33312e736f0a20202b2b2b2b206c642d322e33312e736f0a20202b2b2b2b20616e64206d756368206d6f7265206c6962726172696573202e736f200a20202b2b206c696236340a20202b2b2b206c642d6c696e75782d7838362d36342e736f2e32202d3e202f6c69622f7838365f36342d6c696e75782d676e752f6c642d322e33312e736f0a20202b2b206d656469610a20202b2b206574630a20202b2b2b2073736c206365727473202b2070726976617465206b6579732c2061707420736f75726365732e6c6973742c2063726f6e2e636f6e6620616e64206f7468657220636f6e666967730a20202b2b206d6e740a20202b2b2070726f632028636f6e7461696e2066696c657320726570726573656e74696e67206465766963657320616e642073746420696f20290a20202b2b2b20696e74657272757074732c20627573202c206e65742c207474792c20766d737461742c2073656c662c20696f6d656d2c20646d612c20646576696365730a20202b2b206465762028646576696365732066696c652077686963682073796d6c696e6b7320746f202f70726f63290a20202b2b2b207474790a20202b2b2b20737464696e202d3e202f70726f632f73656c662f66642f300a20202b2b2b207374646f7574202d3e202f70726f632f73656c662f66642f31200a20202b2b20737973202873696d696c617220746f202f70726f63290a20202b2b206f70740a20202b2b20726f6f740a20202b2b2b202e70726f66696c65202e6261736872630a20202b2b207661720a20202b2b2b206261636b7570732c2063616368652c206c69622c206c6f63616c2c206c6f636b2c206c6f672c206d61696c2c206f70742c2072756e2c2073706f6f6c2c20746d700a20202b2b20626f6f742028456d707479290a20202b2b20686f6d652028456d707479290a20202b2b20746d702028456d707479290a20202b2b2072756e20286c696b65202f746d702062757420666f7220736f636b65747320616e642070726f63657373206964290a20202b2b207372762028456d707479290a7d7d0a40656e6473616c74"></figure>
+<section id="usr-directory-1" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> /usr directory</h2>
+<ul>
+<li><code>WORKDIR /usr/src/app</code> is typical docker config</li>
+<li><code>/usr/local/bin</code> is typically where we output our built binary</li>
+</ul>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h40737461727473616c740a7b7b540a20202b202f0a20202b2b207573720a20202b2b2b207372630a20202b2b2b2b206170700a20202b2b2b2b2b20594f55522046494c455320484552450a20202b2b2b2b2b20626c65682065786563757461626c650a20202b2b2b2062696e0a20202b2b2b2b206170742d676574206261736536342061776b20672b2b206375726c207838365f36342d6c696e75782d676e752d672b2b0a20202b2b2b20696e636c7564650a20202b2b2b2b2066636e746c2e682066737461622e68206c696d6974732e68206d616c6c6f632e68206d656d6f72792e6820737061776e2e6820746872656164732e6820756e697374642e6820617270612f696e65742e680a20202b2b2b206c69620a20202b2b2b2b2063657274732070726976617465206b657920676363206c6962726172792066696c65730a20202b2b2b206c6962657865630a20202b2b2b2b20636f72657574696c732f6c69627374646275662e736f0a20202b2b2b206c6f63616c0a20202b2b2b2b2062696e0a20202b2b2b2b2b206170700a20202b2b2b2b20676f0a20202b2b2b2b2b2062696e2f676f2062696e2f676f666d7420706b67204c4943454e534520524541444d452e6d640a20202b2b2b2b206c69620a20202b2b2b2b2b20707974686f6e332e390a20202b2b2b2b20696e636c7564652028456d707479290a20202b2b2b2b207362696e2028456d707479290a20202b2b2b207362696e0a20202b2b2b2b206368726f6f742c20757365726d6f642c20736572766963652c206c646174746163682c206164642d7368656c6c2c2064656c757365722c206368677061737377642c206664666f726d61742c2e2e0a20202b2b2b2073686172650a20202b2b2b2b2063612d63657274696669636174650a20202b2b2b2b2b206d6f7a696c6c610a20202b2b2b2b2b2b20536f6d6543657274732e6372740a7d7d0a40656e6473616c74"></figure>
+</section>
+<section id="etc-directory" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> /etc directory</h2>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h40737461727473616c740a7b7b540a20202b202f0a20202b2b206574630a20202b2b2b2063612d6365727469666963617465732f7570646174652e642c2063612d6365727469666963617465732e636f6e662c2063726f6e2e642c2063726f6e2e6461696c792c20646562636f6e662e636f6e662c2066737461622c20686f73742e636f6e662c20696e69742e642c206c642e736f2e636f6e662c207061737377642c2073797374656d642f2a2c207373682f2a0a20202b2b2b2073736c0a20202b2b2b2b2063657274730a20202b2b2b2b2b2063612d6365727469666963617465732e6372740a20202b2b2b2b2b20626c65682e70656d0a20202b2b2b2b206f70656e73736c2e636e660a20202b2b2b2b2b20707269766174650a20202b2b2b2b2b2b20626c7572672e6b65790a20202b2b2b206170740a20202b2b2b2b20736f75726365732e6c6973740a7d7d0a40656e6473616c74"></figure>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <img class="pagehitscounter" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("button");
+                newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks) => {
+                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
+                    leader.insertAdjacentElement("beforebegin",btn);
+
+                })
+                
+                //make showAll button START
+                const btnShowAll = document.createElement("button");
+                btnShowAll.textContent = "All";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks);
+                const firsttab = groupOfCodeblocks[0]
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <script>
+            mermaid.initialize({startOnLoad:true});
+        </script>
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

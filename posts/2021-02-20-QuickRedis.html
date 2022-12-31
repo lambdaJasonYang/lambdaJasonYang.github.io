@@ -141,28 +141,91 @@
 <li>Hash</li>
 </ul>
 </section>
-<section id="setting-a-key-value" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Setting a KEY VALUE</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> event:Bleh <span class="st">&quot;heh&quot;</span></span></code></pre></div>
+<section id="set-a-key-value-pair" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> SET a key-value pair</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> user:1000:followers <span class="st">&quot;heh&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># OK</span></span></code></pre></div>
 <ul>
-<li>KEY - event:Bleh</li>
-<li>VALUE - “heh”</li>
+<li>KEY - <code>user:1000:followers</code></li>
+<li>VALUE - <code>"heh"</code></li>
 </ul>
-<section id="list" class="level5" data-number="3.0.0.0.1">
-<h5 data-number="3.0.0.0.1"><span class="header-section-number">3.0.0.0.1</span> List</h5>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lpop</span> events</span></code></pre></div>
+<p>Notice the way we named our key using colons? This allows us to give psuedo complex structure to a simple key-value data struct.<br />
+In a meta level we can associate <code>user:1000:followers</code> =&gt; <code>[role]:[id]:[property]</code></p>
+<section id="check-if-not-exist-before-set" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Check if NOT exist before SET</h2>
+<ul>
+<li>Just add <code>NX</code> to the end</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> user:1000:followers <span class="st">&quot;heh&quot;</span> NX</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># OK</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> user:1000:followers <span class="st">&quot;heh&quot;</span> NX</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># (nil)</span></span></code></pre></div>
 </section>
+<section id="check-if-exist-before-set" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Check if EXIST before SET</h2>
+<ul>
+<li>Just add <code>XX</code> to the end</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> user:1000:followers <span class="st">&quot;heh&quot;</span> XX</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (nil)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> user:1000:followers <span class="st">&quot;heh&quot;</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># OK</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> user:1000:followers <span class="st">&quot;Updatedheh&quot;</span> XX</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;Updatedheh&quot;</span></span></code></pre></div>
+</section>
+</section>
+<section id="get-all-keys-w-keys-scan" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Get all Keys w/ KEYS SCAN</h1>
+<ul>
+<li><code>SCAN</code> is partial-block, returns last searched index to allow continue scanning for keys</li>
+<li><code>KEYS</code> is blocking, never used in production &lt;– only for debugging</li>
+</ul>
+<section id="example" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Example</h2>
+<p>find all keys with customer id that starts with 1</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">keys</span> customer:1<span class="pp">*</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) &quot;customer:1340&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) &quot;customer:1423&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">scan</span> 0 MATCH customer:1<span class="pp">*</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) &quot;94&quot;     &lt;--------- this is LAST SEARCHED INDEX</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) (empty list or set)  &lt;---- No matching result in index 0 to 90, DO IT AGAIN</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">scan</span> 94 MATCH customer:1<span class="pp">*</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) &quot;154&quot; </span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) (empty list or set) &lt;--- AGAIN</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">scan</span> 154 MATCH customer:1<span class="pp">*</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) &quot;300&quot;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) 1) &quot;customer:1340&quot;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#    2) &quot;customer:1423&quot;</span></span></code></pre></div>
+<p>What happens when if there are no matches?</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">scan</span> 0 MATCH customer:1bleh COUNT 1000</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) &quot;0&quot;   &lt;-----TELLS US NO MORE KEYS TO ITERATE OVER </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) (empty list or set)</span></span></code></pre></div>
+</section>
+</section>
+<section id="deleting-keys-w-del-unlink" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Deleting keys w/ DEL UNLINK</h1>
+<ul>
+<li><code>unlink customer:1000</code> - deletes key and frees memory async &lt;— just use unlink</li>
+<li><code>del customer:1000</code> - deletes key and frees memory in a blocking manner</li>
+</ul>
+</section>
+<section id="caching" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Caching</h1>
+</section>
+<section id="list" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> List</h1>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lpop</span> events</span></code></pre></div>
 </section>
 
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">
                 <div>
-            Site proudly generated by
-            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
                 </div>
-   
-            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+                <img class="pagehitscounter" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
   
             </div>
         </div>
@@ -240,7 +303,12 @@
         <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
-
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <script>
+            mermaid.initialize({startOnLoad:true});
+        </script>
+        <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">
             import rr,* as rrClass from "/lib/railroad/railroad.js";

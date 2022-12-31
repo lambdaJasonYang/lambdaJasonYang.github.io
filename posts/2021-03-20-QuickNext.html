@@ -144,6 +144,7 @@
 <li><a href="#images"><span class="toc-section-number">12.1</span> Images</a></li>
 <li><a href="#dynamic-routes-dont-work-in-ssg"><span class="toc-section-number">12.2</span> Dynamic Routes DONT work in SSG</a></li>
 </ul></li>
+<li><a href="#isr"><span class="toc-section-number">13</span> ISR</a></li>
 </ul></div>
 <section id="extensions-setup" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Extensions setup</h1>
@@ -519,16 +520,54 @@ Example: <code>&lt;Image src={"/vercel.svg"} width={50} height={50}&gt;&lt;/Imag
 <span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 </section>
+<section id="isr" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> ISR</h1>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> IServerData {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">serverData</span><span class="op">:</span> any<span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Home</span>({ serverData }<span class="op">:</span> IServerData)<span class="op">:</span> any {<span class="op">...</span>}</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">getStaticProps</span>()<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>any<span class="op">&gt;</span> {</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> getData <span class="op">=</span> <span class="kw">async</span> (</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="st">&quot;https://api.github.com/repos/userJY/someRepo/contents/ooout.json&quot;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  )<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>any<span class="op">&gt;</span> <span class="kw">=&gt;</span> {</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Default options are marked with *</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(url<span class="op">,</span> {</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">method</span><span class="op">:</span> <span class="st">&quot;GET&quot;</span><span class="op">,</span> <span class="co">// *GET, POST, PUT, DELETE, etc.</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">mode</span><span class="op">:</span> <span class="st">&quot;cors&quot;</span><span class="op">,</span> <span class="co">// no-cors, *cors, same-origin</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">cache</span><span class="op">:</span> <span class="st">&quot;no-cache&quot;</span><span class="op">,</span> <span class="co">// *default, no-cache, reload, force-cache, only-if-cached</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">credentials</span><span class="op">:</span> <span class="st">&quot;same-origin&quot;</span><span class="op">,</span> <span class="co">// include, *same-origin, omit</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">headers</span><span class="op">:</span> {</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Authorization</span><span class="op">:</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;token github_pat_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span><span class="op">,</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Accept</span><span class="op">:</span> <span class="st">&quot;application/vnd.github.v3.raw&quot;</span><span class="op">,</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Content-Type&quot;</span><span class="op">:</span> <span class="st">&quot;application/json&quot;</span><span class="op">,</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 'Content-Type': 'application/x-www-form-urlencoded',</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">redirect</span><span class="op">:</span> <span class="st">&quot;follow&quot;</span><span class="op">,</span> <span class="co">// manual, *follow, error</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">referrerPolicy</span><span class="op">:</span> <span class="st">&quot;no-referrer&quot;</span><span class="op">,</span> <span class="co">// no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span> <span class="co">// parses JSON response into native JavaScript objects</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> serverData <span class="op">=</span> <span class="cf">await</span> <span class="fu">getData</span>()<span class="op">;</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// console.log(&quot;terminal:[size]&quot;, BLEHdata); // this will not output on browser but in terminal</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    <span class="dt">props</span><span class="op">:</span> { serverData }<span class="op">,</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">revalidate</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">
                 <div>
-            Site proudly generated by
-            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
                 </div>
-   
-            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+                <img class="pagehitscounter" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
   
             </div>
         </div>
@@ -606,7 +645,12 @@ Example: <code>&lt;Image src={"/vercel.svg"} width={50} height={50}&gt;&lt;/Imag
         <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
-
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <script>
+            mermaid.initialize({startOnLoad:true});
+        </script>
+        <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">
             import rr,* as rrClass from "/lib/railroad/railroad.js";

@@ -148,6 +148,7 @@
 <li><a href="#memory-limit"><span class="toc-section-number">3</span> Memory limit</a></li>
 <li><a href="#neat-trick"><span class="toc-section-number">4</span> Neat trick</a></li>
 <li><a href="#mistakes"><span class="toc-section-number">5</span> Mistakes</a></li>
+<li><a href="#docker-compose"><span class="toc-section-number">6</span> Docker-Compose</a></li>
 </ul></div>
 <section id="basics" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Basics</h1>
@@ -333,7 +334,9 @@
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> touch additional.txt</span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># When running docker run the command will be ./hello.sh</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> ./hello.sh</span></code></pre></div>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> ./hello.sh</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#CMD [&quot;/somebinary&quot;]</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build . <span class="at">-t</span> bleh</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># REPOSITORY   TAG        IMAGE ID       CREATED          SIZE</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># bleh         latest     b396ac3611b3   21 seconds ago   5.61MB</span></span></code></pre></div>
@@ -486,35 +489,36 @@ D = Deleted</p>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN</span> cp <span class="at">-r</span> /tmp/lib/ /lib <span class="co">#GOOD</span></span></code></pre></div>
 <p>Scenario: We want to add our library files</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#no permission</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN</span> chmod 777 /lib <span class="co">#BAD</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Docker-Compose</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="ex">File</span> Structure  </span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> docker-compose.yml</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> example-frontend</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*</span> Dockerfile</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> example-backend</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="ex">*</span> Dockerfile</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="kw">```</span><span class="ex">{.yml</span> .numberLines filename=<span class="st">&quot;docker-compose.yml&quot;</span>}</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="ex">version:</span> <span class="st">&quot;3.9&quot;</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="ex">services:</span></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>     <span class="ex">myFront:</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>          <span class="ex">image:</span> frontend:v1</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>          <span class="ex">ports:</span> </span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>              <span class="ex">-</span> <span class="st">&quot;3200:5000&quot;</span></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>          <span class="ex">build:</span> ./example-frontend</span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>     <span class="ex">myBack:</span></span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>          <span class="ex">image:</span> backend:v1</span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>          <span class="ex">ports:</span> </span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>              <span class="ex">-</span> <span class="st">&quot;3300:8080&quot;</span></span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>          <span class="ex">build:</span> ./example-backend</span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> build </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN</span> chmod 777 /lib <span class="co">#BAD</span></span></code></pre></div>
+</section>
+<section id="docker-compose" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Docker-Compose</h1>
+<p>File Structure</p>
+<ul>
+<li>docker-compose.yml</li>
+<li>example-frontend
+<ul>
+<li>Dockerfile</li>
+</ul></li>
+<li>example-backend
+<ul>
+<li>Dockerfile</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb22" data-filename="docker-compose.yml"><pre class="sourceCode numberSource yml numberLines"><code class="sourceCode yaml"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;3.9&quot;</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="at">     </span><span class="fu">myFront</span><span class="kw">:</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> frontend:v1</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="at">          </span><span class="fu">ports</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="at">              </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;3200:5000&quot;</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="at">          </span><span class="fu">build</span><span class="kw">:</span><span class="at"> ./example-frontend</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="at">     </span><span class="fu">myBack</span><span class="kw">:</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> backend:v1</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="at">          </span><span class="fu">ports</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="at">              </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;3300:8080&quot;</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a><span class="at">          </span><span class="fu">build</span><span class="kw">:</span><span class="at"> ./example-backend</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> build </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div>
 <p>line 6 build “Dockerfile” in current dir “.”<br />
 and create image named “ads/wrga:latest” (line 5)</p>
 <p>docker-compose <code class="sourceCode yaml"><span class="at">environment</span></code> vs Dockerfile <code class="sourceCode dockerfile"><span class="kw">ENV</span></code>.<br />
@@ -526,11 +530,11 @@ and create image named “ads/wrga:latest” (line 5)</p>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">
                 <div>
-            Site proudly generated by
-            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
                 </div>
-   
-            <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+                <img class="pagehitscounter" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
   
             </div>
         </div>
@@ -608,7 +612,12 @@ and create image named “ads/wrga:latest” (line 5)</p>
         <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
-
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <script>
+            mermaid.initialize({startOnLoad:true});
+        </script>
+        <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">
             import rr,* as rrClass from "/lib/railroad/railroad.js";
