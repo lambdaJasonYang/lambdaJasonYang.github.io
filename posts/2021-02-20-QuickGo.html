@@ -5,6 +5,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
@@ -153,21 +156,22 @@
 <li><a href="#switch-statement"><span class="toc-section-number">13</span> Switch statement</a></li>
 <li><a href="#struct"><span class="toc-section-number">14</span> struct</a></li>
 <li><a href="#interfaces"><span class="toc-section-number">15</span> Interfaces</a></li>
-<li><a href="#pointer"><span class="toc-section-number">16</span> Pointer</a>
+<li><a href="#generics"><span class="toc-section-number">16</span> Generics</a></li>
+<li><a href="#pointer"><span class="toc-section-number">17</span> Pointer</a>
 <ul>
-<li><a href="#lambda"><span class="toc-section-number">16.1</span> Lambda</a></li>
-<li><a href="#tree"><span class="toc-section-number">16.2</span> Tree</a></li>
+<li><a href="#lambda"><span class="toc-section-number">17.1</span> Lambda</a></li>
+<li><a href="#tree"><span class="toc-section-number">17.2</span> Tree</a></li>
 </ul></li>
-<li><a href="#runes"><span class="toc-section-number">17</span> Runes</a></li>
-<li><a href="#scenarios"><span class="toc-section-number">18</span> Scenarios</a>
+<li><a href="#runes"><span class="toc-section-number">18</span> Runes</a></li>
+<li><a href="#scenarios"><span class="toc-section-number">19</span> Scenarios</a>
 <ul>
-<li><a href="#loops-and-mutation-fail"><span class="toc-section-number">18.1</span> Loops and mutation fail</a></li>
+<li><a href="#loops-and-mutation-fail"><span class="toc-section-number">19.1</span> Loops and mutation fail</a></li>
 </ul></li>
-<li><a href="#traps"><span class="toc-section-number">19</span> Traps</a>
+<li><a href="#traps"><span class="toc-section-number">20</span> Traps</a>
 <ul>
-<li><a href="#pointer-receivers-and-interfaces"><span class="toc-section-number">19.1</span> Pointer receivers and interfaces</a></li>
+<li><a href="#pointer-receivers-and-interfaces"><span class="toc-section-number">20.1</span> Pointer receivers and interfaces</a></li>
 </ul></li>
-<li><a href="#json"><span class="toc-section-number">20</span> JSON</a></li>
+<li><a href="#json"><span class="toc-section-number">21</span> JSON</a></li>
 </ul></div>
 <ul>
 <li>Go func pass-by-value</li>
@@ -569,21 +573,31 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>	<span class="kw">return</span> score</span>
 <span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="pointer" class="level1" data-number="16">
-<h1 data-number="16"><span class="header-section-number">16</span> Pointer</h1>
+<section id="generics" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Generics</h1>
+<div class="sourceCode" id="cb33"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">//ofc dont use this since fmt.Println can do this already</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> PrintList<span class="op">[</span>T any<span class="op">](</span> x <span class="op">[]</span>T <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>	<span class="kw">for</span> i<span class="op">,</span>_ <span class="op">:=</span> <span class="kw">range</span><span class="op">(</span>x<span class="op">){</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>		fmt<span class="op">.</span>Println<span class="op">(</span>x<span class="op">[</span>i<span class="op">])</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>	<span class="op">}</span>	</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>	<span class="kw">return</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="pointer" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Pointer</h1>
 <p>Just as in our “Quick C” ,</p>
 <ul>
 <li>think of passing pointers in args as passing addresses.</li>
 <li>The temporary <code class="sourceCode go">ptr <span class="op">*</span><span class="dt">int</span></code> will bind to the passed address <code class="sourceCode go"><span class="op">&amp;</span>x</code>.</li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> trans<span class="op">(</span>ptr <span class="op">*</span><span class="dt">int</span><span class="op">){</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>ptr <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">(){</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  x <span class="op">:=</span> <span class="dv">5</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  trans<span class="op">(&amp;</span>x<span class="op">)</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> trans<span class="op">(</span>ptr <span class="op">*</span><span class="dt">int</span><span class="op">){</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>ptr <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">(){</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  x <span class="op">:=</span> <span class="dv">5</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  trans<span class="op">(&amp;</span>x<span class="op">)</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <hr />
 <table>
 <thead>
@@ -629,30 +643,30 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 </table>
 <hr />
 <p>Style</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">//BAD</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>name <span class="op">:=</span> <span class="st">&quot;bob&quot;</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>name <span class="op">:=</span> name <span class="op">+</span> <span class="st">&quot; ross&quot;</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">//GOOD</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fstname <span class="op">=</span> <span class="st">&quot;bob&quot;</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> lstname <span class="op">=</span> <span class="st">&quot; ross&quot;</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> name <span class="op">=</span> fstname <span class="op">+</span> lstname</span></code></pre></div>
 <div class="sourceCode" id="cb35"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">//BAD</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>arr <span class="op">:=</span> <span class="op">[</span><span class="dv">3</span><span class="op">]</span><span class="dt">int</span><span class="op">{</span><span class="dv">7</span><span class="op">}</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>arr<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">8</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>arr<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> <span class="dv">9</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">//GOOD</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>arr <span class="op">:=</span> <span class="op">[</span><span class="dv">3</span><span class="op">]</span><span class="dt">int</span><span class="op">{</span><span class="dv">7</span><span class="op">}</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>arr2 <span class="op">:=</span> <span class="bu">append</span><span class="op">(</span>arr<span class="op">,[</span><span class="dv">2</span><span class="op">]</span><span class="dt">int</span><span class="op">{</span><span class="dv">8</span><span class="op">,</span><span class="dv">9</span><span class="op">})</span></span></code></pre></div>
-<section id="lambda" class="level2" data-number="16.1">
-<h2 data-number="16.1"><span class="header-section-number">16.1</span> Lambda</h2>
-<div class="sourceCode" id="cb36"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">:=</span> <span class="kw">func</span><span class="op">()</span> <span class="kw">interface</span><span class="op">{}{</span><span class="kw">return</span> <span class="dv">2</span><span class="op">}</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">.</span>Println<span class="op">(</span>f<span class="op">())</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">//output 2</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">.</span>Println<span class="op">((</span><span class="kw">func</span><span class="op">()</span> <span class="kw">interface</span><span class="op">{}{</span><span class="kw">return</span> <span class="dv">2</span><span class="op">})())</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">//output 2</span></span></code></pre></div>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>name <span class="op">:=</span> <span class="st">&quot;bob&quot;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>name <span class="op">:=</span> name <span class="op">+</span> <span class="st">&quot; ross&quot;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">//GOOD</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fstname <span class="op">=</span> <span class="st">&quot;bob&quot;</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> lstname <span class="op">=</span> <span class="st">&quot; ross&quot;</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> name <span class="op">=</span> fstname <span class="op">+</span> lstname</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">//BAD</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>arr <span class="op">:=</span> <span class="op">[</span><span class="dv">3</span><span class="op">]</span><span class="dt">int</span><span class="op">{</span><span class="dv">7</span><span class="op">}</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>arr<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>arr<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> <span class="dv">9</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">//GOOD</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>arr <span class="op">:=</span> <span class="op">[</span><span class="dv">3</span><span class="op">]</span><span class="dt">int</span><span class="op">{</span><span class="dv">7</span><span class="op">}</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>arr2 <span class="op">:=</span> <span class="bu">append</span><span class="op">(</span>arr<span class="op">,[</span><span class="dv">2</span><span class="op">]</span><span class="dt">int</span><span class="op">{</span><span class="dv">8</span><span class="op">,</span><span class="dv">9</span><span class="op">})</span></span></code></pre></div>
+<section id="lambda" class="level2" data-number="17.1">
+<h2 data-number="17.1"><span class="header-section-number">17.1</span> Lambda</h2>
+<div class="sourceCode" id="cb37"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">:=</span> <span class="kw">func</span><span class="op">()</span> <span class="kw">interface</span><span class="op">{}{</span><span class="kw">return</span> <span class="dv">2</span><span class="op">}</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">.</span>Println<span class="op">(</span>f<span class="op">())</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">//output 2</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">.</span>Println<span class="op">((</span><span class="kw">func</span><span class="op">()</span> <span class="kw">interface</span><span class="op">{}{</span><span class="kw">return</span> <span class="dv">2</span><span class="op">})())</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co">//output 2</span></span></code></pre></div>
 </section>
-<section id="tree" class="level2" data-number="16.2">
-<h2 data-number="16.2"><span class="header-section-number">16.2</span> Tree</h2>
+<section id="tree" class="level2" data-number="17.2">
+<h2 data-number="17.2"><span class="header-section-number">17.2</span> Tree</h2>
 <ul>
 <li>Golang does not allow recursive data structs, 2 ways to solve this:
 <ul>
@@ -663,116 +677,116 @@ Warning if len doesn’t fit, it will NOT autoexpand the list; it will get cut o
 <li>Use pointer to self</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb37"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> tree <span class="kw">struct</span><span class="op">{</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    data <span class="dt">int</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    left <span class="op">[]</span>tree <span class="co">//tree wrapped in List functor</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    right <span class="op">*</span>tree <span class="co">//pointer to self</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>   a <span class="op">:=</span> tree<span class="op">{</span>data<span class="op">:</span><span class="dv">2</span><span class="op">,</span>left<span class="op">:</span> <span class="op">[]</span>tree<span class="op">{</span>tree<span class="op">{</span>data<span class="op">:</span><span class="dv">4</span><span class="op">}}}</span></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>   fmt<span class="op">.</span>Println<span class="op">(</span>a<span class="op">.</span>left<span class="op">[</span><span class="dv">0</span><span class="op">].</span>data<span class="op">)</span></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>   b <span class="op">:=</span> tree<span class="op">{</span>data<span class="op">:</span><span class="dv">2</span><span class="op">,</span>right<span class="op">:</span> <span class="op">&amp;</span>tree<span class="op">{</span>data<span class="op">:</span><span class="dv">4</span><span class="op">}}</span></span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>   fmt<span class="op">.</span>Println<span class="op">(</span>b<span class="op">.</span>right<span class="op">.</span>data<span class="op">)</span></span></code></pre></div>
-</section>
-</section>
-<section id="runes" class="level1" data-number="17">
-<h1 data-number="17"><span class="header-section-number">17</span> Runes</h1>
-<div class="sourceCode" id="cb38"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">//BAD</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    string str <span class="op">=</span> <span class="st">&quot;Hello, 世界!&quot;</span><span class="op">;</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> len <span class="op">=</span> str<span class="op">.</span>length<span class="op">();</span></span>
+<div class="sourceCode" id="cb38"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> tree <span class="kw">struct</span><span class="op">{</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    data <span class="dt">int</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    left <span class="op">[]</span>tree <span class="co">//tree wrapped in List functor</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    right <span class="op">*</span>tree <span class="co">//pointer to self</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span>len<span class="op">;</span> i<span class="op">++){</span></span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span> <span class="co">// Guess the output, now you can</span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span>len<span class="op">;</span> i<span class="op">++){</span></span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> str<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span> <span class="co">// Umm, you can sense that something unexpected will happen</span></span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="co">// OUTPUT:</span></span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="co">// 0 1 2 3 4 5 6 7 8 9 10 11 12 13</span></span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="co">// H e l l o ,   � � � � � � !</span></span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="co">//GOOD</span></span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>    string str <span class="op">=</span> <span class="st">&quot;Hello, 世界!&quot;</span><span class="op">;</span></span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="kw">auto</span> x <span class="op">=</span> str<span class="op">.</span>begin<span class="op">();</span> x <span class="op">!=</span> str<span class="op">.</span>end<span class="op">();</span> x<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="op">*</span>x<span class="op">;</span></span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a><span class="co">// OUTPUT</span></span>
-<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a><span class="co">// Hello, 世界!</span></span></code></pre></div>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>   a <span class="op">:=</span> tree<span class="op">{</span>data<span class="op">:</span><span class="dv">2</span><span class="op">,</span>left<span class="op">:</span> <span class="op">[]</span>tree<span class="op">{</span>tree<span class="op">{</span>data<span class="op">:</span><span class="dv">4</span><span class="op">}}}</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>   fmt<span class="op">.</span>Println<span class="op">(</span>a<span class="op">.</span>left<span class="op">[</span><span class="dv">0</span><span class="op">].</span>data<span class="op">)</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>   b <span class="op">:=</span> tree<span class="op">{</span>data<span class="op">:</span><span class="dv">2</span><span class="op">,</span>right<span class="op">:</span> <span class="op">&amp;</span>tree<span class="op">{</span>data<span class="op">:</span><span class="dv">4</span><span class="op">}}</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>   fmt<span class="op">.</span>Println<span class="op">(</span>b<span class="op">.</span>right<span class="op">.</span>data<span class="op">)</span></span></code></pre></div>
+</section>
+</section>
+<section id="runes" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Runes</h1>
+<div class="sourceCode" id="cb39"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">//BAD</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    string str <span class="op">=</span> <span class="st">&quot;Hello, 世界!&quot;</span><span class="op">;</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> len <span class="op">=</span> str<span class="op">.</span>length<span class="op">();</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span>len<span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span> <span class="co">// Guess the output, now you can</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span>len<span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> str<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span> <span class="co">// Umm, you can sense that something unexpected will happen</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="co">// OUTPUT:</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="co">// 0 1 2 3 4 5 6 7 8 9 10 11 12 13</span></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a><span class="co">// H e l l o ,   � � � � � � !</span></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="co">//GOOD</span></span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>    string str <span class="op">=</span> <span class="st">&quot;Hello, 世界!&quot;</span><span class="op">;</span></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="kw">auto</span> x <span class="op">=</span> str<span class="op">.</span>begin<span class="op">();</span> x <span class="op">!=</span> str<span class="op">.</span>end<span class="op">();</span> x<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="op">*</span>x<span class="op">;</span></span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a><span class="co">// OUTPUT</span></span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a><span class="co">// Hello, 世界!</span></span></code></pre></div>
 <p>typical loops will only loop byte by byte which cause errors when looping on non-standard characters like chinese <strong>runes</strong>.<br />
 Iterators will loop through <strong>runes</strong>.</p>
 <blockquote>
 <p>Golang <strong>rune</strong> type is basically a better char</p>
 </blockquote>
-<div class="sourceCode" id="cb39"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">//BAD</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    str <span class="op">:=</span> <span class="st">&quot;Hello, 世界!&quot;</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> i<span class="op">:=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span><span class="bu">len</span><span class="op">(</span>str<span class="op">);</span> i<span class="op">++</span> <span class="op">{</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>        fmt<span class="op">.</span>Printf<span class="op">(</span><span class="st">&quot;%v&quot;</span><span class="op">,</span> str<span class="op">[</span>i<span class="op">])</span> <span class="co">// This will print the decimal values</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> i<span class="op">:=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span><span class="bu">len</span><span class="op">(</span>str<span class="op">);</span> i<span class="op">++</span> <span class="op">{</span></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>        fmt<span class="op">.</span>Printf<span class="op">(</span><span class="st">&quot;%c&quot;</span><span class="op">,</span> str<span class="op">[</span>i<span class="op">])</span> <span class="co">// This will print the chars, but what happens to the chinese chars?</span></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="co">// OUTPUT</span></span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="co">// 72101108108111443222818415023114914033</span></span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="co">// Hello, ä¸ç!</span></span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="co">//GOOD</span></span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>    str <span class="op">:=</span> <span class="st">&quot;世界&quot;</span></span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> i<span class="op">,</span> v <span class="op">:</span> <span class="kw">range</span><span class="op">(</span>str<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>        fmt<span class="op">.</span>Println<span class="op">(</span>i<span class="op">)</span></span>
-<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>        fmt<span class="op">.</span>Println<span class="op">(</span>v<span class="op">)</span></span>
-<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a><span class="co">// OUTPUT</span></span>
-<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a><span class="co">// 0</span></span>
-<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a><span class="co">// 19990  &lt;--This is 世 represented as 3 bytes unicode</span></span>
-<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a><span class="co">// 3      &lt;--3 bytes</span></span>
-<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a><span class="co">// 30028  &lt;--This is 界 represented as 3 bytes unicode</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">//BAD</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    str <span class="op">:=</span> <span class="st">&quot;Hello, 世界!&quot;</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> i<span class="op">:=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span><span class="bu">len</span><span class="op">(</span>str<span class="op">);</span> i<span class="op">++</span> <span class="op">{</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>        fmt<span class="op">.</span>Printf<span class="op">(</span><span class="st">&quot;%v&quot;</span><span class="op">,</span> str<span class="op">[</span>i<span class="op">])</span> <span class="co">// This will print the decimal values</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> i<span class="op">:=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span><span class="bu">len</span><span class="op">(</span>str<span class="op">);</span> i<span class="op">++</span> <span class="op">{</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>        fmt<span class="op">.</span>Printf<span class="op">(</span><span class="st">&quot;%c&quot;</span><span class="op">,</span> str<span class="op">[</span>i<span class="op">])</span> <span class="co">// This will print the chars, but what happens to the chinese chars?</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="co">// OUTPUT</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="co">// 72101108108111443222818415023114914033</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a><span class="co">// Hello, ä¸ç!</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="co">//GOOD</span></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>    str <span class="op">:=</span> <span class="st">&quot;世界&quot;</span></span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> i<span class="op">,</span> v <span class="op">:</span> <span class="kw">range</span><span class="op">(</span>str<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>        fmt<span class="op">.</span>Println<span class="op">(</span>i<span class="op">)</span></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>        fmt<span class="op">.</span>Println<span class="op">(</span>v<span class="op">)</span></span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a><span class="co">// OUTPUT</span></span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a><span class="co">// 0</span></span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a><span class="co">// 19990  &lt;--This is 世 represented as 3 bytes unicode</span></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a><span class="co">// 3      &lt;--3 bytes</span></span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a><span class="co">// 30028  &lt;--This is 界 represented as 3 bytes unicode</span></span></code></pre></div>
 </section>
-<section id="scenarios" class="level1" data-number="18">
-<h1 data-number="18"><span class="header-section-number">18</span> Scenarios</h1>
-<section id="loops-and-mutation-fail" class="level2" data-number="18.1">
-<h2 data-number="18.1"><span class="header-section-number">18.1</span> Loops and mutation fail</h2>
-<div class="sourceCode" id="cb40"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> index<span class="op">,</span> edge <span class="op">:=</span> <span class="kw">range</span> mygraph<span class="op">.</span>Edges<span class="op">{</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>	edge<span class="op">.</span>Size <span class="op">=</span> <span class="dv">1</span> <span class="co">//Fails to modify mygraph object</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<section id="scenarios" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> Scenarios</h1>
+<section id="loops-and-mutation-fail" class="level2" data-number="19.1">
+<h2 data-number="19.1"><span class="header-section-number">19.1</span> Loops and mutation fail</h2>
+<div class="sourceCode" id="cb41"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> index<span class="op">,</span> edge <span class="op">:=</span> <span class="kw">range</span> mygraph<span class="op">.</span>Edges<span class="op">{</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>	edge<span class="op">.</span>Size <span class="op">=</span> <span class="dv">1</span> <span class="co">//Fails to modify mygraph object</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Why? <code>edge.Size</code> is just a local copy.</p>
 </section>
 </section>
-<section id="traps" class="level1" data-number="19">
-<h1 data-number="19"><span class="header-section-number">19</span> Traps</h1>
-<section id="pointer-receivers-and-interfaces" class="level2" data-number="19.1">
-<h2 data-number="19.1"><span class="header-section-number">19.1</span> Pointer receivers and interfaces</h2>
+<section id="traps" class="level1" data-number="20">
+<h1 data-number="20"><span class="header-section-number">20</span> Traps</h1>
+<section id="pointer-receivers-and-interfaces" class="level2" data-number="20.1">
+<h2 data-number="20.1"><span class="header-section-number">20.1</span> Pointer receivers and interfaces</h2>
 <ul>
 <li>server implements the <code>ServeHTTP</code> function to work</li>
 </ul>
-<div class="sourceCode" id="cb41"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> MyServer <span class="kw">struct</span> <span class="op">{</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="op">(</span>p <span class="op">*</span>MyServer<span class="op">)</span> ServeHTTP<span class="op">(</span>w http<span class="op">.</span>ResponseWriter<span class="op">,</span> r <span class="op">*</span>http<span class="op">.</span>Request<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>	<span class="op">...</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">(){</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  server <span class="op">:=</span> MyServer<span class="op">{}</span> <span class="co">//FAILS to run server</span></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>	server <span class="op">:=</span> <span class="op">&amp;</span>MyServer<span class="op">{}</span> <span class="co">//GOOD </span></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>	http<span class="op">.</span>ListenAndServe<span class="op">(</span><span class="st">&quot;:5000&quot;</span><span class="op">,</span> server<span class="op">)</span></span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> MyServer <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="op">(</span>p <span class="op">*</span>MyServer<span class="op">)</span> ServeHTTP<span class="op">(</span>w http<span class="op">.</span>ResponseWriter<span class="op">,</span> r <span class="op">*</span>http<span class="op">.</span>Request<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>	<span class="op">...</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">(){</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  server <span class="op">:=</span> MyServer<span class="op">{}</span> <span class="co">//FAILS to run server</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>	server <span class="op">:=</span> <span class="op">&amp;</span>MyServer<span class="op">{}</span> <span class="co">//GOOD </span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>	http<span class="op">.</span>ListenAndServe<span class="op">(</span><span class="st">&quot;:5000&quot;</span><span class="op">,</span> server<span class="op">)</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -814,23 +828,23 @@ Iterators will loop through <strong>runes</strong>.</p>
 </ul>
 </section>
 </section>
-<section id="json" class="level1" data-number="20">
-<h1 data-number="20"><span class="header-section-number">20</span> JSON</h1>
+<section id="json" class="level1" data-number="21">
+<h1 data-number="21"><span class="header-section-number">21</span> JSON</h1>
 <p>reading a JSON request as AOB. We can print as a string</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Message <span class="kw">struct</span> <span class="op">{</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>	Data <span class="kw">struct</span> <span class="op">{</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>		Message     <span class="dt">string</span> <span class="st">`json:&quot;message&quot;`</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>		MessageType <span class="dt">string</span> <span class="st">`json:&quot;messageType&quot;`</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>	<span class="op">}</span> <span class="st">`json:&quot;data&quot;`</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>	Datacontenttype <span class="dt">string</span> <span class="st">`json:&quot;datacontenttype&quot;`</span></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">...}</span></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>router<span class="op">.</span>Handle<span class="op">(</span><span class="st">&quot;/something&quot;</span><span class="op">,</span> http<span class="op">.</span>HandlerFunc<span class="op">(</span><span class="kw">func</span><span class="op">(</span>w http<span class="op">.</span>ResponseWriter<span class="op">,</span> r <span class="op">*</span>http<span class="op">.</span>Request<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>  bodyBytes<span class="op">,</span> _ <span class="op">:=</span> io<span class="op">.</span>ReadAll<span class="op">(</span>r<span class="op">.</span>Body<span class="op">)</span></span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> msg Message<span class="op">;</span></span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>  err <span class="op">:=</span> json<span class="op">.</span>Unmarshal<span class="op">(</span>bodyBytes<span class="op">,&amp;</span>msg<span class="op">)</span></span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  log<span class="op">.</span>Println<span class="op">(</span><span class="dt">string</span><span class="op">(</span>bodyBytes<span class="op">))</span> <span class="co">//output string form of json</span></span>
-<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="op">}))</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Message <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>	Data <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>		Message     <span class="dt">string</span> <span class="st">`json:&quot;message&quot;`</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>		MessageType <span class="dt">string</span> <span class="st">`json:&quot;messageType&quot;`</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>	<span class="op">}</span> <span class="st">`json:&quot;data&quot;`</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>	Datacontenttype <span class="dt">string</span> <span class="st">`json:&quot;datacontenttype&quot;`</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">...}</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>router<span class="op">.</span>Handle<span class="op">(</span><span class="st">&quot;/something&quot;</span><span class="op">,</span> http<span class="op">.</span>HandlerFunc<span class="op">(</span><span class="kw">func</span><span class="op">(</span>w http<span class="op">.</span>ResponseWriter<span class="op">,</span> r <span class="op">*</span>http<span class="op">.</span>Request<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>  bodyBytes<span class="op">,</span> _ <span class="op">:=</span> io<span class="op">.</span>ReadAll<span class="op">(</span>r<span class="op">.</span>Body<span class="op">)</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> msg Message<span class="op">;</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>  err <span class="op">:=</span> json<span class="op">.</span>Unmarshal<span class="op">(</span>bodyBytes<span class="op">,&amp;</span>msg<span class="op">)</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>  log<span class="op">.</span>Println<span class="op">(</span><span class="dt">string</span><span class="op">(</span>bodyBytes<span class="op">))</span> <span class="co">//output string form of json</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="op">}))</span></span></code></pre></div>
 <p><strong>JSON is []bytes</strong> in golang !!</p>
 <ul>
 <li>Response body something read as an JSON aka []bytes via (<code>io.readAll(r.Body)</code>)</li>
@@ -933,9 +947,6 @@ Iterators will loop through <strong>runes</strong>.</p>
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- MERMAID START -------------------------------------- -->
         <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
-        <script>
-            mermaid.initialize({startOnLoad:true});
-        </script>
         <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">

@@ -5,6 +5,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
@@ -369,27 +372,27 @@
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>	<span class="st">&quot;fmt&quot;</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Ele <span class="kw">struct</span> <span class="op">{</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    Data any</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    Next <span class="op">*</span>Ele</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> LinkedList<span class="op">[</span>T any<span class="op">]</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    Data T</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    Next <span class="op">*</span>LinkedList<span class="op">[</span>T<span class="op">]</span></span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="op">(</span>e <span class="op">*</span>Ele<span class="op">)</span> Append<span class="op">(</span>data any<span class="op">)</span> <span class="op">*</span>Ele <span class="op">{</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="op">(</span>e <span class="op">*</span>LinkedList<span class="op">[</span>T<span class="op">])</span> Append<span class="op">(</span>data T<span class="op">)</span> <span class="op">*</span>LinkedList<span class="op">[</span>T<span class="op">]</span> <span class="op">{</span></span>
 <span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> e<span class="op">.</span>Next <span class="op">==</span> <span class="ot">nil</span> <span class="op">{</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>        e<span class="op">.</span>Next <span class="op">=</span> <span class="op">&amp;</span>Ele<span class="op">{</span>data<span class="op">,</span> <span class="ot">nil</span><span class="op">}</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>        e<span class="op">.</span>Next <span class="op">=</span> <span class="op">&amp;</span>LinkedList<span class="op">[</span>T<span class="op">]{</span>data<span class="op">,</span> <span class="ot">nil</span><span class="op">}</span></span>
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        tmp <span class="op">:=</span> <span class="op">&amp;</span>Ele<span class="op">{</span>data<span class="op">,</span> e<span class="op">.</span>Next<span class="op">}</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        tmp <span class="op">:=</span> <span class="op">&amp;</span>LinkedList<span class="op">[</span>T<span class="op">]{</span>data<span class="op">,</span> e<span class="op">.</span>Next<span class="op">}</span></span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        e<span class="op">.</span>Next <span class="op">=</span> tmp</span>
 <span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> e<span class="op">.</span>Next</span>
 <span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="op">(</span>e <span class="op">*</span>Ele<span class="op">)</span> String<span class="op">()</span> <span class="dt">string</span> <span class="op">{</span></span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> fmt<span class="op">.</span>Sprintf<span class="op">(</span><span class="st">&quot;Ele: %v&quot;</span><span class="op">,</span> e<span class="op">.</span>Data<span class="op">)</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="op">(</span>e <span class="op">*</span>LinkedList<span class="op">[</span>T<span class="op">])</span> String<span class="op">()</span> <span class="dt">string</span> <span class="op">{</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> fmt<span class="op">.</span>Sprintf<span class="op">(</span><span class="st">&quot;LinkedList: %v&quot;</span><span class="op">,</span> e<span class="op">.</span>Data<span class="op">)</span></span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">(){</span></span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>	<span class="kw">var</span> b Ele</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>	<span class="kw">var</span> b LinkedList<span class="op">[</span><span class="dt">int</span><span class="op">]</span></span>
 <span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>	b<span class="op">.</span>Data <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>	fmt<span class="op">.</span>Println<span class="op">(</span>b<span class="op">.</span>String<span class="op">())</span></span>
 <span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
@@ -930,9 +933,6 @@ BUT Optimal(gym) –depends–&gt; (Optimal(rest) yesterday,Optimal(code) yester
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- MERMAID START -------------------------------------- -->
         <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
-        <script>
-            mermaid.initialize({startOnLoad:true});
-        </script>
         <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">

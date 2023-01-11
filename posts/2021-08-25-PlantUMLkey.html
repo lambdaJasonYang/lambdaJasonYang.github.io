@@ -5,6 +5,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
@@ -118,14 +121,14 @@
 <section id="mermaid" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Mermaid</h1>
 <div class="mermaid">graph TD;
-    A-->B;
-    A-->C;
+    A["label A"]-->B["label B"];
+    A-->|"arrow label"|C;
     B-->D;
     C-->D;</div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode .txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>&quot;&quot;&quot;mermaid</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>graph TD;</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    A--&gt;B;</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    A--&gt;C;</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    A[&quot;label A&quot;]--&gt;B[&quot;label B&quot;];</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    A--&gt;|&quot;arrow label&quot;|C;</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    B--&gt;D;</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    C--&gt;D;</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>&quot;&quot;&quot;</span></code></pre></div>
@@ -416,9 +419,6 @@ Activity Diagram has less control than state diagram.</p>
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- MERMAID START -------------------------------------- -->
         <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
-        <script>
-            mermaid.initialize({startOnLoad:true});
-        </script>
         <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">

@@ -5,6 +5,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
@@ -125,28 +128,33 @@
 <li><a href="#delete-data"><span class="toc-section-number">1.5</span> Delete data</a></li>
 <li><a href="#drop"><span class="toc-section-number">1.6</span> Drop</a></li>
 </ul></li>
-<li><a href="#counting-scenarios"><span class="toc-section-number">2</span> Counting Scenarios</a>
+<li><a href="#datetime"><span class="toc-section-number">2</span> DateTime</a>
 <ul>
-<li><a href="#count-num-rows"><span class="toc-section-number">2.1</span> Count Num Rows</a></li>
-<li><a href="#count-non-null-rows"><span class="toc-section-number">2.2</span> Count Non-Null Rows</a></li>
-<li><a href="#count-unique-occurences"><span class="toc-section-number">2.3</span> Count Unique Occurences</a></li>
+<li><a href="#timestamp"><span class="toc-section-number">2.1</span> TIMESTAMP</a></li>
 </ul></li>
-<li><a href="#string-scenarios"><span class="toc-section-number">3</span> String Scenarios</a>
+<li><a href="#foreign-key"><span class="toc-section-number">3</span> Foreign Key</a></li>
+<li><a href="#counting-scenarios"><span class="toc-section-number">4</span> Counting Scenarios</a>
 <ul>
-<li><a href="#concat"><span class="toc-section-number">3.1</span> Concat</a></li>
-<li><a href="#case-insensitive-search"><span class="toc-section-number">3.2</span> Case insensitive Search</a></li>
-<li><a href="#regex-matching"><span class="toc-section-number">3.3</span> Regex matching</a></li>
-<li><a href="#padding-string"><span class="toc-section-number">3.4</span> Padding string</a></li>
+<li><a href="#count-num-rows"><span class="toc-section-number">4.1</span> Count Num Rows</a></li>
+<li><a href="#count-non-null-rows"><span class="toc-section-number">4.2</span> Count Non-Null Rows</a></li>
+<li><a href="#count-unique-occurences"><span class="toc-section-number">4.3</span> Count Unique Occurences</a></li>
 </ul></li>
-<li><a href="#grouping"><span class="toc-section-number">4</span> Grouping</a>
+<li><a href="#string-scenarios"><span class="toc-section-number">5</span> String Scenarios</a>
 <ul>
-<li><a href="#group-same-names-then-count-each"><span class="toc-section-number">4.1</span> Group same names then count each</a></li>
+<li><a href="#concat"><span class="toc-section-number">5.1</span> Concat</a></li>
+<li><a href="#case-insensitive-search"><span class="toc-section-number">5.2</span> Case insensitive Search</a></li>
+<li><a href="#regex-matching"><span class="toc-section-number">5.3</span> Regex matching</a></li>
+<li><a href="#padding-string"><span class="toc-section-number">5.4</span> Padding string</a></li>
 </ul></li>
-<li><a href="#by-1-table-value"><span class="toc-section-number">5</span> 1-by-1 table = value</a></li>
-<li><a href="#recursion"><span class="toc-section-number">6</span> Recursion</a></li>
-<li><a href="#innerjoin"><span class="toc-section-number">7</span> INNERJOIN</a>
+<li><a href="#grouping"><span class="toc-section-number">6</span> Grouping</a>
 <ul>
-<li><a href="#transitivity"><span class="toc-section-number">7.1</span> transitivity</a></li>
+<li><a href="#group-same-names-then-count-each"><span class="toc-section-number">6.1</span> Group same names then count each</a></li>
+</ul></li>
+<li><a href="#by-1-table-value"><span class="toc-section-number">7</span> 1-by-1 table = value</a></li>
+<li><a href="#recursion"><span class="toc-section-number">8</span> Recursion</a></li>
+<li><a href="#innerjoin"><span class="toc-section-number">9</span> INNERJOIN</a>
+<ul>
+<li><a href="#transitivity"><span class="toc-section-number">9.1</span> transitivity</a></li>
 </ul></li>
 </ul></div>
 <ul>
@@ -156,6 +164,10 @@
 <h1 data-number="1"><span class="header-section-number">1</span> Basics</h1>
 <section id="make-and-fill-table" class="level2" data-number="1.1">
 <h2 data-number="1.1"><span class="header-section-number">1.1</span> Make and fill table</h2>
+<ul>
+<li>in mySQL we would do <code>id INT PRIMARY KEY AUTO_INCREMENT</code></li>
+<li>in postgres we would do <code>id SERIAL PRIMARY KEY</code></li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> employees (<span class="kw">id</span> <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, name TEXT, age <span class="dt">INTEGER</span>);</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> employee </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    (name,age) </span>
@@ -222,130 +234,167 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> employee;</span></code></pre></div>
 </section>
 </section>
-<section id="counting-scenarios" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Counting Scenarios</h1>
-<section id="count-num-rows" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> Count Num Rows</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FROM</span> employee; <span class="co">--Counts all rows</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">COUNT</span>(<span class="op">*</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">----------</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span></span></code></pre></div>
-</section>
-<section id="count-non-null-rows" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> Count Non-Null Rows</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(age) <span class="kw">FROM</span> employee;</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">COUNT</span>(age)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">----------</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span></span></code></pre></div>
-</section>
-<section id="count-unique-occurences" class="level2" data-number="2.3">
-<h2 data-number="2.3"><span class="header-section-number">2.3</span> Count Unique Occurences</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> age) <span class="kw">FROM</span> employee;</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> age)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">----------</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span></span></code></pre></div>
+<section id="datetime" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> DateTime</h1>
+<section id="timestamp" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> TIMESTAMP</h2>
+<ul>
+<li>You can also set default as <code>CURRENT_TIMESTAMP</code> which means if you insert with no field, it will just auto-fill using the current time.</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">TYPE</span>: <span class="dt">timestamp</span>(<span class="dv">40</span>)	</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2023</span><span class="op">-</span><span class="dv">01</span><span class="op">-</span><span class="dv">04</span> <span class="dv">03</span><span class="ch">:04:45</span><span class="fl">.245619</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> mytime <span class="kw">FROM</span> employee <span class="kw">WHERE</span> mytime <span class="op">=</span> <span class="st">'2023-01-04 03:04:45.245619'</span>;</span></code></pre></div>
 </section>
 </section>
-<section id="string-scenarios" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> String Scenarios</h1>
-<section id="concat" class="level2" data-number="3.1">
-<h2 data-number="3.1"><span class="header-section-number">3.1</span> Concat</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> surname <span class="op">||</span> <span class="st">' aka '</span> <span class="op">||</span> firstname <span class="kw">as</span> name <span class="kw">from</span> cd.members </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">--&quot;BOB&quot; &quot;JONES&quot;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">--outputs &quot;BOB aka JONES&quot;</span></span></code></pre></div>
+<section id="foreign-key" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Foreign Key</h1>
+<div class="mermaid">erDiagram
+	hero ||--o{ heroInventory : heroHash
+	hero {
+		int id
+		int heroHash
+	}
+	heroInventory {
+		int id
+		int heroHash
+		string stuff
+	}</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> hero(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>	<span class="kw">id</span> <span class="dt">INT</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTO_INCREMENT,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>	heroHash <span class="dt">INT</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> heroInventory (</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>	<span class="kw">id</span> <span class="dt">INT</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTO_INCREMENT,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>	heroHash <span class="dt">INT</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>	<span class="kw">FOREIGN</span> <span class="kw">KEY</span>(heroHash) <span class="kw">REFERENCES</span> hero(heroHash),</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>	stuff <span class="dt">VARCHAR</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
 </section>
-<section id="case-insensitive-search" class="level2" data-number="3.2">
-<h2 data-number="3.2"><span class="header-section-number">3.2</span> Case insensitive Search</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> cd.facilities <span class="kw">where</span> <span class="fu">upper</span>(name) <span class="kw">like</span> <span class="st">'TENNIS%'</span>;      </span></code></pre></div>
+<section id="counting-scenarios" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Counting Scenarios</h1>
+<section id="count-num-rows" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Count Num Rows</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FROM</span> employee; <span class="co">--Counts all rows</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">COUNT</span>(<span class="op">*</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">----------</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span></span></code></pre></div>
 </section>
-<section id="regex-matching" class="level2" data-number="3.3">
-<h2 data-number="3.3"><span class="header-section-number">3.3</span> Regex matching</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> memid, telephone <span class="kw">from</span> cd.members <span class="kw">where</span> telephone similar <span class="kw">to</span> <span class="st">'%[()]%'</span>;</span></code></pre></div>
+<section id="count-non-null-rows" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> Count Non-Null Rows</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(age) <span class="kw">FROM</span> employee;</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">COUNT</span>(age)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">----------</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span></span></code></pre></div>
 </section>
-<section id="padding-string" class="level2" data-number="3.4">
-<h2 data-number="3.4"><span class="header-section-number">3.4</span> Padding string</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="fu">lpad</span>(<span class="fu">cast</span>(zipcode <span class="kw">as</span> <span class="dt">char</span>(<span class="dv">5</span>)),<span class="dv">5</span>,<span class="st">'0'</span>) zip <span class="kw">from</span> cd.members <span class="kw">order</span> <span class="kw">by</span> zip </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">--input: 43</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">--output: 00043</span></span></code></pre></div>
+<section id="count-unique-occurences" class="level2" data-number="4.3">
+<h2 data-number="4.3"><span class="header-section-number">4.3</span> Count Unique Occurences</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> age) <span class="kw">FROM</span> employee;</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> age)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">----------</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span></span></code></pre></div>
 </section>
 </section>
-<section id="grouping" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Grouping</h1>
+<section id="string-scenarios" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> String Scenarios</h1>
+<section id="concat" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Concat</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> surname <span class="op">||</span> <span class="st">' aka '</span> <span class="op">||</span> firstname <span class="kw">as</span> name <span class="kw">from</span> cd.members </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">--&quot;BOB&quot; &quot;JONES&quot;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">--outputs &quot;BOB aka JONES&quot;</span></span></code></pre></div>
+</section>
+<section id="case-insensitive-search" class="level2" data-number="5.2">
+<h2 data-number="5.2"><span class="header-section-number">5.2</span> Case insensitive Search</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> cd.facilities <span class="kw">where</span> <span class="fu">upper</span>(name) <span class="kw">like</span> <span class="st">'TENNIS%'</span>;      </span></code></pre></div>
+</section>
+<section id="regex-matching" class="level2" data-number="5.3">
+<h2 data-number="5.3"><span class="header-section-number">5.3</span> Regex matching</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> memid, telephone <span class="kw">from</span> cd.members <span class="kw">where</span> telephone similar <span class="kw">to</span> <span class="st">'%[()]%'</span>;</span></code></pre></div>
+</section>
+<section id="padding-string" class="level2" data-number="5.4">
+<h2 data-number="5.4"><span class="header-section-number">5.4</span> Padding string</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="fu">lpad</span>(<span class="fu">cast</span>(zipcode <span class="kw">as</span> <span class="dt">char</span>(<span class="dv">5</span>)),<span class="dv">5</span>,<span class="st">'0'</span>) zip <span class="kw">from</span> cd.members <span class="kw">order</span> <span class="kw">by</span> zip </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">--input: 43</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">--output: 00043</span></span></code></pre></div>
+</section>
+</section>
+<section id="grouping" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Grouping</h1>
 <ul>
 <li>Math analogue: Preimage, Set partition</li>
 </ul>
-<section id="group-same-names-then-count-each" class="level2" data-number="4.1">
-<h2 data-number="4.1"><span class="header-section-number">4.1</span> Group same names then count each</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="fu">substr</span> (mems.surname,<span class="dv">1</span>,<span class="dv">1</span>) <span class="kw">as</span> letter, <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">as</span> <span class="fu">count</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">from</span> cd.members mems</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">group</span> <span class="kw">by</span> letter</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">order</span> <span class="kw">by</span> letter          </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>letter	<span class="fu">count</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>B	<span class="dv">5</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>C	<span class="dv">2</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>D	<span class="dv">1</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>F	<span class="dv">2</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>G	<span class="dv">2</span></span></code></pre></div>
+<section id="group-same-names-then-count-each" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> Group same names then count each</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="fu">substr</span> (mems.surname,<span class="dv">1</span>,<span class="dv">1</span>) <span class="kw">as</span> letter, <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">as</span> <span class="fu">count</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">from</span> cd.members mems</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">group</span> <span class="kw">by</span> letter</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">order</span> <span class="kw">by</span> letter          </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>letter	<span class="fu">count</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>B	<span class="dv">5</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>C	<span class="dv">2</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>D	<span class="dv">1</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>F	<span class="dv">2</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>G	<span class="dv">2</span></span></code></pre></div>
 </section>
 </section>
-<section id="by-1-table-value" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> 1-by-1 table = value</h1>
+<section id="by-1-table-value" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 1-by-1 table = value</h1>
 <ul>
 <li>1 by 1 tables can be auto-casted as values
 <ul>
 <li>aggregation operators like <code>max</code> indicate 1-by-1 tables</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> firstname, surname, joindate</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>	<span class="kw">from</span> cd.members</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>	<span class="kw">where</span> joindate <span class="op">=</span> (<span class="kw">select</span> <span class="fu">max</span>(joindate) <span class="kw">from</span> cd.members);</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">--(select max(joindate) from cd.members)  is a 1-by-1 table </span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> firstname, surname, joindate</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>	<span class="kw">from</span> cd.members</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>	<span class="kw">where</span> joindate <span class="op">=</span> (<span class="kw">select</span> <span class="fu">max</span>(joindate) <span class="kw">from</span> cd.members);</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">--(select max(joindate) from cd.members)  is a 1-by-1 table </span></span></code></pre></div>
 </section>
-<section id="recursion" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Recursion</h1>
-<div class="sourceCode" id="cb16"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> RECURSIVE counter <span class="kw">AS</span> (</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="dv">1</span> <span class="kw">AS</span> i</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">UNION</span> <span class="kw">ALL</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> i<span class="op">+</span><span class="dv">1</span> <span class="kw">FROM</span> counter <span class="kw">WHERE</span> i <span class="op">&lt;</span> <span class="dv">5</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    )    <span class="kw">SELECT</span> i <span class="kw">FROM</span> counter;</span></code></pre></div>
+<section id="recursion" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Recursion</h1>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> RECURSIVE counter <span class="kw">AS</span> (</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="dv">1</span> <span class="kw">AS</span> i</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> i<span class="op">+</span><span class="dv">1</span> <span class="kw">FROM</span> counter <span class="kw">WHERE</span> i <span class="op">&lt;</span> <span class="dv">5</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    )    <span class="kw">SELECT</span> i <span class="kw">FROM</span> counter;</span></code></pre></div>
 </section>
-<section id="innerjoin" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> INNERJOIN</h1>
-<div class="sourceCode" id="cb17"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">--select those that recommend themselves</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="kw">distinct</span> recs.firstname <span class="kw">as</span> firstname, recs.surname <span class="kw">as</span> surname</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>	<span class="kw">from</span> </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>		cd.members mems</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>		<span class="kw">inner</span> <span class="kw">join</span> cd.members recs</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>			<span class="kw">on</span> recs.memid <span class="op">=</span> mems.recommendedby</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="kw">order</span> <span class="kw">by</span> surname, firstname; </span></code></pre></div>
-<section id="transitivity" class="level2" data-number="7.1">
-<h2 data-number="7.1"><span class="header-section-number">7.1</span> transitivity</h2>
+<section id="innerjoin" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> INNERJOIN</h1>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">--select those that recommend themselves</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="kw">distinct</span> recs.firstname <span class="kw">as</span> firstname, recs.surname <span class="kw">as</span> surname</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>	<span class="kw">from</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>		cd.members mems</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>		<span class="kw">inner</span> <span class="kw">join</span> cd.members recs</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>			<span class="kw">on</span> recs.memid <span class="op">=</span> mems.recommendedby</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="kw">order</span> <span class="kw">by</span> surname, firstname; </span></code></pre></div>
+<section id="transitivity" class="level2" data-number="9.1">
+<h2 data-number="9.1"><span class="header-section-number">9.1</span> transitivity</h2>
 <ul>
 <li>3rd degree transitive relation</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Herietta  --recBY-&gt; Matthew  --recBY-&gt; Gerald --recBY-&gt; Darren</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Ramnaresh --recBY-&gt; Florence --recBY-&gt; Ponder --recBY-&gt; Burton</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>Douglas   --recBy-&gt; David    --recBY-&gt; Janice --recBY-&gt; Darren</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="kw">distinct</span> recs.firstname <span class="kw">as</span> rootrecommender, abc2.firstname <span class="kw">as</span> thirdhoprecommended</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>	<span class="kw">from</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>		</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>		(cd.members mems</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>		<span class="kw">inner</span> <span class="kw">join</span> cd.members recs</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>			<span class="kw">on</span> recs.memid <span class="op">=</span> mems.recommendedby)  <span class="co">--first hop</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>			<span class="kw">inner</span> <span class="kw">join</span> cd.members abc</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>				<span class="kw">on</span> mems.memid <span class="op">=</span> abc.recommendedby <span class="co">--second hop</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>					<span class="kw">inner</span> <span class="kw">join</span> cd.members abc2</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>						<span class="kw">on</span> abc.memid <span class="op">=</span> abc2.recommendedby <span class="co">--third hop</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>;    </span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">--using SELECT, we can only choose information about those with</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">--level 3 nested recommendations.</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">--BUT THAT also means out of level 3 we can choose 1,2,3 recommendations</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Herietta  --recBY-&gt; Matthew  --recBY-&gt; Gerald --recBY-&gt; Darren</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>Ramnaresh --recBY-&gt; Florence --recBY-&gt; Ponder --recBY-&gt; Burton</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>Douglas   --recBy-&gt; David    --recBY-&gt; Janice --recBY-&gt; Darren</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="kw">distinct</span> recs.firstname <span class="kw">as</span> rootrecommender, abc2.firstname <span class="kw">as</span> thirdhoprecommended</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>	<span class="kw">from</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>		</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>		(cd.members mems</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>		<span class="kw">inner</span> <span class="kw">join</span> cd.members recs</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>			<span class="kw">on</span> recs.memid <span class="op">=</span> mems.recommendedby)  <span class="co">--first hop</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>			<span class="kw">inner</span> <span class="kw">join</span> cd.members abc</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>				<span class="kw">on</span> mems.memid <span class="op">=</span> abc.recommendedby <span class="co">--second hop</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>					<span class="kw">inner</span> <span class="kw">join</span> cd.members abc2</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>						<span class="kw">on</span> abc.memid <span class="op">=</span> abc2.recommendedby <span class="co">--third hop</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>;    </span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">--using SELECT, we can only choose information about those with</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">--level 3 nested recommendations.</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co">--BUT THAT also means out of level 3 we can choose 1,2,3 recommendations</span></span></code></pre></div>
 </section>
 </section>
 
@@ -439,9 +488,6 @@
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- MERMAID START -------------------------------------- -->
         <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
-        <script>
-            mermaid.initialize({startOnLoad:true});
-        </script>
         <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">
