@@ -238,8 +238,8 @@ but I believe initializing sets with “specifies” should become the standard 
                 const newbutton = document.createElement("input");
                 newbutton.type = "radio";
                 // newbutton.textContent = dataglabeltxt;
-                newbutton.id = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
+                    // console.log(datagroupCodeBlocks)
                     showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
                 return newbutton;
@@ -256,27 +256,40 @@ but I believe initializing sets with “specifies” should become the standard 
                     
                     const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
                     btn.name = datagroup;
-                    let radiolabelx = document.createElement("label");
-                    radiolabelx.setAttribute("for",singleglabeltxt);
+                    btn.id = datagroup+singleglabeltxt;
+                    const radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",datagroup+singleglabeltxt);
                     radiolabelx.innerText = singleglabeltxt;
         
-                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",btn);
-                    btn.insertAdjacentElement('afterend',radiolabelx);
+                    // leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radiolabelx);
+                    // radiolabelx.appendChild(btn);
+                    const radioclass = document.createElement("div");
+                    radioclass.className = "radioclass";
+                    radioclass.appendChild(btn);
+                    radioclass.appendChild(radiolabelx)
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radioclass);
+                    // leaderCodeBlockDiv.prepend(btn);
+                    
                     
                 })
+             
+                // leaderCodeBlockDiv.append(btnlist);
                 
-                //make showAll button START
                 const btnShowAll = document.createElement("input");
                 btnShowAll.type = "radio";
-                // btnShowAll.textContent = "All";
                 btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
-                leaderCodeBlockDiv.insertAdjacentElement('beforebegin', btnShowAll);
+
                 btnShowAll.name = datagroup;
-                btnShowAll.id = "All";
+                btnShowAll.id = datagroup+"All";
                 const radiolabel = document.createElement("label");
-                radiolabel.setAttribute("for","All");
+                radiolabel.setAttribute("for",datagroup+"All");
                 radiolabel.innerText = "All";
-                btnShowAll.insertAdjacentElement('afterend',radiolabel);
+
+                const radioclass = document.createElement("div");
+                radioclass.className = "radioclass";
+                radioclass.appendChild(btnShowAll);
+                radioclass.appendChild(radiolabel)
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin',radioclass);
                 //make showAllbutton END
             }
 
