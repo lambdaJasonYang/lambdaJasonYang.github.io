@@ -8,22 +8,26 @@
         <!-- <meta
             http-equiv="Content-Security-Policy"
             content="default-src *" /> -->
+
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
         <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
         <!-- Icon end -->
-        <!-- Global site tag (gtag.js) - Google Analytics -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
         <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-2W1VXE5GSE');
         </script>
-        <!-- Google Analytics TAG END  ---------------------->
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
         <!-- NO JS Behavior START -->
         <noscript>
             <style>
@@ -222,8 +226,10 @@ A magnetic field will be induced when current is running through a closed circui
                 (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
             const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
-                const newbutton = document.createElement("button");
-                newbutton.textContent = dataglabeltxt;
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.id = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
                     showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
@@ -234,28 +240,43 @@ A magnetic field will be induced when current is running through a closed circui
             datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (datagroupCodeBlocks) => {
-                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
                 const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
                 setglabelstxt.map((singleglabeltxt)=>{
-                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
-                    leader.insertAdjacentElement("beforebegin",btn);
-
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    let radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",btn);
+                    btn.insertAdjacentElement('afterend',radiolabelx);
+                    
                 })
                 
                 //make showAll button START
-                const btnShowAll = document.createElement("button");
-                btnShowAll.textContent = "All";
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                // btnShowAll.textContent = "All";
                 btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
-                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin', btnShowAll);
+                btnShowAll.name = datagroup;
+                btnShowAll.id = "All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for","All");
+                radiolabel.innerText = "All";
+                btnShowAll.insertAdjacentElement('afterend',radiolabel);
                 //make showAllbutton END
             }
 
             //below code is performing actual behavior, the above code are just functions
             datagroupSet.map((datagroup) => {
+                
                 const groupOfCodeblocks = getCodeBlocks(datagroup);
-                buildCodeTab(groupOfCodeblocks);
-                const firsttab = groupOfCodeblocks[0]
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
                 showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
        
             })

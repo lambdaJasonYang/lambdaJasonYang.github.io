@@ -8,22 +8,26 @@
         <!-- <meta
             http-equiv="Content-Security-Policy"
             content="default-src *" /> -->
+
         <!-- Icon start -->
         <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
         <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
         <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
         <!-- Icon end -->
-        <!-- Global site tag (gtag.js) - Google Analytics -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
         <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-2W1VXE5GSE');
         </script>
-        <!-- Google Analytics TAG END  ---------------------->
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
         <!-- NO JS Behavior START -->
         <noscript>
             <style>
@@ -134,28 +138,32 @@
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">def</span> mulk<span class="er">(</span><span class="ex">a,b,k</span><span class="kw">)</span><span class="bu">:</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">k</span><span class="er">(</span><span class="ex">a*b</span><span class="kw">)</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">plusk</span><span class="er">(</span><span class="ex">2,5,</span> λK.mulk<span class="er">(</span><span class="ex">a,7,print</span><span class="kw">))</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>      <span class="ex">plusk</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="ex">/</span> <span class="dt">\ </span>  <span class="dt">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    2   5   λK.mulk</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>   <span class="ex">+--</span><span class="kw">&amp;</span><span class="ex">--+</span>   /  <span class="dt">\ </span>  <span class="dt">\</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="kw">|</span>     <span class="ex">K</span>    7  print</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="kw">|</span>     <span class="kw">|</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">plus</span><span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span>   <span class="kw">|</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">|</span>     <span class="kw">|</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="ex">o--#--o</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span>       <span class="kw">|</span>      <span class="kw">|</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span>       <span class="kw">|</span>      <span class="kw">|</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">K:=plus</span><span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span>   <span class="kw">|</span>      <span class="kw">|</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>         <span class="ex">+----</span><span class="kw">&amp;</span><span class="ex">--+</span>      <span class="kw">|</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>              <span class="kw">|</span>         <span class="kw">|</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="ex">mul</span><span class="er">(</span><span class="ex">plus</span><span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span><span class="ex">,7</span><span class="kw">)</span>  <span class="kw">|</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>              <span class="kw">|</span>         <span class="kw">|</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>              <span class="ex">o----#----o</span>   </span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ex">+--</span><span class="kw">&amp;</span><span class="ex">--+</span> stands for unwrap, ex: unwrap plusk to plus</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ex">o--#--o</span> stands for pipe, ex: pipe plus<span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span> <span class="ex">into</span> λK</span></code></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">plusk</span><span class="er">(</span><span class="ex">2,5,</span> λT.mulk<span class="er">(</span><span class="ex">T,7,print</span><span class="kw">))</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2+5=7 is placed into λT </span></span></code></pre></div>
+<p>In typical cps, the continuations are nested into the 3rd argument<br />
+Notice similarity to js except instead of nested, we can move it out into a thennable</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plus</span>(<span class="dv">2</span><span class="op">,</span><span class="dv">5</span>)<span class="op">.</span><span class="fu">then</span>(T <span class="kw">=&gt;</span> <span class="fu">mult</span>(T<span class="op">,</span><span class="dv">7</span>))<span class="op">.</span><span class="fu">then</span>(o <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(o))</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>      <span class="ex">plusk</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>     <span class="ex">/</span> <span class="dt">\ </span>  <span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    2   5   λT.mulk</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>   <span class="ex">+--</span><span class="kw">&amp;</span><span class="ex">--+</span>   /  <span class="dt">\ </span>  <span class="dt">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="kw">|</span>     <span class="ex">T</span>    7  print</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="kw">|</span>     <span class="kw">|</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">plus</span><span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span>   <span class="kw">|</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">|</span>     <span class="kw">|</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="ex">o--#--o</span>    <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span>       <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span>       <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">T:=plus</span><span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span>   <span class="kw">|</span>      <span class="kw">|</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>         <span class="ex">+----</span><span class="kw">&amp;</span><span class="ex">--+</span>      <span class="kw">|</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>              <span class="kw">|</span>         <span class="kw">|</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>      <span class="ex">mul</span><span class="er">(</span><span class="ex">plus</span><span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span><span class="ex">,7</span><span class="kw">)</span>  <span class="kw">|</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>              <span class="kw">|</span>         <span class="kw">|</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>              <span class="ex">o----#----o</span>   </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="ex">+--</span><span class="kw">&amp;</span><span class="ex">--+</span> stands for unwrap, ex: unwrap plusk to plus</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="ex">o--#--o</span> stands for pipe, ex: pipe plus<span class="er">(</span><span class="ex">2,5</span><span class="kw">)</span> <span class="ex">into</span> λK</span></code></pre></div>
 <ol type="1">
 <li>plusk is unwrapped to plus and @ to (2,5) RESULT: plus(2,5)</li>
 <li>continuation of plusk, λK.mulk(a,7,print) is @ to plus(2,5) RESULT: mulk(7,7,print)</li>
@@ -168,17 +176,17 @@
 <ul>
 <li>Notice all the <em>action</em> is being done in the argument of the function.</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">def</span> Negk<span class="er">(</span><span class="ex">a,k</span><span class="kw">)</span><span class="bu">:</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">k</span><span class="er">(</span><span class="ex">-a</span><span class="kw">)</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Negk</span><span class="er">(</span><span class="ex">3,λa.Negk</span><span class="er">(</span><span class="ex">a,λb.Negk</span><span class="er">(</span><span class="ex">b,return</span><span class="kw">)))</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#same as above but formatted differently</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Negk</span><span class="er">(</span><span class="ex">3,</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="ex">λa.Negk</span><span class="er">(</span><span class="ex">a,</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                <span class="ex">λb.Negk</span><span class="er">(</span><span class="ex">b,return</span><span class="kw">)</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>              <span class="kw">)</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">def</span> Negk<span class="er">(</span><span class="ex">a,k</span><span class="kw">)</span><span class="bu">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">k</span><span class="er">(</span><span class="ex">-a</span><span class="kw">)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Negk</span><span class="er">(</span><span class="ex">3,λa.Negk</span><span class="er">(</span><span class="ex">a,λb.Negk</span><span class="er">(</span><span class="ex">b,return</span><span class="kw">)))</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#same as above but formatted differently</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Negk</span><span class="er">(</span><span class="ex">3,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="ex">λa.Negk</span><span class="er">(</span><span class="ex">a,</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                <span class="ex">λb.Negk</span><span class="er">(</span><span class="ex">b,return</span><span class="kw">)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>              <span class="kw">)</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span></code></pre></div>
 </section>
 </section>
 <section id="investigating-callcc" class="level1" data-number="2">
@@ -191,17 +199,17 @@
 </ul></li>
 <li><code>a*</code> can be considered the hole to be filled. in <code>2 + callcc...</code>, the hole of the <code>2 + []</code> is an Int.</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>   <span class="ex">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">/</span> <span class="dt">\</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a> 2   @</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">/</span>  <span class="dt">\</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>callcc  lambda cont.</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>         <span class="ex">@</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">/</span> <span class="dt">\</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>      cont 3</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">+2</span> <span class="er">(</span><span class="ex">callcc</span> <span class="er">(</span><span class="ex">lambda</span> <span class="er">(</span><span class="ex">cont</span><span class="kw">)</span> <span class="ex">3</span> <span class="kw">)))</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 5</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>   <span class="ex">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">/</span> <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> 2   @</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">/</span>  <span class="dt">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>callcc  lambda cont.</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>         <span class="ex">@</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">/</span> <span class="dt">\</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      cont 3</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">+2</span> <span class="er">(</span><span class="ex">callcc</span> <span class="er">(</span><span class="ex">lambda</span> <span class="er">(</span><span class="ex">cont</span><span class="kw">)</span> <span class="ex">3</span> <span class="kw">)))</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 5</span></code></pre></div>
 <ul>
 <li>in the above case we never used the continuation</li>
 <li><code>(lambda (cont) 3 ) :: ? -&gt; ?</code></li>
@@ -283,8 +291,10 @@
                 (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
             }
             const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
-                const newbutton = document.createElement("button");
-                newbutton.textContent = dataglabeltxt;
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.id = dataglabeltxt;
                 newbutton.addEventListener('click', ()=>{
                     showfunc(dataglabeltxt,datagroupCodeBlocks);
                 });
@@ -295,28 +305,43 @@
             datagroup.map((e)=>(e.style.display="block"));
             }
 
-            const buildCodeTab = (datagroupCodeBlocks) => {
-                const leader = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
                 const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
                 setglabelstxt.map((singleglabeltxt)=>{
-                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks)
-                    leader.insertAdjacentElement("beforebegin",btn);
-
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    let radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",btn);
+                    btn.insertAdjacentElement('afterend',radiolabelx);
+                    
                 })
                 
                 //make showAll button START
-                const btnShowAll = document.createElement("button");
-                btnShowAll.textContent = "All";
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                // btnShowAll.textContent = "All";
                 btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
-                leader.insertAdjacentElement('beforebegin', btnShowAll);
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin', btnShowAll);
+                btnShowAll.name = datagroup;
+                btnShowAll.id = "All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for","All");
+                radiolabel.innerText = "All";
+                btnShowAll.insertAdjacentElement('afterend',radiolabel);
                 //make showAllbutton END
             }
 
             //below code is performing actual behavior, the above code are just functions
             datagroupSet.map((datagroup) => {
+                
                 const groupOfCodeblocks = getCodeBlocks(datagroup);
-                buildCodeTab(groupOfCodeblocks);
-                const firsttab = groupOfCodeblocks[0]
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
                 showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
        
             })
