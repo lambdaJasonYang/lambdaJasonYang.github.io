@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
+
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - NLP</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>NLP</h1>
+            
+
+            <div class="info">
+    Posted on March 23, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'python'." href="../tags/python.html">python</a>, <a title="All pages tagged 'pytorch'." href="../tags/pytorch.html">pytorch</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#sites"><span class="toc-section-number">1</span> Sites</a></li>
+<li><a href="#chomsky-hierchy"><span class="toc-section-number">2</span> Chomsky Hierchy</a>
+<ul>
+<li><a href="#type-0"><span class="toc-section-number">2.1</span> Type 0</a></li>
+<li><a href="#type-1"><span class="toc-section-number">2.2</span> Type 1</a></li>
+</ul></li>
+<li><a href="#finite-state-automata"><span class="toc-section-number">3</span> Finite State Automata</a>
+<ul>
+<li><a href="#deterministic-example"><span class="toc-section-number">3.1</span> Deterministic Example</a></li>
+<li><a href="#non-deterministic-example"><span class="toc-section-number">3.2</span> Non-Deterministic Example</a></li>
+</ul></li>
+<li><a href="#nlp-statistics"><span class="toc-section-number">4</span> NLP Statistics</a></li>
+<li><a href="#penn-treebank"><span class="toc-section-number">5</span> Penn treebank</a>
+<ul>
+<li><a href="#contents"><span class="toc-section-number">5.1</span> Contents:</a></li>
+<li><a href="#bracket-labels"><span class="toc-section-number">5.2</span> Bracket Labels</a>
+<ul>
+<li><a href="#clause-level"><span class="toc-section-number">5.2.1</span> Clause Level</a></li>
+<li><a href="#phrase-level"><span class="toc-section-number">5.2.2</span> Phrase Level</a></li>
+<li><a href="#word-level"><span class="toc-section-number">5.2.3</span> Word level</a></li>
+</ul></li>
+<li><a href="#function-tags"><span class="toc-section-number">5.3</span> Function tags</a>
+<ul>
+<li><a href="#formfunction-discrepancies"><span class="toc-section-number">5.3.1</span> Form/function discrepancies</a></li>
+<li><a href="#grammatical-role"><span class="toc-section-number">5.3.2</span> Grammatical role</a></li>
+<li><a href="#adverbials"><span class="toc-section-number">5.3.3</span> Adverbials</a></li>
+<li><a href="#miscellaneous"><span class="toc-section-number">5.3.4</span> Miscellaneous</a></li>
+</ul></li>
+</ul></li>
+</ul></div>
+<section id="sites" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Sites</h1>
+<p><a href="https://propbank.github.io/v3.4.0/frames/">https://propbank.github.io/v3.4.0/frames/</a></p>
+</section>
+<section id="chomsky-hierchy" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Chomsky Hierchy</h1>
+<p><span class="math display">\[ Type\ 0 \subset \]</span></p>
+<section id="type-0" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Type 0</h2>
+<ul>
+<li>No rule restriction</li>
+<li>Equivalent to turing machine</li>
+</ul>
+</section>
+<section id="type-1" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Type 1</h2>
+<ul>
+<li></li>
+<li>Context sensitive rules</li>
+<li>Example: rules (SUPER BIG =&gt; VERY VERY BIG)</li>
+</ul>
+</section>
+</section>
+<section id="finite-state-automata" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Finite State Automata</h1>
+<ul>
+<li>Deterministic Finite State Automata (DFSA) : Rules are unambiguous</li>
+<li>NonDeterministic Finite State Automata (NDFSA) : More than one sequence of rule must be attempted to see if string matches grammar (Back tracking, look ahead)</li>
+</ul>
+<p>Any NDFSA can be recreated using a larger DFSA</p>
+<section id="deterministic-example" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Deterministic Example</h2>
+<p>DFSA for regexp: <code>A(ab)*ABB?</code></p>
+<div class="mermaid">graph LR;
+    A["Q0"]-->|"A"|B["Q1"];
+    B["Q1"]-->|"a"|C["Q2"];
+    C-->|"b"|B;
+    B-->|"A"|D["Q3"];
+    D-->|"B"|E["Q4"];
+    E-->|"B"|F["Q5"];
+    E-->|"e"|F["Q5"];</div>
+<p>note: <code>e</code> stands for empty string</p>
+</section>
+<section id="non-deterministic-example" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Non-Deterministic Example</h2>
+<p>NDFSA for regexp: <code>A(ab)*ABB?</code></p>
+<div class="mermaid">graph LR;
+    A["Q0"]-->|"A"|B["Q1"];
+    B["Q1"]-->|"a"|C["Q2"];
+    C-->|"b"|B;
+    B-->|"A"|D["Q3"];
+    D-->|"B"|E["Q4"];
+    E-->|"B"|F["Q5"];
+    D-->|"B"|F;</div>
+<ul>
+<li>How is this different for the Deterministic example?
+<ul>
+<li>If we give it input <code>AabABB</code> At Q3, it does back tracking, if it terminates too early from Q3-&gt;Q5, it backtracks back to Q3, and then tries Q3-&gt;Q4-&gt;Q5.</li>
+</ul></li>
+</ul>
+<p>The other Deterministic example does not backtrack; eventhough there is a split path at Q4 for the DFSA version, it just means 2 cases are acceptable, either empty string <code>e</code> or string <code>B</code>.</p>
+</section>
+</section>
+<section id="nlp-statistics" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> NLP Statistics</h1>
+<ul>
+<li>Frequency of words: eat, eating, cat, big, bigger</li>
+<li>Frequency of base forms: eat, cat, big</li>
+<li>Frequency of characters: a, b, c</li>
+<li>Frequency of bi-grams: the big, big cat, ate the, the mouse</li>
+<li>TFIDF::<code>term -&gt; [documents] -&gt; number</code> = Term Frequency * Inverse Document Frequency
+<ul>
+<li>TF = Frequency of Terms in corpus(set of different documents)</li>
+<li>IDF = <span class="math inline">\(\frac{Number\ of\ documents}{Number\ of\ documents\ containing\ term}\)</span></li>
+<li>Example: TFIDF(“cat”) for a corpus of 100 documents
+<ul>
+<li>Example 1: 100 documents and 100 instances of cat in 1 document, 99 documents contain no cat
+THEN TFIDF(“cat”)= 100 * 100/1 = 10000</li>
+<li>Example 2: 100 documents and 100 instance of cat, 1 instance in each of 100 documents<br />
+THEN TFIDF(“cat”)= 100 * 100/100 = 100</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="penn-treebank" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Penn treebank</h1>
+<p><a href="https://catalog.ldc.upenn.edu/LDC99T42">https://catalog.ldc.upenn.edu/LDC99T42</a></p>
+<section id="contents" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Contents:</h2>
+<p>Bracket Labels<br />
+Clause Level<br />
+Phrase Level<br />
+Word Level<br />
+Function Tags<br />
+Form/function discrepancies<br />
+Grammatical role<br />
+Adverbials<br />
+Miscellaneous</p>
+</section>
+<section id="bracket-labels" class="level2" data-number="5.2">
+<h2 data-number="5.2"><span class="header-section-number">5.2</span> Bracket Labels</h2>
+<section id="clause-level" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1"><span class="header-section-number">5.2.1</span> Clause Level</h3>
+<p>S - simple declarative clause, i.e. one that is not introduced by a (possible empty) subordinating conjunction or a wh-word and that does not exhibit subject-verb inversion.<br />
+SBAR - Clause introduced by a (possibly empty) subordinating conjunction.<br />
+SBARQ - Direct question introduced by a wh-word or a wh-phrase. Indirect questions and relative clauses should be bracketed as SBAR, not SBARQ.<br />
+SINV - Inverted declarative sentence, i.e. one in which the subject follows the tensed verb or modal.<br />
+SQ - Inverted yes/no question, or main clause of a wh-question, following the wh-phrase in SBARQ.</p>
+</section>
+<section id="phrase-level" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2"><span class="header-section-number">5.2.2</span> Phrase Level</h3>
+<p>ADJP - Adjective Phrase.<br />
+ADVP - Adverb Phrase.<br />
+CONJP - Conjunction Phrase.<br />
+FRAG - Fragment.<br />
+INTJ - Interjection. Corresponds approximately to the part-of-speech tag UH.<br />
+LST - List marker. Includes surrounding punctuation.<br />
+NAC - Not a Constituent; used to show the scope of certain prenominal modifiers within an NP.<br />
+NP - Noun Phrase.<br />
+NX - Used within certain complex NPs to mark the head of the NP. Corresponds very roughly to N-bar level but used quite differently.<br />
+PP - Prepositional Phrase.<br />
+PRN - Parenthetical.<br />
+PRT - Particle. Category for words that should be tagged RP.<br />
+QP - Quantifier Phrase (i.e. complex measure/amount phrase); used within NP.<br />
+RRC - Reduced Relative Clause.<br />
+UCP - Unlike Coordinated Phrase.<br />
+VP - Vereb Phrase.<br />
+WHADJP - Wh-adjective Phrase. Adjectival phrase containing a wh-adverb, as in how hot.<br />
+WHAVP - Wh-adverb Phrase. Introduces a clause with an NP gap. May be null (containing the 0 complementizer) or lexical, containing a wh-adverb such as how or why.<br />
+WHNP - Wh-noun Phrase. Introduces a clause with an NP gap. May be null (containing the 0 complementizer) or lexical, containing some wh-word, e.g. who, which book, whose daughter, none of which, or how many leopards.<br />
+WHPP - Wh-prepositional Phrase. Prepositional phrase containing a wh-noun phrase (such as of which or by whose authority) that either introduces a PP gap or is contained by a WHNP.<br />
+X - Unknown, uncertain, or unbracketable. X is often used for bracketing typos and in bracketing the…the-constructions.</p>
+</section>
+<section id="word-level" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3"><span class="header-section-number">5.2.3</span> Word level</h3>
+<p>CC - Coordinating conjunction<br />
+CD - Cardinal number<br />
+DT - Determiner<br />
+EX - Existential there<br />
+FW - Foreign word<br />
+IN - Preposition or subordinating conjunction<br />
+JJ - Adjective<br />
+JJR - Adjective, comparative<br />
+JJS - Adjective, superlative<br />
+LS - List item marker<br />
+MD - Modal<br />
+NN - Noun, singular or mass<br />
+NNS - Noun, plural<br />
+NNP - Proper noun, singular<br />
+NNPS - Proper noun, plural<br />
+PDT - Predeterminer<br />
+POS - Possessive ending<br />
+PRP - Personal pronoun<br />
+PRP$ - Possessive pronoun (prolog version PRP-S)<br />
+RB - Adverb<br />
+RBR - Adverb, comparative<br />
+RBS - Adverb, superlative<br />
+RP - Particle<br />
+SYM - Symbol<br />
+TO - to<br />
+UH - Interjection<br />
+VB - Verb, base form<br />
+VBD - Verb, past tense<br />
+VBG - Verb, gerund or present participle<br />
+VBN - Verb, past participle<br />
+VBP - Verb, non-3rd person singular present<br />
+VBZ - Verb, 3rd person singular present<br />
+WDT - Wh-determiner<br />
+WP - Wh-pronoun<br />
+WP$ - Possessive wh-pronoun (prolog version WP-S)<br />
+WRB - Wh-adverb</p>
+</section>
+</section>
+<section id="function-tags" class="level2" data-number="5.3">
+<h2 data-number="5.3"><span class="header-section-number">5.3</span> Function tags</h2>
+<section id="formfunction-discrepancies" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1"><span class="header-section-number">5.3.1</span> Form/function discrepancies</h3>
+<ul>
+<li>ADV (adverbial) - marks a constituent other than ADVP or PP when it is used adverbially (e.g. NPs or free (“headless” relatives). However, constituents that themselves are modifying an ADVP generally do not get -ADV. If a more specific tag is available (for example, -TMP) then it is used alone and -ADV is implied. See the Adverbials section.<br />
+</li>
+<li>NOM (nominal) - marks free (“headless”) relatives and gerunds when they act nominally.</li>
+</ul>
+</section>
+<section id="grammatical-role" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2"><span class="header-section-number">5.3.2</span> Grammatical role</h3>
+<ul>
+<li>DTV (dative) - marks the dative object in the unshifted form of the double object construction. If the preposition introducing the “dative” object is for, it is considered benefactive (-BNF). -DTV (and -BNF) is only used after verbs that can undergo dative shift.<br />
+</li>
+<li>LGS (logical subject) - is used to mark the logical subject in passives. It attaches to the NP object of by and not to the PP node itself.<br />
+</li>
+<li>PRD (predicate) - marks any predicate that is not VP. In the do so construction, the so is annotated as a predicate.</li>
+<li>PUT - marks the locative complement of put.<br />
+</li>
+<li>SBJ (surface subject) - marks the structural surface subject of both matrix and embedded clauses, including those with null subjects.<br />
+</li>
+<li>TPC (“topicalized”) - marks elements that appear before the subject in a declarative sentence, but in two cases only:
+if the front element is associated with a <em>T</em> in the position of the gap.<br />
+if the fronted element is left-dislocated (i.e. it is associated with a resumptive pronoun in the position of the gap).<br />
+</li>
+<li>VOC (vocative) - marks nouns of address, regardless of their position in the sentence. It is not coindexed to the subject and not get -TPC when it is sentence-initial.</li>
+</ul>
+</section>
+<section id="adverbials" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3"><span class="header-section-number">5.3.3</span> Adverbials</h3>
+<p>Adverbials are generally VP adjuncts.</p>
+<ul>
+<li>BNF (benefactive) - marks the beneficiary of an action (attaches to NP or PP).<br />
+This tag is used only when (1) the verb can undergo dative shift and (2) the prepositional variant (with the same meaning) uses for. The prepositional objects of dative-shifting verbs with other prepositions than for (such as to or of) are annotated -DTV.<br />
+</li>
+<li>DIR (direction) - marks adverbials that answer the questions “from where?” and “to where?” It implies motion, which can be metaphorical as in “…rose 5 pts. to 57-1/2” or “increased 70% to 5.8 billion yen” -DIR is most often used with verbs of motion/transit and financial verbs.<br />
+</li>
+<li>EXT (extent) - marks adverbial phrases that describe the spatial extent of an activity. -EXT was incorporated primarily for cases of movement in financial space, but is also used in analogous situations elsewhere. Obligatory complements do not receive -EXT. Words such as fully and completely are absolutes and do not receive -EXT.<br />
+</li>
+<li>LOC (locative) - marks adverbials that indicate place/setting of the event. -LOC may also indicate metaphorical location. There is likely to be some varation in the use of -LOC due to differing annotator interpretations. In cases where the annotator is faced with a choice between -LOC or -TMP, the default is -LOC. In cases involving SBAR, SBAR should not receive -LOC. -LOC has some uses that are not adverbial, such as with place names that are adjoined to other NPs and NAC-LOC premodifiers of NPs. The special tag -PUT is used for the locative argument of put.<br />
+</li>
+<li>MNR (manner) - marks adverbials that indicate manner, including instrument phrases.<br />
+</li>
+<li>PRP (purpose or reason) - marks purpose or reason clauses and PPs.<br />
+</li>
+<li>TMP (temporal) - marks temporal or aspectual adverbials that answer the questions when, how often, or how long. It has some uses that are not strictly adverbial, auch as with dates that modify other NPs at S- or VP-level. In cases of apposition involving SBAR, the SBAR should not be labeled -TMP. Only in “financialspeak,” and only when the dominating PP is a PP-DIR, may temporal modifiers be put at PP object level. Note that -TMP is not used in possessive phrases.</li>
+</ul>
+</section>
+<section id="miscellaneous" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4"><span class="header-section-number">5.3.4</span> Miscellaneous</h3>
+<ul>
+<li>CLR (closely related) - marks constituents that occupy some middle ground between arguments and adjunct of the verb phrase. These roughly correspond to “predication adjuncts”, prepositional ditransitives, and some “phrasel verbs”. Although constituents marked with -CLR are not strictly speaking complements, they are treated as complements whenever it makes a bracketing difference. The precise meaning of -CLR depends somewhat on the category of the phrase.<br />
+</li>
+<li>on S or SBAR - These categories are usually arguments, so the -CLR tag indicates that the clause is more adverbial than normal clausal arguments. The most common case is the infinitival semi-complement of use, but there are a variety of other cases.<br />
+</li>
+<li>on PP, ADVP, SBAR-PRP, etc - On categories that are ordinarily interpreted as (adjunct) adverbials, -CLR indicates a somewhat closer relationship to the verb. For example:
+<ul>
+<li>Prepositional Ditransitives<br />
+In order to ensure consistency, the Treebank recognizes only a limited class of verbs that take more than one complement (-DTV and -PUT and Small Clauses) Verbs that fall outside these classes (including most of the prepositional ditransitive verbs in class [D2]) are often associated with -CLR.</li>
+<li>Phrasal verbs<br />
+Phrasal verbs are also annotated with -CLR or a combination of -PRT and PP-CLR. Words that are considered borderline between particle and adverb are often bracketed with ADVP-CLR.</li>
+<li>Predication Adjuncts<br />
+Many of Quirk’s predication adjuncts are annotated with -CLR.</li>
+</ul></li>
+<li>on NP - To the extent that -CLR is used on NPs, it indicates that the NP is part of some kind of “fixed phrase” or expression, such as take care of. Variation is more likely for NPs than for other uses of -CLR.</li>
+<li>CLF (cleft) - marks it-clefts (“true clefts”) and may be added to the labels S, SINV, or SQ.</li>
+<li>HLN (headline) - marks headlines and datelines. Note that headlines and datelines always constitute a unit of text that is structurally independent from the following sentence.</li>
+<li>TTL (title) - is attached to the top node of a title when this title appears inside running text. -TTL implies -NOM. The internal structure of the title is bracketed as usual.</li>
+</ul>
+</section>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <div class="pagehitscounter"> 
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                </div>
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    // console.log(datagroupCodeBlocks)
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    btn.id = datagroup+singleglabeltxt;
+                    const radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",datagroup+singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    // leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radiolabelx);
+                    // radiolabelx.appendChild(btn);
+                    const radioclass = document.createElement("div");
+                    radioclass.className = "radioclass";
+                    radioclass.appendChild(btn);
+                    radioclass.appendChild(radiolabelx)
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radioclass);
+                    // leaderCodeBlockDiv.prepend(btn);
+                    
+                    
+                })
+             
+                // leaderCodeBlockDiv.append(btnlist);
+                
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+
+                btnShowAll.name = datagroup;
+                btnShowAll.id = datagroup+"All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for",datagroup+"All");
+                radiolabel.innerText = "All";
+
+                const radioclass = document.createElement("div");
+                radioclass.className = "radioclass";
+                radioclass.appendChild(btnShowAll);
+                radioclass.appendChild(radiolabel)
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin',radioclass);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

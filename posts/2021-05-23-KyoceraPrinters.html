@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Convert Enterprise printer to a prosumer printer</title>
+        <title>Jason Yang - Convert Enterprise printer to a prosumer printer OpnWrt Mesh</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,7 +110,7 @@
         </div>
 
         <div id="content">
-            <h1>Convert Enterprise printer to a prosumer printer</h1>
+            <h1>Convert Enterprise printer to a prosumer printer OpnWrt Mesh</h1>
             
 
             <div class="info">
@@ -122,13 +122,12 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'hardware'." href="../tags/hardware.html">hardware</a>
     
 </div>
-<section id="background" class="level4" data-number="0.0.0.1">
-<h4 data-number="0.0.0.1"><span class="header-section-number">0.0.0.1</span> background</h4>
+<section id="background" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> background</h1>
 <p>My workplace was upgrading their equipment so they let me take home their kyocera printer (manufactured in 2016). It’s sticker price is ~$10,000 and used ones around the webs were ~$3000.
 Well, I got it for free as long as I could handle moving a 200 lb printer to my home.</p>
-</section>
-<section id="guide" class="level4" data-number="0.0.0.2">
-<h4 data-number="0.0.0.2"><span class="header-section-number">0.0.0.2</span> Guide</h4>
+<section id="guide" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Guide</h2>
 <p>CUPS server<br />
 Set up</p>
 <p>Configuration<br />
@@ -138,8 +137,8 @@ use ip of your printer<br />
 The ip address can be found by going through your kyocera network panel.<br />
 use the kyocera ppd 6002i file</p>
 </section>
-<section id="a-better-way-if-you-are-using-openwrt" class="level4" data-number="0.0.0.3">
-<h4 data-number="0.0.0.3"><span class="header-section-number">0.0.0.3</span> A Better way if you are using OpenWrt</h4>
+<section id="a-better-way-if-you-are-using-openwrt" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> A Better way if you are using OpenWrt</h2>
 <p>This option allows you to use kyocera interface.</p>
 <p>Requires: 2 OpenWrt routers<br />
 Mesh the 2 OpenWrt routers<br />
@@ -147,13 +146,51 @@ There are cheap archer c7’s floating around ebay for ~$20 that can mesh their 
 <p>Simply find the ip of the printer then use that as the url.<br />
 You can download a phone app to search IPs in your LAN network or just look at the printer network settings.</p>
 </section>
-<section id="toner" class="level4" data-number="0.0.0.4">
-<h4 data-number="0.0.0.4"><span class="header-section-number">0.0.0.4</span> Toner</h4>
+<section id="toner" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> Toner</h2>
 <p>Drill a hole, buy a rubber plug and use that hole to refill the toner.</p>
 </section>
-<section id="conclusion" class="level4" data-number="0.0.0.5">
-<h4 data-number="0.0.0.5"><span class="header-section-number">0.0.0.5</span> Conclusion</h4>
+<section id="conclusion" class="level2" data-number="1.4">
+<h2 data-number="1.4"><span class="header-section-number">1.4</span> Conclusion</h2>
 <p>A 60 ppm(pages per minute) MFP printer doesn’t come cheap and I don’t think I ’ll need to replace this printer anytime in the near or far future.</p>
+</section>
+</section>
+<section id="openwrt-settings" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> OpenWrt Settings</h1>
+<section id="archer-c7" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Archer C7</h2>
+<ul>
+<li>Interfaces &gt;&gt; Interfaces &gt;&gt; LAN &gt;&gt; General Settings
+<ul>
+<li>Protocol : Static Address</li>
+<li>Device : br-lan</li>
+<li>IPv4 address : 192.168.1.50</li>
+<li>IPv4 netmask: 255.255.255.0</li>
+<li>IPv4 gateway: 192.168.1.1</li>
+</ul></li>
+<li>Interfaces &gt;&gt; LAN &gt;&gt; Advanced Settings
+<ul>
+<li>Use default gateway: checked</li>
+<li>Use custom DNS server: 192.168.1.1</li>
+</ul></li>
+<li>Interfaces &gt;&gt; LAN &gt;&gt; DHCP Server
+<ul>
+<li>General Setup
+<ul>
+<li>Ignore Interface: Checked</li>
+</ul></li>
+<li>Advannced Settings:
+<ul>
+<li>Dynamic DHCP: Checked
+<!--  --></li>
+</ul></li>
+</ul></li>
+<li>Interfaces &gt;&gt; Devices &gt;&gt; General device options
+<ul>
+<li>Bridge ports: Switch VLAN: eth1.1</li>
+</ul></li>
+</ul>
+</section>
 </section>
 
         </div>
