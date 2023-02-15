@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
+
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Misc CyberSecurity</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Misc CyberSecurity</h1>
+            
+
+            <div class="info">
+    Posted on February  1, 2015
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'cybersec'." href="../tags/cybersec.html">cybersec</a>
+    
+</div>
+<section id="reminders" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Reminders</h1>
+<ul>
+<li>Stack- stores local variables inside functions. Local variables and Values get destroyed after function call returns.</li>
+<li>Heap- <code>new</code> allows local variables to persist after function call. Only destroyed with <code>delete</code>. Only Heap cause mem leaks.</li>
+</ul>
+</section>
+<section id="examples" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Examples</h1>
+<blockquote>
+<p>Code has buffer overflow due to <code>memcpy</code>, but you use a compiler that uses stack canaries. Which is better <strong>random canaries</strong> or <strong>terminator canaries</strong> for security?</p>
+</blockquote>
+<ul>
+<li>(GOOD) Random canaries -Attack has to guess</li>
+<li>(BAD) Terminator canary - Terminator canary contains NULL(0x00), CR (0x0d), LF (0x0a), and EOF (0xff) after a string . only useful for <code>strcpy</code>; wont help against <code>memcpy</code> bc memcpy can overwrite the canary. the canary.</li>
+</ul>
+<blockquote>
+<p>You visit page using VPN w. <strong>passive mixed content</strong>(HTTPS loads <img> subresources from a cdn that uses insecure HTTP). If your VPN service is evil, what exploit can they use?</p>
+</blockquote>
+<ul>
+<li>VPN service can change/replace the image.</li>
+</ul>
+<blockquote>
+<p>Can VPN service inject javascipt with an onload attribute using <code>&lt;img src=".." onload="possibleAttack?"&gt;</code>.</p>
+</blockquote>
+<ul>
+<li>No since onload is part of the HTTPS page which is secure from VPN attack.</li>
+</ul>
+<blockquote>
+<p>Are XSS attacks affected by cookies marked <strong>secure</strong>? how about marked <strong>httponly</strong>?</p>
+</blockquote>
+<ul>
+<li>(BAD) secure: not effective</li>
+<li>(GOOD) httponly: blocks script access and completely stops XSS</li>
+</ul>
+<blockquote>
+<p>NX pages: <strong>NX bit</strong> is security feature on processors which mark certain pages of memory as non-executable. Explain what this prevents.</p>
+</blockquote>
+<ul>
+<li>Prevents stack-based buffer overflows</li>
+</ul>
+<blockquote>
+<p>Which segments is NX bit set for: stack,heap,code?</p>
+</blockquote>
+<ul>
+<li>mainly stack and sometimes heap</li>
+</ul>
+<blockquote>
+<p>Does NX bit require re-compiling old code.</p>
+</blockquote>
+<ul>
+<li>No since only the kern</li>
+</ul>
+<blockquote>
+<p>Does NX bit have permance penalty?</p>
+</blockquote>
+<ul>
+<li>No</li>
+</ul>
+<blockquote>
+<p>Name an advanced version of the stack-based buffer overflow which can evade NX bit.</p>
+</blockquote>
+<ul>
+<li>Heap-based buffer overflow and ROP-return oriented programming which returns to your malicious library.</li>
+</ul>
+<blockquote>
+<p>Suppose you build an encrypted web app which stores keys in browser local storage. You think of implementing PGP or OTR. (remember OTR offers <strong>forward secrecy</strong> but PGP does not). What can a XSS attack on your site do?</p>
+</blockquote>
+<ul>
+<li>XSS injection could read keys from local storage but OTR</li>
+</ul>
+<blockquote>
+<p>Which PGP or OTR is better against this XSS attack?</p>
+</blockquote>
+<ul>
+<li>OTR is better since leaked keys can only be used to read old messages.</li>
+</ul>
+<blockquote>
+<p>Some UNIX distro has a user called <strong>nobody</strong> with no access rights to file system. Bob downloaded a program foo and set it with <code>-r-sr-xr-x 1 nobody nogroup foo</code>. What does this do?</p>
+</blockquote>
+<ul>
+<li>The <strong>setuid bit</strong> is a linux principle that means when running an executable, <strong>system permissions</strong> are set to the user that created it(nobody) instead of the user that launched it(Bob)</li>
+<li>Anyone can run <code>foo</code> but <code>foo</code> wont be able to write or corrupt our file system or processes.</li>
+<li>Essentially this is program isolation.</li>
+</ul>
+<blockquote>
+<p>What is DKIM and how does it preevnt spam?</p>
+</blockquote>
+<ul>
+<li>DKIM(Domain Key Identified Mail) adds a signature to each email message using a the email domain specified key.</li>
+<li>You can verify if the email really came from a gmail account by checking the email signature.</li>
+</ul>
+<blockquote>
+<p>Describe <strong>ACLs</strong> vs. <strong>Capabilities</strong></p>
+</blockquote>
+<ul>
+<li>ACL(Access Control Lists) - behaves like a bouncer that checks their DB if you are on-the-list.
+<ul>
+<li>Pro: Disallow sharing</li>
+<li>Pro: Centrally manage therefore Easy to manage</li>
+<li>Con: Very specific to an app or system therefore not reusable. (Bouncer can’t just use his on-the-list on the other bar across town)</li>
+</ul></li>
+<li>Capabilities - behaves like a metal detector
+<ul>
+<li>Pro: Anonymous access</li>
+<li>Pro: Abstract broad policies making it easy to share</li>
+<li>Con: Harder to revoke</li>
+</ul></li>
+</ul>
+</section>
+<section id="guide" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Guide</h1>
+<section id="symmetric-crypto" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Symmetric Crypto</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Primitive</th>
+<th>Function</th>
+<th>Property</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hash function</td>
+<td>H(x) -&gt; y</td>
+<td>Collision-Resistant<br /> One-way</td>
+<td>SHA-256, SHA-512, SHA3 <br /> MD5,SHA1 are broken</td>
+</tr>
+<tr class="even">
+<td>Symmetric Encryption</td>
+<td>KeyGen() -&gt; k <br /> Encrypt(m,k) -&gt; c <br /> Decrypt(k,c) -&gt; m</td>
+<td>Semantic Security</td>
+<td>Stream Ciphers (RC-4, AES-CTR) <br /> Block Ciphers(AES-CBC, DES-CBC) <br /> ECB is not secure</td>
+</tr>
+<tr class="odd">
+<td>MAC (Message Auth. Code)</td>
+<td>KeyGen() -&gt; k <br /> MAC(m,k) -&gt; t</td>
+<td>Existential unforgeability</td>
+<td>HMAC</td>
+</tr>
+<tr class="even">
+<td>Authenticated Encryption</td>
+<td>Encryption + MAC</td>
+<td>Semantic Security <br /> Existential unforgeability</td>
+<td>AES-GCM</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="asymmetric-crypto" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Asymmetric Crypto</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Primitive</th>
+<th>Function</th>
+<th>Property</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Public-Key encryption</td>
+<td>KeyGen() -&gt; (k_pub, k_priv) <br /> Encrypt(m,k_pub) -&gt; c <br /> Decrypt(c, k_priv) -&gt; m</td>
+<td>Semantic Security</td>
+<td>RSA, El Gamal, EC El Gamal</td>
+</tr>
+<tr class="even">
+<td>Digital Signature</td>
+<td>KeyGen() -&gt; (k_pub, k_priv) <br /> Sign(m,k_priv) -&gt; s <br /> Verify(s,k_pub) -&gt; Bool</td>
+<td>Existential unforgeability</td>
+<td>RSA, DSA, ECDSA</td>
+</tr>
+<tr class="odd">
+<td>Key Exchange</td>
+<td>KeyGen -&gt; (x, g<sup>x</sup> ) <br /> KeyDerive(x, g<sup>y</sup>) -&gt; g<sup>xy</sup></td>
+<td>Key is indistinguishable from Random</td>
+<td>Diffie-Hellman</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>TLS key exchange - RSA-style and DH-style
+<ul>
+<li>DH-style is resistant to passive attacks and provide forward secrecy</li>
+</ul></li>
+<li>TLS key exchange involves exchanging a hash of the transcript (downgrade attacks)</li>
+<li>PKI - Certificates tie public keys to names signed by Certificate authority</li>
+<li>X.509 Certs: Mu</li>
+<li>PGP - Encryption for email. Async. Web of trust. No forward secrecy.</li>
+<li>OTR/Signal - Encryption for real time chat. Synchronous (DH-style key exchange). Key ratcheting for forward secrecy</li>
+<li>Cryptocurrency - use Digital signatures to authorize payments and blockchain to record transactions and prevent double spend</li>
+</ul>
+</section>
+<section id="network-security" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> Network Security</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Primitive</th>
+<th>Function</th>
+<th>Property</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data</td>
+<td>Ethernet, Wifi, GSM</td>
+<td>Local connection to Internet</td>
+<td>Ethernet: none <br /> Wifi: WEP/WPA <br /> GSM: A5, GEA</td>
+</tr>
+<tr class="even">
+<td>Network</td>
+<td>IP</td>
+<td>Send packets to IP address in best-effort</td>
+<td>IPSEC ( VPNS)</td>
+</tr>
+<tr class="odd">
+<td>Transport</td>
+<td>TCP, UDP</td>
+<td>TCP: Reliable Ordered Delivery w/ Congestion control <br /> UDP: Fast Best-effort</td>
+<td>TLS/SSL(TCP) <br /> Tor<br /> DTLS (UDP)</td>
+</tr>
+<tr class="even">
+<td>Application</td>
+<td>HTTP, SMTP, FTP, SSH</td>
+<td>HTTP: connect to web server <br /> SMTP: email</td>
+<td>HTTPS</td>
+</tr>
+</tbody>
+</table>
+<p>Each layer has:</p>
+<ul>
+<li>Confidentiality - Who can eavesdrop? (passive attacker)</li>
+<li>Integrity - Who can modify data? (access control)</li>
+<li>Access Control - Who can send data? (DDOS attacker)</li>
+<li>Availability - Who can block data (jammers)</li>
+</ul>
+<p>Concepts:</p>
+<ul>
+<li>Tor - Adds anonymity via 3 relays with layered encryption( onion encryption).
+<ul>
+<li>Local observer cannot pair client IP with server IP.</li>
+<li>Vulnerable to traffic fingerprinting</li>
+<li>Tor hides client IP from server</li>
+<li>Tor hidden services hide server IP from client</li>
+</ul></li>
+</ul>
+</section>
+<section id="system-security" class="level2" data-number="3.4">
+<h2 data-number="3.4"><span class="header-section-number">3.4</span> System Security</h2>
+<section id="access-control" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1"><span class="header-section-number">3.4.1</span> Access Control</h3>
+<ul>
+<li>Subject/Principal - user ID, real name, IP address</li>
+<li>Object/Resource - file, web page, network resource, IO device</li>
+<li>Permission - Read, Write, Execute, Append, Change Ownership</li>
+<li>Roles - Set of Subjects/Principals (students, faculty)</li>
+<li>Labels - Set of Object/Resources (Sensitive, Unclassified)
+<!--  --></li>
+<li>ACL(Access Control List) - is like a bouncer with a list of names w/ some in VIP
+<ul>
+<li>Store a list of subjects + permissions with each resource</li>
+</ul></li>
+<li>Capabilities</li>
+<li>Gives Subject/Principal handles which represent Permission to access Object/Resource
+<!--  --></li>
+</ul>
+<p>POSIX permissions model</p>
+<ul>
+<li>All process are ran with a user ID and Group ID</li>
+<li>Processes can run with elevate privilege if <code>setuid</code> or <code>setgid</code> bits are set</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Permission</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>-rwsr-x--x 1 alice acct</code></td>
+<td>Alice (Owner) can read, write, execute. <br /> Member of <code>acct</code> group can read,execute. <br /> <code>Others</code> can only execute <br /> Setuid bit means program will run with alice’s privilege.</td>
+</tr>
+<tr class="even">
+<td><code>-r-xr----- 1 bob admin</code></td>
+<td>Bob (Owner) can read, execute <br /> Members of <code>admin</code> group can read. <br /> <code>Others</code> have no permission</td>
+</tr>
+<tr class="odd">
+<td><code>-r-xr-sr-x 1 carol gurus</code></td>
+<td>Anybody can read, execute <br /> Setgid bit means program will run with <code>gurus</code> group privilege</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Privilege escalation attack - Exploit which tricks priileged programs intro running arbitrary code.</li>
+</ul>
+</section>
+</section>
+<section id="memory" class="level2" data-number="3.5">
+<h2 data-number="3.5"><span class="header-section-number">3.5</span> Memory</h2>
+<ul>
+<li>NOP Sled - Reduce effectiveness of ASLR with a large buffer to jump to</li>
+<li>Heap overflow - evade NX bits and Stack canaries</li>
+<li>ROP: Evade canaries, ASLR, NX bits</li>
+</ul>
+</section>
+<section id="web" class="level2" data-number="3.6">
+<h2 data-number="3.6"><span class="header-section-number">3.6</span> Web</h2>
+<section id="password-storage" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1"><span class="header-section-number">3.6.1</span> Password Storage</h3>
+<ul>
+<li>Hash password so DB leaks dont reveal actual password, and since hash function is one way, it is difficult to get the real password.</li>
+<li>Add <strong>salt</strong>(~64 bit) to prevent dictionary attack or parallel attack on hashed password.</li>
+<li>Iterated hashes make brute-force attacks harder</li>
+</ul>
+</section>
+<section id="authentication-cookies" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2"><span class="header-section-number">3.6.2</span> Authentication Cookies</h3>
+<ul>
+<li>Commit to username, expiration. Use a MAC!</li>
+<li>Mark auth cookies as <code>secure, httponly</code></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <div class="pagehitscounter"> 
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                </div>
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    // console.log(datagroupCodeBlocks)
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    btn.id = datagroup+singleglabeltxt;
+                    const radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",datagroup+singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    // leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radiolabelx);
+                    // radiolabelx.appendChild(btn);
+                    const radioclass = document.createElement("div");
+                    radioclass.className = "radioclass";
+                    radioclass.appendChild(btn);
+                    radioclass.appendChild(radiolabelx)
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radioclass);
+                    // leaderCodeBlockDiv.prepend(btn);
+                    
+                    
+                })
+             
+                // leaderCodeBlockDiv.append(btnlist);
+                
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+
+                btnShowAll.name = datagroup;
+                btnShowAll.id = datagroup+"All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for",datagroup+"All");
+                radiolabel.innerText = "All";
+
+                const radioclass = document.createElement("div");
+                radioclass.className = "radioclass";
+                radioclass.appendChild(btnShowAll);
+                radioclass.appendChild(radiolabel)
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin',radioclass);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
+
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Setting up Dev Env in linux</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Setting up Dev Env in linux</h1>
+            
+
+            <div class="info">
+    Posted on October  2, 2012
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#while-in-disk-installation"><span class="toc-section-number">1</span> While in disk installation</a></li>
+<li><a href="#while-in-terminal-of-newly-installed-os"><span class="toc-section-number">2</span> While in terminal of newly installed OS</a>
+<ul>
+<li><a href="#ssh-into-root"><span class="toc-section-number">2.1</span> SSH into root</a></li>
+<li><a href="#give-sudo-command-to-user"><span class="toc-section-number">2.2</span> Give sudo command to user</a>
+<ul>
+<li><a href="#give-sudo-access"><span class="toc-section-number">2.2.1</span> Give sudo access</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#theory-and-network"><span class="toc-section-number">3</span> Theory and Network</a></li>
+<li><a href="#updating"><span class="toc-section-number">4</span> Updating</a>
+<ul>
+<li><a href="#package-update"><span class="toc-section-number">4.1</span> package update</a></li>
+</ul></li>
+<li><a href="#mounting-drives-and-transferring-files"><span class="toc-section-number">5</span> Mounting drives and transferring files</a></li>
+<li><a href="#setup"><span class="toc-section-number">6</span> Setup</a>
+<ul>
+<li><a href="#code-server"><span class="toc-section-number">6.1</span> Code-server</a></li>
+<li><a href="#firewalld"><span class="toc-section-number">6.2</span> firewalld</a></li>
+</ul></li>
+<li><a href="#install-zshrc"><span class="toc-section-number">7</span> Install zshrc</a></li>
+<li><a href="#bashrc-zshrc"><span class="toc-section-number">8</span> bashrc zshrc</a></li>
+<li><a href="#install-node"><span class="toc-section-number">9</span> install node</a></li>
+<li><a href="#install-docker"><span class="toc-section-number">10</span> Install docker</a></li>
+<li><a href="#install-golang"><span class="toc-section-number">11</span> Install golang</a></li>
+<li><a href="#wolfram"><span class="toc-section-number">12</span> Wolfram</a></li>
+<li><a href="#troubleshooting"><span class="toc-section-number">13</span> TroubleShooting</a>
+<ul>
+<li><a href="#failure-in-apt-update"><span class="toc-section-number">13.1</span> Failure in apt update</a></li>
+</ul></li>
+<li><a href="#install-ghcup"><span class="toc-section-number">14</span> Install ghcup</a></li>
+</ul></div>
+<section id="while-in-disk-installation" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> While in disk installation</h1>
+<ul>
+<li>Select SSH server</li>
+<li>Deselect any desktop environment</li>
+<li>Webserver is just apache web server, not useful</li>
+</ul>
+</section>
+<section id="while-in-terminal-of-newly-installed-os" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> While in terminal of newly installed OS</h1>
+<section id="ssh-into-root" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> SSH into root</h2>
+<p>We cannot SSH immediately into root</p>
+<ol type="1">
+<li>login as root</li>
+<li>go to <code>/etc/ssh/sshd_config</code></li>
+<li>Change <code>PermitRootLogin without-password</code> to <code>PermitRootLogin yes</code></li>
+</ol>
+<ul>
+<li><code>#"PermitRootLogin prohibit-password" =&gt; "PermitRootLogin yes"</code></li>
+</ul>
+<ol start="4" type="1">
+<li>sudo service ssh restart</li>
+</ol>
+</section>
+<section id="give-sudo-command-to-user" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Give sudo command to user</h2>
+<ol type="1">
+<li>RHEL makes 2 accounts, the root and your default user which is named rhel.</li>
+<li>by default rhel has no sudo privilege so first login to root then give sudo to rhel.</li>
+</ol>
+<section id="give-sudo-access" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1"><span class="header-section-number">2.2.1</span> Give sudo access</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">su</span> <span class="at">-</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">apt</span> install sudo</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">usermod</span> <span class="at">-aG</span> sudo debian</span></code></pre></div>
+<ul>
+<li>If the above doesnt work try below</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">su</span> <span class="at">-</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> /etc/sudoers</span></code></pre></div>
+<p>under <code>root     ALL=(ALL)       ALL</code><br />
+add <code>rhel     ALL=(ALL)       ALL</code></p>
+</section>
+</section>
+</section>
+<section id="theory-and-network" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Theory and Network</h1>
+<ul>
+<li>NetworkManager is the core hub</li>
+<li>nmcli is used to talk with NetworkManager</li>
+<li>Even if you connect ethernet physically, you still need to set-up the config connection to get internet</li>
+</ul>
+<p>nmcli con add con-name example ifname eno1 type ethernet ip4 192.168.1.86/24 gw4 192.168.1.1
+nmcli con mod example ipv4.dns “8.8.8.8”
+nmcli -p con show example
+nmcli connection up example</p>
+<p>nmcli connection delete example</p>
+</section>
+<section id="updating" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Updating</h1>
+<ul>
+<li>RHEL requires we “register” our system with our account</li>
+<li><code>subscription-manager register --username &lt;username&gt; --password &lt;password&gt; --auto-attach</code></li>
+<li>go to <code>https://www.redhat.com/wapps/tnc</code> and click agree</li>
+<li><code>subscription-manager attach --auto</code></li>
+<li>Cant update with <code>dnf</code> due to subscription error caused by NTP</li>
+<li>go to “192.168.1.86:9090” &gt;&gt; Services &gt;&gt; NTP client/server chronyd.service , Enable</li>
+</ul>
+<section id="package-update" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> package update</h2>
+<ul>
+<li>note dnf is called “dandified yum” aka better yum</li>
+<li>instead of apt-get, use dnf</li>
+<li>Search for package using <code>dnf search bleh</code>, <code>dnf search --all bleh</code></li>
+<li><code>dnf list --installed</code></li>
+<li><code>dnf update</code></li>
+</ul>
+</section>
+</section>
+<section id="mounting-drives-and-transferring-files" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Mounting drives and transferring files</h1>
+<ul>
+<li><code>lsblk</code> -which show drives and partitions<br />
+</li>
+<li><code>sudo mount /dev/sdc2 /mnt</code></li>
+</ul>
+</section>
+<section id="setup" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Setup</h1>
+<section id="code-server" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> Code-server</h2>
+<p>Remember to change the configs following https://userjy.github.io/posts/2021-11-10-CodeServer.html</p>
+</section>
+<section id="firewalld" class="level2" data-number="6.2">
+<h2 data-number="6.2"><span class="header-section-number">6.2</span> firewalld</h2>
+<ul>
+<li>code-server wont work because of firewall</li>
+<li><code>sudo firewall-cmd --set-default-zone trusted</code></li>
+</ul>
+</section>
+</section>
+<section id="install-zshrc" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Install zshrc</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apt-get</span> install zsh</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sh</span> <span class="at">-c</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span class="va">)</span><span class="st">&quot;</span></span></code></pre></div>
+</section>
+<section id="bashrc-zshrc" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> bashrc zshrc</h1>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#lean prover</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$PATH</span><span class="st">:</span><span class="va">$HOME</span><span class="st">/.elan/bin&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">NEXT_TELEMETRY_DISABLED</span><span class="op">=</span>1</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.zprofile</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> kubectl=<span class="st">&quot;minikube kubectl --&quot;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SAM_CLI_TELEMETRY</span><span class="op">=</span>0</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a># !! Contents within this block are managed by 'conda init' !!</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>__conda_setup=&quot;$('/home/kali/miniconda3/bin/conda' 'shell.zsh' 'hook' 2&gt; /dev/null)&quot;</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>if [ $? -eq 0 ]; then</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    eval &quot;$__conda_setup&quot;</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>else</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    if [ -f &quot;/home/kali/miniconda3/etc/profile.d/conda.sh&quot; ]; then</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        . &quot;/home/kali/miniconda3/etc/profile.d/conda.sh&quot;</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    else</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        export PATH=&quot;/home/kali/miniconda3/bin:$PATH&quot;</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    fi</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>fi</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>unset __conda_setup</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>export PATH=&quot;$PATH:/home/kali/.local/bin&quot;</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>export PATH=&quot;$HOME/.elan/bin:$PATH&quot;</span></code></pre></div>
+</section>
+<section id="install-node" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> install node</h1>
+<p>Install node via installing <a href="https://github.com/nvm-sh/nvm">nvm</a></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-qO-</span> https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh <span class="kw">|</span> <span class="fu">bash</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nvm</span> install node</span></code></pre></div>
+</section>
+<section id="install-docker" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Install docker</h1>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf config-manager <span class="at">--add-repo</span><span class="op">=</span>https://download.docker.com/linux/centos/docker-ce.repo</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf remove runc</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install docker-ce</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install docker-compose-plugin</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable docker</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd docker</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-aG</span> docker <span class="va">$USER</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 666 /var/run/docker.sock</span></code></pre></div>
+</section>
+<section id="install-golang" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Install golang</h1>
+<p>Get linux download link from golang website</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> /usr/local/go</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /usr/local</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> https://go.dev/dl/go1.19.3.linux-amd64.tar.gz</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> https://go.dev/dl/go1.19.3.linux-amd64.tar.gz</span></code></pre></div>
+<p>either in .zshrc or .bashrc, or .zprofile .profile add the lines</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">GOBIN</span><span class="op">=</span>/usr/local/go/bin</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">$GOBIN</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">GOPATH</span><span class="op">=</span><span class="va">$(</span><span class="ex">go</span> env GOPATH<span class="va">)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:<span class="va">$GOPATH</span></span></code></pre></div>
+</section>
+<section id="wolfram" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Wolfram</h1>
+<ul>
+<li>follow the instructions</li>
+<li>also chmod -R 777 the wolfram engine</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install alsa-lib</span></code></pre></div>
+</section>
+<section id="troubleshooting" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> TroubleShooting</h1>
+<section id="failure-in-apt-update" class="level2" data-number="13.1">
+<h2 data-number="13.1"><span class="header-section-number">13.1</span> Failure in apt update</h2>
+<ul>
+<li><code>vi /etc/apt/sources.list</code></li>
+</ul>
+</section>
+</section>
+<section id="install-ghcup" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Install ghcup</h1>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#for debian</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install libnuma-dev</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#for redhat</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">dnf</span> install numactl</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ghcup</span> tui</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ghcup</span> set ghc 8.10.7</span></code></pre></div>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <div class="pagehitscounter"> 
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                </div>
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    // console.log(datagroupCodeBlocks)
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    btn.id = datagroup+singleglabeltxt;
+                    const radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",datagroup+singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    // leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radiolabelx);
+                    // radiolabelx.appendChild(btn);
+                    const radioclass = document.createElement("div");
+                    radioclass.className = "radioclass";
+                    radioclass.appendChild(btn);
+                    radioclass.appendChild(radiolabelx)
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radioclass);
+                    // leaderCodeBlockDiv.prepend(btn);
+                    
+                    
+                })
+             
+                // leaderCodeBlockDiv.append(btnlist);
+                
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+
+                btnShowAll.name = datagroup;
+                btnShowAll.id = datagroup+"All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for",datagroup+"All");
+                radiolabel.innerText = "All";
+
+                const radioclass = document.createElement("div");
+                radioclass.className = "radioclass";
+                radioclass.appendChild(btnShowAll);
+                radioclass.appendChild(radiolabel)
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin',radioclass);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

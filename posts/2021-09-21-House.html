@@ -122,51 +122,90 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>
     
 </div>
-<script blocking>  
-    // const a = document.getElementById("content")
-    // a.innerHTML = "<div>line 26: 'window' element not defined</div>".repeat(50)
-    const addNext = (src,tgt) => {src.parentNode.insertBefore(tgt,src.nextSibling)};
-    const strToNode = (src) => (new DOMParser().parseFromString(src, "text/html").body.firstElementChild)
-    window.addEventListener("load", () => {
-        const content = document.querySelectorAll("section")
-        const builds = [...content].map(x=>(btoa(x.outerHTML)))
-    const a = document.getElementById("content")
-    // const saved = btoa(a.innerHTML)
-    // a.innerHTML = ""
-    const b = document.createElement("input")
-    a.appendChild(b);
-    b.addEventListener("change",(e)=>{
-        if(e.target.value == "5"){
-            const dcontent = document.querySelectorAll("section")
-            const starterdiv = document.querySelectorAll("div.info")[document.querySelectorAll("div.info").length - 1]
-            const lcontent = [...builds].map(x=>(strToNode(atob(x))))
-            lcontent.forEach(x => {addNext(starterdiv,x)})
-            // lcontent.forEach(x => {addNext(starterdiv,x)})
-        }
-    })
-    
-    })
-    
-</script>
-<ol type="1">
-<li>Go to ad</li>
-</ol>
-<section id="no" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> no</h1>
-<p>fae</p>
-<p>wade</p>
-</section>
-<section id="search-request" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Search request</h1>
+<section id="search-request" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Search request</h1>
 <ul>
 <li>Search request for Block: XXXX, Lot: XX, “house and street addr , NY zip add”.</li>
 <li>Requesting Any and all open or closed permits, surveys, plans and violations regarding septic and well.</li>
 <li>Information regarding presence of an underground oil tank including permits, remediation reports, environmental reports.</li>
 </ul>
 </section>
-<section id="insurance" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Insurance</h1>
+<section id="insurance" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Insurance</h1>
 <p><a href="https://www.insurance.state.pa.us/scrpts/gfsearch"></a></p>
+</section>
+<section id="construction" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Construction</h1>
+<div class="mermaid">graph BT;
+    A["Concrete Foundation"]-->|"Anchor Bolts"|B["Mud Sill lumber"];
+    X["Columns/Posts"]-->C["Beams"];
+    B-->CC["Girder"];
+    C-->D["Joists"];
+    CC-->|"Ends of"|D;
+    D-->E["Subfloor"];
+    E-->F["Plates"];
+    E-->G["Hardwood Floor"];
+    F-->H["Studs"];
+    H-->I["2xPlates"];
+</div>
+<section id="foundation" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Foundation</h2>
+<ul>
+<li>Brickblock walls or poured concrete foundation
+<ul>
+<li>These are a level base to build off</li>
+</ul></li>
+<li>MudSill aka the Sill rests on top of the concrete foundation
+<ul>
+<li>Mud Sill is made out of treated lumber so it doesnt rot from moisture</li>
+<li>Layed around the entire perimeter of foundation</li>
+<li>Tied to foundation with anchor bolts</li>
+</ul></li>
+</ul>
+</section>
+<section id="floor" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Floor</h2>
+<ul>
+<li>Joists are layed horizontally but turned on to their edge, and are the base structure of floors
+<ul>
+<li>recent innovation uses I-joists (which sorta resembles steel I-beams)</li>
+</ul></li>
+<li>Beams are layed like joist but aligned orthogonally to Joists
+<ul>
+<li>Joists sit ontop of Beams</li>
+<li>Made out of dimensional lumber or LVL (laminated veneer lumber)</li>
+</ul></li>
+<li>Columns or Posts
+<ul>
+<li>Vertical structures that hold up Beams</li>
+</ul></li>
+<li>Subfloor - Subfloor sit ontop of Joists
+<ul>
+<li>Sheets of plywood</li>
+<li>you put your fancy hardwood floors on top of the subfloor</li>
+<li>you put your <strong>Plate</strong> on top of your subfloor</li>
+</ul></li>
+</ul>
+</section>
+<section id="wall" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> Wall</h2>
+<ul>
+<li>Separating Wall frame
+<ul>
+<li>Studs - vertical wood for building fake wall, should not rely as support
+<ul>
+<li>Studs sit on top of a stud layed horizontally flat called a <strong>Plate</strong> which sits on top of the subfloor
+<ul>
+<li><strong>Plate</strong> is layed flat like a mud sill</li>
+</ul></li>
+<li>2x4 or 2x6 dimension</li>
+<li>spaced out 16’’ or 24’’</li>
+<li>sometimes fastened together as studpacks to help carry loads</li>
+</ul></li>
+<li>Typically put 2 layed Plates on top of Studs</li>
+</ul></li>
+</ul>
+</section>
 </section>
 
         </div>

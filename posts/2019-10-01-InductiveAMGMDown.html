@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
+
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Proof Downward Induction AM-GM</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Proof Downward Induction AM-GM</h1>
+            
+
+            <div class="info">
+    Posted on October  1, 2019
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>, <a title="All pages tagged 'proofs'." href="../tags/proofs.html">proofs</a>, <a title="All pages tagged 'recursion'." href="../tags/recursion.html">recursion</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#upward-induction-step-1"><span class="toc-section-number">1</span> Upward induction step 1</a></li>
+<li><a href="#downward-induction-step-2"><span class="toc-section-number">2</span> Downward induction step 2</a>
+<ul>
+<li><a href="#pause-real-proof-reverse-meta-rewrite-goal"><span class="toc-section-number">2.1</span> Pause Real Proof: Reverse meta-Rewrite Goal</a></li>
+<li><a href="#resume-real-proof"><span class="toc-section-number">2.2</span> Resume Real Proof</a></li>
+</ul></li>
+<li><a href="#step-3-combining-results-from-upwards-and-downward-induction"><span class="toc-section-number">3</span> Step 3 Combining results from Upwards and Downward induction</a></li>
+<li><a href="#aside"><span class="toc-section-number">4</span> Aside</a></li>
+</ul></div>
+<p>AM-GM Theorem<br />
+<span class="math display">\[ (x_1 x_2 .. x_n)^{1/n} \leq \frac{x_1 + x_2 + .. x_n}{n} \]</span></p>
+<section id="upward-induction-step-1" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Upward induction step 1</h1>
+<p>Base step: n = 1, obvious<br />
+Base step: n = 2, obvious</p>
+<p><span class="math inline">\((P(k) \rightarrow P(2k) )\)</span>:</p>
+<p>for <span class="math inline">\(k \geq 2\)</span> IH:<br />
+<span class="math display">\[(x_1 x_2 .. x_k)^{1/k} \leq \frac{x_1 + x_2 + .. x_k}{k}\]</span></p>
+<p>Prove P(2k) is true:
+<span class="math display">\[ (x_1 x_2 .. x_{2k})^{1/2k} \leq \frac{x_1 + x_2 + .. x_{2k} }{2k} \]</span></p>
+<p>Thoughts:</p>
+<ul>
+<li><strong>Shift complexity</strong> from LHS to RHS for IH
+<ul>
+<li>IH: <span class="math inline">\((x_1 x_2 .. x_k) \leq (\frac{x_1 + x_2 + .. x_k}{k})^{k}\)</span></li>
+<li>Goal: <span class="math inline">\((x_1 x_2 .. x_{2k}) \leq (\frac{x_1 + x_2 + .. x_{2k}}{2k})^{2k}\)</span></li>
+</ul></li>
+<li>Separate problem to <strong>Subproblem</strong> and <strong>Renaming</strong>
+<ul>
+<li>(1..2k) to (1..k) and (k+1 ..2k)</li>
+<li>Renaming
+<ul>
+<li><span class="math inline">\({}^{\times}A : (x_1 x_2 .. x_k)\)</span></li>
+<li><span class="math inline">\({}^{\times}B : (x_{k+1} x_{k+2} .. x_{2k})\)</span></li>
+<li>Goal: <span class="math inline">\({}^{\times}A \times {}^{\times}B \leq (\frac{{}^{+}A + {}^{+}B}{2k})^{2k}\)</span></li>
+</ul></li>
+</ul></li>
+<li><strong>Apply IH</strong> to the subproblems
+<ul>
+<li><span class="math inline">\({}^{\times}A \leq (\frac{{}^{+}A}{k})^{k}\)</span></li>
+<li><span class="math inline">\({}^{\times}B \leq (\frac{{}^{+}B}{k})^{k}\)</span></li>
+</ul></li>
+<li>Try to <strong>Build towards Goal</strong>(LHS of Goal) using IHs
+<ul>
+<li>Notice multiplying both IHs works
+<ul>
+<li><span class="math inline">\({}^{\times}A \times {}^{\times}B \leq (\frac{{}^{+}A}{k})^{k} (\frac{{}^{+}B}{k})^{k} = (\frac{{}^{+}A \times {}^{+}B}{k^2})^{k}\)</span></li>
+</ul></li>
+</ul></li>
+<li>New Goal: Show <span class="math inline">\((\frac{{}^{+}A \times {}^{+}B}{k^2})^{k} \leq (\frac{{}^{+}A + {}^{+}B}{2k})^{2k}\)</span></li>
+</ul>
+<p>Get stuck !! How do we show this inequality.</p>
+<p><strong>IMPORTANT TECHNIQUE - IH(2)</strong> meaning induction hypothesis with n=2.</p>
+<p>Observe <span class="math inline">\((\frac{\color{red}{{}^{+}A \times {}^{+}B}}{k^2})^{k}\)</span></p>
+<ul>
+<li>IH(2): <span class="math inline">\(\color{red}{{}^{+}A \times {}^{+}B \leq (\frac{{}^{+}A \times {}^{+}B}{2})^{2}}\)</span></li>
+</ul>
+<p><span class="math inline">\((\frac{\color{red}{{}^{+}A \times {}^{+}B}}{k^2})^{k} \leq (\frac{1}{k^2})({\color{red}{(\frac{{}^{+}A \times {}^{+}B}{2})^{2}}})^{k} = (\frac{{}^{+}A + {}^{+}B}{2k})^{2k}\)</span></p>
+<p>QED: <span class="math inline">\((\frac{{}^{+}A \times {}^{+}B}{k^2})^{k} \leq (\frac{{}^{+}A + {}^{+}B}{2k})^{2k}\)</span></p>
+<p>Thoughts: Don’t fall in to the trap of believing IH should only be used with obvious cases like n-1, n/2<br />
+IH(2) is the crux of this proof.</p>
+</section>
+<section id="downward-induction-step-2" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Downward induction step 2</h1>
+<p><span class="math inline">\((P(k) \rightarrow P(k-1) )\)</span>:<br />
+After shifting complexity LHS to RHS:</p>
+<p><strong>IMPORTANT</strong> WRITE OUT <span class="math inline">\(x_{n-1}\)</span> instead of just abstracting it into the ellipse.If not you will hit a roadblock when using IH.<br />
+<span class="math inline">\(x_1 + x_2 + .. x_{n}\)</span> is BAD.<br />
+<span class="math inline">\(x_1 + x_2 + .. x_{n-1}+x_{n}\)</span> is GOOD.</p>
+<p>let <span class="math inline">\(C^+ = x_1 + x_2 + ..x_{n-1}\)</span><br />
+let <span class="math inline">\(C^{\times} = (x_1 x_2 ..x_{n-1})\)</span></p>
+<p>IH: <span class="math display">\[ (x_1 x_2 ..x_{n-1} x_n) \leq (\frac{x_1 + x_2 + .. x_{n-1} + x_n}{n})^{n} \]</span></p>
+<p><span class="math display">\[ (C^{\times} \times x_n) \leq (\frac{C^+ + x_n}{n})^n \tag{IH}\]</span></p>
+<p>Goal: <span class="math display">\[ (x_1 x_2 .. x_{n-1}) \leq (\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1} \]</span></p>
+<p><span class="math display">\[ (C^{\times}) \leq (\frac{C^+ }{n-1})^{n-1} \tag{Goal} \]</span></p>
+<ul>
+<li>Find starting point:
+<ul>
+<li><span class="math inline">\((x_1 x_2 .. x_{n-1})\)</span></li>
+</ul></li>
+<li>Notice similarity of IH LHS <span class="math inline">\((x_1 x_2 ..x_{n-1} x_n)\)</span> with starting point
+<ul>
+<li>We can FREELY add one more variable/expression <span class="math inline">\(\framebox{}\)</span> to starting point so we can use IH. How do we Choose?</li>
+</ul></li>
+</ul>
+<section id="pause-real-proof-reverse-meta-rewrite-goal" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Pause Real Proof: Reverse meta-Rewrite Goal</h2>
+<p>Find an expression that fits the criteria to use <span class="math inline">\((IH)\)</span> :
+<span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \tag{1}\]</span></p>
+<p>Relating IH back to the Goal :<br />
+Algebraic manipulation: multiply bothside of <span class="math inline">\((Goal)\)</span> with <span class="math inline">\(\framebox{}\)</span><br />
+<span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{2}\]</span></p>
+<p>Combined (1) and (2):<br />
+Meta-choose the non-striked out combination because it leads us closer to our goal.<br />
+How did we get that equation? It’s a Meta-choice, meaning later in the real proof we HOPE to achieve this equation .
+<span class="math display">\[\xcancel{(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1} \leq(\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n}}\]</span>
+<span class="math display">\[(x_1 x_2 .. x_{n-1}\times\framebox{}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n}\leq \framebox{}\times(\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{3}\]</span></p>
+<p>New Goal by multiplying <span class="math inline">\((3)\)</span> by <span class="math inline">\(\frac{1}{\framebox{}}\)</span>:<br />
+<span class="math display">\[ (x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\framebox{}})(\frac{x_1 + x_2 + .. x_{n-1}+ \framebox{}}{n})^{n} \leq (\frac{x_1 + x_2 + .. x_{n-1}}{n-1})^{n-1}\tag{4}\]</span></p>
+<p>Thoughts:</p>
+<ul>
+<li><strong>Find syntatic similarity</strong> of the three expression in goal.
+<ul>
+<li><span class="math inline">\(x_1 + x_2 + .. x_{n-1}\)</span></li>
+</ul></li>
+<li>Renaming
+<ul>
+<li><span class="math inline">\(A = x_1 + x_2 + .. x_{n-1}\)</span></li>
+</ul></li>
+</ul>
+<p>Renamed Goal:
+<span class="math display">\[ (x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\framebox{}})(\frac{A + \framebox{}}{n})^{n} \leq (\frac{A}{n-1})^{n-1}\tag{Renamed(Goal)}\]</span></p>
+<p>Try: <span class="math inline">\(\framebox{} = \frac{A}{n-1}\)</span></p>
+<ul>
+<li>Backenvelop calculations to see where this could go:
+<ul>
+<li><span class="math inline">\(\frac{A + \framebox{}}{n} =\frac{A+\frac{A}{n-1}}{n} = \frac{\frac{An-A+A}{n-1}}{n}=\frac{A}{n-1}\)</span></li>
+<li>Looks good</li>
+</ul></li>
+</ul>
+</section>
+<section id="resume-real-proof" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Resume Real Proof</h2>
+<p>Solving Goal:</p>
+<p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{1}{\frac{A}{n-1}})(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
+<p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{-1}(\frac{A}{n-1})^{n}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
+<p><span class="math display">\[(x_1 x_2 .. x_{n-1}) \leq (\frac{A}{n-1})^{n-1}\leq (\frac{A}{n-1})^{n-1}\]</span></p>
+<p>Backtrack Meta:</p>
+<p>Reverse operation fill in <span class="math inline">\(\framebox{}\)</span> in <span class="math inline">\((1)\)</span> to get our <span class="math inline">\(new IH\)</span>
+</p>
+<p><span class="math display">\[x_n = \frac{A}{n-1}\]</span></p>
+<p><span class="math display">\[(x_1 x_2 .. x_{n-1}\frac{A}{n-1}) \leq (\frac{x_1 + x_2 + .. x_{n-1}+ \frac{A}{n-1}}{n})^{n} \tag{new IH}\]</span></p>
+</section>
+</section>
+<section id="step-3-combining-results-from-upwards-and-downward-induction" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Step 3 Combining results from Upwards and Downward induction</h1>
+<p>QED Combining Upward and Downward induction constitutes a full proof the inequality is true for all naturals.</p>
+</section>
+<section id="aside" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Aside</h1>
+<ul>
+<li>Why are we allowed to just set <span class="math inline">\(x_n\)</span> as <span class="math inline">\(\frac{A}{n-1}\)</span> ?
+<ul>
+<li>Doesn’t this break the arbitrary-ness of <span class="math inline">\(x_n\)</span> ?
+<!--  --></li>
+</ul></li>
+<li>We are not doing <span class="math inline">\(\forall n \in \mathbb{N} ( P(n) \rightarrow P(n-1)\)</span><br />
+</li>
+<li>We are doing $n  ( x {x_1..x_n} P(x) x {x_1..x_{n-1}} P(x))
+<ul>
+<li>Intuitively, if AMGM prop is true for ANY n-arguments, then AMGM prop is true for ANY (n-1)-arguments.
+<!--  --></li>
+</ul></li>
+<li>This means we get the free IH <span class="math inline">\(\forall x \in \{x_1..x_n\} P(x)\)</span> which allows us to set <span class="math inline">\(x_n\)</span> as anything we want</li>
+</ul>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <div class="pagehitscounter"> 
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                </div>
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    // console.log(datagroupCodeBlocks)
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    btn.id = datagroup+singleglabeltxt;
+                    const radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",datagroup+singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    // leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radiolabelx);
+                    // radiolabelx.appendChild(btn);
+                    const radioclass = document.createElement("div");
+                    radioclass.className = "radioclass";
+                    radioclass.appendChild(btn);
+                    radioclass.appendChild(radiolabelx)
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radioclass);
+                    // leaderCodeBlockDiv.prepend(btn);
+                    
+                    
+                })
+             
+                // leaderCodeBlockDiv.append(btnlist);
+                
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+
+                btnShowAll.name = datagroup;
+                btnShowAll.id = datagroup+"All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for",datagroup+"All");
+                radiolabel.innerText = "All";
+
+                const radioclass = document.createElement("div");
+                radioclass.className = "radioclass";
+                radioclass.appendChild(btnShowAll);
+                radioclass.appendChild(radiolabel)
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin',radioclass);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

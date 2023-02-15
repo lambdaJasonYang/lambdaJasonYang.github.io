@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
+
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Quick C</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Quick C</h1>
+            
+
+            <div class="info">
+    Posted on July  1, 2014
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'C'." href="../tags/C.html">C</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'OS'." href="../tags/OS.html">OS</a>
+    
+</div>
+<p>Remember pointers always hold an address so if you’re reading some spec,<br />
+replace pointer with address if it gets confusing.</p>
+<blockquote>
+<p>function bleh that takes a pointer can be read as this function is directly accessing or modifying the object</p>
+</blockquote>
+<section id="basics" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Basics</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>str <span class="op">=</span> <span class="st">&quot;Hello&quot;</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>        +----+----+---+---+---+---+---+----+----+----+</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Memory: | .. | .. | H | e | l | l | o | \0 | .. | .. |</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        +----+----+---+---+---+---+---+----+----+----+</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                    ^</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                   str</span></code></pre></div>
+<p>standard library is nested in angled brackets like &lt;iostream&gt; &lt;stdio.h&gt;</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>a <span class="op">=</span> <span class="op">&amp;</span>b<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;address of pointee b aka value of a is %p  </span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> a<span class="op">);</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;value of pointee is b  </span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*(</span><span class="dt">int</span><span class="op">*)(</span>a<span class="op">));</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">//address of pointee b aka value of a is 0xbefe3588</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">//value of pointee b is 5 </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;An int is %d, A long is %ld, a float is %f, a double is %lf, a char is %c, a string is %s, a pointer is %p&quot;</span><span class="op">,</span><span class="dv">12</span><span class="op">,</span><span class="dv">25555555</span><span class="op">,</span><span class="fl">23.1</span><span class="op">,</span><span class="fl">23.01</span><span class="op">,</span><span class="ch">'c'</span><span class="op">,</span><span class="st">&quot;asd&quot;</span><span class="op">,</span>a<span class="op">)</span></span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>printf</th>
+<th>keywords</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>%c</td>
+<td>char</td>
+</tr>
+<tr class="even">
+<td>%s</td>
+<td>string</td>
+</tr>
+<tr class="odd">
+<td>%d,%ld</td>
+<td>int,long</td>
+</tr>
+<tr class="even">
+<td>%f</td>
+<td>float</td>
+</tr>
+<tr class="odd">
+<td>%lf</td>
+<td>double</td>
+</tr>
+<tr class="even">
+<td>%p</td>
+<td>pointer value aka address of pointee</td>
+</tr>
+<tr class="odd">
+<td>%x</td>
+<td>convert unsigned number to hex</td>
+</tr>
+<tr class="even">
+<td>%o</td>
+<td>convert unsigned number to octal</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="macros" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> MACROS</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef two</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define two 2</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> two<span class="op">;</span></span></code></pre></div>
+<p>ifndef tells us if not defined then define it else skip it.</p>
+<p><code class="sourceCode c"><span class="pp">#define MAX(a,b) a &gt; b ? a : b</span></code></p>
+<hr />
+</section>
+<section id="example-linking-multiple-object-files" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Example linking multiple object files</h1>
+<div class="sourceCode" id="cb5" data-filename="main.c"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;helper.h&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef two</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define two 2</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> two<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;hey %d &quot;</span><span class="op">,</span> plus<span class="op">(</span>a<span class="op">,</span><span class="dv">3</span><span class="op">));</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb6" data-filename="helper.h"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef avoidRepeatImport</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define avoidRepeatImport</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> plus<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">);</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
+<div class="sourceCode" id="cb7" data-filename="helper.c"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;helper.h&quot;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> plus<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">){</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Below, the “-c” flag tells us to convert helper.c to helper.o</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-c</span> helper.c <span class="co">#outputs helper.o</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-c</span> main.c <span class="co">#outputs main.o</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> main.o helper.o <span class="at">-o</span> myexecutable</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./myexecutable</span></span></code></pre></div>
+<p>Alternatively we can just do</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> main.c helper.c <span class="at">-o</span> myexecutable <span class="at">-Wall</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./myexecutable</span>    </span></code></pre></div>
+</section>
+<section id="makefile" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> makefile</h1>
+<ul>
+<li>“make” is analogous to “npm build”<br />
+</li>
+<li>“makefile” is analogous to “package.json”</li>
+</ul>
+<p>On Vscode bottom right click on Spaces and turn to tab.<br />
+make requires tab before gcc command.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-e</span> <span class="at">-t</span> <span class="at">-v</span> makefile <span class="co">#Use to check for tabs ^I</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> <span class="co">#this will build the makefile</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">all:</span> run</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>	<span class="fu">gcc</span> main.o </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>	<span class="ex">./a.out</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">run:</span> main.c</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>	<span class="fu">gcc</span> <span class="at">-c</span> main.c</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ex">clean:</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>	<span class="fu">rm</span> a.out main.o</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">all:</span> main.o helper.o</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>	<span class="fu">gcc</span> main.o helper.o <span class="at">-o</span> myexecutable</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ex">main.o:</span> main.c helper.h</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>	<span class="fu">gcc</span> <span class="at">-c</span> main.c</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="ex">helper.o:</span> helper.c helper.h</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>	<span class="fu">gcc</span> <span class="at">-c</span> helper.c</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="ex">clean:</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>	<span class="fu">rm</span> helper.o main.o myexecutable</span></code></pre></div>
+<ul>
+<li>the all keyword will always run.
+<ul>
+<li>all: main.o …</li>
+<li>therefore the make will go to<br />
+main.o main.o: &lt;Dependency1&gt; &lt;Dependency2&gt;…</li>
+</ul></li>
+</ul>
+</section>
+<section id="null-pointers-structs" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> null pointers, structs</h1>
+<ul>
+<li>uninitialized base variables and pointer are both <code>NULL</code> when read</li>
+<li>uninitalized struct are also <code>NULL</code> when read</li>
+<li>but <strong>members of uninitalized struct variables have random value</strong> and addresses(if the member is a pointer)</li>
+<li><strong>but members of uninitalized struct pointers always give seg fault</strong></li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> ll <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> var<span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span><span class="op">*</span> ll next<span class="op">;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> ll newlist<span class="op">;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,</span>newlist<span class="op">);</span> <span class="co">// 0</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%p&quot;</span><span class="op">,</span>newlistptr<span class="op">);</span> <span class="co">// (nil)</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,</span>newlist<span class="op">.</span>next<span class="op">);</span> <span class="co">// 1824314</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%p&quot;</span><span class="op">,</span>newlistptr<span class="op">.</span>next<span class="op">);</span> <span class="co">// 0x294452u205</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> ll<span class="op">*</span> newlistptr<span class="op">;</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,</span>newlistptr<span class="op">);</span> <span class="co">// 0</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%p&quot;</span><span class="op">,</span>newlistptr<span class="op">);</span> <span class="co">// (nil)</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,(*</span>newlistptr<span class="op">).</span>next<span class="op">);</span> <span class="co">// segfault</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%p&quot;</span><span class="op">,(*</span>newlistptr<span class="op">).</span>next<span class="op">);</span> <span class="co">// segfault</span></span></code></pre></div>
+</section>
+<section id="strings" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Strings</h1>
+<ul>
+<li>String is just a pointer to a character</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>str<span class="op">;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>str <span class="op">=</span> <span class="st">&quot;name&quot;</span></span></code></pre></div>
+<ul>
+<li><code>"name"</code> is actually the address of the beginning of the array <code>['n','a','m','e','\0']</code>
+<ul>
+<li>this means <code>str</code> points to the first character in <code>'n'</code> in the array</li>
+</ul></li>
+</ul>
+<section id="string-literals-are-immutable-in-memory" class="level4" data-number="6.0.0.1">
+<h4 data-number="6.0.0.1"><span class="header-section-number">6.0.0.1</span> String literals are immutable in memory</h4>
+<ul>
+<li>Typing a string like “hello” in your code editor means your progam will allocate a permanent address and memory for “hello” that all other
+“hello” in your code will refer to.</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%s&quot;</span><span class="op">,</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">//init string literal &quot;hello&quot; at SOME address </span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">//0xfffeee -&gt; &quot;hello&quot;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;%s&quot;</span><span class="op">,</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">//REUSE same string literal at SAME address</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">//0xfffeee -&gt; &quot;hello&quot;</span></span></code></pre></div>
+</section>
+<section id="different-ways-to-init-string" class="level4" data-number="6.0.0.2">
+<h4 data-number="6.0.0.2"><span class="header-section-number">6.0.0.2</span> Different ways to init String</h4>
+<div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[</span><span class="dv">256</span><span class="op">];</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">//MUTABLE array of 256 initialized.</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[</span><span class="dv">256</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>s<span class="op">[</span><span class="dv">1</span><span class="op">]=</span><span class="ch">'Y'</span><span class="op">;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: MUTABLE array s of 256 initialized.</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">//Copies string( and Auto appends a terminating \0) </span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">//RESULT: &quot;hello\0&quot; MUTABLE</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>s<span class="op">[</span><span class="dv">1</span><span class="op">]=</span><span class="ch">'Y'</span><span class="op">;</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: automatically initialized 8 bytes MUTABLE array s.</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">//Copies string(and Auto append a terminating \0) </span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">//RESULT: &quot;hello\0&quot; MUTABLE</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>s <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="op">*(</span>s<span class="op">+</span><span class="dv">1</span><span class="op">)=</span><span class="ch">'Y'</span><span class="op">;</span> <span class="co">//Crash trying to change 'e' =&gt; 'Y'</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">//RHS: immutable string literal &quot;hello&quot; is initialized</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co">//LHS: s POINTS to IMMUTABLE string</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co">//We Crash for trying to modify an immutable string literal</span></span></code></pre></div>
+<hr />
+</section>
+<section id="dynamic-mem-allocation" class="level3" data-number="6.0.1">
+<h3 data-number="6.0.1"><span class="header-section-number">6.0.1</span> Dynamic mem allocation</h3>
+<p>malloc(size_t x)
+allocates x bytes of heap memory
+return address for x
+return a void pointer, void <em>
+int </em>a;
+a = malloc(5 * sizeof(int));</p>
+<p>free(void * p)
+release dynamically allocated memory
+input: pointer[aka address] to the beginning of a dynamically allocated block of memory</p>
+<p>calloc(size_t n, size_t x)
+basically just malloc with n*x bytes of memory</p>
+<p>realloc(void *p, size_t x)
+p must point to beginning of block
+reallocate memory to x size.</p>
+<p>GDB
+must compile with -g
+gcc -g …
+gdb someprogram</p>
+<p>run</p>
+<p>file functions
+&lt;fcntl.h&gt;
+open
+add a . file to file table returns file descriptor
+if open fails =&gt; -1</p>
+<p>open(path,flags, mode)
+* mode - basically file permission like 777
+* used in file creation
+* flags - what to do with file
+* O_RDONLY
+* O_WRONLY
+* O_RDWR
+* O_CREAT</p>
+<p>&lt;sys/stat.h&gt;
+umask
+set file creation for all files;
+umask(777); //gives all new file that will be created full permission</p>
+<p>&lt;unistd.h&gt;
+read data from file
+read(filename, buffer , size)
+read size bytes from filename into buffer</p>
+<p>&lt;unistd.h&gt;
+write(filename,buffer,size)</p>
+<p>&lt;unistd.h&gt;
+lseek
+set current position in open file
+lseek(file_descriptor, offset,whence)
+* offset - number of bytes to move position by, (-inf,inf)
+* whence - where to measure offset from
+* SEEK_SET - beginning of file
+* SEEK_CUR - current position in file
+* SEEK)END - end of file</p>
+<p>&lt;sys/stat.h&gt;
+stat(path , stat_buffer )
+get information about a file</p>
+<p>DIRECTORIES</p>
+<p>&lt;dirent.h&gt;
+opendir
+<em>Open a directory file
+opendir( path);
+returns a pointer to a directory stream typed “DIR </em>”</p>
+<p>closedir(dir_stream)
+closes directory stream and frees the pointer</p>
+<p>readdir(dir_stream)
+returns pointer to next entry in a directory stream or NULL if all entries have already been returned.</p>
+<p>rewinddir(DIR * d)</p>
+<pre><code>resets directory stream of d to the beginngin</code></pre>
+<p>INPUT OUTPUT
+int main( int argc, char *argv[] )
+argc - number of command line args
+argv - array of command line args as strings</p>
+<p>stdin input
+&lt;stdio.h&gt;
+fgets(char * s, int size, FILE * f)
+reads size-1 characters fomr file stream f and stores it in s and appends NULL.
+stops at newline, EOF.
+File stream has type “FILE <em>”
+</em> more complex than file descriptor
+<em>stdin is a universal FILE </em> variable
+fgets(s,100 stdin);</p>
+<p>Signals</p>
+<p>kill(pid,signal)</p>
+<p>sighandler is basically a callback function you define.
+static void sighandler (int signo )
+intercept signals in a c program, cannot catch SIGKILL,SIGSTOP</p>
+<p>signal(SIGNUMBER, sighandler)
+attach a signal to a signal handling function</p>
+<p>static void sighandler(int signo){
+if (signo == SIGUSR1 )
+printf(“YO”);
+}
+signal(SIGUSR1,sighandler);</p>
+<p>Exec - c functions that run other proc or replace current proc with anothe proc
+&lt;unistd.h&gt;</p>
+<p>execl(path, command ,arg0, arg1 .. )</p>
+<p>execlp(path, command, arg0,arg1 ..)
+same as execlp but uses $PATH environment variables</p>
+<p>Managing Sub-processes</p>
+<p>&lt;unistd.h&gt;
+fork()</p>
+<p>&lt;sys/wait.h&gt;
+wait(status)
+stops parent process until child exited
+return pid of child exited
+* status
+* WIFEEXITED - true if exit normally
+* WEXITSTATUS - return value of child
+* WIFSIGNALED - true if exit with signal
+* WTERMSIG - signal number intercepted dby child</p>
+<p>waidpid(pid,status,options)
+wait for specific child</p>
+<p>Redirection
+&lt;unistd.h&gt;
+dup2(fd1,fd2)
+* redirects fd2 to fd1</p>
+<p>Pipes
+A conduit between 2 separate processes on the same computer.
+Pipes have 2 ends, a read end and a write end.
+Pipes act just like files (i.e. you can read() and write() to send any kind of data).
+Pipes exist in memory.
+Unnamed Pipes
+Unnamed pipes have no external identifier.
+pipe - &lt;unistd.h&gt;
+Create an unnamed pipe.
+Returns 0 if the pipe was created, -1 if not.
+pipe( descriptors )
+descriptors
+Array that will contain the descriptors for each end of the pipe. Must be an int array of size 2.
+descriptors[0] is the read end.
+descriptors[1] is the write end.
+example
+int fds[2];
+pipe( fds );
+char line[100];
+f = fork();
+if (f == 0) {
+close( fds[0] );
+write( fds[1], “hello!”, 7);
+}
+else {
+close( fds[1] );
+read( fds[0], line, sizeof(line) );
+}
+Named Pipes
+Also known as FIFOs.
+Same as unnamed pipes except FIFOs have a name that can be used to identify them via different programs.
+Like unnamed pipes, FIFOS are unidirectional.
+mkfifo
+Shell command to make a FIFO
+$ mkfifo name
+mkfifo - &lt;sys/types.h&gt; &lt;sys/stat.h&gt;
+c function to create a FIFO
+Returns 0 on success and -1 on failure
+Once created, the FIFO acts like a regular file, and we can use open, read, write, and close on it.
+FIFOs will block on open until both ends of the pipe have a connection.
+mkfifo( name, permissions )</p>
+<p>Shared Memory
+&lt;sys/shm.h&gt; &lt;sys/ipc.h&gt; &lt;sys/types.h&gt;
+A segment of heap memory that can be accessed by multiple processes.
+Shared memory is accessed via a key that is known by any process that needs to access it.
+Shared memory does not get released when a program exits.`</p>
+<ul>
+<li>5 Shared memory operations</li>
+<li>Create the segment (happens once) - shmget</li>
+<li>Access the segment (happens once per process) - shmget</li>
+<li>Attach the segment to a variable (once per process) - shmat</li>
+<li>Detach the segment from a variable (once per process) - shmdt</li>
+<li>Remove the segment (happens once) - shmctl</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>data<span class="op">;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> shmd<span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>shmd <span class="op">=</span> shmget<span class="op">(</span>KEY<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">),</span> IPC_CREAT <span class="op">|</span> <span class="bn">0640</span><span class="op">);</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;shmd: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> shmd<span class="op">);</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> shmat<span class="op">(</span>shmd<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;data: %p</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> data<span class="op">);</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>data<span class="op">);</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>data <span class="op">=</span> <span class="op">*</span> data <span class="op">+</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;*data: %d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>data<span class="op">);</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>shmdt<span class="op">(</span>data<span class="op">);</span> </span></code></pre></div>
+<p>Server Design
+* Handshake - ensure a connection between 2 programs</p>
+<ul>
+<li>3-way-handshake - verify both client and server can BOTH SEND AND RECIEVE DATA</li>
+<li>Client send msg to Server. (lets server know client can recieve data)</li>
+<li>NOTE: At this point Server DOES NOT KNOW if client can send data<br />
+</li>
+<li>Server send resp to Client. (Let client know Server can recieve and send data)</li>
+<li>Client send resp to Server. (lets server know client can recieve and send data)</li>
+</ul>
+<p>Setup</p>
+<ul>
+<li>Server creates a FIFO (Well Known Pipe) and waits for a connection.</li>
+<li>Client creates a “private” FIFO.
+sprintf(buffer, “%d”, getpid() );</li>
+</ul>
+<p>Handshake</p>
+<ul>
+<li>Client connects to server and sends the private FIFO name.</li>
+<li>Client waits for a response from the server.</li>
+<li>Server receives client’s message and removes the WKP.</li>
+<li>Server connects to client FIFO, sending an initial acknowledgement message.</li>
+<li>Client receives server’s message, removes its private FIFO.</li>
+<li>Client sends response to server.</li>
+</ul>
+<p>Operation</p>
+<ul>
+<li>Server and client send information back and forth.</li>
+</ul>
+<p>Reset</p>
+<ul>
+<li>Client exits, server closes any connections to the client.</li>
+<li>Server recreates the WKP waits for another client.</li>
+</ul>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <div class="pagehitscounter"> 
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                </div>
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    // console.log(datagroupCodeBlocks)
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    btn.id = datagroup+singleglabeltxt;
+                    const radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",datagroup+singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    // leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radiolabelx);
+                    // radiolabelx.appendChild(btn);
+                    const radioclass = document.createElement("div");
+                    radioclass.className = "radioclass";
+                    radioclass.appendChild(btn);
+                    radioclass.appendChild(radiolabelx)
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radioclass);
+                    // leaderCodeBlockDiv.prepend(btn);
+                    
+                    
+                })
+             
+                // leaderCodeBlockDiv.append(btnlist);
+                
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+
+                btnShowAll.name = datagroup;
+                btnShowAll.id = datagroup+"All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for",datagroup+"All");
+                radiolabel.innerText = "All";
+
+                const radioclass = document.createElement("div");
+                radioclass.className = "radioclass";
+                radioclass.appendChild(btnShowAll);
+                radioclass.appendChild(radiolabel)
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin',radioclass);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

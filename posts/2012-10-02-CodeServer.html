@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
+
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Code-Server</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Code-Server</h1>
+            
+
+            <div class="info">
+    Posted on October  2, 2012
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#running-offical-vs-code-server"><span class="toc-section-number">1</span> Running Offical vs-code server</a>
+<ul>
+<li><a href="#certificates"><span class="toc-section-number">1.1</span> Certificates</a></li>
+<li><a href="#nginx"><span class="toc-section-number">1.2</span> nginx</a>
+<ul>
+<li><a href="#http"><span class="toc-section-number">1.2.1</span> http</a></li>
+<li><a href="#https"><span class="toc-section-number">1.2.2</span> https</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#https-setup-on-opnsense-or-pfsense"><span class="toc-section-number">2</span> HTTPS setup on Opnsense or Pfsense</a>
+<ul>
+<li><a href="#certificates-1"><span class="toc-section-number">2.1</span> Certificates</a></li>
+</ul></li>
+<li><a href="#updating-unofficial-code-server"><span class="toc-section-number">3</span> Updating Unofficial Code-server</a>
+<ul>
+<li><a href="#rhel"><span class="toc-section-number">3.1</span> RHEL</a></li>
+</ul></li>
+<li><a href="#extensions"><span class="toc-section-number">4</span> Extensions</a>
+<ul>
+<li><a href="#extensions-list"><span class="toc-section-number">4.1</span> Extensions list</a></li>
+</ul></li>
+<li><a href="#lean-and-multi-root-workspaces"><span class="toc-section-number">5</span> Lean and Multi-root workspaces</a></li>
+<li><a href="#jupyter"><span class="toc-section-number">6</span> Jupyter</a></li>
+<li><a href="#fixing-auto-complete-bug"><span class="toc-section-number">7</span> Fixing auto-complete bug</a></li>
+<li><a href="#cern-root-c-interpreter"><span class="toc-section-number">8</span> Cern ROOT C++ interpreter</a></li>
+<li><a href="#spring-boot"><span class="toc-section-number">9</span> Spring boot</a></li>
+</ul></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use to see programs associated with listening ports and address</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netstat <span class="at">-tuplen</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#alternative command below</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ss <span class="at">-tuplen</span></span></code></pre></div>
+<section id="running-offical-vs-code-server" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Running Offical vs-code server</h1>
+<p><a href="https://code.visualstudio.com/docs/remote/vscode-server">microsoft offical vs code server</a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O-</span> https://aka.ms/install-vscode-server/setup.sh <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div>
+<p>If you run into <code>-bash: /usr/bin/code-server: No such file or directory</code>,<br />
+then go to code-server binary with <code>which code-server</code>, then <code>sudo chmod 777 code-server</code></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code-server</span> serve-local <span class="at">--disable-telemetry</span> <span class="at">--telemetry-level</span> off  <span class="at">--without-connection-token</span> <span class="at">--host</span> 127.0.0.1 <span class="at">--port</span> 8443</span></code></pre></div>
+<p>You can make a file that runs the server like below</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apt</span> install <span class="at">-y</span> gnome-keyring</span></code></pre></div>
+<div class="sourceCode" id="cb5" data-filename="cservrun" data-group="a1" data-glabel="withkeyring"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nohup</span> dbus-run-session <span class="at">--</span> sh <span class="at">-c</span> <span class="st">&quot;(echo 'root' | gnome-keyring-daemon --unlock) &amp;&amp; code-server serve-local --disable-telemetry --telemetry-level off --without-connection-token --host 127.0.0.1 --port 8443&quot;</span> <span class="kw">&amp;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6" data-filename="cservrun" data-group="a1" data-glabel="withOUTkeyring"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nohup</span> code-server serve-local <span class="at">--disable-telemetry</span> <span class="at">--telemetry-level</span> off  <span class="at">--without-connection-token</span> <span class="at">--host</span> 127.0.0.1 <span class="at">--port</span> 8443 <span class="kw">&amp;</span></span></code></pre></div>
+<section id="certificates" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Certificates</h2>
+<p>Summary:</p>
+<ul>
+<li><code>/usr/local/share/ca-certificates/VsCodeOpenBSERVER.crt</code> ==generates==&gt; <code>/etc/ssl/certs/VsCodeOpenBSERVER.pem</code>
+<ul>
+<li>However if <code>/usr/local/share/ca-certificates</code> DOES NOT EXIST, we can just throw <code>VsCodeOpenBSERVER.crt</code> into <code>/etc/ssl/certs/VsCodeOpenBSERVER.crt</code></li>
+</ul></li>
+<li><code>/etc/ssl/private/VsCodeOpenBSERVER.key</code></li>
+</ul>
+<p>Instruction for Debian:</p>
+<ol type="1">
+<li>Download <code>*.crt</code> and <code>*.key</code></li>
+<li><code>sudo update-ca-certificates --fresh</code> to sync/clean <code>/usr/local/share/ca-certificates</code> with <code>/etc/ssl/certs</code></li>
+<li>COPY <code>*.crt</code> into <code>/usr/local/share/ca-certificates</code></li>
+<li>COPY <code>*.key</code> into <code>/etc/ssl/private</code></li>
+<li><code>sudo update-ca-certificates</code> will create a <code>*.pem</code> file in <code>/etc/ssl/certs</code> that points to our <code>*.crt</code></li>
+</ol>
+<p>Instruction for RHEL:</p>
+<ul>
+<li>instead of <code>/usr/local/share/ca-certificates/VsCodeOpn.crt</code> go to <code>/etc/pki/tls/certs/VsCodeOpn.crt</code></li>
+<li>instead of <code>/etc/ssl/private/VsCodeOpn.key</code> go to <code>/etc/pki/tls/private/VsCodeOpn.key</code></li>
+</ul>
+</section>
+<section id="nginx" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> nginx</h2>
+<p>Call the below command once you download nginx.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> unlink /etc/nginx/sites-enabled/default</span></code></pre></div>
+<section id="http" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1"><span class="header-section-number">1.2.1</span> http</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /etc/nginx/sites-available/</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano code-server.conf</span></code></pre></div>
+<div class="sourceCode" id="cb9" data-filename="&quot;/etc/nginx/sites-available/code-server.conf"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">listen</span> 0.0.0.0:80<span class="kw">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">location</span> / {</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_pass</span> http://localhost:8443/<span class="kw">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> X-Forwarded-For <span class="va">$proxy_add_x_forwarded_for</span><span class="kw">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> X-Forwarded-Proto <span class="va">$scheme</span><span class="kw">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> Host <span class="va">$host</span><span class="kw">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> Upgrade <span class="va">$http_upgrade</span><span class="kw">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> Connection upgrade<span class="kw">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> Accept-Encoding gzip<span class="kw">;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>                    </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#call if you have a previous enabled conf #sudo rm /etc/nginx/sites-enabled/code-server.conf</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /etc/nginx/sites-available/code-server.conf /etc/nginx/sites-enabled/code-server.conf</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart nginx</span></code></pre></div>
+<p>Note: for rhel if you choose to open port to traffic like 0.0.0.0:7777 you need to call <code>sudo semanage port -a -t http_port_t  -p tcp 7777</code></p>
+<p>on rhel you need to call <code>setsebool -P httpd_can_network_connect 1</code></p>
+</section>
+<section id="https" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2"><span class="header-section-number">1.2.2</span> https</h3>
+<p>note:RHEL doesnt have folders <code>/etc/nginx/sites-available/</code> nor <code>/etc/nginx/sites-enabled/</code> so you will have to mkdir to make them. You will also have to add this line <code>include /etc/nginx/sites-enabled/*;</code> to <code>/etc/nginx/nginx.conf</code> inside the <code>http{...}</code> block.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /etc/nginx/sites-available/</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano code-server.conf</span></code></pre></div>
+<div class="sourceCode" id="cb12" data-filename="&quot;/etc/nginx/sites-available/code-server.conf"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">listen</span> 0.0.0.0:443 ssl<span class="kw">;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ssl_certificate</span> /etc/ssl/certs/VsCodeRemoteCSERVER.pem<span class="kw">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ssl_certificate_key</span> /etc/ssl/private/VsCodeRemoteCSERVER.key<span class="kw">;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">location</span> / {</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_pass</span> http://localhost:8443/<span class="kw">;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> X-Forwarded-For <span class="va">$proxy_add_x_forwarded_for</span><span class="kw">;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> X-Forwarded-Proto <span class="va">$scheme</span><span class="kw">;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> Host <span class="va">$host</span><span class="kw">;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> Upgrade <span class="va">$http_upgrade</span><span class="kw">;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> Connection upgrade<span class="kw">;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>      <span class="ex">proxy_set_header</span> Accept-Encoding gzip<span class="kw">;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="er">}</span>        </span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#call if you have a previous enabled conf #sudo rm /etc/nginx/sites-enabled/code-server.conf</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /etc/nginx/sites-available/code-server.conf /etc/nginx/sites-enabled/code-server.conf</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart nginx</span></code></pre></div>
+<p>on rhel you need to call <code>setsebool -P httpd_can_network_connect 1</code></p>
+<p>Note: HTTPS/SSL only works on port 443. You have to do some additional config if you want to open to public with a different port.</p>
+<p>go to <code>cd /var/log/nginx/</code> to see log files if something doesnt work
+# Running UnOffical</p>
+<p>Without HTTPS, SSL Cert, things like Coq, Lean, wont work. Extensions wont show details, etc. Codeserver 3.8.0 is the last version that works without SSL.</p>
+<p>Config location: ~/.config/code-server/config.yaml</p>
+</section>
+</section>
+</section>
+<section id="https-setup-on-opnsense-or-pfsense" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> HTTPS setup on Opnsense or Pfsense</h1>
+<p>In the cert and cert-key fields, remember to use ABSOLUTE PATHS or systemctl wont work.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non-root node server cant bind to ports lower than 1024</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Allows code-server to listen on ports lower than 1024, including 443.</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setcap cap_net_bind_service=+ep <span class="kw">`</span><span class="fu">readlink</span> <span class="at">-f</span> <span class="dt">\`</span>which node<span class="dt">\`</span><span class="kw">`</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setcap cap_net_bind_service=+ep /usr/lib/code-server/lib/node</span></code></pre></div>
+<div class="sourceCode" id="cb15" data-filename="~/.config/code-server/config.yaml"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind-addr</span><span class="kw">:</span><span class="at"> 0.0.0.0:443</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auth</span><span class="kw">:</span><span class="at"> password</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">password</span><span class="kw">:</span><span class="at"> root</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cert</span><span class="kw">:</span><span class="at"> /etc/ssl/certs/VsCodeOpenBSERVER.pem</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cert-key</span><span class="kw">:</span><span class="at"> /etc/ssl/private/VsCodeOpenBSERVER.key</span></span></code></pre></div>
+<ol type="1">
+<li>Next you have to generate your Certificate Root Authority.<br />
+(This is what your browser downloads)</li>
+</ol>
+<p>Trust &gt;&gt; Authorities &gt;&gt; Add</p>
+<ul>
+<li>Name: Web SSL Cert</li>
+<li>Method: Create an internal Certificate Authority</li>
+<li>Leave the Cipher and Hash default or else it wont work if key is too weak.</li>
+<li>Use valid city and state data</li>
+</ul>
+<ol start="2" type="1">
+<li>Next you have to generate your Server Certificate.<br />
+(This will generate a <code>VsCodeOpenBSERVER.key</code> and <code>VsCodeOpenBSERVER.crt</code> that you put in your <code>/usr/local/share/ca-certificates</code> and <code>/etc/ssl/private</code>)</li>
+</ol>
+<p>Trust &gt;&gt; Certificates &gt;&gt; Add</p>
+<ul>
+<li>Name: VsCodeOpenBSERVER</li>
+<li>Method: Create an internal Certificate</li>
+<li>Certificate Authority: Web SSL Cert</li>
+<li>Type: Server Certificate</li>
+<li>Alternative Names:
+<ul>
+<li>DNS: server.opnroot.com</li>
+<li>IP: 192.168.1.245</li>
+</ul></li>
+</ul>
+<p>NOTE: Every new PC or computer you use as a server requires you to remake a new certificate</p>
+<p>Download the VsCodeOpenBSERVER.crt and VsCodeOpenBSERVER.key drag them int your code-server browser or download via SSH.</p>
+<section id="certificates-1" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Certificates</h2>
+<p>Conceptually: <code>VsCodeOpenBSERVER.crt</code> to generate <code>VsCodeOpenBSERVER.pem</code> to be used BUT technically you can just use <code>VsCodeOpenBSERVER.crt</code> directly.<br />
+We use <code>VsCodeOpenBSERVER.key directly</code></p>
+<p>The locations below are generally where we put our SSL certificate and private key.</p>
+<ul>
+<li><code>/usr/local/share/ca-certificates</code> hold <code>*.crt</code>
+<ul>
+<li><code>/etc/ssl/certs</code> holds <code>*.pem</code> that is symlinked from <code>*.crt</code> above via <code>sudo update-ca-certificates</code></li>
+</ul></li>
+<li><code>/etc/ssl/private</code> holds <code>*.key</code> which is the private key</li>
+</ul>
+<p>Instruction:</p>
+<ol type="1">
+<li><p>Download <code>*.crt</code> and <code>*.key</code></p></li>
+<li><p><code>sudo update-ca-certificates --fresh</code> to sync/clean <code>/usr/local/share/ca-certificates</code> with <code>/etc/ssl/certs</code></p></li>
+<li><p>COPY <code>*.crt</code> into <code>/usr/local/share/ca-certificates</code></p></li>
+<li><p>COPY <code>*.key</code> into <code>/etc/ssl/private</code></p></li>
+<li><p><code>sudo update-ca-certificates</code> will create a <code>*.pem</code> file in <code>/etc/ssl/certs</code> that points to our <code>*.crt</code></p></li>
+<li><p>Go to Browser</p></li>
+</ol>
+<p>Trust &gt;&gt; Authorities</p>
+<p>Download the Web-SSL-Cert.crt, which is the Root Cert Authority. Go to Chrome settings ,
+Manage Certificates &gt;&gt; <strong>Trusted Root Certificate Authorities</strong> tab &gt;&gt; Import .. , and install the *.crt.<br />
+Note we DO NOT need to install VsCodeOpn.crt on our browser.</p>
+</section>
+</section>
+<section id="updating-unofficial-code-server" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Updating Unofficial Code-server</h1>
+<section id="rhel" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> RHEL</h2>
+<ul>
+<li>Unlike in the offical documents, <code>sudo rpm -i code-server...</code> will error on preinstalled code-server so you need to add a <code>-U</code> flag to it.</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fOL</span> https://github.com/coder/code-server/releases/download/v<span class="va">$VERSION</span>/code-server-<span class="va">$VERSION</span>-amd64.rpm</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rpm <span class="at">-U</span> <span class="at">-i</span> code-server-<span class="va">$VERSION</span>-amd64.rpm <span class="co">#ADD THE '-U' flag here</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable <span class="at">--now</span> code-server@<span class="va">$USER</span></span></code></pre></div>
+<p>Next your code-server <strong>should fail</strong> to start if running on port 80 or 443 or anything lower than 1024.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode .txt"><code class="sourceCode default"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>12:15 PM [2022-10-02T16:15:06.060Z] error parent:17517 Error: EACCES: permission denied, mkdir '20221002-1215-01-'code-server</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>12:15 PM [2022-10-02T16:15:06.060Z] error parent:17517 Uncaught exception: EACCES: permission denied, mkdir '20221002-1215-01-'code-server</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>12:15 PM [2022-10-02T16:15:06.058Z] error listen EACCES: permission denied 0.0.0.0:443 code-server</span></code></pre></div>
+<p>The solution is below:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non-root node server cant bind to ports lower than 1024</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Allows code-server to listen on ports lower than 1024, including 443.</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setcap cap_net_bind_service=+ep /usr/lib/code-server/lib/node</span></code></pre></div>
+</section>
+</section>
+<section id="extensions" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Extensions</h1>
+<p>go to <a href="https://open-vsx.org/">open-vsx.org</a></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://open-vsx.org/api/something/vscode-bleh/1.2.0/file/something.vscode-bleh-1.2.0.vsix</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code-server</span> <span class="at">--install-extension</span> something.vscode-bleh-1.2.0.vsix</span></code></pre></div>
+<section id="extensions-list" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Extensions list</h2>
+<ul>
+<li>AWS Toolkit</li>
+<li>Git Graph</li>
+<li>HashiCorp Terraform</li>
+<li>Haskell</li>
+<li>Haskell Syntax Highlighting</li>
+<li>lean4</li>
+<li>lean</li>
+<li>TLA+</li>
+<li>Live Server</li>
+<li>Javascript and TypeScript Nightly</li>
+<li>Rust</li>
+<li>VSCoq</li>
+</ul>
+</section>
+</section>
+<section id="lean-and-multi-root-workspaces" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Lean and Multi-root workspaces</h1>
+<ul>
+<li>To use multi-root vscode workspaces with lean, the *.workplace file must be placed inside a lean project folder.</li>
+</ul>
+</section>
+<section id="jupyter" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Jupyter</h1>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env</span> GO111MODULE=on go install github.com/gopherdata/gophernotes@latest</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">go</span> env GOPATH<span class="va">)</span><span class="st">&quot;</span>/src/github.com/gopherdata/gophernotes</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">env</span> GO111MODULE=on go install</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/.local/share/jupyter/kernels/gophernotes</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> kernel/<span class="pp">*</span> ~/.local/share/jupyter/kernels/gophernotes</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/.local/share/jupyter/kernels/gophernotes</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +w ./kernel.json</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s|gophernotes|</span><span class="va">$(</span><span class="ex">go</span> env GOPATH<span class="va">)</span><span class="st">/bin/gophernotes|&quot;</span> <span class="op">&lt;</span> kernel.json.in <span class="op">&gt;</span> kernel.json</span></code></pre></div>
+</section>
+<section id="fixing-auto-complete-bug" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Fixing auto-complete bug</h1>
+<p>Problem: VSCode command palette may cache old and non-existent paths. (Opening a folder or Workspace will autofill an old non-existant path)</p>
+<ul>
+<li>Solution: Ctrl+Shift+P &gt; File: Clear Recently Opened</li>
+</ul>
+</section>
+<section id="cern-root-c-interpreter" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Cern ROOT C++ interpreter</h1>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--env</span> <span class="at">--add</span> channels conda-forge</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install root</span></code></pre></div>
+</section>
+<section id="spring-boot" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Spring boot</h1>
+<ul>
+<li>Java Extension Pack - microsoft vscjava</li>
+<li>Spring boot Extension Pack</li>
+</ul>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <div class="pagehitscounter"> 
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                </div>
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    // console.log(datagroupCodeBlocks)
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    btn.id = datagroup+singleglabeltxt;
+                    const radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",datagroup+singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    // leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radiolabelx);
+                    // radiolabelx.appendChild(btn);
+                    const radioclass = document.createElement("div");
+                    radioclass.className = "radioclass";
+                    radioclass.appendChild(btn);
+                    radioclass.appendChild(radiolabelx)
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radioclass);
+                    // leaderCodeBlockDiv.prepend(btn);
+                    
+                    
+                })
+             
+                // leaderCodeBlockDiv.append(btnlist);
+                
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+
+                btnShowAll.name = datagroup;
+                btnShowAll.id = datagroup+"All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for",datagroup+"All");
+                radiolabel.innerText = "All";
+
+                const radioclass = document.createElement("div");
+                radioclass.className = "radioclass";
+                radioclass.appendChild(btnShowAll);
+                radioclass.appendChild(radiolabel)
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin',radioclass);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

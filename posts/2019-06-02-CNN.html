@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
+
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2W1VXE5GSE');
+        </script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - CNN</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/userJY" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>CNN</h1>
+            
+
+            <div class="info">
+    Posted on June  2, 2019
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'AI'." href="../tags/AI.html">AI</a>, <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'python'." href="../tags/python.html">python</a>, <a title="All pages tagged 'pytorch'." href="../tags/pytorch.html">pytorch</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#week-1"><span class="toc-section-number">1</span> Week 1</a>
+<ul>
+<li><a href="#problem-types"><span class="toc-section-number">1.1</span> Problem Types</a></li>
+</ul></li>
+<li><a href="#transformations"><span class="toc-section-number">2</span> Transformations</a>
+<ul>
+<li><a href="#kernelfilter"><span class="toc-section-number">2.1</span> Kernel(Filter)</a></li>
+<li><a href="#pooling"><span class="toc-section-number">2.2</span> Pooling</a></li>
+<li><a href="#kernelfilter-vs-pooling"><span class="toc-section-number">2.3</span> Kernel(filter) vs Pooling</a></li>
+<li><a href="#padding"><span class="toc-section-number">2.4</span> Padding</a></li>
+<li><a href="#channels"><span class="toc-section-number">2.5</span> Channels</a></li>
+</ul></li>
+<li><a href="#stride"><span class="toc-section-number">3</span> Stride</a></li>
+<li><a href="#example-dimensions"><span class="toc-section-number">4</span> Example dimensions</a></li>
+<li><a href="#week-2"><span class="toc-section-number">5</span> Week 2</a>
+<ul>
+<li><a href="#convnet"><span class="toc-section-number">5.1</span> ConvNet</a></li>
+</ul></li>
+<li><a href="#transfer-learning"><span class="toc-section-number">6</span> Transfer learning</a></li>
+<li><a href="#mathematica"><span class="toc-section-number">7</span> Mathematica</a></li>
+<li><a href="#increasing-dataset-size"><span class="toc-section-number">8</span> Increasing Dataset size</a></li>
+</ul></div>
+<section id="week-1" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Week 1</h1>
+<blockquote>
+<p>Core problem with images and Neural Network. A 1000 x 1000 blackwhite image is a 1 million parameter, add just 1000 hidden layer, we have 1 billion parameters.<br />
+The Solution is using convolution which is a type of information compression.</p>
+</blockquote>
+<section id="problem-types" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Problem Types</h2>
+<ul>
+<li>Image classification</li>
+<li>Object detection
+<ul>
+<li>Bounded object and Position detection</li>
+</ul></li>
+<li>Style transfer - art generation</li>
+</ul>
+</section>
+</section>
+<section id="transformations" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Transformations</h1>
+<section id="kernelfilter" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Kernel(Filter)</h2>
+<ul>
+<li>Kernels aka Filters - Sliding window operation with some convolution matrix on your image which may result in compressed dimension.</li>
+</ul>
+<p>Convolution is elementwise multiplication. It is NOT the dotproduct matrix multiplication.<br />
+X convolve with kernel means<br />
+submatrix(X) elementwise multiply by kernel matrix.
+Example of the</p>
+<p><span class="math display">\[kernel = \begin{bmatrix} 2 &amp; 5 \\ -7 &amp; -6 \end{bmatrix}\]</span></p>
+<p><span class="math display">\[\begin{bmatrix}
+    a &amp; b &amp; c\\
+    d &amp; e &amp; f\\
+    g &amp; h &amp; i\\
+    j &amp; k &amp; l
+  \end{bmatrix} \star^{Conv1} \begin{bmatrix} 2 &amp; 5 \\ -7 &amp; -6 \end{bmatrix} = \begin{bmatrix}
+    Sum(\begin{bmatrix} 2a &amp; 5b \\ -7d &amp; -6e \end{bmatrix}) &amp; Conv2\\
+    Conv3 &amp; Conv4 \\
+    Conv5 &amp; Conv6\\
+  \end{bmatrix}\]</span>
+<span class="math display">\[Conv1 = Sum(\begin{bmatrix} 2a &amp; 5b \\ -7d &amp; -6e \end{bmatrix}) = 2a + 5b -7d -6e\]</span></p>
+</section>
+<section id="pooling" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Pooling</h2>
+<ul>
+<li>Pooling - Sliding window Aggregation or compression operation which will result in compressed dimension.
+<ul>
+<li>Max pooling</li>
+<li>Min pooling</li>
+<li>L2 pooling</li>
+</ul></li>
+</ul>
+</section>
+<section id="kernelfilter-vs-pooling" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> Kernel(filter) vs Pooling</h2>
+<p>They are very similar but Kernel(Filters) have a convolution matrix which is applied onto the layer or input.</p>
+<p>Kernel(filter) can be thought of as Transform w/ convolution matrix then Pool; meaning Pooling is an implicit operation of Kernels(filters).</p>
+</section>
+<section id="padding" class="level2" data-number="2.4">
+<h2 data-number="2.4"><span class="header-section-number">2.4</span> Padding</h2>
+<ul>
+<li>Adding extra data all around the edges of the original input image.
+<ul>
+<li>Ex. 2-by-3 image is padded to 4-by-5</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode .txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>2-by-3 is padded to 4-by-5</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>o o o  =PADDING=&gt;  P P P P P</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>o o o              P o o o P</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                   P o o o P</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                   P P P P P</span></code></pre></div>
+<ul>
+<li>Why?
+<ul>
+<li>A kernel(filter) is a sliding window meaning it will only touch an edge once for an unpadded image.
+<ul>
+<li>No-padding means you lose alot of the information on the edges of the image.</li>
+</ul></li>
+<li>Every kernel(filter) or Pooling will decrease dimension and in extreme case it collapses to 1-by-1 pixel, which <strong>padding</strong> prevents.</li>
+</ul></li>
+</ul>
+</section>
+<section id="channels" class="level2" data-number="2.5">
+<h2 data-number="2.5"><span class="header-section-number">2.5</span> Channels</h2>
+<ul>
+<li>Alternative terminology to <strong>Channel</strong>=<strong>depth of the 3d volume</strong></li>
+<li>Channels just means an extra dimension like RGB uses 3 dimensions, aka we get 3 matrices stacked on top of each other
+<ul>
+<li>eg. 100-by-50 RGB image is dimensions 100-50-3</li>
+</ul></li>
+<li>Number of Channels of input must match Number of Channels of kernel(filter)</li>
+</ul>
+<p>Convolving a RGB image denoted with dimensions 100-50-3 with a 6-6-3 results in a 95-45-1 matrix.
+How did we calculate the output dimensions 95-45-1?<br />
+<strong>(InputDim-ConvolveDim+1)=OutputDim</strong><br />
+(100-6+1)=95<br />
+(50-6+1)=45<br />
+(3-3+1)=1</p>
+<p>Observe how the rgb dimension collapses when we convolved with the analogous 6-6-3 convolution filter.</p>
+<ul>
+<li>KNOW we can use multiple convolution filters then stack the results meaning we can get output of dimension 95-45-N
+<ul>
+<li>N is the number of convolution filters we used on the original input.</li>
+</ul></li>
+</ul>
+<p><strong>DIMENSION OF # of INPUT CHANNELS MUST EQUAL TO # OF CONVOLUTION CHANNELS BUT NEITHER HAS ANY RELATION TO THE # OF OUTPUT CHANNELS</strong></p>
+</section>
+</section>
+<section id="stride" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Stride</h1>
+<ul>
+<li>Kernel(filter) and Pooling are considered Sliding windows.</li>
+<li><strong>Stride</strong> is how many units to slide each step.</li>
+</ul>
+</section>
+<section id="example-dimensions" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Example dimensions</h1>
+<p><span class="math display">\[\displaylines{
+\overbrace{
+32\times32\times{\color{green}\overset{channel}{3}}}^{Input}
+\overbrace{
+\overset{Convolve}{\underset{\displaylines{{\color{green}channel=3}\\stride=1\\pad=0\\Convolve=5\times5\\filterCount=6}}{\longrightarrow}}
+\overset{32-5+1}{28}\times\overset{32-5+1}{28}\times6 \overset{Pool}{\underset{\displaylines{{\color{green}channel=3}\\stride=1\\pad=0\\filters=5}}{\longrightarrow}}
+14\times14\times6}^{Layer\ 1}
+\overbrace{
+\overset{Convolve}{\underset{\displaylines{{\color{green}channel=3}\\stride=1\\pad=0\\filters=5}}{\longrightarrow}}\overset{32-5+1}{28}\times\overset{32-5+1}{28}\times6 \overset{Pool}{\underset{\displaylines{{\color{green}channel=3}\\stride=1\\pad=0\\filters=5}}{\longrightarrow}}
+14\times14\times6 =200 \rightarrow}^{Layer\ 2}
+\\ 
+\overset{Matrix^{200\times60}}{\underset{\displaylines{{\color{green}channel=3}\\stride=1\\pad=0\\filters=5}}{\longrightarrow}}}\]</span></p>
+<ul>
+<li>You should notice there is <strong>NO activation AKA non-linear function</strong> after each layer(convolution+pooling) and the activation is only done once at the end.</li>
+</ul>
+</section>
+<section id="week-2" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Week 2</h1>
+<section id="convnet" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> ConvNet</h2>
+<p>Practically use opensource resnet, then use transfer learning</p>
+</section>
+</section>
+<section id="transfer-learning" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Transfer learning</h1>
+<ul>
+<li>Prexisting model and freeze all the layers AKA <strong>freeze</strong> the trained weights or coefficients and throw away the last layer(which should represent an activation function).
+<ul>
+<li>Why throw away the last layer?
+<ul>
+<li>Ex: The existing model outputs 100 classifications symbolized with 100-vector but instead you want to only do 2 classes so you throw away the last layer which outputs 100-vector classes and make your own layer that outputs 2-vector classes.</li>
+</ul></li>
+<li>Training means you only train the last layer you replaced, NOT the frozen layer of the previous model.</li>
+</ul></li>
+<li>Typically you do this by setting <code>trainableparameters=0</code> or <code>freeze=1</code> which tells the ML framework not to train these layers.</li>
+</ul>
+</section>
+<section id="mathematica" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Mathematica</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>randphoto <span class="op">=</span> ResourceFunction[<span class="st">&quot;RandomPhoto&quot;</span>][<span class="dv">200</span>]<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rphoto2 <span class="op">=</span> Binarize<span class="op">@</span>randphoto<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>hlinekernel <span class="op">=</span> {{<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>},{<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>},{<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>}}<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>vlinekernel <span class="op">=</span> {{<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>},{<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>},{<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>}}<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> ImageConvolve[rphoto2,vlinekernel]</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>b<span class="op">=</span> ImageConvolve[rphoto2,hlinekernel]</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ImageAdd[a,b]</span></code></pre></div>
+</section>
+<section id="increasing-dataset-size" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Increasing Dataset size</h1>
+<p>Tactics</p>
+<ul>
+<li>Making a mirror duplicate</li>
+<li>Random cropping</li>
+<li>Rotation</li>
+<li>Shearing</li>
+<li>Local Warping</li>
+<li>Color Shifting
+<ul>
+<li>PCA color augmentation</li>
+</ul></li>
+</ul>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <div class="pagehitscounter"> 
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                </div>
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    // console.log(datagroupCodeBlocks)
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    btn.id = datagroup+singleglabeltxt;
+                    const radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",datagroup+singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    // leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radiolabelx);
+                    // radiolabelx.appendChild(btn);
+                    const radioclass = document.createElement("div");
+                    radioclass.className = "radioclass";
+                    radioclass.appendChild(btn);
+                    radioclass.appendChild(radiolabelx)
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radioclass);
+                    // leaderCodeBlockDiv.prepend(btn);
+                    
+                    
+                })
+             
+                // leaderCodeBlockDiv.append(btnlist);
+                
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+
+                btnShowAll.name = datagroup;
+                btnShowAll.id = datagroup+"All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for",datagroup+"All");
+                radiolabel.innerText = "All";
+
+                const radioclass = document.createElement("div");
+                radioclass.className = "radioclass";
+                radioclass.appendChild(btnShowAll);
+                radioclass.appendChild(radiolabel)
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin',radioclass);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>
