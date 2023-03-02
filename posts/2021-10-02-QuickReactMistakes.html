@@ -130,6 +130,68 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bleh <span class="op">=</span> <span class="fu">useRef</span>(<span class="op">..</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">useEffect</span>(()<span class="kw">=&gt;</span>{<span class="op">..</span>}<span class="op">,</span>[bleh<span class="op">.</span><span class="at">current</span>])<span class="op">;</span></span></code></pre></div>
 </section>
+<section id="referential-equality" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Referential equality</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Foo</span>({bar<span class="op">,</span> baz}) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> options <span class="op">=</span> {bar<span class="op">,</span> baz}</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  React<span class="op">.</span><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">buzz</span>(options)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span> [options]) <span class="co">// we want this to re-run if bar or baz change</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>foobar<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Blub</span>() {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">&lt;</span>Foo bar<span class="op">=</span><span class="st">&quot;bar value&quot;</span> baz<span class="op">=</span>{<span class="dv">3</span>} <span class="op">/&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><code>useEffect</code> is worthless in the above scenario since js will say each new rerender of options is “different”</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Foo</span>({bar<span class="op">,</span> baz}) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  React<span class="op">.</span><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> options <span class="op">=</span> {bar<span class="op">,</span> baz}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">buzz</span>(options)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span> [bar<span class="op">,</span> baz]) <span class="co">// we want this to re-run if bar or baz change</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>foobar<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The above works but ONLY IF bar and baz are primitive types. If we defined bar and baz as a function and list type, the above would fail.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Foo</span>({bar<span class="op">,</span> baz}) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  React<span class="op">.</span><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> options <span class="op">=</span> {bar<span class="op">,</span> baz}</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">buzz</span>(options)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span> [bar<span class="op">,</span> baz])</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>foobar<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Blub</span>() {</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bar <span class="op">=</span> React<span class="op">.</span><span class="fu">useCallback</span>(() <span class="kw">=&gt;</span> {}<span class="op">,</span> [])</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> baz <span class="op">=</span> React<span class="op">.</span><span class="fu">useMemo</span>(() <span class="kw">=&gt;</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">,</span> [])</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">&lt;</span>Foo bar<span class="op">=</span>{bar} baz<span class="op">=</span>{baz} <span class="op">/&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The above now works.</p>
+</section>
+<section id="objects-and-useeffect-referential-equality" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Objects and useEffect, referential equality</h1>
+<p>https://dev.to/vicnovais/understanding-referential-equality-in-reacts-useeffect-2m7o</p>
+<ul>
+<li><code>useEffect</code> detects REFERENTIAL EQUALITY</li>
+<li>When a object is passed to <code>useEffect</code> dependency, even if we mutate the object, the reference to the object doesnt change</li>
+</ul>
+<section id="useref-and-useeffect-chaos" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> useRef and useEffect chaos</h2>
+<ul>
+<li><code>const myref = useRef()</code> creates an object <code>myref</code>
+<ul>
+<li><code>myref</code> is an object with a property called <code>current</code></li>
+<li>even if <code>myref.current</code> changes, aka the DOMElement changes, <code>myref</code> the object itself maintains the same reference since only the property <code>current</code> changed.</li>
+</ul></li>
+<li>useEffect only detects referential equality.</li>
+</ul>
+<p>For those reasons above<br />
+<code>useEffect(()=&gt;{},[myref])</code> doesnt work<br />
+but… what if we did <code>useEffect(()=&gt;{},[myref.current])</code>?<br />
+We naively expect it to work since <code>myref.current</code> does change reference BUT REMEMBER even if <code>myref.current</code> changes meaning the DOM changed, it does not trigger a react rerender.<br />
+useEffect only works when a rerender is triggered, meaning it will never trigger.</p>
+<p>Example is D3 controlling the DOM, D3 does not trigger rerenders therefore useEffect on D3 controlled elements wont work!!</p>
+</section>
+</section>
 
         </div>
         <div id="footer">

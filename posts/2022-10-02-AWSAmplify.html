@@ -124,138 +124,105 @@
 </div>
 <section id="using-amplify-ui" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Using Amplify UI</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>npx create<span class="op">-</span>next<span class="op">-</span>app</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>cd myapp</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>amplify pull <span class="op">--</span>appId XXXXXXXXX <span class="op">--</span>envName staging</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Amplify</span> AppID found: XXXXXXXXXX. Amplify App name is: demo</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Backend</span> environment staging found in Amplify Console app: demo</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Choose your default editor: Visual Studio Code</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Choose the type of app that you<span class="st">'re building javascript</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">Please tell us about your project</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">? What javascript framework are you using react</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">? Source Directory Path:  src</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">? Distribution Directory Path: .next</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">? Build Command:  npm run-script build</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">? Start Command: npm run dev</span></span></code></pre></div>
-<ul>
-<li>This will create a <code>model/</code> and <code>ui-components/</code> in your <code>src/</code> folder</li>
-<li>This will create a <code>amplify/</code> in your root folder</li>
-</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">amplify</span> init</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Project information</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># | Name: MyAmplifyProject</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># | Environment: dev</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># | Default editor: Visual Studio Code</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># | App type: javascript</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># | Javascript framework: none</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># | Source Directory Path: src</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># | Distribution Directory Path: dist</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># | Build Command: npm run-script build</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># | Start Command: npm run-script start</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ? Initialize the project with the above configuration? Yes</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Using default provider  awscloudformation</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ? Select the authentication method you want to use: AWS profile</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># For more information on AWS Profiles, see:</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># ? Please choose the profile you want to use mydemoamplifyprofile</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding backend environment dev to AWS Amplify app: awfieojiwfe</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Deployment completed.</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Deploying root stack MyAmplifyProject [ ---------------------------------------- ] 0/4</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#         amplify-MyAmplifyProject-dev-14222 AWS::CloudFormation::Stack     CREATE_IN_PROGRESS             Sat</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">#         UnauthRole                     AWS::IAM::Role                 CREATE_IN_PROGRESS             Sat</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">#         DeploymentBucket               AWS::S3::Bucket                CREATE_IN_PROGRESS             Sat</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">#         AuthRole                       AWS::IAM::Role                 CREATE_IN_PROGRESS             Sat</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># ✔ Help improve Amplify CLI by sharing non sensitive configurations on failures (y/N) · no</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Deployment state saved successfully.</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># ✔ Initialized provider successfully.</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Initialized your environment successfully.</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Your project has been successfully initialized and connected to the cloud!</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Some next steps:</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;amplify status&quot; will show you what you've added already and if it's locally configured or deployed</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;amplify add &lt;category&gt;&quot; will allow you to add features like user login or a backend API</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;amplify push&quot; will build all your local backend resources and provision it in the cloud</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;amplify console&quot; to open the Amplify Console and view your project status</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;amplify publish&quot; will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Pro tip:</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Try &quot;amplify add api&quot; to create a backend API and then &quot;amplify push&quot; to deploy everything</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># (base) ➜  MyAmplifyProject amplify status</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co">#     Current Environment: dev</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co"># ┌──────────┬───────────────┬───────────┬─────────────────┐</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># │ Category │ Resource name │ Operation │ Provider plugin │</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co"># └──────────┴───────────────┴───────────┴─────────────────┘</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h40737461727473616c740a7b7b540a20202b20616d706c6966792f0a20202b2b206261636b656e642f0a20202b2b2b20617773636c6f7564666f726d6174696f6e2f0a20202b2b2b2b20726f6f742d636c6f7564666f726d6174696f6e2d737461636b2e6a736f6e0a20202b2b2b2074797065732f0a20202b2b2b20616d706c6966792d6d6574612e6a736f6e0a20202b2b20686f6f6b732f0a7d7d0a40656e6473616c74"></figure>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">amplify</span> add api</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">amplify</span> remove api</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ? Select from one of the below mentioned services: GraphQL</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ? Here is the GraphQL API that we will create. Select a setting to edit or continue Continue</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ? Choose a schema template: Blank Schema</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ⚠️  </span><span class="al">WARNING</span><span class="co">: your GraphQL API currently allows public create, read, update, and delete access to all models via an API Key. To configure PRODUCTION-READY authorization rules, review: https://docs.amplify.aws/cli/graphql/authorization-rules</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ GraphQL schema compiled successfully.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit your schema at /home/rhel/ReactProjs/1trash/amplifyTrash/amplify/backend/api/amplifytrash/schema.graphql or place .graphql files in a directory at /home/rhel/ReactProjs/1trash/amplifyTrash/amplify/backend/api/amplifytrash/schema</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ✔ Do you want to edit the schema now? (Y/n) · yes</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Could not find selected code editor (Visual Studio Code) on your machine.</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># ? Try opening with system-default editor instead? No</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Successfully added resource amplifytrash locally</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Some next steps:</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;amplify push&quot; will build all your local backend resources and provision it in the cloud</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;amplify publish&quot; will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud</span></span></code></pre></div>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h40737461727473616c740a7b7b540a20202b20616d706c6966792f0a20202b2b206261636b656e642f0a20202b2b2b206170692f0a20202b2b2b2b204d7944656d6f50726f6a2f0a20202b2b2b2b2b206275696c642f0a20202b2b2b2b2b207265736f6c766572732f0a20202b2b2b2b2b20737461636b732f0a20202b2b2b2b2b20736368656d612e6772617068716c0a20202b2b2b20617773636c6f7564666f726d6174696f6e2f0a20202b2b2b2b20726f6f742d636c6f7564666f726d6174696f6e2d737461636b2e6a736f6e0a20202b2b2b2074797065732f0a20202b2b2b20616d706c6966792d6d6574612e6a736f6e0a20202b2b20686f6f6b732f0a7d7d0a40656e6473616c74"></figure>
 </section>
-<section id="understanding-amplify-studio" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Understanding Amplify Studio</h1>
-<section id="component-vs-child" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> Component vs Child</h2>
-<p><img src="../images/180715AWSAmplify.png" /></p>
-<p>Observe the “Component properties” sidebar correspond to <code>props</code> and typescript types</p>
-<div class="sourceCode" id="cb3" data-filename="myapp/ui-components/NavBar.jsx"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">NavBar</span>(props) {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> { username<span class="op">,</span> avatar<span class="op">,</span> authText<span class="op">,</span> handleAuth<span class="op">,</span> overrides<span class="op">,</span> <span class="op">...</span>rest } <span class="op">=</span> props<span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span><span class="op">...</span></span></code></pre></div>
-<div class="sourceCode" id="cb4" data-filename="myapp/ui-components/NavBar.ts"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> declare type NavBarProps <span class="op">=</span> React<span class="op">.</span><span class="at">PropsWithChildren</span><span class="op">&lt;</span>Partial<span class="op">&lt;</span>FlexProps<span class="op">&gt;</span> <span class="op">&amp;</span> {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    username<span class="op">?:</span> <span class="bu">String</span><span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    avatar<span class="op">?:</span> <span class="bu">String</span><span class="op">;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    authText<span class="op">?:</span> <span class="bu">String</span><span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    handleAuth<span class="op">?:</span> (<span class="dt">event</span><span class="op">:</span> SyntheticEvent) <span class="kw">=&gt;</span> <span class="kw">void</span><span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>} <span class="op">&amp;</span> {</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    overrides<span class="op">?:</span> NavBarOverridesProps <span class="op">|</span> <span class="kw">undefined</span> <span class="op">|</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>}<span class="op">&gt;;</span></span></code></pre></div>
-<p><a href="https://ui.docs.amplify.aws/react/components/view">Amplify UI primitive props</a></p>
+<section id="auth-rules" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Auth rules</h1>
 <ul>
-<li>Press “Add Prop” next to “Component properties”.
+<li><code>@auth</code> directive means accessing that Todo product type will require cognito sign-in
 <ul>
-<li>Name: “username” &lt;– this is the prop variable name as shown in the codeblock above (Can name it anything)</li>
-<li>Type: String &lt;– this is the Type that is given to our typescript file</li>
-</ul></li>
-</ul>
-<p>using the AmplifyUI components</p>
-<div class="sourceCode" id="cb5" data-filename="layout.jsx"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { Amplify } <span class="im">from</span> <span class="st">&quot;aws-amplify&quot;</span><span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { studioTheme } <span class="im">from</span> <span class="st">&quot;../ui-components&quot;</span><span class="op">;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { AmplifyProvider } <span class="im">from</span> <span class="st">&quot;@aws-amplify/ui-react&quot;</span><span class="op">;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="st">&quot;@aws-amplify/ui-react/styles.css&quot;</span><span class="op">;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">// import &quot;@fontsource/inter&quot;;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="st">'@/styles/globals.css'</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> awsconfig <span class="im">from</span> <span class="st">&quot;../aws-exports&quot;</span><span class="op">;</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>Amplify<span class="op">.</span><span class="fu">configure</span>(awsconfig)<span class="op">;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">App</span>({ Component<span class="op">,</span> pageProps }) {</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>AmplifyProvider theme<span class="op">=</span>{studioTheme}<span class="op">&gt;</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>Component {<span class="op">...</span>pageProps} <span class="op">/&gt;</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;/</span>AmplifyProvider<span class="op">&gt;</span>  </span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb6" data-filename="index.jsx"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> NavBar <span class="im">from</span> <span class="st">'@/ui-components/NavBar'</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Home</span>() {</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (<span class="op">&lt;&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>NavBar username<span class="op">=</span><span class="st">&quot;none&quot;</span> avatar<span class="op">=</span><span class="st">&quot;none&quot;</span> authText<span class="op">=</span><span class="st">&quot;Hi&quot;</span> handleAuth<span class="op">=</span>{() <span class="kw">=&gt;</span> {<span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;hi&quot;</span>)<span class="op">;</span>}} <span class="op">/&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;/&gt;</span>) }</span></code></pre></div>
-</section>
-<section id="hero-example" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> Hero example</h2>
-<p><img src="../images/180715AWSAmplify_2.png" /></p>
+<li>OBSERVE: the amplify generated Todo also included <code>owner</code>
 <ul>
-<li>In this Hero example, the <strong>Component</strong> refers to the <strong>HeroLayout1</strong>, aka the Entire thing</li>
-<li>The <strong>Child</strong>, refers to the “Button” which we have selected on the left Elements tree sidebar.</li>
-</ul>
-<p>In this case we set our “handleClick” callback via our <strong>HeroLayout1</strong>.<br />
-The <strong>Child</strong> aka button when clicked will call the <strong>HeroLayout1</strong>’s “handleClick” callback function.</p>
-</section>
-</section>
-<section id="graphql-crud-component-integration" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> GraphQL CRUD Component integration</h1>
-<ul>
-<li>Amplify Studio native C(R)UD dynamoDB integration with it’s graphQL appsync models.<br />
-</li>
-<li>Is it free? Well it’s actually deployed in your AppSync function using a VTL runtime(as opposed to lambda runtime), so no</li>
-</ul>
-<p><img src="../images/amplifygraphql0.png" />
-<img src="../images/amplifygraphql1.png" /></p>
-</section>
-<section id="authenticator-hook" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Authenticator hook</h1>
-<div class="sourceCode" id="cb7" data-filename="page.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {  withAuthenticator } <span class="im">from</span> <span class="st">'@aws-amplify/ui-react'</span><span class="op">;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Home</span>() {<span class="cf">return</span> (<span class="op">&lt;</span>div<span class="op">&gt;</span>Home<span class="op">&lt;/</span>div<span class="op">&gt;</span>)}</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="fu">withAuthenticator</span>(Home)</span></code></pre></div>
-</section>
-<section id="upgrading-amplify-figma-ui-components" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Upgrading Amplify Figma UI components</h1>
-<p>Understand that “primitives” in figma are things like buttons, text boxes which the AWS team modifies but the user should NEVER touch.<br />
-The user modifies “components” in figma which are combinations of “primitives” in figma.<br />
-<strong>Upgrading Amplify UI components == Upgrading “primitives” in Figma</strong> (we upgrade by copying the updated “primitives” into our Amplify UI project while keeping our custom components)</p>
-<ul>
-<li>Go to https://www.figma.com/community/file/1047600760128127424</li>
-<li>Click “Get a copy”</li>
-<li>Delete your Primitives page in your custom Figma UI</li>
-<li>Make a new page called Primitives</li>
-<li>Shift+Select Primitives in the Updated Amplify UI Figma , Primitives pages
-<ul>
-<li>Should highlight “Icon, Alert, Card,….Button, Rating, Badge”
-<ul>
-<li>Ctrl+C copy then Switch tabs to your custom figma “Primitives” page and Ctrl+V paste</li>
+<li>On Creation, owner is the cognito user</li>
+<li>On Query, the Todo’s returned will only be the ones created by the owner</li>
 </ul></li>
 </ul></li>
 </ul>
-<p><img src="../images/figma001.png" /></p>
-<ol type="1">
-<li>The red X mark indicates the component is NOT connected. (Do Not Click “Restore Component”, it will just copy the primitive into your component page).<br />
-</li>
-<li>Click the dropdown, the search for “Icon”, then select it.</li>
-</ol>
-<figure>
-<img src="../images/figma002.png" alt="It should look like this" /><figcaption aria-hidden="true">It should look like this</figcaption>
-</figure>
-<p>You will have to do this for ALL Components in your components list. Use the area circled in BLUE to help find “primitives” that your component uses.</p>
-<p>KNOW: This is tedious and there is no way around it !</p>
-</section>
-<section id="building-your-own-component" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Building your own component</h1>
-<ol type="1">
-<li>Hit “f” to frame-building, then drag a rectangle frame</li>
-<li>Right-click &gt;&gt; Create component</li>
-<li>Select component frame, Navbar &gt;&gt; Click Resources &gt;&gt; Primitives &gt;&gt; Button</li>
-<li>Optional , Right click frame &gt;&gt; Main Component &gt;&gt; Add variant</li>
-</ol>
+<div class="sourceCode" id="cb4" data-filename="MyAmplifyProj/amplify/backend/api/amplifytrash/schema.graphql"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>type Todo @model @<span class="fu">auth</span>(rules<span class="op">:</span> [{<span class="dt">allow</span><span class="op">:</span> owner}]){</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">todoId</span><span class="op">:</span> ID<span class="op">!</span> @primaryKey</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">content</span><span class="op">:</span> <span class="bu">String</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5" data-filename="amplifyOutput"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>type Todo @aws_cognito_user_pools {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>	<span class="dt">todoId</span><span class="op">:</span> ID<span class="op">!</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>	<span class="dt">content</span><span class="op">:</span> <span class="bu">String</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>	<span class="dt">createdAt</span><span class="op">:</span> AWSDateTime<span class="op">!</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>	<span class="dt">updatedAt</span><span class="op">:</span> AWSDateTime<span class="op">!</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>	<span class="dt">owner</span><span class="op">:</span> <span class="bu">String</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 
         </div>

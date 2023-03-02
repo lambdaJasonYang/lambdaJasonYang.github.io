@@ -143,10 +143,12 @@
     C-->D["Joists"];
     CC-->|"Ends of"|D;
     D-->E["Subfloor"];
-    E-->F["Plates"];
     E-->G["Hardwood Floor"];
-    F-->H["Studs"];
-    H-->I["2xPlates"];
+    subgraph drywall
+        E-->F["Plates"];
+        F-->H["Studs"];
+        H-->I["2xPlates"];
+    end
 </div>
 <section id="foundation" class="level2" data-number="3.1">
 <h2 data-number="3.1"><span class="header-section-number">3.1</span> Foundation</h2>

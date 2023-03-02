@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Quick AWS</title>
+        <title>Jason Yang - Quick AWS EC2 VPC</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,7 +110,7 @@
         </div>
 
         <div id="content">
-            <h1>Quick AWS</h1>
+            <h1>Quick AWS EC2 VPC</h1>
             
 
             <div class="info">
@@ -126,7 +126,6 @@
 <div class="mermaid">graph TD;
 A["VPC"]---|"closely related"|B["EC2"]
 A---|"iso"|C["Private LAN"]
-subgraph one
 A-->Sub["Subnet"]
 Sub-->|"determines"|Routetable["Routetable"]
 Routetable-->|"contains"|InternetGateway["InternetGateway"]
@@ -144,8 +143,25 @@ Sub --> D["CIDR aka DHCP"]</div>
 <li>Typically all Zones use the same Route-Table, Network ACL</li>
 </ul></li>
 </ul>
-<section id="ec2-and-ssh" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> EC2 and ssh</h1>
+<section id="vpc" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> VPC</h1>
+<ul>
+<li>A VPC is just a private LAN for you EC2s</li>
+</ul>
+<p><img src="../images/awsVPCcreationmenu.png" /></p>
+<p>NOTICE: the private subnets route to project-vpce-s3, this is a gateway to your AWS services. This allows you private subnets to access your AWS resources like s3 without touching the internet.</p>
+</section>
+<section id="ec2-and-ssh" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> EC2 and ssh</h1>
+<section id="summary" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Summary</h2>
+<p>Summary: To SSH, you need to generate a .pem private key via AWS UI.<br />
+The private key should be held in the local computer AKA user computer.<br />
+The public key should be held in the remote computer AKA AWS EC2 instance.<br />
+The public key is generated from the .pem private using a bash command that all linux PCs have meaning you will have to generate the public key on a local computer then copy it into your remote AWS EC2 instance.</p>
+</section>
+<section id="instructions" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> instructions</h2>
 <ul>
 <li>To ssh in your EC2 you MUST setup a keypair when initializing a EC2
 <ul>
@@ -158,20 +174,40 @@ Sub --> D["CIDR aka DHCP"]</div>
 <li>check this by looking at Network&amp;Security &gt;&gt; Security Groups &gt;&gt; vpc-instance &gt;&gt; inbound-rules &gt;&gt; Port 22</li>
 </ul></li>
 </ul>
+<p><img src="../images/awskeypairinstruction.png" /></p>
+<ol type="1">
+<li>Drag your <code>ForSSH.pem</code> (private key) into your openroot.com server</li>
+<li><code>sudo chmod 400 ForSSH.pem</code></li>
+<li><code>ssh-keygen -y -f ForSSH.pem</code> , this generates the public key which is shown below</li>
+</ol>
+<div class="sourceCode" id="cb1" data-filename="ssh-keygen -y -f ForSSH.pem"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ssh-rsa XXXXXXXXXXXXXXXXXXXXXXX+XXXXXXX/A/XXXXXXXXXXXXXXX </span></code></pre></div>
+<ol start="4" type="1">
+<li>go to AWS console, connect via EC2 INSTANCE CONNECT in UI and <code>nano /.ssh/authorized_keys</code></li>
+</ol>
+<p>add the text below, notice this is the public key we generated but we also added <code>ForSSH</code> label at the end</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode .txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ssh-rsa XXXXXXXXXXXXXXXXXXXXXXX+XXXXXXX/A/XXXXXXXXXXXXXXX ForSSH</span></code></pre></div>
+<ol start="5" type="1">
+<li>After doing do look in the UI, Network&amp;Security &gt;&gt; Key Pairs and you should see an added ForSSH keypair.
+<ul>
+<li>OPINION: I think it is strange the UI doesnt let you add the public key and we have to go directly into the EC2 machine to add it.</li>
+</ul></li>
+<li>Log-in via SSH from local computer using <code>ssh -i ./ForSSH.pem ec2-user@54.210.175.47</code> with 54.210.175.47 being the public IP of the aws instance.</li>
+</ol>
 </section>
-<section id="setup" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Setup</h1>
-<section id="download-cli" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> Download CLI</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> awstmp</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="st">&quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot;</span> <span class="at">-o</span> <span class="st">&quot;awscliv2.zip&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> awscliv2.zip</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./awstmp/aws/install</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#You can now run: /usr/local/bin/aws --version</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> <span class="at">--version</span></span></code></pre></div>
 </section>
-<section id="create-administrator-account" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> Create Administrator account</h2>
+<section id="setup" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Setup</h1>
+<section id="download-cli" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Download CLI</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> awstmp</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="st">&quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot;</span> <span class="at">-o</span> <span class="st">&quot;awscliv2.zip&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> awscliv2.zip</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./awstmp/aws/install</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#You can now run: /usr/local/bin/aws --version</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> <span class="at">--version</span></span></code></pre></div>
+</section>
+<section id="create-administrator-account" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Create Administrator account</h2>
 <ol type="1">
 <li>check both boxes, programmatic access and web console browser access</li>
 <li>Add User “Administrator” with your custom password</li>
@@ -187,51 +223,51 @@ Sub --> D["CIDR aka DHCP"]</div>
 </ol>
 <p>IAM id, Username and your custom password is used to logon browser.<br />
 Access key and Secret access key is used for code.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> configure</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">AWS</span> Access Key ID [None]: your_access_key_id</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">AWS</span> Secret Access Key [None]: your_secret_access_key</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Default</span> region name [None]: </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Default</span> output format [None]:</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> configure</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">AWS</span> Access Key ID [None]: your_access_key_id</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">AWS</span> Secret Access Key [None]: your_secret_access_key</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Default</span> region name [None]: </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Default</span> output format [None]:</span></code></pre></div>
 </section>
-<section id="download-sam" class="level2" data-number="2.3">
-<h2 data-number="2.3"><span class="header-section-number">2.3</span> Download SAM</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> SAMtmp</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> aws-sam-cli-linux-x86_64.zip</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./install</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">sam</span> <span class="at">--version</span></span></code></pre></div>
-<section id="upgrade-sam" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1"><span class="header-section-number">2.3.1</span> Upgrade SAM</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> SAMtmp</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> aws-sam-cli-linux-x86_64.zip</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./install <span class="at">--update</span> <span class="co">##THIS IS THE ONLY DIFF from regular install</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">sam</span> <span class="at">--version</span></span></code></pre></div>
+<section id="download-sam" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> Download SAM</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> SAMtmp</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> aws-sam-cli-linux-x86_64.zip</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./install</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">sam</span> <span class="at">--version</span></span></code></pre></div>
+<section id="upgrade-sam" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1"><span class="header-section-number">3.3.1</span> Upgrade SAM</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> SAMtmp</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> aws-sam-cli-linux-x86_64.zip</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./install <span class="at">--update</span> <span class="co">##THIS IS THE ONLY DIFF from regular install</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">sam</span> <span class="at">--version</span></span></code></pre></div>
 <ul>
 <li>Note SAM autodetects aws profile if you setup the aws cli</li>
 </ul>
 </section>
 </section>
 </section>
-<section id="sam" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> SAM</h1>
+<section id="sam" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> SAM</h1>
 <p>Common theme whether remote or local, we build the container locally.<br />
 Next step we can either call the local lambda or deploy it to AWS cloud.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sam</span> build <span class="at">--use-container</span></span></code></pre></div>
-<section id="local-lambda-call" class="level2" data-number="3.1">
-<h2 data-number="3.1"><span class="header-section-number">3.1</span> Local lambda call</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sam</span> build <span class="at">--use-container</span></span></code></pre></div>
+<section id="local-lambda-call" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Local lambda call</h2>
 <ul>
 <li>this emulate the aws cloud env locally as a docker</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#local lambda invoke</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sam</span> local invoke <span class="st">&quot;HelloWorldFunction&quot;</span> <span class="at">-e</span> events/event.json</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#local lambda invoke</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sam</span> local invoke <span class="st">&quot;HelloWorldFunction&quot;</span> <span class="at">-e</span> events/event.json</span></code></pre></div>
 </section>
-<section id="real-aws-cloud-deploy" class="level2" data-number="3.2">
-<h2 data-number="3.2"><span class="header-section-number">3.2</span> Real AWS cloud deploy</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#real lambda deploy</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sam</span> deploy <span class="at">--guided</span></span></code></pre></div>
+<section id="real-aws-cloud-deploy" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> Real AWS cloud deploy</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#real lambda deploy</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sam</span> deploy <span class="at">--guided</span></span></code></pre></div>
 </section>
 </section>
 

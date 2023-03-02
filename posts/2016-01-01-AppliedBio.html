@@ -122,9 +122,82 @@
     Tags: <a title="All pages tagged 'musings'." href="../tags/musings.html">musings</a>, <a title="All pages tagged 'bio'." href="../tags/bio.html">bio</a>
     
 </div>
-<div id="TOC"></div>
+<div id="TOC"><ul>
+<li><a href="#ideal-gas-law"><span class="toc-section-number">1</span> ideal gas law</a></li>
+<li><a href="#conductor-and-insulators"><span class="toc-section-number">2</span> Conductor and Insulators</a></li>
+<li><a href="#question-set-acid-base"><span class="toc-section-number">3</span> Question set Acid Base</a></li>
+<li><a href="#glyocolysis-and-metabolism"><span class="toc-section-number">4</span> Glyocolysis and Metabolism</a>
+<ul>
+<li><a href="#anaerobic-vs-aerobic"><span class="toc-section-number">4.1</span> Anaerobic vs Aerobic</a></li>
+<li><a href="#methods"><span class="toc-section-number">4.2</span> Methods</a></li>
+<li><a href="#example-inhibitors"><span class="toc-section-number">4.3</span> Example inhibitors</a></li>
+</ul></li>
+</ul></div>
+<section id="ideal-gas-law" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> ideal gas law</h1>
 <p><span class="math display">\[PV = nkT \text{ more specifically } PV = kT\sum_{j}n_j\]</span><br />
 <span class="math display">\[Concentration = c_j = \frac{n_j}{V} \tag{identity of gas is disregarded}\]</span></p>
+<p>Some people know it as <span class="math inline">\(PV = nRT\)</span></p>
+<p>If quantity of gas <span class="math inline">\(n\)</span> is constant while temperature <span class="math inline">\(T\)</span> increases, the volume <span class="math inline">\(V\)</span> of the gas will increase if pressure <span class="math inline">\(P\)</span> remains constant.</p>
+</section>
+<section id="conductor-and-insulators" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Conductor and Insulators</h1>
+<ul>
+<li>Insulators : valence electrons are tightly bound to their atoms and it takes alot of energy to free them from their atomic energy levels. This makes it hard for electrons to move from one atom to another.</li>
+</ul>
+</section>
+<section id="question-set-acid-base" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Question set Acid Base</h1>
+<ul>
+<li>When a weak acid (HA) is titrated with NaOH in the presence of an indicator (HIn), the pH that causes the indicator to change color is correlated to when HIn is converted to In<sup>-</sup> and this depends on the pK<sub>a</sub> of the indicator
+<ul>
+<li>does not depend on final concentration of HA</li>
+<li>does not depend on final concentration of HIn</li>
+<li>does not depend on initial concentration of HA</li>
+</ul></li>
+<li>If you want to add HCl to a solution containing Pb(NO<sub>3</sub>)<sub>2</sub>(aq). To determine how much Pb<sup>2+</sup> will precipate from the solution when HCl is added, you need to know the solubility of PbCl<sub>2</sub> which is related to the solubility product constant K<sub>sp</sub> of PbCl<sub>2</sub>.</li>
+</ul>
+</section>
+<section id="glyocolysis-and-metabolism" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Glyocolysis and Metabolism</h1>
+<p>The process below produces ATP or ATP-intermediataries</p>
+<div class="mermaid">flowchart TB
+    A["Fatty acids + glycerol"]
+    B["Glucose + sugars"]
+    C["Amino acids"]
+    D["Acetyl CoA"]
+    E["Citric Acid cycle"]
+    F["Oxidative phosphorylation"]
+    A --> D
+    B --> D
+    C --> D
+    D --> E
+    E --> F</div>
+<section id="anaerobic-vs-aerobic" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Anaerobic vs Aerobic</h2>
+<div class="mermaid">flowchart TB
+    A["Glucose"];
+    B["Pyruvate"];
+    C["Lactate"];
+    D["Acetyl CoA"];
+    A-->B;
+    B-- Anaerobic -->C;
+    B-- Aerobic -->D;</div>
+</section>
+<section id="methods" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> Methods</h2>
+<ul>
+<li>QUESTION: How to tell what are the components of metabolic pathway.</li>
+<li>MARKER: Use isotopic tracer-label glucose with <sup>14</sup>C</li>
+<li>DIFFERENCE: Use mutants that has dysfunctional pathway, aka a partially missing pathway.</li>
+<li>MEASURE: Use NMR spectrometer to measure appearance and disappearance of intermediates</li>
+</ul>
+</section>
+<section id="example-inhibitors" class="level2" data-number="4.3">
+<h2 data-number="4.3"><span class="header-section-number">4.3</span> Example inhibitors</h2>
+<p>Inhibitors of metabolism by inhibiting glycolysis</p>
+</section>
+</section>
 
         </div>
         <div id="footer">

@@ -205,6 +205,45 @@ Standing on the cliff doesn’t kill, it’s the fall</p>
 <p>The above quote is an abuse of language, since Current is basically Voltage-in-action.</p>
 </section>
 </section>
+<section id="home-wiring" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Home wiring</h1>
+<div class="mermaid">flowchart LR
+  A["Power Src"]
+  B["Microwave"]
+  A-->|"hot"|B
+  B-->|"neutral"|A</div>
+<div class="mermaid">flowchart LR
+  A["Power Src"]
+  B["Microwave"]
+  S["Switch"]
+  O["StuffAlwaysOn"]
+  A-->|"hot"|S
+  S-->|"live"|O
+  O-->|"neutral"|A
+  S-->|"load"|B
+  B-->|"neutral"|A
+</div>
+<div class="mermaid">flowchart LR
+  A["Power Src"]
+  B["Microwave Short Circuit\n Hot is touching metal box"]
+  C["Person"]
+  D["Ground"]
+  E["Standing on Ground"]
+  A-->B
+  B-->C
+  C-->E
+  B-->|"Safety Ground wire"|D
+  D-->|"Ground neutral"|A
+  E-->D</div>
+<p>In the above scenario the microwave hot wire is loose and touches the metal case, effectively turning the microwave into a hot wire.
+The person touches the hot wire while standing on ground.<br />
+But since there is a grounding wire in the microwave that is attached to the metal case, the hot wire will move the current to the ground since (Resistance of Ground &gt; Resistance of Ground + Resistance of Person).</p>
+<p>OBSERVE: “Safety Ground wire” is lower resistance than “Person” + “Standing on Ground”, meaning the current will prefer to go through the “Safety Ground wire” back to the power src rather than Going through the Person to the Ground back to the power source (which would electrocute the person).</p>
+<p>Here is another scenario. What happens if there is no ground wire but the person is standing on a infinitely insulated surface and touches the hot wire.<br />
+SOLUTION: There would be no shock since it is effectively an open circuit.<br />
+TAKEAWAY: The earth’s ground completes a circuit.<br />
+MISNOMERS: People believe the Earth is a bad conductor but that is false.</p>
+</section>
 
         </div>
         <div id="footer">

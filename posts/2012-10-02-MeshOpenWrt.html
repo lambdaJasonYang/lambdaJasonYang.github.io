@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Quick React 4</title>
+        <title>Jason Yang - Mesh OpenWrt from scratch</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,85 +110,126 @@
         </div>
 
         <div id="content">
-            <h1>Quick React 4</h1>
+            <h1>Mesh OpenWrt from scratch</h1>
             
 
             <div class="info">
-    Posted on October  2, 2021
+    Posted on October  2, 2012
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
+    Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'hardware'." href="../tags/hardware.html">hardware</a>
     
 </div>
-<section id="usememo" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> UseMemo</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="st">&quot;./styles.css&quot;</span><span class="op">;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> React<span class="op">,</span> {useMemo<span class="op">,</span>useState<span class="op">,</span>useEffect} <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> slowfunction <span class="op">=</span> (num) <span class="kw">=&gt;</span> {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;slow function&quot;</span>)<span class="op">;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span> <span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">10000000</span><span class="op">;</span> i<span class="op">++</span>){}<span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> num <span class="op">*</span> <span class="dv">2</span><span class="op">;</span>   </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">App</span>() {</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> [count<span class="op">,</span>setCount] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> [count2<span class="op">,</span>setCount2] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> memoizedslowfunction <span class="op">=</span> <span class="fu">useMemo</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">slowfunction</span>(count)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span>[count])<span class="op">;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;App&quot;</span><span class="op">&gt;</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      <span class="op">&lt;</span>button onClick <span class="op">=</span> {<span class="bu">event</span> <span class="kw">=&gt;</span> {</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">setCount</span>(cstate <span class="kw">=&gt;</span> cstate <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        }}<span class="op">&gt;</span>Not Often pressed button<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>p<span class="op">&gt;</span>Not Often Updated <span class="dt">Value</span><span class="op">:</span> {<span class="fu">slowfunction</span>(count)}<span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>p<span class="op">&gt;</span>Above count value needs to be memoized<span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>      <span class="op">&lt;</span>h2<span class="op">&gt;----------&lt;/</span>h2<span class="op">&gt;</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>      <span class="op">&lt;</span>button onClick <span class="op">=</span> {<span class="bu">event</span> <span class="kw">=&gt;</span> {</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">setCount2</span>(cstate <span class="kw">=&gt;</span> cstate <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>      }}<span class="op">&gt;</span>Often pressed button<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>      <span class="op">&lt;</span>p<span class="op">&gt;</span>Often Updated <span class="dt">Value</span><span class="op">:</span> {count2}<span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
-</section>
-<section id="adapting-external-libraries-into-js" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Adapting external libraries into JS</h1>
+<section id="overview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
 <ul>
-<li>Typical external libraries will act upon a DOM element like. <code>new Sigma(document.getElementById("mydiv")",mygraph,settings)</code></li>
+<li>Mesh network consist of main AP and secondary AP</li>
+<li>Main AP which we use a mi router, bridges it’s internet connected AP to the mesh wifi
+<ul>
+<li>It needs both an accesspoint and a mesh</li>
+</ul></li>
+<li>Secondary AP only needs to setup a mesh to work
+<ul>
+<li>It doesnt even need to have it’s own AP but we setup an isolated AP because we may need to troubleshoot the router</li>
+</ul></li>
 </ul>
-<div class="sourceCode" id="cb2" data-filename="vanillajs"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> mygraph <span class="op">=</span> <span class="kw">new</span> <span class="fu">Graph</span>({<span class="dt">multi</span><span class="op">:</span> <span class="kw">true</span>})<span class="op">;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mygraph<span class="op">.</span><span class="fu">import</span>(graphdata) </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> settingsSigma <span class="op">=</span> { <span class="dt">labelRenderedSizeThreshold</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span>}</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> mydiv <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&quot;mydiv&quot;</span>)<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">new</span> <span class="fu">Sigma</span>(mydiv<span class="op">,</span>mygraph<span class="op">,</span>settings)<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb3" data-filename="react"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> MyComponent <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> myDiv <span class="op">=</span> <span class="fu">useRef</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> hoveredEdge <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">useEffect</span>(()<span class="kw">=&gt;</span>{</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> mygraph <span class="op">=</span> <span class="kw">new</span> <span class="fu">Graph</span>({<span class="dt">multi</span><span class="op">:</span> <span class="kw">true</span>})<span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        mygraph<span class="op">.</span><span class="fu">import</span>(graphdata) </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> settingsSigma <span class="op">=</span> { <span class="dt">labelRenderedSizeThreshold</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span>}</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> renderer <span class="op">=</span> <span class="kw">new</span> <span class="fu">Sigma</span>(mygraph<span class="op">,</span>myDiv<span class="op">.</span><span class="at">current</span><span class="op">,</span>settingsSigma)<span class="op">;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> () <span class="kw">=&gt;</span> {<span class="co">//disposal - or else if you resize, you get duplicate graphs</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            renderer<span class="op">.</span><span class="fu">kill</span>()</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span>[])</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;&gt;</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>div ref<span class="op">=</span>{myDiv} style<span class="op">=</span>{{<span class="st">&quot;height&quot;</span> <span class="op">:</span> <span class="st">&quot;100vh&quot;</span><span class="op">,</span> <span class="st">&quot;width&quot;</span> <span class="op">:</span> <span class="st">&quot;50%&quot;</span>}}<span class="op">&gt;&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;/&gt;</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section id="mirouter---main-mesh" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> MiRouter - main mesh</h1>
+<section id="summary" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Summary</h2>
+<ul>
+<li>Setup “LAN” that has access to internet</li>
+<li>Setup AP which uses network “LAN”</li>
+<li>Setup mesh which uses network “LAN”</li>
+</ul>
+</section>
+<section id="enable-wi-fi" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Enable Wi-fi</h2>
+<ul>
+<li>Network &gt;&gt; Wireless Overview &gt;&gt; Enable</li>
+</ul>
+</section>
+<section id="setup-lan-to-bridge-mesh-with-ap" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> Setup LAN to bridge mesh with AP</h2>
+<ul>
+<li>Network &gt;&gt; Interfaces &gt;&gt; LAN &gt;&gt; Edit
+<ul>
+<li>General Settings
+<ul>
+<li>Protocol : Static Address</li>
+<li>Device : br-lan</li>
+<li>Bring up on boot : checked</li>
+<li>IPv4 Address : 192.168.1.51</li>
+<li>IPv4 Netmask : 255.255.255.0</li>
+<li>IPv4 Gateway: 192.168.1.1</li>
+</ul></li>
+<li>DHCP Servers
+<ul>
+<li>Ignore Interface : Checked</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="tplink---secondary-mesh" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> TPlink - Secondary mesh</h1>
+<section id="summary-1" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Summary</h2>
+<p>We will perform the two below</p>
+<ul>
+<li>Setup solely for mesh use</li>
+<li>Setup independent isolated AP solely for Access
+<ul>
+<li>This is NOT relevant to operating a mesh network (functionally this is only used so you can access the router)</li>
+<li>This means the only way to access the router, is by disconnecting from your internet-connected wifi and connecting to the router SSID which will not have any internet access.</li>
+</ul></li>
+</ul>
+</section>
+<section id="factory-reset" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Factory reset</h2>
+<p>Reset to default configurations which will reset and reboot your router.</p>
+<p>NOTE: You will lose access to the router’s wifi and there wont be any router SSID being broadcasted.</p>
+<p>Disconnect from any pre-existing wifi on your laptop.<br />
+Physically connect router to your laptop by ethernet.<br />
+Go to 192.168.1.1 which should show OpenWrt GUI</p>
+</section>
+<section id="enable-wi-fi-1" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> Enable Wi-fi</h2>
+<ul>
+<li>Network &gt;&gt; Wireless Overview &gt;&gt; Enable</li>
+</ul>
+</section>
+<section id="setup-sole-for-mesh-use" class="level2" data-number="3.4">
+<h2 data-number="3.4"><span class="header-section-number">3.4</span> Setup sole for mesh use</h2>
+<p>WARN: YOU MUST COPY THE SAME Operating Frequency as the Main Mesh router.</p>
+<ul>
+<li>Network &gt;&gt; Wireless Overview &gt;&gt; Add &gt;&gt; Device Configuration
+<ul>
+<li>Mode : 802.11s (this indicates this is a mesh)</li>
+<li>Mesh Id : test</li>
+<li>Network : lan</li>
+<li>Wireless Security &gt;&gt; Encryption : No Encryption</li>
+</ul></li>
+</ul>
+</section>
+<section id="setup-independent-isolated-ap-solely-for-access" class="level2" data-number="3.5">
+<h2 data-number="3.5"><span class="header-section-number">3.5</span> Setup independent isolated AP solely for Access</h2>
+<ul>
+<li>Network &gt;&gt; Wireless Overview &gt;&gt; Add &gt;&gt; Device Configuration
+<ul>
+<li>Mode : Access Point</li>
+<li>ESSID : TPc7IsolatedConfigs (NOTE: this does not have to be same ESSID as your mesh network ESSID, since this is not relevant to the mesh network)</li>
+<li>Network : isolatednet (this MUSTNOT BE the same network as the mesh network)
+<ul>
+<li>Must enabled DHCP for isolatednet</li>
+</ul></li>
+<li>Wireless Security &gt;&gt; Encryption &gt;&gt; Whatever you want</li>
+</ul></li>
+</ul>
+</section>
 </section>
 
         </div>
