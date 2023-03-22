@@ -123,8 +123,78 @@
     
 </div>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h646967726170682047207b0a0a6e6f6465205b72616e6b7365703d302e325d3b0a0a7b72616e6b3d2273616d65223b204131203b2042313b2044313b207d0a7b72616e6b3d2273616d65223b204132203b2041333b2044323b7d0a0a5031205b6c6162656c203d202270726f626c656d225d0a0a4231205b6c6162656c203d2022497465726174697665225d0a4232205b6c6162656c203d20225375626c6973745c6e4c6f6f7020496e76617269616e742049483a5b302e2e695d5c6e7b5b302e2e695d2c6a2e2e6e7d225d0a0a4131205b6c6162656c203d2022526563757273697665225d0a4331205b6c6162656c203d2022537472656e677468656e2070726f626c656d225d0a4431205b6c6162656c203d202247656e65726174697665225d0a4432205b6c6162656c203d20225461696c2d5265632053746174652074726565225d0a0a4132205b6c6162656c203d202253706c69745c6e49482866737448616c663a3a6c697374295c6e494828736e6448616c663a3a6c69737429225d0a0a4133205b6c6162656c203d202241746f6d69635c6e686561643a3a656c656d656e745c6e4948287461696c3a3a6c6973742920225d0a0a0a5031202d3e204131205b6c6162656c3d2244657465726d696e65735c6e4948225d3b0a5031202d3e2042313b0a4131202d3e2041323b0a4131202d3e2041333b0a4131202d3e2043313b0a4331202d3e205031205b6c6162656c3d22537472656e677468656e5c6e49482220636f6e73747261696e743d66616c73655d3b0a4231202d3e2042323b0a0a5031202d3e2044313b0a4431202d3e2044323b0a7d0a"></figure>
-<section id="documenting-some-random-algorithmic-problems" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Documenting some random algorithmic problems:</h1>
+<section id="python-vs-c-in-cses" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> python vs C++ in CSES</h1>
+<ul>
+<li>Use Python</li>
+<li>CSES will TLE python even if the code structure is the same with C++</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>a, goal <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>, <span class="bu">input</span>().split()))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>choice  <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>, <span class="bu">input</span>().split()))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>DP <span class="op">=</span> [<span class="op">-</span><span class="dv">1</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(goal<span class="op">+</span><span class="dv">1000000</span>)]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>DP[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>maxj <span class="op">=</span> <span class="bu">max</span>(choice)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> choice:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    DP[i] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> k <span class="op">&lt;=</span> goal:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> choice:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> k<span class="op">+</span>j <span class="op">&gt;</span> goal:</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            choice.remove(j)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">pass</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> DP[k] <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> DP[k<span class="op">+</span>j] <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                DP[k<span class="op">+</span>j] <span class="op">=</span> <span class="bu">min</span>(DP[k<span class="op">+</span>j],DP[k]<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                DP[k <span class="op">+</span> j] <span class="op">=</span> DP[k]<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> k <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DP[goal])</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> DP<span class="op">[</span><span class="dv">1000100</span><span class="op">];</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    DP<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">1000101</span><span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        DP<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> TC<span class="op">,</span> goal<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> choice<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,&amp;</span>TC<span class="op">,&amp;</span>goal<span class="op">);</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// std::cout&lt;&lt; TC&lt;&lt; goal &lt;&lt; &quot;\n&quot;;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>TC<span class="op">--){</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> tmp<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,&amp;</span>tmp<span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        choice<span class="op">.</span>push_back<span class="op">(</span>tmp<span class="op">);</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">:</span> choice<span class="op">){</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        DP<span class="op">[</span>j<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>k <span class="op">&lt;</span> goal<span class="op">){</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">:</span> choice<span class="op">){</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>            <span class="co">// std::cout &lt;&lt; j;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>DP<span class="op">[</span>k<span class="op">]</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> k <span class="op">+</span> j <span class="op">&lt;=</span> goal<span class="op">){</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span><span class="op">(</span>DP<span class="op">[</span>k<span class="op">+</span>j<span class="op">]</span> <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">){</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                    DP<span class="op">[</span>k<span class="op">+</span>j<span class="op">]</span> <span class="op">=</span> <span class="bu">std::</span>min<span class="op">(</span>DP<span class="op">[</span>k<span class="op">+</span>j<span class="op">],</span>DP<span class="op">[</span>k<span class="op">]+</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                <span class="op">}</span><span class="cf">else</span><span class="op">{</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                    DP<span class="op">[</span>k<span class="op">+</span>j<span class="op">]=</span>DP<span class="op">[</span>k<span class="op">]+</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                <span class="op">}</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        k <span class="op">=</span> k<span class="op">+</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">// for(int i = 0; i &lt; 13; i++){</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">//     std::cout &lt;&lt; DP[i] &lt;&lt; &quot; &quot;;</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">// }</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span>DP<span class="op">[</span>goal<span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co">//g++ shit.cpp &amp;&amp; ./a.out</span></span></code></pre></div>
+</section>
+<section id="documenting-some-random-algorithmic-problems" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Documenting some random algorithmic problems:</h1>
 <hr />
 <blockquote>
 <p>Describe an algorithm that given a linked list,<br />
@@ -211,47 +281,47 @@ since the largest disk does not cause any side effect or reduce degree of freedo
 <p>Take Tree T as an input. For every node C, output the shortest path from C to the closest leaf.</p>
 </blockquote>
 </section>
-<section id="twosum" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> TwoSum</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Psuedocode</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Goal:</span> Return INDEX of nums that sum to target</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">nums</span> = [2,7,11,15]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">hmap</span> = {Value#1stpartialSum <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> Index#2ndpartialSum} </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">also</span>   {Value#2ndpartialSum <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> Index#1stpartialSum}</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>     <span class="ex">where</span> Invariant is Value#1stpartialSum + Value#2ndPartialSum = target</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">let</span> <span class="va">nums</span> <span class="op">=</span> <span class="va">Value</span><span class="er">#</span><span class="dv">1</span><span class="va">stpartialSum</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">enumerate</span><span class="er">(</span><span class="ex">nums</span><span class="kw">)</span> <span class="ex">=</span> {index <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> nums} where i::index, k::Value#1stpartialSum</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">check</span> k::Value#1stpartialSum in hmap</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">true</span> =<span class="op">&gt;</span> return [hmap<span class="er">(</span><span class="ex">k</span><span class="kw">)</span><span class="ex">::Index#2ndpartialSum,</span> <span class="er">(</span><span class="ex">index</span> of k::Value#1stpartialSum<span class="kw">)</span><span class="ex">::Index#1ndpartialSum</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">false</span> =<span class="op">&gt;</span> SET hmap[target <span class="at">-</span> Value#1stpartialSum <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> Index#2ndpartialSum]</span></code></pre></div>
-<div class="sourceCode" id="cb2" data-group="2sum" data-glabel="py"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">class</span> Solution(<span class="bu">object</span>):</span>
-<span id="cb2-2"><a href="#cb2-2"></a>    <span class="kw">def</span> twoSum(<span class="va">self</span>, nums, target):</span>
-<span id="cb2-3"><a href="#cb2-3"></a>        hmap <span class="op">=</span> {}</span>
-<span id="cb2-4"><a href="#cb2-4"></a>        <span class="cf">for</span> Index1stPartial,Value1stPartial <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
-<span id="cb2-5"><a href="#cb2-5"></a>            <span class="cf">if</span> Value1stPartial <span class="kw">in</span> hmap:</span>
-<span id="cb2-6"><a href="#cb2-6"></a>                Index2ndPartial<span class="op">=</span>hmap[Value1stPartial]</span>
-<span id="cb2-7"><a href="#cb2-7"></a>                <span class="cf">return</span> [Index2ndPartial,Index1stPartial]</span>
-<span id="cb2-8"><a href="#cb2-8"></a>            Value2ndPartial <span class="op">=</span> target<span class="op">-</span>Value1stPartial</span>
-<span id="cb2-9"><a href="#cb2-9"></a>            hmap[Value2ndPartial] <span class="op">=</span> Index1stPartial</span>
-<span id="cb2-10"><a href="#cb2-10"></a>        <span class="cf">return</span> []</span>
-<span id="cb2-11"><a href="#cb2-11"></a></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#Test = Solution().twoSum([2,7,11,15],9)</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#print(Test)</span></span></code></pre></div>
-<div class="sourceCode" id="cb3" data-group="2sum" data-glabel="go"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> twoSum<span class="op">(</span>nums <span class="op">[]</span><span class="dt">int</span><span class="op">,</span> target <span class="dt">int</span><span class="op">)</span> <span class="op">[]</span><span class="dt">int</span> <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>	hmap <span class="op">:=</span> <span class="bu">make</span><span class="op">(</span><span class="kw">map</span><span class="op">[</span><span class="dt">int</span><span class="op">]</span><span class="dt">int</span><span class="op">)</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>	<span class="kw">for</span> Index1stPartial<span class="op">,</span> Value1stPartial <span class="op">:=</span> <span class="kw">range</span> nums <span class="op">{</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>		<span class="kw">if</span> _<span class="op">,</span> exists <span class="op">:=</span> hmap<span class="op">[</span>Value1stPartial<span class="op">];</span> exists <span class="op">{</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>			Index2ndPartial <span class="op">:=</span> hmap<span class="op">[</span>Value1stPartial<span class="op">]</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>			<span class="kw">return</span> <span class="op">[]</span><span class="dt">int</span><span class="op">{</span>Index2ndPartial<span class="op">,</span> Index1stPartial<span class="op">}</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>		<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>			Value2ndPartial <span class="op">:=</span> target <span class="op">-</span> Value1stPartial</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>			hmap<span class="op">[</span>Value2ndPartial<span class="op">]</span> <span class="op">=</span> Index1stPartial</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>		<span class="op">}</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>	<span class="op">}</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>	<span class="kw">return</span> <span class="op">[]</span><span class="dt">int</span><span class="op">{}</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<section id="twosum" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> TwoSum</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Psuedocode</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Goal:</span> Return INDEX of nums that sum to target</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">nums</span> = [2,7,11,15]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">hmap</span> = {Value#1stpartialSum <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> Index#2ndpartialSum} </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">also</span>   {Value#2ndpartialSum <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> Index#1stpartialSum}</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>     <span class="ex">where</span> Invariant is Value#1stpartialSum + Value#2ndPartialSum = target</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">let</span> <span class="va">nums</span> <span class="op">=</span> <span class="va">Value</span><span class="er">#</span><span class="dv">1</span><span class="va">stpartialSum</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">enumerate</span><span class="er">(</span><span class="ex">nums</span><span class="kw">)</span> <span class="ex">=</span> {index <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> nums} where i::index, k::Value#1stpartialSum</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">check</span> k::Value#1stpartialSum in hmap</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">true</span> =<span class="op">&gt;</span> return [hmap<span class="er">(</span><span class="ex">k</span><span class="kw">)</span><span class="ex">::Index#2ndpartialSum,</span> <span class="er">(</span><span class="ex">index</span> of k::Value#1stpartialSum<span class="kw">)</span><span class="ex">::Index#1ndpartialSum</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">false</span> =<span class="op">&gt;</span> SET hmap[target <span class="at">-</span> Value#1stpartialSum <span class="kw">|</span><span class="ex">-</span><span class="op">&gt;</span> Index#2ndpartialSum]</span></code></pre></div>
+<div class="sourceCode" id="cb4" data-group="2sum" data-glabel="py"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">class</span> Solution(<span class="bu">object</span>):</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="kw">def</span> twoSum(<span class="va">self</span>, nums, target):</span>
+<span id="cb4-3"><a href="#cb4-3"></a>        hmap <span class="op">=</span> {}</span>
+<span id="cb4-4"><a href="#cb4-4"></a>        <span class="cf">for</span> Index1stPartial,Value1stPartial <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
+<span id="cb4-5"><a href="#cb4-5"></a>            <span class="cf">if</span> Value1stPartial <span class="kw">in</span> hmap:</span>
+<span id="cb4-6"><a href="#cb4-6"></a>                Index2ndPartial<span class="op">=</span>hmap[Value1stPartial]</span>
+<span id="cb4-7"><a href="#cb4-7"></a>                <span class="cf">return</span> [Index2ndPartial,Index1stPartial]</span>
+<span id="cb4-8"><a href="#cb4-8"></a>            Value2ndPartial <span class="op">=</span> target<span class="op">-</span>Value1stPartial</span>
+<span id="cb4-9"><a href="#cb4-9"></a>            hmap[Value2ndPartial] <span class="op">=</span> Index1stPartial</span>
+<span id="cb4-10"><a href="#cb4-10"></a>        <span class="cf">return</span> []</span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#Test = Solution().twoSum([2,7,11,15],9)</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#print(Test)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5" data-group="2sum" data-glabel="go"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> twoSum<span class="op">(</span>nums <span class="op">[]</span><span class="dt">int</span><span class="op">,</span> target <span class="dt">int</span><span class="op">)</span> <span class="op">[]</span><span class="dt">int</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>	hmap <span class="op">:=</span> <span class="bu">make</span><span class="op">(</span><span class="kw">map</span><span class="op">[</span><span class="dt">int</span><span class="op">]</span><span class="dt">int</span><span class="op">)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>	<span class="kw">for</span> Index1stPartial<span class="op">,</span> Value1stPartial <span class="op">:=</span> <span class="kw">range</span> nums <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>		<span class="kw">if</span> _<span class="op">,</span> exists <span class="op">:=</span> hmap<span class="op">[</span>Value1stPartial<span class="op">];</span> exists <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>			Index2ndPartial <span class="op">:=</span> hmap<span class="op">[</span>Value1stPartial<span class="op">]</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>			<span class="kw">return</span> <span class="op">[]</span><span class="dt">int</span><span class="op">{</span>Index2ndPartial<span class="op">,</span> Index1stPartial<span class="op">}</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>		<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>			Value2ndPartial <span class="op">:=</span> target <span class="op">-</span> Value1stPartial</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>			hmap<span class="op">[</span>Value2ndPartial<span class="op">]</span> <span class="op">=</span> Index1stPartial</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>		<span class="op">}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>	<span class="op">}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>	<span class="kw">return</span> <span class="op">[]</span><span class="dt">int</span><span class="op">{}</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>2 cases:</p>
 <p>Hashmap Miss</p>
 <figure><img src="http://www.plantuml.com/plantuml/svg/~h407374617274756d6c0a7363616c6520302e360a6672616d65206e756d73207b0a20202020757365636173652022496e6465782c56616c7565233173745061727469616c53756d22206173205543310a20202020757365636173652022496e6465782c56616c756523326e645061727469616c53756d2220617320580a7d0a0a6672616d65204861736856616c7565207b0a0a202075736563617365202243616e27742066696e6420496e64657823326e645061727469616c53756d22206173204143310a2020757365636173652022496e646578233173745061727469616c53756d22206173204143320a7d0a6672616d652048617368496e646578207b0a75736563617365202243616e27742066696e642056616c7565233173745061727469616c53756d22206173205543330a202075736563617365202256616c756523326e645061727469616c53756d22206173205543320a0a7d0a0a40656e64756d6c0a0a554331202d5b646f747465645d2d3e20554333203a2022312920686173686d6170206d6973735c6e204c696e652032302046616c7365220a554333202d5b646f747465645d2d3e20414331203a2022312920686173686d6170206d6973735c6e204c696e652032302046616c7365220a554332202d2d3e20414332203a20202233292066696c6c20686173686d61705c6e204c696e65203234220a554331202d2d3e20554332203a2022322920746172676574202d2056616c756523317374204c696e65203233220a"></figure>
