@@ -18,13 +18,13 @@
 
         <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
 
-        <!-- <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-2W1VXE5GSE');
-        </script> -->
+        </script>
         
         <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
 
@@ -122,6 +122,19 @@
     Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'puremath'." href="../tags/puremath.html">puremath</a>
     
 </div>
+<section id="overview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<p>Goal: To understand the Riemann integral on a function of one real variable - the simple integration you learned in hs calculus.<br />
+1. Integrate a function f over a finite interval [a,b]
+* this interval is <strong>closed</strong> aka has endpoints aka NOT infinite
+* this closed interval is also naturally <strong>compact</strong>
+2. function f should be <strong>uniformly continuous</strong></p>
+<p>A function that is closed, compact and uniformly continous has a reimann integral.<br />
+Reimann integral is defined over the reals (not the rationals) because the reals are <strong>Complete</strong>. The hilbert space and banach space are also <strong>Complete</strong>.</p>
+<p>Main concepts: closed, continuous, compact, uniformly continuous, and completeness</p>
+</section>
+<section id="basics" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Basics</h1>
 <ul>
 <li><span class="math inline">\(\mathbb{N}\)</span> : Naturals</li>
 <li><span class="math inline">\(\mathbb{Z}\)</span> : Integers, Naturals + Negatives
@@ -133,8 +146,9 @@
 </ul></li>
 <li><span class="math inline">\(\mathbb{Q}\)</span> : <span class="math inline">\(\frac{p}{q}\)</span> where p,q are Integers</li>
 </ul>
-<section id="fields" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Fields</h1>
+</section>
+<section id="fields" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Fields</h1>
 <p>Reals is a set with multiplication and addition satisfying the below:</p>
 <ul>
 <li><span class="math inline">\((\mathbb{R}, +, 0)\)</span> is an abelian group</li>
@@ -143,14 +157,14 @@
 <li><span class="math inline">\(\leq\)</span> is total order compatible with <span class="math inline">\(+, \cdot\)</span></li>
 <li>Every cauchy sequence is a convergent sequence</li>
 </ul>
-<section id="absolute-value" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> Absolute value</h2>
+<section id="absolute-value" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Absolute value</h2>
 <p><span class="math display">\[ \lvert x \cdot y \rvert = \lvert x \rvert \cdot \lvert y \rvert \]</span>
 <span class="math display">\[ \lvert x + y \rvert \leq \lvert x \rvert + \lvert y \rvert \]</span></p>
 </section>
 </section>
-<section id="dedekind-cuts" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Dedekind cuts</h1>
+<section id="dedekind-cuts" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Dedekind cuts</h1>
 <ul>
 <li><code class="sourceCode haskell"><span class="dt">Dedekind_cuts</span> <span class="op">:=</span> (<span class="dt">A</span>,<span class="dt">B</span>)<span class="ot"> ::</span> (<span class="dt">Partition</span>(<span class="dt">Q</span>),<span class="dt">Partition</span>(<span class="dt">Q</span>))</code>
 <ul>
@@ -170,24 +184,24 @@
 <p>A real number is a Dedekind cut.<br />
 A real number is represented by a partition of <span class="math inline">\(\mathbb{Q}\)</span>.</p>
 </section>
-<section id="cauchy-sequence" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Cauchy Sequence</h1>
+<section id="cauchy-sequence" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Cauchy Sequence</h1>
 <p><span class="math inline">\(\underset{n \rightarrow \infty}{lim}a_n=b\)</span></p>
 </section>
-<section id="cauchy-condition" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Cauchy Condition</h1>
+<section id="cauchy-condition" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Cauchy Condition</h1>
 </section>
-<section id="inner-product" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Inner product</h1>
+<section id="inner-product" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Inner product</h1>
 <p>Inner product on a vector space V = Operation on a pair of vectors in V</p>
 <p>discriminant proof of Cauchy-Schwarz Inequality valid for all inner products on a real vector space.</p>
 <p>All inner products define a norm but not all norms are inner products.</p>
 <hr />
 </section>
-<section id="topology" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Topology</h1>
-<section id="metric-space" class="level2" data-number="6.1">
-<h2 data-number="6.1"><span class="header-section-number">6.1</span> Metric Space</h2>
+<section id="topology" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Topology</h1>
+<section id="metric-space" class="level2" data-number="8.1">
+<h2 data-number="8.1"><span class="header-section-number">8.1</span> Metric Space</h2>
 <p><code class="sourceCode haskell"><span class="dt">Metric_Space</span> <span class="op">:=</span> (<span class="dt">M</span>,dist)<span class="ot"> ::</span> (<span class="dt">Set</span>,binary_operation)</code></p>
 <p>Fields of knowledge as Metric Spaces (M,d)</p>
 <ul>
@@ -205,8 +219,8 @@ A real number is represented by a partition of <span class="math inline">\(\math
 </ul></li>
 </ul>
 </section>
-<section id="limit-aka-limit-point" class="level2" data-number="6.2">
-<h2 data-number="6.2"><span class="header-section-number">6.2</span> Limit aka Limit point</h2>
+<section id="limit-aka-limit-point" class="level2" data-number="8.2">
+<h2 data-number="8.2"><span class="header-section-number">8.2</span> Limit aka Limit point</h2>
 <ul>
 <li>Given Metric Space <span class="math inline">\((M,d)\)</span></li>
 <li><span class="math inline">\(S \subseteq M\)</span></li>
@@ -214,10 +228,10 @@ A real number is represented by a partition of <span class="math inline">\(\math
 </ul>
 </section>
 </section>
-<section id="brightside" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> brightside</h1>
-<section id="section" class="level2" data-number="7.1">
-<h2 data-number="7.1"><span class="header-section-number">7.1</span> 3</h2>
+<section id="brightside" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> brightside</h1>
+<section id="section" class="level2" data-number="9.1">
+<h2 data-number="9.1"><span class="header-section-number">9.1</span> 3</h2>
 <ul>
 <li>A sequence is <strong>bounded</strong> if exist some number that bounds the sequence</li>
 <li>Convergent sequences implies bounded sequences but not otherway around
@@ -227,10 +241,10 @@ A real number is represented by a partition of <span class="math inline">\(\math
 </ul>
 </section>
 </section>
-<section id="riemann-vs-lesbesgue-integral" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Riemann vs Lesbesgue integral</h1>
-<section id="riemann" class="level2" data-number="8.1">
-<h2 data-number="8.1"><span class="header-section-number">8.1</span> Riemann</h2>
+<section id="riemann-vs-lesbesgue-integral" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Riemann vs Lesbesgue integral</h1>
+<section id="riemann" class="level2" data-number="10.1">
+<h2 data-number="10.1"><span class="header-section-number">10.1</span> Riemann</h2>
 <ul>
 <li>Area under the curve by summing infinitely small deltas.</li>
 </ul>
@@ -243,8 +257,8 @@ A real number is represented by a partition of <span class="math inline">\(\math
 <p>The above equality is contingent on uniform converge of the function f, for Riemann integrals BUT<br />
 we know empirically that the equality is true for far weaker constraints.</p>
 </section>
-<section id="lesbesgue" class="level2" data-number="8.2">
-<h2 data-number="8.2"><span class="header-section-number">8.2</span> Lesbesgue</h2>
+<section id="lesbesgue" class="level2" data-number="10.2">
+<h2 data-number="10.2"><span class="header-section-number">10.2</span> Lesbesgue</h2>
 <ul>
 <li>Instead of delta on x-axis, we choose deltas on y-axis.
 <ul>

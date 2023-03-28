@@ -18,13 +18,13 @@
 
         <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
 
-        <!-- <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-2W1VXE5GSE');
-        </script> -->
+        </script>
         
         <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
 
@@ -145,6 +145,24 @@
 <p>The topological ordering on the neighbors of <code>n</code> aka head of queue is the induction variable.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Front of Queue                                          End of Queue</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n | neigh1_A | neigh1_B | neigh1_C | ... | neigh4_A | neigh4_B | ...</span></code></pre></div>
+</section>
+<section id="examples" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Examples</h1>
+<ul>
+<li>PROBLEM: A set of N nodes of a COMPLETE graph with 1 way edges connecting them. Show there exist a path that reaches every node.</li>
+<li>SOLUTION:
+<ul>
+<li>Pick X to be some arbitrary node.</li>
+<li>Partition K nodes to 2 set of disjoint nodes K and L
+<ul>
+<li>let K nodes to be the complete path from an arbitrary origin Y that ENDS at X.</li>
+<li>let L nodes to be the complete path from an arbitrary origin Y that STARTS at X.</li>
+</ul></li>
+<li>K and L are disjoint sets of nodes</li>
+<li>IH is what allows us to build paths K and L</li>
+<li></li>
+</ul></li>
+</ul>
 </section>
 
         </div>
