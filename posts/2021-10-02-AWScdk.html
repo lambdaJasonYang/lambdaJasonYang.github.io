@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Terraform tag</title>
+        <title>Jason Yang - Quick AWS CDK</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,17 +110,92 @@
         </div>
 
         <div id="content">
-            <h1>Terraform tag</h1>
+            <h1>Quick AWS CDK</h1>
             
 
-            <ul class="postlist">
+            <div class="info">
+    Posted on October  2, 2021
     
-        <li>
-            <a href="../posts/2021-10-02-QuickTerraForm.html">Quick TerraForm</a> 
-        </li>
+</div>
+<div class="info">
     
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'aws'." href="../tags/aws.html">aws</a>
+    
+</div>
+<section id="theory" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Theory</h1>
+<ul>
+<li>In a way CDK is like typescript for Cloudformation
+<ul>
+<li>use <code>cdk synth</code> like typescript’s <code>tsc</code> to generate the Cloudformation template</li>
+<li>run Cloudformation template to spin up resources
+<!--  --></li>
+</ul></li>
+<li>Constructs : Basic reusable building blocks
+<ul>
+<li>L1 Constructs : one-to-one mapping to cloudformation resources, starts with <code>Cfn</code> like `CfnResolver</li>
+<li>L2 Constructs : Pre-configured popular default settings on L1 constructs</li>
+<li>L3 Constructs : Composed out of L2 and L1 constructs</li>
+<li>Stacks - made out of Constructs</li>
+</ul></li>
 </ul>
-<script></script>
+</section>
+<section id="practical" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Practical</h1>
+<p>to use cdk install it with</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> aws-cdk             </span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cdk</span> ls <span class="co"># list stacks </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">cdk</span> destroy</span></code></pre></div>
+</section>
+<section id="example" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Example</h1>
+<section id="spinning-up-s3-bucket" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Spinning up S3 bucket</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cdk</span> init app <span class="at">--language</span> typescript</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">cdk</span> bootstrap</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#bootstrap creates a s3 bucket called cdk-hnb659fds-assets-729330484136-us-east-1, </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SO DONT JUST willy nilly delete s3 buckets</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cdk</span> synth</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#this will compile the cloudformation templates in dir cdk.out</span></span></code></pre></div>
+<div class="sourceCode" id="cb5" data-filename="lib/cloud_formation-stack.ts"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> cdk <span class="im">from</span> <span class="st">'aws-cdk-lib'</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {aws_s3} <span class="im">from</span> <span class="st">'aws-cdk-lib'</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { Construct } <span class="im">from</span> <span class="st">'constructs'</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">// import * as sqs from 'aws-cdk-lib/aws-sqs';</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">class</span> CloudFormationStack <span class="kw">extends</span> cdk<span class="op">.</span><span class="at">Stack</span> {</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">constructor</span>(<span class="dt">scope</span><span class="op">:</span> Construct<span class="op">,</span> <span class="dt">id</span><span class="op">:</span> string<span class="op">,</span> props<span class="op">?:</span> cdk<span class="op">.</span><span class="at">StackProps</span>) {</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">super</span>(scope<span class="op">,</span> id<span class="op">,</span> props)<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// The code that defines your stack goes here</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// example resource</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// const queue = new sqs.Queue(this, 'CloudFormationQueue', {</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">//   visibilityTimeout: cdk.Duration.seconds(300)</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// });</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> mybucket <span class="op">=</span> <span class="kw">new</span> aws_s3<span class="op">.</span><span class="fu">Bucket</span>(<span class="kw">this</span><span class="op">,</span><span class="st">'MyFirstBucket'</span><span class="op">,</span>{</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">versioned</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">removalPolicy</span><span class="op">:</span> cdk<span class="op">.</span><span class="at">RemovalPolicy</span><span class="op">.</span><span class="at">DESTROY</span><span class="op">,</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">autoDeleteObjects</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section id="ec2-instance" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> ec2 instance</h2>
+</section>
+</section>
+<section id="troubleshooting" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> troubleshooting</h1>
+<ul>
+<li>Scenario: You start deleting all s3 buckets to clean your account
+<ul>
+<li>problem: you keep getting error asking <code>did you bootstrap</code> from cdk</li>
+<li>solution: delete your CDK toolkit stack via vscode aws plugin</li>
+<li>why: You deleted a CDK toolkit s3 bucket dependency thus corrupting the env, so now you need to clean slate it.</li>
+</ul></li>
+</ul>
+</section>
+
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">

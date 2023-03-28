@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Terraform tag</title>
+        <title>Jason Yang - Quick AWS 2 - S3</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,17 +110,53 @@
         </div>
 
         <div id="content">
-            <h1>Terraform tag</h1>
+            <h1>Quick AWS 2 - S3</h1>
             
 
-            <ul class="postlist">
+            <div class="info">
+    Posted on October  2, 2021
     
-        <li>
-            <a href="../posts/2021-10-02-QuickTerraForm.html">Quick TerraForm</a> 
-        </li>
+</div>
+<div class="info">
     
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'aws'." href="../tags/aws.html">aws</a>
+    
+</div>
+<ul>
+<li>Files are Objects which are grouped as Buckets</li>
+<li>Bucket Objects can be <code>index.html</code> <code>lib.js</code> etc allowing static site hosting.
+<ul>
+<li>Select “testBucket” &gt;&gt; Properties &gt;&gt; Static webwite Hosting</li>
+</ul></li>
 </ul>
-<script></script>
+<section id="security" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Security</h1>
+<ol type="1">
+<li>Bucket Settings (Block all request default)</li>
+<li>Bucket Policy (None by default)</li>
+</ol>
+<section id="bucket-policy" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Bucket Policy</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">&quot;Version&quot;</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2012-10-17&quot;</span><span class="kw">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">&quot;Statement&quot;</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">&quot;Sid&quot;</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Statement1&quot;</span><span class="kw">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">&quot;Effect&quot;</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Allow&quot;</span><span class="kw">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">&quot;Principal&quot;</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;*&quot;</span><span class="kw">,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">&quot;Action&quot;</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;s3:GetObject&quot;</span><span class="kw">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">&quot;Resource&quot;</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;arn:aws:s3:::testsitenew/*&quot;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">}</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">]</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<ul>
+<li>Principal is who this rule applies to, Root, Users, etc..</li>
+<li>Resource is <code>arn:aws:s3:::{BUCKET}/{OBJECT}</code></li>
+</ul>
+<p><img src="../images/3r9f38_chartAWSitems.png" /></p>
+</section>
+</section>
+
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">

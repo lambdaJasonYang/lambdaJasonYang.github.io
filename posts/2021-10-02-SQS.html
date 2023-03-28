@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Terraform tag</title>
+        <title>Jason Yang - Quick AWS SQS SNS</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,17 +110,126 @@
         </div>
 
         <div id="content">
-            <h1>Terraform tag</h1>
+            <h1>Quick AWS SQS SNS</h1>
             
 
-            <ul class="postlist">
+            <div class="info">
+    Posted on October  2, 2021
     
-        <li>
-            <a href="../posts/2021-10-02-QuickTerraForm.html">Quick TerraForm</a> 
-        </li>
+</div>
+<div class="info">
     
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'aws'." href="../tags/aws.html">aws</a>
+    
+</div>
+<section id="broad-summary" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Broad Summary</h1>
+<ul>
+<li>SQS: ONE-TO-ONE bridge between lambda + service/db/s3
+<ul>
+<li>Just throw it in front of everything if cost allows</li>
+</ul></li>
+<li>SNS: FANOUT pubsub</li>
 </ul>
-<script></script>
+</section>
+<section id="sqs" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> SQS</h1>
+<ul>
+<li>SQS
+<ul>
+<li>Functionality
+<ul>
+<li>lambda poll Queue: by configuring SQS lambda trigger</li>
+<li>lambda push Queue: using boto3</li>
+</ul></li>
+<li>Options
+<ul>
+<li>unOrdered Queue</li>
+<li>FIFO Queue</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Max message size is 256 KB<br />
+Typically middlemans one-to-one, NOT FANOUT</p>
+<section id="mechanism" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Mechanism</h2>
+<ol type="1">
+<li>Producer Send Msg to SQS</li>
+<li>SQS Send Msg to Consumer</li>
+<li>Consumer initiate Polling
+4a. Consumer Process Msg
+4b. Consumer Delete Msg</li>
+</ol>
+<p>Message Details:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ID</span>                              Size      MD5 of message body</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ABC-CDE-FE32-EG12-ZZZZZZZZZZ</span>    9 bytes   4901d08f14cacf11650dadaac7e22067</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Sender</span> account ID     Sent                      First received</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ABCDEFFFFFFFFFFFFFFF</span>  7/8/2022, 12:26:26 EDT    7/8/2022, 12:26:50 EDT</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Receive</span> count   Message attributes count  Message attributes size   MD5 of message attributes</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span>               <span class="at">-</span>                         <span class="at">-</span>                         <span class="at">-</span></span></code></pre></div>
+<ul>
+<li>Note that it is possible to poll for message but not delete it. This will make the *Receive count” go up.</li>
+</ul>
+</section>
+<section id="common-pattern" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Common pattern</h2>
+<ul>
+<li>A very common pattern is throwing SQS infront of a lambda or db or microservice.(really just throw it in front of anything important)
+<ul>
+<li>Retrys if fail</li>
+<li>If message processing lambda needs to be taken down for service, means messages can be left in queue to be later processed.</li>
+<li>Loosen tight dependencies by giving an agnostic message queue between services</li>
+</ul></li>
+</ul>
+</section>
+<section id="examples" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> Examples</h2>
+<section id="ex1" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1"><span class="header-section-number">2.3.1</span> Ex1</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3 </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lambda_handler(event, context):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co"> implement</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    sqs <span class="op">=</span> boto3.client(<span class="st">'sqs'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    sqs.send_message(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        QueueUrl <span class="op">=</span> <span class="st">&quot;https://sqs.us-east-1.amazonaws.com/637189393063/myqueue&quot;</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        MessageBody <span class="op">=</span> <span class="st">&quot;hi&quot;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'statusCode'</span>: <span class="dv">200</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">'body'</span>: json.dumps(<span class="st">'Hello from Lambda!'</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div>
+</section>
+</section>
+</section>
+<section id="counter-example-sqs-vs-sns" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Counter example: SQS vs SNS</h1>
+<ul>
+<li>Imagine client order message needs to be processed by Accounting Service AND Analytic Service
+<ul>
+<li>SQS :(BAD) Only one (Either Accounting or Analytic Service ) wins out and takes the message</li>
+<li>SNS :(GOOD) Both service sub to the topic and can process the message</li>
+</ul></li>
+</ul>
+<section id="usecase" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Usecase</h2>
+<p>REMEMBER: How you throw SQS in-front of anything important?</p>
+<ul>
+<li>SQS-SNS fanout pattern
+<ul>
+<li>SNS is typically used in conjunction with SQS</li>
+<li>SQS fans out to multiple SNS queues infront of individual microservices
+<ul>
+<li>This way when one microservice goes down, data isn’t lost and instead kept in queue</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+</section>
+
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">

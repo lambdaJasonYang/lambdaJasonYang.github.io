@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Terraform tag</title>
+        <title>Jason Yang - Quick AWS Achitecture</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,17 +110,30 @@
         </div>
 
         <div id="content">
-            <h1>Terraform tag</h1>
+            <h1>Quick AWS Achitecture</h1>
             
 
-            <ul class="postlist">
+            <div class="info">
+    Posted on October  2, 2021
     
-        <li>
-            <a href="../posts/2021-10-02-QuickTerraForm.html">Quick TerraForm</a> 
-        </li>
+</div>
+<div class="info">
     
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'aws'." href="../tags/aws.html">aws</a>
+    
+</div>
+<section id="service-tiers" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Service tiers</h1>
+<ul>
+<li>Tier 1 - Most important , Customer DBs</li>
+<li>Tier 2 - Still important</li>
+<li>Tier 3 - Not important , Data analytics</li>
 </ul>
-<script></script>
+<p>A Tier 3 serverless lambda should never be talking directly to a Tier 1 Customer DynamoDB.<br />
+How do we resolve this cross-tier talking? With a Message Queue like SQS.<br />
+A lambda should poll the queue, either one-by-one message or batch process multiple(cheaper)</p>
+</section>
+
         </div>
         <div id="footer">
             <div class="flex-container" style="display:flex; justify-content: space-between;">
