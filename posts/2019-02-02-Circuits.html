@@ -90,7 +90,7 @@
 
 
             <li class="nav-item">
-                <a href="https://github.com/userJY" class="nav-link">
+                <a href="https://github.com/lambdaJasonYang" class="nav-link">
                     <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
                     <span class="link-text">Github</span>
                 </a>
@@ -129,23 +129,88 @@
 <li>Current is <span class="math inline">\(q'(t)\)</span> or <span class="math inline">\(\frac{dq}{dt}\)</span></li>
 </ul>
 </section>
-<section id="circuits" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Circuits</h1>
+<section id="power-box" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Power box</h1>
+<ul>
+<li>The high voltage powerlines goes to your powerbox and is downstepped to 120V via transformer
+<ul>
+<li>Powerline –&gt; Transformer –&gt; Live Wire –&gt; Your home appliance –&gt; Neutral –&gt; Transformer –&gt; Powerline</li>
+</ul></li>
+<li>THe power provided is AC meaning the current is oscillating back and forth</li>
+</ul>
+</section>
+<section id="power-adapters-chargers-led-lights" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Power adapters, Chargers, LED lights</h1>
+<ul>
+<li>Appliances typically use power adapters like your cellphone charger or laptop charger
+<ul>
+<li>These are transformers that downstep that 120V to 30V or so</li>
+</ul></li>
+<li>LED lights are said to be 12V but how?
+<ul>
+<li>LEDs use LED drivers which also act as transformers that downstep the 120V to 12V</li>
+</ul></li>
+</ul>
+</section>
+<section id="misconceptions" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Misconceptions</h1>
+<section id="ground-wire-has-nothing-to-do-with-grounding-rod" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Ground wire has nothing to do with Grounding Rod</h2>
+<ul>
+<li>Ground wire has <strong>NOTHING TO DO WITH THE GROUNDING ROD</strong></li>
+<li>Ground wire does NOT mean it’s path terminates at the Ground rod.
+<ul>
+<li>Instead it goes back to the powerbox transformer just like the live and neutral wire. (Otherwise the ground wire would just be an open circuit and worthless)</li>
+</ul></li>
+<li>Ground wire is basically an alternative neutral and at the powerbox it is BONDED to neutral.</li>
+<li>The Ground wire is designed to short so that it can trigger the circuit breaker.</li>
+</ul>
+</section>
+<section id="all-wires-are-grounded" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> All wires are Grounded</h2>
+<ul>
+<li>All wires are Grounded via GROUNDING ROD, meaning the live and neutral are also connected to the GROUNDING ROD.</li>
+<li>You can use a multimeter to check GROUNDING ROD should beep when touching any wire.</li>
+<li>GROUNDING ROD provides a reference 0 voltage which is earth !!
+<ul>
+<li>WHAT-IF: What if you didnt have a GROUNDING ROD and measured outlet with a multimeter
+<ul>
+<li>You’d get correct results of 120 V BUT people call that <strong>FLOATING GROUND</strong> meaning the <strong>DIFFERENCE IS 120V</strong> aka it could be 1120V on live and 1000V on neutral.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="current-kills-voltage-doesnt" class="level2" data-number="4.3">
+<h2 data-number="4.3"><span class="header-section-number">4.3</span> Current Kills Voltage doesnt</h2>
+<p>Remember Current is electron passing per second; it’s these electrons that kill.</p>
+<ul>
+<li>Voltage at an outlet is fixed at 120 V.
+<ul>
+<li>Touching the outlet with rubber gloves means you complete the circuit with HIGH RESISTANCE, implying CURRENT PASSING THROUGH YOU IS LOW</li>
+<li>Touching the outlet with wet hands means you complete the circuit with LOW RESISTANCE, implying CURRENT PASSING THROUGH YOU IS HIGH. (this current is what kills)</li>
+</ul></li>
+</ul>
+<p>In the above 2 scenarios, the outlet voltage is high at 120 V but you survive in once case but not the other which shows that current is what is important, NOT Voltage.<br />
+BUT REMEMBER, HIGH Voltage means you need higher resistance outfit to survive; the proverb is semi-true in that HIGH VOLTAGE has a higher probability of killing.</p>
+</section>
+</section>
+<section id="circuits" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Circuits</h1>
 <ul>
 <li>Voltage has no meaning without a reference point &lt;- reason for grounding circuits</li>
 <li>Voltage only has meaning when you say the voltage <strong>across a resistor</strong><br />
 This means the potential difference before passing and after passing the resistor is the Voltage.</li>
 </ul>
-<section id="series" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> Series</h2>
+<section id="series" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Series</h2>
 <ul>
 <li>Voltage varies, Total voltage is sum of Voltage across all resistors</li>
 <li>Resistance varies, Total resistance is sum</li>
 <li>Current is same everywhere</li>
 </ul>
 </section>
-<section id="parallel" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> Parallel</h2>
+<section id="parallel" class="level2" data-number="5.2">
+<h2 data-number="5.2"><span class="header-section-number">5.2</span> Parallel</h2>
 <ul>
 <li>Voltage is same when passing each resistor in parallel</li>
 <li>Inverse(total resistance) = Inverse(sum resistors)</li>
@@ -153,10 +218,10 @@ This means the potential difference before passing and after passing the resisto
 </ul>
 </section>
 </section>
-<section id="ohms-law-and-reality" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Ohm’s law and Reality</h1>
-<section id="real-life-power-sources" class="level2" data-number="3.1">
-<h2 data-number="3.1"><span class="header-section-number">3.1</span> Real life power sources</h2>
+<section id="ohms-law-and-reality" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Ohm’s law and Reality</h1>
+<section id="real-life-power-sources" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> Real life power sources</h2>
 <p>How does Ohm’s law play in reality?</p>
 <ul>
 <li>In reality, electronics has a pre-determined static resistance.<br />
@@ -205,8 +270,8 @@ Standing on the cliff doesn’t kill, it’s the fall</p>
 <p>The above quote is an abuse of language, since Current is basically Voltage-in-action.</p>
 </section>
 </section>
-<section id="home-wiring" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Home wiring</h1>
+<section id="home-wiring" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Home wiring</h1>
 <div class="mermaid">flowchart LR
   A["Power Src"]
   B["Microwave"]
@@ -255,7 +320,7 @@ MISNOMERS: People believe the Earth is a bad conductor but that is false.</p>
                 <div class="pagehitscounter"> 
                     <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
                 </div>
-                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://userjy.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://userjy.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://lambdaJasonYang.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://lambdaJasonYang.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
   
             </div>
         </div>
