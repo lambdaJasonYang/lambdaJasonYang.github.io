@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - UML ReEnvisioned</title>
+        <title>Jason Yang - UML and Design Patterns</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,7 +110,7 @@
         </div>
 
         <div id="content">
-            <h1>UML ReEnvisioned</h1>
+            <h1>UML and Design Patterns</h1>
             
 
             <div class="info">
@@ -123,10 +123,85 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#class-vs-interface"><span class="toc-section-number">1</span> Class vs Interface</a></li>
+<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
+<ul>
+<li><a href="#concrete-class-inheritance"><span class="toc-section-number">1.1</span> Concrete Class Inheritance</a></li>
+<li><a href="#interface-implementation"><span class="toc-section-number">1.2</span> Interface implementation</a></li>
+<li><a href="#association-composition-vs-aggregation"><span class="toc-section-number">1.3</span> Association: Composition vs Aggregation</a></li>
+</ul></li>
+<li><a href="#interface"><span class="toc-section-number">2</span> Interface</a></li>
+<li><a href="#class-vs-interface"><span class="toc-section-number">3</span> Class vs Interface</a></li>
+<li><a href="#design-patterns"><span class="toc-section-number">4</span> Design patterns</a>
+<ul>
+<li><a href="#factory"><span class="toc-section-number">4.1</span> Factory</a></li>
+</ul></li>
 </ul></div>
-<section id="class-vs-interface" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Class vs Interface</h1>
+<section id="basics" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Basics</h1>
+<section id="concrete-class-inheritance" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Concrete Class Inheritance</h2>
+<div class="mermaid">classDiagram
+classA <|-- classB : Inherits</div>
+</section>
+<section id="interface-implementation" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Interface implementation</h2>
+<div class="mermaid">classDiagram
+IclassA <|.. classB : Implements</div>
+</section>
+<section id="association-composition-vs-aggregation" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> Association: Composition vs Aggregation</h2>
+<p>Composition and Aggregation are both Associations.<br />
+<span class="math display">\[ Composition \subset Association \qquad Aggregation \subset Association\]</span></p>
+<p>Composition is stronger than Aggregation</p>
+<ul>
+<li>Composition: A “Owns” B ; B has no meaning without A<br />
+</li>
+<li>Aggregation: A “Uses” B ; B can exist independently from A</li>
+</ul>
+<div class="mermaid">classDiagram
+classC --* classD : Composition
+classE --o classF : Aggregation</div>
+</section>
+</section>
+<section id="interface" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Interface</h1>
+<p><span class="math display">\[ Implemented(ICar) = \{Honda, Toyota, Tesla\}\]</span>
+<span class="math display">\[ Methods(ICar) \subset Methods(Honda)\]</span>
+<span class="math display">\[ \forall X : X\ DependOn ICar \Rightarrow X\ CanDependOn \{Honda, Toyota, Tesla\}\]</span></p>
+<div class="mermaid">classDiagram
+IclassA <|-- classB : Implements
+classC --* classD : Composition
+classE --o classF : Aggregation
+classG --> classH : Association
+classI -- classJ : Link(Solid)
+classK ..> classL : Dependency
+classM ..|> classN : Realization
+classO .. classP : Link(Dashed)</div>
+<div class="mermaid">classDiagram
+class Honda{
+  +drive()
+  +Loud Honk()
+}
+class Toyota{
+  +drive()
+  +Quiet Honk()
+}
+class Tesla{
+  +drive()
+  +autopilot()
+}
+class ICar{
+  +drive()
+}
+Honda ..|> ICar 
+Toyota ..|> ICar
+Tesla ..|> ICar
+
+X ..> ICar 
+X ..> Tesla</div>
+</section>
+<section id="class-vs-interface" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Class vs Interface</h1>
 <p>Compared to normal UML, we reversed the arrow for the Interface-Class relation.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>     Class       Vs  Interface</span>
@@ -149,6 +224,43 @@
 <li>To build a GreyHound Class <strong>requires</strong> the variables of a Dog Class.</li>
 <li>To build a Dog Interface <strong>requires</strong> the variables of a GreyHound Class.</li>
 </ul>
+</section>
+<section id="design-patterns" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Design patterns</h1>
+<section id="factory" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Factory</h2>
+<div class="mermaid">classDiagram
+class AbstractFactoryClass{
+  +ABSTRACT createIButton()
+  +CONCRETE render()
+}
+AbstractFactoryClass ..> IButton : Factory Method
+
+AbstractFactoryClass <|-- ConcreteFactory_Windows : extends
+AbstractFactoryClass <|-- ConcreteFactory_Mac : extends
+ConcreteButton_Windows <|.. IButton : implements
+ConcreteButton_Mac <|.. IButton : implements</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>AbstractFactoryClass obj<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (options <span class="op">==</span> <span class="st">&quot;Windows&quot;</span>){</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  obj <span class="op">=</span> New <span class="fu">ConcreteFactory_Windows</span>()<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (options <span class="op">==</span> <span class="st">&quot;Mac&quot;</span>){</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  obj <span class="op">=</span> New <span class="fu">ConcreteFactory_Mac</span>()<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>IButton mybutton <span class="op">=</span> obj<span class="op">.</span><span class="fu">createIButton</span>()<span class="op">;</span> <span class="co">//createIButton() is the factoryMethod</span></span></code></pre></div>
+<ul>
+<li>Factory is <strong>Abstract Class/Interface</strong> that is USED FOR
+<ul>
+<li>different Factory creation via Abstract Class <code>obj = New ConcreteFactory_Windows()</code></li>
+</ul></li>
+<li>Factory is <strong>Abstract Class/Interface</strong> that HAS
+<ul>
+<li>common method <code>render()</code></li>
+<li>different object creation via interface <code>IButton = new ConcreteMacButton()</code></li>
+</ul></li>
+</ul>
+<p>Factory pattern is like an OOP-switch-builder pattern.</p>
+</section>
 </section>
 
         </div>
@@ -270,7 +382,10 @@
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- MERMAID START -------------------------------------- -->
-        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <script type="module"> 
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/+esm'
+        </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script> -->
         <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">

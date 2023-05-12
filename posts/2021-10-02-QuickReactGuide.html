@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Maxwell Equations</title>
+        <title>Jason Yang - Quick React Guide</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,76 +110,48 @@
         </div>
 
         <div id="content">
-            <h1>Maxwell Equations</h1>
+            <h1>Quick React Guide</h1>
             
 
             <div class="info">
-    Posted on February  2, 2019
+    Posted on October  2, 2021
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'mathcs'." href="../tags/mathcs.html">mathcs</a>, <a title="All pages tagged 'appliedmath'." href="../tags/appliedmath.html">appliedmath</a>, <a title="All pages tagged 'physics'." href="../tags/physics.html">physics</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
     
 </div>
-<p><span class="math inline">\(Div(F) =\nabla \cdot F\)</span><br />
-<span class="math inline">\(Curl(F) =\nabla \times F\)</span></p>
-<section id="div" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Div</h1>
-<p>Assume given a vector field <span class="math inline">\(F\)</span></p>
-<p>Positive = source<br />
-Negative = sink</p>
-<ul>
-<li><span class="math inline">\(Div(F,(x,y))\)</span> means Divergence of field F at point (x,y).</li>
-<li>Draw a circle at (x,y) in vector field
-<ul>
-<li>Fluid moving out Circle &gt; Fluid moving in Circle
-<ul>
-<li>Positive</li>
-</ul></li>
-<li>Fluid moving in Circle &gt; Fluit moving out Circle
-<ul>
-<li>Negative</li>
-</ul></li>
-</ul></li>
-</ul>
-<p>Incompressible fluid like water has Divergence = 0 everywhere.
-Divergence = 0 implies no source or sinks.</p>
-</section>
-<section id="curl" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Curl</h1>
-<p>How much fluid rotates around a point.</p>
-<p>postive = Clockwise
-negative = Counterclockwise</p>
-<p>Uni-directional vector field, imagine a vertical piece of wood, if vector field is stronger on top than bottom it will make it spin clockwise.</p>
-</section>
-<section id="maxwell-eq" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Maxwell Eq</h1>
-<p><span class="math inline">\(Div(E) = \frac{\rho}{\epsilon_0}\)</span></p>
-<ul>
-<li>Divergence of electric field is correlated to charge density.
-<ul>
-<li>Electric field has a source like effect when charge is positive.</li>
-<li>Electric field has a sink like effect when charge is negative.</li>
-</ul></li>
-</ul>
-<p><span class="math inline">\(Div(B) = 0\)</span></p>
-<ul>
-<li>magnetic field is incompressible like water</li>
-<li>magnetic field have no source nor sinks
-<ul>
-<li>The north-south pole magnet effect is created a pair of clockwise and counter clockwise flow.</li>
-</ul></li>
-</ul>
-<p><span class="math inline">\(Curl(E) = -\frac{dB}{dt}\)</span>
-A closed circuit denoted by the Curl of E will be induced a current when magnetic field changes.
-A magnetic field will be induced when current is running through a closed circuit.</p>
-<p><span class="math inline">\(Curl(B) = \mu_{0}(J + \epsilon_{0}\frac{dE}{dt})\)</span></p>
-</section>
-<section id="practical" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Practical</h1>
-<p>A magnetic field is just an electric field from a different frame of reference.</p>
-<p>Energy doesn’t JUST flow through wires in a circuit. The circuit has a electric-magnetic field that allows energy to flow in space and converge to the target.</p>
+<section id="where-to-put-usestate" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Where to put useState</h1>
+<div class="mermaid">stateDiagram-v2
+  s1 : Building App
+  s1if: used by \nonly this component
+  s2if: used by \nonly one child
+  s3 : colocate state
+  s4if : used by\nsibling or parent
+  s2 : lift state
+  leave: leave it there
+  s5if: prop drilling issue?
+  s6if: can child function outside parent?
+  s7 : component composition
+  s8 : move state to context provider
+  [*] --> s1
+  s1 --> s1if
+  s1if --> s2if : no
+  s1if --> leave: yes
+  s2if --> s3 : yes
+  s3 --> s1if
+  s2if --> s4if: no
+  s4if --> leave: no 
+  s4if --> s2 : yes
+  s2 --> s1if
+  leave --> s5if
+  s5if --> done : no
+  s5if --> s6if : yes
+  s6if --> s7 : no
+  s6if --> s8 : yes
+ </div>
 </section>
 
         </div>

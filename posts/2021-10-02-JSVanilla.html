@@ -142,6 +142,7 @@
 <ul>
 <li><a href="#arrow-vs-function"><span class="toc-section-number">11.1</span> Arrow vs function()</a></li>
 </ul></li>
+<li><a href="#prototype-give-pseudo-class-functionality-to-js-functions"><span class="toc-section-number">12</span> Prototype give pseudo-class functionality to JS functions</a></li>
 </ul></div>
 <section id="content-security-policy" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Content security policy</h1>
@@ -337,6 +338,39 @@ Given a url: <code class="sourceCode javascript">https<span class="op">:</span><
 </ul>
 </section>
 </section>
+<section id="prototype-give-pseudo-class-functionality-to-js-functions" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Prototype give pseudo-class functionality to JS functions</h1>
+<p>JS has a half-baked class system which doesn’t actually have interfaces or abstract methods/classes. All you can do is extend concrete classes with concrete classes.</p>
+<ol type="1">
+<li>JS functions can behave as pseudo-classes</li>
+<li>prototype allows to add methods to this psuedo-classes</li>
+<li>The <code>clone()</code> method in typical design pattern is just the <code>new</code> method applied to the JS pseudo-class</li>
+</ol>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Car</span>(name) {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">this</span><span class="op">.</span><span class="at">name</span> <span class="op">=</span> name<span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>Car<span class="op">.</span><span class="at">prototype</span><span class="op">.</span><span class="at">getName</span> <span class="op">=</span> <span class="kw">function</span>(){</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="kw">this</span><span class="op">.</span><span class="at">name</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="at">name</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> b <span class="op">=</span> <span class="kw">new</span> <span class="fu">Car</span>(<span class="st">&quot;sick&quot;</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>b<span class="op">.</span><span class="fu">getName</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> GenericPerson <span class="op">=</span> {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">greet</span>() {</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`hello, my name is </span><span class="sc">${</span><span class="kw">this</span><span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">!`</span>)<span class="op">;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Person</span>(name) {</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">this</span><span class="op">.</span><span class="at">name</span> <span class="op">=</span> name<span class="op">;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">Object</span><span class="op">.</span><span class="fu">assign</span>(Person<span class="op">.</span><span class="at">prototype</span><span class="op">,</span> GenericPerson)<span class="op">;</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">// or</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">// Person.prototype.greet = GenericPerson.greet;</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>THIS is very similar <span class="fu">to</span> <span class="vs">`Person extends GenericPerson`</span> <span class="kw">in</span> OOP terms</span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">
@@ -457,7 +491,10 @@ Given a url: <code class="sourceCode javascript">https<span class="op">:</span><
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- MERMAID START -------------------------------------- -->
-        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <script type="module"> 
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/+esm'
+        </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script> -->
         <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">

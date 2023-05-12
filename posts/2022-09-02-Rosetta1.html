@@ -123,21 +123,30 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a></li>
-<li><a href="#array"><span class="toc-section-number">2</span> Array</a></li>
-<li><a href="#listvectorslice"><span class="toc-section-number">3</span> List/Vector/Slice</a></li>
-<li><a href="#references"><span class="toc-section-number">4</span> References</a>
+<li><a href="#oop"><span class="toc-section-number">1</span> OOP</a></li>
+<li><a href="#basics"><span class="toc-section-number">2</span> Basics</a></li>
+<li><a href="#array"><span class="toc-section-number">3</span> Array</a></li>
+<li><a href="#listvectorslice"><span class="toc-section-number">4</span> List/Vector/Slice</a></li>
+<li><a href="#references"><span class="toc-section-number">5</span> References</a>
 <ul>
-<li><a href="#ownership"><span class="toc-section-number">4.1</span> Ownership</a></li>
+<li><a href="#ownership"><span class="toc-section-number">5.1</span> Ownership</a></li>
 </ul></li>
-<li><a href="#struct"><span class="toc-section-number">5</span> Struct</a></li>
-<li><a href="#strings"><span class="toc-section-number">6</span> Strings</a></li>
-<li><a href="#hashmapdict"><span class="toc-section-number">7</span> Hashmap,Dict</a></li>
-<li><a href="#error"><span class="toc-section-number">8</span> Error</a></li>
-<li><a href="#typescript"><span class="toc-section-number">9</span> Typescript</a></li>
+<li><a href="#struct"><span class="toc-section-number">6</span> Struct</a></li>
+<li><a href="#strings"><span class="toc-section-number">7</span> Strings</a></li>
+<li><a href="#hashmapdict"><span class="toc-section-number">8</span> Hashmap,Dict</a></li>
+<li><a href="#error"><span class="toc-section-number">9</span> Error</a></li>
+<li><a href="#typescript"><span class="toc-section-number">10</span> Typescript</a></li>
 </ul></div>
-<section id="basics" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Basics</h1>
+<section id="oop" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> OOP</h1>
+<ul>
+<li>Plain JS classes only allow <code>extends</code> with concrete classes</li>
+<li>Plain JS do not have interfaces nor abstract classes/methods</li>
+<li>C only has structs, not classes</li>
+</ul>
+</section>
+<section id="basics" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Basics</h1>
 <div data-group="a1" data-glabel="ts">
 <div class="sourceCode" id="cb1"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>let bleh <span class="op">:</span> <span class="dt">any</span> <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>let msg <span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span></span>
@@ -236,8 +245,8 @@
 </ul>
 </div>
 </section>
-<section id="array" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Array</h1>
+<section id="array" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Array</h1>
 <div class="sourceCode" id="cb4"><pre class="sourceCode rs"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> a  <span class="op">=</span> [<span class="st">&quot;hi&quot;</span><span class="op">;</span><span class="dv">100</span>]<span class="op">;</span></span>
@@ -255,8 +264,8 @@
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="pp">assert_eq!</span>([<span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">,</span> nice_slice)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="listvectorslice" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> List/Vector/Slice</h1>
+<section id="listvectorslice" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> List/Vector/Slice</h1>
 <div class="sourceCode" id="cb6"><pre class="sourceCode rs"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> a <span class="op">=</span> [<span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">40</span>]<span class="op">;</span> <span class="co">// a plain array</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> v <span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;=</span> <span class="pp">vec!</span>[<span class="dv">10</span><span class="op">,</span><span class="dv">20</span><span class="op">,</span><span class="dv">30</span><span class="op">,</span><span class="dv">40</span>]<span class="op">;</span></span>
@@ -302,8 +311,8 @@
 <span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="references" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> References</h1>
+<section id="references" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> References</h1>
 <ul>
 <li>init Pointers in rust using <code>let &amp; a : i32;</code>
 <ul>
@@ -311,8 +320,8 @@
 </ul></li>
 <li>init Pointers in C using <code>int* a;     * deref pointer in C using</code>*a`</li>
 </ul>
-<section id="ownership" class="level2" data-number="4.1">
-<h2 data-number="4.1"><span class="header-section-number">4.1</span> Ownership</h2>
+<section id="ownership" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Ownership</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode rs"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> vec0 <span class="op">=</span> <span class="dt">Vec</span><span class="pp">::</span>new()<span class="op">;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -374,8 +383,8 @@ In rust they call this <strong>borrowing</strong> AKA we are borrowing the point
 <p><img src="https://i.stack.imgur.com/bYDqf.png" /></p>
 </section>
 </section>
-<section id="struct" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Struct</h1>
+<section id="struct" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Struct</h1>
 <p>In rust a tuple is a struct. Below we have a struct, tuple and unit type.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode rs"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> ColorClassicStruct <span class="op">{</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// </span><span class="al">TODO</span><span class="co">: Something goes here</span></span>
@@ -409,16 +418,16 @@ In rust they call this <strong>borrowing</strong> AKA we are borrowing the point
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="pp">Message::</span>Quit <span class="op">=&gt;</span> <span class="op">...,</span></span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="strings" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Strings</h1>
+<section id="strings" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Strings</h1>
 <ul>
 <li>Rust <code>String</code> vs <code>&amp;str</code></li>
 <li>Rust <code>&amp;str</code> is like C <code>*char</code></li>
 <li>Rust <code>String</code> is like C <code>std::string</code></li>
 </ul>
 </section>
-<section id="hashmapdict" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Hashmap,Dict</h1>
+<section id="hashmapdict" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Hashmap,Dict</h1>
 <p>2 ways to insert items into hashmap if item doesnt exist.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode rs"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">//method 1</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> basket<span class="op">.</span>get(<span class="op">&amp;</span>fruit) <span class="op">==</span> <span class="cn">None</span> <span class="op">{</span></span>
@@ -428,14 +437,14 @@ In rust they call this <strong>borrowing</strong> AKA we are borrowing the point
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>basket<span class="op">.</span>entry(fruit)<span class="op">.</span>or_insert(<span class="dv">0</span>)<span class="op">;</span> <span class="co">//init if does not exist</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>basket<span class="op">.</span>entry(fruit) <span class="op">+=</span> <span class="dv">11</span><span class="op">;</span> <span class="co">//then modify</span></span></code></pre></div>
 </section>
-<section id="error" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Error</h1>
+<section id="error" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Error</h1>
 <ul>
 <li>Rust uses <code>Result&lt;S,T&gt;</code> types for error handling</li>
 </ul>
 </section>
-<section id="typescript" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Typescript</h1>
+<section id="typescript" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Typescript</h1>
 <div class="sourceCode" id="cb16"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>let message <span class="op">:</span> <span class="dt">any</span> <span class="op">=</span> <span class="st">&quot;Hello World&quot;</span><span class="op">;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>let messageA <span class="op">=</span> <span class="st">&quot;Hello World&quot;</span><span class="op">;</span> <span class="co">//same</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">//var message in vanilla JS</span></span>
@@ -679,7 +688,10 @@ In rust they call this <strong>borrowing</strong> AKA we are borrowing the point
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- MERMAID START -------------------------------------- -->
-        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <script type="module"> 
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/+esm'
+        </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script> -->
         <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">

@@ -122,13 +122,9 @@
     Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
     
 </div>
-<ul>
-<li><code>const</code> means variable cannot be reassigned.
-<ul>
-<li><code>const a = 6</code> primitive is effectively immutable</li>
-<li>but <code>const b = {"hi"}</code> object can have setter functions that modify the object but remember it cannot be reassigned to a new object.</li>
-</ul></li>
-</ul>
+<p>As Per Mdn docs:</p>
+<p>The value of a <code>const</code> can’t be changed through reassignment, and it can’t be redeclared (i.e. through a variable declaration). However, if a <code>const</code> is an object or array its properties or items can be updated or removed.</p>
+<p>React uses <code>const</code> in it’s components because components are destroyed and recreated(re-mounted) each render, NOT REASSIGNED !!</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> React<span class="op">,</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span></code></pre></div>
 <p>Good links
 <a href="https://dev.to/bytebodger/constructors-in-functional-components-with-hooks-280m">Implement the constructor behavior componentWillMount() into functional components as hooks</a></p>
@@ -407,7 +403,10 @@ But in this case the hook depends on the JSX element.</p>
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- MERMAID START -------------------------------------- -->
-        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <script type="module"> 
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/+esm'
+        </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script> -->
         <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">

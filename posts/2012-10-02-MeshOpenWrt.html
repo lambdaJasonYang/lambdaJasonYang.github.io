@@ -124,6 +124,9 @@
 </div>
 <section id="overview" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<p>Why mesh? Why cant we just use the openwrt to wireless connect to the router as a dhcp client via WAN then share that internet to the LAN.<br />
+LAN must have a different IP subnet from WAN meaning WAN will connect as 192.168.1.51 but LAN must be 192.168.2.XX
+BUT we can use this configuration for temporary internet access on the router.</p>
 <ul>
 <li>Mesh network consist of main AP and secondary AP</li>
 <li>Main AP which we use a mi router, bridges it’s internet connected AP to the mesh wifi
@@ -265,16 +268,18 @@ YOu can also do this by holding the WPS reset button for 10s then wait for your 
 <p>The mesh option wont give you internet since you still need to install a package then REBOOT.<br />
 So how do we get internet?</p>
 <ol type="1">
+<li>Change the static IP of your LAN group interface to 192.168.2.XX along with the gateway.</li>
+</ol>
+<ul>
+<li>LAN 192.168.<strong>2</strong>.XX must be different subnet from WAN 192.168.<strong>1</strong>.XX</li>
+<li>Since the WAN is connecting to the internet router via 192.168.1.1, WAN must take the 192.168.<strong>1</strong>.XX static IP address.</li>
+</ul>
+<ol start="2" type="1">
 <li>Network &gt;&gt; Interfaces &gt;&gt; Radio1 &gt;&gt; Scan</li>
 </ol>
 <ul>
 <li>Join Network</li>
-<li>Name of the new Network: “bleh” &lt;– this will generate a new network group along with your preexisting LAN,WAN,WAN6 network group.
-<ul>
-<li>Do not delete the “bleh” network group, it will say “DHCP client”</li>
-</ul></li>
-<li>passphrase: you the pass phrase of your preexisting network</li>
-<li>Create / Assign firewall-zone: Unspecified</li>
+<li>Choose LAN</li>
 </ul>
 <p>Then click Save, a new form pre-filled will pop up, DO NOT MODIFY IT, just click Save again.<br />
 Then ssh into your openwrt, and run the commands below.</p>
@@ -291,18 +296,8 @@ Then ssh into your openwrt, and run the commands below.</p>
 </section>
 <section id="setup-emergency-ap" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Setup emergency AP</h1>
-<p>This AP has no access to internet, only used to connect to router</p>
+<!--  -->
 <ul>
-<li>Devices &gt;&gt; Add device configuration
-<ul>
-<li>Device type: Bridge device</li>
-<li>Device name: EmerAcc</li>
-<li>Bridge ports: eth0</li>
-<li>MTU: 1500</li>
-<li>MAC Address: D4:6E:0E:35:C4:F1</li>
-<li>TX queue length: 1000
-<!--  --></li>
-</ul></li>
 <li>Interfaces &gt;&gt; WAN
 <ul>
 <li>Firewall Settings
@@ -322,6 +317,107 @@ Then ssh into your openwrt, and run the commands below.</p>
 </ul></li>
 </ul>
 <p>In your wireless &gt;&gt; “OpenWrt5Ghz”, select Network: “wan” (this binds the wifi to the network).</p>
+</section>
+<section id="cli" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> CLI</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#this creates the network interface </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set network.altlan=interface</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set network.altlan.proto=<span class="st">'static'</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set network.altlan.ipaddr=<span class="st">'192.168.3.54'</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set network.altlan.netmask=<span class="st">'255.255.255.0'</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set network.altlan.gateway=<span class="st">'192.168.3.0'</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set network.altlan.device=<span class="st">'wlan0'</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> commit network</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#this attaches a dhcp server to the network interface above</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set dhcp.altlan=dhcp</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set dhcp.altlan.interface=<span class="st">'altlan'</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set dhcp.altlan.start=<span class="st">'4'</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set dhcp.altlan.limit=<span class="st">'200'</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set dhcp.altlan.leasetime=<span class="st">'12h'</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set dhcp.altlan.dhcpv4=<span class="st">'server'</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set dhcp.altlan.ra=<span class="st">'server'</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set dhcp.altlan.ra_slaac=<span class="st">'1'</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set dhcp.altlan.ra_flags=<span class="st">&quot;managed-config other-config&quot;</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> commit dhcp</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#this turns on both radios 2.5ghz and 5ghz</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set wireless.@wifi-device[0].disabled=<span class="st">&quot;0&quot;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set wireless.@wifi-device[1].disabled=<span class="st">&quot;0&quot;</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#this creates a WiFi SSID and attaches to the network interface</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set wireless.openwrt192168354=<span class="st">&quot;wifi-iface&quot;</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set wireless.openwrt192168354.mode=<span class="st">&quot;ap&quot;</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set wireless.openwrt192168354.ssid=<span class="st">&quot;openwrt192168354&quot;</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set wireless.openwrt192168354.key=<span class="st">&quot;changemeplox&quot;</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set wireless.openwrt192168354.encryption=<span class="st">&quot;psk2&quot;</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set wireless.openwrt192168354.device=<span class="st">'radio0'</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> set wireless.openwrt192168354.network=<span class="st">'altlan'</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> commit wireless</span></code></pre></div>
+<p>Add the below script for turning on 192.168.1.54, (you can use both the above and below script)</p>
+<pre><code>uci set network.lan.ipaddr=&quot;192.168.1.54&quot;
+uci commit network
+uci set wireless.@wifi-device[0].disabled=&quot;0&quot;
+uci set wireless.@wifi-iface[0].disabled=&quot;0&quot;
+uci set wireless.@wifi-iface[0].ssid=&quot;OpenWrt&quot;
+uci set wireless.@wifi-iface[0].key=&quot;changemeplox&quot;
+uci set wireless.@wifi-iface[0].encryption=&quot;psk2&quot;
+uci commit wireless</code></pre>
+<p>Below is for diagnostic purposes and helping to build your own <code>uci set ..</code> commands via extrapolation</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> <span class="at">-N</span> show network.lan</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># network.lan=interface</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># network.lan.device='br-lan'</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># network.lan.proto='static'</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># network.lan.netmask='255.255.255.0'</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># network.lan.ip6assign='60'</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># network.lan.ipaddr='192.168.1.51'</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># network.lan.gateway='192.168.1.1'</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># network.lan.dns='192.168.1.1'</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># network.lan.delegate='0'</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> <span class="at">-N</span> show dhcp.@dhcp[0]</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.lan=dhcp</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.lan.interface='lan'</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.lan.limit='150'</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.lan.leasetime='12h'</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.lan.dhcpv4='server'</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.lan.dhcpv6='server'</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.lan.ra='server'</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.lan.ra_slaac='1'</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.lan.ra_flags='managed-config' 'other-config'</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.lan.start='4'</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> <span class="at">-N</span> show dhcp.@dhcp[1]</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.wan=dhcp</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.wan.interface='wan'</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co"># dhcp.wan.ignore='1'</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> <span class="at">-N</span> show wireless.@wifi-device[0]</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.radio0=wifi-device</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.radio0.type='mac80211'</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.radio0.path='platform/soc/a000000.wifi'</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.radio0.channel='4'</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.radio0.hwmode='11g'</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.radio0.band='2g'</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.radio0.cell_density='0'</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.radio0.htmode='HT40'</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.radio0.country='US'</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> show wireless.@wifi-iface[1]</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.default_radio1=wifi-iface</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.default_radio1.device='radio1'</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.default_radio1.network='lan'</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.default_radio1.mode='ap'</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.default_radio1.ssid='OpenWrt'</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.default_radio1.encryption='none'</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="ex">uci</span> <span class="at">-N</span> show wireless.@wifi-iface[0]</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.wifinet3=wifi-iface</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.wifinet3.device='radio0'</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.wifinet3.mode='mesh'</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.wifinet3.mesh_id='test'</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.wifinet3.mesh_fwding='1'</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.wifinet3.mesh_rssi_threshold='0'</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.wifinet3.network='lan'</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.wifinet3.key='blehblehblehbleh'</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="co"># wireless.wifinet3.encryption='sae'</span></span></code></pre></div>
 </section>
 
         </div>
@@ -443,7 +539,10 @@ Then ssh into your openwrt, and run the commands below.</p>
         </script>
         <!-- MATH JAX END ----------------------------------------- -->
         <!-- MERMAID START -------------------------------------- -->
-        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script>
+        <script type="module"> 
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/+esm'
+        </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script> -->
         <!-- MERMAID END -------------------------------------- -->
         <!-- RAILROAD START -------------------------------------- -->
         <script type="module">
