@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
+
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
+        <!-- <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2W1VXE5GSE');
+        </script> -->
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Quick React Colocated Component library with Demo</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/lambdaJasonYang" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Quick React Colocated Component library with Demo</h1>
+            
+
+            <div class="info">
+    Posted on October  2, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>, <a title="All pages tagged 'cloud'." href="../tags/cloud.html">cloud</a>, <a title="All pages tagged 'frontend'." href="../tags/frontend.html">frontend</a>
+    
+</div>
+<section id="prelude" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Prelude</h1>
+<p>The entire project is here</p>
+<p>https://github.com/lambdaJasonYang/colocatedReact</p>
+<p>I am sick and tired of all the tutorials online using bulky Storybook to hot-reload/demo their react components.<br />
+Here we do not use any external tools to build our react library and hot-reload/demo in the SAME FOLDER.</p>
+</section>
+<section id="summary" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Summary</h1>
+<p>Our general project name that contains both the component library and demo page is called <code>colocatedReact</code></p>
+<p>This allows us to develop our react component library and demo it using the light weight default create-react-app in the SAME folder called colocatedReact.</p>
+<figure><img src="http://www.plantuml.com/plantuml/svg/~h40737461727473616c740a7b7b540a20202b20636f6c6f636174656452656163740a20202b2b207061636b6167652e6a736f6e20236f6e6c79207573656420666f722072756e6e696e67207363726970740a20202b2b2064656d6f0a20202b2b2b206e6f64655f6d6f64756c65730a20202b2b2b207372630a20202b2b2b2b204170702e6a730a20202b2b2b207061636b6167652e6a736f6e0a20202b2b20636f6d706f6e656e746c6962726172790a20202b2b2b20636f6d6d6f6e0a20202b2b2b2072656163740a20202b2b2b2b207372630a20202b2b2b2b2b20626f6f2e6a730a20202b2b2b2b2b20696e6465782e6a730a20202b2b2b2b20696e6465782e6a730a20202b2b2b2b207061636b6167652e6a736f6e0a7d7d0a40656e6473616c74"></figure>
+</section>
+<section id="components-library-in-the-componentlibrary-directory" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Components library (in the “componentlibrary” directory)</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> colocatedReact</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> colocatedReact</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> componentlibrary</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> componentlibrary</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> common</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> react</span></code></pre></div>
+<p>create a folder componentlibrary.<br />
+Create subfolders for componentlibrary for your components dedicated to each framework (vue, react, common)</p>
+<section id="componentlibrary" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> componentlibrary</h2>
+<section id="componentlibraryreact" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1"><span class="header-section-number">3.1.1</span> componentlibrary/react</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> react</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> index.js</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> package.json</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> src</span></code></pre></div>
+<p>in <code>colocatedReact/componentlibrary/core</code> folder create <code>index.js</code>, <code>package.json</code>, <code>src</code> subfolder</p>
+<div class="sourceCode" id="cb3" data-filename="colocatedReact/componentlibrary/react/package.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;private&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;@mystuff/supercomponents&quot;</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.0.1&quot;</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;main&quot;</span><span class="fu">:</span> <span class="st">&quot;index.js&quot;</span><span class="fu">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;echo </span><span class="ch">\&quot;</span><span class="st">Error: no test specified</span><span class="ch">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;license&quot;</span><span class="fu">:</span> <span class="st">&quot;ISC&quot;</span><span class="fu">,</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4" data-filename="colocatedReact/componentlibrary/react/index.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="op">*</span> <span class="im">from</span> <span class="st">&quot;./src&quot;</span><span class="op">;</span></span></code></pre></div>
+</section>
+<section id="componentlibraryreactsrc" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2"><span class="header-section-number">3.1.2</span> componentlibrary/react/src</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> src</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> boo.js</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> index.js</span></code></pre></div>
+<p>in src folder create file <code>boo.js</code> <code>index.js</code></p>
+<div class="sourceCode" id="cb6" data-filename="colocatedReact/componentlibrary/react/src/boo.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> SparkContext <span class="op">=</span> <span class="dv">1231231</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7" data-filename="colocatedReact/componentlibrary/react/src/index.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> {SparkContext} <span class="im">from</span> <span class="st">&quot;./boo&quot;</span></span></code></pre></div>
+</section>
+</section>
+</section>
+<section id="demo" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> demo</h1>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/colocatedReact</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> create-react-app demo</span></code></pre></div>
+<p>this is where you will use the components library you created</p>
+<p>in your <code>App.js</code></p>
+<div class="sourceCode" id="cb9" data-filename="App.js"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> Spark <span class="im">from</span> <span class="st">&quot;@mystuff/supercomponents&quot;</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { SparkContext } <span class="op">=</span> Spark<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">App</span>() {</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;App&quot;</span><span class="op">&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        {SparkContext}</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> demo</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install ~/colocatedReact/componentlibrary/react</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> start</span></code></pre></div>
+</section>
+<section id="colocatedreactpackage.json" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> colocatedReact/package.json</h1>
+<ul>
+<li>not needed but makes life easier</li>
+<li>behaves like a <code>makeFile</code> file</li>
+<li>put this in the root folder and use it to run the scripts</li>
+</ul>
+<div class="sourceCode" id="cb11" data-filename="colocatedReact/package.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;private&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;doesntmatter_justforscriptruns&quot;</span><span class="fu">,</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.0.1&quot;</span><span class="fu">,</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;cd componentlibrary &amp;&amp; npm install&quot;</span><span class="fu">,</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;cd demo &amp;&amp; npm run start&quot;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;license&quot;</span><span class="fu">:</span> <span class="st">&quot;ISC&quot;</span><span class="fu">,</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <div class="pagehitscounter"> 
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                </div>
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://lambdaJasonYang.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://lambdaJasonYang.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    // console.log(datagroupCodeBlocks)
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    btn.id = datagroup+singleglabeltxt;
+                    const radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",datagroup+singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    // leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radiolabelx);
+                    // radiolabelx.appendChild(btn);
+                    const radioclass = document.createElement("div");
+                    radioclass.className = "radioclass";
+                    radioclass.appendChild(btn);
+                    radioclass.appendChild(radiolabelx)
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radioclass);
+                    // leaderCodeBlockDiv.prepend(btn);
+                    
+                    
+                })
+             
+                // leaderCodeBlockDiv.append(btnlist);
+                
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+
+                btnShowAll.name = datagroup;
+                btnShowAll.id = datagroup+"All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for",datagroup+"All");
+                radiolabel.innerText = "All";
+
+                const radioclass = document.createElement("div");
+                radioclass.className = "radioclass";
+                radioclass.appendChild(btnShowAll);
+                radioclass.appendChild(radiolabel)
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin',radioclass);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script type="module"> 
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/+esm'
+        </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script> -->
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>

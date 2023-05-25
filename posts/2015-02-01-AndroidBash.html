@@ -122,14 +122,21 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'android'." href="../tags/android.html">android</a>
     
 </div>
+<section id="terminal-termux-in-root" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Terminal (Termux in root)</h1>
+<p>Go to termux and enter <code>su</code></p>
 <p>Note if within phone you omit <code>adb shell</code> to all bash commands</p>
-<section id="adb-shell" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> adb shell</h1>
+</section>
+<section id="logcat" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> logcat</h1>
+</section>
+<section id="adb-shell" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> adb shell</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> shell am start <span class="at">-a</span> android.intent.action.CALL <span class="at">-d</span> tel:<span class="va">$1</span><span class="kw">;</span> <span class="co">#calling from android</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> shell am force-stop com.google.android.dialer<span class="kw">;</span> <span class="co">#force stop</span></span></code></pre></div>
 </section>
-<section id="sqlite" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> SQLite</h1>
+<section id="sqlite" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> SQLite</h1>
 <p>first you must manually get a sqlite3 binary</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">AMsqloutput</span><span class="op">=</span><span class="va">$(</span><span class="st">&quot;/data/media/0/scripts/sqlite3&quot;</span> <span class="st">&quot;/data/data/com.android.providers.contacts/databases/calllog.db&quot;</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;SELECT number,duration,date,strftime('%H', datetime( ROUND(DATE/1000),'unixepoch')) as hour, </span></span>
@@ -137,13 +144,13 @@
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">        strftime('%m', datetime( ROUND(DATE/1000),'unixepoch')) as monthnum FROM calls </span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE ...&quot;</span><span class="va">)</span><span class="kw">;</span></span></code></pre></div>
 </section>
-<section id="tapping-screen" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> tapping screen</h1>
+<section id="tapping-screen" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> tapping screen</h1>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> shell input tap 600 700<span class="kw">;</span> <span class="co">#taps screen at position (600,700)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> shell input swipe 366 700 366 700 250<span class="kw">;</span> <span class="co">#swipes screen from (366,700) to (366,700) for duration 250ms</span></span></code></pre></div>
 </section>
-<section id="android-and-termux" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Android and Termux</h1>
+<section id="android-and-termux" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Android and Termux</h1>
 <ul>
 <li>home directory of non-root user is <code>/data/data/com.termux/files/home</code></li>
 </ul>
@@ -164,16 +171,16 @@
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">LD_LIBRARY_PATH</span><span class="op">=</span>/data/data/com.termux/files/usr/lib <span class="bu">exec</span> /data/data/com.termux/files/usr/bin/bash <span class="at">--init-file</span> /.bashrc</span></code></pre></div>
 <p>To get root with termux libraries call <code>sudo</code> instead of <code>su</code></p>
 </section>
-<section id="getting-name-for-ssh" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Getting name for ssh</h1>
+<section id="getting-name-for-ssh" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Getting name for ssh</h1>
 <ul>
 <li>How do we ssh if we dont know the android user name?</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nmap</span> <span class="at">-p</span> 22 192.168.1.182</span></code></pre></div>
 </section>
-<section id="keypads" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> keypads</h1>
+<section id="keypads" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> keypads</h1>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> shell input keyevent <span class="at">--longpress</span> 8 <span class="co">#press keypad 1</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_UNKNOWN&quot;</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> <span class="at">--</span><span class="op">&gt;</span>  <span class="st">&quot;KEYCODE_MENU&quot;</span> </span>
