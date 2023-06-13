@@ -191,16 +191,19 @@
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># # RUN wolframscript -code Needs[&quot;WolframLanguageForJupyter`&quot;]</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># # RUN wolframscript -code ConfigureJupyter[&quot;Add&quot;]</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="at">EXPOSE 8888</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="at">CMD [&quot;jupyter&quot;, &quot;lab&quot;, &quot;--ip=0.0.0.0&quot;, &quot;--allow-root&quot;, &quot;--no-browser&quot;, &quot;--NotebookApp.token=''&quot;, &quot;--NotebookApp.password=''&quot;]</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># CMD sh -c 'while true; do date; sleep 1; done'</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Install JupyterLab and the Wolfram Kernel for Jupyter</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># RUN wolframscript -e 'PacletInstall[&quot;WolframLanguageForJupyter&quot;]'</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="at">RUN wget -P /opt https://github.com/Kitware/CMake/releases/download/v3.26.4/cmake-3.26.4-linux-x86_64.sh</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="at">RUN chmod +x /opt/cmake-3.26.4-linux-x86_64.sh</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="at">EXPOSE 8888</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="at">CMD [&quot;jupyter&quot;, &quot;lab&quot;, &quot;--ip=0.0.0.0&quot;, &quot;--allow-root&quot;, &quot;--no-browser&quot;, &quot;--NotebookApp.token=''&quot;, &quot;--NotebookApp.password=''&quot;]</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># CMD sh -c 'while true; do date; sleep 1; done'</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># # Configure JupyterLab extensions</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager \</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">#     &amp;&amp; jupyter labextension install @jupyterlab/debugger</span></span></code></pre></div>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Install JupyterLab and the Wolfram Kernel for Jupyter</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># RUN wolframscript -e 'PacletInstall[&quot;WolframLanguageForJupyter&quot;]'</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># # Configure JupyterLab extensions</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager \</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     &amp;&amp; jupyter labextension install @jupyterlab/debugger</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">--build-arg</span> WOLFRAM_ID=<span class="st">&quot;nsj65837@aklqo.com&quot;</span> <span class="at">--build-arg</span> WOLFRAM_PASSWORD=<span class="st">&quot;yourpassword&quot;</span> <span class="at">-t</span> jupywolf .</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#docker run -p 8888:8888 jupywolf</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-p</span> 8888:8888 <span class="at">-v</span> <span class="va">$PWD</span>:/mountedDir jupywolf </span>

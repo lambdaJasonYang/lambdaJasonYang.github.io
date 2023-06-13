@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
+
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
+        <!-- <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2W1VXE5GSE');
+        </script> -->
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - Mathematica - Determinant</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/lambdaJasonYang" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Mathematica - Determinant</h1>
+            
+
+            <div class="info">
+    Posted on April  4, 2021
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'mathematica'." href="../tags/mathematica.html">mathematica</a>
+    
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>AArrow[{p_, q_}, label_:<span class="st">&quot;&quot;</span>] :<span class="op">=</span> {Inset[Style[label,Purple],Midpoint[{p,q}]], Arrow[{p,q}]}<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>vec2[p_] :<span class="op">=</span> Graphics<span class="op">@</span>AArrow[{ConstantArray[<span class="dv">0</span>,Length[p]],p}]<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>vec2[p_,q_] :<span class="op">=</span> Which[  ArrayQ[q] <span class="op">==</span> <span class="va">False</span>, Graphics<span class="op">@</span>AArrow[{ConstantArray[<span class="dv">0</span>,Length[p]],p},q],</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                       ArrayQ[q] <span class="op">==</span> <span class="va">True</span>, Graphics<span class="op">@</span>AArrow[{p,q},<span class="st">&quot;&quot;</span>] ]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>vec2[p_,q_,label_] :<span class="op">=</span> Graphics<span class="op">@</span>AArrow[{p,q},label]<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>vec[p_] :<span class="op">=</span> Which[ Length[p] <span class="op">==</span> <span class="dv">2</span>, vec2[p],</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                  Length[p] <span class="op">==</span> <span class="dv">3</span>, vec2[p] <span class="op">/</span>. Graphics <span class="op">-&gt;</span> Graphics3D ]<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>vec[p_,q_] :<span class="op">=</span> Which[ Length[p] <span class="op">==</span> <span class="dv">2</span>, vec2[p,q],</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                     Length[p] <span class="op">==</span> <span class="dv">3</span>, vec2[p,q] <span class="op">/</span>. Graphics <span class="op">-&gt;</span> Graphics3D ]<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>vec[p_,q_,label_] :<span class="op">=</span> Which[  Length[p] <span class="op">==</span> <span class="dv">2</span>,vec2[p,q,label],</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                             Length[q] <span class="op">==</span> <span class="dv">3</span>,vec2[p,q,label] <span class="op">/</span>. Graphics <span class="op">-&gt;</span> Graphics3D]<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>sty[c__:Red] :<span class="op">=</span> (<span class="co"># /. Arrow[x__] -&gt; {c, Arrow[x]})&amp;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>(<span class="op">*</span>  sty[Red]<span class="op">@</span>vec[{<span class="dv">3</span>,<span class="dv">5</span>}]<span class="op">*</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>matrix[expr_] :<span class="op">=</span> expr <span class="op">/</span>. List[p__]<span class="op">-&gt;</span> MatrixForm[List[p]]</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>cout[x__] :<span class="op">=</span> TeXForm[Row[{x}]]<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>pnt[x_] :<span class="op">=</span> Graphics3D<span class="op">@</span>Point[x]<span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>(<span class="op">*</span> polynomial <span class="op">*</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>(<span class="op">*</span> helper functions <span class="op">*</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> <span class="bu">vars</span>[n_, m_] :<span class="op">=</span> Flatten<span class="op">@</span>Transpose[Outer[Symbol<span class="op">@</span>StringJoin[<span class="co">##] &amp;, CharacterRange[&quot;A&quot;, &quot;Z&quot;][[;; m]], ToString /@ Range[n]]]</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> polyvar[v_] :<span class="op">=</span>  Flatten[{<span class="dv">1</span>,<span class="bu">vars</span>[v<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>]}]<span class="op">;</span> </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>(<span class="op">*</span> Give a <span class="bu">list</span> of coefficents <span class="kw">and</span> it will generate a polynomial <span class="cf">with</span> variables <span class="op">*</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>poly[coef_] :<span class="op">=</span> Transpose[coef].polyvar[Length<span class="op">@</span>coef]<span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>poly<span class="op">@</span>Thread[{{<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}}]<span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>T :<span class="op">=</span> Transpose<span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>Dim <span class="op">=</span> Dimensions<span class="op">;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Ones[n_] :<span class="op">=</span> ConstantArray[<span class="dv">1</span>,n]</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>addCol[x_] :<span class="op">=</span> MapThread[Append, {<span class="co">#, x}] &amp;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>(<span class="op">*</span>  addCol[ConstantArray[<span class="dv">1</span>,<span class="dv">2</span>]]<span class="op">@</span>{{<span class="dv">1</span>,<span class="dv">3</span>},{<span class="dv">3</span>,<span class="dv">4</span>}} <span class="op">//</span> matrix<span class="op">*</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>addRow[x_] :<span class="op">=</span> Append[<span class="co">#,x]&amp;</span></span></code></pre></div>
+<ul>
+<li>Determinant of 1 = means energy is conserved = area is conserved</li>
+<li>Determinant of -1 = means energy is inverted</li>
+<li>Determinant of trivial matrix = <span class="math inline">\(\Pi\)</span>MainDiagonal - <span class="math inline">\(\Pi\)</span>MinDiagonal</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>basisX <span class="op">=</span> {<span class="dv">0</span>,<span class="dv">1</span>}<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>basisY <span class="op">=</span> {<span class="dv">1</span>,<span class="dv">0</span>}<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>rotation <span class="op">=</span> {{<span class="dv">0</span>,<span class="dv">1</span>},{<span class="dv">1</span>,<span class="dv">0</span>}}<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>rotmat[x_] <span class="op">=</span> {{Cos[x],Sin[x]},{<span class="op">-</span>Sin[x],Cos[x]}}<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Inactive[Det][matrix<span class="op">@</span>{{a,b},{c,d}}] <span class="op">==</span> Det[{{a,b},{c,d}}]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>rotmat[Pi] <span class="op">//</span> matrix</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>rotmat[Pi<span class="op">/</span><span class="dv">4</span>] <span class="op">//</span> matrix</span></code></pre></div>
+<style>
+													.grid-container {
+														display: inline-grid;
+														grid-template-columns: auto;
+													}
+												</style>
+
+												<div><div class="grid-container"><div class="grid-item"><img alt="Output" src="data:image/png;base64,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">
+</div>
+<div class="grid-item">
+<img alt="Output" src="data:image/png;base64,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">
+</div>
+<div class="grid-item">
+<img alt="Output" src="data:image/png;base64,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">
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>SVD[matrix<span class="op">@</span>rotmat[Pi]] <span class="op">==</span> matrix <span class="op">/@</span> SingularValueDecomposition[rotmat[Pi]] </span></code></pre></div>
+<div>
+<img alt="Output" src="data:image/png;base64,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">
+</div>
+<ul>
+<li>Notice how the middle matrix of the SVD is a diagonal matrix and when you multiply the diagonal you get the determinant.</li>
+</ul>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <div class="pagehitscounter"> 
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" />
+                </div>
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://lambdaJasonYang.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://lambdaJasonYang.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    // console.log(datagroupCodeBlocks)
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    btn.id = datagroup+singleglabeltxt;
+                    const radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",datagroup+singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    // leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radiolabelx);
+                    // radiolabelx.appendChild(btn);
+                    const radioclass = document.createElement("div");
+                    radioclass.className = "radioclass";
+                    radioclass.appendChild(btn);
+                    radioclass.appendChild(radiolabelx)
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radioclass);
+                    // leaderCodeBlockDiv.prepend(btn);
+                    
+                    
+                })
+             
+                // leaderCodeBlockDiv.append(btnlist);
+                
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+
+                btnShowAll.name = datagroup;
+                btnShowAll.id = datagroup+"All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for",datagroup+"All");
+                radiolabel.innerText = "All";
+
+                const radioclass = document.createElement("div");
+                radioclass.className = "radioclass";
+                radioclass.appendChild(btnShowAll);
+                radioclass.appendChild(radiolabel)
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin',radioclass);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script type="module"> 
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/+esm'
+        </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script> -->
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>
