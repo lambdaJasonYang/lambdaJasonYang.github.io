@@ -732,6 +732,121 @@ Only pulling libraries from a <img src="https://github.com/aws-amplify/amplify-j
 </div>
 </section>
 </section>
+<section id="aws-sdk-on-backend" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> AWS-sdk on backend</h1>
+<p>AWS amplify doesnt work on nodejs backend since its clientside<br />
+We will use the aws-sdk v3</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    ListUsersCommand<span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    CognitoIdentityProviderClient<span class="op">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  } <span class="im">from</span> <span class="st">&quot;@aws-sdk/client-cognito-identity-provider&quot;</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> DEFAULT_REGION <span class="op">=</span> <span class="st">&quot;us-east-1&quot;</span><span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> client <span class="op">=</span> <span class="kw">new</span> <span class="fu">CognitoIdentityProviderClient</span>({</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">region</span><span class="op">:</span> DEFAULT_REGION<span class="op">,</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">credentials</span><span class="op">:</span> {</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">accessKeyId</span><span class="op">:</span> <span class="st">&quot;AAAAAAAAAAA&quot;</span><span class="op">,</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">secretAccessKey</span><span class="op">:</span> <span class="st">&quot;BBBBBBBBBBBBBBBBBBBBBBBBBBBB&quot;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> listUsers <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> command <span class="op">=</span> <span class="kw">new</span> <span class="fu">ListUsersCommand</span>({</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">UserPoolId</span><span class="op">:</span> <span class="st">&quot;us-east-1_wrA4I0ZmE&quot;</span><span class="op">,</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> client<span class="op">.</span><span class="fu">send</span>(command)<span class="op">;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> runner <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> b <span class="op">=</span> <span class="cf">await</span> <span class="fu">listUsers</span>()<span class="op">;</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(b)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="fu">runner</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="er">#output</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="er">'$metadata'</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="er">httpStatusCode</span><span class="fu">:</span> <span class="dv">200</span><span class="fu">,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="er">requestId</span><span class="fu">:</span> <span class="er">'</span><span class="dv">6</span><span class="er">bb63b2b-b640</span><span class="dv">-44</span><span class="er">d6-b420-f6905fffd2e6'</span><span class="fu">,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="er">extendedRequestId</span><span class="fu">:</span> <span class="er">undefined</span><span class="fu">,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="er">cfId</span><span class="fu">:</span> <span class="er">undefined</span><span class="fu">,</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="er">attempts</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="er">totalRetryDelay</span><span class="fu">:</span> <span class="dv">0</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="er">Users</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>      <span class="er">Attributes</span><span class="fu">:</span> <span class="ot">[</span><span class="er">Array</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>      <span class="er">Enabled</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>      <span class="er">UserCreateDate</span><span class="fu">:</span> <span class="dv">2023-06-16</span><span class="er">T02:</span><span class="dv">04</span><span class="er">:</span><span class="fl">54.046</span><span class="er">Z</span><span class="fu">,</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>      <span class="er">UserLastModifiedDate</span><span class="fu">:</span> <span class="dv">2023-06-16</span><span class="er">T02:</span><span class="dv">05</span><span class="er">:</span><span class="dv">0</span><span class="fl">5.123</span><span class="er">Z</span><span class="fu">,</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>      <span class="er">UserStatus</span><span class="fu">:</span> <span class="er">'CONFIRMED'</span><span class="fu">,</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>      <span class="er">Username</span><span class="fu">:</span> <span class="er">'weqdweqdf'</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    CognitoIdentityProviderClient<span class="op">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    GetUserCommand<span class="op">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  } <span class="im">from</span> <span class="st">&quot;@aws-sdk/client-cognito-identity-provider&quot;</span><span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> DEFAULT_REGION <span class="op">=</span> <span class="st">&quot;us-east-1&quot;</span><span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> client <span class="op">=</span> <span class="kw">new</span> <span class="fu">CognitoIdentityProviderClient</span>({</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">region</span><span class="op">:</span> DEFAULT_REGION<span class="op">,</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">credentials</span><span class="op">:</span> { } <span class="co">//getting user id from access token doesnt require account specific data/login</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> getUser <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> command <span class="op">=</span> <span class="kw">new</span> <span class="fu">GetUserCommand</span>({</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">AccessToken</span><span class="op">:</span> <span class="st">&quot;XXXXXXXXXXX&quot;</span><span class="op">,</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> client<span class="op">.</span><span class="fu">send</span>(command)<span class="op">;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> runner <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> b <span class="op">=</span> <span class="cf">await</span> <span class="fu">getUser</span>()<span class="op">;</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(b)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="fu">runner</span>()</span></code></pre></div>
+<ul>
+<li>access token is a jwt</li>
+<li>when user signs in, the accesstoken is given in response</li>
+<li>access token expires after certain time period, you have to sign in again to get new access token</li>
+<li>access token is made by cognito with a secret key(we cannot access this only AWS can access this)
+<ul>
+<li>this means that cognito signs the user id and turns it into a jwt access token</li>
+<li>this means an attacker cannot forge your jwt access token</li>
+</ul></li>
+<li>access token can be consumed (read) and translated to id by anyone
+<ul>
+<li><strong>ANYONE CAN READ THE CONTENTS OF THE JWT LIKE USER ID</strong>
+<ul>
+<li>typically not dangerous</li>
+</ul></li>
+<li>typically backends with consume the access token and use the id to modify specific profile</li>
+</ul></li>
+</ul>
+<section id="jwt" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1"><span class="header-section-number">5.0.1</span> JWT</h3>
+<p>JWTs can be either signed, encrypted or both.
+* If a token is signed, but not encrypted, everyone can read its contents, but when you don’t know the private key, you can’t change it.
+* If a token is signed, and attacker attempt to tamper with its contents, the receiver will notice that the signature won’t match anymore.</p>
+<p>An attacker can steal your session if they steal the JWT BUT the attacker cannot generate a JWT that spoofs them as another user.</p>
+<ul>
+<li><strong>IMPORTANT: BACKEND SHOULD NEVER READ PLAINTEXT USERID, IT MUST READ THE JWT</strong><br />
+</li>
+<li>CounterExample: Clientside reads the jwt access token and decodes it to userid then sends it to backend.
+<ul>
+<li>This implies the backend allows any plaintext userid which means an attacker can forge any userid and the jwt is just useless</li>
+</ul></li>
+</ul>
+</section>
+</section>
 
         </div>
         <div id="footer">
