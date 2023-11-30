@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Property</title>
+        <title>Jason Yang - Property Construction House</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,7 +110,7 @@
         </div>
 
         <div id="content">
-            <h1>Property</h1>
+            <h1>Property Construction House</h1>
             
 
             <div class="info">
@@ -139,7 +139,7 @@
 <div class="mermaid">graph BT;
     A["Concrete Foundation"]-->|"Anchor Bolts"|B["Mud Sill lumber"];
     X["Columns/Posts"]-->C["Beams"];
-    B-->CC["Girder"];
+    B-->CC["Header Joists"];
     C-->D["Joists"];
     CC-->|"Ends of"|D;
     D-->E["Subfloor"];
@@ -180,6 +180,7 @@
 <li>Columns or Posts
 <ul>
 <li>Vertical structures that hold up Beams</li>
+<li>for a 2nd floor, typically put 2 “top plates” on top of posts, similar to mudsill on foundation.</li>
 </ul></li>
 <li>Subfloor - Subfloor sit ontop of Joists
 <ul>
@@ -208,6 +209,152 @@
 </ul></li>
 </ul>
 </section>
+</section>
+<section id="electrical" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Electrical</h1>
+<ul>
+<li>120 V standard AC circuit, 2 phase meaning using a 4 wire line we can get 240 V</li>
+</ul>
+<p><span class="math display">\[ \{1W,2W,...999W\} \in 120V \]</span></p>
+<p>Just to emphasize voltage does not determine power or wattage.</p>
+<p>From the distribution panel, each circuit breaker is in parallel with each other.<br />
+However the canonical textbook diagram of a parallel circuit doesnt work here, because it shows all parallel circuits sharing the same return path(the same neutral);<br />
+this is called <strong>“Mixing neutrals”</strong> Which is Not Allowed.</p>
+<p>A better model for visualization is Multiple self-directed loops with<br />
+the 120V distribution panel power source in the center, and<br />
+each circuit with its circuit-breaker as a separate self-directed loop</p>
+<div class="mermaid">graph TD
+  PowerSrc120V -->  Live1
+  Live1 --> Load1
+  Load1 -->Neutral1
+  Neutral1 --> |Circuitbreaker1| PowerSrc120V
+  PowerSrc120V --> Live2
+  Live2 --> Load2
+  Load2 -->Neutral2 
+  Neutral2 --> |Circuitbreaker2| PowerSrc120V</div>
+<section id="understanding-appliances-and-current" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Understanding appliances and Current</h2>
+<ul>
+<li>Motto: Current is drawn, not supplied<br />
+</li>
+<li>3000W appliance will draw (3000W/120V) of current
+<ul>
+<li>Appliance will typically have labels showing 5V, 25V, 120V, 240V for Voltage needed</li>
+<li>Appliances with <strong>labels showing amps is SHORT-HAND for MAX-RATED amps</strong> it can take before burning out the internals.</li>
+</ul></li>
+</ul>
+<p>Example:<br />
+You may see power-adapters show 25V 5.5A<br />
+The power-adapter converts 120V to 25V; it <strong>Does NOT convert the Amp to 5.5A</strong>.<br />
+<strong>5.5A is the MAX-RATED Amp</strong> the power-adapter can take before the high current burns out the internals.</p>
+</section>
+<section id="wires" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> Wires</h2>
+<p><span class="math display">\[R=\rho \frac{L}{A} \tag{resistance of wire eqn}\]</span></p>
+<ul>
+<li>Bigger Cross-section of wire =&gt; Lower Resistance
+<ul>
+<li>Also means more current
+<ul>
+<li>Analogous to bigger cross-section of pipes =&gt; More water flow</li>
+</ul></li>
+</ul></li>
+<li>Longer length of wire =&gt; Higher Resistance</li>
+</ul>
+<p><strong>Why do thin wires melt/catch on fire?</strong></p>
+<ul>
+<li>Small cross-section wire =&gt; High Resistance wire</li>
+<li>Big load electrical appliance drawing High power =&gt; High current drawn</li>
+<li>High current flowing through thin wire causes it glow hot like a light-bulb filament(which also have high resistance)</li>
+</ul>
+<p>Solution: Higher Gauge wires.</p>
+</section>
+<section id="overloaded-socket" class="level2" data-number="4.3">
+<h2 data-number="4.3"><span class="header-section-number">4.3</span> Overloaded socket</h2>
+<p><span class="math display">\[\frac{1}{R_{\text{total}}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \ldots + \frac{1}{R_n}\]</span></p>
+<ul>
+<li>All appliances in a circuit are in parallel</li>
+<li>Plug in 2 appliances in a typical socket, they will be in parallel</li>
+<li>Plug in 4 appliances to two sockets and they will all be in parallel to the same circuit</li>
+</ul>
+<p>It is mathematically proveable:</p>
+<p><span class="math display">\[\forall k: R_{\text{total}} &lt; R_k \tag{parallel circuits}\]</span></p>
+<p><strong>This means plugging more appliances to your electrical sockets LOWERS the overall load resistance of the circuit</strong></p>
+<ul>
+<li>lower load resistance =&gt; higher current drawn</li>
+<li>too high current running though wires will make them glow hot like a lightbulb</li>
+<li>Circuit breaker will activate when you turn on a microwave, boiler, hair dryer,etc at the same time.</li>
+</ul>
+</section>
+<section id="old-home" class="level2" data-number="4.4">
+<h2 data-number="4.4"><span class="header-section-number">4.4</span> Old home</h2>
+<ul>
+<li>Lightswitch - you may see one with no ground and only 2 wires. One is the line, the other is load.
+<ul>
+<li>There is no neutral for this switch, so how does electricity return? Well obviously the neutral must be colocated with the load aka lights/lamps.</li>
+<li>To install a smart switch, you either pull a neutral and ground from the ceiling lights or from a nearby electrical socket.
+<ul>
+<li>But DO NOT pull a neutral belonging to a different circuit breaker (termed “mixing neutrals”)</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="water-supply" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Water supply</h1>
+<ul>
+<li>kirchoff law analog is continuity law <span class="math inline">\(Area_1 \times Velocity_1 = Area_2 \times Velocity_2\)</span><br />
+</li>
+<li>Since pipes have same cross section area, whenever we have a junction, water flow will be halved in a 3-way pipe with 1 input, 2 output. (basically showering while using sink will decrease flow of water by half)</li>
+</ul>
+</section>
+<section id="plumbing-air-vent-pipe" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Plumbing air vent pipe</h1>
+<ul>
+<li>Analogous to how circuits use ground as a reference point, drains need a route to air’s atmospheric pressure as a reference point.
+<ul>
+<li>eg. try drinking through a straw poked through a coconut with no air gaps. 0 pressure differential means you cant drink.</li>
+</ul></li>
+</ul>
+</section>
+<section id="hvac" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> HVAC</h1>
+<p><img src="../images/thermostat.gif" /></p>
+<ul>
+<li>C is the Commons aka return path for Smart functionalities, (informally may be considered neutral)
+<ul>
+<li>Measuring C wire against ground will give you 0V</li>
+<li>You must measure the C wire against R to get 25V to see if it is working properly</li>
+</ul></li>
+<li>Notice: Look at the R wire INSIDE the thermostat, IT SPLITS THE WIRE to an “ALWAYS ON Smart_Bells_and_Whistles” and the switch ON_OFF heater.
+<ul>
+<li>Understandably much confusion: R paired with neutral W as the heater circuit, then what paired with the neutral C wire? Apparently, it was also the R but you just couldnt see it since it was in the thermostat.</li>
+</ul></li>
+</ul>
+<ol type="1">
+<li>Initially 120V powers the thermostat ONLY and the Smart_Bells_and_Whistles, not the heater
+<ul>
+<li>“R-C wires” powers your fancy smart functionalities</li>
+</ul></li>
+<li>Person switches thermostat to ON
+<ul>
+<li>“R-W wires” powers your actual heater circuit when switch is ON</li>
+</ul></li>
+<li>The thermostat circuit closes the heater relay and supplies the 120V to the actual heater
+<ul>
+<li>The Default-open-relay is a logical “AND” that couples the “R-W circuit” with the “Actual_Heater”</li>
+</ul></li>
+</ol>
+<ul>
+<li>Red - R - 24VAC</li>
+<li>Red - Rh - 24VAC (dedicated to heat call)</li>
+<li>Red - Rc - 24VAC (dedicated to cooling call)</li>
+<li>Green - G - Fan on</li>
+<li>White - W - Heat call</li>
+<li>Yellow - Y - Cool call</li>
+<li>Blue or Black - C - Common</li>
+</ul>
+<p>If we included a Y-wire in the above diagram, we would draw the Y like the W but direct it to a new relay resulting in a diagram showing 2 relays with W-wire controlling the heater relay and Y-wire controlling the cooler relay.</p>
 </section>
 
         </div>

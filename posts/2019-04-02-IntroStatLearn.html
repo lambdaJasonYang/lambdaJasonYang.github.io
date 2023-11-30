@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Intro To Statistical Learning Notes</title>
+        <title>Jason Yang - Intro To Statistical Learning Notes Mathematica</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,7 +110,7 @@
         </div>
 
         <div id="content">
-            <h1>Intro To Statistical Learning Notes</h1>
+            <h1>Intro To Statistical Learning Notes Mathematica</h1>
             
 
             <div class="info">
@@ -123,43 +123,66 @@
     
 </div>
 <div id="TOC"><ul>
-<li><a href="#terms"><span class="toc-section-number">1</span> terms</a>
+<li><a href="#intro"><span class="toc-section-number">1</span> Intro</a></li>
+<li><a href="#terms"><span class="toc-section-number">2</span> terms</a>
 <ul>
-<li><a href="#variance"><span class="toc-section-number">1.1</span> Variance</a></li>
+<li><a href="#variance"><span class="toc-section-number">2.1</span> Variance</a></li>
 </ul></li>
-<li><a href="#chapter-2-ols"><span class="toc-section-number">2</span> Chapter 2 OLS</a>
+<li><a href="#chapter-2-ols"><span class="toc-section-number">3</span> Chapter 2 OLS</a>
 <ul>
-<li><a href="#reality-vs-estimate"><span class="toc-section-number">2.1</span> Reality vs Estimate</a></li>
-<li><a href="#residual-vs-irreducible-error"><span class="toc-section-number">2.2</span> Residual vs Irreducible Error</a></li>
-<li><a href="#finding-best-fit"><span class="toc-section-number">2.3</span> Finding best fit</a>
+<li><a href="#reality-vs-estimate"><span class="toc-section-number">3.1</span> Reality vs Estimate</a></li>
+<li><a href="#residual-vs-irreducible-error"><span class="toc-section-number">3.2</span> Residual vs Irreducible Error</a></li>
+<li><a href="#finding-best-fit"><span class="toc-section-number">3.3</span> Finding best fit</a>
 <ul>
-<li><a href="#rss-residual-sum-squared"><span class="toc-section-number">2.3.1</span> RSS: Residual Sum Squared</a></li>
-<li><a href="#covariance-matrix"><span class="toc-section-number">2.3.2</span> Covariance matrix</a></li>
+<li><a href="#rss-residual-sum-squared"><span class="toc-section-number">3.3.1</span> RSS: Residual Sum Squared</a></li>
+<li><a href="#covariance-matrix"><span class="toc-section-number">3.3.2</span> Covariance matrix</a></li>
 </ul></li>
-<li><a href="#validate-linearity"><span class="toc-section-number">2.4</span> Validate linearity</a>
+<li><a href="#validate-linearity"><span class="toc-section-number">3.4</span> Validate linearity</a>
 <ul>
-<li><a href="#t-test"><span class="toc-section-number">2.4.1</span> T-test</a></li>
-<li><a href="#validate-multi-linear-regression-model"><span class="toc-section-number">2.4.2</span> Validate multi-linear regression model</a></li>
+<li><a href="#t-test"><span class="toc-section-number">3.4.1</span> T-test</a></li>
+<li><a href="#validate-multi-linear-regression-model"><span class="toc-section-number">3.4.2</span> Validate multi-linear regression model</a></li>
 </ul></li>
-<li><a href="#model-fit-loss-function"><span class="toc-section-number">2.5</span> Model fit ( Loss Function )</a>
+<li><a href="#model-fit-loss-function"><span class="toc-section-number">3.5</span> Model fit ( Loss Function )</a>
 <ul>
-<li><a href="#mse"><span class="toc-section-number">2.5.1</span> MSE</a></li>
-<li><a href="#r2"><span class="toc-section-number">2.5.2</span> R^2</a></li>
-<li><a href="#cor"><span class="toc-section-number">2.5.3</span> Cor</a></li>
+<li><a href="#mse"><span class="toc-section-number">3.5.1</span> MSE</a></li>
+<li><a href="#r2"><span class="toc-section-number">3.5.2</span> R^2</a></li>
+<li><a href="#cor"><span class="toc-section-number">3.5.3</span> Cor</a></li>
 </ul></li>
-<li><a href="#prediction"><span class="toc-section-number">2.6</span> Prediction</a></li>
+<li><a href="#prediction"><span class="toc-section-number">3.6</span> Prediction</a></li>
 </ul></li>
-<li><a href="#chapter-4-classification"><span class="toc-section-number">3</span> Chapter 4 Classification</a></li>
-<li><a href="#chapter-5-resampling"><span class="toc-section-number">4</span> Chapter 5 Resampling</a></li>
+<li><a href="#chapter-4-classification"><span class="toc-section-number">4</span> Chapter 4 Classification</a></li>
+<li><a href="#chapter-5-resampling"><span class="toc-section-number">5</span> Chapter 5 Resampling</a></li>
 </ul></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Addataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Advertising.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>autodata <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Auto.data&quot;</span>,<span class="st">&quot;Table&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span> <span class="op">-&gt;</span> <span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>autodataset <span class="op">=</span> Dataset[AssociationThread[First[autoData] <span class="op">-&gt;</span> <span class="co">#] &amp; /@ Rest[autoData]];</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>autodataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Auto.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>collegedataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/College.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ch12ex13dataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Ch12Ex13.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>creditdataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Credit.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>heartdataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Heart.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>income1dataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Income1.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>income2dataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Income2.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span></code></pre></div>
+<p>import all of the datasets</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>AdDataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Advertising.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>AutoDataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Auto.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>CollegeDataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/College.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>Ch12ex13Dataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Ch12Ex13.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>CreditDataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Credit.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>HeartDataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Heart.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>Income1Dataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Income1.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>Income2Dataset <span class="op">=</span> Import[<span class="st">&quot;https://www.statlearning.com/s/Income2.csv&quot;</span>,<span class="st">&quot;Dataset&quot;</span>,<span class="st">&quot;HeaderLines&quot;</span><span class="op">-&gt;</span><span class="dv">1</span>]<span class="op">;</span></span></code></pre></div>
+<section id="intro" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Intro</h1>
 <p><code class="sourceCode r">Wage</code> : Linear Regression
 How does <code class="sourceCode r">age</code> affect <code class="sourceCode r">wage</code></p>
 <p><code class="sourceCode r">Smarket</code> : Classification
 Classification</p>
-<section id="terms" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> terms</h1>
-<section id="variance" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> Variance</h2>
+</section>
+<section id="terms" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> terms</h1>
+<section id="variance" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Variance</h2>
 <p>variance is squared(distance-to-mean)<br />
 That means there is larger value for scattered points than clumped points.<br />
 The square operation has an absolute value like effect.</p>
@@ -167,14 +190,14 @@ The square operation has an absolute value like effect.</p>
 <p>Normalising against variance by dividing by TSS.</p>
 </section>
 </section>
-<section id="chapter-2-ols" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Chapter 2 OLS</h1>
+<section id="chapter-2-ols" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Chapter 2 OLS</h1>
 <p>Goal: Find <span class="math inline">\(\beta\)</span> weight vector that minimizes sum square residual</p>
 <p>Method:
 1. Find inflection(min/max): Solve derivative of Error wrt. weight equal to 0
 2. Prove that this is a min, not a max: Check 2nd derivative is positive definite(analogous to postive in real numbers)</p>
-<section id="reality-vs-estimate" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> Reality vs Estimate</h2>
+<section id="reality-vs-estimate" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Reality vs Estimate</h2>
 <p>Ideal Model of Reality
 <span class="math display">\[Y = X\beta + \epsilon\]</span></p>
 <p>Estimated Model
@@ -185,8 +208,8 @@ The square operation has an absolute value like effect.</p>
 </ul>
 <p>Statistics is about using Samples(Simulation/Models/Estimations) to estimate Population(Reality)</p>
 </section>
-<section id="residual-vs-irreducible-error" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> Residual vs Irreducible Error</h2>
+<section id="residual-vs-irreducible-error" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Residual vs Irreducible Error</h2>
 <p><span class="math display">\[X_1 .. X_n \sim N(\mu ,\sigma^2)\]</span>
 <span class="math inline">\(X_1..X_n\)</span> each represent the choice of a random singleton subset AKA singleton sample from population.<br />
 <span class="math inline">\(\mu\)</span> is the population mean.</p>
@@ -213,13 +236,13 @@ The square operation has an absolute value like effect.</p>
 <p>We can <strong>ignore our Ideal Model</strong> <span class="math inline">\(\dot{Y},\dot{\beta},\epsilon\)</span> because they are simply model of an impossible ideal.</p>
 </blockquote>
 </section>
-<section id="finding-best-fit" class="level2" data-number="2.3">
-<h2 data-number="2.3"><span class="header-section-number">2.3</span> Finding best fit</h2>
+<section id="finding-best-fit" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> Finding best fit</h2>
 <p>Regression is the best fit line that is minimizes <span class="math inline">\(e\)</span> or residual squared error.</p>
 <p><span class="math display">\[Y=X\hat{\beta} + e\]</span></p>
 <p><span class="math display">\[e=Y-X\hat{\beta}\]</span></p>
-<section id="rss-residual-sum-squared" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1"><span class="header-section-number">2.3.1</span> RSS: Residual Sum Squared</h3>
+<section id="rss-residual-sum-squared" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1"><span class="header-section-number">3.3.1</span> RSS: Residual Sum Squared</h3>
 <p>Sum of Squared residuals</p>
 <p><span class="math display">\[RSS(\hat{\beta}) = e^t e \]</span></p>
 <p><span class="math display">\[e^Te = (Y-X\hat{\beta})^T(Y-X\hat{\beta})\]</span></p>
@@ -231,8 +254,8 @@ The square operation has an absolute value like effect.</p>
 <p>Show that this inflection point is minimum by proving the 2nd derivative is positive (or positive definite for matrices).</p>
 <p><span class="math display">\[\frac{\partial^2 e^Te}{\partial\beta \partial\beta^T} = 2X^T X\]</span><br />
 Assuming X has full column rank, <span class="math inline">\(X^T X\)</span> can be shown to be positive definite.</p>
-<section id="axb" class="level4" data-number="2.3.1.1">
-<h4 data-number="2.3.1.1"><span class="header-section-number">2.3.1.1</span> Ax=b</h4>
+<section id="axb" class="level4" data-number="3.3.1.1">
+<h4 data-number="3.3.1.1"><span class="header-section-number">3.3.1.1</span> Ax=b</h4>
 <p>Tricky</p>
 <ul>
 <li><span class="math inline">\(X\beta = Y\)</span></li>
@@ -245,8 +268,8 @@ This is an overdetermined system (too many constraints/equation against too few 
 Overdetermined systems have no exact solutions but we can find the best fit solution or <span class="math inline">\(x\)</span>(in our case coefficient <span class="math inline">\(\beta\)</span>)</p>
 </section>
 </section>
-<section id="covariance-matrix" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2"><span class="header-section-number">2.3.2</span> Covariance matrix</h3>
+<section id="covariance-matrix" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2"><span class="header-section-number">3.3.2</span> Covariance matrix</h3>
 <p>The <span class="math inline">\(X^T X\)</span> is the Covariance Matrix in multivariate normal distribution.</p>
 <p>$$= Cov(X,X) = (X_i - _i)(X_j-_j)</p>
 <p><span class="math display">\[ E[Y-\hat{Y}]^2 = E[f(X)+\epsilon -\hat{f}(X)]^2 = {\color{red}E[f(X)-\hat{f}(X)]^2} + Var(\epsilon)\]</span></p>
@@ -265,27 +288,27 @@ Overdetermined systems have no exact solutions but we can find the best fit solu
 <ol start="2" type="1">
 <li>Train parameters: Ordinary Least Squares(OLS)</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>,<span class="at">mean =</span> <span class="dv">0</span>,<span class="at">sd =</span> <span class="dv">1</span>)  <span class="co"># creates 50 points</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">50</span>,<span class="at">mean=</span><span class="dv">1</span>,<span class="at">sd=</span><span class="fl">0.5</span>) <span class="co"># creates 50 points </span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(x,y) <span class="co"># correlation</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0.8344</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>,<span class="at">mean =</span> <span class="dv">0</span>,<span class="at">sd =</span> <span class="dv">1</span>)  <span class="co"># creates 50 points</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">50</span>,<span class="at">mean=</span><span class="dv">1</span>,<span class="at">sd=</span><span class="fl">0.5</span>) <span class="co"># creates 50 points </span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(x,y) <span class="co"># correlation</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0.8344</span></span></code></pre></div>
 </section>
 </section>
-<section id="validate-linearity" class="level2" data-number="2.4">
-<h2 data-number="2.4"><span class="header-section-number">2.4</span> Validate linearity</h2>
+<section id="validate-linearity" class="level2" data-number="3.4">
+<h2 data-number="3.4"><span class="header-section-number">3.4</span> Validate linearity</h2>
 <ul>
 <li>We can use linear regression on any dataset but that DOES NOT imply a linear relation exists.<br />
 </li>
 <li>We must perform t-test(single independent var) or ANOVA F-test(multiple independent var) on the linear regression model’s coefficients to prove whether a linear relation exists.</li>
 </ul>
-<section id="t-test" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1"><span class="header-section-number">2.4.1</span> T-test</h3>
+<section id="t-test" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1"><span class="header-section-number">3.4.1</span> T-test</h3>
 <ul>
 <li>T-dist is a probability dist like a normal-dist but bigger tails
 <ul>
@@ -300,14 +323,14 @@ Alt H: There is a linear relationship between independent variable and output <s
 What happens when only some coefficient are significant and others arent.<br />
 ANSWER: Typically, we throw out nonsignificant (high p-value) coefficients to sacrifice some bias to reduce variance.<br />
 Remember high variance leads to overfit.</p>
-<section id="degree-of-freedom" class="level4" data-number="2.4.1.1">
-<h4 data-number="2.4.1.1"><span class="header-section-number">2.4.1.1</span> degree of freedom</h4>
+<section id="degree-of-freedom" class="level4" data-number="3.4.1.1">
+<h4 data-number="3.4.1.1"><span class="header-section-number">3.4.1.1</span> degree of freedom</h4>
 </section>
 </section>
-<section id="validate-multi-linear-regression-model" class="level3" data-number="2.4.2">
-<h3 data-number="2.4.2"><span class="header-section-number">2.4.2</span> Validate multi-linear regression model</h3>
-<section id="f-test" class="level4" data-number="2.4.2.1">
-<h4 data-number="2.4.2.1"><span class="header-section-number">2.4.2.1</span> F-test</h4>
+<section id="validate-multi-linear-regression-model" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2"><span class="header-section-number">3.4.2</span> Validate multi-linear regression model</h3>
+<section id="f-test" class="level4" data-number="3.4.2.1">
+<h4 data-number="3.4.2.1"><span class="header-section-number">3.4.2.1</span> F-test</h4>
 <p>Null H: None of the independent variable have a linear relationship with output <span class="math inline">\(\forall n, \beta_n = 0\)</span><br />
 Alt H: At least one of the independent variable have a linear relationship with output<span class="math inline">\(\exists n, \beta_n \neq 0\)</span></p>
 <p>Variance WITHIN groups vs Variance BETWEEN groups</p>
@@ -325,10 +348,10 @@ Alt H: At least one of the independent variable have a linear relationship with 
 </section>
 </section>
 </section>
-<section id="model-fit-loss-function" class="level2" data-number="2.5">
-<h2 data-number="2.5"><span class="header-section-number">2.5</span> Model fit ( Loss Function )</h2>
-<section id="mse" class="level3" data-number="2.5.1">
-<h3 data-number="2.5.1"><span class="header-section-number">2.5.1</span> MSE</h3>
+<section id="model-fit-loss-function" class="level2" data-number="3.5">
+<h2 data-number="3.5"><span class="header-section-number">3.5</span> Model fit ( Loss Function )</h2>
+<section id="mse" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1"><span class="header-section-number">3.5.1</span> MSE</h3>
 <ul>
 <li>MSE(Mean Squared Error) : used to check how well our regression model fits
 <ul>
@@ -337,19 +360,19 @@ Alt H: At least one of the independent variable have a linear relationship with 
 <li>Notice <span class="math inline">\(MSE = \frac{1}{n} RSS\)</span></li>
 </ul>
 <p>Goal is to minimize MSE of test dataset, not training dataset</p>
-<section id="standard-error-se" class="level4" data-number="2.5.1.1">
-<h4 data-number="2.5.1.1"><span class="header-section-number">2.5.1.1</span> Standard Error SE</h4>
+<section id="standard-error-se" class="level4" data-number="3.5.1.1">
+<h4 data-number="3.5.1.1"><span class="header-section-number">3.5.1.1</span> Standard Error SE</h4>
 <ul>
 <li>how far the sample {mean,weights,residuals} are from the reality or population {mean,weights,residuals}</li>
 </ul>
 </section>
-<section id="rse-serss" class="level4" data-number="2.5.1.2">
-<h4 data-number="2.5.1.2"><span class="header-section-number">2.5.1.2</span> RSE = SE(RSS)</h4>
+<section id="rse-serss" class="level4" data-number="3.5.1.2">
+<h4 data-number="3.5.1.2"><span class="header-section-number">3.5.1.2</span> RSE = SE(RSS)</h4>
 <p>Standard Error of RSS is RSE</p>
 </section>
 </section>
-<section id="r2" class="level3" data-number="2.5.2">
-<h3 data-number="2.5.2"><span class="header-section-number">2.5.2</span> R^2</h3>
+<section id="r2" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2"><span class="header-section-number">3.5.2</span> R^2</h3>
 <p><span class="math inline">\(R^2\)</span> is a number in [0,1] and related to Variance(Scatter or Clumped)<br />
 <span class="math inline">\(R^2\)</span> measure how scattered or clumped the data WRT our regression line aka model.</p>
 <ul>
@@ -369,25 +392,25 @@ We can safely drop height variable</p>
 </ul></li>
 </ul>
 </section>
-<section id="cor" class="level3" data-number="2.5.3">
-<h3 data-number="2.5.3"><span class="header-section-number">2.5.3</span> Cor</h3>
+<section id="cor" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3"><span class="header-section-number">3.5.3</span> Cor</h3>
 <p><span class="math display">\[R^2 = Cor(Y,\hat{Y})^2 \text{ for multiple lin reg}\]</span><br />
 Linear fit models aim to <span class="math inline">\(max(Cor(Y,\hat{Y}))\)</span></p>
 </section>
 </section>
-<section id="prediction" class="level2" data-number="2.6">
-<h2 data-number="2.6"><span class="header-section-number">2.6</span> Prediction</h2>
+<section id="prediction" class="level2" data-number="3.6">
+<h2 data-number="3.6"><span class="header-section-number">3.6</span> Prediction</h2>
 <p>Prediction interval</p>
 </section>
 </section>
-<section id="chapter-4-classification" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Chapter 4 Classification</h1>
+<section id="chapter-4-classification" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Chapter 4 Classification</h1>
 <p>Why can’t we just do one-hot encoding with linear regression?<br />
 We Can but only for binary outcomes</p>
 <p>If we do it for more than binary outcomes, we create an equidistant ordering which may not reflect reality.</p>
 </section>
-<section id="chapter-5-resampling" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Chapter 5 Resampling</h1>
+<section id="chapter-5-resampling" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Chapter 5 Resampling</h1>
 <p>Remember statistics is about how using our subset/sample to understand the population.</p>
 <p>Resampling is about repeatedly taking different subsets or samples.</p>
 <p>Two common resampling method: Cross-validation, bootstrap</p>

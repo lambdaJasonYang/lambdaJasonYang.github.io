@@ -133,6 +133,7 @@
 <ul>
 <li><a href="#os"><span class="toc-section-number">2.0.1</span> OS</a></li>
 </ul></li>
+<li><a href="#diassembly"><span class="toc-section-number">3</span> Diassembly</a></li>
 </ul></div>
 <div class="mermaid">graph TD;
     A["Stack"] --> B["Heap"]
@@ -226,6 +227,74 @@ Sector = [1..)</p>
 <p>We need to write a bootloader.<br />
 To compiler</p>
 </section>
+</section>
+<section id="diassembly" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Diassembly</h1>
+<p>Here you can see a diasssembler used against boot.bin with “x86 Real mode 16 bit” since when we compiled boot.bin, our nasm compiler defaults to x86 16 bit real mode
+Note: press D to decompile</p>
+<figure>
+<img src="Bootloader.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>org <span class="bn">0x7C00</span> <span class="op">;</span>this puts <span class="bn">0x7C</span> at <span class="bn">00000024</span> <span class="cf">if</span> you open the <span class="op">*.</span>bin</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>bits <span class="dv">16</span> <span class="op">;</span>BIOS boots the bootloader into <span class="dv">16</span> bit realmode</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>define ENDL <span class="bn">0x0D</span><span class="op">,</span> <span class="bn">0x0A</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>start<span class="op">:</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    jmp main</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>puts<span class="op">:</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>save <span class="dt">register</span> we will modify</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    push si</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    push ax</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    push bx</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>loop<span class="op">:</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    lodsb <span class="op">;</span> loads a byte in the al <span class="dt">register</span><span class="op">,</span> then increments si</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    or al<span class="op">,</span> al </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    jz <span class="op">.</span>done </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    mov ah<span class="op">,</span> <span class="bn">0x0e</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    mov bh<span class="op">,</span> <span class="dv">0</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="bn">0x10</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    jmp <span class="op">.</span>loop </span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>done<span class="op">:</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    pop bx</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    pop ax </span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    pop si</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    ret</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>main<span class="op">:</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="op">;;</span>GoodToKnow<span class="op">:</span> segment registers are  cs<span class="op">,</span> ss<span class="op">,</span> ds<span class="op">,</span> es<span class="op">,</span> fs<span class="op">,</span> gs</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="op">;;</span>cs <span class="op">=</span> currently running code segment</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="op">;;</span>ds <span class="op">=</span> data segment</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="op">;;</span>es<span class="op">,</span>fs<span class="op">,</span>gs <span class="op">=</span> <span class="op">(</span>extra<span class="op">)</span> data segment</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="op">;;</span>ss <span class="op">=</span> stack segment</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>setup data segment</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    mov ax<span class="op">,</span> <span class="dv">0</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    mov ds<span class="op">,</span> ax <span class="op">;;</span>segment <span class="dt">register</span> ds</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    mov es<span class="op">,</span> ax <span class="op">;;</span>segment <span class="dt">register</span> es</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>setup stack segment</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    mov ss<span class="op">,</span> ax <span class="op">;;</span>segment <span class="dt">register</span> ss</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    mov sp<span class="op">,</span> <span class="bn">0x7C00</span> <span class="op">;;</span>pointer <span class="dt">register</span> sp</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>print message</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    mov si<span class="op">,</span> msg_hello</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>    call puts</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    hlt</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>msg_hello<span class="op">:</span> db <span class="st">&quot;hello World&quot;</span><span class="op">,</span> ENDL<span class="op">,</span> <span class="dv">0</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="op">;</span>bootloader is the first <span class="dv">512</span> bytes and </span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="op">;</span>the last <span class="bn">0x55</span> <span class="bn">0xaa</span> tells the BIOS it is the bootloader </span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>times <span class="dv">510</span><span class="op">-(</span>$<span class="op">-</span>$$<span class="op">)</span> db <span class="dv">0</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>db <span class="bn">0x55</span><span class="op">,</span> <span class="bn">0xaa</span></span></code></pre></div>
 </section>
 
         </div>
