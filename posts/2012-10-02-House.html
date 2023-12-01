@@ -240,6 +240,10 @@ each circuit with its circuit-breaker as a separate self-directed loop</p>
 <li>3000W appliance will draw (3000W/120V) of current
 <ul>
 <li>Appliance will typically have labels showing 5V, 25V, 120V, 240V for Voltage needed</li>
+<li>Appliances typically show <strong>Watts or VA(Volt-Amperes); VA = Watts for DC circuits</strong>
+<ul>
+<li>DO NOT mistake VA for VAC, VAC is just Voltage + hinting it is a AC circuit</li>
+</ul></li>
 <li>Appliances with <strong>labels showing amps is SHORT-HAND for MAX-RATED amps</strong> it can take before burning out the internals.</li>
 </ul></li>
 </ul>
@@ -247,10 +251,20 @@ each circuit with its circuit-breaker as a separate self-directed loop</p>
 You may see power-adapters show 25V 5.5A<br />
 The power-adapter converts 120V to 25V; it <strong>Does NOT convert the Amp to 5.5A</strong>.<br />
 <strong>5.5A is the MAX-RATED Amp</strong> the power-adapter can take before the high current burns out the internals.</p>
+<section id="example-label-of-appliance" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1"><span class="header-section-number">4.1.1</span> Example Label of appliance</h3>
+<p>Typical label will choose one of each section below Voltage, Max-Amps, Power</p>
+<ul>
+<li>Voltage: 12 V, 12 VDC, 12 VAC</li>
+<li>Max-Amps: 5A</li>
+<li>Power: 20 W, 20 VA</li>
+</ul>
+<p>Example: (12 VAC - 5A - 20VA) transformer secondary</p>
+</section>
 </section>
 <section id="wires" class="level2" data-number="4.2">
 <h2 data-number="4.2"><span class="header-section-number">4.2</span> Wires</h2>
-<p><span class="math display">\[R=\rho \frac{L}{A} \tag{resistance of wire eqn}\]</span></p>
+<p><span class="math display">\[R=\rho \frac{L}{A} \tag{R resistance of wire, L is Length, A is cross-section area}\]</span></p>
 <ul>
 <li>Bigger Cross-section of wire =&gt; Lower Resistance
 <ul>
