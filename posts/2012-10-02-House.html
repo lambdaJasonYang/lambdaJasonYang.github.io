@@ -232,8 +232,18 @@ each circuit with its circuit-breaker as a separate self-directed loop</p>
   Live2 --> Load2
   Load2 -->Neutral2 
   Neutral2 --> |Circuitbreaker2| PowerSrc120V</div>
-<section id="understanding-appliances-and-current" class="level2" data-number="4.1">
-<h2 data-number="4.1"><span class="header-section-number">4.1</span> Understanding appliances and Current</h2>
+<section id="understanding-neutral" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Understanding neutral</h2>
+<ul>
+<li>Neutral may be 0 V, but it DOES have current
+<ul>
+<li>The reason you dont get shocked is because the earth gives it 0 V</li>
+<li>Counterexample proof: If you cut the neutral, the neutral half connected to the load will be hot, the neutral half connected to the ground will be 0V.</li>
+</ul></li>
+</ul>
+</section>
+<section id="understanding-appliances-and-current" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> Understanding appliances and Current</h2>
 <ul>
 <li>Motto: Current is drawn, not supplied<br />
 </li>
@@ -251,8 +261,8 @@ each circuit with its circuit-breaker as a separate self-directed loop</p>
 You may see power-adapters show 25V 5.5A<br />
 The power-adapter converts 120V to 25V; it <strong>Does NOT convert the Amp to 5.5A</strong>.<br />
 <strong>5.5A is the MAX-RATED Amp</strong> the power-adapter can take before the high current burns out the internals.</p>
-<section id="example-label-of-appliance" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1"><span class="header-section-number">4.1.1</span> Example Label of appliance</h3>
+<section id="example-label-of-appliance" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1"><span class="header-section-number">4.2.1</span> Example Label of appliance</h3>
 <p>Typical label will choose one of each section below Voltage, Max-Amps, Power</p>
 <ul>
 <li>Voltage: 12 V, 12 VDC, 12 VAC</li>
@@ -262,8 +272,8 @@ The power-adapter converts 120V to 25V; it <strong>Does NOT convert the Amp to 5
 <p>Example: (12 VAC - 5A - 20VA) transformer secondary</p>
 </section>
 </section>
-<section id="wires" class="level2" data-number="4.2">
-<h2 data-number="4.2"><span class="header-section-number">4.2</span> Wires</h2>
+<section id="wires" class="level2" data-number="4.3">
+<h2 data-number="4.3"><span class="header-section-number">4.3</span> Wires</h2>
 <p><span class="math display">\[R=\rho \frac{L}{A} \tag{R resistance of wire, L is Length, A is cross-section area}\]</span></p>
 <ul>
 <li>Bigger Cross-section of wire =&gt; Lower Resistance
@@ -283,8 +293,8 @@ The power-adapter converts 120V to 25V; it <strong>Does NOT convert the Amp to 5
 </ul>
 <p>Solution: Higher Gauge wires.</p>
 </section>
-<section id="overloaded-socket" class="level2" data-number="4.3">
-<h2 data-number="4.3"><span class="header-section-number">4.3</span> Overloaded socket</h2>
+<section id="overloaded-socket" class="level2" data-number="4.4">
+<h2 data-number="4.4"><span class="header-section-number">4.4</span> Overloaded socket</h2>
 <p><span class="math display">\[\frac{1}{R_{\text{total}}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \ldots + \frac{1}{R_n}\]</span></p>
 <ul>
 <li>All appliances in a circuit are in parallel</li>
@@ -300,8 +310,8 @@ The power-adapter converts 120V to 25V; it <strong>Does NOT convert the Amp to 5
 <li>Circuit breaker will activate when you turn on a microwave, boiler, hair dryer,etc at the same time.</li>
 </ul>
 </section>
-<section id="old-home" class="level2" data-number="4.4">
-<h2 data-number="4.4"><span class="header-section-number">4.4</span> Old home</h2>
+<section id="old-home" class="level2" data-number="4.5">
+<h2 data-number="4.5"><span class="header-section-number">4.5</span> Old home</h2>
 <ul>
 <li>Lightswitch - you may see one with no ground and only 2 wires. One is the line, the other is load.
 <ul>
@@ -312,6 +322,22 @@ The power-adapter converts 120V to 25V; it <strong>Does NOT convert the Amp to 5
 </ul></li>
 </ul></li>
 </ul>
+<section id="broken-switch" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1"><span class="header-section-number">4.5.1</span> Broken switch</h3>
+<ul>
+<li>Cut off neutral case
+<ul>
+<li>In this scenario, if you probe the neutral, it will be hot with 120 V
+<ul>
+<li>You may have to trace the neutral wire to some light fixture or wall to find where is the disconnect.</li>
+</ul></li>
+</ul></li>
+<li>Cut off neutral and ground
+<ul>
+<li>In this scenario, you should probe the light switch before doing anything because the switch can shock you just by touching it.</li>
+</ul></li>
+</ul>
+</section>
 </section>
 </section>
 <section id="water-supply" class="level1" data-number="5">
@@ -369,6 +395,17 @@ The power-adapter converts 120V to 25V; it <strong>Does NOT convert the Amp to 5
 <li>Blue or Black - C - Common</li>
 </ul>
 <p>If we included a Y-wire in the above diagram, we would draw the Y like the W but direct it to a new relay resulting in a diagram showing 2 relays with W-wire controlling the heater relay and Y-wire controlling the cooler relay.</p>
+</section>
+<section id="scams-to-avoid-from-car-dealer" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Scams to avoid from Car dealer</h1>
+<ul>
+<li>Loan origination fee should never be more than 2%, typically 1% and less
+<ul>
+<li>This is the fee for making a loan</li>
+<li>eg: 10000 loan should NOT have a 1000 loan origination fee, at most it should be 200</li>
+</ul></li>
+<li>The loan’s interest rate or APY is inflated by the salesman, You have all Legal rights to argue down the interest rate.</li>
+</ul>
 </section>
 
         </div>
