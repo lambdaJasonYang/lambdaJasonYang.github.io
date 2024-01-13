@@ -37,7 +37,7 @@
         </noscript>
          <!-- NO JS Behavior END -->
 
-        <title>Jason Yang - Vim</title>
+        <title>Jason Yang - Quick SQL dashboard</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
     </head>
 
@@ -110,52 +110,51 @@
         </div>
 
         <div id="content">
-            <h1>Vim</h1>
+            <h1>Quick SQL dashboard</h1>
             
 
             <div class="info">
-    Posted on October  2, 2012
+    Posted on March  2, 2022
     
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>
     
 </div>
-<section id="essentials" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Essentials</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Alt+U</span> <span class="kw">|</span> <span class="ex">undo</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl+R</span> <span class="kw">|</span> <span class="ex">redo</span></span></code></pre></div>
+<div id="TOC"><ul>
+<li><a href="#fundamental-data-types"><span class="toc-section-number">1</span> 4 Fundamental data types:</a>
+<ul>
+<li><a href="#number"><span class="toc-section-number">1.1</span> number</a></li>
+<li><a href="#blobs"><span class="toc-section-number">1.2</span> blobs</a></li>
+</ul></li>
+</ul></div>
+<p><img src="20230101fae_phpmyadmin.png" /></p>
+<section id="fundamental-data-types" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 4 Fundamental data types:</h1>
+<ol type="1">
+<li>number</li>
+<li>string</li>
+<li>datetime</li>
+<li>boolean</li>
+<li>blobs</li>
+</ol>
+<section id="number" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> number</h2>
+<div class="sourceCode" id="cb1" data-filename="mysql"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">SMALLINT</span>(<span class="dv">99</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>BIGINT(<span class="dv">99</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">VARCHAR</span>(<span class="dv">99</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>TEXT</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">DATE</span>(<span class="dv">30</span>)</span></code></pre></div>
 </section>
-<section id="multifile" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Multifile</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">:qall!</span> <span class="kw">|</span> <span class="ex">quit</span> all without saving</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">:qallw</span> <span class="kw">|</span> <span class="ex">quit</span> all with saving</span></code></pre></div>
-<section id="single-screen" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> Single screen</h2>
-<p>Vi can take multiple files as arguments called buffers.<br />
-THIS IS NOT split screen.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">:ls</span> ,list buffers</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">:bnext</span> ,moves focus to next buffer</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">:bprevious,</span> moves focus to previous buffer</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">:</span></span></code></pre></div>
+<section id="blobs" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> blobs</h2>
+<ul>
+<li>Client sends a file to server, server encodes file to base64 and store as Blob</li>
+<li>Client read a blob, server send base64 to client</li>
+</ul>
+<p>Generally one should not use blob to store large files because the load times are big and takes alot of bandwidth. If many people are reading large images on clientside, they will load very slowly.</p>
 </section>
-<section id="split-screen" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> Split screen</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vi</span> <span class="at">-o2</span> file1.txt file2.txt</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl+W</span> H <span class="kw">|</span> <span class="ex">focus</span> left window</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl+W</span> J <span class="kw">|</span> <span class="ex">focus</span> up window</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl+W</span> K <span class="kw">|</span> <span class="ex">focus</span> down window</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Ctrl+W</span> L <span class="kw">|</span> <span class="ex">focus</span> right window</span></code></pre></div>
-<p>Add another split</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">:split</span> newfile.txt</span></code></pre></div>
-</section>
-</section>
-<section id="number-lines" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Number lines</h1>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">:set</span> number</span></code></pre></div>
 </section>
 
         </div>

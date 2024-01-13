@@ -122,15 +122,34 @@
     Tags: <a title="All pages tagged 'tech'." href="../tags/tech.html">tech</a>, <a title="All pages tagged 'openwrt'." href="../tags/openwrt.html">openwrt</a>, <a title="All pages tagged 'homeserver'." href="../tags/homeserver.html">homeserver</a>
     
 </div>
+<section id="check-if-your-device-can-spawn-multiple-ap" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Check if your device can spawn multiple AP</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">iw</span> phy0 info</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ....</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#         valid interface combinations:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                  * #{ managed } &lt;= 1, #{ P2P-device } &lt;= 1, #{ P2P-client, P2P-GO } &lt;= 1,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#                    total &lt;= 3, #channels &lt;= 2</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#                  * #{ managed } &lt;= 1, #{ AP } &lt;= 1, #{ P2P-client } &lt;= 1, #{ P2P-device } &lt;= 1,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#                    total &lt;= 4, #channels &lt;= 1</span></span></code></pre></div>
+<ul>
+<li><code>#{ AP } &lt;= 1</code> means it can only spawn 1 access point.</li>
+</ul>
+<p>If you are running a wireless headless pi, you cant spawn another AP, since one is already in use to connect to the Pi.</p>
 <p>Instructions for hostapd is in <code>/usr/share/doc/hostapd/README.Debian</code><br />
 (Cool tidbit: you can just use linux file path into chrome browser url search bar to read the text)</p>
 <p>hostapd loads configs from <code>/etc/hostapd/hostapd.conf</code></p>
 <p>Copy the example configs</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /usr/share/doc/hostapd/examples/hostapd.conf /etc/hostapd/hostapd.conf</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /usr/share/doc/hostapd/examples/hostapd.conf /etc/hostapd/hostapd.conf</span></code></pre></div>
 <p>if need be, look into your hostapd.conf and make sure it uses a valid interface, sometimes it your PC may use conventional naming like <code>wlan0</code> which your can check with <code>ip addr</code></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> unmask hostapd</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> enable hostapd</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> start hostapd</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> unmask hostapd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> enable hostapd</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> start hostapd</span></code></pre></div>
+</section>
+<section id="properly-checking-if-hostapd-failed-and-how" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Properly checking if hostapd failed and how</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/sbin/hostapd</span> /etc/hostapd/hostapd.conf <span class="at">-dd</span> <span class="kw">|</span> <span class="fu">tee</span> /tmp/hostapd.log</span></code></pre></div>
+</section>
 
         </div>
         <div id="footer">

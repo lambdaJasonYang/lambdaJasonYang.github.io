@@ -137,7 +137,7 @@
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span> a<span class="op">;</span> how about <span class="op">[</span>$<span class="op">]</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>print <span class="op">*</span>a<span class="op">;</span> how about print <span class="op">[</span>$<span class="op">][</span><span class="dv">0</span><span class="op">]</span></span></code></pre></div>
-<p>But this is confuses us with array so instead lets use<br />
+<p>But this confuses us with array so instead lets use<br />
 <code>int* a := &lt;int&gt;</code><br />
 <code>*a := !&lt;int&gt; = int</code></p>
 <p>! for dereference<br />
@@ -196,19 +196,21 @@ someaddr = 3</p>
 <h1 data-number="5"><span class="header-section-number">5</span> Math theory</h1>
 <p><span class="math display">\[ Address \rightarrow Value \]</span>
 <span class="math display">\[ Pointer \rightarrow Address \rightarrow Value \]</span></p>
-<p><span class="math display">\[ p = &amp;x \equiv *p = x \]</span>
-<span class="math display">\[ arr + i = &amp;arr[i] \]</span></p>
+<p><span class="math display">\[ p = \&amp;x \equiv *p = x \]</span>
+<span class="math display">\[ arr + i = \&amp;arr[i] \]</span></p>
+<!--  -->
 <ul>
-<li><p>*(arr + i) = arr[i]</p></li>
-<li><p>*arr = arr[0]</p></li>
-<li><p>**arr = arr[0][0]</p></li>
-<li><p>pass-by-pointer vs pass-by-ref</p>
+<li>*(arr + i) = arr[i]</li>
+<li>*arr = arr[0]</li>
+<li>**arr = arr[0][0]
+<!--  --></li>
+<li>pass-by-pointer vs pass-by-ref
 <ul>
 <li>pass-by-pointer when you need a NULL placeholder.</li>
 </ul></li>
-<li><p>the way to use pass-by-ref is similar to pass-by-value<br />
-</p></li>
-<li><p>pass-by-pointer requires passing an address</p></li>
+<li>the way to use pass-by-ref is similar to pass-by-value<br />
+</li>
+<li>pass-by-pointer requires passing an address</li>
 </ul>
 <p>All variables are pointers
 All languages do implicit dereference of variables.

@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *" /> -->
+
+        <!-- Icon start -->
+        <link rel="icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="apple-touch-icon" href="../images/icons/IconSheet.svg#browserlogo">
+        <link rel="shortcut icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <link rel="mask-icon" href="../images/icons/IconSheet.svg#browserlogo" />
+        <!-- Icon end -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics START ------------------->
+
+        <!-- <script defer src="https://www.googletagmanager.com/gtag/js?id=G-2W1VXE5GSE"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2W1VXE5GSE');
+        </script> -->
+        
+        <!-- Global site tag (gtag.js) - Google Analytics END ---------------------->
+
+        <!-- NO JS Behavior START -->
+        <noscript>
+            <style>
+                nav.sidenav {display:none;}
+                li.nav-item{display:none;}
+            </style>
+        </noscript>
+         <!-- NO JS Behavior END -->
+
+        <title>Jason Yang - SQL Normalization - 1NF 2NF 3NF</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+
+    <body>
+        <!-- Side navigation start -->
+        <nav class="sidenav">
+            <li class="logo">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Jason</span>
+                    <svg><use href="../images/icons/IconSheet.svg#sidebardod"></use></svg>
+                </a>
+            </li>
+        
+            
+            <li class="nav-item">
+                <a href="../tags/mathcs.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#lambda"></use></svg>
+                    <span class="link-text">Math/CS</span>
+                </a>
+            </li>
+                
+            <li class="nav-item">
+                <a href="../tags/prog.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#progcode"></use></svg>
+                    <span class="link-text">Prog</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="../tags/AI.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#AIbrain"></use></svg>
+                    <span class="link-text">ML/AI</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/tech.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#hardware"></use></svg>
+                    <span class="link-text">Tech</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="../tags/musings.html" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#thinker"></use></svg>
+                    <span class="link-text">Musings</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="https://github.com/lambdaJasonYang" class="nav-link">
+                    <svg><use href="../images/icons/IconSheet.svg#github"></use></svg>
+                    <span class="link-text">Github</span>
+                </a>
+            </li>
+        </nav>
+        <!-- Side navigation end -->
+        <div id="header">
+            <div id="logo">
+                <a href="../">Jason Yang</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>SQL Normalization - 1NF 2NF 3NF</h1>
+            
+
+            <div class="info">
+    Posted on March  2, 2022
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'prog'." href="../tags/prog.html">prog</a>, <a title="All pages tagged 'QuickCode'." href="../tags/QuickCode.html">QuickCode</a>
+    
+</div>
+<div id="TOC"><ul>
+<li><a href="#nf"><span class="toc-section-number">1</span> 1NF</a>
+<ul>
+<li><a href="#nf---counterexamples"><span class="toc-section-number">1.1</span> 1NF - CounterExamples</a>
+<ul>
+<li><a href="#repeating-groups"><span class="toc-section-number">1.1.1</span> Repeating groups</a></li>
+<li><a href="#composite-attributes"><span class="toc-section-number">1.1.2</span> Composite Attributes</a></li>
+<li><a href="#multivalued-attributes"><span class="toc-section-number">1.1.3</span> Multivalued Attributes:</a></li>
+<li><a href="#arrays-or-lists"><span class="toc-section-number">1.1.4</span> Arrays or lists</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#nf-1"><span class="toc-section-number">2</span> 2NF</a>
+<ul>
+<li><a href="#nf---counterexamples-1"><span class="toc-section-number">2.1</span> 2NF - CounterExamples</a>
+<ul>
+<li><a href="#partial-dependencies"><span class="toc-section-number">2.1.1</span> Partial Dependencies</a></li>
+<li><a href="#composite-primary-key-with-dependencies"><span class="toc-section-number">2.1.2</span> Composite Primary Key with Dependencies</a></li>
+<li><a href="#non-atomic-attributes"><span class="toc-section-number">2.1.3</span> Non-atomic attributes</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#nf-2"><span class="toc-section-number">3</span> 3NF</a>
+<ul>
+<li><a href="#nf---counterexamples-2"><span class="toc-section-number">3.1</span> 3NF - CounterExamples</a>
+<ul>
+<li><a href="#transitive-dependency"><span class="toc-section-number">3.1.1</span> Transitive Dependency</a></li>
+<li><a href="#derived-attribute"><span class="toc-section-number">3.1.2</span> Derived Attribute</a></li>
+<li><a href="#non-atomic-attributes-in-a-composite-key"><span class="toc-section-number">3.1.3</span> Non-atomic Attributes in a Composite Key</a></li>
+</ul></li>
+</ul></li>
+</ul></div>
+<section id="nf" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 1NF</h1>
+<div class="mermaid">graph TD
+  start[Start] --> checkTable[Check each table in the database]
+  checkTable -->|For each table| checkPrimaryKey[Is there a primary key defined for the table?]
+  checkPrimaryKey -->|No| notIn1NF[Database is not in 1NF]
+  checkPrimaryKey -->|Yes| checkAttributes[Check each attribute in the table]
+  checkAttributes -->|For each attribute| checkAtomic[Is the attribute atomic AKA contains only indivisible values?]
+  checkAtomic -->|No| notIn1NF2[Database is not in 1NF]
+  checkAtomic -->|Yes| continue[Continue to the next attribute]
+  continue -->|All attributes are atomic| in1NF[Database is in 1NF]
+  checkAttributes -->|All attributes checked| checkRepeatingGroups[Check if there are repeating groups]
+  checkRepeatingGroups -->|No| in1NF
+  checkRepeatingGroups -->|Yes| notIn1NF3[Database is not in 1NF]
+  notIn1NF3 -->|End| enda[End]
+  notIn1NF -->|End| enda
+  in1NF -->|End| enda
+</div>
+<section id="nf---counterexamples" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> 1NF - CounterExamples</h2>
+<section id="repeating-groups" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1"><span class="header-section-number">1.1.1</span> Repeating groups</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>| StudentID | Subjects               |</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>|-----------|------------------------|</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>| 1         | Math, Physics, Chemistry|</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>| 2         | Biology, History        |</span></code></pre></div>
+<p>Issue: The “Subjects” column violates 1NF because it contains multiple values, creating a repeating group. To bring it to 1NF, you’d split the subjects into separate rows.</p>
+</section>
+<section id="composite-attributes" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2"><span class="header-section-number">1.1.2</span> Composite Attributes</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>| EmployeeID | Contact                |</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>|------------|------------------------|</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>| 101        | (555) 123-4567, email@example.com |</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>| 102        | (555) 987-6543, another@email.com |</span></code></pre></div>
+<p>Issue: The “Contact” column contains a composite attribute with phone number and email. To adhere to 1NF, you’d separate these into distinct columns.</p>
+</section>
+<section id="multivalued-attributes" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3"><span class="header-section-number">1.1.3</span> Multivalued Attributes:</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>| MovieID | Genres                 |</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>|---------|------------------------|</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>| 1       | Action, Comedy         |</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>| 2       | Drama, Romance         |</span></code></pre></div>
+<p>Issue: The “Genres” column violates 1NF by holding multiple values. To conform to 1NF, you’d have a separate row for each genre and movie combination.</p>
+</section>
+<section id="arrays-or-lists" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4"><span class="header-section-number">1.1.4</span> Arrays or lists</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>| OrderID | Products               |</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>|---------|------------------------|</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>| 1       | [Item1, Item2, Item3]  |</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>| 2       | [Item2, Item4]         |</span></code></pre></div>
+<p>Issue: The “Products” column is an array or list, violating 1NF. You’d split these into separate rows with one product per row.</p>
+</section>
+</section>
+</section>
+<section id="nf-1" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 2NF</h1>
+<section id="nf---counterexamples-1" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> 2NF - CounterExamples</h2>
+<section id="partial-dependencies" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1"><span class="header-section-number">2.1.1</span> Partial Dependencies</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>| OrderID | Product  | Category    |</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>|---------|----------|-------------|</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>| 1       | Laptop   | Electronics |</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>| 1       | Printer  | Electronics |</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>| 2       | Pen      | Stationery  |</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>| 2       | Pencil   | Stationery  |</span></code></pre></div>
+<p>Issue: The “Category” depends only on part of the primary key (OrderID), not the whole key. To satisfy 2NF, you’d separate this into two tables: one for orders and products, and another for products and categories.</p>
+</section>
+<section id="composite-primary-key-with-dependencies" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2"><span class="header-section-number">2.1.2</span> Composite Primary Key with Dependencies</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>| EmployeeID | ProjectID | ProjectName |</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>|------------|-----------|-------------|</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>| 101        | 1         | ProjectA    |</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>| 101        | 2         | ProjectB    |</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>| 102        | 1         | ProjectA    |</span></code></pre></div>
+<p>Issue: Both “EmployeeID” and “ProjectID” form the composite primary key, and “ProjectName” depends on only “ProjectID,” violating 2NF. To satisfy 2NF, you’d separate this into two tables: one for employees and projects, and another for projects and project names.</p>
+</section>
+<section id="non-atomic-attributes" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3"><span class="header-section-number">2.1.3</span> Non-atomic attributes</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>| OrderID | Product           |</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>|---------|-------------------|</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>| 1       | Laptop, Printer   |</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>| 2       | Pen, Pencil       |</span></code></pre></div>
+<p>Issue: The “Product” column violates 2NF because it is not atomic. To conform to 2NF, you’d separate this into two tables: one for orders and products, and another for products.</p>
+</section>
+</section>
+</section>
+<section id="nf-2" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 3NF</h1>
+<section id="nf---counterexamples-2" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> 3NF - CounterExamples</h2>
+<section id="transitive-dependency" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1"><span class="header-section-number">3.1.1</span> Transitive Dependency</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>| EmployeeID | Department  | Location     |</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>|------------|-------------|--------------|</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>| 101        | HR          | BuildingA    |</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>| 102        | IT          | BuildingB    |</span></code></pre></div>
+<p>Issue: “Location” depends on “Department,” and “Department” depends on “EmployeeID.” This is a transitive dependency. To satisfy 3NF, you’d separate this into three tables: one for employees, one for departments, and one for locations.</p>
+</section>
+<section id="derived-attribute" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2"><span class="header-section-number">3.1.2</span> Derived Attribute</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>| StudentID | Course  | Credits | GPA  |</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>|-----------|---------|---------|------|</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>| 1         | Math    | 3       | 3.5  |</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>| 2         | Physics | 4       | 3.2  |</span></code></pre></div>
+<p>Issue: “GPA” is a derived attribute, as it can be calculated from “Credits” and other information. To satisfy 3NF, you’d store only the raw data in one table (student and course information) and calculate the GPA when needed.</p>
+</section>
+<section id="non-atomic-attributes-in-a-composite-key" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3"><span class="header-section-number">3.1.3</span> Non-atomic Attributes in a Composite Key</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>| OrderID | Product           | SupplierName   |</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>|---------|-------------------|----------------|</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>| 1       | Laptop            | ABC Electronics|</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>| 1       | Printer           | XYZ Suppliers  |</span></code></pre></div>
+<p>Issue: “SupplierName” depends on part of the composite key (“Product”), violating 3NF. To satisfy 3NF, you’d separate this into two tables: one for orders and products, and another for products and suppliers.</p>
+</section>
+</section>
+</section>
+
+        </div>
+        <div id="footer">
+            <div class="flex-container" style="display:flex; justify-content: space-between;">
+                <div>
+                    Site proudly generated by
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+                </div>
+                <div class="pagehitscounter"> 
+                    <!-- <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fuserjy.github.io&count_bg=%231FDBD9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true"/> -->
+                </div>
+                <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://lambdaJasonYang.github.io/">Jason's Notes</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://lambdaJasonYang.github.io/">Jason Yang</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></div>
+  
+            </div>
+        </div>
+        
+    </body>
+    <footer>
+        <!-- CODE TAB START -->
+        <script>
+                    //Structure:
+                    // Codeblock < Group/Grouplabel/subgrp < datagroupSet < allblocks
+
+            const AllBlocksPre = document.querySelectorAll("[data-group]");
+            const AllBlocks = [...AllBlocksPre]; //gets all codeblocks w/ and w/o group label
+            const getUniqueSet = (TargetSet,dataAttr) => {
+                //gets the set of attributes of an array of codeblocks aka TargetSet
+                const temp = TargetSet.map((e) => (e.getAttribute(dataAttr))); 
+                const temp2 = temp.filter((a)=>a); //remove nulls
+                return [...new Set(temp2)];
+            } 
+            const datagroupSet = getUniqueSet(AllBlocks,"data-group") //remove nulls
+
+            const getCodeBlocks = (datagroup) => {
+                //return list of glabels CodeBlocks associated to a single group 
+                return AllBlocks.filter((dataglabelBlock)=>(dataglabelBlock.getAttribute("data-group") === datagroup));
+            }
+
+            const showBlocks = (dataglabeltxt,datagroupCodeBlocks) => {
+                const selectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") === dataglabeltxt))
+                const NONselectedglabelGroup = datagroupCodeBlocks.filter((SingleBlock)=>(SingleBlock.getAttribute("data-glabel") !== dataglabeltxt))
+                selectedglabelGroup.map((SingleBlock) => (SingleBlock.style.display="block"));
+                (NONselectedglabelGroup || []).map((SingleBlock) => (SingleBlock.style.display="none"));
+            }
+            const mkBtn = (dataglabeltxt,datagroupCodeBlocks,showfunc) => {
+                const newbutton = document.createElement("input");
+                newbutton.type = "radio";
+                // newbutton.textContent = dataglabeltxt;
+                newbutton.addEventListener('click', ()=>{
+                    // console.log(datagroupCodeBlocks)
+                    showfunc(dataglabeltxt,datagroupCodeBlocks);
+                });
+                return newbutton;
+            }
+            const showAll = (datagroup) => {
+                //make all codeblocks visible
+            datagroup.map((e)=>(e.style.display="block"));
+            }
+
+            const buildCodeTab = (datagroupCodeBlocks,datagroup) => {
+                const leaderCodeBlockDiv = datagroupCodeBlocks[0]; //get the leader codeblock of a group of codeblock
+                const setglabelstxt = getUniqueSet(datagroupCodeBlocks,"data-glabel"); 
+                setglabelstxt.map((singleglabeltxt)=>{
+                    
+                    const btn = mkBtn(singleglabeltxt,datagroupCodeBlocks,showBlocks);
+                    btn.name = datagroup;
+                    btn.id = datagroup+singleglabeltxt;
+                    const radiolabelx = document.createElement("label");
+                    radiolabelx.setAttribute("for",datagroup+singleglabeltxt);
+                    radiolabelx.innerText = singleglabeltxt;
+        
+                    // leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radiolabelx);
+                    // radiolabelx.appendChild(btn);
+                    const radioclass = document.createElement("div");
+                    radioclass.className = "radioclass";
+                    radioclass.appendChild(btn);
+                    radioclass.appendChild(radiolabelx)
+                    leaderCodeBlockDiv.insertAdjacentElement("beforebegin",radioclass);
+                    // leaderCodeBlockDiv.prepend(btn);
+                    
+                    
+                })
+             
+                // leaderCodeBlockDiv.append(btnlist);
+                
+                const btnShowAll = document.createElement("input");
+                btnShowAll.type = "radio";
+                btnShowAll.addEventListener('click',(e)=>(showAll(datagroupCodeBlocks)));
+
+                btnShowAll.name = datagroup;
+                btnShowAll.id = datagroup+"All";
+                const radiolabel = document.createElement("label");
+                radiolabel.setAttribute("for",datagroup+"All");
+                radiolabel.innerText = "All";
+
+                const radioclass = document.createElement("div");
+                radioclass.className = "radioclass";
+                radioclass.appendChild(btnShowAll);
+                radioclass.appendChild(radiolabel)
+                leaderCodeBlockDiv.insertAdjacentElement('beforebegin',radioclass);
+                //make showAllbutton END
+            }
+
+            //below code is performing actual behavior, the above code are just functions
+            datagroupSet.map((datagroup) => {
+                
+                const groupOfCodeblocks = getCodeBlocks(datagroup);
+                buildCodeTab(groupOfCodeblocks,datagroup);
+                const firsttab = groupOfCodeblocks[0];
+                showBlocks(firsttab.getAttribute("data-glabel"),groupOfCodeblocks);
+       
+            })
+        </script>
+        <!-- CODE TAB END ---->
+
+        <!-- MATH JAX START -------------------------------------- -->
+        <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js">
+        </script>
+        <!-- MATH JAX END ----------------------------------------- -->
+        <!-- MERMAID START -------------------------------------- -->
+        <script type="module"> 
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/+esm'
+        </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async></script> -->
+        <!-- MERMAID END -------------------------------------- -->
+        <!-- RAILROAD START -------------------------------------- -->
+        <script type="module">
+            import rr,* as rrClass from "/lib/railroad/railroad.js";
+            Object.assign(window,rr)
+            window.rrOptions = rrClass.Options;
+            document.addEventListener('DOMContentLoaded',()=>{ReplaceDivWithSvg()},false)
+            const ReplaceDivWithSvg = () =>  {
+                for (const railroadelem of document.getElementsByClassName("rroad") ){
+                railroadelem.innerHTML = eval(railroadelem.innerText.trim()+".toString()")
+                }
+            }
+        </script>
+        
+
+        <link rel="stylesheet" href="../lib/railroad/railroad-diagrams.css">
+        <!-- RAILROAD END ----------------------------------------- -->
+    </footer>
+</html>
